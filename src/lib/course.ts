@@ -277,11 +277,10 @@ export function renderRich(text: string, lang: Lang, current?: string): string {
 		else if (m[1] !== undefined) out += `<strong>${renderRich(m[1], lang, current)}</strong>`;
 		else if (m[2] !== undefined) out += katex.renderToString(m[2], { displayMode: true, throwOnError: true, strict: 'ignore' });
 		else if (m[3] !== undefined) {
-			// Keep punctuation right after inline math on the same line as the math.
+			// A word joiner (U+2060) keeps punctuation right after inline math on the same line as
+			// the math, while long formulas can still break inside.
 			const math = katex.renderToString(m[3], { throwOnError: true, strict: 'ignore' });
-			const punct = /^[。，、；：！？）”.,;:!?)]+/.exec(text.slice(last))?.[0] ?? '';
-			last += punct.length;
-			out += punct ? `<span class="nowrap">${math}${esc(punct)}</span>` : math;
+			out += /^[。，、；：！？）”.,;:!?)]/.test(text.slice(last)) ? `${math}\u2060` : math;
 		}
 		else if (m[4] !== undefined) out += refHtml(parseRefToken(m[4]), lang, current);
 	}
