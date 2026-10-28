@@ -128,5 +128,8 @@ practice (taught before this lesson), or on the prerequisites when the profile h
   rule below the header, bottom rule) and only as wide as their content.
 - Use one separator per block: whitespace, a background or a border, not two. Figures have no frame
   (whitespace and caption only); question blocks have a background and no border.
+- Widgets fit the page width: each draws a wide SVG (`viz-wide`, 640 wide) and a narrow one for
+  phones (`viz-narrow`, 360 wide, same font sizes); a container query on the figure shows one.
+  Long LaTeX formulas may overflow; the page itself must not scroll sideways.
 - Text uses the system font smoothing (not `antialiased`) and body text one step stronger than
   Starlight's default (`--sl-color-text: var(--sl-color-gray-1)`).
