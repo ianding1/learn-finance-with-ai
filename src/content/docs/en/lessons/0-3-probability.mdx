@@ -41,9 +41,11 @@ $$
 E[R] = \sum_i p_i R_i
 $$
 
-In the example, $E[R_A] = 10\%$ and $E[R_B] = 3.5\%$.
+For stock A:
 
-Note: the expected value is not necessarily a result that can actually occur in a given year (one of A's three possible outcomes happens to be 10, but none of B's outcomes is 3.5), and it is not a forecast for next year.
+$$
+E[R_A] = 0.25 \times 30 + 0.5 \times 10 + 0.25 \times (-10) = 10\%
+$$
 
 <Check id="C1" />
 
@@ -55,8 +57,13 @@ $$
 \text{Var}(R) = \sum_i p_i \big(R_i - E[R]\big)^2, \qquad \sigma = \sqrt{\text{Var}(R)}
 $$
 
-- A: $\text{Var} = 200$ (%²), $\sigma_A \approx 14.14\%$.
-- B: $\text{Var} = 2.75$ (%²), $\sigma_B \approx 1.66\%$.
+For A, the deviations from the expected value in the three scenarios are +20, 0 and −20:
+
+$$
+\text{Var}(R_A) = 0.25 \times 20^2 + 0.5 \times 0^2 + 0.25 \times (-20)^2 = 200
+$$
+
+So $\sigma_A = \sqrt{200} \approx 14.14\%$. In the same way, the variance of B is 2.75 (%²) and $\sigma_B \approx 1.66\%$.
 
 **Units**: the unit of variance is %², which has no intuitive meaning. The standard deviation is back in %, so it can be compared directly with the expected return. "Volatility" in finance means the standard deviation. Also note that squaring makes large deviations count more: a deviation of 20 contributes 100 times as much as a deviation of 2.
 
@@ -91,8 +98,6 @@ $$
 $$
 
 The correlation coefficient has no unit and lies in $[-1, 1]$. It measures only linear relationships, and correlation does not imply causation (<Ref concept="correlation-vs-causation" />).
-
-**Key point: correlation is about the direction of deviations, not about whether returns are positive.** Suppose two funds both have an expected return of 8%, and in one year one fund rises 15% and the other rises 2%. Both "went up", but one is above its expected value and the other is below, so this year contributes a negative amount to the covariance. "Both went up, so they are positively correlated" is wrong reasoning. Also, a single observation cannot show a probabilistic relationship.
 
 <Figure id="4-1" title="The deviations of A and B in each scenario, and each scenario's contribution to the covariance." observe="In the boom, A rises and B falls, which contributes a large negative amount. In the recession, both are below their expected values, which contributes a small positive amount. The weighted sum is −10.">
 	<CovarianceProducts />
@@ -163,7 +168,7 @@ A consequence: if you hold only the low-volatility asset B, adding a small amoun
 ## Summary [#summary]
 
 - Expected value: the probability-weighted average. Variance: the probability-weighted average of squared deviations (%²). Standard deviation: the square root of the variance (%).
-- Covariance: positive when the deviations from each expected value have the same direction, negative when they have opposite directions. Correlation coefficient: the covariance scaled to $[-1, 1]$. It is about deviations, not about whether returns are positive.
+- Covariance: positive when the deviations from each expected value have the same direction, negative when they have opposite directions. Correlation coefficient: the covariance scaled to $[-1, 1]$.
 - The expected value of a portfolio is a weighted average; the variance of a portfolio has an extra covariance term and is **not** a weighted average.
 - As long as $\rho < 1$ there is a benefit from diversification; at $\rho = 0$ the benefit comes from the fact that variances add but standard deviations do not.
 - When you hold many assets with equal weights, the portfolio variance approaches the average covariance between the assets: the risk specific to each stock can be diversified away, but the common risk cannot (<Ref check="Q7" />).
@@ -171,7 +176,5 @@ A consequence: if you hold only the low-volatility asset B, adding a small amoun
 <CheckAll />
 
 ## Exercises [#exercises]
-
-There are 7 exercises. They are reviewed by the AI and are not scored. You can submit them all at once or in several parts. The words in bold are instruction words: **Determine** means choose among several possibilities, **Evaluate** means use your knowledge to reach a conclusion about a statement, **Calculate** means find a numerical value, **Discuss** means analyze from several angles, and **Explain** means state the reason or the mechanism.
 
 <Exercises />

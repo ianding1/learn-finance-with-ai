@@ -53,16 +53,11 @@ common_errors:
       $\rho = 0$ 时用“受协方差影响”解释分散化：结论对，但理由不成立。此时协方差项为 0，好处来自方差相加、标准差不相加。
     en: |-
       Explaining diversification at $\rho = 0$ by "the effect of covariance": the conclusion is right but the reason is wrong. The covariance term is 0 in this case; the benefit comes from the fact that variances add but standard deviations do not.
-  - questions: [Q2, C3]
+  - questions: [Q2]
     zh: |-
       认为“两只基金都涨了，所以正相关”：相关看的是相对各自期望的偏差方向，不是收益的正负；而且一次观测说明不了概率关系。
     en: |-
       Saying "both funds went up, so they are positively correlated": correlation is about the direction of deviations from each expected value, not about whether returns are positive. Also, one observation says nothing about a probabilistic relationship.
-  - questions: [C5]
-    zh: |-
-      在互动图中只观察 $\rho = -1$ 的情形，错过了“不相关也能分散”这个要点。
-    en: |-
-      Exploring only $\rho = -1$ in the interactive figure and missing the point that uncorrelated assets also diversify.
   - questions: [C2, C4, Q3, Q4]
     zh: |-
       把方差的单位写成 %，或者直接比较方差和期望收益的大小。
@@ -79,9 +74,9 @@ questions:
     expected: { E_B: "3.5" }
     question:
       zh: |-
-        B 的期望为什么是 3.5%？写出计算过程。
+        用同样的方法计算 B 的期望收益，写出计算过程。
       en: |-
-        Why is the expected return of B equal to 3.5%? Show the calculation.
+        Use the same method to calculate the expected return of B. Show the calculation.
     answer:
       zh: |-
         $E[R_B] = 0.25 \times 1 + 0.5 \times 5 + 0.25 \times 3 = 3.5$（%）。
@@ -184,9 +179,9 @@ questions:
     expected: { w_A: "20", sd_min: "8.94" }
     question:
       zh: |-
-        **先把 $\rho$ 调到 0**（不是 −1），找出组合标准差最小的大致权重。这时组合的标准差比 B 自己的 10% 还小吗？这说明了什么？
+        把 $\rho$ 调到 0，找出组合标准差最小的大致权重。这时组合的标准差比 B 自己的 10% 还小吗？这说明了什么？
       en: |-
-        **First set $\rho$ to 0** (not −1), and find the approximate weight that minimizes the portfolio standard deviation. Is the portfolio standard deviation then smaller than B's own 10%? What does this show?
+        Set $\rho$ to 0 and find the approximate weight that minimizes the portfolio standard deviation. Is the portfolio standard deviation then smaller than B's own 10%? What does this show?
     answer:
       zh: |-
         $\rho = 0$ 时 $w_A = \frac{\sigma_B^2}{\sigma_A^2 + \sigma_B^2} = 20$%，$\sigma_P = \sqrt{80} \approx 8.94$% $< 10$%。
@@ -196,12 +191,12 @@ questions:
         This shows that uncorrelated assets also diversify risk: adding some of the more volatile A to the low-volatility B lowers the total risk of the portfolio.
     rubric:
       zh:
-        - "回答的是 $\\rho = 0$ 的情形。"
-        - "最小方差权重约为 20%，标准差约 8.9%，小于 10%。"
+        - "最小方差权重约为 20%。"
+        - "标准差约 8.9%，小于 10%。"
         - "结论指出不相关也能分散，或加入高波动资产反而降低风险。"
       en:
-        - "Answers the case $\\rho = 0$."
-        - "The minimum-variance weight is about 20% and the standard deviation is about 8.9%, which is less than 10%."
+        - "The minimum-variance weight is about 20%."
+        - "The standard deviation is about 8.9%, which is less than 10%."
         - "The conclusion states that uncorrelated assets also diversify, or that adding a more volatile asset can lower risk."
 
   # ---------- Exercises (reviewed by the AI, not scored) ----------
@@ -211,9 +206,9 @@ questions:
     concepts: [diversification, covariance]
     question:
       zh: |-
-        **判断**真假并说明理由：两项资产的相关系数为 0 时，组合标准差等于两者标准差的加权平均。
+        判断真假并说明理由：两项资产的相关系数为 0 时，组合标准差等于两者标准差的加权平均。
       en: |-
-        **Determine** whether this statement is true or false, and explain: when the correlation between two assets is 0, the portfolio standard deviation equals the weighted average of their standard deviations.
+        Determine whether this statement is true or false, and explain: when the correlation between two assets is 0, the portfolio standard deviation equals the weighted average of their standard deviations.
     answer:
       zh: |-
         假。$\rho = 0$ 时协方差项为 0，$\sigma_P = \sqrt{w^2\sigma_A^2 + (1-w)^2\sigma_B^2} < w\sigma_A + (1-w)\sigma_B$，因为对正数 $a, b$ 有 $\sqrt{a^2+b^2} < a+b$。
@@ -233,9 +228,9 @@ questions:
     concepts: [correlation, covariance]
     question:
       zh: |-
-        一位朋友说：“这两只基金去年都涨了，所以它们的相关系数一定是正的。”**评估**这个说法。
+        一位朋友说：“这两只基金去年都涨了，所以它们的相关系数一定是正的。”评估这个说法。
       en: |-
-        A friend says: "Both of these funds went up last year, so their correlation must be positive." **Evaluate** this statement.
+        A friend says: "Both of these funds went up last year, so their correlation must be positive." Evaluate this statement.
     answer:
       zh: |-
         不对。(1) 相关系数看的是相对各自期望的偏差方向，不是收益是否同为正：两只基金期望都是 8%，一只涨 15%、一只涨 2%，这一年对协方差的贡献是负的。(2) 一年只是一个观测点，样本太小，说明不了概率关系（[[0.4]] 会讲怎样从数据估计）。
@@ -256,9 +251,9 @@ questions:
     expected: { E_C: "7.7", sd_C: "13.56", E_D: "4.5", sd_D: "6.70", cov_CD: "-88.95", rho_CD: "-0.98" }
     question:
       zh: |-
-        三种情景概率为 0.3、0.4、0.3；资产 C 收益为 25、8、−10（%），资产 D 收益为 −5、6、12（%）。**计算**两者的期望、标准差、协方差和相关系数。
+        三种情景概率为 0.3、0.4、0.3；资产 C 收益为 25、8、−10（%），资产 D 收益为 −5、6、12（%）。计算两者的期望、标准差、协方差和相关系数。
       en: |-
-        Three scenarios have probabilities 0.3, 0.4 and 0.3. Asset C returns 25, 8 and −10 (%), and asset D returns −5, 6 and 12 (%). **Calculate** the expected value and standard deviation of each asset, their covariance and their correlation.
+        Three scenarios have probabilities 0.3, 0.4 and 0.3. Asset C returns 25, 8 and −10 (%), and asset D returns −5, 6 and 12 (%). Calculate the expected value and standard deviation of each asset, their covariance and their correlation.
     answer:
       zh: |-
         $E[C] = 7.7$，$\sigma_C \approx 13.56$；$E[D] = 4.5$，$\sigma_D \approx 6.70$；$\text{Cov} = -88.95$（%²）；$\rho \approx -0.98$。
@@ -279,9 +274,9 @@ questions:
     expected: { var_P: "140.70", sd_P: "11.86", wavg: "14" }
     question:
       zh: |-
-        $\sigma_A = 18\%$，$\sigma_B = 8\%$，$\rho = 0.2$，权重 60% / 40%。**计算**组合标准差，并与加权平均比较。
+        $\sigma_A = 18\%$，$\sigma_B = 8\%$，$\rho = 0.2$，权重 60% / 40%。计算组合标准差，并与加权平均比较。
       en: |-
-        $\sigma_A = 18\%$, $\sigma_B = 8\%$, $\rho = 0.2$, and the weights are 60% / 40%. **Calculate** the portfolio standard deviation and compare it with the weighted average.
+        $\sigma_A = 18\%$, $\sigma_B = 8\%$, $\rho = 0.2$, and the weights are 60% / 40%. Calculate the portfolio standard deviation and compare it with the weighted average.
     answer:
       zh: |-
         $\text{Var} = 0.36 \times 324 + 0.16 \times 64 + 2 \times 0.6 \times 0.4 \times 0.2 \times 18 \times 8 = 140.70$（%²），$\sigma_P \approx 11.86$%；加权平均为 14%，组合标准差更低。
@@ -351,9 +346,9 @@ questions:
     concepts: [portfolio-variance, diversification]
     question:
       zh: |-
-        等权持有 $n$ 只股票，每只方差都是 $\sigma^2$，任意两只之间的协方差都是 $c$（$c > 0$）。求组合方差，**讨论** $n \to \infty$ 时的极限，并**解释**其投资含义。
+        等权持有 $n$ 只股票，每只方差都是 $\sigma^2$，任意两只之间的协方差都是 $c$（$c > 0$）。求组合方差，讨论 $n \to \infty$ 时的极限，并解释其投资含义。
       en: |-
-        You hold $n$ stocks with equal weights. Each has variance $\sigma^2$, and the covariance between any two is $c$ ($c > 0$). Find the portfolio variance, **discuss** its limit as $n \to \infty$, and **explain** what it means for investing.
+        You hold $n$ stocks with equal weights. Each has variance $\sigma^2$, and the covariance between any two is $c$ ($c > 0$). Find the portfolio variance, discuss its limit as $n \to \infty$, and explain what it means for investing.
     answer:
       zh: |-
         $\text{Var} = \frac{1}{n^2}\big(n\sigma^2 + (n^2 - n)c\big) = \frac{\sigma^2}{n} + \left(1 - \frac{1}{n}\right)c \to c$。

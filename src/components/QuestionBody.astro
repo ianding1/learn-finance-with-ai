@@ -1,6 +1,8 @@
 ---
-// One question: label, points and text. Answers are not entered on the site; the learner writes
-// them on paper (or types them after the copied prompt) and submits them at the end of the lesson.
+// One question: label, result, points and text. Answers are not entered on the site; the learner
+// writes them on paper (or types them after the copied prompt) and submits them at the end of the
+// lesson. The result (not answered / score / reviewed) is filled in from the learner profile by
+// src/scripts/questions.ts.
 import { t, type Lang } from '../i18n/ui';
 import { renderRich, type Question } from '../lib/course';
 
@@ -16,7 +18,10 @@ const { q, lang, lessonId, label } = Astro.props;
 <div class="lfwai-q" id={`q-${q.id}`}>
 	<div class="lfwai-q-head">
 		<span class="lfwai-q-label">{label}{q.star ? ' ★' : ''}</span>
-		{q.points != null && <span class="lfwai-q-points">{t(lang, 'points', { n: q.points })}</span>}
+		<span class="lfwai-q-meta">
+			<span class="lfwai-q-status" data-q-status={q.id} hidden></span>
+			{q.points != null && <span class="lfwai-q-points">{t(lang, 'points', { n: q.points })}</span>}
+		</span>
 	</div>
 	<div class="lfwai-q-text" set:html={renderRich(q.question[lang], lang, lessonId)} />
 </div>

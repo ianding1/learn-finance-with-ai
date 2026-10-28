@@ -1,6 +1,6 @@
 ---
-// Submission controls for a group of questions: copy the grading prompt, see which questions are
-// already graded, and paste the result back.
+// Submission controls for a group of questions: copy the grading prompt and paste the result back.
+// Each question shows its own result (QuestionBody).
 import { t, type Lang } from '../i18n/ui';
 import { toJson } from '../lib/grading';
 
@@ -16,7 +16,6 @@ const { lang, payload, scored = true } = Astro.props;
 <div class="lfwai-controls">
 	<button type="button" class="lfwai-btn lfwai-btn-primary" data-grade>{t(lang, scored ? 'copyGrading' : 'copyFeedback')}</button>
 	<p class="lfwai-hint">{scored ? '' : t(lang, 'exercisesHint')}{t(lang, 'copyHint')}</p>
-	<p class="lfwai-progress" data-progress></p>
 	<details class="lfwai-result">
 		<summary>{t(lang, 'pasteResult')}</summary>
 		<p class="lfwai-hint">{t(lang, 'pasteHint')}</p>

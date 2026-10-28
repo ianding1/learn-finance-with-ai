@@ -33,7 +33,7 @@ const prereqHtml = prereqs.map((id) => refHtml({ concept: id }, lang, lessonId))
 	{prereqs.length > 0 && <p class="lfwai-prereq"><strong>{t(lang, 'prereqLabel')}</strong><span set:html={prereqHtml} /></p>}
 	<button type="button" class="lfwai-btn lfwai-btn-primary" data-review-copy>{t(lang, 'copyReviewQuiz')}</button>
 	<p class="lfwai-hint">{t(lang, 'reviewHint')}</p>
-	<p class="lfwai-progress" data-review-focus hidden></p>
+	<p class="lfwai-review-focus" data-review-focus hidden></p>
 	<script type="application/json" data-review-data set:html={toJson({ reviewable, prereqs })}></script>
 </section>
 
