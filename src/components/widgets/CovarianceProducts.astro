@@ -61,10 +61,10 @@ const layouts = [
 	},
 	{
 		cls: 'viz-narrow', W: 360, zeroX: 262, scale: 16, title: L.contribNarrow,
-		rows: rows.map((_, i) => { const y = narrowTop + i * 84 + 16; return { name: y, dev: y + 19, bar: y + 48 }; }),
+		rows: rows.map((_, i) => { const y = narrowTop + i * 92 + 16; return { name: y, dev: y + 19, bar: y + 50 }; }),
 		// one zero line per bar, so that it does not cross the text of the next row
-		axis: [0, 1, 2].map((i) => [narrowTop + i * 84 + 44, narrowTop + i * 84 + 84]),
-		H: narrowTop + 84 * 2 + 16 + 48 + 62,
+		axis: [0, 1, 2].map((i) => [narrowTop + i * 92 + 44, narrowTop + i * 92 + 88]),
+		H: narrowTop + 92 * 2 + 16 + 50 + 62,
 	},
 ];
 ---
