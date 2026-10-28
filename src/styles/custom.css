@@ -598,12 +598,28 @@
 	border-bottom: 1px solid var(--sl-color-gray-4);
 }
 
-/* SVG figures keep a minimum width so their labels stay readable on phones; they scroll sideways. */
+/* Figures fit the width of the page. Each widget draws a wide and a narrow layout; the figure
+   shows the narrow one when it is narrower than 34rem (phones), so labels keep their size. */
 .lfwai-figure-body {
-	overflow-x: auto;
+	container-type: inline-size;
 }
-.lfwai-figure-body .lfwai-viz {
-	min-width: 34rem;
+.lfwai-viz.viz-narrow {
+	display: none;
+}
+@container (max-width: 34rem) {
+	.lfwai-viz.viz-wide {
+		display: none;
+	}
+	.lfwai-viz.viz-narrow {
+		display: block;
+	}
+}
+/* Text drawn over grid lines gets an outline in the page color. */
+.lfwai-viz .viz-halo {
+	paint-order: stroke;
+	stroke: var(--sl-color-bg);
+	stroke-width: 4px;
+	stroke-linejoin: round;
 }
 
 /* ---------- Text rendering and contrast (all languages) ---------- */

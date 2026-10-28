@@ -1,5 +1,7 @@
 ---
 // Figure 3-1: outcomes of A and B on one axis; dot area is proportional to probability.
+// Two layouts: a wide one, and a narrow one for phones with the row names above each axis.
+// The figure shows the one that fits (container query in custom.css).
 import { toLang } from '../../i18n/ui';
 
 const lang = toLang(Astro.locals.starlightRoute.lang);
@@ -9,43 +11,53 @@ const L = {
 }[lang];
 
 const p = [0.25, 0.5, 0.25];
-const rows = [
-	{ name: L.a, cls: 'a', y: 70, values: [30, 10, -10] },
-	{ name: L.b, cls: 'b', y: 150, values: [1, 5, 3] },
+const series = [
+	{ name: L.a, cls: 'a', values: [30, 10, -10] },
+	{ name: L.b, cls: 'b', values: [1, 5, 3] },
 ];
-const W = 640;
-const x0 = 110;
-const x1 = 610;
 const lo = -15;
 const hi = 35;
-const X = (v: number) => x0 + ((v - lo) / (hi - lo)) * (x1 - x0);
 const ticks = [-10, 0, 10, 20, 30];
 const radius = (pi: number) => 6 + 14 * Math.sqrt(pi);
 const mean = (vs: number[]) => vs.reduce((s, v, i) => s + v * p[i], 0);
+
+// wide: names in a column on the left. narrow: names above each axis.
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 230, x0: 110, x1: 610, rowY: [70, 150], gridY: [30, 185], tickY: 203, axisY: 224, nameAbove: false },
+	{ cls: 'viz-narrow', W: 360, H: 262, x0: 22, x1: 344, rowY: [84, 180], gridY: [40, 212], tickY: 230, axisY: 254, nameAbove: true },
+].map((l) => ({ ...l, X: (v: number) => l.x0 + ((v - lo) / (hi - lo)) * (l.x1 - l.x0) }));
 ---
 
-<svg class="lfwai-viz" viewBox={`0 0 ${W} 230`} role="img" aria-label={`${L.a} / ${L.b}`}>
-	{ticks.map((tk) => (
-		<g>
-			<line class="viz-grid" x1={X(tk)} x2={X(tk)} y1="30" y2="185" />
-			<text class="viz-tick" x={X(tk)} y="203" text-anchor="middle">{tk}</text>
-		</g>
-	))}
-	<text class="viz-tick" x={(x0 + x1) / 2} y="224" text-anchor="middle">{L.axis}</text>
-	{rows.map((r) => {
-		const m = mean(r.values);
-		return (
+{layouts.map((l) => (
+	<svg class={`lfwai-viz ${l.cls}`} viewBox={`0 0 ${l.W} ${l.H}`} role="img" aria-label={`${L.a} / ${L.b}`}>
+		{ticks.map((tk) => (
 			<g>
-				<text class="viz-label" x="12" y={r.y + 5}>{r.name}</text>
-				<line class="viz-axis" x1={x0} x2={x1} y1={r.y} y2={r.y} />
-				{r.values.map((v, i) => (
-					<circle class={`viz-dot viz-${r.cls}`} cx={X(v)} cy={r.y} r={radius(p[i])}>
-						<title>{`${r.name}: ${v}%, p = ${p[i]}`}</title>
-					</circle>
-				))}
-				<line class="viz-mean" x1={X(m)} x2={X(m)} y1={r.y - 30} y2={r.y + 30} />
-				<text class="viz-small" x={X(m)} y={r.y - 34} text-anchor="middle">{`${L.e} ${m}%`}</text>
+				<line class="viz-grid" x1={l.X(tk)} x2={l.X(tk)} y1={l.gridY[0]} y2={l.gridY[1]} />
+				<text class="viz-tick" x={l.X(tk)} y={l.tickY} text-anchor="middle">{tk}</text>
 			</g>
-		);
-	})}
-</svg>
+		))}
+		<text class="viz-tick" x={(l.x0 + l.x1) / 2} y={l.axisY} text-anchor="middle">{L.axis}</text>
+		{series.map((r, k) => {
+			const y = l.rowY[k];
+			const m = mean(r.values);
+			return (
+				<g>
+					{l.nameAbove ? (
+						<text class="viz-label viz-halo" x="4" y={y - 34}>{r.name}</text>
+					) : (
+						<text class="viz-label" x="12" y={y + 5}>{r.name}</text>
+					)}
+					<line class="viz-axis" x1={l.x0} x2={l.x1} y1={y} y2={y} />
+					{r.values.map((v, i) => (
+						<circle class={`viz-dot viz-${r.cls}`} cx={l.X(v)} cy={y} r={radius(p[i])}>
+							<title>{`${r.name}: ${v}%, p = ${p[i]}`}</title>
+						</circle>
+					))}
+					<line class="viz-mean" x1={l.X(m)} x2={l.X(m)} y1={y - 30} y2={y + 30} />
+					{/* narrow: the label starts at the mean line, so it does not run into the row name */}
+					<text class="viz-small viz-halo" x={l.nameAbove ? l.X(m) - 4 : l.X(m)} y={y - 34} text-anchor={l.nameAbove ? 'start' : 'middle'}>{`${L.e} ${m}%`}</text>
+				</g>
+			);
+		})}
+	</svg>
+))}
