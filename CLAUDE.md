@@ -87,7 +87,7 @@ history and answers inline. To publish a finished lesson:
 
 | 中文 | English | `kind` / component | Scored |
 | --- | --- | --- | --- |
-| 辨析题 | check question | `check`, `<Check>`, submitted by `<CheckAll>` | yes |
+| 随堂题 | check question | `check`, `<Check>`, submitted by `<CheckAll>` | yes |
 | 练习题 | exercise | `exercise`, `<Exercises>` | no ("ok" / "revise") |
 | 测验 | quiz | `E0`, `E1`, ... in the curriculum (not built yet) | yes |
 | 课前复习 | review before the lesson | `<Review>` | no |

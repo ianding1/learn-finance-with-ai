@@ -43,7 +43,7 @@ const bullets = (xs: string[]) => xs.map((x) => `- ${x}`).join('\n');
  * The prompt ends where the learner's answers begin: the learner attaches a photo or types the
  * answers after it, and may answer only some of the questions.
  *
- * Two modes: check questions (辨析题) are scored; exercises are reviewed
+ * Two modes: check questions (随堂题) are scored; exercises are reviewed
  * without points, and each answered exercise is marked "ok" or "revise".
  */
 export function gradingPrompt(i: GradingInput): string {

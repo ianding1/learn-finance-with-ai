@@ -70,7 +70,7 @@ common_errors:
       Writing the unit of variance as % instead of %², or comparing a variance directly with an expected return.
 
 questions:
-  # ---------- Check questions (辨析题, scored) ----------
+  # ---------- Check questions (随堂题, scored) ----------
   - id: C1
     kind: check
     section: expected-value

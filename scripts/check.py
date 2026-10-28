@@ -448,7 +448,7 @@ PLAIN_PATTERNS = [
     (re.compile(r"(?:见|参见|详见|参考)\s*(?:第\s*)?(\d+\.\d+)"), "'见 X.Y'"),
     (re.compile(r"第\s*(\d+(?:\.\d+)?)\s*(?:课|段|节)"), "'第 N 课/段/节'"),
     (re.compile(r"(?:测验)?第\s*(\d+)\s*题"), "'第 N 题'"),
-    (re.compile(r"(?:辨析题|检查题|复习题)\s*([A-Z]\d+)"), "question label"),
+    (re.compile(r"(?:随堂题|辨析题|检查题|复习题)\s*([A-Z]\d+)"), "question label"),
     (re.compile(r"\b(?:see|lesson|section|step)\s+(\d+\.\d+)\b", re.I), "'see/lesson X.Y'"),
     (re.compile(r"\bquestion\s+(\d+)\b", re.I), "'question N'"),
     (re.compile(r"\b(?:check|review)\s+([A-Z]\d+)\b"), "question label"),
