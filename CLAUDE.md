@@ -52,8 +52,8 @@ history and answers inline. To publish a finished lesson:
    context item with the `concepts` or `questions` it serves (leave both out only for facts every
    question needs), and each common error with its `questions`. Any fact a question needs from the
    lesson (example data, figure parameters) must be in a context item tagged for that question.
-   Place `<Check id="..."/>` in the right section, `<CheckAll />` after the summary and `<Quiz />`
-   at the end.
+   Place `<Check id="..."/>` (question text only) in the right section, `<CheckAll />` after the
+   summary and `<Quiz />` at the end.
 5. Put every numeric answer in `expected` and recompute it in `course/verify/<id>.py`.
 6. Write the English page at `src/content/docs/en/lessons/<slug>.mdx` and every `en` field.
    Use plain, standard English without idioms. Formulas must be identical.
@@ -83,9 +83,12 @@ history and answers inline. To publish a finished lesson:
 ## Prompts
 
 - Grading prompts never include the learner profile, so that the grader judges each answer on its own.
-- The learner's answers are the last section of a grading prompt. Typed answers are optional; most
-  learners write by hand and attach a photo after the prompt, and the prompt asks the grader to
-  transcribe first and not to guess.
+- Answers are not entered on the site. Review and check questions are submitted together by
+  `<CheckAll />` at the end of the lesson, and quiz questions by `<Quiz />`. The prompt ends with an
+  empty "learner's answers" heading; the learner attaches a photo or types the answers after it.
+- Learners may submit only some questions. The grader grades only the answered ones and lists only
+  those in the result block; other questions keep their earlier score or stay "not done yet".
+- Buttons copy the prompt directly to the clipboard. The dialog is only a fallback.
 - Explanation prompts include the learner's background, preferences and the concepts of the current
   lesson that they need to practice, unless the learner turned this off. Scores are never included.
 - In Chinese text, write 提示词, not "prompt" (checked).

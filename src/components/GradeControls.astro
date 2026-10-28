@@ -1,18 +1,20 @@
 ---
-// Buttons for a group of questions: generate the grading prompt, paste the result, save it.
+// Submission controls for a group of questions: copy the grading prompt, see which questions are
+// already graded, and paste the result back.
 import { t, type Lang } from '../i18n/ui';
 import { toJson } from '../lib/grading';
 
 interface Props {
 	lang: Lang;
 	payload: unknown;
-	label: string;
 }
-const { lang, payload, label } = Astro.props;
+const { lang, payload } = Astro.props;
 ---
 
 <div class="lfwai-controls">
-	<button type="button" class="lfwai-btn lfwai-btn-primary" data-grade>{label}</button>
+	<button type="button" class="lfwai-btn lfwai-btn-primary" data-grade>{t(lang, 'copyGrading')}</button>
+	<p class="lfwai-hint">{t(lang, 'copyHint')}</p>
+	<p class="lfwai-progress" data-progress></p>
 	<details class="lfwai-result">
 		<summary>{t(lang, 'pasteResult')}</summary>
 		<p class="lfwai-hint">{t(lang, 'pasteHint')}</p>

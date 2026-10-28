@@ -1,6 +1,5 @@
 ---
 // <CheckAll /> — one grading prompt for all review and check questions of the lesson.
-// For learners who write every answer on paper and send one photo.
 import { toLang, t } from '../i18n/ui';
 import { lessonKey } from '../lib/course';
 import { gradingPayload } from '../lib/grading';
@@ -14,7 +13,7 @@ const qs = (lessonKey(lessonId)?.questions ?? []).filter((q) => q.kind !== 'quiz
 ---
 
 <section class="lfwai-group not-content" data-lfwai-group id="check-all">
-	<div class="lfwai-q-head"><span class="lfwai-q-label">{t(lang, 'allTitle')}</span></div>
-	<p class="lfwai-all-help">{t(lang, 'allHelp')}</p>
-	<GradeControls lang={lang} payload={gradingPayload(lessonId, qs, lang)} label={t(lang, 'makeAllPrompt')} />
+	<div class="lfwai-q-head"><span class="lfwai-q-label">{t(lang, 'exercisesTitle')}</span></div>
+	<p class="lfwai-all-help">{t(lang, 'exercisesHelp')}</p>
+	<GradeControls lang={lang} payload={gradingPayload(lessonId, qs, lang)} />
 </section>

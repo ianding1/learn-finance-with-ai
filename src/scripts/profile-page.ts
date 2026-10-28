@@ -1,6 +1,6 @@
 // Client behavior for the learner profile page (ProfilePanel.astro).
 import { pageData, ui } from './page-data';
-import { showPrompt } from './dialog';
+import { copyPrompt, flash } from './dialog';
 import { sessionPrompt } from './prompts';
 import {
 	applyResult,
@@ -102,8 +102,11 @@ export function initProfilePage() {
 		render();
 	});
 
-	q('[data-action="session"]').addEventListener('click', () => {
-		showPrompt(sessionPrompt(data.lang, data.site, aboutMe(loadProfile(), names, data.lang)));
+	q<HTMLElement>('[data-action="session"]').addEventListener('click', (e) => {
+		const btn = e.currentTarget as HTMLElement;
+		copyPrompt(sessionPrompt(data.lang, data.site, aboutMe(loadProfile(), names, data.lang)), () =>
+			flash(btn, ui('copied')),
+		);
 	});
 
 	q('[data-action="export"]').addEventListener('click', () => {

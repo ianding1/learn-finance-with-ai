@@ -1,10 +1,10 @@
-// Client behavior for <Check>, <CheckAll> and <Quiz>: keep typed answer drafts, build grading
-// prompts, save results. Typed answers are optional: learners who write by hand attach a photo
-// after the prompt, and the prompt tells the grader where to find the answers.
+// Client behavior for <CheckAll> and <Quiz>: copy the grading prompt, show which questions are
+// already graded, and save results. Answers are not entered on the site: the learner attaches a
+// photo or types the answers after the copied prompt, and may submit only some questions at a time.
 import { pageData, ui } from './page-data';
-import { showPrompt } from './dialog';
+import { copyPrompt, flash } from './dialog';
 import { gradingPrompt } from './prompts';
-import { applyResult, parseResult } from './profile';
+import { applyResult, loadProfile, parseResult } from './profile';
 
 interface Payload {
 	lessonId: string;
@@ -16,56 +16,48 @@ interface Payload {
 	questions: { id: string; label: string; points: number; question: string; answer: string; rubric: string[] }[];
 }
 
-const draftKey = (lesson: string, id: string) => `lfwai.draft.${lesson}.${id}`;
-
-function safeGet(k: string) {
-	try {
-		return localStorage.getItem(k) ?? '';
-	} catch {
-		return '';
-	}
-}
-function safeSet(k: string, v: string) {
-	try {
-		localStorage.setItem(k, v);
-	} catch {
-		/* storage unavailable: drafts are simply not kept */
-	}
-}
-
 let done = false;
 
 export function initGradeGroups() {
 	if (done) return;
 	done = true;
 
-	// Answer boxes: one per question on the page. Restore drafts and open boxes that have one.
-	const lesson = pageData().lesson?.id ?? '';
-	document.querySelectorAll<HTMLTextAreaElement>('[data-answer-for]').forEach((ta) => {
-		const key = draftKey(lesson, ta.dataset.answerFor!);
-		ta.value = safeGet(key);
-		if (ta.value) ta.closest('details')?.setAttribute('open', '');
-		ta.addEventListener('input', () => safeSet(key, ta.value));
-	});
-	const typedAnswer = (id: string) =>
-		document.querySelector<HTMLTextAreaElement>(`[data-answer-for="${id}"]`)?.value ?? '';
-
 	document.querySelectorAll<HTMLElement>('[data-lfwai-group]').forEach((group) => {
 		const payload = JSON.parse(group.querySelector('[data-payload]')!.textContent || '{}') as Payload;
+		const progress = group.querySelector<HTMLElement>('[data-progress]')!;
+		const sep = pageData().lang === 'zh' ? '、' : ', ';
 
-		group.querySelector('[data-grade]')!.addEventListener('click', () => {
-			showPrompt(
-				gradingPrompt({
-					lang: pageData().lang,
-					lessonId: payload.lessonId,
-					lessonTitle: payload.lessonTitle,
-					lessonUrl: payload.lessonUrl,
-					context: payload.context,
-					commonErrors: payload.commonErrors,
-					conceptIds: payload.conceptIds,
-					questions: payload.questions.map((q) => ({ ...q, learnerAnswer: typedAnswer(q.id) })),
-				}),
-			);
+		// Latest stored score of each question in this group. Questions without one are "not done yet".
+		function renderProgress() {
+			const results = loadProfile().results.filter((r) => r.lesson === payload.lessonId);
+			const graded: string[] = [];
+			const todo: string[] = [];
+			for (const q of payload.questions) {
+				const r = results.find((x) => x.id === q.id);
+				if (r) graded.push(`${q.label} ${r.score}/${r.max}`);
+				else todo.push(q.label);
+			}
+			const parts: string[] = [];
+			if (graded.length) parts.push(ui('progressDone') + graded.join(sep));
+			if (graded.length && todo.length) parts.push(ui('progressTodo') + todo.join(sep));
+			progress.textContent = parts.join(pageData().lang === 'zh' ? '；' : '; ');
+			progress.hidden = parts.length === 0;
+		}
+		renderProgress();
+
+		const btn = group.querySelector<HTMLElement>('[data-grade]')!;
+		btn.addEventListener('click', () => {
+			const text = gradingPrompt({
+				lang: pageData().lang,
+				lessonId: payload.lessonId,
+				lessonTitle: payload.lessonTitle,
+				lessonUrl: payload.lessonUrl,
+				context: payload.context,
+				commonErrors: payload.commonErrors,
+				conceptIds: payload.conceptIds,
+				questions: payload.questions,
+			});
+			copyPrompt(text, () => flash(btn, ui('copiedGrading')));
 		});
 
 		const resultArea = group.querySelector<HTMLTextAreaElement>('[data-result]')!;
@@ -77,12 +69,12 @@ export function initGradeGroups() {
 				status.dataset.state = 'error';
 				return;
 			}
+			// Only the questions in the result are updated; earlier scores of other questions stay.
 			applyResult(r, new Set(Object.keys(pageData().concepts)));
-			const total = r.items.reduce((s, i) => s + i.score, 0);
-			const max = r.items.reduce((s, i) => s + i.max, 0);
-			status.textContent = `${ui('saved')} ${total}/${max}`;
+			status.textContent = ui('saved');
 			status.dataset.state = 'ok';
 			resultArea.value = '';
+			renderProgress();
 		});
 	});
 }

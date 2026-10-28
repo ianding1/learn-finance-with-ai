@@ -49,3 +49,26 @@ export function showPrompt(text: string) {
 	dialog.showModal();
 	area.scrollTop = 0;
 }
+
+/**
+ * Copy a prompt to the clipboard. On success, call `done` (to show short feedback);
+ * if the browser does not allow copying, open the dialog so the learner can copy by hand.
+ */
+export async function copyPrompt(text: string, done: () => void) {
+	try {
+		await navigator.clipboard.writeText(text);
+		done();
+	} catch {
+		showPrompt(text);
+	}
+}
+
+/** Temporarily replace a button's label, e.g. with "Copied". */
+export function flash(btn: HTMLElement, label: string, ms = 2000) {
+	const original = btn.dataset.label ?? btn.textContent ?? '';
+	btn.dataset.label = original;
+	btn.textContent = label;
+	window.setTimeout(() => {
+		btn.textContent = original;
+	}, ms);
+}

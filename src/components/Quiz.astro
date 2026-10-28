@@ -1,6 +1,6 @@
 ---
-// <Quiz /> — all quiz questions of the current lesson, graded together with one prompt.
-import { toLang, t } from '../i18n/ui';
+// <Quiz /> — all quiz questions of the current lesson, submitted together with one prompt.
+import { toLang } from '../i18n/ui';
 import { lessonKey } from '../lib/course';
 import { gradingPayload, questionLabel } from '../lib/grading';
 import QuestionBody from './QuestionBody.astro';
@@ -15,5 +15,5 @@ const qs = (lessonKey(lessonId)?.questions ?? []).filter((q) => q.kind === 'quiz
 
 <section class="lfwai-group lfwai-quiz not-content" data-lfwai-group>
 	{qs.map((q, i) => <QuestionBody q={q} lang={lang} lessonId={lessonId} label={questionLabel(q, lang, i + 1)} />)}
-	<GradeControls lang={lang} payload={gradingPayload(lessonId, qs, lang)} label={t(lang, 'makeQuizPrompt')} />
+	<GradeControls lang={lang} payload={gradingPayload(lessonId, qs, lang)} />
 </section>

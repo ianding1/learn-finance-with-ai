@@ -1,7 +1,7 @@
 // "Explain this": when the learner selects text in the lesson, show a floating button that
 // builds an explanation prompt containing the selection, its paragraph and its section.
 import { pageData, ui } from './page-data';
-import { showPrompt } from './dialog';
+import { copyPrompt } from './dialog';
 import { explainPrompt } from './prompts';
 import { aboutMe, loadProfile } from './profile';
 
@@ -109,8 +109,13 @@ export function initExplain() {
 				return p.includeInPrompts ? aboutMe(p, data.concepts, data.lang, data.lesson?.concepts ?? []) : '';
 			})(),
 		});
-		hide();
-		window.getSelection()?.removeAllRanges();
-		showPrompt(prompt);
+		copyPrompt(prompt, () => {
+			btn.textContent = ui('copiedExplain');
+			window.setTimeout(() => {
+				window.getSelection()?.removeAllRanges();
+				hide();
+				btn.textContent = ui('explain');
+			}, 1500);
+		});
 	});
 }

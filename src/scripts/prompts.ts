@@ -11,7 +11,6 @@ export interface PromptQuestion {
 	question: string;
 	answer: string;
 	rubric: string[];
-	learnerAnswer: string;
 }
 
 export interface GradingInput {
@@ -39,9 +38,9 @@ const fence = (s: string) => `"""\n${s.trim()}\n"""`;
 const bullets = (xs: string[]) => xs.map((x) => `- ${x}`).join('\n');
 
 /**
- * Grading prompt. No learner profile is included: the grader should judge each answer on its own,
- * without expectations about the learner. The learner's answers come last, so that a learner who
- * writes by hand can paste the prompt and attach a photo after it.
+ * Grading prompt. No learner profile is included: the grader should judge each answer on its own.
+ * The prompt ends where the learner's answers begin: the learner attaches a photo or types the
+ * answers after it, and may answer only some of the questions.
  */
 export function gradingPrompt(i: GradingInput): string {
 	const zh = i.lang === 'zh';
@@ -56,10 +55,6 @@ export function gradingPrompt(i: GradingInput): string {
 		weak: [],
 		note: '',
 	});
-	const typed = i.questions.filter((q) => q.learnerAnswer.trim());
-	const missing = i.questions.filter((q) => !q.learnerAnswer.trim());
-	const missingLabels = missing.map((q) => q.label).join(zh ? '、' : ', ');
-
 	const qs = i.questions
 		.map((q) =>
 			zh
@@ -84,23 +79,8 @@ ${bullets(q.rubric)}`,
 		)
 		.join('\n\n');
 
-	const answers = [
-		...typed.map((q) => `### ${q.label}\n${fence(q.learnerAnswer)}`),
-		missing.length === 0
-			? ''
-			: typed.length === 0
-				? zh
-					? '学习者的答案附在本提示词之后（手写照片或文字）。'
-					: "The learner's answers follow this prompt (a photo of handwritten work, or text)."
-				: zh
-					? `以下题目的答案附在本提示词之后（手写照片或文字）：${missingLabels}。`
-					: `The answers to these questions follow this prompt (a photo of handwritten work, or text): ${missingLabels}.`,
-	]
-		.filter(Boolean)
-		.join('\n\n');
-
 	if (zh) {
-		return `你是${COURSE.zh}课程的评卷老师。请批改学习者在第 ${i.lessonId} 课《${i.lessonTitle}》中的作答。学习者的答案在本提示词的最后，可能是文字，也可能是附在后面的手写照片。
+		return `你是${COURSE.zh}课程的评卷老师。请批改学习者在第 ${i.lessonId} 课《${i.lessonTitle}》中的作答。学习者的答案附在本提示词之后（照片或文字），可能只包含其中一部分题目。
 
 ## 重要说明
 ${DISCLAIMER.zh}如果你认为参考答案或评分要点本身有误，请明确指出错在哪里，并按正确的答案评分，不要因为学习者没有照搬错误的参考答案而扣分。
@@ -116,7 +96,7 @@ ${bullets(i.context)}
 ${qs}
 ${i.commonErrors.length ? `\n## 常见错误（供诊断参考）\n${bullets(i.commonErrors)}\n` : ''}
 ## 请这样回复
-1. 如果答案是照片：先逐题写出你识别到的内容（题号加转写），看不清的地方明确标出，不要猜测。照片中找不到某道题的答案时，说明缺少这道题并给 0 分。
+1. 只批改学习者这次作答了的题目。没有作答的题目不评分，也不要给 0 分，它们会在以后提交。
 2. 逐题评分：给出得分，指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。结论正确但理由不成立时，按评分要点扣分。
 3. 对错误之处，用学习者能理解的方式讲解，必要时举一个小例子。不要只重复参考答案。
 4. 如果作答反映出对某个概念的误解，明确指出是哪个概念。
@@ -127,14 +107,13 @@ ${i.commonErrors.length ? `\n## 常见错误（供诊断参考）\n${bullets(i.c
 ${example}
 LFWAI-RESULT>>>
 
-score 填实际得分。mastered（已掌握）和 weak（需要多练习）只能使用这些概念 id：${ids}。note 用一句话概括这次作答反映出的主要问题（不超过 100 字），它会被保存到学习档案中。
+items 中只列出这次批改了的题目，score 填实际得分。mastered（已掌握）和 weak（需要多练习）只能使用这些概念 id：${ids}。note 用一句话概括这次作答反映出的主要问题（不超过 100 字），它会被保存到学习档案中。
 
 ## 学习者的答案
-${answers}
 `;
 	}
 
-	return `You are the grader for the course ${COURSE.en}. Grade the learner's answers for Lesson ${i.lessonId}, "${i.lessonTitle}". The learner's answers are at the end of this prompt. They may be text or a photo of handwritten work attached after the prompt.
+	return `You are the grader for the course ${COURSE.en}. Grade the learner's answers for Lesson ${i.lessonId}, "${i.lessonTitle}". The learner's answers follow this prompt (a photo or text) and may cover only some of the questions.
 
 ## Important
 ${DISCLAIMER.en} If you believe a reference answer or a grading point is itself wrong, say clearly what is wrong and grade against the correct answer. Do not take points away because the learner did not copy a wrong reference answer.
@@ -150,7 +129,7 @@ ${bullets(i.context)}
 ${qs}
 ${i.commonErrors.length ? `\n## Common errors (for diagnosis)\n${bullets(i.commonErrors)}\n` : ''}
 ## How to reply
-1. If the answers are in a photo: first write out what you read for each question (the question label and a transcription). Mark clearly anything you cannot read; do not guess. If the photo has no answer for a question, say that it is missing and give 0 points.
+1. Grade only the questions the learner answered this time. Do not grade or give 0 points to unanswered questions; they will be submitted later.
 2. Grade each question: give the score and say what is correct and what is wrong. Check the reasoning, not only the final numbers. If the conclusion is right but the reason does not hold, deduct points according to the grading points.
 3. For each error, explain it in a way the learner can understand, with a small example if useful. Do not only repeat the reference answer.
 4. If an answer shows a misunderstanding of a concept, name the concept.
@@ -161,10 +140,9 @@ ${i.commonErrors.length ? `\n## Common errors (for diagnosis)\n${bullets(i.commo
 ${example}
 LFWAI-RESULT>>>
 
-Put the actual score in "score". "mastered" and "weak" (needs more practice) may only contain these concept ids: ${ids}. "note" is one sentence (at most 30 words) that sums up the main problem shown by these answers; it is saved to the learner profile.
+List only the questions you graded in "items", with the actual score in "score". "mastered" and "weak" (needs more practice) may only contain these concept ids: ${ids}. "note" is one sentence (at most 30 words) that sums up the main problem shown by these answers; it is saved to the learner profile.
 
 ## The learner's answers
-${answers}
 `;
 }
 
