@@ -11,6 +11,7 @@ const L = {
 		prod: '乘积',
 		contrib: '对协方差的贡献 = 概率 × 乘积（柱的粗细表示概率）',
 		sum: '加权求和',
+		sep: '，',
 	},
 	en: {
 		names: ['Boom', 'Normal', 'Recession'],
@@ -19,6 +20,7 @@ const L = {
 		prod: 'product',
 		contrib: 'Contribution to covariance = probability × product (bar thickness shows probability)',
 		sum: 'Weighted sum',
+		sep: ', ',
 	},
 }[lang];
 
@@ -34,8 +36,10 @@ const rows = p.map((pi, i) => {
 	return { name: L.names[i], p: pi, dA, dB, prod: dA * dB, c: pi * dA * dB };
 });
 const total = rows.reduce((s, r) => s + r.c, 0);
+const signed = (v: number) => (v < 0 ? ` − ${Math.abs(v)}` : ` + ${v}`);
 const fmt = (v: number) => (v > 0 ? `+${v}` : v < 0 ? `−${Math.abs(v)}` : '0');
 
+const sumText = fmt(rows[0].c) + rows.slice(1).map((r) => signed(r.c)).join('');
 const zeroX = 480;
 const scale = 9; // px per unit of contribution
 const top = 50;
@@ -53,11 +57,11 @@ const rowH = 56;
 		return (
 			<g>
 				<text class="viz-label" x="12" y={y - 4}>{`${r.name}  p = ${r.p}`}</text>
-				<text class="viz-small" x="12" y={y + 15}>{`${L.devA} ${fmt(r.dA)}   ${L.devB} ${fmt(r.dB)}   ${L.prod} ${fmt(r.prod)}`}</text>
+				<text class="viz-small" x="12" y={y + 15}>{[`${L.devA} ${fmt(r.dA)}`, `${L.devB} ${fmt(r.dB)}`, `${L.prod} ${fmt(r.prod)}`].join(L.sep)}</text>
 				{w > 0 && <rect class={r.c < 0 ? 'viz-neg' : 'viz-pos'} x={x} y={y - h / 2} width={w} height={h} rx="3" />}
 				<text class="viz-value" x={r.c < 0 ? x - 6 : x + w + 6} y={y + 5} text-anchor={r.c < 0 ? 'end' : 'start'}>{fmt(r.c)}</text>
 			</g>
 		);
 	})}
-	<text class="viz-label" x="12" y="250">{`${L.sum}: ${rows.map((r) => fmt(r.c)).join(' ')} = ${fmt(total)} (%²)`}</text>
+	<text class="viz-label" x="12" y="250">{`${L.sum}: ${sumText} = ${fmt(total)} (%²)`}</text>
 </svg>

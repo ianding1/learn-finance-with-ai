@@ -12,9 +12,9 @@ context:
     - 期望 $E[R] = \sum_i p_i R_i$；方差 $\text{Var}(R) = \sum_i p_i (R_i - E[R])^2$，单位为 %²；标准差是方差的平方根，单位为 %，也叫波动率。
     - 协方差 $\text{Cov}(R_A, R_B) = \sum_i p_i (R_{A,i} - E[R_A])(R_{B,i} - E[R_B])$；看的是相对各自期望的偏差是否同向，不是收益的正负。相关系数 $\rho = \text{Cov} / (\sigma_A \sigma_B)$，在 $[-1, 1]$ 之间。
     - 组合 $R_P = wR_A + (1-w)R_B$：期望是线性的；方差 $w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\text{Cov}$ 不是线性的。
-    - 分散化：只要 $\rho < 1$，组合标准差就小于加权平均。$\rho = 0$ 时好处来自"方差相加、标准差不相加"（$\sqrt{a^2+b^2} < a+b$），不来自协方差项。分散化不需要负相关。
+    - 分散化：只要 $\rho < 1$，组合标准差就小于加权平均。$\rho = 0$ 时好处来自“方差相加、标准差不相加”（$\sqrt{a^2+b^2} < a+b$），不来自协方差项。分散化不需要负相关。
     - 讲义例子：繁荣 / 正常 / 衰退概率 0.25 / 0.5 / 0.25；股票 A 收益 30 / 10 / −10，债券 B 收益 1 / 5 / 3（%）。$E[R_A] = 10$，$E[R_B] = 3.5$，$\text{Var}_A = 200$，$\text{Var}_B = 2.75$，$\text{Cov} = -10$，$\rho \approx -0.43$。
-    本课所有计算以百分点为单位。学习者已经学过：求和符号，以及 [[0.2]] 的最优化。还没有学：用历史数据估计参数（[[0.4]]）、回归（[[0.5]]）、组合理论（[[4.2]]）。
+    本课所有计算以百分点为单位。学习者已经学过：求和符号，以及[[0.2]]的最优化。还没有学：用历史数据估计参数（[[0.4]]）、回归（[[0.5]]）、组合理论（[[4.2]]）。
   en: |-
     Key points of this lesson:
     - A scenario table lists possible outcomes and their probabilities. The probabilities sum to 1.
@@ -27,9 +27,9 @@ context:
 
 common_errors:
   zh:
-    - "$\\rho = 0$ 时用\"受协方差影响\"解释分散化：结论对，但理由不成立。此时协方差项为 0，好处来自方差相加、标准差不相加。"
-    - "认为\"两只基金都涨了，所以正相关\"：相关看的是相对各自期望的偏差方向，不是收益的正负；而且一次观测说明不了概率关系。"
-    - "在互动图中只观察 $\\rho = -1$ 的情形，错过了\"不相关也能分散\"这个要点。"
+    - "$\\rho = 0$ 时用“受协方差影响”解释分散化：结论对，但理由不成立。此时协方差项为 0，好处来自方差相加、标准差不相加。"
+    - "认为“两只基金都涨了，所以正相关”：相关看的是相对各自期望的偏差方向，不是收益的正负；而且一次观测说明不了概率关系。"
+    - "在互动图中只观察 $\\rho = -1$ 的情形，错过了“不相关也能分散”这个要点。"
     - "把方差的单位写成 %，或者直接比较方差和期望收益的大小。"
   en:
     - "Explaining diversification at $\\rho = 0$ by \"the effect of covariance\": the conclusion is right but the reason is wrong. The covariance term is 0 in this case; the benefit comes from the fact that variances add but standard deviations do not."
@@ -49,7 +49,7 @@ questions:
       zh: |-
         一家餐馆每月房租 12,000 美元（已签一年租约）。每份餐卖 30 美元，每月卖 $q$ 份的可变成本为 $10q + \frac{q^2}{100}$ 美元。
         (a) 每月最优份数和利润是多少？
-        (b) 老板说"反正亏钱，少卖一点就少亏一点"，对吗？用数字说明。
+        (b) 老板说“反正亏钱，少卖一点就少亏一点”，对吗？用数字说明。
         (c) 租约到期时，如果市场情况不变，应该怎么决定？
       en: |-
         A restaurant pays a monthly rent of 12,000 dollars (it has signed a one-year lease). Each meal sells for 30 dollars, and the variable cost of selling $q$ meals per month is $10q + \frac{q^2}{100}$ dollars.
@@ -139,7 +139,7 @@ questions:
     rubric:
       zh:
         - "期望的变化正确。"
-        - "标准差不变，并用\"偏差不变\"说明理由。"
+        - "标准差不变，并用“偏差不变”说明理由。"
       en:
         - "The change in the expected value is correct."
         - "States that the standard deviation is unchanged and gives the reason: the deviations do not change."
@@ -250,7 +250,7 @@ questions:
     rubric:
       zh:
         - "结论为假（2 分）。"
-        - "理由必须指向\"方差相加、标准差不相加\"（6 分）。用\"受协方差影响\"作理由在 $\\rho = 0$ 时不成立，只给结论分。"
+        - "理由必须指向“方差相加、标准差不相加”（6 分）。用“受协方差影响”作理由在 $\\rho = 0$ 时不成立，只给结论分。"
       en:
         - "States false (2 points)."
         - "The reason must point to \"variances add, standard deviations do not\" (6 points). A reason based on \"the effect of covariance\" does not hold at $\\rho = 0$; give only the points for the conclusion."
@@ -262,7 +262,7 @@ questions:
     concepts: [correlation, covariance]
     question:
       zh: |-
-        一位朋友说："这两只基金去年都涨了，所以它们的相关系数一定是正的。"**评估**这个说法。
+        一位朋友说：“这两只基金去年都涨了，所以它们的相关系数一定是正的。”**评估**这个说法。
       en: |-
         A friend says: "Both of these funds went up last year, so their correlation must be positive." **Evaluate** this statement.
     answer:
@@ -399,7 +399,7 @@ questions:
       zh:
         - "交叉项个数为 $n^2 - n$（6 分）。"
         - "极限正确（6 分）。"
-        - "含义要区分\"能分散的\"和\"不能分散的\"（8 分）。"
+        - "含义要区分“能分散的”和“不能分散的”（8 分）。"
       en:
         - "The number of cross terms is $n^2 - n$ (6 points)."
         - "The limit is correct (6 points)."

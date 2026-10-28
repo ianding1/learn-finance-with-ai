@@ -613,6 +613,19 @@ def check_lint():
         for w in FORBIDDEN_WORDS:
             if w in text:
                 err(rel(p), f"contains '{w}': remove private teaching notes before publishing")
+    # Chinese text uses Chinese quotation marks. Straight quotes next to Chinese characters
+    # are turned into wrongly paired curly quotes by Markdown typography.
+    straight = re.compile(r'"(?=[\u4e00-\u9fff])|(?<=[\u4e00-\u9fff\u3002\uff0c\uff1f\uff01])"')
+    for r in source_docs():
+        p = doc_path(SOURCE, str(r))
+        if straight.search(prose_only(body_of(p.read_text(encoding="utf-8")))):
+            err(rel(p), 'Chinese text contains straight double quotes ("); use “ and ”')
+    for lesson_id, key in keys.items():
+        def fn(path, node, lesson_id=lesson_id):
+            for s in all_strings(node[SOURCE]):
+                if straight.search(s):
+                    err(f"course/keys/{lesson_id}.yaml", f'{path}: Chinese text contains straight double quotes ("); use “ and ”')
+        walk_bilingual(key, "", fn)
     prompts = (ROOT / "src/scripts/prompts.ts").read_text(encoding="utf-8")
     for chunk in prompts.split("export function ")[1:]:
         name = chunk.split("(")[0]

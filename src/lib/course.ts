@@ -237,7 +237,8 @@ export function parseRefToken(token: string): RefTarget {
 
 // ---------- Rich text (key files) ----------
 
-const TOKEN = /\\\$|\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$|\[\[([^\]]+)\]\]|\*\*([^*]+)\*\*/g;
+// Bold is matched first so that **text with $math$** renders the math inside the bold text.
+const TOKEN = /\\\$|\*\*([^*]+)\*\*|\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$|\[\[([^\]]+)\]\]/g;
 
 /** Render key-file text to HTML: math (KaTeX), bold, [[refs]], line breaks. */
 export function renderRich(text: string, lang: Lang, current?: string): string {
@@ -247,10 +248,10 @@ export function renderRich(text: string, lang: Lang, current?: string): string {
 		out += esc(text.slice(last, m.index)).replace(/\n/g, '<br>');
 		last = m.index! + m[0].length;
 		if (m[0] === '\\$') out += '$';
-		else if (m[1] !== undefined) out += katex.renderToString(m[1], { displayMode: true, throwOnError: true, strict: 'ignore' });
-		else if (m[2] !== undefined) out += katex.renderToString(m[2], { throwOnError: true, strict: 'ignore' });
-		else if (m[3] !== undefined) out += refHtml(parseRefToken(m[3]), lang, current);
-		else if (m[4] !== undefined) out += `<strong>${esc(m[4])}</strong>`;
+		else if (m[1] !== undefined) out += `<strong>${renderRich(m[1], lang, current)}</strong>`;
+		else if (m[2] !== undefined) out += katex.renderToString(m[2], { displayMode: true, throwOnError: true, strict: 'ignore' });
+		else if (m[3] !== undefined) out += katex.renderToString(m[3], { throwOnError: true, strict: 'ignore' });
+		else if (m[4] !== undefined) out += refHtml(parseRefToken(m[4]), lang, current);
 	}
 	out += esc(text.slice(last)).replace(/\n/g, '<br>');
 	return out;

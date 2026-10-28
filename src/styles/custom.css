@@ -215,14 +215,14 @@
 	height: 0;
 	border-top: 3px solid;
 }
-.sw-avg {
-	border-top-style: dashed !important;
+.lfwai-legend .sw-avg {
+	border-top-style: dashed;
 	border-color: var(--viz-muted);
 }
-.sw-port {
+.lfwai-legend .sw-port {
 	border-color: var(--viz-b);
 }
-.sw-gap {
+.lfwai-legend .sw-gap {
 	border-color: var(--viz-violet);
 }
 .lfwai-legend .sw-min {
