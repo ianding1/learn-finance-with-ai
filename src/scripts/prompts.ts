@@ -43,7 +43,7 @@ const bullets = (xs: string[]) => xs.map((x) => `- ${x}`).join('\n');
  * The prompt ends where the learner's answers begin: the learner attaches a photo or types the
  * answers after it, and may answer only some of the questions.
  *
- * Two modes: scored questions (review and check questions) get points; exercises are reviewed
+ * Two modes: check questions (辨析题) are scored; exercises are reviewed
  * without points, and each answered exercise is marked "ok" or "revise".
  */
 export function gradingPrompt(i: GradingInput): string {
@@ -239,6 +239,66 @@ ${fence(i.selection)}`);
 5. End with one short question that lets me check my understanding (do not give the answer yet).
 Reply in English. Use LaTeX for formulas.`);
 	return parts.join('\n\n') + '\n';
+}
+
+export interface ReviewConcept {
+	name: string;
+	/** one-sentence definition, if the course has one */
+	short?: string;
+	/** where it is taught, e.g. 第 0.2 课《优化》; empty for assumed background */
+	where?: string;
+}
+
+/**
+ * Personalized review at the start of a lesson. The AI writes a few short questions on the given
+ * concepts, waits for the learner's answers, then comments on them. Nothing is scored.
+ */
+export function reviewPrompt(i: {
+	lang: Lang;
+	lessonId: string;
+	lessonTitle: string;
+	pageUrl: string;
+	concepts: ReviewConcept[];
+	/** true when the concepts come from the learner profile, false when they are the lesson prerequisites */
+	fromProfile: boolean;
+	aboutMe: string;
+}): string {
+	const zh = i.lang === 'zh';
+	const list = i.concepts
+		.map((c) =>
+			zh
+				? `- ${c.name}${c.where ? `（${c.where}）` : ''}${c.short ? `：${c.short}` : ''}`
+				: `- ${c.name}${c.where ? ` (${c.where})` : ''}${c.short ? `: ${c.short}` : ''}`,
+		)
+		.join('\n');
+	if (zh) {
+		return `我在学习${COURSE.zh}课程，马上要开始第 ${i.lessonId} 课《${i.lessonTitle}》（${i.pageUrl}）。开始之前，请帮我做一次简短的复习。
+说明：${DISCLAIMER.zh}
+
+${i.fromProfile ? '这些是我之前需要多练习的概念：' : '这些是本课需要的前置知识：'}
+${list}
+${i.aboutMe ? `\n关于我：\n${i.aboutMe}\n` : ''}
+请这样做：
+1. 针对上面的概念出 3 道简短的题，每道一两分钟能答完。重点考理解和容易混淆的地方，而不是背定义。
+2. 只用到这些概念和它们之前的内容，不要提前考第 ${i.lessonId} 课的新内容。
+3. 先只给题目，不要给答案。等我回答后，再逐题讲评，指出错误并简单解释。
+4. 不需要打分。
+用中文回复，数学公式使用 LaTeX。
+`;
+	}
+	return `I am studying the course ${COURSE.en} and am about to start Lesson ${i.lessonId}, "${i.lessonTitle}" (${i.pageUrl}). Before I start, please give me a short review.
+Note: ${DISCLAIMER.en}
+
+${i.fromProfile ? 'These are concepts I need to practice more:' : 'These are the prerequisites of this lesson:'}
+${list}
+${i.aboutMe ? `\nAbout me:\n${i.aboutMe}\n` : ''}
+Please do this:
+1. Write 3 short questions on the concepts above, each answerable in one or two minutes. Focus on understanding and on points that are easy to confuse, not on recalling definitions.
+2. Use only these concepts and what comes before them. Do not test the new content of Lesson ${i.lessonId}.
+3. Give only the questions first, without answers. After I answer, comment on each answer, point out errors and explain briefly.
+4. Do not give scores.
+Reply in English. Use LaTeX for formulas.
+`;
 }
 
 /** Sent once at the start of a study conversation, so later prompts do not need to repeat it. */

@@ -37,10 +37,9 @@ A lesson must not rely on a concept that is taught later, unless it says so.
 
 ## R3. Questions are answerable with what has been taught
 
-- Each check question can be answered with the content above it on the page and earlier lessons.
-- Each exercise can be answered with this lesson and earlier lessons.
-- Review questions test only earlier lessons.
-- Quiz questions (the scored quizzes after a group of lessons) test only the lessons in that group and earlier groups.
+- Each check question (辨析题) can be answered with the content above it on the page and earlier lessons.
+- Each exercise (练习题) can be answered with this lesson and earlier lessons.
+- Quiz questions (测验, the scored quizzes after a group of lessons) test only the lessons in that group and earlier groups.
 - Any information a question needs beyond the lessons (data, tax rules, prices) is stated in the
   question itself.
 

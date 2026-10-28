@@ -22,15 +22,6 @@ def cov(x, y, p):
 
 def results():
     r = {}
-    # R1: restaurant, profit = 30q - (10q + q^2/100) - 12000
-    profit = lambda q: 30 * q - (10 * q + q * q / 100) - 12000
-    q_star = max(range(0, 3001), key=profit)
-    r["R1.q_star"] = q_star
-    r["R1.profit_star"] = profit(q_star)
-    # R2
-    r["R2.dx"] = 10 / 5
-    r["R2.dy"] = 10 / 2
-
     p = [0.25, 0.5, 0.25]
     A = [30, 10, -10]
     B = [1, 5, 3]

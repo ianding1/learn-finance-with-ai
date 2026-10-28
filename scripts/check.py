@@ -301,8 +301,8 @@ def check_keys():
                     err(where, f"unknown question '{qid}'")
         for q in key.get("questions", []):
             where = f"{file} [{q['id']}]"
-            if q.get("kind") not in ("review", "check", "exercise"):
-                err(where, "kind must be review, check or exercise")
+            if q.get("kind") not in ("check", "exercise"):
+                err(where, "kind must be check or exercise")
             if q.get("kind") == "exercise":
                 # Exercises are reviewed without scores; point values in them would mislead the grader.
                 if "points" in q:
@@ -323,12 +323,8 @@ def check_keys():
                     err(where, f"unknown concept '{cid}'")
                 elif order_of(concepts[cid]["defined_in"]) > l["order"]:
                     err(where, f"tests concept '{cid}', which is only taught in {concepts[cid]['defined_in']}")
-            if q.get("kind") in ("review", "check") and not q.get("section"):
-                err(where, "review/check questions need 'section' (the h2 id where the question appears)")
-            if q.get("kind") == "review":
-                older = [c for c in q.get("concepts", []) if c in concepts and order_of(concepts[c]["defined_in"]) >= l["order"]]
-                if older:
-                    err(where, f"review questions must test earlier lessons; {older} are not from earlier lessons")
+            if q.get("kind") == "check" and not q.get("section"):
+                err(where, "check questions need 'section' (the h2 id where the question appears)")
 
         if not l.get("published"):
             continue
@@ -352,7 +348,9 @@ def check_keys():
             has_checks = any(q["kind"] != "exercise" for q in key["questions"])
             n_all = sum(1 for name, _ in tags(body) if name == "CheckAll")
             if has_checks and n_all != 1:
-                err(rel(p), "the lesson has review/check questions, so the page must contain <CheckAll /> exactly once")
+                err(rel(p), "the lesson has check questions, so the page must contain <CheckAll /> exactly once")
+            if sum(1 for name, _ in tags(body) if name == "Review") != 1:
+                err(rel(p), "a lesson page must contain <Review /> exactly once (prerequisites and personalized review)")
             has_ex = any(q["kind"] == "exercise" for q in key["questions"])
             n_ex = sum(1 for name, _ in tags(body) if name == "Exercises")
             if has_ex and n_ex != 1:
@@ -450,7 +448,7 @@ PLAIN_PATTERNS = [
     (re.compile(r"(?:见|参见|详见|参考)\s*(?:第\s*)?(\d+\.\d+)"), "'见 X.Y'"),
     (re.compile(r"第\s*(\d+(?:\.\d+)?)\s*(?:课|段|节)"), "'第 N 课/段/节'"),
     (re.compile(r"(?:测验)?第\s*(\d+)\s*题"), "'第 N 题'"),
-    (re.compile(r"(?:检查题|复习题)\s*([A-Z]\d+)"), "question label"),
+    (re.compile(r"(?:辨析题|检查题|复习题)\s*([A-Z]\d+)"), "question label"),
     (re.compile(r"\b(?:see|lesson|section|step)\s+(\d+\.\d+)\b", re.I), "'see/lesson X.Y'"),
     (re.compile(r"\bquestion\s+(\d+)\b", re.I), "'question N'"),
     (re.compile(r"\b(?:check|review)\s+([A-Z]\d+)\b"), "question label"),

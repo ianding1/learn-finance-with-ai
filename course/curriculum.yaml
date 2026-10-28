@@ -28,7 +28,7 @@ stages:
           en: "Describe investment returns with a scenario table, compute expectation, variance and covariance, derive the variance of a two-asset portfolio, and explain where diversification comes from."
         published: true
         introduces: [random-variable, expected-value, variance, standard-deviation, covariance, correlation, portfolio-variance, diversification]
-        uses: [summation, profit-maximization, sunk-cost, budget-constraint]
+        uses: [summation]
       - id: "0.4"
         slug: "0-4-distributions-inference"
         title: { zh: "分布与统计推断", en: "Distributions and Statistical Inference" }

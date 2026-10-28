@@ -169,15 +169,9 @@
  "course/keys/0.3.yaml#questions[Q7].answer": "95105da2e16b43b5",
  "course/keys/0.3.yaml#questions[Q7].question": "3e9ad932942c99b7",
  "course/keys/0.3.yaml#questions[Q7].rubric": "3c76dd7561c5fd6f",
- "course/keys/0.3.yaml#questions[R1].answer": "524b759ae0759578",
- "course/keys/0.3.yaml#questions[R1].question": "b20e1a89f2a4ad63",
- "course/keys/0.3.yaml#questions[R1].rubric": "85bca1ee17872d94",
- "course/keys/0.3.yaml#questions[R2].answer": "d86717c75fc50fc4",
- "course/keys/0.3.yaml#questions[R2].question": "db4533c1cf15c536",
- "course/keys/0.3.yaml#questions[R2].rubric": "e685d2f8b8df39a6",
  "src/content/docs/guide/curriculum.mdx": "88e4cac72d61da47",
- "src/content/docs/guide/how-to-use.mdx": "7bee17345acc474f",
+ "src/content/docs/guide/how-to-use.mdx": "68ea617392e4c0c4",
  "src/content/docs/guide/profile.mdx": "a0c9ab86a32a1455",
- "src/content/docs/index.mdx": "a41770f2c1506667",
- "src/content/docs/lessons/0-3-probability.mdx": "b3a80b8e55b62dd9"
+ "src/content/docs/index.mdx": "b461c69e7028cb8e",
+ "src/content/docs/lessons/0-3-probability.mdx": "aaa10d99bc275e80"
 }

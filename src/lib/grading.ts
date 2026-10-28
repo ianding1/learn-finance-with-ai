@@ -13,7 +13,6 @@ import {
 } from './course';
 
 export function questionLabel(q: Question, lang: Lang, n?: number): string {
-	if (q.kind === 'review') return t(lang, 'review', { id: q.id });
 	if (q.kind === 'check') return t(lang, 'check', { id: q.id });
 	return t(lang, 'exerciseItem', { n: n ?? q.id.replace(/\D/g, '') });
 }

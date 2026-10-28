@@ -15,7 +15,7 @@ All content is AI-generated; the site says so on every page and in every prompt.
 | `course/widgets.yaml` | Slider ranges of interactive figures. |
 | `course/translation-lock.json` | Hash of each Chinese source at the time it was last translated. Generated. |
 | `src/content/docs/` | Chinese pages (source, root locale). `src/content/docs/en/` holds the English pages. |
-| `src/components/` | `Ref`, `Def`, `Figure`, `Check`, `CheckAll`, `Exercises`, `CurriculumList`, `ProfilePanel`, `widgets/*`. |
+| `src/components/` | `Ref`, `Def`, `Figure`, `Review`, `Check`, `CheckAll`, `Exercises`, `CurriculumList`, `ProfilePanel`, `widgets/*`. |
 | `src/scripts/` | Browser code: prompt templates, learner profile (localStorage), selection "Explain this". |
 | `scripts/check.py` | Blocking consistency checks (CI). |
 | `.github/review-rules.md` | Rules for the advisory AI review of pull requests. |
@@ -52,7 +52,8 @@ history and answers inline. To publish a finished lesson:
    context item with the `concepts` or `questions` it serves (leave both out only for facts every
    question needs), and each common error with its `questions`. Any fact a question needs from the
    lesson (example data, figure parameters) must be in a context item tagged for that question.
-   Place `<Check id="..."/>` (question text only) in the right section, `<CheckAll />` after the
+   Place `<Review />` under `## 课前复习 [#review]` at the start, `<Check id="..."/>` (question
+   text only) in the right section, `<CheckAll />` after the
    summary and `<Exercises />` at the end.
 5. Put every numeric answer in `expected` and recompute it in `course/verify/<id>.py`.
 6. Write the English page at `src/content/docs/en/lessons/<slug>.mdx` and every `en` field.
@@ -69,26 +70,39 @@ history and answers inline. To publish a finished lesson:
   and `[[0.4]]`, `[[0.3#sec]]`, `[[concept:id]]`, `[[check:Q4]]`, `[[fig:6-1]]` in YAML text.
 - References point to things that exist. Sections, figures and questions can only be referenced in
   published lessons.
-- `uses` concepts come from earlier lessons; questions only test concepts taught so far; review
-  questions only test earlier lessons; `<Def>` ids equal `introduces` and use the canonical term.
-- Every review/check question appears exactly once, in the section named by its `section` field.
+- `uses` concepts come from earlier lessons; questions only test concepts taught so far; `<Def>` ids equal `introduces` and use the canonical term.
+- Every check question appears exactly once, in the section named by its `section` field.
 - `expected` values match `course/verify/` and appear in every language's answer text.
 - Slider values named in questions are reachable; slider attributes match `course/widgets.yaml`.
 - No private teaching notes (学员, 教案, 修订记录, briefing) in published content.
 - Context items and common errors in key files refer to existing concepts and questions.
-- A lesson with review/check questions contains `<CheckAll />` exactly once, and a lesson with
+- Every lesson page contains `<Review />` exactly once. A lesson with check questions contains
+  `<CheckAll />` exactly once, and a lesson with
   exercises contains `<Exercises />` exactly once.
 - Exercises have no `points`, and their rubric does not mention points.
 - Chinese text uses Chinese quotation marks and the word 提示词.
 - Every prompt template includes the AI-generated-content disclaimer in both languages.
 
+## Terms
+
+| 中文 | English | `kind` / component | Scored |
+| --- | --- | --- | --- |
+| 辨析题 | check question | `check`, `<Check>`, submitted by `<CheckAll>` | yes |
+| 练习题 | exercise | `exercise`, `<Exercises>` | no ("ok" / "revise") |
+| 测验 | quiz | `E0`, `E1`, ... in the curriculum (not built yet) | yes |
+| 课前复习 | review before the lesson | `<Review>` | no |
+
+There are no fixed review questions. `<Review>` lists the lesson's prerequisites (`uses`) and copies a
+personalized review prompt: the AI writes a few questions on the concepts the learner needs to
+practice (taught before this lesson), or on the prerequisites when the profile has none.
+
 ## Prompts
 
 - Grading prompts never include the learner profile, so that the grader judges each answer on its own.
-- Answers are not entered on the site. Review and check questions are submitted together by
+- Answers are not entered on the site. Check questions are submitted together by
   `<CheckAll />` at the end of the lesson, and exercises by `<Exercises />`. The prompt ends with an
   empty "learner's answers" heading; the learner attaches a photo or types the answers after it.
-- Review and check questions are scored (`points`). Exercises (`kind: exercise`, 练习题) are
+- Check questions are scored (`points`). Exercises (`kind: exercise`, 练习题) are
   reviewed without scores: the result marks each one "ok" or "revise". Only the quizzes after a
   group of lessons (测验, `E0`, `E1`, ... in the curriculum) are scored tests; they are not built yet.
 - Learners may submit only some questions. The grader grades only the answered ones and lists only

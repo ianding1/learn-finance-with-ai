@@ -70,66 +70,7 @@ common_errors:
       Writing the unit of variance as % instead of %², or comparing a variance directly with an expected return.
 
 questions:
-  # ---------- Review of 0.2 ----------
-  - id: R1
-    kind: review
-    section: review
-    points: 6
-    concepts: [profit-maximization, sunk-cost]
-    expected: { q_star: "1000", profit_star: "-2000" }
-    question:
-      zh: |-
-        一家餐馆每月房租 12,000 美元（已签一年租约）。每份餐卖 30 美元，每月卖 $q$ 份的可变成本为 $10q + \frac{q^2}{100}$ 美元。
-        (a) 每月最优份数和利润是多少？
-        (b) 老板说“反正亏钱，少卖一点就少亏一点”，对吗？用数字说明。
-        (c) 租约到期时，如果市场情况不变，应该怎么决定？
-      en: |-
-        A restaurant pays a monthly rent of 12,000 dollars (it has signed a one-year lease). Each meal sells for 30 dollars, and the variable cost of selling $q$ meals per month is $10q + \frac{q^2}{100}$ dollars.
-        (a) What are the optimal number of meals per month and the resulting profit?
-        (b) The owner says: "We lose money anyway, so selling less means losing less." Is this right? Use numbers.
-        (c) When the lease ends, and market conditions are unchanged, what should the owner decide?
-    answer:
-      zh: |-
-        (a) $\pi = 20q - \frac{q^2}{100} - 12000$，令 $\pi'(q) = 20 - \frac{q}{50} = 0$，得 $q^* = 1000$，$\pi^* = -2000$。
-        (b) 不对。例如 $q = 900$ 时 $\pi = -2100$，$q = 500$ 时 $\pi = -4500$。$q^*$ 是亏得最少的产量。
-        (c) 租约期内房租是沉没成本，不影响产量决策；租约到期后房租变为可以避免的成本。最好的情况仍是每月亏 2000，所以应该不续约、退出。
-      en: |-
-        (a) $\pi = 20q - \frac{q^2}{100} - 12000$. Setting $\pi'(q) = 20 - \frac{q}{50} = 0$ gives $q^* = 1000$ and $\pi^* = -2000$.
-        (b) No. For example, $\pi = -2100$ at $q = 900$ and $\pi = -4500$ at $q = 500$. $q^*$ is the output with the smallest loss.
-        (c) During the lease, the rent is a sunk cost and does not affect the output decision. When the lease ends, the rent becomes an avoidable cost. The best case is still a loss of 2000 per month, so the owner should not renew the lease and should exit.
-    rubric:
-      zh:
-        - "(a) 写出利润函数并用一阶条件求出 $q^*$ 与 $\\pi^*$。"
-        - "(b) 用至少一个其他产量的利润作对比。"
-        - "(c) 必须说明租约期内房租是沉没成本、到期后变为可避免成本，二者的区别决定了结论。"
-      en:
-        - "(a) Writes the profit function and uses the first-order condition to find $q^*$ and $\\pi^*$."
-        - "(b) Compares with the profit at at least one other output level."
-        - "(c) Must explain that the rent is a sunk cost during the lease and an avoidable cost after it ends, and that this difference drives the conclusion."
-
-  - id: R2
-    kind: review
-    section: review
-    points: 2
-    concepts: [budget-constraint]
-    expected: { dx: "2", dy: "5" }
-    question:
-      zh: |-
-        $p_x = 5$，$p_y = 2$。把 10 美元从 $y$ 挪到 $x$，$x$ 和 $y$ 各变化多少单位？
-      en: |-
-        $p_x = 5$ and $p_y = 2$. If 10 dollars of spending moves from $y$ to $x$, how many units do $x$ and $y$ each change by?
-    answer:
-      zh: |-
-        $x$ 增加 $10/5 = 2$ 单位，$y$ 减少 $10/2 = 5$ 单位。
-      en: |-
-        $x$ increases by $10/5 = 2$ units and $y$ decreases by $10/2 = 5$ units.
-    rubric:
-      zh:
-        - "两个方向和数量都正确。"
-      en:
-        - "Both directions and both quantities are correct."
-
-  # ---------- Check questions ----------
+  # ---------- Check questions (辨析题, scored) ----------
   - id: C1
     kind: check
     section: expected-value

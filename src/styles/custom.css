@@ -480,3 +480,12 @@
 	flex-wrap: wrap;
 	gap: 0.5rem;
 }
+
+/* ---------- Review at the start of a lesson ---------- */
+.lfwai-prereq {
+	margin: 0 0 0.5rem;
+	line-height: 1.8;
+}
+.lfwai-review .lfwai-btn {
+	margin-top: 0.25rem;
+}
