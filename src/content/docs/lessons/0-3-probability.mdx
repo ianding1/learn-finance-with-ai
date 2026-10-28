@@ -15,18 +15,6 @@ import ScenarioDots from '../../../components/widgets/ScenarioDots.astro';
 import CovarianceProducts from '../../../components/widgets/CovarianceProducts.astro';
 import DiversificationSlider from '../../../components/widgets/DiversificationSlider.astro';
 
-## 学习目标 [#goals]
-
-学完本课后，你应该能够：
-
-1. 用情景表（scenario table）描述一项投资的收益：可能的结果和对应的概率。
-2. 计算期望收益、方差和标准差，并说明方差的单位是 %²、标准差的单位是 %。
-3. 计算协方差与相关系数，并解释：相关看的是**相对各自期望的偏差**是否同向，而不是收益的正负。
-4. ★ 推导两个随机变量线性组合的方差公式，并用它计算两资产组合的风险。
-5. 解释分散化：**只要 $\rho < 1$**，组合标准差就小于各资产标准差的加权平均；$\rho = 0$ 时，好处来自“方差相加、标准差不相加”，而不是来自协方差项。
-
-本课的组合方差公式是后面 <Ref lesson="4.2" /> 的核心。
-
 ## 课前复习 [#review]
 
 <Review />
@@ -127,6 +115,8 @@ $$
 $$
 \text{Var}(R_P) = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\,\text{Cov}(R_A, R_B)
 $$
+
+这个公式是后面 <Ref lesson="4.2" /> 的核心。
 
 例：A、B 各 50%。
 

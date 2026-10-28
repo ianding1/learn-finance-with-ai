@@ -44,6 +44,7 @@ history and answers inline. To publish a finished lesson:
 3. Write `src/content/docs/lessons/<slug>.mdx` (Chinese) for a general reader:
    - remove everything about a specific learner; turn "the learner got this wrong" notes into
      general explanations or into `common_errors`;
+   - leave out the learning goals of the plan; the page starts with `## 课前复习 [#review]`;
    - every `##` heading gets a stable id: `## 分散化 [#diversification]`;
    - mark each concept definition with `<Def id="...">canonical term</Def>`;
    - every reference to a lesson, section, figure, question or concept uses `<Ref ... />`;

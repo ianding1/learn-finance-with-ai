@@ -15,18 +15,6 @@ import ScenarioDots from '../../../../components/widgets/ScenarioDots.astro';
 import CovarianceProducts from '../../../../components/widgets/CovarianceProducts.astro';
 import DiversificationSlider from '../../../../components/widgets/DiversificationSlider.astro';
 
-## Learning goals [#goals]
-
-After this lesson you should be able to:
-
-1. Describe the return of an investment with a scenario table: the possible outcomes and their probabilities.
-2. Compute the expected return, the variance and the standard deviation, and state that the unit of variance is %² and the unit of standard deviation is %.
-3. Compute the covariance and the correlation coefficient, and explain that correlation is about whether the **deviations from each expected value** have the same direction, not about whether returns are positive.
-4. ★ Derive the variance of a linear combination of two random variables, and use it to compute the risk of a two-asset portfolio.
-5. Explain diversification: **as long as $\rho < 1$**, the portfolio standard deviation is less than the weighted average of the assets' standard deviations; when $\rho = 0$, the benefit comes from "variances add, standard deviations do not", not from the covariance term.
-
-The portfolio variance formula in this lesson is the core of <Ref lesson="4.2" />.
-
 ## Review before the lesson [#review]
 
 <Review />
@@ -127,6 +115,8 @@ But the variance is **not** linear. The <Def id="portfolio-variance">portfolio v
 $$
 \text{Var}(R_P) = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\,\text{Cov}(R_A, R_B)
 $$
+
+This formula is the core of <Ref lesson="4.2" />.
 
 Example: 50% in A and 50% in B.
 
