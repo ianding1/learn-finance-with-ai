@@ -634,3 +634,8 @@ body {
 :root {
 	--sl-color-text: var(--sl-color-gray-1);
 }
+
+/* Inline math together with the punctuation that follows it (see renderRich). */
+.nowrap {
+	white-space: nowrap;
+}
