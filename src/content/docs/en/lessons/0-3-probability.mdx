@@ -9,6 +9,7 @@ import Def from '../../../../components/Def.astro';
 import Figure from '../../../../components/Figure.astro';
 import Check from '../../../../components/Check.astro';
 import Quiz from '../../../../components/Quiz.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
 import ScenarioDots from '../../../../components/widgets/ScenarioDots.astro';
 import CovarianceProducts from '../../../../components/widgets/CovarianceProducts.astro';
 import DiversificationSlider from '../../../../components/widgets/DiversificationSlider.astro';
@@ -177,6 +178,8 @@ A consequence: if you hold only the low-volatility asset B, adding a small amoun
 - The expected value of a portfolio is a weighted average; the variance of a portfolio has an extra covariance term and is **not** a weighted average.
 - As long as $\rho < 1$ there is a benefit from diversification; at $\rho = 0$ the benefit comes from the fact that variances add but standard deviations do not.
 - When you hold many assets with equal weights, the portfolio variance approaches the average covariance between the assets: the risk specific to each stock can be diversified away, but the common risk cannot (<Ref check="Q7" />).
+
+<CheckAll />
 
 ## Quiz [#quiz]
 

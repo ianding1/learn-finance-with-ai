@@ -22,7 +22,9 @@ const data = {
 				id: l.id,
 				title: l.title[lang],
 				url: absolute(lessonPath(l, lang)),
-				context: key ? plainRich(key.context[lang], lang, l.id) : '',
+				// Explanations can be about any part of the lesson, so they get the whole lesson context.
+				context: key ? key.context.map((c) => '- ' + plainRich(c[lang], lang, l.id)).join('\n') : '',
+				concepts: [...(l.introduces ?? []), ...(l.uses ?? [])],
 			}
 		: null,
 	concepts: Object.fromEntries(Object.values(concepts()).map((c) => [c.id, c[lang]])),

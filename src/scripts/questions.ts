@@ -1,14 +1,16 @@
-// Client behavior for <Check> and <Quiz>: keep answer drafts, build grading prompts, save results.
+// Client behavior for <Check>, <CheckAll> and <Quiz>: keep typed answer drafts, build grading
+// prompts, save results. Typed answers are optional: learners who write by hand attach a photo
+// after the prompt, and the prompt tells the grader where to find the answers.
 import { pageData, ui } from './page-data';
 import { showPrompt } from './dialog';
 import { gradingPrompt } from './prompts';
-import { applyResult, loadProfile, parseResult, profileSummary } from './profile';
+import { applyResult, parseResult } from './profile';
 
 interface Payload {
 	lessonId: string;
 	lessonTitle: string;
 	lessonUrl: string;
-	context: string;
+	context: string[];
 	commonErrors: string[];
 	conceptIds: Record<string, string>;
 	questions: { id: string; label: string; points: number; question: string; answer: string; rubric: string[] }[];
@@ -36,30 +38,32 @@ let done = false;
 export function initGradeGroups() {
 	if (done) return;
 	done = true;
+
+	// Answer boxes: one per question on the page. Restore drafts and open boxes that have one.
+	const lesson = pageData().lesson?.id ?? '';
+	document.querySelectorAll<HTMLTextAreaElement>('[data-answer-for]').forEach((ta) => {
+		const key = draftKey(lesson, ta.dataset.answerFor!);
+		ta.value = safeGet(key);
+		if (ta.value) ta.closest('details')?.setAttribute('open', '');
+		ta.addEventListener('input', () => safeSet(key, ta.value));
+	});
+	const typedAnswer = (id: string) =>
+		document.querySelector<HTMLTextAreaElement>(`[data-answer-for="${id}"]`)?.value ?? '';
+
 	document.querySelectorAll<HTMLElement>('[data-lfwai-group]').forEach((group) => {
 		const payload = JSON.parse(group.querySelector('[data-payload]')!.textContent || '{}') as Payload;
-		const answers = new Map<string, HTMLTextAreaElement>();
-		group.querySelectorAll<HTMLTextAreaElement>('[data-answer-for]').forEach((ta) => {
-			const id = ta.dataset.answerFor!;
-			answers.set(id, ta);
-			ta.value = safeGet(draftKey(payload.lessonId, id));
-			ta.addEventListener('input', () => safeSet(draftKey(payload.lessonId, id), ta.value));
-		});
 
 		group.querySelector('[data-grade]')!.addEventListener('click', () => {
-			const data = pageData();
 			showPrompt(
 				gradingPrompt({
-					lang: data.lang,
+					lang: pageData().lang,
 					lessonId: payload.lessonId,
 					lessonTitle: payload.lessonTitle,
 					lessonUrl: payload.lessonUrl,
 					context: payload.context,
 					commonErrors: payload.commonErrors,
 					conceptIds: payload.conceptIds,
-					profile: profileSummary(loadProfile(), data.concepts, data.lang),
-					emptyAnswer: ui('emptyAnswer'),
-					questions: payload.questions.map((q) => ({ ...q, learnerAnswer: answers.get(q.id)?.value ?? '' })),
+					questions: payload.questions.map((q) => ({ ...q, learnerAnswer: typedAnswer(q.id) })),
 				}),
 			);
 		});

@@ -45,11 +45,36 @@ export interface Question {
 	widget?: { id: string; set: Record<string, number> };
 }
 
+export interface ContextItem extends Bi {
+	concepts?: string[];
+	questions?: string[];
+}
+
+export interface CommonError extends Bi {
+	questions: string[];
+}
+
 export interface LessonKey {
 	lesson: string;
-	context: Bi;
-	common_errors: { zh: string[]; en: string[] };
+	context: ContextItem[];
+	common_errors: CommonError[];
 	questions: Question[];
+}
+
+/** Context items relevant to a set of questions (see the comment at the top of each key file). */
+export function contextFor(key: LessonKey, qs: Question[]): ContextItem[] {
+	const ids = new Set(qs.map((q) => q.id));
+	const tested = new Set(qs.flatMap((q) => q.concepts));
+	return key.context.filter((c) => {
+		if (!c.concepts?.length && !c.questions?.length) return true;
+		return (c.concepts ?? []).some((x) => tested.has(x)) || (c.questions ?? []).some((x) => ids.has(x));
+	});
+}
+
+/** Common errors relevant to a set of questions. */
+export function errorsFor(key: LessonKey, qs: Question[]): CommonError[] {
+	const ids = new Set(qs.map((q) => q.id));
+	return key.common_errors.filter((e) => e.questions.some((x) => ids.has(x)));
 }
 
 let _lessons: Lesson[] | undefined;

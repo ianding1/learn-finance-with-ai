@@ -19,13 +19,13 @@ export interface GradingInput {
 	lessonId: string;
 	lessonTitle: string;
 	lessonUrl: string;
-	context: string;
+	/** lesson facts relevant to these questions only */
+	context: string[];
+	/** common errors relevant to these questions only */
 	commonErrors: string[];
 	questions: PromptQuestion[];
-	/** concept id -> name, the only ids the grader may report */
+	/** concept id -> name: the concepts these questions test, the only ids the grader may report */
 	conceptIds: Record<string, string>;
-	profile: string;
-	emptyAnswer: string;
 }
 
 const DISCLAIMER = {
@@ -36,7 +36,13 @@ const DISCLAIMER = {
 const COURSE = { zh: '「跟 AI 学金融」', en: '"Learn Finance with AI"' };
 
 const fence = (s: string) => `"""\n${s.trim()}\n"""`;
+const bullets = (xs: string[]) => xs.map((x) => `- ${x}`).join('\n');
 
+/**
+ * Grading prompt. No learner profile is included: the grader should judge each answer on its own,
+ * without expectations about the learner. The learner's answers come last, so that a learner who
+ * writes by hand can paste the prompt and attach a photo after it.
+ */
 export function gradingPrompt(i: GradingInput): string {
 	const zh = i.lang === 'zh';
 	const ids = Object.entries(i.conceptIds)
@@ -50,6 +56,9 @@ export function gradingPrompt(i: GradingInput): string {
 		weak: [],
 		note: '',
 	});
+	const typed = i.questions.filter((q) => q.learnerAnswer.trim());
+	const missing = i.questions.filter((q) => !q.learnerAnswer.trim());
+	const missingLabels = missing.map((q) => q.label).join(zh ? '、' : ', ');
 
 	const qs = i.questions
 		.map((q) =>
@@ -62,10 +71,7 @@ ${q.question}
 ${q.answer}
 
 评分要点：
-${q.rubric.map((r) => `- ${r}`).join('\n')}
-
-学习者的答案：
-${fence(q.learnerAnswer.trim() || i.emptyAnswer)}`
+${bullets(q.rubric)}`
 				: `### ${q.label} (${q.points} points)
 Question:
 ${q.question}
@@ -74,15 +80,27 @@ Reference answer:
 ${q.answer}
 
 Grading points:
-${q.rubric.map((r) => `- ${r}`).join('\n')}
-
-Learner's answer:
-${fence(q.learnerAnswer.trim() || i.emptyAnswer)}`,
+${bullets(q.rubric)}`,
 		)
 		.join('\n\n');
 
+	const answers = [
+		...typed.map((q) => `### ${q.label}\n${fence(q.learnerAnswer)}`),
+		missing.length === 0
+			? ''
+			: typed.length === 0
+				? zh
+					? '学习者的答案附在本提示词之后（手写照片或文字）。'
+					: "The learner's answers follow this prompt (a photo of handwritten work, or text)."
+				: zh
+					? `以下题目的答案附在本提示词之后（手写照片或文字）：${missingLabels}。`
+					: `The answers to these questions follow this prompt (a photo of handwritten work, or text): ${missingLabels}.`,
+	]
+		.filter(Boolean)
+		.join('\n\n');
+
 	if (zh) {
-		return `你是${COURSE.zh}课程的评卷老师。请批改学习者在第 ${i.lessonId} 课《${i.lessonTitle}》中的作答。
+		return `你是${COURSE.zh}课程的评卷老师。请批改学习者在第 ${i.lessonId} 课《${i.lessonTitle}》中的作答。学习者的答案在本提示词的最后，可能是文字，也可能是附在后面的手写照片。
 
 ## 重要说明
 ${DISCLAIMER.zh}如果你认为参考答案或评分要点本身有误，请明确指出错在哪里，并按正确的答案评分，不要因为学习者没有照搬错误的参考答案而扣分。
@@ -91,34 +109,32 @@ ${DISCLAIMER.zh}如果你认为参考答案或评分要点本身有误，请明�
 ${i.lessonUrl}
 （如果你能访问网页，可以参考；不能访问也没有关系，评卷需要的内容都已写在下面。）
 
-## 本课要点
-${i.context}
+## 与这些题目相关的课程要点
+${bullets(i.context)}
 
-## 学习者档案
-${i.profile}
-
-## 题目与作答
+## 题目、参考答案与评分要点
 ${qs}
-
-## 本课的常见错误（供诊断参考）
-${i.commonErrors.map((e) => `- ${e}`).join('\n')}
-
+${i.commonErrors.length ? `\n## 常见错误（供诊断参考）\n${bullets(i.commonErrors)}\n` : ''}
 ## 请这样回复
-1. 逐题评分：给出得分，指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。结论正确但理由不成立时，按评分要点扣分。
-2. 对错误之处，用学习者能理解的方式讲解，必要时举一个小例子。不要只重复参考答案。
-3. 如果作答反映出对某个概念的误解，明确指出是哪个概念。
-4. 用中文回复，数学公式使用 LaTeX。
-5. 在回复的最后，原样输出下面格式的结果块，JSON 必须合法：
+1. 如果答案是照片：先逐题写出你识别到的内容（题号加转写），看不清的地方明确标出，不要猜测。照片中找不到某道题的答案时，说明缺少这道题并给 0 分。
+2. 逐题评分：给出得分，指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。结论正确但理由不成立时，按评分要点扣分。
+3. 对错误之处，用学习者能理解的方式讲解，必要时举一个小例子。不要只重复参考答案。
+4. 如果作答反映出对某个概念的误解，明确指出是哪个概念。
+5. 用中文回复，数学公式使用 LaTeX。
+6. 在回复的最后，原样输出下面格式的结果块，JSON 必须合法：
 
 <<<LFWAI-RESULT
 ${example}
 LFWAI-RESULT>>>
 
-score 填实际得分。mastered（已掌握）和 weak（薄弱）只能使用下面的概念 id：${ids}。note 用一句话概括这次作答反映出的主要问题（不超过 100 字），它会被保存到学习档案中。
+score 填实际得分。mastered（已掌握）和 weak（需要多练习）只能使用这些概念 id：${ids}。note 用一句话概括这次作答反映出的主要问题（不超过 100 字），它会被保存到学习档案中。
+
+## 学习者的答案
+${answers}
 `;
 	}
 
-	return `You are the grader for the course ${COURSE.en}. Grade the learner's answers for Lesson ${i.lessonId}, "${i.lessonTitle}".
+	return `You are the grader for the course ${COURSE.en}. Grade the learner's answers for Lesson ${i.lessonId}, "${i.lessonTitle}". The learner's answers are at the end of this prompt. They may be text or a photo of handwritten work attached after the prompt.
 
 ## Important
 ${DISCLAIMER.en} If you believe a reference answer or a grading point is itself wrong, say clearly what is wrong and grade against the correct answer. Do not take points away because the learner did not copy a wrong reference answer.
@@ -127,30 +143,28 @@ ${DISCLAIMER.en} If you believe a reference answer or a grading point is itself 
 ${i.lessonUrl}
 (You may consult it if you can open web pages. If you cannot, that is fine: everything needed for grading is written below.)
 
-## Key points of the lesson
-${i.context}
+## Lesson facts relevant to these questions
+${bullets(i.context)}
 
-## Learner profile
-${i.profile}
-
-## Questions and answers
+## Questions, reference answers and grading points
 ${qs}
-
-## Common errors in this lesson (for diagnosis)
-${i.commonErrors.map((e) => `- ${e}`).join('\n')}
-
+${i.commonErrors.length ? `\n## Common errors (for diagnosis)\n${bullets(i.commonErrors)}\n` : ''}
 ## How to reply
-1. Grade each question: give the score and say what is correct and what is wrong. Check the reasoning, not only the final numbers. If the conclusion is right but the reason does not hold, deduct points according to the grading points.
-2. For each error, explain it in a way the learner can understand, with a small example if useful. Do not only repeat the reference answer.
-3. If an answer shows a misunderstanding of a concept, name the concept.
-4. Reply in English. Use LaTeX for formulas.
-5. At the end of your reply, output a result block in exactly this format. The JSON must be valid:
+1. If the answers are in a photo: first write out what you read for each question (the question label and a transcription). Mark clearly anything you cannot read; do not guess. If the photo has no answer for a question, say that it is missing and give 0 points.
+2. Grade each question: give the score and say what is correct and what is wrong. Check the reasoning, not only the final numbers. If the conclusion is right but the reason does not hold, deduct points according to the grading points.
+3. For each error, explain it in a way the learner can understand, with a small example if useful. Do not only repeat the reference answer.
+4. If an answer shows a misunderstanding of a concept, name the concept.
+5. Reply in English. Use LaTeX for formulas.
+6. At the end of your reply, output a result block in exactly this format. The JSON must be valid:
 
 <<<LFWAI-RESULT
 ${example}
 LFWAI-RESULT>>>
 
-Put the actual score in "score". "mastered" and "weak" may only contain these concept ids: ${ids}. "note" is one sentence (at most 30 words) that sums up the main problem shown by these answers; it is saved to the learner profile.
+Put the actual score in "score". "mastered" and "weak" (needs more practice) may only contain these concept ids: ${ids}. "note" is one sentence (at most 30 words) that sums up the main problem shown by these answers; it is saved to the learner profile.
+
+## The learner's answers
+${answers}
 `;
 }
 
@@ -164,7 +178,8 @@ export interface ExplainInput {
 	selection: string;
 	paragraph: string;
 	context?: string;
-	profile: string;
+	/** "About me" lines, or empty when the learner turned this off or has nothing relevant */
+	aboutMe: string;
 }
 
 export function explainPrompt(i: ExplainInput): string {
@@ -177,69 +192,63 @@ export function explainPrompt(i: ExplainInput): string {
 			? `《${i.pageTitle}》页面`
 			: `the page "${i.pageTitle}"`;
 	const sameAsSelection = i.paragraph.trim() === i.selection.trim();
+	const parts: string[] = [];
 
 	if (zh) {
-		return `我在学习${COURSE.zh}课程的${where}，有一段内容没有看懂，请帮我展开讲解。
+		parts.push(`我在学习${COURSE.zh}课程的${where}，有一段内容没有看懂，请帮我展开讲解。
 说明：${DISCLAIMER.zh}如果你发现这段内容本身有误，请直接指出。
 
 页面：${i.pageUrl}
 所在小节：${i.section || '（无）'}
 
 我选中的文字：
-${fence(i.selection)}
-${sameAsSelection ? '' : `\n它所在的段落：\n${fence(i.paragraph)}\n`}${i.context ? `\n本课要点（供你了解上下文）：\n${i.context}\n` : ''}
-我的学习档案：
-${i.profile}
-
-请这样讲解：
+${fence(i.selection)}`);
+		if (!sameAsSelection) parts.push(`它所在的段落：\n${fence(i.paragraph)}`);
+		if (i.context) parts.push(`本课要点（供你了解上下文）：\n${i.context}`);
+		if (i.aboutMe) parts.push(`关于我：\n${i.aboutMe}`);
+		parts.push(`请这样讲解：
 1. 先用一两句话说明这段话的意思。
 2. 再解释为什么是这样，补上中间省略的步骤；如果涉及公式，说明每个符号的含义。
 3. 举一个具体的小例子，最好用数字。
 4. 如果这段话依赖前面学过的概念，简单提醒一下。除非理解这段话必须用到，不要提前讲后续课程的内容。
 5. 最后出一道很短的小问题，让我检验自己是否理解了（先不要给出答案）。
-用中文回答，数学公式使用 LaTeX。
-`;
+用中文回答，数学公式使用 LaTeX。`);
+		return parts.join('\n\n') + '\n';
 	}
 
-	return `I am studying ${where} in the course ${COURSE.en}, and I do not understand a passage. Please explain it in more detail.
+	parts.push(`I am studying ${where} in the course ${COURSE.en}, and I do not understand a passage. Please explain it in more detail.
 Note: ${DISCLAIMER.en} If you find that the passage itself is wrong, please say so directly.
 
 Page: ${i.pageUrl}
 Section: ${i.section || '(none)'}
 
 The text I selected:
-${fence(i.selection)}
-${sameAsSelection ? '' : `\nThe paragraph it is in:\n${fence(i.paragraph)}\n`}${i.context ? `\nKey points of the lesson (for context):\n${i.context}\n` : ''}
-My learner profile:
-${i.profile}
-
-Please explain it this way:
+${fence(i.selection)}`);
+	if (!sameAsSelection) parts.push(`The paragraph it is in:\n${fence(i.paragraph)}`);
+	if (i.context) parts.push(`Key points of the lesson (for context):\n${i.context}`);
+	if (i.aboutMe) parts.push(`About me:\n${i.aboutMe}`);
+	parts.push(`Please explain it this way:
 1. First state the meaning of the passage in one or two sentences.
 2. Then explain why it is true, and fill in any steps that were skipped. If there is a formula, explain what each symbol means.
 3. Give a small concrete example, preferably with numbers.
 4. If the passage depends on concepts from earlier lessons, briefly remind me of them. Do not teach content from later lessons unless it is necessary to understand this passage.
 5. End with one short question that lets me check my understanding (do not give the answer yet).
-Reply in English. Use LaTeX for formulas.
-`;
+Reply in English. Use LaTeX for formulas.`);
+	return parts.join('\n\n') + '\n';
 }
 
-export function sessionPrompt(lang: Lang, siteUrl: string, profile: string): string {
+/** Sent once at the start of a study conversation, so later prompts do not need to repeat it. */
+export function sessionPrompt(lang: Lang, siteUrl: string, aboutMe: string): string {
 	if (lang === 'zh') {
 		return `接下来我会配合${COURSE.zh}课程学习（网站：${siteUrl}）。这是一门以美国市场为背景的经济学与金融课程，目标是高年级本科水平。
 说明：${DISCLAIMER.zh}如果你发现课程内容有误，请指出。
-
-我的学习档案：
-${profile}
-
-在这次对话中，我会粘贴网站生成的评卷 prompt 或讲解 prompt，请按 prompt 中的要求回复。其他时候，请在回答我的问题时考虑我的学习档案：针对薄弱概念多解释一步，并按我的学习偏好调整讲解方式。请用中文回复，数学公式使用 LaTeX。
+${aboutMe ? `\n关于我：\n${aboutMe}\n` : ''}
+在这次对话中，我会粘贴网站生成的评卷提示词或讲解提示词，请按提示词中的要求回复。其他时候回答我的问题时，请参考上面关于我的信息：对需要多练习的概念多解释一步，并按我的学习偏好调整讲解方式。请用中文回复，数学公式使用 LaTeX。
 `;
 	}
 	return `I will use you while studying the course ${COURSE.en} (website: ${siteUrl}). It is an economics and finance course set in the US market, at an upper-undergraduate level.
 Note: ${DISCLAIMER.en} If you find an error in the course content, please point it out.
-
-My learner profile:
-${profile}
-
-In this conversation I will paste grading prompts or explanation prompts generated by the website. Please reply as each prompt asks. At other times, take my learner profile into account when you answer: explain one more step for my weak concepts, and adapt your explanations to my learning preferences. Reply in English. Use LaTeX for formulas.
+${aboutMe ? `\nAbout me:\n${aboutMe}\n` : ''}
+In this conversation I will paste grading prompts or explanation prompts generated by the website. Please reply as each prompt asks. At other times, use the information about me above when you answer: explain one more step for the concepts I need to practice, and adapt your explanations to my learning preferences. Reply in English. Use LaTeX for formulas.
 `;
 }

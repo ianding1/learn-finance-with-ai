@@ -1,6 +1,16 @@
-// Build-time helpers shared by Check.astro and Quiz.astro.
+// Build-time helpers shared by Check.astro, CheckAll.astro and Quiz.astro.
 import { t, type Lang } from '../i18n/ui';
-import { lesson, lessonKey, concepts, absolute, lessonPath, plainRich, type Question } from './course';
+import {
+	lesson,
+	lessonKey,
+	concepts,
+	absolute,
+	lessonPath,
+	plainRich,
+	contextFor,
+	errorsFor,
+	type Question,
+} from './course';
 
 export function questionLabel(q: Question, lang: Lang, n?: number): string {
 	if (q.kind === 'review') return t(lang, 'review', { id: q.id });
@@ -8,22 +18,27 @@ export function questionLabel(q: Question, lang: Lang, n?: number): string {
 	return t(lang, 'quizItem', { n: n ?? q.id.replace(/\D/g, '') });
 }
 
-/** JSON payload that the client needs to build a grading prompt for a group of questions. */
+/**
+ * JSON payload that the client needs to build a grading prompt for a group of questions.
+ * Only the context, common errors and concept ids that concern these questions are included,
+ * so that the grader is not distracted by material about other questions.
+ */
 export function gradingPayload(lessonId: string, qs: Question[], lang: Lang) {
 	const l = lesson(lessonId);
 	const key = lessonKey(lessonId)!;
-	const ids = new Set<string>([...(l.introduces ?? []), ...(l.uses ?? []), ...qs.flatMap((q) => q.concepts)]);
 	const all = concepts();
+	const ids = [...new Set(qs.flatMap((q) => q.concepts))].filter((id) => all[id]);
+	const quizNumber = new Map(key.questions.filter((q) => q.kind === 'quiz').map((q, i) => [q.id, i + 1]));
 	return {
 		lessonId,
 		lessonTitle: l.title[lang],
 		lessonUrl: absolute(lessonPath(l, lang)),
-		context: plainRich(key.context[lang], lang, lessonId),
-		commonErrors: key.common_errors[lang].map((e) => plainRich(e, lang, lessonId)),
-		conceptIds: Object.fromEntries([...ids].filter((id) => all[id]).map((id) => [id, all[id][lang]])),
-		questions: qs.map((q, i) => ({
+		context: contextFor(key, qs).map((c) => plainRich(c[lang], lang, lessonId)),
+		commonErrors: errorsFor(key, qs).map((e) => plainRich(e[lang], lang, lessonId)),
+		conceptIds: Object.fromEntries(ids.map((id) => [id, all[id][lang]])),
+		questions: qs.map((q) => ({
 			id: q.id,
-			label: questionLabel(q, lang, i + 1),
+			label: questionLabel(q, lang, quizNumber.get(q.id)),
 			points: q.points,
 			question: plainRich(q.question[lang], lang, lessonId),
 			answer: plainRich(q.answer[lang], lang, lessonId),

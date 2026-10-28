@@ -1,41 +1,73 @@
 # Answer key for lesson 0.3. Shown to learners only inside generated grading prompts.
 # Text fields support: $inline math$, $$display math$$, **bold**, line breaks,
-# and references: [[0.4]] (lesson), [[0.3#covariance]] (section), [[concept:covariance]].
+# and references: [[0.4]] (lesson), [[0.3#covariance]] (section), [[concept:covariance]], [[check:Q4]].
 # expected: values are recomputed by course/verify/0.3.py in CI and must appear verbatim in every answer text.
+#
+# context: lesson facts for the grader. A grading prompt includes an item when
+#   - the item has neither `concepts` nor `questions` (always included), or
+#   - one of its `concepts` is tested by a question being graded, or
+#   - one of its `questions` is being graded.
+# common_errors: each item lists the `questions` it is relevant to. Only those go into a prompt.
 
 lesson: "0.3"
 
 context:
-  zh: |-
-    本课核心内容：
-    - 情景表：可能结果 + 概率，概率之和为 1。
-    - 期望 $E[R] = \sum_i p_i R_i$；方差 $\text{Var}(R) = \sum_i p_i (R_i - E[R])^2$，单位为 %²；标准差是方差的平方根，单位为 %，也叫波动率。
-    - 协方差 $\text{Cov}(R_A, R_B) = \sum_i p_i (R_{A,i} - E[R_A])(R_{B,i} - E[R_B])$；看的是相对各自期望的偏差是否同向，不是收益的正负。相关系数 $\rho = \text{Cov} / (\sigma_A \sigma_B)$，在 $[-1, 1]$ 之间。
-    - 组合 $R_P = wR_A + (1-w)R_B$：期望是线性的；方差 $w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\text{Cov}$ 不是线性的。
-    - 分散化：只要 $\rho < 1$，组合标准差就小于加权平均。$\rho = 0$ 时好处来自“方差相加、标准差不相加”（$\sqrt{a^2+b^2} < a+b$），不来自协方差项。分散化不需要负相关。
-    - 讲义例子：繁荣 / 正常 / 衰退概率 0.25 / 0.5 / 0.25；股票 A 收益 30 / 10 / −10，债券 B 收益 1 / 5 / 3（%）。$E[R_A] = 10$，$E[R_B] = 3.5$，$\text{Var}_A = 200$，$\text{Var}_B = 2.75$，$\text{Cov} = -10$，$\rho \approx -0.43$。
-    本课所有计算以百分点为单位。学习者已经学过：求和符号，以及[[0.2]]的最优化。还没有学：用历史数据估计参数（[[0.4]]）、回归（[[0.5]]）、组合理论（[[4.2]]）。
-  en: |-
-    Key points of this lesson:
-    - A scenario table lists possible outcomes and their probabilities. The probabilities sum to 1.
-    - Expected value $E[R] = \sum_i p_i R_i$. Variance $\text{Var}(R) = \sum_i p_i (R_i - E[R])^2$, in %². The standard deviation is the square root of the variance, in %, and is also called volatility.
-    - Covariance $\text{Cov}(R_A, R_B) = \sum_i p_i (R_{A,i} - E[R_A])(R_{B,i} - E[R_B])$. It measures whether the deviations from each expected value have the same sign, not whether the returns are positive. Correlation $\rho = \text{Cov} / (\sigma_A \sigma_B)$ lies in $[-1, 1]$.
-    - Portfolio $R_P = wR_A + (1-w)R_B$: the expected value is linear; the variance $w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\text{Cov}$ is not.
-    - Diversification: as long as $\rho < 1$, the portfolio standard deviation is less than the weighted average. When $\rho = 0$, the benefit comes from "variances add, standard deviations do not" ($\sqrt{a^2+b^2} < a+b$), not from the covariance term. Diversification does not require negative correlation.
-    - Example used in the lesson: boom / normal / recession with probabilities 0.25 / 0.5 / 0.25; stock A returns 30 / 10 / −10 and bond fund B returns 1 / 5 / 3 (%). $E[R_A] = 10$, $E[R_B] = 3.5$, $\text{Var}_A = 200$, $\text{Var}_B = 2.75$, $\text{Cov} = -10$, $\rho \approx -0.43$.
-    All calculations in this lesson use percentage points. The learner has already studied summation notation and the optimization in [[0.2]]. The learner has not yet studied estimating parameters from historical data ([[0.4]]), regression ([[0.5]]) or portfolio theory ([[4.2]]).
+  - zh: |-
+      本课所有计算以百分点为单位，方差的单位为 %²。学习者已经学过求和符号，以及[[0.2]]的最优化；还没有学用历史数据估计参数（[[0.4]]）、回归（[[0.5]]）和组合理论（[[4.2]]）。
+    en: |-
+      All calculations in this lesson use percentage points, and variance is in %². The learner has studied summation notation and the optimization in [[0.2]]. The learner has not yet studied estimating parameters from historical data ([[0.4]]), regression ([[0.5]]) or portfolio theory ([[4.2]]).
+  - questions: [C1, C2, C3, C4]
+    zh: |-
+      讲义中的例子（情景表）：繁荣 / 正常 / 衰退的概率为 0.25 / 0.5 / 0.25；股票 A 的收益为 30 / 10 / −10，债券基金 B 的收益为 1 / 5 / 3（%）。由此 $E[R_A] = 10$，$E[R_B] = 3.5$，$\text{Var}_A = 200$，$\text{Var}_B = 2.75$，$\text{Cov} = -10$，$\rho \approx -0.43$。
+    en: |-
+      Example from the lesson (scenario table): boom / normal / recession with probabilities 0.25 / 0.5 / 0.25; stock A returns 30 / 10 / −10 and bond fund B returns 1 / 5 / 3 (%). So $E[R_A] = 10$, $E[R_B] = 3.5$, $\text{Var}_A = 200$, $\text{Var}_B = 2.75$, $\text{Cov} = -10$, $\rho \approx -0.43$.
+  - questions: [C5]
+    zh: |-
+      [[fig:6-1]] 是一张交互图：$\sigma_A = 20\%$，$\sigma_B = 10\%$，学习者可以用滑块调整相关系数 $\rho$ 和 A 的权重 $w$，图中显示组合标准差曲线、加权平均线和波动最小点。
+    en: |-
+      [[fig:6-1]] is an interactive figure with $\sigma_A = 20\%$ and $\sigma_B = 10\%$. The learner can move sliders for the correlation $\rho$ and the weight in A, $w$. It shows the portfolio standard deviation curve, the weighted-average line and the minimum-volatility point.
+  - concepts: [expected-value, variance, standard-deviation]
+    zh: |-
+      期望 $E[R] = \sum_i p_i R_i$；方差 $\text{Var}(R) = \sum_i p_i (R_i - E[R])^2$；标准差是方差的平方根，单位为 %，也叫波动率。
+    en: |-
+      Expected value $E[R] = \sum_i p_i R_i$. Variance $\text{Var}(R) = \sum_i p_i (R_i - E[R])^2$. The standard deviation is the square root of the variance, in %, and is also called volatility.
+  - concepts: [covariance, correlation]
+    zh: |-
+      协方差 $\text{Cov}(R_A, R_B) = \sum_i p_i (R_{A,i} - E[R_A])(R_{B,i} - E[R_B])$，看的是相对各自期望的偏差是否同向，不是收益的正负。相关系数 $\rho = \text{Cov} / (\sigma_A \sigma_B)$，在 $[-1, 1]$ 之间。
+    en: |-
+      Covariance $\text{Cov}(R_A, R_B) = \sum_i p_i (R_{A,i} - E[R_A])(R_{B,i} - E[R_B])$ measures whether the deviations from each expected value have the same sign, not whether the returns are positive. Correlation $\rho = \text{Cov} / (\sigma_A \sigma_B)$ lies in $[-1, 1]$.
+  - concepts: [portfolio-variance]
+    zh: |-
+      组合 $R_P = wR_A + (1-w)R_B$：期望是线性的；方差 $w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\text{Cov}$ 不是线性的。
+    en: |-
+      Portfolio $R_P = wR_A + (1-w)R_B$: the expected value is linear; the variance $w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\text{Cov}$ is not.
+  - concepts: [diversification]
+    zh: |-
+      分散化：只要 $\rho < 1$，组合标准差就小于加权平均。$\rho = 0$ 时好处来自“方差相加、标准差不相加”（$\sqrt{a^2+b^2} < a+b$），不来自协方差项。分散化不需要负相关。
+    en: |-
+      Diversification: as long as $\rho < 1$, the portfolio standard deviation is less than the weighted average. When $\rho = 0$, the benefit comes from "variances add, standard deviations do not" ($\sqrt{a^2+b^2} < a+b$), not from the covariance term. Diversification does not require negative correlation.
 
 common_errors:
-  zh:
-    - "$\\rho = 0$ 时用“受协方差影响”解释分散化：结论对，但理由不成立。此时协方差项为 0，好处来自方差相加、标准差不相加。"
-    - "认为“两只基金都涨了，所以正相关”：相关看的是相对各自期望的偏差方向，不是收益的正负；而且一次观测说明不了概率关系。"
-    - "在互动图中只观察 $\\rho = -1$ 的情形，错过了“不相关也能分散”这个要点。"
-    - "把方差的单位写成 %，或者直接比较方差和期望收益的大小。"
-  en:
-    - "Explaining diversification at $\\rho = 0$ by \"the effect of covariance\": the conclusion is right but the reason is wrong. The covariance term is 0 in this case; the benefit comes from the fact that variances add but standard deviations do not."
-    - "Saying \"both funds went up, so they are positively correlated\": correlation is about the direction of deviations from each expected value, not about whether returns are positive. Also, one observation says nothing about a probabilistic relationship."
-    - "Exploring only $\\rho = -1$ in the interactive figure and missing the point that uncorrelated assets also diversify."
-    - "Writing the unit of variance as % instead of %², or comparing a variance directly with an expected return."
+  - questions: [Q1, C5]
+    zh: |-
+      $\rho = 0$ 时用“受协方差影响”解释分散化：结论对，但理由不成立。此时协方差项为 0，好处来自方差相加、标准差不相加。
+    en: |-
+      Explaining diversification at $\rho = 0$ by "the effect of covariance": the conclusion is right but the reason is wrong. The covariance term is 0 in this case; the benefit comes from the fact that variances add but standard deviations do not.
+  - questions: [Q2, C3]
+    zh: |-
+      认为“两只基金都涨了，所以正相关”：相关看的是相对各自期望的偏差方向，不是收益的正负；而且一次观测说明不了概率关系。
+    en: |-
+      Saying "both funds went up, so they are positively correlated": correlation is about the direction of deviations from each expected value, not about whether returns are positive. Also, one observation says nothing about a probabilistic relationship.
+  - questions: [C5]
+    zh: |-
+      在互动图中只观察 $\rho = -1$ 的情形，错过了“不相关也能分散”这个要点。
+    en: |-
+      Exploring only $\rho = -1$ in the interactive figure and missing the point that uncorrelated assets also diversify.
+  - questions: [C2, C4, Q3, Q4]
+    zh: |-
+      把方差的单位写成 %，或者直接比较方差和期望收益的大小。
+    en: |-
+      Writing the unit of variance as % instead of %², or comparing a variance directly with an expected return.
 
 questions:
   # ---------- Review of 0.2 ----------

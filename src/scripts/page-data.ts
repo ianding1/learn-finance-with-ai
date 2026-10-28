@@ -12,6 +12,8 @@ export interface PageData {
 		title: string;
 		url: string;
 		context: string;
+		/** concept ids introduced or used by the lesson; used to pick relevant profile entries */
+		concepts: string[];
 	};
 	/** concept id -> name in the page language */
 	concepts: Record<string, string>;

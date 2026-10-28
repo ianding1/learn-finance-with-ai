@@ -3,7 +3,7 @@
 import { pageData, ui } from './page-data';
 import { showPrompt } from './dialog';
 import { explainPrompt } from './prompts';
-import { loadProfile, profileSummary } from './profile';
+import { aboutMe, loadProfile } from './profile';
 
 const BLOCKS = 'p, li, td, th, blockquote, figcaption, .lfwai-q-text, .katex-display, h2, h3, h4';
 
@@ -103,7 +103,11 @@ export function initExplain() {
 			selection,
 			paragraph: paragraph.length > 1500 ? paragraph.slice(0, 1500) + '…' : paragraph,
 			context: data.lesson?.context,
-			profile: profileSummary(loadProfile(), data.concepts, data.lang),
+			aboutMe: (() => {
+				const p = loadProfile();
+				// Only concepts of this lesson; nothing at all if the learner turned it off.
+				return p.includeInPrompts ? aboutMe(p, data.concepts, data.lang, data.lesson?.concepts ?? []) : '';
+			})(),
 		});
 		hide();
 		window.getSelection()?.removeAllRanges();

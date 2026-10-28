@@ -1,0 +1,20 @@
+---
+// <CheckAll /> — one grading prompt for all review and check questions of the lesson.
+// For learners who write every answer on paper and send one photo.
+import { toLang, t } from '../i18n/ui';
+import { lessonKey } from '../lib/course';
+import { gradingPayload } from '../lib/grading';
+import GradeControls from './GradeControls.astro';
+
+const route = Astro.locals.starlightRoute;
+const lang = toLang(route.lang);
+const lessonId = route.entry.data.lesson;
+if (!lessonId) throw new Error('<CheckAll> can only be used on a lesson page (frontmatter "lesson")');
+const qs = (lessonKey(lessonId)?.questions ?? []).filter((q) => q.kind !== 'quiz');
+---
+
+<section class="lfwai-group not-content" data-lfwai-group id="check-all">
+	<div class="lfwai-q-head"><span class="lfwai-q-label">{t(lang, 'allTitle')}</span></div>
+	<p class="lfwai-all-help">{t(lang, 'allHelp')}</p>
+	<GradeControls lang={lang} payload={gradingPayload(lessonId, qs, lang)} label={t(lang, 'makeAllPrompt')} />
+</section>

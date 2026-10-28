@@ -11,8 +11,19 @@ This is a fully static website: it does not call any AI and does not collect you
 
 1. Read the explanations in order. In the interactive figures you can move the sliders and see how the conclusions change with the parameters.
 2. When you do not understand a passage, select the text with the mouse and click the "Explain this" button that appears. The site generates an explanation prompt that contains the selected text, its paragraph and the key points of the lesson.
-3. Check questions follow each section. Write your answer in the answer box, click "Generate grading prompt", and copy the prompt into your AI assistant. Your answers are saved in your browser automatically.
-4. Each lesson ends with a quiz. It is best to finish all questions and then generate one grading prompt for the whole quiz.
+3. Check questions follow each section, and each lesson ends with a quiz.
+
+## Answering and grading [#grading]
+
+The recommended way is to write by hand:
+
+1. Write the answers to all review and check questions on paper.
+2. When you are done, click "Generate one grading prompt for all review and check questions" below the lesson summary. You can also use the button below a single question to grade only that question.
+3. Paste the prompt into your AI assistant, attach a photo of your answers **in the same message**, and send it. The prompt asks the AI to transcribe your answers first and to point out anything it cannot read instead of guessing.
+
+The quiz works the same way: when you have finished all questions, use the button below the quiz to generate one grading prompt.
+
+If you prefer to type, open "Type your answer on the site" below a question. Your answer is saved in your browser and written directly into the prompt, so no photo is needed.
 
 ## Saving grading results [#results]
 
@@ -24,16 +35,16 @@ The grading prompt asks the AI to end its reply with a result block:
 LFWAI-RESULT>>>
 ```
 
-Paste this block (or the whole reply) into the "Paste the grading result from your AI" box below the question and click save. The scores, weak concepts and grading note are added to your learner profile. Every prompt generated after that includes a summary of the profile, so the AI can adapt its explanations.
+Paste this block (or the whole reply) into the "Paste the grading result from your AI" box below the button you used, and click save. The scores, the concepts to practice and the grading note are added to your learner profile.
 
 ## Learner profile [#profile]
 
-Your learner profile is stored only in your browser (localStorage) and is never uploaded. On the <a href="/learn-finance-with-ai/en/guide/profile/">learner profile</a> page you can:
+Your learner profile is stored only in your browser (localStorage) and is never uploaded.
 
-- describe your background and learning preferences;
-- see your scores and weak concepts;
-- generate a "session start prompt" to send first when you start a new study conversation with your AI assistant;
-- export and import the profile. Export it before you change device or browser. You can also upload the exported file to a project in your AI assistant (a Claude Project, a Gemini Gem, and so on) as long-term context.
+- **Grading prompts do not include your profile.** Grading looks only at your answers.
+- **Explanation prompts** include your background, your learning preferences and the concepts from this lesson that you need to practice, so that the AI can adapt its explanation. They do not include scores. You can turn this off on the <a href="/learn-finance-with-ai/en/guide/profile/">learner profile</a> page.
+- On the learner profile page you can also generate a "session start prompt". Send it first when you start a new study conversation, so that you do not need to repeat it later in the same conversation.
+- Export your profile before you change device or browser. You can also upload the exported file to a project in your AI assistant (a Claude Project, a Gemini Gem, and so on) as long-term context.
 
 ## About correctness [#accuracy]
 

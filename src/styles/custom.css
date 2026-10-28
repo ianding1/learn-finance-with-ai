@@ -461,6 +461,28 @@
 	border-bottom: 1px solid var(--lfwai-border);
 	text-align: start;
 }
+.lfwai-check {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	margin-top: 0.75rem;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-2);
+}
+.lfwai-check input {
+	margin-top: 0.3rem;
+}
+.lfwai-answer summary {
+	cursor: pointer;
+}
+.lfwai-answer textarea {
+	margin-top: 0.5rem;
+}
+.lfwai-all-help {
+	margin: 0.25rem 0 0;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-2);
+}
 .lfwai-row {
 	display: flex;
 	flex-wrap: wrap;

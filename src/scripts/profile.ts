@@ -15,6 +15,8 @@ export interface Profile {
 	v: 1;
 	background: string;
 	preferences: string;
+	/** include background, preferences and concepts to practice in explanation prompts */
+	includeInPrompts: boolean;
 	results: ResultItem[];
 	/** concept id -> latest status reported by a grader */
 	concepts: Record<string, { status: 'weak' | 'mastered'; ts: string }>;
@@ -22,7 +24,7 @@ export interface Profile {
 }
 
 export function emptyProfile(): Profile {
-	return { v: 1, background: '', preferences: '', results: [], concepts: {}, notes: [] };
+	return { v: 1, background: '', preferences: '', includeInPrompts: true, results: [], concepts: {}, notes: [] };
 }
 
 function normalize(raw: any): Profile {
@@ -30,6 +32,7 @@ function normalize(raw: any): Profile {
 	if (!raw || typeof raw !== 'object') return p;
 	if (typeof raw.background === 'string') p.background = raw.background;
 	if (typeof raw.preferences === 'string') p.preferences = raw.preferences;
+	if (typeof raw.includeInPrompts === 'boolean') p.includeInPrompts = raw.includeInPrompts;
 	if (Array.isArray(raw.results)) {
 		p.results = raw.results
 			.filter((r: any) => r && typeof r.id === 'string' && typeof r.lesson === 'string')
@@ -149,24 +152,26 @@ export function applyResult(r: GradeResult, knownConcepts: Set<string>): Profile
 	return p;
 }
 
-/** Short profile summary placed in every prompt. Kept small on purpose. */
-export function profileSummary(p: Profile, conceptNames: Record<string, string>, lang: 'zh' | 'en'): string {
+/**
+ * "About me" lines for explanation and session prompts: background, preferences and the concepts
+ * to practice. Scores and grading notes are never included. When `relevant` is given, only concepts
+ * in that list are mentioned. Returns '' when there is nothing to say.
+ */
+export function aboutMe(
+	p: Profile,
+	conceptNames: Record<string, string>,
+	lang: 'zh' | 'en',
+	relevant?: string[],
+): string {
 	const zh = lang === 'zh';
 	const lines: string[] = [];
 	if (p.background.trim()) lines.push((zh ? '背景：' : 'Background: ') + p.background.trim().slice(0, 300));
 	if (p.preferences.trim()) lines.push((zh ? '学习偏好：' : 'Learning preferences: ') + p.preferences.trim().slice(0, 300));
-	const weak = Object.entries(p.concepts)
-		.filter(([, c]) => c.status === 'weak')
+	const keep = relevant ? new Set(relevant) : null;
+	const practice = Object.entries(p.concepts)
+		.filter(([id, c]) => c.status === 'weak' && (!keep || keep.has(id)))
 		.map(([id]) => conceptNames[id] ?? id);
-	if (weak.length) lines.push((zh ? '目前的薄弱概念：' : 'Concepts currently weak: ') + weak.join(zh ? '、' : ', '));
-	const recent = [...p.results].sort((a, b) => b.ts.localeCompare(a.ts)).slice(0, 6);
-	if (recent.length)
-		lines.push(
-			(zh ? '最近的得分：' : 'Recent scores: ') +
-				recent.map((r) => `${r.lesson} ${r.id} ${r.score}/${r.max}`).join(zh ? '；' : '; '),
-		);
-	const note = p.notes[p.notes.length - 1];
-	if (note) lines.push((zh ? '上次评卷的备注：' : 'Note from the last grading: ') + note.text.slice(0, 200));
-	if (!lines.length) return zh ? '（学习者还没有学习档案。）' : '(The learner has no profile yet.)';
+	if (practice.length)
+		lines.push((zh ? '需要多练习的概念：' : 'Concepts I need to practice more: ') + practice.join(zh ? '、' : ', '));
 	return lines.join('\n');
 }

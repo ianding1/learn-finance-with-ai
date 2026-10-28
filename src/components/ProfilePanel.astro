@@ -8,6 +8,7 @@ const L = {
 		about: '关于你',
 		background: '背景（例如：数学基础、为什么学这门课）',
 		preferences: '学习偏好（例如：先给直觉再给公式、多举数字例子）',
+		include: '在讲解提示词中附上我的背景、学习偏好，以及与本课有关的需要多练习的概念。评卷提示词不会包含学习档案。',
 		save: '保存',
 		saved: '已保存。',
 		results: '得分记录',
@@ -16,14 +17,14 @@ const L = {
 		score: '得分',
 		date: '日期',
 		none: '还没有记录。',
-		weak: '薄弱概念',
+		weak: '需要多练习的概念',
 		mastered: '已掌握的概念',
 		notes: '最近的评卷备注',
 		paste: '粘贴 AI 返回的评分结果',
 		saveResult: '保存结果',
-		session: '会话启动 prompt',
-		sessionHelp: '在 AI 助手里开始一段新的学习对话时，先发送这个 prompt。它包含课程说明和你的学习档案，之后的评卷和讲解 prompt 可以在同一个对话里使用。',
-		makeSession: '生成会话启动 prompt',
+		session: '会话启动提示词',
+		sessionHelp: '在 AI 助手里开始一段新的学习对话时，可以先发送这个提示词。它包含课程说明，以及你的背景、学习偏好和需要多练习的概念（不包含得分）。之后的评卷和讲解提示词可以在同一个对话里使用。',
+		makeSession: '生成会话启动提示词',
 		backup: '备份与迁移',
 		backupHelp: '学习档案只保存在这个浏览器中。换设备或换浏览器前，请先导出；也可以把导出的文件上传到 AI 助手的项目（Project、Gem 等）中作为长期资料。',
 		exportLabel: '导出学习档案',
@@ -37,6 +38,7 @@ const L = {
 		about: 'About you',
 		background: 'Background (for example: your math level, why you are taking this course)',
 		preferences: 'Learning preferences (for example: intuition before formulas, more numeric examples)',
+		include: 'Add my background, learning preferences and the related concepts I need to practice to explanation prompts. Grading prompts never include the profile.',
 		save: 'Save',
 		saved: 'Saved.',
 		results: 'Scores',
@@ -45,13 +47,13 @@ const L = {
 		score: 'Score',
 		date: 'Date',
 		none: 'No records yet.',
-		weak: 'Weak concepts',
+		weak: 'Concepts to practice more',
 		mastered: 'Mastered concepts',
 		notes: 'Recent grading notes',
 		paste: 'Paste the grading result from your AI',
 		saveResult: 'Save result',
 		session: 'Session start prompt',
-		sessionHelp: 'When you start a new study conversation with your AI assistant, send this prompt first. It contains a description of the course and your learner profile. You can then use the grading and explanation prompts in the same conversation.',
+		sessionHelp: 'When you start a new study conversation with your AI assistant, you can send this prompt first. It contains a description of the course, your background, your learning preferences and the concepts you need to practice (no scores). You can then use the grading and explanation prompts in the same conversation.',
 		makeSession: 'Generate session start prompt',
 		backup: 'Backup and transfer',
 		backupHelp: 'Your profile is stored only in this browser. Export it before you change device or browser. You can also upload the exported file to a project in your AI assistant (a Project, a Gem, and so on) as long-term context.',
@@ -70,6 +72,7 @@ const L = {
 		<h3>{L.about}</h3>
 		<label class="lfwai-answer"><span>{L.background}</span><textarea rows="3" data-field="background"></textarea></label>
 		<label class="lfwai-answer"><span>{L.preferences}</span><textarea rows="3" data-field="preferences"></textarea></label>
+		<label class="lfwai-check"><input type="checkbox" data-field="include" /> <span>{L.include}</span></label>
 		<button type="button" class="lfwai-btn" data-action="save">{L.save}</button>
 		<span class="lfwai-status" data-status="about" role="status"></span>
 	</section>

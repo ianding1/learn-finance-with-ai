@@ -7,7 +7,7 @@ import {
 	importProfile,
 	loadProfile,
 	parseResult,
-	profileSummary,
+	aboutMe,
 	resetProfile,
 	saveProfile,
 } from './profile';
@@ -32,6 +32,7 @@ export function initProfilePage() {
 		const p = loadProfile();
 		q<HTMLTextAreaElement>('[data-field="background"]').value = p.background;
 		q<HTMLTextAreaElement>('[data-field="preferences"]').value = p.preferences;
+		q<HTMLInputElement>('[data-field="include"]').checked = p.includeInPrompts;
 
 		const box = q<HTMLElement>('[data-results]');
 		box.replaceChildren();
@@ -77,8 +78,15 @@ export function initProfilePage() {
 		const p = loadProfile();
 		p.background = q<HTMLTextAreaElement>('[data-field="background"]').value;
 		p.preferences = q<HTMLTextAreaElement>('[data-field="preferences"]').value;
+		p.includeInPrompts = q<HTMLInputElement>('[data-field="include"]').checked;
 		saveProfile(p);
 		status('about', L.saved);
+	});
+
+	q<HTMLInputElement>('[data-field="include"]').addEventListener('change', (e) => {
+		const p = loadProfile();
+		p.includeInPrompts = (e.target as HTMLInputElement).checked;
+		saveProfile(p);
 	});
 
 	q('[data-action="paste"]').addEventListener('click', () => {
@@ -95,7 +103,7 @@ export function initProfilePage() {
 	});
 
 	q('[data-action="session"]').addEventListener('click', () => {
-		showPrompt(sessionPrompt(data.lang, data.site, profileSummary(loadProfile(), names, data.lang)));
+		showPrompt(sessionPrompt(data.lang, data.site, aboutMe(loadProfile(), names, data.lang)));
 	});
 
 	q('[data-action="export"]').addEventListener('click', () => {

@@ -10,7 +10,7 @@ All content is AI-generated; the site says so on every page and in every prompt.
 | --- | --- |
 | `course/curriculum.yaml` | Lesson order, ids, slugs, titles, summaries, `published`, `introduces`, `uses`. Single source of truth for order. |
 | `course/concepts.yaml` | Concept registry: where each concept is defined and its canonical term in each language. |
-| `course/keys/<id>.yaml` | Questions, reference answers, rubrics, common errors and lesson context for one lesson. Shown to learners only inside grading prompts. |
+| `course/keys/<id>.yaml` | Questions, reference answers, rubrics, common errors and lesson context for one lesson. Shown to learners only inside grading prompts. Context items are tagged with `concepts` or `questions`, and common errors with `questions`, so that a grading prompt contains only what concerns the questions being graded. |
 | `course/verify/<id>.py` | Recomputes every numeric answer in the key file. |
 | `course/widgets.yaml` | Slider ranges of interactive figures. |
 | `course/translation-lock.json` | Hash of each Chinese source at the time it was last translated. Generated. |
@@ -48,8 +48,12 @@ history and answers inline. To publish a finished lesson:
    - mark each concept definition with `<Def id="...">canonical term</Def>`;
    - every reference to a lesson, section, figure, question or concept uses `<Ref ... />`;
    - figures: `<Figure id="6-1" title="..." observe="...">` around a widget component.
-4. Move questions, answers, rubrics and common errors into `course/keys/<id>.yaml`; place
-   `<Check id="..."/>` in the right section and `<Quiz />` at the end.
+4. Move questions, answers, rubrics and common errors into `course/keys/<id>.yaml`. Tag each
+   context item with the `concepts` or `questions` it serves (leave both out only for facts every
+   question needs), and each common error with its `questions`. Any fact a question needs from the
+   lesson (example data, figure parameters) must be in a context item tagged for that question.
+   Place `<Check id="..."/>` in the right section, `<CheckAll />` after the summary and `<Quiz />`
+   at the end.
 5. Put every numeric answer in `expected` and recompute it in `course/verify/<id>.py`.
 6. Write the English page at `src/content/docs/en/lessons/<slug>.mdx` and every `en` field.
    Use plain, standard English without idioms. Formulas must be identical.
@@ -71,7 +75,20 @@ history and answers inline. To publish a finished lesson:
 - `expected` values match `course/verify/` and appear in every language's answer text.
 - Slider values named in questions are reachable; slider attributes match `course/widgets.yaml`.
 - No private teaching notes (学员, 教案, 修订记录, briefing) in published content.
+- Context items and common errors in key files refer to existing concepts and questions.
+- A lesson with review/check questions contains `<CheckAll />` exactly once.
+- Chinese text uses Chinese quotation marks and the word 提示词.
 - Every prompt template includes the AI-generated-content disclaimer in both languages.
+
+## Prompts
+
+- Grading prompts never include the learner profile, so that the grader judges each answer on its own.
+- The learner's answers are the last section of a grading prompt. Typed answers are optional; most
+  learners write by hand and attach a photo after the prompt, and the prompt asks the grader to
+  transcribe first and not to guess.
+- Explanation prompts include the learner's background, preferences and the concepts of the current
+  lesson that they need to practice, unless the learner turned this off. Scores are never included.
+- In Chinese text, write 提示词, not "prompt" (checked).
 
 ## Writing conventions
 

@@ -9,6 +9,7 @@ import Def from '../../../components/Def.astro';
 import Figure from '../../../components/Figure.astro';
 import Check from '../../../components/Check.astro';
 import Quiz from '../../../components/Quiz.astro';
+import CheckAll from '../../../components/CheckAll.astro';
 import ScenarioDots from '../../../components/widgets/ScenarioDots.astro';
 import CovarianceProducts from '../../../components/widgets/CovarianceProducts.astro';
 import DiversificationSlider from '../../../components/widgets/DiversificationSlider.astro';
@@ -178,8 +179,10 @@ $$
 - 只要 $\rho < 1$ 就有分散化的好处；$\rho = 0$ 时，好处来自方差相加、标准差不相加。
 - 等权持有很多资产时，组合方差趋向于资产之间的平均协方差：个股自己的风险能分散掉，共同的风险分散不掉（<Ref check="Q7" />）。
 
+<CheckAll />
+
 ## 测验 [#quiz]
 
-测验共 7 题，满分 100 分。建议先独立完成全部题目，再生成评卷 prompt。加粗的词是指令词：**判断**表示在几种可能中做出选择，**评估**表示运用知识对一个说法得出结论，**计算**表示求出数值，**讨论**表示从多个角度分析，**解释**表示说明原因或机制。
+测验共 7 题，满分 100 分。建议先独立完成全部题目，再生成评卷提示词。加粗的词是指令词：**判断**表示在几种可能中做出选择，**评估**表示运用知识对一个说法得出结论，**计算**表示求出数值，**讨论**表示从多个角度分析，**解释**表示说明原因或机制。
 
 <Quiz />

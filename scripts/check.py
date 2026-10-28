@@ -278,6 +278,27 @@ def check_keys():
         qids = [q["id"] for q in key.get("questions", [])]
         if len(qids) != len(set(qids)):
             err(file, "duplicate question ids")
+        for n, c in enumerate(key.get("context", [])):
+            where = f"{file} context[{n}]"
+            if not isinstance(c, dict):
+                err(where, "each context item must be a mapping with zh/en and optional concepts/questions")
+                continue
+            for cid in c.get("concepts", []):
+                if cid not in concepts:
+                    err(where, f"unknown concept '{cid}'")
+                elif order_of(concepts[cid]["defined_in"]) > l["order"]:
+                    err(where, f"concept '{cid}' is only taught in {concepts[cid]['defined_in']}")
+            for qid in c.get("questions", []):
+                if qid not in qids:
+                    err(where, f"unknown question '{qid}'")
+        for n, e in enumerate(key.get("common_errors", [])):
+            where = f"{file} common_errors[{n}]"
+            if not isinstance(e, dict) or not e.get("questions"):
+                err(where, "each common error needs 'questions' (the questions it is relevant to) and zh/en")
+                continue
+            for qid in e["questions"]:
+                if qid not in qids:
+                    err(where, f"unknown question '{qid}'")
         for q in key.get("questions", []):
             where = f"{file} [{q['id']}]"
             if q.get("kind") not in ("review", "check", "quiz"):
@@ -320,6 +341,10 @@ def check_keys():
             for q in key["questions"]:
                 if q["kind"] != "quiz" and q["id"] not in used:
                     err(rel(p), f"question {q['id']} in {file} is never shown (add <Check id=\"{q['id']}\" />)")
+            has_checks = any(q["kind"] != "quiz" for q in key["questions"])
+            n_all = sum(1 for name, _ in tags(body) if name == "CheckAll")
+            if has_checks and n_all != 1:
+                err(rel(p), "the lesson has review/check questions, so the page must contain <CheckAll /> exactly once")
             has_quiz = any(q["kind"] == "quiz" for q in key["questions"])
             n_quiz = sum(1 for name, _ in tags(body) if name == "Quiz")
             if has_quiz and n_quiz != 1:
@@ -421,6 +446,7 @@ PLAIN_PATTERNS = [
     (re.compile(r"\b(?:see|lesson|section|step)\s+(\d+\.\d+)\b", re.I), "'see/lesson X.Y'"),
     (re.compile(r"\bquestion\s+(\d+)\b", re.I), "'question N'"),
     (re.compile(r"\b(?:check|review)\s+([A-Z]\d+)\b"), "question label"),
+    (re.compile(r"(?:图|\bFigure)\s*(\d+-\d+)"), "figure number"),
 ]
 
 
@@ -626,6 +652,21 @@ def check_lint():
                 if straight.search(s):
                     err(f"course/keys/{lesson_id}.yaml", f'{path}: Chinese text contains straight double quotes ("); use “ and ”')
         walk_bilingual(key, "", fn)
+    # Chinese text says 提示词, not "prompt".
+    for r in source_docs():
+        p = doc_path(SOURCE, str(r))
+        if re.search(r"prompt", prose_only(body_of(p.read_text(encoding="utf-8"))), re.I):
+            err(rel(p), "Chinese text uses 'prompt'; write 提示词")
+    for lesson_id, key in keys.items():
+        def fn2(path, node, lesson_id=lesson_id):
+            for s in all_strings(node[SOURCE]):
+                if re.search(r"prompt", s, re.I):
+                    err(f"course/keys/{lesson_id}.yaml", f"{path}: Chinese text uses 'prompt'; write 提示词")
+        walk_bilingual(key, "", fn2)
+    zh_ui = (ROOT / "src/i18n/ui.ts").read_text(encoding="utf-8").split("const en")[0]
+    for m in re.finditer(r"^\s*(\w+): '([^']*)'", zh_ui, re.M):
+        if re.search(r"prompt", m.group(2), re.I):
+            err("src/i18n/ui.ts", f"Chinese UI string '{m.group(1)}' uses 'prompt'; write 提示词")
     prompts = (ROOT / "src/scripts/prompts.ts").read_text(encoding="utf-8")
     for chunk in prompts.split("export function ")[1:]:
         name = chunk.split("(")[0]
