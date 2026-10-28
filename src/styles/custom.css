@@ -40,11 +40,10 @@
 	content: '⚠ ';
 	color: var(--sl-color-orange);
 }
-.lfwai-ai-notice summary::after {
-	content: ' ▸';
-}
-.lfwai-ai-notice[open] summary::after {
-	content: ' ▾';
+.lfwai-ai-notice summary:hover {
+	color: var(--sl-color-gray-2);
+	text-decoration: underline dotted;
+	text-underline-offset: 0.25em;
 }
 .lfwai-ai-notice p {
 	margin: 0.4rem 0 0;
