@@ -26,8 +26,8 @@ const L = {
 		makeSession: '生成会话启动 prompt',
 		backup: '备份与迁移',
 		backupHelp: '学习档案只保存在这个浏览器中。换设备或换浏览器前，请先导出；也可以把导出的文件上传到 AI 助手的项目（Project、Gem 等）中作为长期资料。',
-		export: '导出学习档案',
-		import: '导入学习档案',
+		exportLabel: '导出学习档案',
+		importLabel: '导入学习档案',
 		reset: '清空学习档案',
 		confirmReset: '确定要清空学习档案吗？这个操作不能撤销。',
 		importFailed: '导入失败：文件格式不正确。',
@@ -55,8 +55,8 @@ const L = {
 		makeSession: 'Generate session start prompt',
 		backup: 'Backup and transfer',
 		backupHelp: 'Your profile is stored only in this browser. Export it before you change device or browser. You can also upload the exported file to a project in your AI assistant (a Project, a Gem, and so on) as long-term context.',
-		export: 'Export profile',
-		import: 'Import profile',
+		exportLabel: 'Export profile',
+		importLabel: 'Import profile',
 		reset: 'Clear profile',
 		confirmReset: 'Clear your learner profile? This cannot be undone.',
 		importFailed: 'Import failed: the file format is not valid.',
@@ -101,8 +101,8 @@ const L = {
 		<h3>{L.backup}</h3>
 		<p>{L.backupHelp}</p>
 		<div class="lfwai-row">
-			<button type="button" class="lfwai-btn" data-action="export">{L.export}</button>
-			<label class="lfwai-btn">{L.import}<input type="file" accept="application/json,.json" data-import hidden /></label>
+			<button type="button" class="lfwai-btn" data-action="export">{L.exportLabel}</button>
+			<label class="lfwai-btn">{L.importLabel}<input type="file" accept="application/json,.json" data-import hidden /></label>
 			<button type="button" class="lfwai-btn lfwai-btn-danger" data-action="reset">{L.reset}</button>
 		</div>
 		<p class="lfwai-status" data-status="backup" role="status"></p>
