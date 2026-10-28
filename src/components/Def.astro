@@ -1,0 +1,10 @@
+---
+// <Def id="covariance">协方差</Def> — marks where a concept is defined. Concept links point here.
+// The text must equal the concept's canonical term for the page language (checked by CI).
+interface Props {
+	id: string;
+}
+const { id } = Astro.props;
+---
+
+<dfn id={`concept-${id}`} class="lfwai-def"><slot /></dfn>

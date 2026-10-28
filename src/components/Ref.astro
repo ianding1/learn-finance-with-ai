@@ -1,0 +1,22 @@
+---
+// Cross-reference. Never write lesson numbers as plain text; use this component.
+//   <Ref lesson="0.4" />                      a lesson
+//   <Ref lesson="0.3" sec="diversification" /> a section (explicit heading id)
+//   <Ref fig="6-1" /> <Ref check="C5" />       a figure or question (current lesson unless lesson="...")
+//   <Ref concept="covariance" />               a concept, linked to where it is defined
+// The text comes from course/curriculum.yaml and course/concepts.yaml in the page language.
+import { toLang } from '../i18n/ui';
+import { refHtml } from '../lib/course';
+
+interface Props {
+	lesson?: string;
+	sec?: string;
+	fig?: string;
+	check?: string;
+	concept?: string;
+}
+const route = Astro.locals.starlightRoute;
+const html = refHtml(Astro.props, toLang(route.lang), route.entry.data.lesson);
+---
+
+<Fragment set:html={html} />

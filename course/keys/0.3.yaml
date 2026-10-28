@@ -1,0 +1,406 @@
+# Answer key for lesson 0.3. Shown to learners only inside generated grading prompts.
+# Text fields support: $inline math$, $$display math$$, **bold**, line breaks,
+# and references: [[0.4]] (lesson), [[0.3#covariance]] (section), [[concept:covariance]].
+# expected: values are recomputed by course/verify/0.3.py in CI and must appear verbatim in every answer text.
+
+lesson: "0.3"
+
+context:
+  zh: |-
+    本课核心内容：
+    - 情景表：可能结果 + 概率，概率之和为 1。
+    - 期望 $E[R] = \sum_i p_i R_i$；方差 $\text{Var}(R) = \sum_i p_i (R_i - E[R])^2$，单位为 %²；标准差是方差的平方根，单位为 %，也叫波动率。
+    - 协方差 $\text{Cov}(R_A, R_B) = \sum_i p_i (R_{A,i} - E[R_A])(R_{B,i} - E[R_B])$；看的是相对各自期望的偏差是否同向，不是收益的正负。相关系数 $\rho = \text{Cov} / (\sigma_A \sigma_B)$，在 $[-1, 1]$ 之间。
+    - 组合 $R_P = wR_A + (1-w)R_B$：期望是线性的；方差 $w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\text{Cov}$ 不是线性的。
+    - 分散化：只要 $\rho < 1$，组合标准差就小于加权平均。$\rho = 0$ 时好处来自"方差相加、标准差不相加"（$\sqrt{a^2+b^2} < a+b$），不来自协方差项。分散化不需要负相关。
+    - 讲义例子：繁荣 / 正常 / 衰退概率 0.25 / 0.5 / 0.25；股票 A 收益 30 / 10 / −10，债券 B 收益 1 / 5 / 3（%）。$E[R_A] = 10$，$E[R_B] = 3.5$，$\text{Var}_A = 200$，$\text{Var}_B = 2.75$，$\text{Cov} = -10$，$\rho \approx -0.43$。
+    本课所有计算以百分点为单位。学习者已经学过：求和符号，以及 [[0.2]] 的最优化。还没有学：用历史数据估计参数（[[0.4]]）、回归（[[0.5]]）、组合理论（[[4.2]]）。
+  en: |-
+    Key points of this lesson:
+    - A scenario table lists possible outcomes and their probabilities. The probabilities sum to 1.
+    - Expected value $E[R] = \sum_i p_i R_i$. Variance $\text{Var}(R) = \sum_i p_i (R_i - E[R])^2$, in %². The standard deviation is the square root of the variance, in %, and is also called volatility.
+    - Covariance $\text{Cov}(R_A, R_B) = \sum_i p_i (R_{A,i} - E[R_A])(R_{B,i} - E[R_B])$. It measures whether the deviations from each expected value have the same sign, not whether the returns are positive. Correlation $\rho = \text{Cov} / (\sigma_A \sigma_B)$ lies in $[-1, 1]$.
+    - Portfolio $R_P = wR_A + (1-w)R_B$: the expected value is linear; the variance $w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\text{Cov}$ is not.
+    - Diversification: as long as $\rho < 1$, the portfolio standard deviation is less than the weighted average. When $\rho = 0$, the benefit comes from "variances add, standard deviations do not" ($\sqrt{a^2+b^2} < a+b$), not from the covariance term. Diversification does not require negative correlation.
+    - Example used in the lesson: boom / normal / recession with probabilities 0.25 / 0.5 / 0.25; stock A returns 30 / 10 / −10 and bond fund B returns 1 / 5 / 3 (%). $E[R_A] = 10$, $E[R_B] = 3.5$, $\text{Var}_A = 200$, $\text{Var}_B = 2.75$, $\text{Cov} = -10$, $\rho \approx -0.43$.
+    All calculations in this lesson use percentage points. The learner has already studied summation notation and the optimization in [[0.2]]. The learner has not yet studied estimating parameters from historical data ([[0.4]]), regression ([[0.5]]) or portfolio theory ([[4.2]]).
+
+common_errors:
+  zh:
+    - "$\\rho = 0$ 时用\"受协方差影响\"解释分散化：结论对，但理由不成立。此时协方差项为 0，好处来自方差相加、标准差不相加。"
+    - "认为\"两只基金都涨了，所以正相关\"：相关看的是相对各自期望的偏差方向，不是收益的正负；而且一次观测说明不了概率关系。"
+    - "在互动图中只观察 $\\rho = -1$ 的情形，错过了\"不相关也能分散\"这个要点。"
+    - "把方差的单位写成 %，或者直接比较方差和期望收益的大小。"
+  en:
+    - "Explaining diversification at $\\rho = 0$ by \"the effect of covariance\": the conclusion is right but the reason is wrong. The covariance term is 0 in this case; the benefit comes from the fact that variances add but standard deviations do not."
+    - "Saying \"both funds went up, so they are positively correlated\": correlation is about the direction of deviations from each expected value, not about whether returns are positive. Also, one observation says nothing about a probabilistic relationship."
+    - "Exploring only $\\rho = -1$ in the interactive figure and missing the point that uncorrelated assets also diversify."
+    - "Writing the unit of variance as % instead of %², or comparing a variance directly with an expected return."
+
+questions:
+  # ---------- Review of 0.2 ----------
+  - id: R1
+    kind: review
+    section: review
+    points: 6
+    concepts: [profit-maximization, sunk-cost]
+    expected: { q_star: "1000", profit_star: "-2000" }
+    question:
+      zh: |-
+        一家餐馆每月房租 12,000 美元（已签一年租约）。每份餐卖 30 美元，每月卖 $q$ 份的可变成本为 $10q + \frac{q^2}{100}$ 美元。
+        (a) 每月最优份数和利润是多少？
+        (b) 老板说"反正亏钱，少卖一点就少亏一点"，对吗？用数字说明。
+        (c) 租约到期时，如果市场情况不变，应该怎么决定？
+      en: |-
+        A restaurant pays a monthly rent of 12,000 dollars (it has signed a one-year lease). Each meal sells for 30 dollars, and the variable cost of selling $q$ meals per month is $10q + \frac{q^2}{100}$ dollars.
+        (a) What are the optimal number of meals per month and the resulting profit?
+        (b) The owner says: "We lose money anyway, so selling less means losing less." Is this right? Use numbers.
+        (c) When the lease ends, and market conditions are unchanged, what should the owner decide?
+    answer:
+      zh: |-
+        (a) $\pi = 20q - \frac{q^2}{100} - 12000$，令 $\pi'(q) = 20 - \frac{q}{50} = 0$，得 $q^* = 1000$，$\pi^* = -2000$。
+        (b) 不对。例如 $q = 900$ 时 $\pi = -2100$，$q = 500$ 时 $\pi = -4500$。$q^*$ 是亏得最少的产量。
+        (c) 租约期内房租是沉没成本，不影响产量决策；租约到期后房租变为可以避免的成本。最好的情况仍是每月亏 2000，所以应该不续约、退出。
+      en: |-
+        (a) $\pi = 20q - \frac{q^2}{100} - 12000$. Setting $\pi'(q) = 20 - \frac{q}{50} = 0$ gives $q^* = 1000$ and $\pi^* = -2000$.
+        (b) No. For example, $\pi = -2100$ at $q = 900$ and $\pi = -4500$ at $q = 500$. $q^*$ is the output with the smallest loss.
+        (c) During the lease, the rent is a sunk cost and does not affect the output decision. When the lease ends, the rent becomes an avoidable cost. The best case is still a loss of 2000 per month, so the owner should not renew the lease and should exit.
+    rubric:
+      zh:
+        - "(a) 写出利润函数并用一阶条件求出 $q^*$ 与 $\\pi^*$。"
+        - "(b) 用至少一个其他产量的利润作对比。"
+        - "(c) 必须说明租约期内房租是沉没成本、到期后变为可避免成本，二者的区别决定了结论。"
+      en:
+        - "(a) Writes the profit function and uses the first-order condition to find $q^*$ and $\\pi^*$."
+        - "(b) Compares with the profit at at least one other output level."
+        - "(c) Must explain that the rent is a sunk cost during the lease and an avoidable cost after it ends, and that this difference drives the conclusion."
+
+  - id: R2
+    kind: review
+    section: review
+    points: 2
+    concepts: [budget-constraint]
+    expected: { dx: "2", dy: "5" }
+    question:
+      zh: |-
+        $p_x = 5$，$p_y = 2$。把 10 美元从 $y$ 挪到 $x$，$x$ 和 $y$ 各变化多少单位？
+      en: |-
+        $p_x = 5$ and $p_y = 2$. If 10 dollars of spending moves from $y$ to $x$, how many units do $x$ and $y$ each change by?
+    answer:
+      zh: |-
+        $x$ 增加 $10/5 = 2$ 单位，$y$ 减少 $10/2 = 5$ 单位。
+      en: |-
+        $x$ increases by $10/5 = 2$ units and $y$ decreases by $10/2 = 5$ units.
+    rubric:
+      zh:
+        - "两个方向和数量都正确。"
+      en:
+        - "Both directions and both quantities are correct."
+
+  # ---------- Check questions ----------
+  - id: C1
+    kind: check
+    section: expected-value
+    points: 2
+    concepts: [expected-value]
+    expected: { E_B: "3.5" }
+    question:
+      zh: |-
+        B 的期望为什么是 3.5%？写出计算过程。
+      en: |-
+        Why is the expected return of B equal to 3.5%? Show the calculation.
+    answer:
+      zh: |-
+        $E[R_B] = 0.25 \times 1 + 0.5 \times 5 + 0.25 \times 3 = 3.5$（%）。
+      en: |-
+        $E[R_B] = 0.25 \times 1 + 0.5 \times 5 + 0.25 \times 3 = 3.5$ (%).
+    rubric:
+      zh:
+        - "按概率加权求和，过程完整。"
+      en:
+        - "Computes the probability-weighted sum and shows each term."
+
+  - id: C2
+    kind: check
+    section: variance
+    points: 2
+    concepts: [expected-value, variance, standard-deviation]
+    expected: { E_new: "15" }
+    question:
+      zh: |-
+        如果 A 在每种情景下的收益都加 5 个百分点，期望和标准差分别怎么变？为什么？
+      en: |-
+        If A's return in every scenario increases by 5 percentage points, how do its expected value and standard deviation change? Why?
+    answer:
+      zh: |-
+        期望增加 5 个百分点，变为 15%。标准差不变，因为每种情景的偏差 $R_i - E[R]$ 都没有变。
+      en: |-
+        The expected value increases by 5 percentage points to 15%. The standard deviation does not change, because the deviation $R_i - E[R]$ in every scenario stays the same.
+    rubric:
+      zh:
+        - "期望的变化正确。"
+        - "标准差不变，并用\"偏差不变\"说明理由。"
+      en:
+        - "The change in the expected value is correct."
+        - "States that the standard deviation is unchanged and gives the reason: the deviations do not change."
+
+  - id: C3
+    kind: check
+    section: covariance
+    points: 3
+    concepts: [covariance]
+    expected: { E_B_new: "4.75", cov_new: "-35" }
+    question:
+      zh: |-
+        如果把 B 在衰退时的收益从 3% 改为 8%（其他不变），协方差会变大还是变小？先凭直觉判断，再计算验证。
+      en: |-
+        If B's return in the recession scenario changes from 3% to 8% (everything else unchanged), does the covariance become larger or smaller? First judge by intuition, then verify by calculation.
+    answer:
+      zh: |-
+        变得更负（变小）。直觉：衰退时 A 远低于期望，B 改为 8% 后 B 在衰退时高于期望，二者反向，贡献负值。
+        计算：B 的新期望为 4.75%，偏差为 −3.75、+0.25、+3.25；
+        $\text{Cov} = 0.25(20)(-3.75) + 0.5(0)(0.25) + 0.25(-20)(3.25) = -35$。
+      en: |-
+        It becomes more negative (smaller). Intuition: in the recession A is far below its expected value; after the change, B is above its expected value in the recession, so the two move in opposite directions and the contribution is negative.
+        Calculation: B's new expected value is 4.75%, and its deviations are −3.75, +0.25 and +3.25;
+        $\text{Cov} = 0.25(20)(-3.75) + 0.5(0)(0.25) + 0.25(-20)(3.25) = -35$.
+    rubric:
+      zh:
+        - "注意到 B 的期望也随之改变，并重新计算了偏差。"
+        - "协方差数值正确。"
+        - "直觉判断用偏差的方向来解释。"
+      en:
+        - "Notices that B's expected value also changes and recomputes the deviations."
+        - "The covariance value is correct."
+        - "The intuitive judgment is explained with the direction of the deviations."
+
+  - id: C4
+    kind: check
+    section: linear-combination
+    points: 3
+    concepts: [portfolio-variance]
+    expected: { E_P: "8.7", var_P: "124.91", sd_P: "11.18" }
+    question:
+      zh: |-
+        A 占 80%、B 占 20% 时，组合的期望和标准差是多少？
+      en: |-
+        With 80% in A and 20% in B, what are the portfolio's expected value and standard deviation?
+    answer:
+      zh: |-
+        $E[R_P] = 0.8 \times 10 + 0.2 \times 3.5 = 8.7$（%）。
+        $\text{Var} = 0.64 \times 200 + 0.04 \times 2.75 + 2 \times 0.8 \times 0.2 \times (-10) = 124.91$（%²），$\sigma_P \approx 11.18$%。
+      en: |-
+        $E[R_P] = 0.8 \times 10 + 0.2 \times 3.5 = 8.7$ (%).
+        $\text{Var} = 0.64 \times 200 + 0.04 \times 2.75 + 2 \times 0.8 \times 0.2 \times (-10) = 124.91$ (%²), so $\sigma_P \approx 11.18$%.
+    rubric:
+      zh:
+        - "期望正确。"
+        - "方差公式三项齐全，协方差项带系数 2。"
+        - "标准差正确，单位正确。"
+      en:
+        - "The expected value is correct."
+        - "All three terms of the variance formula are present, with the factor 2 on the covariance term."
+        - "The standard deviation and its unit are correct."
+
+  - id: C5
+    kind: check
+    section: diversification
+    points: 3
+    concepts: [diversification, portfolio-variance]
+    widget: { id: diversification, set: { rho: 0 } }
+    expected: { w_A: "20", sd_min: "8.94" }
+    question:
+      zh: |-
+        **先把 $\rho$ 调到 0**（不是 −1），找出组合标准差最小的大致权重。这时组合的标准差比 B 自己的 10% 还小吗？这说明了什么？
+      en: |-
+        **First set $\rho$ to 0** (not −1), and find the approximate weight that minimizes the portfolio standard deviation. Is the portfolio standard deviation then smaller than B's own 10%? What does this show?
+    answer:
+      zh: |-
+        $\rho = 0$ 时 $w_A = \frac{\sigma_B^2}{\sigma_A^2 + \sigma_B^2} = 20$%，$\sigma_P = \sqrt{80} \approx 8.94$% $< 10$%。
+        说明不相关的资产也能分散风险：在低波动的 B 中加入一部分波动更高的 A，组合的总风险反而下降。
+      en: |-
+        At $\rho = 0$, $w_A = \frac{\sigma_B^2}{\sigma_A^2 + \sigma_B^2} = 20$%, and $\sigma_P = \sqrt{80} \approx 8.94$% $< 10$%.
+        This shows that uncorrelated assets also diversify risk: adding some of the more volatile A to the low-volatility B lowers the total risk of the portfolio.
+    rubric:
+      zh:
+        - "回答的是 $\\rho = 0$ 的情形。"
+        - "最小方差权重约为 20%，标准差约 8.9%，小于 10%。"
+        - "结论指出不相关也能分散，或加入高波动资产反而降低风险。"
+      en:
+        - "Answers the case $\\rho = 0$."
+        - "The minimum-variance weight is about 20% and the standard deviation is about 8.9%, which is less than 10%."
+        - "The conclusion states that uncorrelated assets also diversify, or that adding a more volatile asset can lower risk."
+
+  # ---------- Quiz ----------
+  - id: Q1
+    kind: quiz
+    level: A
+    points: 8
+    concepts: [diversification, covariance]
+    question:
+      zh: |-
+        **判断**真假并说明理由：两项资产的相关系数为 0 时，组合标准差等于两者标准差的加权平均。
+      en: |-
+        **Determine** whether this statement is true or false, and explain: when the correlation between two assets is 0, the portfolio standard deviation equals the weighted average of their standard deviations.
+    answer:
+      zh: |-
+        假。$\rho = 0$ 时协方差项为 0，$\sigma_P = \sqrt{w^2\sigma_A^2 + (1-w)^2\sigma_B^2} < w\sigma_A + (1-w)\sigma_B$，因为对正数 $a, b$ 有 $\sqrt{a^2+b^2} < a+b$。
+      en: |-
+        False. When $\rho = 0$ the covariance term is 0, and $\sigma_P = \sqrt{w^2\sigma_A^2 + (1-w)^2\sigma_B^2} < w\sigma_A + (1-w)\sigma_B$, because $\sqrt{a^2+b^2} < a+b$ for positive $a, b$.
+    rubric:
+      zh:
+        - "结论为假（2 分）。"
+        - "理由必须指向\"方差相加、标准差不相加\"（6 分）。用\"受协方差影响\"作理由在 $\\rho = 0$ 时不成立，只给结论分。"
+      en:
+        - "States false (2 points)."
+        - "The reason must point to \"variances add, standard deviations do not\" (6 points). A reason based on \"the effect of covariance\" does not hold at $\\rho = 0$; give only the points for the conclusion."
+
+  - id: Q2
+    kind: quiz
+    level: A
+    points: 8
+    concepts: [correlation, covariance]
+    question:
+      zh: |-
+        一位朋友说："这两只基金去年都涨了，所以它们的相关系数一定是正的。"**评估**这个说法。
+      en: |-
+        A friend says: "Both of these funds went up last year, so their correlation must be positive." **Evaluate** this statement.
+    answer:
+      zh: |-
+        不对。(1) 相关系数看的是相对各自期望的偏差方向，不是收益是否同为正：两只基金期望都是 8%，一只涨 15%、一只涨 2%，这一年对协方差的贡献是负的。(2) 一年只是一个观测点，样本太小，说明不了概率关系（[[0.4]] 会讲怎样从数据估计）。
+      en: |-
+        No. (1) Correlation depends on the direction of deviations from each expected value, not on whether both returns are positive. If both funds have an expected return of 8% and one rises 15% while the other rises 2%, this year contributes a negative amount to the covariance. (2) One year is a single observation; the sample is too small to show a probabilistic relationship ([[0.4]] covers how to estimate from data).
+    rubric:
+      zh:
+        - "指出相关看偏差而不是收益的正负（4 分）。"
+        - "指出一次观测 / 样本太小（4 分）。两点都要有。"
+      en:
+        - "Points out that correlation is about deviations, not about the sign of returns (4 points)."
+        - "Points out that one observation is too small a sample (4 points). Both points are required."
+
+  - id: Q3
+    kind: quiz
+    level: B
+    points: 16
+    concepts: [expected-value, variance, standard-deviation, covariance, correlation]
+    expected: { E_C: "7.7", sd_C: "13.56", E_D: "4.5", sd_D: "6.70", cov_CD: "-88.95", rho_CD: "-0.98" }
+    question:
+      zh: |-
+        三种情景概率为 0.3、0.4、0.3；资产 C 收益为 25、8、−10（%），资产 D 收益为 −5、6、12（%）。**计算**两者的期望、标准差、协方差和相关系数。
+      en: |-
+        Three scenarios have probabilities 0.3, 0.4 and 0.3. Asset C returns 25, 8 and −10 (%), and asset D returns −5, 6 and 12 (%). **Calculate** the expected value and standard deviation of each asset, their covariance and their correlation.
+    answer:
+      zh: |-
+        $E[C] = 7.7$，$\sigma_C \approx 13.56$；$E[D] = 4.5$，$\sigma_D \approx 6.70$；$\text{Cov} = -88.95$（%²）；$\rho \approx -0.98$。
+      en: |-
+        $E[C] = 7.7$ and $\sigma_C \approx 13.56$; $E[D] = 4.5$ and $\sigma_D \approx 6.70$; $\text{Cov} = -88.95$ (%²); $\rho \approx -0.98$.
+    rubric:
+      zh:
+        - "两个期望各 2 分，两个标准差各 3 分，协方差 4 分，相关系数 2 分。"
+        - "计算过程必须写出；过程部分正确可得部分分。"
+      en:
+        - "Each expected value 2 points, each standard deviation 3 points, covariance 4 points, correlation 2 points."
+        - "The working must be shown; partially correct working earns partial credit."
+
+  - id: Q4
+    kind: quiz
+    level: B
+    points: 12
+    concepts: [portfolio-variance, diversification]
+    expected: { var_P: "140.70", sd_P: "11.86", wavg: "14" }
+    question:
+      zh: |-
+        $\sigma_A = 18\%$，$\sigma_B = 8\%$，$\rho = 0.2$，权重 60% / 40%。**计算**组合标准差，并与加权平均比较。
+      en: |-
+        $\sigma_A = 18\%$, $\sigma_B = 8\%$, $\rho = 0.2$, and the weights are 60% / 40%. **Calculate** the portfolio standard deviation and compare it with the weighted average.
+    answer:
+      zh: |-
+        $\text{Var} = 0.36 \times 324 + 0.16 \times 64 + 2 \times 0.6 \times 0.4 \times 0.2 \times 18 \times 8 = 140.70$（%²），$\sigma_P \approx 11.86$%；加权平均为 14%，组合标准差更低。
+      en: |-
+        $\text{Var} = 0.36 \times 324 + 0.16 \times 64 + 2 \times 0.6 \times 0.4 \times 0.2 \times 18 \times 8 = 140.70$ (%²), so $\sigma_P \approx 11.86$%. The weighted average is 14%, so the portfolio standard deviation is lower.
+    rubric:
+      zh:
+        - "方差三项正确（8 分）。"
+        - "标准差与加权平均的比较（4 分）。"
+      en:
+        - "All three variance terms are correct (8 points)."
+        - "Standard deviation and the comparison with the weighted average (4 points)."
+
+  - id: Q5
+    kind: quiz
+    level: C
+    star: true
+    points: 20
+    concepts: [portfolio-variance, expected-value, variance, covariance]
+    question:
+      zh: |-
+        ★ 证明 $\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$。
+      en: |-
+        ★ Prove that $\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$.
+    answer:
+      zh: |-
+        由期望的线性，$E[aX + bY] = aE[X] + bE[Y]$。记 $\tilde X = X - E[X]$，$\tilde Y = Y - E[Y]$，则
+        $$\text{Var}(aX+bY) = E\big[(a\tilde X + b\tilde Y)^2\big] = a^2E[\tilde X^2] + b^2E[\tilde Y^2] + 2abE[\tilde X\tilde Y],$$
+        即 $a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$。
+      en: |-
+        By linearity of expectation, $E[aX + bY] = aE[X] + bE[Y]$. Let $\tilde X = X - E[X]$ and $\tilde Y = Y - E[Y]$. Then
+        $$\text{Var}(aX+bY) = E\big[(a\tilde X + b\tilde Y)^2\big] = a^2E[\tilde X^2] + b^2E[\tilde Y^2] + 2abE[\tilde X\tilde Y],$$
+        which equals $a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$.
+    rubric:
+      zh:
+        - "使用期望的线性那一步要写出理由（6 分）。"
+        - "正确展开平方并逐项识别为方差和协方差（14 分）。"
+      en:
+        - "The step that uses linearity of expectation must be justified (6 points)."
+        - "Expands the square correctly and identifies each term as a variance or covariance (14 points)."
+
+  - id: Q6
+    kind: quiz
+    level: C
+    points: 16
+    concepts: [portfolio-variance, correlation]
+    expected: { w: "30.8" }
+    question:
+      zh: |-
+        若 $\rho = -1$，求使组合方差为 0 的权重 $w$（用 $\sigma_A, \sigma_B$ 表示），并代入 [[check:Q4]] 的 $\sigma_A, \sigma_B$ 求数值。
+      en: |-
+        If $\rho = -1$, find the weight $w$ that makes the portfolio variance 0 (in terms of $\sigma_A$ and $\sigma_B$), and then compute its value using $\sigma_A$ and $\sigma_B$ from [[check:Q4]].
+    answer:
+      zh: |-
+        $\rho = -1$ 时 $\sigma_P^2 = \big(w\sigma_A - (1-w)\sigma_B\big)^2$，令其为 0 得 $w = \frac{\sigma_B}{\sigma_A + \sigma_B} = \frac{8}{26} \approx 30.8$%。$w$ 自动在 0 与 1 之间，不需要卖空。
+      en: |-
+        When $\rho = -1$, $\sigma_P^2 = \big(w\sigma_A - (1-w)\sigma_B\big)^2$. Setting it to 0 gives $w = \frac{\sigma_B}{\sigma_A + \sigma_B} = \frac{8}{26} \approx 30.8$%. The weight is automatically between 0 and 1, so no short selling is needed.
+    rubric:
+      zh:
+        - "写出 $\\rho = -1$ 时方差为完全平方，或等价推导（8 分）。"
+        - "得出公式与数值（8 分）。"
+      en:
+        - "Shows that the variance is a perfect square when $\\rho = -1$, or an equivalent derivation (8 points)."
+        - "Obtains the formula and the value (8 points)."
+
+  - id: Q7
+    kind: quiz
+    level: C
+    points: 20
+    concepts: [portfolio-variance, diversification]
+    question:
+      zh: |-
+        等权持有 $n$ 只股票，每只方差都是 $\sigma^2$，任意两只之间的协方差都是 $c$（$c > 0$）。求组合方差，**讨论** $n \to \infty$ 时的极限，并**解释**其投资含义。
+      en: |-
+        You hold $n$ stocks with equal weights. Each has variance $\sigma^2$, and the covariance between any two is $c$ ($c > 0$). Find the portfolio variance, **discuss** its limit as $n \to \infty$, and **explain** what it means for investing.
+    answer:
+      zh: |-
+        $\text{Var} = \frac{1}{n^2}\big(n\sigma^2 + (n^2 - n)c\big) = \frac{\sigma^2}{n} + \left(1 - \frac{1}{n}\right)c \to c$。
+        个股自己的风险（$\sigma^2/n$ 项）可以分散掉；所有股票共同的风险 $c$ 分散不掉（[[concept:systematic-risk]]，[[4.5]] 详细讲）。
+      en: |-
+        $\text{Var} = \frac{1}{n^2}\big(n\sigma^2 + (n^2 - n)c\big) = \frac{\sigma^2}{n} + \left(1 - \frac{1}{n}\right)c \to c$.
+        The risk specific to each stock (the $\sigma^2/n$ term) can be diversified away; the risk common to all stocks, $c$, cannot ([[concept:systematic-risk]], covered in [[4.5]]).
+    rubric:
+      zh:
+        - "交叉项个数为 $n^2 - n$（6 分）。"
+        - "极限正确（6 分）。"
+        - "含义要区分\"能分散的\"和\"不能分散的\"（8 分）。"
+      en:
+        - "The number of cross terms is $n^2 - n$ (6 points)."
+        - "The limit is correct (6 points)."
+        - "The interpretation distinguishes the risk that can be diversified from the risk that cannot (8 points)."

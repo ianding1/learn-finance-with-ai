@@ -1,0 +1,24 @@
+---
+// <Figure id="6-1" title="..." observe="..."> <Widget /> </Figure>
+// title and observe accept $math$ and [[refs]] like key files.
+import { toLang, t } from '../i18n/ui';
+import { renderRich } from '../lib/course';
+
+interface Props {
+	id: string;
+	title: string;
+	observe: string;
+}
+const { id, title, observe } = Astro.props;
+const route = Astro.locals.starlightRoute;
+const lang = toLang(route.lang);
+const lessonId = route.entry.data.lesson;
+---
+
+<figure class="lfwai-figure not-content" id={`fig-${id}`}>
+	<div class="lfwai-figure-body"><slot /></div>
+	<figcaption>
+		<span class="lfwai-figure-title"><strong>{t(lang, 'figure', { id })}</strong> <span set:html={renderRich(title, lang, lessonId)} /></span>
+		<span class="lfwai-figure-observe"><strong>{t(lang, 'observe')}</strong><span set:html={renderRich(observe, lang, lessonId)} /></span>
+	</figcaption>
+</figure>

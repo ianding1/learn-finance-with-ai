@@ -1,0 +1,19 @@
+---
+// <Quiz /> — all quiz questions of the current lesson, graded together with one prompt.
+import { toLang, t } from '../i18n/ui';
+import { lessonKey } from '../lib/course';
+import { gradingPayload, questionLabel } from '../lib/grading';
+import QuestionBody from './QuestionBody.astro';
+import GradeControls from './GradeControls.astro';
+
+const route = Astro.locals.starlightRoute;
+const lang = toLang(route.lang);
+const lessonId = route.entry.data.lesson;
+if (!lessonId) throw new Error('<Quiz> can only be used on a lesson page (frontmatter "lesson")');
+const qs = (lessonKey(lessonId)?.questions ?? []).filter((q) => q.kind === 'quiz');
+---
+
+<section class="lfwai-group lfwai-quiz not-content" data-lfwai-group>
+	{qs.map((q, i) => <QuestionBody q={q} lang={lang} lessonId={lessonId} label={questionLabel(q, lang, i + 1)} />)}
+	<GradeControls lang={lang} payload={gradingPayload(lessonId, qs, lang)} label={t(lang, 'makeQuizPrompt')} />
+</section>

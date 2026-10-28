@@ -1,0 +1,23 @@
+---
+// <Check id="C3" /> — a review or check question from course/keys/<lesson>.yaml with its grading controls.
+import { toLang, t } from '../i18n/ui';
+import { question } from '../lib/course';
+import { gradingPayload, questionLabel } from '../lib/grading';
+import QuestionBody from './QuestionBody.astro';
+import GradeControls from './GradeControls.astro';
+
+interface Props {
+	id: string;
+}
+const route = Astro.locals.starlightRoute;
+const lang = toLang(route.lang);
+const lessonId = route.entry.data.lesson;
+if (!lessonId) throw new Error('<Check> can only be used on a lesson page (frontmatter "lesson")');
+const q = question(lessonId, Astro.props.id);
+if (q.kind === 'quiz') throw new Error(`<Check id="${q.id}">: quiz questions are rendered by <Quiz />`);
+---
+
+<section class="lfwai-group not-content" data-lfwai-group>
+	<QuestionBody q={q} lang={lang} lessonId={lessonId} label={questionLabel(q, lang)} />
+	<GradeControls lang={lang} payload={gradingPayload(lessonId, [q], lang)} label={t(lang, 'makeGradingPrompt')} />
+</section>

@@ -1,0 +1,468 @@
+/* ---------- Tokens ---------- */
+:root {
+	--viz-a: #2a78d6;
+	--viz-b: #eb6834;
+	--viz-violet: #6250d6;
+	--viz-pos: #1baf7a;
+	--viz-neg: #e34948;
+	--viz-text: var(--sl-color-white);
+	--viz-muted: var(--sl-color-gray-3);
+	--viz-grid: var(--sl-color-gray-5);
+	--lfwai-panel: var(--sl-color-gray-7, var(--sl-color-gray-6));
+	--lfwai-border: var(--sl-color-gray-5);
+	--lfwai-forward: #b7791f;
+}
+:root[data-theme='dark'] {
+	--viz-a: #3987e5;
+	--viz-b: #d95926;
+	--viz-violet: #9085e9;
+	--viz-pos: #199e70;
+	--viz-neg: #e66767;
+	--lfwai-panel: var(--sl-color-gray-6);
+	--lfwai-forward: #e0a84f;
+}
+
+/* ---------- AI notice and footer report link ---------- */
+.lfwai-ai-notice {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	margin-bottom: 1.5rem;
+	padding: 0.75rem 1rem;
+	border-inline-start: 4px solid var(--sl-color-orange);
+	background: var(--sl-color-orange-low);
+	color: var(--sl-color-orange-high);
+	font-size: var(--sl-text-sm);
+	line-height: 1.6;
+}
+.lfwai-report {
+	margin-bottom: 1rem;
+	font-size: var(--sl-text-sm);
+}
+
+/* ---------- References ---------- */
+.ref {
+	position: relative;
+}
+.ref-forward::after {
+	content: '↗';
+	font-size: 0.75em;
+	margin-inline-start: 0.1em;
+	color: var(--lfwai-forward);
+}
+.ref-unpublished {
+	color: var(--sl-color-gray-3);
+}
+.ref-status {
+	font-size: 0.85em;
+	color: var(--sl-color-gray-3);
+}
+.ref[data-preview]:hover::before,
+.ref[data-preview]:focus-visible::before {
+	content: attr(data-preview);
+	position: absolute;
+	z-index: 20;
+	inset-block-end: calc(100% + 6px);
+	inset-inline-start: 0;
+	width: max-content;
+	max-width: min(22rem, 80vw);
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--lfwai-border);
+	border-radius: 0.5rem;
+	background: var(--sl-color-bg);
+	color: var(--sl-color-white);
+	font-size: var(--sl-text-xs);
+	font-weight: normal;
+	line-height: 1.5;
+	white-space: normal;
+	box-shadow: var(--sl-shadow-md);
+	pointer-events: none;
+}
+.lfwai-def {
+	font-style: normal;
+	font-weight: 600;
+	scroll-margin-top: 5rem;
+}
+
+/* ---------- Figures ---------- */
+.lfwai-figure {
+	margin: 1.5rem 0;
+	padding: 1rem;
+	border: 1px solid var(--lfwai-border);
+	border-radius: 0.75rem;
+}
+.lfwai-figure figcaption {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	margin-top: 0.75rem;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-2);
+}
+.lfwai-viz {
+	display: block;
+	width: 100%;
+	height: auto;
+	font-family: var(--sl-font);
+}
+.lfwai-viz text {
+	fill: var(--viz-text);
+}
+.lfwai-viz .viz-label {
+	font-size: 15px;
+	font-weight: 600;
+}
+.lfwai-viz .viz-small,
+.lfwai-viz .viz-tick {
+	font-size: 13px;
+	fill: var(--sl-color-gray-2);
+}
+.lfwai-viz .viz-value {
+	font-size: 14px;
+	font-weight: 600;
+}
+.viz-grid {
+	stroke: var(--viz-grid);
+	stroke-width: 1;
+}
+.viz-axis {
+	stroke: var(--viz-muted);
+	stroke-width: 1.5;
+}
+.viz-dot {
+	fill-opacity: 0.85;
+	stroke: var(--sl-color-bg);
+	stroke-width: 2;
+}
+.viz-dot.viz-a {
+	fill: var(--viz-a);
+}
+.viz-dot.viz-b {
+	fill: var(--viz-b);
+}
+.viz-mean {
+	stroke: var(--viz-text);
+	stroke-width: 2;
+	stroke-dasharray: 4 3;
+}
+.viz-pos {
+	fill: var(--viz-pos);
+}
+.viz-neg {
+	fill: var(--viz-neg);
+}
+.viz-avg {
+	stroke: var(--viz-muted);
+	stroke-width: 2;
+	stroke-dasharray: 6 5;
+}
+.viz-port {
+	fill: none;
+	stroke: var(--viz-b);
+	stroke-width: 2.5;
+}
+.viz-gap {
+	stroke: var(--viz-violet);
+	stroke-width: 3;
+}
+.viz-cur {
+	fill: var(--viz-b);
+	stroke: var(--sl-color-bg);
+	stroke-width: 2;
+}
+.viz-min {
+	fill: var(--viz-text);
+	stroke: var(--sl-color-bg);
+	stroke-width: 2;
+}
+.lfwai-sliders {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+	gap: 0.75rem 1.5rem;
+	margin-bottom: 0.75rem;
+	font-size: var(--sl-text-sm);
+}
+.lfwai-sliders label {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+.lfwai-sliders input[type='range'] {
+	width: 100%;
+	accent-color: var(--sl-color-accent);
+}
+.lfwai-sliders output {
+	font-variant-numeric: tabular-nums;
+	font-weight: 600;
+}
+.lfwai-legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.25rem;
+	margin: 0.5rem 0 0;
+	padding: 0;
+	list-style: none;
+	font-size: var(--sl-text-sm);
+}
+.lfwai-legend li {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+.lfwai-legend .sw {
+	display: inline-block;
+	width: 1.25rem;
+	height: 0;
+	border-top: 3px solid;
+}
+.sw-avg {
+	border-top-style: dashed !important;
+	border-color: var(--viz-muted);
+}
+.sw-port {
+	border-color: var(--viz-b);
+}
+.sw-gap {
+	border-color: var(--viz-violet);
+}
+.lfwai-legend .sw-min {
+	width: 0.7rem;
+	height: 0.7rem;
+	border: none;
+	border-radius: 50%;
+	background: var(--viz-text);
+}
+.lfwai-readout {
+	margin: 0.5rem 0 0;
+	font-size: var(--sl-text-sm);
+	font-variant-numeric: tabular-nums;
+	color: var(--sl-color-gray-2);
+}
+
+/* ---------- Questions ---------- */
+.lfwai-group {
+	margin: 1.5rem 0;
+	padding: 1rem;
+	border: 1px solid var(--lfwai-border);
+	border-radius: 0.75rem;
+	background: var(--lfwai-panel);
+}
+.lfwai-q + .lfwai-q {
+	margin-top: 1.25rem;
+	padding-top: 1.25rem;
+	border-top: 1px dashed var(--lfwai-border);
+}
+.lfwai-q {
+	scroll-margin-top: 5rem;
+}
+.lfwai-q-head {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: 0.5rem;
+	font-size: var(--sl-text-sm);
+}
+.lfwai-q-label {
+	font-weight: 700;
+	color: var(--sl-color-accent-high);
+}
+.lfwai-q-points {
+	color: var(--sl-color-gray-3);
+}
+.lfwai-q-text {
+	line-height: 1.75;
+}
+.lfwai-answer {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	margin-top: 0.75rem;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-2);
+}
+.lfwai-group textarea,
+.lfwai-profile textarea,
+.lfwai-dialog textarea {
+	width: 100%;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--lfwai-border);
+	border-radius: 0.5rem;
+	background: var(--sl-color-bg);
+	color: var(--sl-color-white);
+	font: inherit;
+	font-size: var(--sl-text-sm);
+	line-height: 1.6;
+	resize: vertical;
+}
+.lfwai-ref-answer,
+.lfwai-result {
+	margin-top: 0.75rem;
+	font-size: var(--sl-text-sm);
+}
+.lfwai-ref-answer summary,
+.lfwai-result summary {
+	cursor: pointer;
+	color: var(--sl-color-gray-2);
+}
+.lfwai-ref-answer > div {
+	margin-top: 0.5rem;
+	padding: 0.75rem;
+	border-radius: 0.5rem;
+	background: var(--sl-color-bg);
+	line-height: 1.75;
+}
+.lfwai-controls {
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--lfwai-border);
+}
+.lfwai-hint {
+	margin: 0.5rem 0;
+	color: var(--sl-color-gray-3);
+}
+.lfwai-status {
+	margin: 0.5rem 0 0;
+	font-size: var(--sl-text-sm);
+}
+.lfwai-status[data-state='error'] {
+	color: var(--sl-color-red-high);
+}
+.lfwai-status[data-state='ok'] {
+	color: var(--sl-color-green-high);
+}
+.lfwai-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	margin-top: 0.5rem;
+	padding: 0.45rem 0.9rem;
+	border: 1px solid var(--lfwai-border);
+	border-radius: 999px;
+	background: var(--sl-color-bg);
+	color: var(--sl-color-white);
+	font: inherit;
+	font-size: var(--sl-text-sm);
+	cursor: pointer;
+}
+.lfwai-btn:hover {
+	border-color: var(--sl-color-accent);
+}
+.lfwai-btn-primary {
+	border-color: var(--sl-color-accent);
+	background: var(--sl-color-accent);
+	color: var(--sl-color-black);
+	font-weight: 600;
+}
+.lfwai-btn-primary:hover {
+	background: var(--sl-color-accent-high);
+}
+.lfwai-btn-danger {
+	color: var(--sl-color-red-high);
+}
+
+/* ---------- Prompt dialog ---------- */
+.lfwai-dialog {
+	width: min(44rem, calc(100vw - 2rem));
+	max-height: calc(100vh - 2rem);
+	padding: 1rem;
+	border: 1px solid var(--lfwai-border);
+	border-radius: 0.75rem;
+	background: var(--sl-color-bg);
+	color: var(--sl-color-white);
+}
+.lfwai-dialog::backdrop {
+	background: rgb(0 0 0 / 0.5);
+}
+.lfwai-dialog-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+}
+.lfwai-dialog-head button {
+	border: none;
+	background: none;
+	color: inherit;
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+}
+.lfwai-dialog-help {
+	margin: 0.5rem 0;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-2);
+}
+.lfwai-dialog textarea {
+	font-family: var(--sl-font-mono);
+	font-size: var(--sl-text-xs);
+}
+.lfwai-dialog-actions {
+	display: flex;
+	justify-content: flex-end;
+}
+
+/* ---------- Explain button ---------- */
+.lfwai-explain-btn {
+	position: absolute;
+	z-index: 50;
+	padding: 0.35rem 0.8rem;
+	border: 1px solid var(--sl-color-accent);
+	border-radius: 999px;
+	background: var(--sl-color-accent);
+	color: var(--sl-color-black);
+	font: inherit;
+	font-size: var(--sl-text-sm);
+	font-weight: 600;
+	box-shadow: var(--sl-shadow-md);
+	cursor: pointer;
+}
+
+/* ---------- Curriculum and profile ---------- */
+.lfwai-curriculum h3 {
+	margin-top: 1.5rem;
+	font-size: var(--sl-text-lg);
+}
+.lfwai-curriculum ol {
+	margin: 0.5rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+.lfwai-curriculum li {
+	display: flex;
+	gap: 0.75rem;
+	padding: 0.25rem 0;
+}
+.lfwai-curriculum li.is-exam {
+	font-weight: 600;
+}
+.lfwai-cid {
+	min-width: 2.75rem;
+	color: var(--sl-color-gray-3);
+	font-variant-numeric: tabular-nums;
+}
+.lfwai-muted {
+	color: var(--sl-color-gray-3);
+}
+.lfwai-profile section {
+	margin-bottom: 2rem;
+}
+.lfwai-profile h3 {
+	margin: 1rem 0 0.5rem;
+	font-size: var(--sl-text-lg);
+}
+.lfwai-profile table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--sl-text-sm);
+}
+.lfwai-profile th,
+.lfwai-profile td {
+	padding: 0.35rem 0.5rem;
+	border-bottom: 1px solid var(--lfwai-border);
+	text-align: start;
+}
+.lfwai-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}

@@ -1,0 +1,149 @@
+# Course outline. Single source of truth for lesson order, titles, slugs and publication status.
+# Order in this file = teaching order. Concept-order checks use it.
+#
+# Lesson fields:
+#   id:          lesson number, e.g. "0.3" (exams use "E0" etc.)
+#   slug:        URL slug under /lessons/ (same in every language)
+#   title:       { zh, en }
+#   summary:     { zh, en } one sentence, used in link previews and prompts (required when published)
+#   published:   true when the lesson page exists in every language
+#   introduces:  concept ids defined in this lesson (see concepts.yaml) — published lessons only
+#   uses:        concept ids from earlier lessons that this lesson relies on — published lessons only
+
+stages:
+  - id: "0"
+    title: { zh: "第 0 阶段：数学与统计工具", en: "Stage 0: Math and Statistics Tools" }
+    lessons:
+      - id: "0.1"
+        slug: "0-1-time-value-of-money"
+        title: { zh: "复利与货币时间价值", en: "Compounding and the Time Value of Money" }
+      - id: "0.2"
+        slug: "0-2-optimization"
+        title: { zh: "优化", en: "Optimization" }
+      - id: "0.3"
+        slug: "0-3-probability"
+        title: { zh: "概率：期望、方差、协方差与组合方差", en: "Probability: Expectation, Variance, Covariance and Portfolio Variance" }
+        summary:
+          zh: "用情景表描述投资收益，计算期望、方差、协方差，推导两资产组合的方差公式，并解释分散化的来源。"
+          en: "Describe investment returns with a scenario table, compute expectation, variance and covariance, derive the variance of a two-asset portfolio, and explain where diversification comes from."
+        published: true
+        introduces: [random-variable, expected-value, variance, standard-deviation, covariance, correlation, portfolio-variance, diversification]
+        uses: [summation, profit-maximization, sunk-cost, budget-constraint]
+      - id: "0.4"
+        slug: "0-4-distributions-inference"
+        title: { zh: "分布与统计推断", en: "Distributions and Statistical Inference" }
+      - id: "0.5"
+        slug: "0-5-regression"
+        title: { zh: "回归", en: "Regression" }
+      - id: "E0"
+        slug: "e0-exam"
+        exam: true
+        title: { zh: "考试 E0：数学与统计工具", en: "Exam E0: Math and Statistics Tools" }
+
+  - id: "1"
+    title: { zh: "第 1 阶段：微观经济学", en: "Stage 1: Microeconomics" }
+    lessons:
+      - { id: "1.1", slug: "1-1-supply-demand", title: { zh: "供给与需求", en: "Supply and Demand" } }
+      - { id: "1.2", slug: "1-2-consumer-theory", title: { zh: "消费者理论", en: "Consumer Theory" } }
+      - { id: "1.3", slug: "1-3-intertemporal-choice", title: { zh: "跨期选择", en: "Intertemporal Choice" } }
+      - { id: "1.4", slug: "1-4-choice-under-uncertainty", title: { zh: "不确定性下的选择", en: "Choice Under Uncertainty" } }
+      - { id: "1.5", slug: "1-5-producer-theory", title: { zh: "生产者理论", en: "Producer Theory" } }
+      - { id: "1.6", slug: "1-6-market-structure", title: { zh: "市场结构", en: "Market Structure" } }
+      - { id: "1.7", slug: "1-7-game-theory", title: { zh: "博弈论基础", en: "Basic Game Theory" } }
+      - { id: "1.8", slug: "1-8-welfare-market-failure", title: { zh: "福利与市场失灵", en: "Welfare and Market Failure" } }
+      - { id: "1.9", slug: "1-9-information-economics", title: { zh: "信息经济学", en: "Information Economics" } }
+      - { id: "E1", slug: "e1-exam", exam: true, title: { zh: "考试 E1：微观经济学", en: "Exam E1: Microeconomics" } }
+
+  - id: "2"
+    title: { zh: "第 2 阶段：宏观经济学", en: "Stage 2: Macroeconomics" }
+    lessons:
+      - { id: "2.1", slug: "2-1-macro-data", title: { zh: "宏观数据", en: "Macroeconomic Data" } }
+      - { id: "2.2", slug: "2-2-long-run-growth", title: { zh: "长期增长", en: "Long-Run Growth" } }
+      - { id: "2.3", slug: "2-3-money-banking", title: { zh: "货币与银行", en: "Money and Banking" } }
+      - { id: "2.4", slug: "2-4-short-run-fluctuations", title: { zh: "短期波动", en: "Short-Run Fluctuations" } }
+      - { id: "2.5", slug: "2-5-monetary-policy", title: { zh: "货币政策", en: "Monetary Policy" } }
+      - { id: "2.6", slug: "2-6-fiscal-policy", title: { zh: "财政政策", en: "Fiscal Policy" } }
+      - { id: "2.7", slug: "2-7-open-economy", title: { zh: "开放经济", en: "The Open Economy" } }
+      - { id: "2.8", slug: "2-8-business-cycle-asset-prices", title: { zh: "经济周期与资产价格", en: "Business Cycles and Asset Prices" } }
+      - { id: "E2", slug: "e2-exam", exam: true, title: { zh: "考试 E2：宏观经济学", en: "Exam E2: Macroeconomics" } }
+
+  - id: "3"
+    title: { zh: "第 3 阶段：金融市场与证券估值", en: "Stage 3: Financial Markets and Security Valuation" }
+    lessons:
+      - { id: "3.1", slug: "3-1-financial-system", title: { zh: "金融体系概览", en: "Overview of the Financial System" } }
+      - { id: "3.2", slug: "3-2-npv-irr", title: { zh: "NPV、IRR 与资本预算", en: "NPV, IRR and Capital Budgeting" } }
+      - { id: "3.3", slug: "3-3-bond-pricing", title: { zh: "债券定价", en: "Bond Pricing" } }
+      - { id: "3.4", slug: "3-4-interest-rate-risk", title: { zh: "利率风险", en: "Interest Rate Risk" } }
+      - { id: "3.5", slug: "3-5-term-structure", title: { zh: "利率期限结构", en: "The Term Structure of Interest Rates" } }
+      - { id: "3.6", slug: "3-6-credit-risk", title: { zh: "信用风险", en: "Credit Risk" } }
+      - { id: "E3a", slug: "e3a-exam", exam: true, title: { zh: "考试 E3a：金融市场与固定收益", en: "Exam E3a: Financial Markets and Fixed Income" } }
+      - { id: "3.7", slug: "3-7-financial-statements", title: { zh: "财务报表分析", en: "Financial Statement Analysis" } }
+      - { id: "3.8", slug: "3-8-financial-ratios", title: { zh: "财务比率", en: "Financial Ratios" } }
+      - { id: "3.9", slug: "3-9-equity-valuation-ddm", title: { zh: "股票估值 I：股利贴现模型", en: "Equity Valuation I: Dividend Discount Models" } }
+      - { id: "3.10", slug: "3-10-equity-valuation-dcf", title: { zh: "股票估值 II：自由现金流贴现", en: "Equity Valuation II: Discounted Free Cash Flow" } }
+      - { id: "3.11", slug: "3-11-relative-valuation", title: { zh: "股票估值 III：相对估值", en: "Equity Valuation III: Relative Valuation" } }
+      - { id: "E3b", slug: "e3b-exam", exam: true, title: { zh: "考试 E3b：财务分析与股票估值", en: "Exam E3b: Financial Analysis and Equity Valuation" } }
+
+  - id: "4"
+    title: { zh: "第 4 阶段：投资理论与组合建模", en: "Stage 4: Investment Theory and Portfolio Modeling" }
+    lessons:
+      - { id: "4.1", slug: "4-1-risk-return-measures", title: { zh: "收益与风险的度量", en: "Measuring Return and Risk" } }
+      - { id: "4.2", slug: "4-2-markowitz", title: { zh: "均值–方差组合理论", en: "Mean–Variance Portfolio Theory" } }
+      - { id: "4.3", slug: "4-3-capital-allocation", title: { zh: "资本配置线与资本市场线", en: "The Capital Allocation Line and the Capital Market Line" } }
+      - { id: "4.4", slug: "4-4-capm", title: { zh: "资本资产定价模型（CAPM）", en: "The Capital Asset Pricing Model (CAPM)" } }
+      - { id: "4.5", slug: "4-5-single-index-model", title: { zh: "单指数模型与 beta 估计", en: "The Single-Index Model and Estimating Beta" } }
+      - { id: "4.6", slug: "4-6-multifactor-models", title: { zh: "多因子模型", en: "Multifactor Models" } }
+      - { id: "E4a", slug: "e4a-exam", exam: true, title: { zh: "考试 E4a：组合理论与资产定价", en: "Exam E4a: Portfolio Theory and Asset Pricing" } }
+      - { id: "4.7", slug: "4-7-market-efficiency", title: { zh: "有效市场假说", en: "The Efficient Market Hypothesis" } }
+      - { id: "4.8", slug: "4-8-behavioral-finance", title: { zh: "行为金融", en: "Behavioral Finance" } }
+      - { id: "4.9", slug: "4-9-performance-evaluation", title: { zh: "业绩评估", en: "Performance Evaluation" } }
+      - { id: "E4b", slug: "e4b-exam", exam: true, title: { zh: "考试 E4b：市场效率、行为金融与业绩评估", en: "Exam E4b: Market Efficiency, Behavioral Finance and Performance Evaluation" } }
+      - { id: "4.10", slug: "4-10-estimation-error", title: { zh: "估计误差与稳健优化", en: "Estimation Error and Robust Optimization" } }
+      - { id: "4.11", slug: "4-11-capital-market-assumptions", title: { zh: "资本市场假设", en: "Capital Market Assumptions" } }
+      - { id: "4.12", slug: "4-12-lifecycle-allocation", title: { zh: "生命周期资产配置理论", en: "Life-Cycle Asset Allocation Theory" } }
+      - { id: "4.13", slug: "4-13-simulation-backtesting", title: { zh: "模拟与回测方法", en: "Simulation and Backtesting Methods" } }
+      - { id: "E4c", slug: "e4c-exam", exam: true, title: { zh: "考试 E4c：估计误差、资本市场假设、生命周期配置与模拟", en: "Exam E4c: Estimation Error, Capital Market Assumptions, Life-Cycle Allocation and Simulation" } }
+
+  - id: "5"
+    title: { zh: "第 5 阶段：衍生品与另类资产", en: "Stage 5: Derivatives and Alternative Assets" }
+    lessons:
+      - { id: "5.1", slug: "5-1-forwards-futures", title: { zh: "远期与期货", en: "Forwards and Futures" } }
+      - { id: "5.2", slug: "5-2-options-basics", title: { zh: "期权基础", en: "Option Basics" } }
+      - { id: "5.3", slug: "5-3-option-pricing", title: { zh: "期权定价", en: "Option Pricing" } }
+      - { id: "5.4", slug: "5-4-swaps", title: { zh: "互换（选学）", en: "Swaps (Optional)" } }
+      - { id: "5.5", slug: "5-5-alternative-assets", title: { zh: "另类资产", en: "Alternative Assets" } }
+      - { id: "E5", slug: "e5-exam", exam: true, title: { zh: "考试 E5：衍生品与另类资产", en: "Exam E5: Derivatives and Alternative Assets" } }
+
+  - id: "6"
+    title: { zh: "第 6 阶段：家庭投资实践", en: "Stage 6: Household Investing in Practice" }
+    lessons:
+      - { id: "6.1", slug: "6-1-fund-types", title: { zh: "基金的种类与结构", en: "Fund Types and Structures" } }
+      - { id: "6.2", slug: "6-2-fund-costs", title: { zh: "基金成本", en: "Fund Costs" } }
+      - { id: "6.3", slug: "6-3-active-vs-passive", title: { zh: "主动与被动投资", en: "Active vs. Passive Investing" } }
+      - { id: "6.4", slug: "6-4-fund-due-diligence", title: { zh: "基金尽职调查框架", en: "A Framework for Fund Due Diligence" } }
+      - { id: "E6a", slug: "e6a-exam", exam: true, title: { zh: "考试 E6a：基金与产品", en: "Exam E6a: Funds and Products" } }
+      - { id: "6.5", slug: "6-5-accounts-taxes", title: { zh: "账户与税务（美国）", en: "Accounts and Taxes (US)" } }
+      - { id: "6.6", slug: "6-6-household-balance-sheet", title: { zh: "家庭资产负债表与风险保障", en: "The Household Balance Sheet and Insurance" } }
+      - { id: "6.7", slug: "6-7-asset-allocation", title: { zh: "资产配置", en: "Asset Allocation" } }
+      - { id: "6.8", slug: "6-8-stock-research", title: { zh: "选股流程", en: "The Stock Research Process" } }
+      - { id: "E6b", slug: "e6b-exam", exam: true, title: { zh: "考试 E6b：账户与税务、家庭资产负债表、资产配置", en: "Exam E6b: Accounts and Taxes, the Household Balance Sheet, Asset Allocation" } }
+      - { id: "6.9", slug: "6-9-retirement-planning", title: { zh: "退休规划", en: "Retirement Planning" } }
+      - { id: "6.10", slug: "6-10-risk-management", title: { zh: "风险管理与常见错误", en: "Risk Management and Common Mistakes" } }
+      - { id: "6.11", slug: "6-11-inflation-real-returns", title: { zh: "通胀与实际收益", en: "Inflation and Real Returns" } }
+      - { id: "6.12", slug: "6-12-goals-based-investing", title: { zh: "目标导向投资", en: "Goals-Based Investing" } }
+      - { id: "6.13", slug: "6-13-monitoring-review", title: { zh: "监控与复盘", en: "Monitoring and Review" } }
+      - { id: "E6c", slug: "e6c-exam", exam: true, title: { zh: "考试 E6c：退休规划、风险管理、通胀、目标导向投资与复盘", en: "Exam E6c: Retirement, Risk Management, Inflation, Goals-Based Investing and Review" } }
+
+  - id: "7"
+    title: { zh: "第 7 阶段：毕业项目", en: "Stage 7: Capstone Project" }
+    lessons:
+      - { id: "7.1", slug: "7-1-ips", title: { zh: "为虚拟家庭写投资政策说明书", en: "Writing an Investment Policy Statement for a Fictional Household" } }
+      - { id: "7.2", slug: "7-2-household-model", title: { zh: "家庭投资模型", en: "The Household Investment Model" } }
+      - { id: "7.3", slug: "7-3-own-cma", title: { zh: "自行估计资本市场假设", en: "Estimating Your Own Capital Market Assumptions" } }
+      - { id: "7.4", slug: "7-4-shocks", title: { zh: "冲击与调整", en: "Shocks and Adjustments" } }
+      - { id: "7.5", slug: "7-5-fund-report", title: { zh: "基金尽调报告", en: "A Fund Due Diligence Report" } }
+      - { id: "7.6", slug: "7-6-macro-scenarios", title: { zh: "宏观情景分析", en: "Macro Scenario Analysis" } }
+      - { id: "7.7", slug: "7-7-defense-transfer", title: { zh: "答辩与迁移", en: "Defense and Transfer" } }
+      - { id: "7.8", slug: "7-8-stock-report", title: { zh: "个股研究报告（选学）", en: "A Stock Research Report (Optional)" } }
+      - { id: "7.9", slug: "7-9-choosing-advisers", title: { zh: "怎样选择与评估顾问", en: "How to Choose and Evaluate an Adviser" } }
+      - { id: "7.10", slug: "7-10-your-own-household", title: { zh: "应用到自己的家庭（选学）", en: "Applying the Method to Your Own Household (Optional)" } }

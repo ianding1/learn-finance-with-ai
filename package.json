@@ -1,0 +1,26 @@
+{
+  "name": "learn-finance-with-ai",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "跟 AI 学金融 — a static economics and finance course with AI-graded exercises",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "python3 scripts/check.py",
+    "i18n:lock": "python3 scripts/check.py --update-lock"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "~0.34.4",
+    "astro": "~5.12.0",
+    "katex": "^0.16.22",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "sharp": "^0.34.2",
+    "yaml": "^2.8.0"
+  },
+  "engines": {
+    "node": ">=20.3.0"
+  }
+}

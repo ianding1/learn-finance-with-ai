@@ -1,0 +1,18 @@
+---
+// Starlight footer plus a link that opens a pre-filled GitHub issue for content errors.
+import Default from '@astrojs/starlight/components/Footer.astro';
+import { toLang, t } from '../../i18n/ui';
+import { absolute } from '../../lib/course';
+
+const route = Astro.locals.starlightRoute;
+const lang = toLang(route.lang);
+const url = absolute(Astro.url.pathname);
+const title = t(lang, 'reportTitle', { page: route.entry.data.title });
+const body = t(lang, 'reportBody', { url });
+const issue = `https://github.com/ianding1/learn-finance-with-ai/issues/new?labels=content-error&title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+---
+
+<div class="lfwai-report">
+	<a href={issue} target="_blank" rel="noopener">{t(lang, 'reportError')}</a>
+</div>
+<Default><slot /></Default>

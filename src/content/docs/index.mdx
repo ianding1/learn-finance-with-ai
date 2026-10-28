@@ -1,0 +1,31 @@
+---
+title: 跟 AI 学金融
+description: 一门由 AI 编写的经济学与金融课程。课件可以直接阅读，练习和考试用你自己的 AI 助手评卷。
+template: splash
+hero:
+  tagline: 一门由 AI 编写的经济学与金融课程，目标是高年级本科水平，以美国市场为背景。课件可以直接阅读，练习和考试用你自己的 AI 助手评卷。
+  actions:
+    - text: 使用方法
+      link: /learn-finance-with-ai/guide/how-to-use/
+      icon: right-arrow
+    - text: 课程大纲
+      link: /learn-finance-with-ai/guide/curriculum/
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="读课件" icon="open-book">
+		每一课都有讲解、公式推导和互动图。选中看不懂的文字，点击"展开讲解"，就会生成一个可以交给 AI 的讲解 prompt。
+	</Card>
+	<Card title="做练习" icon="pencil">
+		每段讲解后面有检查题，每课结尾有测验。写下答案后生成评卷 prompt，复制到你自己的 AI 助手里评分。
+	</Card>
+	<Card title="记录进度" icon="list-format">
+		把 AI 返回的结果块粘贴回网站，得分和薄弱概念会保存在你的浏览器中，并自动写进之后的每个 prompt。
+	</Card>
+	<Card title="内容由 AI 生成" icon="warning">
+		所有课件、题目和参考答案都由 AI 生成，未经专业人员审核，无法保证正确。内容仅用于学习，不构成投资建议。
+	</Card>
+</CardGrid>

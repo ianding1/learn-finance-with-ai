@@ -1,0 +1,29 @@
+---
+// One question: text, answer box and a collapsed reference answer.
+import { t, type Lang } from '../i18n/ui';
+import { renderRich, type Question } from '../lib/course';
+
+interface Props {
+	q: Question;
+	lang: Lang;
+	lessonId: string;
+	label: string;
+}
+const { q, lang, lessonId, label } = Astro.props;
+---
+
+<div class="lfwai-q" id={`q-${q.id}`}>
+	<div class="lfwai-q-head">
+		<span class="lfwai-q-label">{label}{q.star ? ' ★' : ''}</span>
+		<span class="lfwai-q-points">{t(lang, 'points', { n: q.points })}</span>
+	</div>
+	<div class="lfwai-q-text" set:html={renderRich(q.question[lang], lang, lessonId)} />
+	<label class="lfwai-answer">
+		<span>{t(lang, 'yourAnswer')}</span>
+		<textarea rows="4" data-answer-for={q.id} placeholder={t(lang, 'answerPlaceholder')}></textarea>
+	</label>
+	<details class="lfwai-ref-answer">
+		<summary>{t(lang, 'showAnswer')}</summary>
+		<div set:html={renderRich(q.answer[lang], lang, lessonId)} />
+	</details>
+</div>

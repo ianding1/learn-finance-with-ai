@@ -1,0 +1,57 @@
+---
+// Wraps Starlight's page content: adds the AI-generated-content notice, page data for client
+// scripts, the shared prompt dialog and the "Explain this" selection button.
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import { toLang, UI, t } from '../../i18n/ui';
+import { lesson, lessonKey, concepts, absolute, plainRich, lessonPath } from '../../lib/course';
+
+const route = Astro.locals.starlightRoute;
+const lang = toLang(route.lang);
+const lessonId = route.entry.data.lesson;
+const l = lessonId ? lesson(lessonId) : null;
+const key = lessonId ? lessonKey(lessonId) : null;
+
+const data = {
+	lang,
+	ui: UI[lang],
+	site: absolute(import.meta.env.BASE_URL.replace(/\/?$/, '/') + (lang === 'en' ? 'en/' : '')),
+	pageTitle: route.entry.data.title,
+	pageUrl: absolute(Astro.url.pathname),
+	lesson: l
+		? {
+				id: l.id,
+				title: l.title[lang],
+				url: absolute(lessonPath(l, lang)),
+				context: key ? plainRich(key.context[lang], lang, l.id) : '',
+			}
+		: null,
+	concepts: Object.fromEntries(Object.values(concepts()).map((c) => [c.id, c[lang]])),
+};
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+---
+
+<aside class="lfwai-ai-notice" role="note">
+	<strong>{t(lang, 'aiNoticeTitle')}</strong>
+	<span>{t(lang, 'aiNotice')}</span>
+</aside>
+
+<Default><slot /></Default>
+
+<script type="application/json" id="lfwai-page" set:html={json}></script>
+
+<dialog id="lfwai-dialog" class="lfwai-dialog not-content">
+	<div class="lfwai-dialog-head">
+		<strong>{t(lang, 'promptTitle')}</strong>
+		<button type="button" data-close aria-label={t(lang, 'close')}>×</button>
+	</div>
+	<p class="lfwai-dialog-help">{t(lang, 'promptHelp')}</p>
+	<textarea readonly rows="14" aria-label="prompt"></textarea>
+	<div class="lfwai-dialog-actions">
+		<button type="button" class="lfwai-btn lfwai-btn-primary" data-copy>{t(lang, 'copy')}</button>
+	</div>
+</dialog>
+
+<script>
+	import { initExplain } from '../../scripts/explain';
+	initExplain();
+</script>

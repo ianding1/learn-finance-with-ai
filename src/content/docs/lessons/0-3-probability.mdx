@@ -1,0 +1,185 @@
+---
+title: 0.3 概率：期望、方差、协方差与组合方差
+description: 用情景表描述投资收益，计算期望、方差、协方差，推导两资产组合的方差公式，并解释分散化的来源。
+lesson: "0.3"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Quiz from '../../../components/Quiz.astro';
+import ScenarioDots from '../../../components/widgets/ScenarioDots.astro';
+import CovarianceProducts from '../../../components/widgets/CovarianceProducts.astro';
+import DiversificationSlider from '../../../components/widgets/DiversificationSlider.astro';
+
+## 学习目标 [#goals]
+
+学完本课后，你应该能够：
+
+1. 用情景表（scenario table）描述一项投资的收益：可能的结果和对应的概率。
+2. 计算期望收益、方差和标准差，并说明方差的单位是 %²、标准差的单位是 %。
+3. 计算协方差与相关系数，并解释：相关看的是**相对各自期望的偏差**是否同向，而不是收益的正负。
+4. ★ 推导两个随机变量线性组合的方差公式，并用它计算两资产组合的风险。
+5. 解释分散化：**只要 $\rho < 1$**，组合标准差就小于各资产标准差的加权平均；$\rho = 0$ 时，好处来自"方差相加、标准差不相加"，而不是来自协方差项。
+
+本课需要的前置知识：求和符号。课前复习题针对 <Ref lesson="0.2" />。本课的组合方差公式是后面 <Ref lesson="4.2" /> 的核心。
+
+## 课前复习 [#review]
+
+<Check id="R1" />
+
+<Check id="R2" />
+
+## 随机变量与情景表 [#random-variables]
+
+取值不确定、但知道各个取值的概率的量，叫作<Def id="random-variable">随机变量</Def>（random variable）。投资的收益就是一个随机变量。
+
+下面是一个例子：股票 A 与债券基金 B 在三种经济情景下的年收益（%）。
+
+| 情景 | 概率 $p$ | 股票 A | 债券 B |
+| --- | --- | --- | --- |
+| 繁荣 | 0.25 | 30 | 1 |
+| 正常 | 0.50 | 10 | 5 |
+| 衰退 | 0.25 | −10 | 3 |
+
+所有情景的概率加起来必须等于 1。现实中我们并不知道真正的概率，这张表只是一个简化模型。怎样从历史数据估计这些量，以及估计会有多大的误差，在 <Ref lesson="0.4" /> 中讲。
+
+## 期望 [#expected-value]
+
+<Def id="expected-value">期望</Def>（expected value）的含义是：同样的情况重复很多次，平均下来的结果。计算方法是按概率加权平均：
+
+$$
+E[R] = \sum_i p_i R_i
+$$
+
+在上面的例子中，$E[R_A] = 10\%$，$E[R_B] = 3.5\%$。
+
+注意：期望值不一定是某一年会实际出现的结果（A 的三个可能结果中恰好有 10，但 B 的三个结果中没有 3.5），它也不是对明年的预测。
+
+<Check id="C1" />
+
+## 方差与标准差 [#variance]
+
+只看期望还不够：两项投资的期望可以相同，但结果的分散程度很不一样。我们想衡量结果偏离期望有多远。偏差有正有负，直接平均会互相抵消为 0，所以先平方，再按概率平均，得到<Def id="variance">方差</Def>（variance）。方差的平方根是<Def id="standard-deviation">标准差</Def>（standard deviation）：
+
+$$
+\text{Var}(R) = \sum_i p_i \big(R_i - E[R]\big)^2, \qquad \sigma = \sqrt{\text{Var}(R)}
+$$
+
+- A：$\text{Var} = 200$（%²），$\sigma_A \approx 14.14\%$。
+- B：$\text{Var} = 2.75$（%²），$\sigma_B \approx 1.66\%$。
+
+**单位**：方差的单位是 %²，没有直观含义；标准差回到 %，可以和期望收益直接比较。金融中说的"波动率"就是标准差。另外，平方会放大较大的偏差：偏差 20 的贡献是偏差 2 的 100 倍。
+
+<Figure id="3-1" title="A 和 B 的可能结果。点的面积表示概率，虚线表示期望。" observe="A 的点散得很开，B 的点挤在一起。两者的期望不同，但更重要的区别是分散程度。">
+	<ScenarioDots />
+</Figure>
+
+<Check id="C2" />
+
+## 协方差与相关系数 [#covariance]
+
+组合的风险不只取决于每项资产各自的波动，还取决于它们是否一起波动。衡量这一点的是<Def id="covariance">协方差</Def>（covariance）：
+
+$$
+\text{Cov}(R_A, R_B) = \sum_i p_i \big(R_{A,i} - E[R_A]\big)\big(R_{B,i} - E[R_B]\big)
+$$
+
+在某个情景中，如果两者**都高于**或**都低于各自的期望**，乘积为正；如果一个高于、一个低于，乘积为负。
+
+| 情景 | $p$ | A 偏差 | B 偏差 | 乘积 |
+| --- | --- | --- | --- | --- |
+| 繁荣 | 0.25 | +20 | −2.5 | −50 |
+| 正常 | 0.50 | 0 | +1.5 | 0 |
+| 衰退 | 0.25 | −20 | −0.5 | +10 |
+
+按概率加权求和：$\text{Cov} = 0.25 \times (-50) + 0.5 \times 0 + 0.25 \times 10 = -10$（%²）。
+
+协方差的大小受单位影响，不方便比较。把它除以两个标准差，得到<Def id="correlation">相关系数</Def>（correlation coefficient）：
+
+$$
+\rho_{AB} = \frac{\text{Cov}(R_A, R_B)}{\sigma_A \sigma_B} \approx \frac{-10}{14.14 \times 1.66} \approx -0.43
+$$
+
+相关系数没有单位，取值在 $[-1, 1]$ 之间。它只衡量线性关系；而且相关不等于因果（<Ref concept="correlation-vs-causation" />）。
+
+**重点：相关看的是偏差的方向，不是收益的正负。** 假设两只基金的期望收益都是 8%，某一年一只涨了 15%、另一只涨了 2%。两者都"涨了"，但一个高于期望、一个低于期望，所以这一年对协方差的贡献是负的。"都涨了，所以正相关"是错误的推理；而且一次观测本来就说明不了概率关系。
+
+<Figure id="4-1" title="每种情景中 A、B 的偏差，以及它对协方差的贡献。" observe="繁荣时 A 涨、B 跌，贡献一个较大的负值；衰退时两者同时低于期望，贡献一个较小的正值。加权求和得 −10。">
+	<CovarianceProducts />
+</Figure>
+
+<Check id="C3" />
+
+## 线性组合的期望与方差 [#linear-combination]
+
+现在把资金分成两部分：比例 $w$ 投资 A，比例 $1 - w$ 投资 B。组合收益是 $R_P = wR_A + (1-w)R_B$。
+
+期望是线性的：
+
+$$
+E[R_P] = w\,E[R_A] + (1-w)\,E[R_B]
+$$
+
+但方差**不是**线性的，<Def id="portfolio-variance">组合方差</Def>（portfolio variance）多出一个协方差项：
+
+$$
+\text{Var}(R_P) = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\,\text{Cov}(R_A, R_B)
+$$
+
+例：A、B 各 50%。
+
+- $E[R_P] = 0.5 \times 10 + 0.5 \times 3.5 = 6.75\%$。
+- $\text{Var}(R_P) = 0.25 \times 200 + 0.25 \times 2.75 + 2 \times 0.25 \times (-10) = 45.69$（%²），$\sigma_P \approx 6.76\%$。
+- 验证：组合在三种情景下的收益分别是 15.5、7.5、−3.5，直接用这三个数计算方差，结果相同。
+
+标准差的加权平均是 $0.5 \times 14.14 + 0.5 \times 1.66 = 7.90\%$，而组合的实际标准差只有 $6.76\%$。为什么会更小？这是下一节的主题。这个公式的推导留作 <Ref check="Q5" />。
+
+<Check id="C4" />
+
+## 分散化 [#diversification]
+
+用相关系数改写组合方差：
+
+$$
+\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\,\sigma_A\sigma_B
+$$
+
+分三种情况来看。
+
+**$\rho = 1$**：右边恰好是一个完全平方，$\sigma_P = w\sigma_A + (1-w)\sigma_B$，组合标准差等于加权平均，没有任何好处。
+
+**$\rho = 0$**：协方差项为 0，但
+
+$$
+\sigma_P = \sqrt{w^2\sigma_A^2 + (1-w)^2\sigma_B^2} < w\sigma_A + (1-w)\sigma_B
+$$
+
+因为对正数 $a, b$ 有 $\sqrt{a^2 + b^2} < a + b$（两边平方后，右边多出 $2ab$）。所以这时的好处来自"**方差相加、标准差不相加**"，而不是来自协方差项。可以类比直角三角形：斜边比两条直角边之和短；两个不相关的波动就像两个互相垂直的方向。
+
+**一般情况**：协方差项只调节好处的大小。$\rho > 0$ 时好处变小，$\rho < 0$ 时好处变大，$\rho = 1$ 时好处恰好减为 0。$\rho = -1$ 时可以选出权重使 $\sigma_P = 0$（<Ref check="Q6" />）。
+
+结论：**只要 $\rho < 1$，就有<Def id="diversification">分散化</Def>（diversification）的好处。分散化不需要负相关。** 现实中多数资产的相关系数在 0 和 1 之间，分散化有用，但不能完全消除风险（<Ref concept="systematic-risk" />）。
+
+一个推论：如果你只持有低波动的资产 B，加入一点**波动更高**、但相关性不高的资产 A，组合的波动反而可能下降。
+
+<Figure id="6-1" title="组合标准差与 A 的权重。$\sigma_A = 20\%$，$\sigma_B = 10\%$。" observe="$\rho = 1$ 时曲线与虚线重合；$\rho = 0$ 时最低点已经低于 B 自己的 10%；$\rho = -1$ 时曲线碰到 0。">
+	<DiversificationSlider />
+</Figure>
+
+<Check id="C5" />
+
+## 小结 [#summary]
+
+- 期望：按概率加权平均。方差：偏差平方的加权平均（%²）。标准差：方差开平方（%）。
+- 协方差：相对各自期望同向为正、反向为负。相关系数：把协方差标准化到 $[-1, 1]$。看的是偏差，不是收益的正负。
+- 组合的期望是加权平均；组合的方差多一个协方差项，**不是**加权平均。
+- 只要 $\rho < 1$ 就有分散化的好处；$\rho = 0$ 时，好处来自方差相加、标准差不相加。
+- 等权持有很多资产时，组合方差趋向于资产之间的平均协方差：个股自己的风险能分散掉，共同的风险分散不掉（<Ref check="Q7" />）。
+
+## 测验 [#quiz]
+
+测验共 7 题，满分 100 分。建议先独立完成全部题目，再生成评卷 prompt。加粗的词是指令词：**判断**表示在几种可能中做出选择，**评估**表示运用知识对一个说法得出结论，**计算**表示求出数值，**讨论**表示从多个角度分析，**解释**表示说明原因或机制。
+
+<Quiz />

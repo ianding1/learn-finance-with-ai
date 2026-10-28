@@ -1,0 +1,228 @@
+---
+// Learner profile page: background, preferences, results, concept status, import/export.
+import { toLang } from '../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		about: '关于你',
+		background: '背景（例如：数学基础、为什么学这门课）',
+		preferences: '学习偏好（例如：先给直觉再给公式、多举数字例子）',
+		save: '保存',
+		saved: '已保存。',
+		results: '得分记录',
+		lesson: '课',
+		question: '题',
+		score: '得分',
+		date: '日期',
+		none: '还没有记录。',
+		weak: '薄弱概念',
+		mastered: '已掌握的概念',
+		notes: '最近的评卷备注',
+		paste: '粘贴 AI 返回的评分结果',
+		saveResult: '保存结果',
+		session: '会话启动 prompt',
+		sessionHelp: '在 AI 助手里开始一段新的学习对话时，先发送这个 prompt。它包含课程说明和你的学习档案，之后的评卷和讲解 prompt 可以在同一个对话里使用。',
+		makeSession: '生成会话启动 prompt',
+		backup: '备份与迁移',
+		backupHelp: '学习档案只保存在这个浏览器中。换设备或换浏览器前，请先导出；也可以把导出的文件上传到 AI 助手的项目（Project、Gem 等）中作为长期资料。',
+		export: '导出学习档案',
+		import: '导入学习档案',
+		reset: '清空学习档案',
+		confirmReset: '确定要清空学习档案吗？这个操作不能撤销。',
+		importFailed: '导入失败：文件格式不正确。',
+		imported: '已导入。',
+	},
+	en: {
+		about: 'About you',
+		background: 'Background (for example: your math level, why you are taking this course)',
+		preferences: 'Learning preferences (for example: intuition before formulas, more numeric examples)',
+		save: 'Save',
+		saved: 'Saved.',
+		results: 'Scores',
+		lesson: 'Lesson',
+		question: 'Question',
+		score: 'Score',
+		date: 'Date',
+		none: 'No records yet.',
+		weak: 'Weak concepts',
+		mastered: 'Mastered concepts',
+		notes: 'Recent grading notes',
+		paste: 'Paste the grading result from your AI',
+		saveResult: 'Save result',
+		session: 'Session start prompt',
+		sessionHelp: 'When you start a new study conversation with your AI assistant, send this prompt first. It contains a description of the course and your learner profile. You can then use the grading and explanation prompts in the same conversation.',
+		makeSession: 'Generate session start prompt',
+		backup: 'Backup and transfer',
+		backupHelp: 'Your profile is stored only in this browser. Export it before you change device or browser. You can also upload the exported file to a project in your AI assistant (a Project, a Gem, and so on) as long-term context.',
+		export: 'Export profile',
+		import: 'Import profile',
+		reset: 'Clear profile',
+		confirmReset: 'Clear your learner profile? This cannot be undone.',
+		importFailed: 'Import failed: the file format is not valid.',
+		imported: 'Imported.',
+	},
+}[lang];
+---
+
+<div class="lfwai-profile not-content" data-profile data-labels={JSON.stringify(L)}>
+	<section>
+		<h3>{L.about}</h3>
+		<label class="lfwai-answer"><span>{L.background}</span><textarea rows="3" data-field="background"></textarea></label>
+		<label class="lfwai-answer"><span>{L.preferences}</span><textarea rows="3" data-field="preferences"></textarea></label>
+		<button type="button" class="lfwai-btn" data-action="save">{L.save}</button>
+		<span class="lfwai-status" data-status="about" role="status"></span>
+	</section>
+
+	<section>
+		<h3>{L.results}</h3>
+		<div data-results></div>
+		<h3>{L.weak}</h3>
+		<p data-concepts="weak"></p>
+		<h3>{L.mastered}</h3>
+		<p data-concepts="mastered"></p>
+		<h3>{L.notes}</h3>
+		<ul data-notes></ul>
+		<details class="lfwai-result">
+			<summary>{L.paste}</summary>
+			<textarea rows="4" data-paste></textarea>
+			<button type="button" class="lfwai-btn" data-action="paste">{L.saveResult}</button>
+			<p class="lfwai-status" data-status="paste" role="status"></p>
+		</details>
+	</section>
+
+	<section>
+		<h3>{L.session}</h3>
+		<p>{L.sessionHelp}</p>
+		<button type="button" class="lfwai-btn lfwai-btn-primary" data-action="session">{L.makeSession}</button>
+	</section>
+
+	<section>
+		<h3>{L.backup}</h3>
+		<p>{L.backupHelp}</p>
+		<div class="lfwai-row">
+			<button type="button" class="lfwai-btn" data-action="export">{L.export}</button>
+			<label class="lfwai-btn">{L.import}<input type="file" accept="application/json,.json" data-import hidden /></label>
+			<button type="button" class="lfwai-btn lfwai-btn-danger" data-action="reset">{L.reset}</button>
+		</div>
+		<p class="lfwai-status" data-status="backup" role="status"></p>
+	</section>
+</div>
+
+<script>
+	import { pageData, ui } from '../scripts/page-data';
+	import { showPrompt } from '../scripts/dialog';
+	import { sessionPrompt } from '../scripts/prompts';
+	import {
+		applyResult,
+		importProfile,
+		loadProfile,
+		parseResult,
+		profileSummary,
+		resetProfile,
+		saveProfile,
+	} from '../scripts/profile';
+
+	const root = document.querySelector<HTMLElement>('[data-profile]');
+	if (root) {
+		const L = JSON.parse(root.dataset.labels || '{}') as Record<string, string>;
+		const data = pageData();
+		const names = data.concepts;
+		const $ = <T extends Element>(sel: string) => root.querySelector<T>(sel)!;
+		const status = (name: string, text: string) => ($<HTMLElement>(`[data-status="${name}"]`).textContent = text);
+
+		function render() {
+			const p = loadProfile();
+			$<HTMLTextAreaElement>('[data-field="background"]').value = p.background;
+			$<HTMLTextAreaElement>('[data-field="preferences"]').value = p.preferences;
+
+			const box = $<HTMLElement>('[data-results]');
+			box.replaceChildren();
+			if (!p.results.length) {
+				box.textContent = L.none;
+			} else {
+				const table = document.createElement('table');
+				const head = table.createTHead().insertRow();
+				for (const h of [L.lesson, L.question, L.score, L.date]) {
+					const th = document.createElement('th');
+					th.textContent = h;
+					head.appendChild(th);
+				}
+				const body = table.createTBody();
+				for (const r of [...p.results].sort((a, b) => b.ts.localeCompare(a.ts))) {
+					const row = body.insertRow();
+					for (const v of [r.lesson, r.id, `${r.score}/${r.max}`, r.ts.slice(0, 10)]) row.insertCell().textContent = v;
+				}
+				box.appendChild(table);
+			}
+
+			for (const kind of ['weak', 'mastered'] as const) {
+				const list = Object.entries(p.concepts)
+					.filter(([, c]) => c.status === kind)
+					.map(([id]) => names[id] ?? id);
+				$<HTMLElement>(`[data-concepts="${kind}"]`).textContent = list.length
+					? list.join(data.lang === 'zh' ? '、' : ', ')
+					: L.none;
+			}
+
+			const notes = $<HTMLElement>('[data-notes]');
+			notes.replaceChildren();
+			for (const n of [...p.notes].reverse()) {
+				const li = document.createElement('li');
+				li.textContent = `${n.lesson}: ${n.text}`;
+				notes.appendChild(li);
+			}
+		}
+
+		$('[data-action="save"]').addEventListener('click', () => {
+			const p = loadProfile();
+			p.background = $<HTMLTextAreaElement>('[data-field="background"]').value;
+			p.preferences = $<HTMLTextAreaElement>('[data-field="preferences"]').value;
+			saveProfile(p);
+			status('about', L.saved);
+		});
+
+		$('[data-action="paste"]').addEventListener('click', () => {
+			const area = $<HTMLTextAreaElement>('[data-paste]');
+			const r = parseResult(area.value);
+			if (!r) return status('paste', ui('parseFailed'));
+			applyResult(r, new Set(Object.keys(names)));
+			area.value = '';
+			status('paste', ui('saved'));
+			render();
+		});
+
+		$('[data-action="session"]').addEventListener('click', () => {
+			showPrompt(sessionPrompt(data.lang, data.site, profileSummary(loadProfile(), names, data.lang)));
+		});
+
+		$('[data-action="export"]').addEventListener('click', () => {
+			const blob = new Blob([JSON.stringify(loadProfile(), null, 2)], { type: 'application/json' });
+			const a = document.createElement('a');
+			a.href = URL.createObjectURL(blob);
+			a.download = `learn-finance-with-ai-profile-${new Date().toISOString().slice(0, 10)}.json`;
+			a.click();
+			setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+		});
+
+		$<HTMLInputElement>('[data-import]').addEventListener('change', async (e) => {
+			const file = (e.target as HTMLInputElement).files?.[0];
+			if (!file) return;
+			try {
+				importProfile(await file.text());
+				status('backup', L.imported);
+				render();
+			} catch {
+				status('backup', L.importFailed);
+			}
+		});
+
+		$('[data-action="reset"]').addEventListener('click', () => {
+			if (!confirm(L.confirmReset)) return;
+			resetProfile();
+			render();
+		});
+
+		render();
+	}
+</script>

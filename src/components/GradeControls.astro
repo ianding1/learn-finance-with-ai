@@ -1,0 +1,29 @@
+---
+// Buttons for a group of questions: generate the grading prompt, paste the result, save it.
+import { t, type Lang } from '../i18n/ui';
+import { toJson } from '../lib/grading';
+
+interface Props {
+	lang: Lang;
+	payload: unknown;
+	label: string;
+}
+const { lang, payload, label } = Astro.props;
+---
+
+<div class="lfwai-controls">
+	<button type="button" class="lfwai-btn lfwai-btn-primary" data-grade>{label}</button>
+	<details class="lfwai-result">
+		<summary>{t(lang, 'pasteResult')}</summary>
+		<p class="lfwai-hint">{t(lang, 'pasteHint')}</p>
+		<textarea rows="4" data-result aria-label={t(lang, 'pasteResult')}></textarea>
+		<button type="button" class="lfwai-btn" data-save>{t(lang, 'saveResult')}</button>
+		<p class="lfwai-status" data-status role="status"></p>
+	</details>
+	<script type="application/json" data-payload set:html={toJson(payload)}></script>
+</div>
+
+<script>
+	import { initGradeGroups } from '../scripts/questions';
+	initGradeGroups();
+</script>

@@ -1,0 +1,30 @@
+---
+// The full course outline from course/curriculum.yaml, with links to published lessons.
+import { toLang, t } from '../i18n/ui';
+import { stages, lessonPath } from '../lib/course';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+---
+
+<div class="lfwai-curriculum not-content">
+	{stages().map((s) => (
+		<section>
+			<h3>{s.title[lang]}</h3>
+			<ol>
+				{s.lessons.map((l) => (
+					<li class={l.exam ? 'is-exam' : ''}>
+						<span class="lfwai-cid">{l.id}</span>
+						{l.published ? (
+							<a href={lessonPath(l, lang)}>{l.title[lang]}</a>
+						) : (
+							<span class="lfwai-muted">
+								{l.title[lang]}
+								<span class="ref-status">{lang === 'en' ? ` (${t(lang, 'unpublished')})` : `（${t(lang, 'unpublished')}）`}</span>
+							</span>
+						)}
+					</li>
+				))}
+			</ol>
+		</section>
+	))}
+</div>

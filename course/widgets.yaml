@@ -1,0 +1,12 @@
+# Interactive figure registry. Questions that ask the learner to set a parameter
+# (`widget: { id, set: { param: value } }` in a key file) are checked against these ranges.
+# Keep this file in sync with the component's slider attributes.
+
+diversification:
+  component: src/components/widgets/DiversificationSlider.astro
+  params:
+    rho: { min: -1, max: 1, step: 0.05, default: 0.5 }
+    w: { min: 0, max: 1, step: 0.01, default: 0.5 }
+  fixed:
+    sigma_A: 20
+    sigma_B: 10
