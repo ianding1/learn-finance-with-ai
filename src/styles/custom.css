@@ -549,11 +549,14 @@
 	line-height: 1.4;
 }
 
-/* Justified body text gives an even right edge; CJK text can break between any characters. */
-:root:lang(zh) .sl-markdown-content :is(p, li, dd, blockquote),
-:root:lang(zh) :is(.lfwai-q-text, .lfwai-figure figcaption, .lfwai-hint) {
-	text-align: justify;
-	text-justify: inter-character;
+/* Justified body text gives an even right edge; CJK text can break between any characters.
+   Only on wider screens: on a phone a long English word in a short line would leave large gaps. */
+@media (min-width: 40rem) {
+	:root:lang(zh) .sl-markdown-content :is(p, li, dd, blockquote),
+	:root:lang(zh) :is(.lfwai-q-text, .lfwai-figure figcaption, .lfwai-hint) {
+		text-align: justify;
+		text-justify: inter-character;
+	}
 }
 
 /* KaTeX enlarges math to 1.21em to match Latin x-height; next to CJK characters it looks too big. */
