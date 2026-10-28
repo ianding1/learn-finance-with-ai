@@ -587,3 +587,16 @@
 .lfwai-figure-body .lfwai-viz {
 	min-width: 34rem;
 }
+
+/* ---------- Text rendering and contrast (all languages) ---------- */
+/* Starlight sets -webkit-font-smoothing: antialiased, which makes text thinner on macOS.
+   The system default keeps strokes fuller, which reads better for CJK text at body size. */
+body {
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
+}
+/* Body text one step stronger than Starlight's default: darker in the light theme and
+   brighter in the dark theme (gray-1 is defined per theme by Starlight). */
+:root {
+	--sl-color-text: var(--sl-color-gray-1);
+}

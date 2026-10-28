@@ -125,3 +125,5 @@ practice (taught before this lesson), or on the prerequisites when the profile h
 - Chinese typography lives in `src/styles/custom.css` ("Chinese typography"): CJK fonts for
   quotation marks, smaller headings, justified text, math at 1.1em, no text below 14px.
 - Numeric table columns are right-aligned (`---:`).
+- Text uses the system font smoothing (not `antialiased`) and body text one step stronger than
+  Starlight's default (`--sl-color-text: var(--sl-color-gray-1)`).
