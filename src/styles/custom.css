@@ -314,6 +314,9 @@
 .lfwai-controls {
 	margin-top: 1.5rem;
 }
+.lfwai-all-help + .lfwai-controls {
+	margin-top: 0.75rem;
+}
 .lfwai-hint {
 	margin: 0.5rem 0;
 	font-size: var(--sl-text-xs);
