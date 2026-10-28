@@ -101,10 +101,7 @@
 
 /* ---------- Figures ---------- */
 .lfwai-figure {
-	margin: 1.5rem 0;
-	padding: 1rem;
-	border: 1px solid var(--lfwai-border);
-	border-radius: 0.75rem;
+	margin: 2rem 0;
 }
 .lfwai-figure figcaption {
 	display: flex;
@@ -257,15 +254,12 @@
 /* ---------- Questions ---------- */
 .lfwai-group {
 	margin: 1.5rem 0;
-	padding: 1rem;
-	border: 1px solid var(--lfwai-border);
+	padding: 1rem 1.25rem;
 	border-radius: 0.75rem;
 	background: var(--lfwai-panel);
 }
 .lfwai-q + .lfwai-q {
-	margin-top: 1.25rem;
-	padding-top: 1.25rem;
-	border-top: 1px dashed var(--lfwai-border);
+	margin-top: 1.75rem;
 }
 .lfwai-q {
 	scroll-margin-top: 5rem;
@@ -318,9 +312,7 @@
 	color: var(--sl-color-gray-2);
 }
 .lfwai-controls {
-	margin-top: 1rem;
-	padding-top: 1rem;
-	border-top: 1px solid var(--lfwai-border);
+	margin-top: 1.5rem;
 }
 .lfwai-hint {
 	margin: 0.5rem 0;
@@ -464,15 +456,19 @@
 	font-size: var(--sl-text-lg);
 }
 .lfwai-profile table {
-	width: 100%;
 	border-collapse: collapse;
+	border-top: 1.5px solid var(--sl-color-gray-3);
+	border-bottom: 1.5px solid var(--sl-color-gray-3);
 	font-size: var(--sl-text-sm);
+	font-variant-numeric: tabular-nums;
 }
 .lfwai-profile th,
 .lfwai-profile td {
-	padding: 0.35rem 0.5rem;
-	border-bottom: 1px solid var(--lfwai-border);
+	padding: 0.35rem 0.75rem;
 	text-align: start;
+}
+.lfwai-profile thead th {
+	border-bottom: 1px solid var(--sl-color-gray-4);
 }
 .lfwai-check {
 	display: flex;
@@ -575,9 +571,28 @@
 	white-space: nowrap;
 }
 
-/* Numbers in tables line up. */
-.sl-markdown-content :is(td, th) {
+/* Tables: three rules (top, below the header, bottom), no lines between rows, and only as
+   wide as their content, so that labels stay close to their numbers. Numbers line up. */
+.sl-markdown-content table:not(:where(.not-content *)) {
+	width: max-content;
+	max-width: 100%;
+	border-collapse: collapse;
+	border-top: 1.5px solid var(--sl-color-gray-3);
+	border-bottom: 1.5px solid var(--sl-color-gray-3);
 	font-variant-numeric: tabular-nums;
+}
+.sl-markdown-content :is(th, td):not(:where(.not-content *)) {
+	padding: 0.4rem 0.75rem;
+	border-bottom: none;
+}
+.sl-markdown-content :is(th, td):not(:where(.not-content *)):first-child {
+	padding-inline-start: 0.25rem;
+}
+.sl-markdown-content :is(th, td):not(:where(.not-content *)):last-child {
+	padding-inline-end: 0.25rem;
+}
+.sl-markdown-content thead th:not(:where(.not-content *)) {
+	border-bottom: 1px solid var(--sl-color-gray-4);
 }
 
 /* SVG figures keep a minimum width so their labels stay readable on phones; they scroll sideways. */

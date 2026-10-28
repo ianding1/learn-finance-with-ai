@@ -124,6 +124,9 @@ practice (taught before this lesson), or on the prerequisites when the profile h
 - Never tell the reader to buy or sell a specific security.
 - Chinese typography lives in `src/styles/custom.css` ("Chinese typography"): CJK fonts for
   quotation marks, smaller headings, justified text, math at 1.1em, no text below 14px.
-- Numeric table columns are right-aligned (`---:`).
+- Numeric table columns are right-aligned (`---:`). Tables are three-line tables (三线表: top rule,
+  rule below the header, bottom rule) and only as wide as their content.
+- Use one separator per block: whitespace, a background or a border, not two. Figures have no frame
+  (whitespace and caption only); question blocks have a background and no border.
 - Text uses the system font smoothing (not `antialiased`) and body text one step stronger than
   Starlight's default (`--sl-color-text: var(--sl-color-gray-1)`).
