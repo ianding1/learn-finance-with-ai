@@ -277,10 +277,17 @@ export function renderRich(text: string, lang: Lang, current?: string): string {
 		else if (m[1] !== undefined) out += `<strong>${renderRich(m[1], lang, current)}</strong>`;
 		else if (m[2] !== undefined) out += katex.renderToString(m[2], { displayMode: true, throwOnError: true, strict: 'ignore' });
 		else if (m[3] !== undefined) {
-			// A word joiner (U+2060) keeps punctuation right after inline math on the same line as
-			// the math, while long formulas can still break inside.
-			const math = katex.renderToString(m[3], { throwOnError: true, strict: 'ignore' });
-			out += /^[。，、；：！？）”.,;:!?)]/.test(text.slice(last)) ? `${math}\u2060` : math;
+			// Punctuation right after inline math goes inside the formula's last box (KaTeX output
+			// ends with the closing tags of .base, .katex-html and .katex), so that it stays on the
+			// same line as the end of the formula while long formulas can still break.
+			let math = katex.renderToString(m[3], { throwOnError: true, strict: 'ignore' });
+			const punct = /^[。，、；：！？）”.,;:!?)]+/.exec(text.slice(last))?.[0] ?? '';
+			const tail = '</span></span></span>';
+			if (punct && math.endsWith(tail)) {
+				math = math.slice(0, -tail.length) + `<span class="lfwai-math-punct">${esc(punct)}</span>` + tail;
+				last += punct.length;
+			}
+			out += math;
 		}
 		else if (m[4] !== undefined) out += refHtml(parseRefToken(m[4]), lang, current);
 	}

@@ -561,6 +561,14 @@
 :root:lang(zh) .katex {
 	font-size: 1.1em;
 }
+/* Punctuation placed inside a formula by renderRich: body font and body size. */
+.lfwai-math-punct {
+	font-family: var(--sl-font);
+	font-size: calc(1em / 1.21);
+}
+:root:lang(zh) .lfwai-math-punct {
+	font-size: calc(1em / 1.1);
+}
 
 /* ---------- Rules for every language ---------- */
 
