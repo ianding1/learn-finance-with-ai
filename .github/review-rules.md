@@ -48,7 +48,7 @@ A lesson must not rely on a concept that is taught later, unless it says so.
 For every changed question in `course/keys/`:
 
 - The reference answer answers exactly the question as written (same numbers, same conditions).
-- The rubric's point values add up to `points`, and every rubric item can be checked against an answer.
+- Check questions and exercises have no `points` and their rubrics mention no points (only quizzes are scored). Every rubric item can be checked against an answer.
 - If a question changed, the answer, rubric, `expected` values and `common_errors` were updated with it.
 - `concepts` lists what the question actually tests.
 
@@ -93,7 +93,7 @@ For changes to `src/scripts/prompts.ts` or to the data that prompts use:
   open URLs can still do it.
 - The grading prompt still asks for the result block in the format that `src/scripts/profile.ts` parses.
 - Grading prompts do not include the learner profile and end with the heading for the learner's
-  answers. They tell the grader to grade only answered questions and never to give 0 points for
+  answers. They tell the AI to review only answered questions and never to give 0 points for
   unanswered ones.
 - In key files, every fact a question needs from the lesson (example data, figure parameters) is in a
   context item that is tagged for that question or for a concept it tests. Otherwise the grader

@@ -38,8 +38,8 @@ export function gradingPayload(lessonId: string, qs: Question[], lang: Lang) {
 		questions: qs.map((q) => ({
 			id: q.id,
 			label: questionLabel(q, lang, exerciseNumber.get(q.id)),
-			// Exercises have no points; the prompt then asks for a review without scores.
-			points: q.kind === 'exercise' ? undefined : q.points,
+			// Lesson questions have no points; the prompt then asks for a review without scores.
+			points: q.points,
 			question: plainRich(q.question[lang], lang, lessonId),
 			answer: plainRich(q.answer[lang], lang, lessonId),
 			rubric: q.rubric[lang].map((r) => plainRich(r, lang, lessonId)),

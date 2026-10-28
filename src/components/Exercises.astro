@@ -16,5 +16,5 @@ const qs = (lessonKey(lessonId)?.questions ?? []).filter((q) => q.kind === 'exer
 
 <section class="lfwai-group lfwai-exercises not-content" data-lfwai-group>
 	{qs.map((q, i) => <QuestionBody q={q} lang={lang} lessonId={lessonId} label={questionLabel(q, lang, i + 1)} />)}
-	<GradeControls lang={lang} payload={gradingPayload(lessonId, qs, lang)} scored={false} />
+	<GradeControls lang={lang} payload={gradingPayload(lessonId, qs, lang)} />
 </section>

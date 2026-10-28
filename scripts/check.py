@@ -303,16 +303,16 @@ def check_keys():
             where = f"{file} [{q['id']}]"
             if q.get("kind") not in ("check", "exercise"):
                 err(where, "kind must be check or exercise")
-            if q.get("kind") == "exercise":
-                # Exercises are reviewed without scores; point values in them would mislead the grader.
+            kind = q.get("kind")
+            # Lesson questions (check questions and exercises) are reviewed without scores; only the
+            # quizzes after a group of lessons are scored, and they are not in lesson key files.
+            if kind in ("check", "exercise"):
                 if "points" in q:
-                    err(where, "exercises are not scored: remove 'points'")
+                    err(where, f"{kind} questions are not scored: remove 'points'")
                 for lang in LANGS:
                     for r in (q.get("rubric") or {}).get(lang, []):
                         if re.search(r"\d+\s*分|\d+\s*points?\b|partial credit|部分分", r):
-                            err(where, f"exercise rubric ({lang}) mentions points: '{r[:40]}'")
-            elif not isinstance(q.get("points"), (int, float)) or q["points"] <= 0:
-                err(where, "points must be a positive number")
+                            err(where, f"{kind} rubric ({lang}) mentions points: '{r[:40]}'")
             for f in ("question", "answer", "rubric"):
                 if f not in q:
                     err(where, f"missing '{f}'")

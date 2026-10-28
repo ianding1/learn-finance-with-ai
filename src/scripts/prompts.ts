@@ -7,7 +7,7 @@ import type { Lang } from '../i18n/ui';
 export interface PromptQuestion {
 	id: string;
 	label: string;
-	/** absent for exercises, which are not scored */
+	/** only quiz questions have points; lesson questions are not scored */
 	points?: number;
 	question: string;
 	answer: string;
@@ -43,8 +43,8 @@ const bullets = (xs: string[]) => xs.map((x) => `- ${x}`).join('\n');
  * The prompt ends where the learner's answers begin: the learner attaches a photo or types the
  * answers after it, and may answer only some of the questions.
  *
- * Two modes: check questions (随堂题) are scored; exercises are reviewed
- * without points, and each answered exercise is marked "ok" or "revise".
+ * Two modes: lesson questions (随堂题 and 练习题) are reviewed without points, and each answered
+ * question is marked "ok" or "revise"; quizzes (测验, not built yet) have points and are scored.
  */
 export function gradingPrompt(i: GradingInput): string {
 	const zh = i.lang === 'zh';
@@ -94,7 +94,7 @@ ${bullets(q.rubric)}`,
 		const steps = scored
 			? `1. 只批改学习者这次作答了的题目。没有作答的题目不评分，也不要给 0 分，它们会在以后提交。
 2. 逐题评分：给出得分，指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。结论正确但理由不成立时，按评分要点扣分。`
-			: `1. 这些是练习题，**不打分**。只批改学习者这次作答了的题目，没有作答的题目不要提及，它们会在以后提交。
+			: `1. 这些题**不打分**。只批改学习者这次作答了的题目，没有作答的题目不要提及，它们会在以后提交。
 2. 逐题指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。`;
 		const itemsRule = scored
 			? `items 中只列出这次批改了的题目，每题一项，score 填实际得分，max 填满分。各题的 id 与满分：${maxList}。`
@@ -135,7 +135,7 @@ ${itemsRule}mastered（已掌握）和 weak（需要多练习）只能使用这�
 	const steps = scored
 		? `1. Grade only the questions the learner answered this time. Do not grade or give 0 points to unanswered questions; they will be submitted later.
 2. Grade each question: give the score and say what is correct and what is wrong. Check the reasoning, not only the final numbers. If the conclusion is right but the reason does not hold, deduct points according to the grading points.`
-		: `1. These are exercises and are **not scored**. Review only the questions the learner answered this time. Do not mention unanswered questions; they will be submitted later.
+		: `1. These questions are **not scored**. Review only the questions the learner answered this time. Do not mention unanswered questions; they will be submitted later.
 2. For each question, say what is correct and what is wrong. Check the reasoning, not only the final numbers.`;
 	const itemsRule = scored
 		? `List only the questions you graded in "items", one entry per question, with the actual score in "score" and the full points in "max". Question ids and full points: ${maxList}. `

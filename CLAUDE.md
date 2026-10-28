@@ -80,7 +80,7 @@ history and answers inline. To publish a finished lesson:
 - Every lesson page contains `<Review />` exactly once. A lesson with check questions contains
   `<CheckAll />` exactly once, and a lesson with
   exercises contains `<Exercises />` exactly once.
-- Exercises have no `points`, and their rubric does not mention points.
+- Check questions and exercises have no `points`, and their rubrics do not mention points.
 - Chinese text uses Chinese quotation marks and the word 提示词, has no space after full-width
   punctuation, and never ends a bold run with full-width punctuation directly before a character
   (write `**……正负**。` instead of `**……正负。**`, which Markdown does not render as bold).
@@ -90,7 +90,7 @@ history and answers inline. To publish a finished lesson:
 
 | 中文 | English | `kind` / component | Scored |
 | --- | --- | --- | --- |
-| 随堂题 | check question | `check`, `<Check>`, submitted by `<CheckAll>` | yes |
+| 随堂题 | check question | `check`, `<Check>`, submitted by `<CheckAll>` | no ("ok" / "revise") |
 | 练习题 | exercise | `exercise`, `<Exercises>` | no ("ok" / "revise") |
 | 测验 | quiz | `E0`, `E1`, ... in the curriculum (not built yet) | yes |
 | 课前复习 | review before the lesson | `<Review>` | no |
@@ -105,11 +105,13 @@ practice (taught before this lesson), or on the prerequisites when the profile h
 - Answers are not entered on the site. Check questions are submitted together by
   `<CheckAll />` at the end of the lesson, and exercises by `<Exercises />`. The prompt ends with an
   empty "learner's answers" heading; the learner attaches a photo or types the answers after it.
-- Check questions are scored (`points`). Exercises (`kind: exercise`, 练习题) are
-  reviewed without scores: the result marks each one "ok" or "revise". Only the quizzes after a
-  group of lessons (测验, `E0`, `E1`, ... in the curriculum) are scored tests; they are not built yet.
+- Check questions (随堂题) and exercises (练习题) are reviewed without scores: the result marks each
+  one "ok" or "revise". Only the quizzes after a group of lessons (测验, `E0`, `E1`, ... in the
+  curriculum) are scored (`points`); they are not built yet.
+- Each question shows its latest result next to its label ("not answered", "OK", "needs revision").
+  There is no progress summary under the submit buttons.
 - Learners may submit only some questions. The grader grades only the answered ones and lists only
-  those in the result block; other questions keep their earlier score or stay "not done yet".
+  those in the result block; other questions keep their earlier result or stay "not answered".
 - Buttons copy the prompt directly to the clipboard. The dialog is only a fallback.
 - Explanation prompts include the learner's background, preferences and the concepts of the current
   lesson that they need to practice, unless the learner turned this off. Scores are never included.

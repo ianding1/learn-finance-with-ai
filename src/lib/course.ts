@@ -37,7 +37,7 @@ export interface Question {
 	section?: string;
 	level?: string;
 	star?: boolean;
-	/** check questions only; exercises are not scored */
+	/** quiz questions only; check questions and exercises are not scored */
 	points?: number;
 	concepts: string[];
 	question: Bi;

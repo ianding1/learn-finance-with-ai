@@ -69,7 +69,6 @@ questions:
   - id: C1
     kind: check
     section: expected-value
-    points: 2
     concepts: [expected-value]
     expected: { E_B: "3.5" }
     question:
@@ -91,7 +90,6 @@ questions:
   - id: C2
     kind: check
     section: variance
-    points: 2
     concepts: [expected-value, variance, standard-deviation]
     expected: { E_new: "15" }
     question:
@@ -115,7 +113,6 @@ questions:
   - id: C3
     kind: check
     section: covariance
-    points: 3
     concepts: [covariance]
     expected: { E_B_new: "4.75", cov_new: "-35" }
     question:
@@ -145,7 +142,6 @@ questions:
   - id: C4
     kind: check
     section: linear-combination
-    points: 3
     concepts: [portfolio-variance]
     expected: { E_P: "8.7", var_P: "124.91", sd_P: "11.18" }
     question:
@@ -173,7 +169,6 @@ questions:
   - id: C5
     kind: check
     section: diversification
-    points: 3
     concepts: [diversification, portfolio-variance]
     widget: { id: diversification, set: { rho: 0 } }
     expected: { w_A: "20", sd_min: "8.94" }
