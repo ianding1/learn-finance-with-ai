@@ -13,7 +13,7 @@
 网站是纯静态的，本身不调用任何 AI，也不收集数据。
 
 - **阅读**：每一课有讲解、推导和互动图。选中看不懂的文字，点击"展开讲解"，网站会生成一个讲解提示词。
-- **练习**：在纸上写完检查题和测验后，生成评卷提示词，连同答案照片一起发给你自己的 AI 助手（Claude、ChatGPT、Gemini 等）。也可以在网站上直接输入答案。
+- **练习**：在纸上写完检查题和练习题后，复制网站生成的提示词，连同答案照片一起发给你自己的 AI 助手（Claude、ChatGPT、Gemini 等）评分或批改。练习题不计分；每学完一组课程有一次计分的测验。
 - **记录**：把 AI 返回的结果块粘贴回网站，得分和需要多练习的概念只保存在你的浏览器中。评卷提示词不包含学习档案；讲解提示词只附上相关的部分，可以关闭。
 
 ## 参与贡献
@@ -55,9 +55,10 @@ The website is fully static. It does not call any AI and does not collect data.
 
 - **Read**: each lesson has explanations, derivations and interactive figures. Select text you do
   not understand and click "Explain this" to get an explanation prompt.
-- **Practice**: write your answers to the check questions and quizzes on paper, then generate a
-  grading prompt and send it with a photo of your answers to your own AI assistant (Claude,
-  ChatGPT, Gemini or another one). You can also type answers on the site.
+- **Practice**: write your answers to the check questions and exercises on paper, then copy the
+  prompt the site generates and send it with a photo of your answers to your own AI assistant
+  (Claude, ChatGPT, Gemini or another one). Exercises are not scored; a scored quiz follows each
+  group of lessons.
 - **Track**: paste the result block from the AI back into the site. Scores and the concepts to
   practice are saved only in your browser. Grading prompts never include the profile; explanation
   prompts include only the relevant part, and this can be turned off.

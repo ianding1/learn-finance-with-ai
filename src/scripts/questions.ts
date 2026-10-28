@@ -1,5 +1,5 @@
-// Client behavior for <CheckAll> and <Quiz>: copy the grading prompt, show which questions are
-// already graded, and save results. Answers are not entered on the site: the learner attaches a
+// Client behavior for <CheckAll> and <Exercises>: copy the grading prompt, show which questions are
+// already graded or reviewed, and save results. Answers are not entered on the site: the learner attaches a
 // photo or types the answers after the copied prompt, and may submit only some questions at a time.
 import { pageData, ui } from './page-data';
 import { copyPrompt, flash } from './dialog';
@@ -13,7 +13,13 @@ interface Payload {
 	context: string[];
 	commonErrors: string[];
 	conceptIds: Record<string, string>;
-	questions: { id: string; label: string; points: number; question: string; answer: string; rubric: string[] }[];
+	questions: { id: string; label: string; points?: number; question: string; answer: string; rubric: string[] }[];
+}
+
+/** "2/3" for a scored question, "通过" / "需要订正" for an exercise. */
+export function resultText(r: { score: number | null; max: number | null; status: 'ok' | 'revise' | null }): string {
+	if (r.status) return ui(r.status === 'ok' ? 'statusOk' : 'statusRevise');
+	return `${r.score ?? '?'}/${r.max ?? '?'}`;
 }
 
 let done = false;
@@ -26,6 +32,7 @@ export function initGradeGroups() {
 		const payload = JSON.parse(group.querySelector('[data-payload]')!.textContent || '{}') as Payload;
 		const progress = group.querySelector<HTMLElement>('[data-progress]')!;
 		const sep = pageData().lang === 'zh' ? '、' : ', ';
+		const scored = payload.questions.every((q) => q.points != null);
 
 		// Latest stored score of each question in this group. Questions without one are "not done yet".
 		function renderProgress() {
@@ -34,11 +41,11 @@ export function initGradeGroups() {
 			const todo: string[] = [];
 			for (const q of payload.questions) {
 				const r = results.find((x) => x.id === q.id);
-				if (r) graded.push(`${q.label} ${r.score}/${r.max}`);
+				if (r) graded.push(`${q.label} ${resultText(r)}`);
 				else todo.push(q.label);
 			}
 			const parts: string[] = [];
-			if (graded.length) parts.push(ui('progressDone') + graded.join(sep));
+			if (graded.length) parts.push(ui(scored ? 'progressDone' : 'progressReviewed') + graded.join(sep));
 			if (graded.length && todo.length) parts.push(ui('progressTodo') + todo.join(sep));
 			progress.textContent = parts.join(pageData().lang === 'zh' ? '；' : '; ');
 			progress.hidden = parts.length === 0;

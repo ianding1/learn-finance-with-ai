@@ -9,7 +9,7 @@ const route = Astro.locals.starlightRoute;
 const lang = toLang(route.lang);
 const lessonId = route.entry.data.lesson;
 if (!lessonId) throw new Error('<CheckAll> can only be used on a lesson page (frontmatter "lesson")');
-const qs = (lessonKey(lessonId)?.questions ?? []).filter((q) => q.kind !== 'quiz');
+const qs = (lessonKey(lessonId)?.questions ?? []).filter((q) => q.kind !== 'exercise');
 ---
 
 <section class="lfwai-group not-content" data-lfwai-group id="check-all">

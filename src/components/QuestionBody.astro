@@ -16,7 +16,7 @@ const { q, lang, lessonId, label } = Astro.props;
 <div class="lfwai-q" id={`q-${q.id}`}>
 	<div class="lfwai-q-head">
 		<span class="lfwai-q-label">{label}{q.star ? ' ★' : ''}</span>
-		<span class="lfwai-q-points">{t(lang, 'points', { n: q.points })}</span>
+		{q.points != null && <span class="lfwai-q-points">{t(lang, 'points', { n: q.points })}</span>}
 	</div>
 	<div class="lfwai-q-text" set:html={renderRich(q.question[lang], lang, lessonId)} />
 </div>

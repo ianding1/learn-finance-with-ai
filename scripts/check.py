@@ -301,9 +301,17 @@ def check_keys():
                     err(where, f"unknown question '{qid}'")
         for q in key.get("questions", []):
             where = f"{file} [{q['id']}]"
-            if q.get("kind") not in ("review", "check", "quiz"):
-                err(where, "kind must be review, check or quiz")
-            if not isinstance(q.get("points"), (int, float)) or q["points"] <= 0:
+            if q.get("kind") not in ("review", "check", "exercise"):
+                err(where, "kind must be review, check or exercise")
+            if q.get("kind") == "exercise":
+                # Exercises are reviewed without scores; point values in them would mislead the grader.
+                if "points" in q:
+                    err(where, "exercises are not scored: remove 'points'")
+                for lang in LANGS:
+                    for r in (q.get("rubric") or {}).get(lang, []):
+                        if re.search(r"\d+\s*分|\d+\s*points?\b|partial credit|部分分", r):
+                            err(where, f"exercise rubric ({lang}) mentions points: '{r[:40]}'")
+            elif not isinstance(q.get("points"), (int, float)) or q["points"] <= 0:
                 err(where, "points must be a positive number")
             for f in ("question", "answer", "rubric"):
                 if f not in q:
@@ -336,22 +344,22 @@ def check_keys():
                 q = next((x for x in key["questions"] if x["id"] == qid), None)
                 if q is None:
                     err(rel(p), f"<Check id=\"{qid}\"> has no entry in {file}")
-                elif q["kind"] == "quiz":
-                    err(rel(p), f"<Check id=\"{qid}\"> is a quiz question; quiz questions are shown by <Quiz />")
+                elif q["kind"] == "exercise":
+                    err(rel(p), f"<Check id=\"{qid}\"> is an exercise; exercises are shown by <Exercises />")
             for q in key["questions"]:
-                if q["kind"] != "quiz" and q["id"] not in used:
+                if q["kind"] != "exercise" and q["id"] not in used:
                     err(rel(p), f"question {q['id']} in {file} is never shown (add <Check id=\"{q['id']}\" />)")
-            has_checks = any(q["kind"] != "quiz" for q in key["questions"])
+            has_checks = any(q["kind"] != "exercise" for q in key["questions"])
             n_all = sum(1 for name, _ in tags(body) if name == "CheckAll")
             if has_checks and n_all != 1:
                 err(rel(p), "the lesson has review/check questions, so the page must contain <CheckAll /> exactly once")
-            has_quiz = any(q["kind"] == "quiz" for q in key["questions"])
-            n_quiz = sum(1 for name, _ in tags(body) if name == "Quiz")
-            if has_quiz and n_quiz != 1:
-                err(rel(p), "the lesson has quiz questions, so the page must contain <Quiz /> exactly once")
+            has_ex = any(q["kind"] == "exercise" for q in key["questions"])
+            n_ex = sum(1 for name, _ in tags(body) if name == "Exercises")
+            if has_ex and n_ex != 1:
+                err(rel(p), "the lesson has exercises, so the page must contain <Exercises /> exactly once")
             sections = section_of_tags(body)
             for q in key["questions"]:
-                if q["kind"] != "quiz" and q["id"] in sections and q.get("section") != sections[q["id"]]:
+                if q["kind"] != "exercise" and q["id"] in sections and q.get("section") != sections[q["id"]]:
                     err(rel(p), f"{q['id']} is shown in section '{sections[q['id']]}' but its key says section '{q.get('section')}'")
 
 

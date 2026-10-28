@@ -263,11 +263,10 @@ questions:
         - "The minimum-variance weight is about 20% and the standard deviation is about 8.9%, which is less than 10%."
         - "The conclusion states that uncorrelated assets also diversify, or that adding a more volatile asset can lower risk."
 
-  # ---------- Quiz ----------
+  # ---------- Exercises (reviewed by the AI, not scored) ----------
   - id: Q1
-    kind: quiz
+    kind: exercise
     level: A
-    points: 8
     concepts: [diversification, covariance]
     question:
       zh: |-
@@ -281,16 +280,15 @@ questions:
         False. When $\rho = 0$ the covariance term is 0, and $\sigma_P = \sqrt{w^2\sigma_A^2 + (1-w)^2\sigma_B^2} < w\sigma_A + (1-w)\sigma_B$, because $\sqrt{a^2+b^2} < a+b$ for positive $a, b$.
     rubric:
       zh:
-        - "结论为假（2 分）。"
-        - "理由必须指向“方差相加、标准差不相加”（6 分）。用“受协方差影响”作理由在 $\\rho = 0$ 时不成立，只给结论分。"
+        - "结论为假。"
+        - "理由必须指向“方差相加、标准差不相加”。用“受协方差影响”作理由在 $\\rho = 0$ 时不成立，需要订正。"
       en:
-        - "States false (2 points)."
-        - "The reason must point to \"variances add, standard deviations do not\" (6 points). A reason based on \"the effect of covariance\" does not hold at $\\rho = 0$; give only the points for the conclusion."
+        - "States false."
+        - "The reason must point to \"variances add, standard deviations do not\". A reason based on \"the effect of covariance\" does not hold at $\\rho = 0$ and needs to be revised."
 
   - id: Q2
-    kind: quiz
+    kind: exercise
     level: A
-    points: 8
     concepts: [correlation, covariance]
     question:
       zh: |-
@@ -304,16 +302,15 @@ questions:
         No. (1) Correlation depends on the direction of deviations from each expected value, not on whether both returns are positive. If both funds have an expected return of 8% and one rises 15% while the other rises 2%, this year contributes a negative amount to the covariance. (2) One year is a single observation; the sample is too small to show a probabilistic relationship ([[0.4]] covers how to estimate from data).
     rubric:
       zh:
-        - "指出相关看偏差而不是收益的正负（4 分）。"
-        - "指出一次观测 / 样本太小（4 分）。两点都要有。"
+        - "指出相关看偏差而不是收益的正负。"
+        - "指出一次观测 / 样本太小。两点都要有。"
       en:
-        - "Points out that correlation is about deviations, not about the sign of returns (4 points)."
-        - "Points out that one observation is too small a sample (4 points). Both points are required."
+        - "Points out that correlation is about deviations, not about the sign of returns."
+        - "Points out that one observation is too small a sample. Both points are required."
 
   - id: Q3
-    kind: quiz
+    kind: exercise
     level: B
-    points: 16
     concepts: [expected-value, variance, standard-deviation, covariance, correlation]
     expected: { E_C: "7.7", sd_C: "13.56", E_D: "4.5", sd_D: "6.70", cov_CD: "-88.95", rho_CD: "-0.98" }
     question:
@@ -328,16 +325,15 @@ questions:
         $E[C] = 7.7$ and $\sigma_C \approx 13.56$; $E[D] = 4.5$ and $\sigma_D \approx 6.70$; $\text{Cov} = -88.95$ (%²); $\rho \approx -0.98$.
     rubric:
       zh:
-        - "两个期望各 2 分，两个标准差各 3 分，协方差 4 分，相关系数 2 分。"
-        - "计算过程必须写出；过程部分正确可得部分分。"
+        - "两个期望、两个标准差、协方差和相关系数都正确。"
+        - "计算过程必须写出，以便指出出错的步骤。"
       en:
-        - "Each expected value 2 points, each standard deviation 3 points, covariance 4 points, correlation 2 points."
-        - "The working must be shown; partially correct working earns partial credit."
+        - "Both expected values, both standard deviations, the covariance and the correlation are correct."
+        - "The working must be shown, so that the step with an error can be identified."
 
   - id: Q4
-    kind: quiz
+    kind: exercise
     level: B
-    points: 12
     concepts: [portfolio-variance, diversification]
     expected: { var_P: "140.70", sd_P: "11.86", wavg: "14" }
     question:
@@ -352,17 +348,16 @@ questions:
         $\text{Var} = 0.36 \times 324 + 0.16 \times 64 + 2 \times 0.6 \times 0.4 \times 0.2 \times 18 \times 8 = 140.70$ (%²), so $\sigma_P \approx 11.86$%. The weighted average is 14%, so the portfolio standard deviation is lower.
     rubric:
       zh:
-        - "方差三项正确（8 分）。"
-        - "标准差与加权平均的比较（4 分）。"
+        - "方差三项正确。"
+        - "求出标准差，并与加权平均比较。"
       en:
-        - "All three variance terms are correct (8 points)."
-        - "Standard deviation and the comparison with the weighted average (4 points)."
+        - "All three variance terms are correct."
+        - "Finds the standard deviation and compares it with the weighted average."
 
   - id: Q5
-    kind: quiz
+    kind: exercise
     level: C
     star: true
-    points: 20
     concepts: [portfolio-variance, expected-value, variance, covariance]
     question:
       zh: |-
@@ -380,16 +375,15 @@ questions:
         which equals $a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$.
     rubric:
       zh:
-        - "使用期望的线性那一步要写出理由（6 分）。"
-        - "正确展开平方并逐项识别为方差和协方差（14 分）。"
+        - "使用期望的线性那一步要写出理由。"
+        - "正确展开平方，并逐项识别为方差和协方差。"
       en:
-        - "The step that uses linearity of expectation must be justified (6 points)."
-        - "Expands the square correctly and identifies each term as a variance or covariance (14 points)."
+        - "The step that uses linearity of expectation must be justified."
+        - "Expands the square correctly and identifies each term as a variance or covariance."
 
   - id: Q6
-    kind: quiz
+    kind: exercise
     level: C
-    points: 16
     concepts: [portfolio-variance, correlation]
     expected: { w: "30.8" }
     question:
@@ -404,16 +398,15 @@ questions:
         When $\rho = -1$, $\sigma_P^2 = \big(w\sigma_A - (1-w)\sigma_B\big)^2$. Setting it to 0 gives $w = \frac{\sigma_B}{\sigma_A + \sigma_B} = \frac{8}{26} \approx 30.8$%. The weight is automatically between 0 and 1, so no short selling is needed.
     rubric:
       zh:
-        - "写出 $\\rho = -1$ 时方差为完全平方，或等价推导（8 分）。"
-        - "得出公式与数值（8 分）。"
+        - "写出 $\\rho = -1$ 时方差为完全平方，或等价推导。"
+        - "得出公式与数值。"
       en:
-        - "Shows that the variance is a perfect square when $\\rho = -1$, or an equivalent derivation (8 points)."
-        - "Obtains the formula and the value (8 points)."
+        - "Shows that the variance is a perfect square when $\\rho = -1$, or an equivalent derivation."
+        - "Obtains the formula and the value."
 
   - id: Q7
-    kind: quiz
+    kind: exercise
     level: C
-    points: 20
     concepts: [portfolio-variance, diversification]
     question:
       zh: |-
@@ -429,10 +422,10 @@ questions:
         The risk specific to each stock (the $\sigma^2/n$ term) can be diversified away; the risk common to all stocks, $c$, cannot ([[concept:systematic-risk]], covered in [[4.5]]).
     rubric:
       zh:
-        - "交叉项个数为 $n^2 - n$（6 分）。"
-        - "极限正确（6 分）。"
-        - "含义要区分“能分散的”和“不能分散的”（8 分）。"
+        - "交叉项个数为 $n^2 - n$。"
+        - "极限正确。"
+        - "含义要区分“能分散的”和“不能分散的”。"
       en:
-        - "The number of cross terms is $n^2 - n$ (6 points)."
-        - "The limit is correct (6 points)."
-        - "The interpretation distinguishes the risk that can be diversified from the risk that cannot (8 points)."
+        - "The number of cross terms is $n^2 - n$."
+        - "The limit is correct."
+        - "The interpretation distinguishes the risk that can be diversified from the risk that cannot."

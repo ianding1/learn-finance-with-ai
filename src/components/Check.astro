@@ -14,7 +14,7 @@ const lang = toLang(route.lang);
 const lessonId = route.entry.data.lesson;
 if (!lessonId) throw new Error('<Check> can only be used on a lesson page (frontmatter "lesson")');
 const q = question(lessonId, Astro.props.id);
-if (q.kind === 'quiz') throw new Error(`<Check id="${q.id}">: quiz questions are rendered by <Quiz />`);
+if (q.kind === 'exercise') throw new Error(`<Check id="${q.id}">: exercises are rendered by <Exercises />`);
 ---
 
 <section class="lfwai-group not-content">

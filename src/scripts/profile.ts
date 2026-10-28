@@ -3,13 +3,20 @@
 
 const KEY = 'lfwai.profile.v1';
 
+/** Latest result of one question. Scored questions have score/max; exercises have status. */
 export interface ResultItem {
 	lesson: string;
 	id: string;
-	score: number;
-	max: number;
+	score: number | null;
+	max: number | null;
+	status: ExerciseStatus | null;
 	ts: string;
 }
+
+export type ExerciseStatus = 'ok' | 'revise';
+
+const num = (x: any): number | null => (x == null || x === '' || Number.isNaN(Number(x)) ? null : Number(x));
+const statusOf = (x: any): ExerciseStatus | null => (x === 'ok' || x === 'revise' ? x : null);
 
 export interface Profile {
 	v: 1;
@@ -39,8 +46,9 @@ function normalize(raw: any): Profile {
 			.map((r: any) => ({
 				lesson: r.lesson,
 				id: r.id,
-				score: Number(r.score) || 0,
-				max: Number(r.max) || 0,
+				score: num(r.score),
+				max: num(r.max),
+				status: statusOf(r.status),
 				ts: String(r.ts || ''),
 			}));
 	}
@@ -93,7 +101,7 @@ export function resetProfile() {
 
 export interface GradeResult {
 	lesson: string;
-	items: { id: string; score: number; max: number }[];
+	items: { id: string; score: number | null; max: number | null; status: ExerciseStatus | null }[];
 	mastered: string[];
 	weak: string[];
 	note: string;
@@ -127,7 +135,8 @@ export function parseResult(text: string): GradeResult | null {
 		lesson: raw.lesson,
 		items: raw.items
 			.filter((i: any) => i && typeof i.id === 'string')
-			.map((i: any) => ({ id: i.id, score: Number(i.score) || 0, max: Number(i.max) || 0 })),
+			.map((i: any) => ({ id: i.id, score: num(i.score), max: num(i.max), status: statusOf(i.status) }))
+			.filter((i: any) => i.score != null || i.status != null),
 		mastered: strList(raw.mastered),
 		weak: strList(raw.weak),
 		note: typeof raw.note === 'string' ? raw.note : '',
@@ -140,7 +149,7 @@ export function applyResult(r: GradeResult, knownConcepts: Set<string>): Profile
 	const ts = new Date().toISOString();
 	for (const item of r.items) {
 		p.results = p.results.filter((x) => !(x.lesson === r.lesson && x.id === item.id));
-		p.results.push({ lesson: r.lesson, id: item.id, score: item.score, max: item.max, ts });
+		p.results.push({ lesson: r.lesson, id: item.id, score: item.score, max: item.max, status: item.status, ts });
 	}
 	for (const id of r.mastered) if (knownConcepts.has(id)) p.concepts[id] = { status: 'mastered', ts };
 	for (const id of r.weak) if (knownConcepts.has(id)) p.concepts[id] = { status: 'weak', ts };

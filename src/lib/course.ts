@@ -33,11 +33,12 @@ export interface Concept {
 
 export interface Question {
 	id: string;
-	kind: 'review' | 'check' | 'quiz';
+	kind: 'review' | 'check' | 'exercise';
 	section?: string;
 	level?: string;
 	star?: boolean;
-	points: number;
+	/** review and check questions only; exercises are not scored */
+	points?: number;
 	concepts: string[];
 	question: Bi;
 	answer: Bi;
@@ -196,8 +197,8 @@ export function resolveRef(target: RefTarget, lang: Lang, current?: string) {
 		} else if (target.check) {
 			const q = question(targetLesson.id, target.check);
 			text =
-				q.kind === 'quiz'
-					? `${t(lang, 'quizHeading')} ${t(lang, 'quizItem', { n: q.id.replace(/\D/g, '') })}`
+				q.kind === 'exercise'
+					? `${t(lang, 'exercisesHeading')} ${t(lang, 'exerciseItem', { n: q.id.replace(/\D/g, '') })}`
 					: t(lang, q.kind === 'review' ? 'review' : 'check', { id: target.check });
 			hash = `q-${target.check}`;
 		} else {

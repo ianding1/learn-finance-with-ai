@@ -1,4 +1,4 @@
-// Build-time helpers shared by Check.astro, CheckAll.astro and Quiz.astro.
+// Build-time helpers shared by Check.astro, CheckAll.astro and Exercises.astro.
 import { t, type Lang } from '../i18n/ui';
 import {
 	lesson,
@@ -15,7 +15,7 @@ import {
 export function questionLabel(q: Question, lang: Lang, n?: number): string {
 	if (q.kind === 'review') return t(lang, 'review', { id: q.id });
 	if (q.kind === 'check') return t(lang, 'check', { id: q.id });
-	return t(lang, 'quizItem', { n: n ?? q.id.replace(/\D/g, '') });
+	return t(lang, 'exerciseItem', { n: n ?? q.id.replace(/\D/g, '') });
 }
 
 /**
@@ -28,7 +28,7 @@ export function gradingPayload(lessonId: string, qs: Question[], lang: Lang) {
 	const key = lessonKey(lessonId)!;
 	const all = concepts();
 	const ids = [...new Set(qs.flatMap((q) => q.concepts))].filter((id) => all[id]);
-	const quizNumber = new Map(key.questions.filter((q) => q.kind === 'quiz').map((q, i) => [q.id, i + 1]));
+	const exerciseNumber = new Map(key.questions.filter((q) => q.kind === 'exercise').map((q, i) => [q.id, i + 1]));
 	return {
 		lessonId,
 		lessonTitle: l.title[lang],
@@ -38,8 +38,9 @@ export function gradingPayload(lessonId: string, qs: Question[], lang: Lang) {
 		conceptIds: Object.fromEntries(ids.map((id) => [id, all[id][lang]])),
 		questions: qs.map((q) => ({
 			id: q.id,
-			label: questionLabel(q, lang, quizNumber.get(q.id)),
-			points: q.points,
+			label: questionLabel(q, lang, exerciseNumber.get(q.id)),
+			// Exercises have no points; the prompt then asks for a review without scores.
+			points: q.kind === 'exercise' ? undefined : q.points,
 			question: plainRich(q.question[lang], lang, lessonId),
 			answer: plainRich(q.answer[lang], lang, lessonId),
 			rubric: q.rubric[lang].map((r) => plainRich(r, lang, lessonId)),

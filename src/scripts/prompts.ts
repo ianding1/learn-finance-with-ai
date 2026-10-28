@@ -7,7 +7,8 @@ import type { Lang } from '../i18n/ui';
 export interface PromptQuestion {
 	id: string;
 	label: string;
-	points: number;
+	/** absent for exercises, which are not scored */
+	points?: number;
 	question: string;
 	answer: string;
 	rubric: string[];
@@ -41,65 +42,80 @@ const bullets = (xs: string[]) => xs.map((x) => `- ${x}`).join('\n');
  * Grading prompt. No learner profile is included: the grader should judge each answer on its own.
  * The prompt ends where the learner's answers begin: the learner attaches a photo or types the
  * answers after it, and may answer only some of the questions.
+ *
+ * Two modes: scored questions (review and check questions) get points; exercises are reviewed
+ * without points, and each answered exercise is marked "ok" or "revise".
  */
 export function gradingPrompt(i: GradingInput): string {
 	const zh = i.lang === 'zh';
+	const scored = i.questions.every((q) => q.points != null);
 	const ids = Object.entries(i.conceptIds)
 		.map(([id, name]) => (zh ? `${id}（${name}）` : `${id} (${name})`))
 		.join(zh ? '、' : ', ');
+	const first = i.questions[0];
 	const example = JSON.stringify({
 		v: 1,
 		lesson: i.lessonId,
-		// One example item only: listing every question would invite the grader to score all of them.
-		items: [{ id: i.questions[0]?.id ?? '', score: 0, max: i.questions[0]?.points ?? 0 }],
+		// One example item only: listing every question would invite the grader to include all of them.
+		items: [scored ? { id: first?.id ?? '', score: 0, max: first?.points ?? 0 } : { id: first?.id ?? '', status: 'ok' }],
 		mastered: [],
 		weak: [],
 		note: '',
 	});
 	const maxList = i.questions.map((q) => (zh ? `${q.id}（${q.points} 分）` : `${q.id} (${q.points})`)).join(zh ? '、' : ', ');
+	const idList = i.questions.map((q) => q.id).join(zh ? '、' : ', ');
+
 	const qs = i.questions
 		.map((q) =>
 			zh
-				? `### ${q.label}（${q.points} 分）
+				? `### ${q.label}${scored ? `（${q.points} 分）` : `（id：${q.id}）`}
 题目：
 ${q.question}
 
 参考答案：
 ${q.answer}
 
-评分要点：
+${scored ? '评分要点' : '批改要点'}：
 ${bullets(q.rubric)}`
-				: `### ${q.label} (${q.points} points)
+				: `### ${q.label}${scored ? ` (${q.points} points)` : ` (id: ${q.id})`}
 Question:
 ${q.question}
 
 Reference answer:
 ${q.answer}
 
-Grading points:
+${scored ? 'Grading points' : 'What to check'}:
 ${bullets(q.rubric)}`,
 		)
 		.join('\n\n');
 
 	if (zh) {
-		return `你是${COURSE.zh}课程的评卷老师。请批改学习者在第 ${i.lessonId} 课《${i.lessonTitle}》中的作答。学习者的答案附在本提示词之后（照片或文字），可能只包含其中一部分题目。
+		const task = scored ? '评卷' : '批改';
+		const steps = scored
+			? `1. 只批改学习者这次作答了的题目。没有作答的题目不评分，也不要给 0 分，它们会在以后提交。
+2. 逐题评分：给出得分，指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。结论正确但理由不成立时，按评分要点扣分。`
+			: `1. 这些是练习题，**不打分**。只批改学习者这次作答了的题目，没有作答的题目不要提及，它们会在以后提交。
+2. 逐题指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。`;
+		const itemsRule = scored
+			? `items 中只列出这次批改了的题目，每题一项，score 填实际得分，max 填满分。各题的 id 与满分：${maxList}。`
+			: `items 中只列出这次批改了的题目，每题一项。status 填 "ok"（基本正确，只有小问题）或 "revise"（有实质错误，需要订正）。各题的 id：${idList}。`;
+		return `你是${COURSE.zh}课程的老师。请${task}学习者在第 ${i.lessonId} 课《${i.lessonTitle}》中的作答。学习者的答案附在本提示词之后（照片或文字），可能只包含其中一部分题目。
 
 ## 重要说明
-${DISCLAIMER.zh}如果你认为参考答案或评分要点本身有误，请明确指出错在哪里，并按正确的答案评分，不要因为学习者没有照搬错误的参考答案而扣分。
+${DISCLAIMER.zh}如果你认为参考答案或${scored ? '评分' : '批改'}要点本身有误，请明确指出错在哪里，并按正确的答案${task}，不要因为学习者没有照搬错误的参考答案而判错。
 
 ## 课程页面
 ${i.lessonUrl}
-（如果你能访问网页，可以参考；不能访问也没有关系，评卷需要的内容都已写在下面。）
+（如果你能访问网页，可以参考；不能访问也没有关系，${task}需要的内容都已写在下面。）
 
 ## 与这些题目相关的课程要点
 ${bullets(i.context)}
 
-## 题目、参考答案与评分要点
+## 题目、参考答案与${scored ? '评分' : '批改'}要点
 ${qs}
 ${i.commonErrors.length ? `\n## 常见错误（供诊断参考）\n${bullets(i.commonErrors)}\n` : ''}
 ## 请这样回复
-1. 只批改学习者这次作答了的题目。没有作答的题目不评分，也不要给 0 分，它们会在以后提交。
-2. 逐题评分：给出得分，指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。结论正确但理由不成立时，按评分要点扣分。
+${steps}
 3. 对错误之处，用学习者能理解的方式讲解，必要时举一个小例子。不要只重复参考答案。
 4. 如果作答反映出对某个概念的误解，明确指出是哪个概念。
 5. 用中文回复，数学公式使用 LaTeX。
@@ -109,30 +125,38 @@ ${i.commonErrors.length ? `\n## 常见错误（供诊断参考）\n${bullets(i.c
 ${example}
 LFWAI-RESULT>>>
 
-items 中只列出这次批改了的题目，每题一项，score 填实际得分，max 填满分。各题的 id 与满分：${maxList}。mastered（已掌握）和 weak（需要多练习）只能使用这些概念 id：${ids}。note 用一句话概括这次作答反映出的主要问题（不超过 100 字），它会被保存到学习档案中。
+${itemsRule}mastered（已掌握）和 weak（需要多练习）只能使用这些概念 id：${ids}。note 用一句话概括这次作答反映出的主要问题（不超过 100 字），它会被保存到学习档案中。
 
 ## 学习者的答案
 `;
 	}
 
-	return `You are the grader for the course ${COURSE.en}. Grade the learner's answers for Lesson ${i.lessonId}, "${i.lessonTitle}". The learner's answers follow this prompt (a photo or text) and may cover only some of the questions.
+	const task = scored ? 'Grade' : 'Review';
+	const steps = scored
+		? `1. Grade only the questions the learner answered this time. Do not grade or give 0 points to unanswered questions; they will be submitted later.
+2. Grade each question: give the score and say what is correct and what is wrong. Check the reasoning, not only the final numbers. If the conclusion is right but the reason does not hold, deduct points according to the grading points.`
+		: `1. These are exercises and are **not scored**. Review only the questions the learner answered this time. Do not mention unanswered questions; they will be submitted later.
+2. For each question, say what is correct and what is wrong. Check the reasoning, not only the final numbers.`;
+	const itemsRule = scored
+		? `List only the questions you graded in "items", one entry per question, with the actual score in "score" and the full points in "max". Question ids and full points: ${maxList}. `
+		: `List only the questions you reviewed in "items", one entry per question. Set "status" to "ok" (essentially correct, only minor issues) or "revise" (a substantive error that needs to be corrected). Question ids: ${idList}. `;
+	return `You are a teacher for the course ${COURSE.en}. ${task} the learner's answers for Lesson ${i.lessonId}, "${i.lessonTitle}". The learner's answers follow this prompt (a photo or text) and may cover only some of the questions.
 
 ## Important
-${DISCLAIMER.en} If you believe a reference answer or a grading point is itself wrong, say clearly what is wrong and grade against the correct answer. Do not take points away because the learner did not copy a wrong reference answer.
+${DISCLAIMER.en} If you believe a reference answer or a ${scored ? 'grading point' : 'checking point'} is itself wrong, say clearly what is wrong and judge against the correct answer. Do not mark the learner wrong because they did not copy a wrong reference answer.
 
 ## Lesson page
 ${i.lessonUrl}
-(You may consult it if you can open web pages. If you cannot, that is fine: everything needed for grading is written below.)
+(You may consult it if you can open web pages. If you cannot, that is fine: everything you need is written below.)
 
 ## Lesson facts relevant to these questions
 ${bullets(i.context)}
 
-## Questions, reference answers and grading points
+## Questions, reference answers and ${scored ? 'grading points' : 'what to check'}
 ${qs}
 ${i.commonErrors.length ? `\n## Common errors (for diagnosis)\n${bullets(i.commonErrors)}\n` : ''}
 ## How to reply
-1. Grade only the questions the learner answered this time. Do not grade or give 0 points to unanswered questions; they will be submitted later.
-2. Grade each question: give the score and say what is correct and what is wrong. Check the reasoning, not only the final numbers. If the conclusion is right but the reason does not hold, deduct points according to the grading points.
+${steps}
 3. For each error, explain it in a way the learner can understand, with a small example if useful. Do not only repeat the reference answer.
 4. If an answer shows a misunderstanding of a concept, name the concept.
 5. Reply in English. Use LaTeX for formulas.
@@ -142,7 +166,7 @@ ${i.commonErrors.length ? `\n## Common errors (for diagnosis)\n${bullets(i.commo
 ${example}
 LFWAI-RESULT>>>
 
-List only the questions you graded in "items", one entry per question, with the actual score in "score" and the full points in "max". Question ids and full points: ${maxList}. "mastered" and "weak" (needs more practice) may only contain these concept ids: ${ids}. "note" is one sentence (at most 30 words) that sums up the main problem shown by these answers; it is saved to the learner profile.
+${itemsRule}"mastered" and "weak" (needs more practice) may only contain these concept ids: ${ids}. "note" is one sentence (at most 30 words) that sums up the main problem shown by these answers; it is saved to the learner profile.
 
 ## The learner's answers
 `;

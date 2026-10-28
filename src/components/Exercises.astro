@@ -1,0 +1,20 @@
+---
+// <Exercises /> — the exercises at the end of a lesson. They are reviewed by the AI without
+// scores, and can be submitted together or a few at a time with one prompt.
+import { toLang } from '../i18n/ui';
+import { lessonKey } from '../lib/course';
+import { gradingPayload, questionLabel } from '../lib/grading';
+import QuestionBody from './QuestionBody.astro';
+import GradeControls from './GradeControls.astro';
+
+const route = Astro.locals.starlightRoute;
+const lang = toLang(route.lang);
+const lessonId = route.entry.data.lesson;
+if (!lessonId) throw new Error('<Exercises> can only be used on a lesson page (frontmatter "lesson")');
+const qs = (lessonKey(lessonId)?.questions ?? []).filter((q) => q.kind === 'exercise');
+---
+
+<section class="lfwai-group lfwai-exercises not-content" data-lfwai-group>
+	{qs.map((q, i) => <QuestionBody q={q} lang={lang} lessonId={lessonId} label={questionLabel(q, lang, i + 1)} />)}
+	<GradeControls lang={lang} payload={gradingPayload(lessonId, qs, lang)} scored={false} />
+</section>

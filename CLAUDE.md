@@ -15,7 +15,7 @@ All content is AI-generated; the site says so on every page and in every prompt.
 | `course/widgets.yaml` | Slider ranges of interactive figures. |
 | `course/translation-lock.json` | Hash of each Chinese source at the time it was last translated. Generated. |
 | `src/content/docs/` | Chinese pages (source, root locale). `src/content/docs/en/` holds the English pages. |
-| `src/components/` | `Ref`, `Def`, `Figure`, `Check`, `Quiz`, `CurriculumList`, `ProfilePanel`, `widgets/*`. |
+| `src/components/` | `Ref`, `Def`, `Figure`, `Check`, `CheckAll`, `Exercises`, `CurriculumList`, `ProfilePanel`, `widgets/*`. |
 | `src/scripts/` | Browser code: prompt templates, learner profile (localStorage), selection "Explain this". |
 | `scripts/check.py` | Blocking consistency checks (CI). |
 | `.github/review-rules.md` | Rules for the advisory AI review of pull requests. |
@@ -53,7 +53,7 @@ history and answers inline. To publish a finished lesson:
    question needs), and each common error with its `questions`. Any fact a question needs from the
    lesson (example data, figure parameters) must be in a context item tagged for that question.
    Place `<Check id="..."/>` (question text only) in the right section, `<CheckAll />` after the
-   summary and `<Quiz />` at the end.
+   summary and `<Exercises />` at the end.
 5. Put every numeric answer in `expected` and recompute it in `course/verify/<id>.py`.
 6. Write the English page at `src/content/docs/en/lessons/<slug>.mdx` and every `en` field.
    Use plain, standard English without idioms. Formulas must be identical.
@@ -76,7 +76,9 @@ history and answers inline. To publish a finished lesson:
 - Slider values named in questions are reachable; slider attributes match `course/widgets.yaml`.
 - No private teaching notes (学员, 教案, 修订记录, briefing) in published content.
 - Context items and common errors in key files refer to existing concepts and questions.
-- A lesson with review/check questions contains `<CheckAll />` exactly once.
+- A lesson with review/check questions contains `<CheckAll />` exactly once, and a lesson with
+  exercises contains `<Exercises />` exactly once.
+- Exercises have no `points`, and their rubric does not mention points.
 - Chinese text uses Chinese quotation marks and the word 提示词.
 - Every prompt template includes the AI-generated-content disclaimer in both languages.
 
@@ -84,8 +86,11 @@ history and answers inline. To publish a finished lesson:
 
 - Grading prompts never include the learner profile, so that the grader judges each answer on its own.
 - Answers are not entered on the site. Review and check questions are submitted together by
-  `<CheckAll />` at the end of the lesson, and quiz questions by `<Quiz />`. The prompt ends with an
+  `<CheckAll />` at the end of the lesson, and exercises by `<Exercises />`. The prompt ends with an
   empty "learner's answers" heading; the learner attaches a photo or types the answers after it.
+- Review and check questions are scored (`points`). Exercises (`kind: exercise`, 练习题) are
+  reviewed without scores: the result marks each one "ok" or "revise". Only the quizzes after a
+  group of lessons (测验, `E0`, `E1`, ... in the curriculum) are scored tests; they are not built yet.
 - Learners may submit only some questions. The grader grades only the answered ones and lists only
   those in the result block; other questions keep their earlier score or stay "not done yet".
 - Buttons copy the prompt directly to the clipboard. The dialog is only a fallback.

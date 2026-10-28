@@ -1,6 +1,7 @@
 // Client behavior for the learner profile page (ProfilePanel.astro).
 import { pageData, ui } from './page-data';
 import { copyPrompt, flash } from './dialog';
+import { resultText } from './questions';
 import { sessionPrompt } from './prompts';
 import {
 	applyResult,
@@ -50,7 +51,7 @@ export function initProfilePage() {
 			const sorted = [...p.results].sort((a, b) => b.ts.localeCompare(a.ts));
 			for (const r of sorted) {
 				const row = body.insertRow();
-				for (const v of [r.lesson, r.id, `${r.score}/${r.max}`, r.ts.slice(0, 10)]) {
+				for (const v of [r.lesson, r.id, resultText(r), r.ts.slice(0, 10)]) {
 					row.insertCell().textContent = v;
 				}
 			}
