@@ -28,7 +28,16 @@ jobs:
       - name: Install dependencies
         run: if [ -f package-lock.json ]; then npm ci; else npm install; fi
       - name: Build (fails on broken LaTeX, missing questions or unknown references)
-        run: npm run build
+        env:
+          NO_COLOR: "1"
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee build.log
+      - name: Show build errors as an annotation
+        if: failure()
+        run: |
+          msg=$(grep -v '^[[:space:]]*$' build.log | tail -n 60 | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')
+          echo "::error title=Build failed::$msg"
       - name: Upload lockfile when it was generated here
         if: ${{ hashFiles('package-lock.json') != '' }}
         uses: actions/upload-artifact@v7
