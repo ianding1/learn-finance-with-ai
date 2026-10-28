@@ -50,11 +50,13 @@ export function gradingPrompt(i: GradingInput): string {
 	const example = JSON.stringify({
 		v: 1,
 		lesson: i.lessonId,
-		items: i.questions.map((q) => ({ id: q.id, score: 0, max: q.points })),
+		// One example item only: listing every question would invite the grader to score all of them.
+		items: [{ id: i.questions[0]?.id ?? '', score: 0, max: i.questions[0]?.points ?? 0 }],
 		mastered: [],
 		weak: [],
 		note: '',
 	});
+	const maxList = i.questions.map((q) => (zh ? `${q.id}（${q.points} 分）` : `${q.id} (${q.points})`)).join(zh ? '、' : ', ');
 	const qs = i.questions
 		.map((q) =>
 			zh
@@ -107,7 +109,7 @@ ${i.commonErrors.length ? `\n## 常见错误（供诊断参考）\n${bullets(i.c
 ${example}
 LFWAI-RESULT>>>
 
-items 中只列出这次批改了的题目，score 填实际得分。mastered（已掌握）和 weak（需要多练习）只能使用这些概念 id：${ids}。note 用一句话概括这次作答反映出的主要问题（不超过 100 字），它会被保存到学习档案中。
+items 中只列出这次批改了的题目，每题一项，score 填实际得分，max 填满分。各题的 id 与满分：${maxList}。mastered（已掌握）和 weak（需要多练习）只能使用这些概念 id：${ids}。note 用一句话概括这次作答反映出的主要问题（不超过 100 字），它会被保存到学习档案中。
 
 ## 学习者的答案
 `;
@@ -140,7 +142,7 @@ ${i.commonErrors.length ? `\n## Common errors (for diagnosis)\n${bullets(i.commo
 ${example}
 LFWAI-RESULT>>>
 
-List only the questions you graded in "items", with the actual score in "score". "mastered" and "weak" (needs more practice) may only contain these concept ids: ${ids}. "note" is one sentence (at most 30 words) that sums up the main problem shown by these answers; it is saved to the learner profile.
+List only the questions you graded in "items", one entry per question, with the actual score in "score" and the full points in "max". Question ids and full points: ${maxList}. "mastered" and "weak" (needs more practice) may only contain these concept ids: ${ids}. "note" is one sentence (at most 30 words) that sums up the main problem shown by these answers; it is saved to the learner profile.
 
 ## The learner's answers
 `;
