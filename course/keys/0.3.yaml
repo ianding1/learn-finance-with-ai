@@ -297,9 +297,9 @@ questions:
     concepts: [portfolio-variance, expected-value, variance, covariance]
     question:
       zh: |-
-        ★ 证明 $\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$。
+        证明 $\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$。
       en: |-
-        ★ Prove that $\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$.
+        Prove that $\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$.
     answer:
       zh: |-
         由期望的线性，$E[aX + bY] = aE[X] + bE[Y]$。记 $\tilde X = X - E[X]$，$\tilde Y = Y - E[Y]$，则
