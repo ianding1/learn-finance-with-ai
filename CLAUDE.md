@@ -80,7 +80,9 @@ history and answers inline. To publish a finished lesson:
   `<CheckAll />` exactly once, and a lesson with
   exercises contains `<Exercises />` exactly once.
 - Exercises have no `points`, and their rubric does not mention points.
-- Chinese text uses Chinese quotation marks and the word 提示词.
+- Chinese text uses Chinese quotation marks and the word 提示词, has no space after full-width
+  punctuation, and never ends a bold run with full-width punctuation directly before a character
+  (write `**……正负**。` instead of `**……正负。**`, which Markdown does not render as bold).
 - Every prompt template includes the AI-generated-content disclaimer in both languages.
 
 ## Terms
@@ -119,3 +121,6 @@ practice (taught before this lesson), or on the prerequisites when the profile h
 - Calculations in percentage points; variance in %².
 - Facts that change over time (tax rates, limits, rates) state the year and source.
 - Never tell the reader to buy or sell a specific security.
+- Chinese typography lives in `src/styles/custom.css` ("Chinese typography"): CJK fonts for
+  quotation marks, smaller headings, justified text, math at 1.1em, no text below 14px.
+- Numeric table columns are right-aligned (`---:`).

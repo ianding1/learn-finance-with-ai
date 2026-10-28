@@ -24,16 +24,32 @@
 
 /* ---------- AI notice and footer report link ---------- */
 .lfwai-ai-notice {
-	display: flex;
-	flex-direction: column;
-	gap: 0.25rem;
-	margin-bottom: 1.5rem;
-	padding: 0.75rem 1rem;
-	border-inline-start: 4px solid var(--sl-color-orange);
-	background: var(--sl-color-orange-low);
-	color: var(--sl-color-orange-high);
+	margin-bottom: 1.25rem;
 	font-size: var(--sl-text-sm);
 	line-height: 1.6;
+	color: var(--sl-color-gray-3);
+}
+.lfwai-ai-notice summary {
+	cursor: pointer;
+	list-style: none;
+}
+.lfwai-ai-notice summary::-webkit-details-marker {
+	display: none;
+}
+.lfwai-ai-notice summary::before {
+	content: '⚠ ';
+	color: var(--sl-color-orange);
+}
+.lfwai-ai-notice summary::after {
+	content: ' ▸';
+}
+.lfwai-ai-notice[open] summary::after {
+	content: ' ▾';
+}
+.lfwai-ai-notice p {
+	margin: 0.4rem 0 0;
+	padding-inline-start: 0.75rem;
+	border-inline-start: 2px solid var(--sl-color-orange);
 }
 .lfwai-report {
 	margin-bottom: 1rem;
@@ -488,4 +504,84 @@
 }
 .lfwai-review .lfwai-btn {
 	margin-top: 0.25rem;
+}
+
+/* =====================================================================================
+   Chinese typography (pages with lang="zh-CN")
+   Starlight's defaults are designed for Latin text. These rules follow common Chinese
+   typesetting practice: CJK punctuation glyphs, smaller headings, justified body text,
+   math sized to match CJK characters, and no UI text below 14px.
+   ===================================================================================== */
+
+/* Quotation marks, dashes, ellipsis and the middle dot are Latin code points, so browsers draw
+   them with the Latin font (narrow, tight against the characters). This face sends only those
+   characters to a CJK font. */
+@font-face {
+	font-family: 'CJK Punctuation';
+	src: local('PingFang SC'), local('PingFangSC-Regular'), local('Hiragino Sans GB'), local('Microsoft YaHei'),
+		local('Noto Sans CJK SC'), local('Noto Sans SC'), local('Source Han Sans SC');
+	unicode-range: U+2014, U+2018-2019, U+201C-201D, U+2026, U+00B7;
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'CJK Punctuation';
+	src: local('PingFangSC-Semibold'), local('Microsoft YaHei Bold'), local('Noto Sans CJK SC Bold'),
+		local('Noto Sans SC Bold'), local('Source Han Sans SC Bold'), local('PingFang SC');
+	unicode-range: U+2014, U+2018-2019, U+201C-201D, U+2026, U+00B7;
+	font-weight: 600 900;
+}
+
+:root:lang(zh) {
+	--sl-font: 'CJK Punctuation', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC',
+		'Noto Sans SC', 'Source Han Sans SC', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+	/* Headings: CJK characters look larger and heavier than Latin at the same size. */
+	--sl-text-h1: 2rem;
+	--sl-text-h2: 1.5rem;
+	--sl-text-h3: 1.25rem;
+	--sl-text-h4: 1.125rem;
+	--sl-text-h5: 1rem;
+	/* Small text: CJK strokes crowd together below 14px. */
+	--sl-text-sm: 0.875rem;
+	--sl-text-xs: 0.875rem;
+}
+:root:lang(zh) .sl-markdown-content :is(h1, h2, h3, h4) {
+	line-height: 1.4;
+}
+
+/* Justified body text gives an even right edge; CJK text can break between any characters. */
+:root:lang(zh) .sl-markdown-content :is(p, li, dd, blockquote),
+:root:lang(zh) :is(.lfwai-q-text, .lfwai-figure figcaption, .lfwai-hint) {
+	text-align: justify;
+	text-justify: inter-character;
+}
+
+/* KaTeX enlarges math to 1.21em to match Latin x-height; next to CJK characters it looks too big. */
+:root:lang(zh) .katex {
+	font-size: 1.1em;
+}
+
+/* ---------- Rules for every language ---------- */
+
+/* Long display formulas scroll instead of being cut off on narrow screens. */
+.katex-display {
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: 0.25rem 0;
+}
+.katex-display > .katex {
+	white-space: nowrap;
+}
+
+/* Numbers in tables line up. */
+.sl-markdown-content :is(td, th) {
+	font-variant-numeric: tabular-nums;
+}
+
+/* SVG figures keep a minimum width so their labels stay readable on phones; they scroll sideways. */
+.lfwai-figure-body {
+	overflow-x: auto;
+}
+.lfwai-figure-body .lfwai-viz {
+	min-width: 34rem;
 }

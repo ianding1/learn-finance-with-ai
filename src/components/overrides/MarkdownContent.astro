@@ -32,10 +32,10 @@ const data = {
 const json = JSON.stringify(data).replace(/</g, '\\u003c');
 ---
 
-<aside class="lfwai-ai-notice" role="note">
-	<strong>{t(lang, 'aiNoticeTitle')}</strong>
-	<span>{t(lang, 'aiNotice')}</span>
-</aside>
+<details class="lfwai-ai-notice not-content" role="note">
+	<summary>{t(lang, 'aiNoticeTitle')}</summary>
+	<p>{t(lang, 'aiNotice')}</p>
+</details>
 
 <Default><slot /></Default>
 

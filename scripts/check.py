@@ -658,6 +658,29 @@ def check_lint():
                 if straight.search(s):
                     err(f"course/keys/{lesson_id}.yaml", f'{path}: Chinese text contains straight double quotes ("); use “ and ”')
         walk_bilingual(key, "", fn)
+    # No space after full-width punctuation. A bold run that ends with full-width punctuation and is
+    # followed directly by a Chinese character does not render as bold in Markdown (CommonMark
+    # flanking rules), so put the punctuation after the closing **.
+    space_after = re.compile(r"[。，；：！？、]\**[ \t]+\**[\u4e00-\u9fff]")
+    bold_punct = re.compile(r"[。，；：！？、]\*\*[\u4e00-\u9fff]")
+    for r in source_docs():
+        p = doc_path(SOURCE, str(r))
+        # Math becomes "x" so that the space after an inline formula is not mistaken for a stray space.
+        prose = MATH.sub("x", strip_code(body_of(p.read_text(encoding="utf-8"))))
+        for m in space_after.finditer(prose):
+            err(rel(p), f"space after Chinese punctuation: '{m.group(0)}'")
+        for line in prose.split("\n"):
+            for m in bold_punct.finditer(line):
+                # Only a closing ** (an odd number of ** before it on the line) is a problem.
+                if line[: m.start() + 1].count("**") % 2 == 1:
+                    err(rel(p), f"bold ends with Chinese punctuation before a character, so it will not render; move the punctuation after **: '{m.group(0)}'")
+    for lesson_id, key in keys.items():
+        def fn3(path, node, lesson_id=lesson_id):
+            for s in all_strings(node[SOURCE]):
+                for m in space_after.finditer(MATH.sub("x", s)):
+                    err(f"course/keys/{lesson_id}.yaml", f"{path}: space after Chinese punctuation: '{m.group(0)}'")
+        walk_bilingual(key, "", fn3)
+
     # Chinese text says 提示词, not "prompt".
     for r in source_docs():
         p = doc_path(SOURCE, str(r))
