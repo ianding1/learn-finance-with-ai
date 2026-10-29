@@ -157,9 +157,7 @@ because $\sqrt{a^2 + b^2} < a + b$ for positive $a, b$ (after squaring both side
 
 Conclusion: **as long as $\rho < 1$, there is a benefit from <Def id="diversification">diversification</Def>. Diversification does not require negative correlation.** In reality, the correlation between most assets is between 0 and 1, so diversification helps but cannot remove all risk (<Ref concept="systematic-risk" />).
 
-A consequence: if you hold only the low-volatility asset B, adding a small amount of a **more volatile** asset A that is not highly correlated with B can lower the volatility of the portfolio.
-
-<Figure id="6-1" title="Portfolio standard deviation against the weight in A. $\sigma_A = 20\%$, $\sigma_B = 10\%$." observe="At $\rho = 1$ the curve lies on the dashed line. At $\rho = 0$ the lowest point is already below B's own 10%. At $\rho = -1$ the curve touches 0.">
+<Figure id="6-1" title="Portfolio standard deviation against the weight in A. $\sigma_A = 20\%$, $\sigma_B = 10\%$." observe="Move $\rho$ and compare the portfolio curve with the dashed weighted-average line. At $\rho = 1$ they coincide; the smaller $\rho$ is, the further the curve bends down.">
 	<DiversificationSlider />
 </Figure>
 
@@ -171,7 +169,6 @@ A consequence: if you hold only the low-volatility asset B, adding a small amoun
 - Covariance: positive when the deviations from each expected value have the same direction, negative when they have opposite directions. Correlation coefficient: the covariance scaled to $[-1, 1]$.
 - The expected value of a portfolio is a weighted average; the variance of a portfolio has an extra covariance term and is **not** a weighted average.
 - As long as $\rho < 1$ there is a benefit from diversification; at $\rho = 0$ the benefit comes from the fact that variances add but standard deviations do not.
-- When you hold many assets with equal weights, the portfolio variance approaches the average covariance between the assets: the risk specific to each stock can be diversified away, but the common risk cannot (<Ref check="Q7" />).
 
 <CheckAll />
 
