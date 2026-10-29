@@ -42,8 +42,11 @@ history and answers inline. To publish a finished lesson:
 1. Add or update the lesson in `course/curriculum.yaml`: `summary`, `published: true`, `introduces`, `uses`.
 2. Add every new concept to `course/concepts.yaml` (`defined_in`, `zh`, `en`, `short`).
 3. Write `src/content/docs/lessons/<slug>.mdx` (Chinese) for a general reader:
-   - remove everything about a specific learner; turn "the learner got this wrong" notes into
-     general explanations or into `common_errors`;
+   - remove everything about a specific learner. A mistake one learner made is not a "key point"
+     or a "note" for everyone; keep it only if it is a common misconception, and then put it in
+     `common_errors` rather than in the text;
+   - the text, figure captions and summary never state the answer to a check question or an
+     exercise, and no question only asks the learner to repeat an argument the text already makes;
    - leave out the learning goals of the plan; the page starts with `## 课前复习 [#review]`;
    - every `##` heading gets a stable id: `## 分散化 [#diversification]`;
    - mark each concept definition with `<Def id="...">canonical term</Def>`;
