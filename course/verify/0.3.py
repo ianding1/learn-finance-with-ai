@@ -26,6 +26,9 @@ def results():
     A = [30, 10, -10]
     B = [1, 5, 3]
     r["C1.E_B"] = E(B, p)
+    A2 = [2 * a for a in A]
+    r["Q1.cov_new"] = cov(A2, B, p)
+    r["Q1.rho_new"] = cov(A2, B, p) / sqrt(var(A2, p) * var(B, p))
     r["C2.E_new"] = E([a + 5 for a in A], p)
     B2 = [1, 5, 8]
     r["C3.E_B_new"] = E(B2, p)

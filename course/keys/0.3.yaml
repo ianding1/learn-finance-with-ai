@@ -16,7 +16,7 @@ context:
       本课所有计算以百分点为单位，方差的单位为 %²。学习者已经学过求和符号，以及[[0.2]]的最优化；还没有学用历史数据估计参数（[[0.4]]）、回归（[[0.5]]）和组合理论（[[4.2]]）。
     en: |-
       All calculations in this lesson use percentage points, and variance is in %². The learner has studied summation notation and the optimization in [[0.2]]. The learner has not yet studied estimating parameters from historical data ([[0.4]]), regression ([[0.5]]) or portfolio theory ([[4.2]]).
-  - questions: [C1, C2, C3, C4]
+  - questions: [C1, C2, C3, C4, Q1]
     zh: |-
       讲义中的例子（情景表）：繁荣 / 正常 / 衰退的概率为 0.25 / 0.5 / 0.25；股票 A 的收益为 30 / 10 / −10，债券基金 B 的收益为 1 / 5 / 3（%）。由此 $E[R_A] = 10$，$E[R_B] = 3.5$，$\text{Var}_A = 200$，$\text{Var}_B = 2.75$，$\text{Cov} = -10$，$\rho \approx -0.43$。
     en: |-
@@ -48,7 +48,7 @@ context:
       Diversification: as long as $\rho < 1$, the portfolio standard deviation is less than the weighted average. When $\rho = 0$, the benefit comes from "variances add, standard deviations do not" ($\sqrt{a^2+b^2} < a+b$), not from the covariance term. Diversification does not require negative correlation.
 
 common_errors:
-  - questions: [Q1, C5]
+  - questions: [C5]
     zh: |-
       $\rho = 0$ 时用“受协方差影响”解释分散化：结论对，但理由不成立。此时协方差项为 0，好处来自方差相加、标准差不相加。
     en: |-
@@ -198,24 +198,27 @@ questions:
   - id: Q1
     kind: exercise
     level: A
-    concepts: [diversification, covariance]
+    concepts: [covariance, correlation]
+    expected: { cov_new: "-20", rho_new: "-0.43" }
     question:
       zh: |-
-        判断真假并说明理由：两项资产的相关系数为 0 时，组合标准差等于两者标准差的加权平均。
+        在讲义的例子中，如果 A 在每种情景下的收益都变为原来的 2 倍（60、20、−20），A 与 B 的协方差和相关系数分别会怎样变化？说明理由。
       en: |-
-        Determine whether this statement is true or false, and explain: when the correlation between two assets is 0, the portfolio standard deviation equals the weighted average of their standard deviations.
+        In the example from the lesson, suppose A's return in every scenario doubles (to 60, 20 and −20). How do the covariance and the correlation between A and B change? Explain.
     answer:
       zh: |-
-        假。$\rho = 0$ 时协方差项为 0，$\sigma_P = \sqrt{w^2\sigma_A^2 + (1-w)^2\sigma_B^2} < w\sigma_A + (1-w)\sigma_B$，因为对正数 $a, b$ 有 $\sqrt{a^2+b^2} < a+b$。
+        A 的偏差都变为原来的 2 倍（+40、0、−40），所以协方差也变为 2 倍：$\text{Cov} = 2 \times (-10) = -20$（%²）。
+        A 的标准差同样变为 2 倍，相关系数的分子和分母都乘以 2，所以相关系数不变，仍约为 $-0.43$。这说明协方差的大小受单位和规模影响，相关系数不受影响。
       en: |-
-        False. When $\rho = 0$ the covariance term is 0, and $\sigma_P = \sqrt{w^2\sigma_A^2 + (1-w)^2\sigma_B^2} < w\sigma_A + (1-w)\sigma_B$, because $\sqrt{a^2+b^2} < a+b$ for positive $a, b$.
+        Each of A's deviations doubles (+40, 0, −40), so the covariance doubles: $\text{Cov} = 2 \times (-10) = -20$ (%²).
+        A's standard deviation also doubles, so both the numerator and the denominator of the correlation are multiplied by 2, and the correlation does not change: it is still about $-0.43$. This shows that the size of the covariance depends on units and scale, while the correlation does not.
     rubric:
       zh:
-        - "结论为假。"
-        - "理由必须指向“方差相加、标准差不相加”。用“受协方差影响”作理由在 $\\rho = 0$ 时不成立，需要订正。"
+        - "协方差变为 2 倍，数值正确。"
+        - "相关系数不变，并用分子、分母同时乘以 2 说明理由。"
       en:
-        - "States false."
-        - "The reason must point to \"variances add, standard deviations do not\". A reason based on \"the effect of covariance\" does not hold at $\\rho = 0$ and needs to be revised."
+        - "The covariance doubles, and the value is correct."
+        - "The correlation does not change, and the reason given is that the numerator and the denominator are both multiplied by 2."
 
   - id: Q2
     kind: exercise
