@@ -54,7 +54,9 @@ export type UiKey =
 	| 'reportError'
 	| 'reportTitle'
 	| 'reportBody'
-	| 'exercisesHeading';
+	| 'exercisesHeading'
+	| 'prevPage'
+	| 'nextPage';
 
 export type UiStrings = Record<UiKey, string>;
 

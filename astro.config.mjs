@@ -28,9 +28,16 @@ const lessonGroups = curriculum.stages
 	}))
 	.filter((g) => g.items.length > 0);
 
-// Until 2026-10-29 the Simplified Chinese pages had no language prefix. Keep their old URLs working.
-const OLD_ZH_PAGES = ['guide/how-to-use', 'guide/curriculum', ...curriculum.stages.flatMap((s) => s.lessons.filter((l) => l.published).map((l) => `lessons/${l.slug}`))];
-const redirects = Object.fromEntries(OLD_ZH_PAGES.map((p) => [`/${p}`, `/learn-finance-with-ai/zh-cn/${p}/`]));
+// Until 2026-10-29 the Simplified Chinese pages had no language prefix, and there were guide pages
+// (how to use, course outline). Keep those old URLs working.
+const OLD_ZH_LESSONS = curriculum.stages.flatMap((s) => s.lessons.filter((l) => l.published).map((l) => `lessons/${l.slug}`));
+const redirects = Object.fromEntries([
+	...OLD_ZH_LESSONS.map((p) => [`/${p}`, `/learn-finance-with-ai/zh-cn/${p}/`]),
+	...['how-to-use', 'curriculum'].flatMap((g) => [
+		[`/guide/${g}`, '/learn-finance-with-ai/zh-cn/'],
+		...languages.map((l) => [`/${l.code}/guide/${g}`, `/learn-finance-with-ai/${l.code}/`]),
+	]),
+]);
 
 export default defineConfig({
 	site: 'https://ianding1.github.io',
@@ -52,16 +59,10 @@ export default defineConfig({
 			components: {
 				MarkdownContent: './src/components/overrides/MarkdownContent.astro',
 				Footer: './src/components/overrides/Footer.astro',
+				Pagination: './src/components/overrides/Pagination.astro',
+				Sidebar: './src/components/overrides/Sidebar.astro',
 			},
 			sidebar: [
-				{
-					label: languages.find((l) => l.code === DEFAULT_LANG).start,
-					translations: Object.fromEntries(languages.map((l) => [l.lang, l.start])),
-					items: [
-						{ slug: 'guide/how-to-use' },
-						{ slug: 'guide/curriculum' },
-					],
-				},
 				...lessonGroups,
 			],
 		}),

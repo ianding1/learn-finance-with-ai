@@ -53,6 +53,8 @@ const locale: Locale = {
 		reportTitle: '[内容错误] {page}',
 		reportBody: '页面：{url}\n\n错误位置（复制原文）：\n\n问题说明：\n',
 		exercisesHeading: '练习题',
+		prevPage: '上一页',
+		nextPage: '下一页',
 	},
 
 	prompts: {

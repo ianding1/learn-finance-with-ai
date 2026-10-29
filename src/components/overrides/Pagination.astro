@@ -1,0 +1,26 @@
+---
+// Previous / next links at the bottom of a page: one rule above, two text columns, no boxes
+// (one separator per block, like the rest of the site).
+import { toLang, t } from '../../i18n/ui';
+
+const route = Astro.locals.starlightRoute;
+const lang = toLang(route.lang);
+const { prev, next } = route.pagination;
+---
+
+{(prev || next) && (
+	<nav class="lfwai-pager" aria-label={`${t(lang, 'prevPage')} / ${t(lang, 'nextPage')}`}>
+		{prev ? (
+			<a class="lfwai-pager-prev" href={prev.href} rel="prev">
+				<span class="lfwai-pager-dir" aria-hidden="true">← {t(lang, 'prevPage')}</span>
+				<span class="lfwai-pager-title">{prev.label}</span>
+			</a>
+		) : <span />}
+		{next && (
+			<a class="lfwai-pager-next" href={next.href} rel="next">
+				<span class="lfwai-pager-dir" aria-hidden="true">{t(lang, 'nextPage')} →</span>
+				<span class="lfwai-pager-title">{next.label}</span>
+			</a>
+		)}
+	</nav>
+)}

@@ -629,45 +629,6 @@
 }
 
 /* ---------- Curriculum ---------- */
-.lfwai-curriculum h3 {
-	margin-top: 1.5rem;
-	font-size: var(--sl-text-lg);
-}
-.lfwai-curriculum ol {
-	margin: 0.5rem 0 0;
-	padding: 0;
-	list-style: none;
-}
-.lfwai-curriculum li {
-	display: flex;
-	gap: 0.75rem;
-	padding: 0.25rem 0;
-}
-.lfwai-curriculum li.is-exam {
-	font-weight: 600;
-}
-.lfwai-cid {
-	min-width: 2.75rem;
-	color: var(--sl-color-gray-3);
-	font-variant-numeric: tabular-nums;
-}
-.lfwai-muted {
-	color: var(--sl-color-gray-3);
-}
-/* Lesson status in the course outline: not started / in progress / done. */
-.lfwai-lstatus {
-	margin-inline-start: auto;
-	white-space: nowrap;
-	font-size: var(--sl-text-sm);
-	color: var(--sl-color-gray-3);
-}
-.lfwai-lstatus[data-state='progress'] {
-	color: var(--sl-color-orange-high);
-}
-.lfwai-lstatus[data-state='done'] {
-	color: var(--sl-color-green-high);
-	font-weight: 600;
-}
 .lfwai-all-help {
 	margin: 0.25rem 0 0;
 	font-size: var(--sl-text-sm);
@@ -810,4 +771,87 @@ body {
    brighter in the dark theme (gray-1 is defined per theme by Starlight). */
 :root {
 	--sl-color-text: var(--sl-color-gray-1);
+}
+
+/* ---------- Lesson status in the sidebar ---------- */
+/* A ring after each lesson with questions: empty = not started, half = in progress, full = done.
+   A finished quiz shows its score instead. */
+.sidebar-content a:has(.lfwai-mark) {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+.lfwai-mark {
+	flex: none;
+	margin-inline-start: auto;
+	width: 0.7rem;
+	height: 0.7rem;
+	border-radius: 50%;
+	border: 1.5px solid var(--sl-color-gray-4);
+	box-sizing: border-box;
+}
+.lfwai-mark[data-state='progress'] {
+	border-color: var(--sl-color-orange-high);
+	background: conic-gradient(var(--sl-color-orange-high) 0 50%, transparent 0);
+}
+.lfwai-mark[data-state='done'] {
+	border-color: var(--viz-pos);
+	background: var(--viz-pos);
+}
+.lfwai-mark[data-state='score'] {
+	width: auto;
+	height: auto;
+	border: 0;
+	border-radius: 0;
+	font-size: var(--sl-text-xs);
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+	color: var(--viz-pos);
+}
+/* On the current page's highlighted link, use the link's own text color. */
+.sidebar-content a[aria-current='page'] .lfwai-mark {
+	border-color: currentColor;
+}
+.sidebar-content a[aria-current='page'] .lfwai-mark[data-state='progress'] {
+	background: conic-gradient(currentColor 0 50%, transparent 0);
+}
+.sidebar-content a[aria-current='page'] .lfwai-mark[data-state='done'] {
+	background: currentColor;
+}
+.sidebar-content a[aria-current='page'] .lfwai-mark[data-state='score'] {
+	color: currentColor;
+}
+
+/* ---------- Previous / next ---------- */
+.lfwai-pager {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.5rem;
+	margin-top: 3rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--lfwai-border);
+}
+.lfwai-pager a {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	text-decoration: none;
+	color: var(--sl-color-white);
+}
+.lfwai-pager-next {
+	grid-column: 2;
+	text-align: end;
+	align-items: flex-end;
+}
+.lfwai-pager-dir {
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+}
+.lfwai-pager-title {
+	font-weight: 600;
+	line-height: 1.4;
+}
+.lfwai-pager a:hover .lfwai-pager-title,
+.lfwai-pager a:focus-visible .lfwai-pager-title {
+	color: var(--sl-color-accent-high);
 }

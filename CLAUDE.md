@@ -27,7 +27,7 @@ languages; the site root sends each visitor to the language of their browser.
 | `src/content/docs/<code>/` | Pages of one language. Every page exists in every language with the same file name. |
 | `src/i18n/` | `languages.json`, shared types and one locale module per language (UI strings and prompt templates). |
 | `src/pages/index.astro` | Site root: sends visitors to the language of their browser. |
-| `src/components/` | `Ref`, `Def`, `Figure`, `Check`, `CheckAll`, `Exercises`, `CurriculumList`, `widgets/*`. |
+| `src/components/` | `Ref`, `Def`, `Figure`, `Check`, `CheckAll`, `Exercises`, `Quiz`, `widgets/*`; `overrides/` replaces Starlight parts (content wrapper, footer, sidebar with lesson status, previous / next links). |
 | `src/scripts/` | Browser code: prompt building, learning progress (localStorage), lesson status, selection "Explain this". |
 | `scripts/check.py` | Blocking consistency checks (CI). |
 | `.github/review-rules.md` | Rules for the advisory AI review of pull requests. |
@@ -121,15 +121,17 @@ one learner, revision history and answers inline. To publish a finished lesson:
   question, in localStorage. It stores nothing else about the learner (no background, preferences,
   concept status or notes), has no progress page and no review feature, and no prompt contains
   anything about the learner.
-- The course outline shows one status per lesson: not started (no question submitted), in progress
-  (some submitted), done (all submitted, including questions that need revision).
+- The sidebar shows one status mark per lesson: an empty ring (no question submitted), a half-filled
+  ring (some submitted), a filled ring (all submitted, including questions that need revision).
+  There is no separate course outline page and no "how to use" page: the interface must explain
+  itself through its labels and short hints next to the controls.
 - Answers are not entered on the site. Check questions are submitted together by
   `<CheckAll />` at the end of the lesson, and exercises by `<Exercises />`. The prompt ends with an
   empty "learner's answers" heading; the learner attaches a photo or types the answers after it.
 - Check questions (随堂题) and exercises (练习题) are reviewed without scores: the result marks each
   one "ok" or "revise". Only the quizzes after a group of lessons (测验, `E0`, `E1`, ... in the
   curriculum) are scored: their questions have `points` (total 100), and the scoring prompt asks
-  for a score per question with partial credit. A finished quiz shows its total in the outline.
+  for a score per question with partial credit. A finished quiz shows its total in the sidebar.
 - Each question shows its latest result next to its label ("not answered", "OK", "needs revision").
   There is no progress summary under the submit buttons.
 - Learners may submit only some questions. The grader grades only the answered ones and lists only

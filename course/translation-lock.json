@@ -3347,17 +3347,9 @@
   "en": "c8f496d21aacd752",
   "zh-cn": "bb60aef898f58bd4"
  },
- "src/content/docs/<lang>/guide/curriculum.mdx": {
-  "en": "c4d1ee84433f283b",
-  "zh-cn": "63d5f0d1b3b49fb4"
- },
- "src/content/docs/<lang>/guide/how-to-use.mdx": {
-  "en": "b886d6dfcdda3057",
-  "zh-cn": "7bad20d8f271626a"
- },
  "src/content/docs/<lang>/index.mdx": {
-  "en": "8473957926dd37e5",
-  "zh-cn": "4874a163e8c2e473"
+  "en": "6e42ca2c6cb1a84b",
+  "zh-cn": "7f6556416b28de99"
  },
  "src/content/docs/<lang>/lessons/0-1-time-value-of-money.mdx": {
   "en": "f972df5f84c06c01",

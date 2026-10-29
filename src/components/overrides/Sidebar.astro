@@ -1,0 +1,30 @@
+---
+// Starlight's sidebar plus a status mark after every lesson that has questions: not started,
+// in progress or done (a finished quiz shows its score). The marks are filled in from the
+// progress stored in the browser by src/scripts/sidebar-status.ts.
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+import { toLang, t } from '../../i18n/ui';
+import { lessons, lessonKey, lessonPath } from '../../lib/course';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const data = {
+	labels: {
+		none: t(lang, 'lessonNotStarted'),
+		progress: t(lang, 'lessonInProgress'),
+		done: t(lang, 'lessonDone'),
+		score: t(lang, 'scoreOf', { s: '{s}', m: '{m}' }),
+	},
+	lessons: lessons()
+		.filter((l) => l.published && (lessonKey(l.id)?.questions.length ?? 0) > 0)
+		.map((l) => ({ id: l.id, href: lessonPath(l, lang), questions: lessonKey(l.id)!.questions.map((q) => q.id) })),
+};
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+---
+
+<Default><slot /></Default>
+<script type="application/json" id="lfwai-sidebar-data" set:html={json}></script>
+
+<script>
+	import { initSidebarStatus } from '../../scripts/sidebar-status';
+	initSidebarStatus();
+</script>

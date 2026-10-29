@@ -11,7 +11,6 @@ export interface Language {
 	lang: string;
 	label: string;
 	title: string;
-	start: string;
 }
 
 export const LANGUAGES: Language[] = config.languages;

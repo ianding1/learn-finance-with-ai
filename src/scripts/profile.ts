@@ -64,6 +64,7 @@ export function loadProgress(): Progress {
 export function saveProgress(p: Progress): boolean {
 	try {
 		localStorage.setItem(KEY, JSON.stringify(p));
+		window.dispatchEvent(new Event('lfwai:progress'));
 		return true;
 	} catch {
 		return false;

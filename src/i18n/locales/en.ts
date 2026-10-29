@@ -54,6 +54,8 @@ const locale: Locale = {
 		reportTitle: '[Content error] {page}',
 		reportBody: 'Page: {url}\n\nWhere is the error (copy the original text):\n\nWhat is wrong:\n',
 		exercisesHeading: 'Exercises',
+		prevPage: 'Previous',
+		nextPage: 'Next',
 	},
 
 	prompts: {
