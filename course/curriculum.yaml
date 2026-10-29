@@ -17,9 +17,21 @@ stages:
       - id: "0.1"
         slug: "0-1-time-value-of-money"
         title: { zh: "复利与货币时间价值", en: "Compounding and the Time Value of Money" }
+        summary:
+          zh: "把不同时间的现金流折算到同一时点：终值与现值、APR 与 EAR、年金、永续年金、房贷，以及简单收益率与对数收益率。"
+          en: "Move cash flows at different times to the same date: future and present value, APR and EAR, annuities, perpetuities, mortgages, and simple and log returns."
+        published: true
+        introduces: [time-value-of-money, compound-interest, future-value, present-value, discount-factor, apr, ear, continuous-compounding, annuity, perpetuity, annuity-due, growing-perpetuity, simple-return, log-return]
+        uses: [logarithm, geometric-series, derivative]
       - id: "0.2"
         slug: "0-2-optimization"
         title: { zh: "优化", en: "Optimization" }
+        summary:
+          zh: "用导数求最优：一阶与二阶条件、利润最大化与固定成本、偏导数，以及带预算约束的拉格朗日乘数法与角点解。"
+          en: "Find optima with derivatives: first- and second-order conditions, profit maximization and fixed cost, partial derivatives, and the Lagrange multiplier method with a budget constraint, including corner solutions."
+        published: true
+        introduces: [objective-function, first-order-condition, second-order-condition, fixed-cost, variable-cost, marginal-revenue, marginal-cost, profit-maximization, sunk-cost, partial-derivative, budget-constraint, lagrange-multiplier, shadow-price, corner-solution]
+        uses: [derivative]
       - id: "0.3"
         slug: "0-3-probability"
         title: { zh: "概率：期望、方差、协方差与组合方差", en: "Probability: Expectation, Variance, Covariance and Portfolio Variance" }

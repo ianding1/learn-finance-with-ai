@@ -1,0 +1,79 @@
+---
+// Figure 7-1 of lesson 0.2: U = ln x + y with px = 1, py = 10, M = 5. The Lagrange solution
+// (10, −0.5) lies on the extension of the budget line below the x axis; the best feasible choice
+// is the corner (5, 0). Static.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		budget: '预算线 x + 10y = 5',
+		ext: '预算线的延长（y < 0，不可行）',
+		contour: '效用等高线 U = ln x + y',
+		lag: '拉格朗日解 (10, −0.5)',
+		corner: '角点 (5, 0)',
+	},
+	en: {
+		budget: 'Budget line x + 10y = 5',
+		ext: 'Extension of the budget line (y < 0, not feasible)',
+		contour: 'Utility contours U = ln x + y',
+		lag: 'Lagrange solution (10, −0.5)',
+		corner: 'Corner (5, 0)',
+	},
+}[lang];
+
+const xMax = 12;
+const yMin = -0.8;
+const yMax = 0.8;
+const levels = [1.2, Math.log(5), Math.log(10) - 0.5];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 320, pad: { l: 52, r: 20, t: 14, b: 44 } },
+	{ cls: 'viz-narrow', W: 360, H: 280, pad: { l: 44, r: 12, t: 14, b: 44 } },
+].map((g) => ({
+	...g,
+	X: (x: number) => g.pad.l + (x / xMax) * (g.W - g.pad.l - g.pad.r),
+	Y: (y: number) => g.pad.t + ((yMax - y) / (yMax - yMin)) * (g.H - g.pad.t - g.pad.b),
+}));
+const curve = (X: (x: number) => number, Y: (y: number) => number, c: number) => {
+	let d = '';
+	let first = true;
+	for (let i = 0; i <= 200; i++) {
+		const x = 0.3 + (i / 200) * (xMax - 0.3);
+		const y = c - Math.log(x);
+		if (y > yMax || y < yMin) continue;
+		d += `${first ? 'M' : 'L'}${X(x).toFixed(1)},${Y(y).toFixed(1)}`;
+		first = false;
+	}
+	return d;
+};
+---
+
+{layouts.map(({ cls, W, H, pad, X, Y }) => (
+	<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${L.lag}; ${L.corner}`}>
+		<rect class="viz-infeasible" x={pad.l} y={Y(0)} width={W - pad.l - pad.r} height={Y(yMin) - Y(0)} />
+		{[-0.5, 0, 0.5].map((y) => (
+			<g>
+				<line class={y === 0 ? 'viz-axis' : 'viz-grid'} x1={pad.l} x2={W - pad.r} y1={Y(y)} y2={Y(y)} />
+				<text class="viz-tick" x={pad.l - 8} y={Y(y) + 4} text-anchor="end">{String(y).replace('-', '−')}</text>
+			</g>
+		))}
+		{[0, 2, 4, 6, 8, 10, 12].map((x) => (
+			<text class="viz-tick" x={X(x)} y={H - pad.b + 18} text-anchor="middle">{x}</text>
+		))}
+		<line class="viz-axis" x1={X(0)} x2={X(0)} y1={Y(yMin)} y2={Y(yMax)} />
+		<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">x</text>
+		<text class="viz-tick" x={14} y={(pad.t + H - pad.b) / 2} text-anchor="middle">y</text>
+		{levels.map((c) => <path class="viz-level" d={curve(X, Y, c)} />)}
+		<line class="viz-budget" x1={X(0)} y1={Y(0.5)} x2={X(5)} y2={Y(0)} />
+		<line class="viz-budget viz-dashed" x1={X(5)} y1={Y(0)} x2={X(10)} y2={Y(-0.5)} />
+		<circle class="viz-hollow" cx={X(10)} cy={Y(-0.5)} r="6" />
+		<circle class="viz-min" cx={X(5)} cy={Y(0)} r="6" />
+	</svg>
+))}
+<ul class="lfwai-legend">
+	<li><span class="sw sw-budget"></span>{L.budget}</li>
+	<li><span class="sw sw-budget sw-dashed"></span>{L.ext}</li>
+	<li><span class="sw sw-level"></span>{L.contour}</li>
+	<li><span class="sw sw-hollow"></span>{L.lag}</li>
+	<li><span class="sw sw-min"></span>{L.corner}</li>
+</ul>

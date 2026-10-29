@@ -1,0 +1,199 @@
+---
+title: 0.2 优化
+description: 用导数求最优：一阶与二阶条件、利润最大化与固定成本、偏导数，以及带预算约束的拉格朗日乘数法与角点解。
+lesson: "0.2"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Exercises from '../../../components/Exercises.astro';
+import CheckAll from '../../../components/CheckAll.astro';
+import FixedCostProfit from '../../../components/widgets/FixedCostProfit.astro';
+import ContourPeak from '../../../components/widgets/ContourPeak.astro';
+import BudgetTangency from '../../../components/widgets/BudgetTangency.astro';
+import CornerSolution from '../../../components/widgets/CornerSolution.astro';
+
+## 经济学里的优化 [#what]
+
+经济学的一个基本假设是：人和公司在约束下做出最好的选择。每个优化问题都有三个部分：要最大化或最小化的<Def id="objective-function">目标函数</Def>（objective function）、可以选择的变量，以及约束。
+
+| 谁 | 目标 | 选择变量 | 约束 |
+| --- | --- | --- | --- |
+| 消费者 | 效用最大 | 两种商品各买多少 | 预算 |
+| 公司 | 利润最大 | 产量 | 成本 |
+| 投资者 | 方差最小 | 各资产的权重 | 目标收益；权重之和为 1 |
+
+最后一行是 <Ref lesson="4.2" /> 的组合优化。
+
+## 单变量优化：导数与边际 [#single-variable]
+
+导数是函数图像的斜率。想象爬山：走到山顶时，地面是平的，斜率为 0。所以函数在内部取最大值或最小值的点 $x^*$ 满足<Def id="first-order-condition">一阶条件</Def>（first-order condition）：
+
+$$
+f'(x^*) = 0
+$$
+
+斜率为 0 的点是山顶还是谷底，要看<Def id="second-order-condition">二阶条件</Def>（second-order condition）：$f''(x^*) < 0$ 是最大值，$f''(x^*) > 0$ 是最小值。
+
+**成本的两个部分**。公司的总成本 $C(q)$ 分成两部分：
+
+$$
+C(q) = F + VC(q)
+$$
+
+- <Def id="fixed-cost">固定成本</Def>（fixed cost）$F$：不管生产多少都要付的部分，例如房租和设备租约，与产量 $q$ 无关。
+- <Def id="variable-cost">可变成本</Def>（variable cost）$VC(q)$：随产量变化的部分，例如原料和计件工资。
+
+已经付出、无论之后怎样决策都收不回的成本叫<Def id="sunk-cost">沉没成本</Def>（sunk cost）。
+
+经济学里的“边际”就是导数。多卖一件带来的收入增加叫<Def id="marginal-revenue">边际收入</Def>（marginal revenue，MR），多生产一件带来的成本增加叫<Def id="marginal-cost">边际成本</Def>（marginal cost，MC）：
+
+$$
+MC = C'(q)
+$$
+
+**例：利润最大化**。价格为 40 美元，成本为 $C(q) = 100 + q^2$，其中 $F = 100$，$VC(q) = q^2$。利润是
+
+$$
+\pi(q) = 40q - 100 - q^2
+$$
+
+一阶条件：
+
+$$
+\pi'(q) = 40 - 2q = 0 \quad\Rightarrow\quad q^* = 20
+$$
+
+$\pi''(q) = -2 < 0$，所以这是最大值，$\pi^* = 800 - 100 - 400 = 300$。
+
+$\pi'(q) = 0$ 就是 $MR - MC = 0$。选择产量使利润最大，叫<Def id="profit-maximization">利润最大化</Def>（profit maximization）；在内部最优点，$MR = MC$。直觉是：只要多生产一件带来的收入大于成本，就应该多生产。
+
+<Figure id="2-1" title="利润 $\pi(q) = 40q - q^2 - F$。" observe="拖动 $F$，观察利润曲线和利润最高的产量怎样变化。">
+	<FixedCostProfit />
+</Figure>
+
+<Check id="C1" />
+
+## 多变量：偏导数 [#partial]
+
+函数有两个变量 $f(x, y)$ 时，保持 $y$ 不变、只改变 $x$ 时的斜率叫 $f$ 对 $x$ 的<Def id="partial-derivative">偏导数</Def>（partial derivative），记作 $\frac{\partial f}{\partial x}$。没有约束时，内部最优点处所有偏导数同时为 0。
+
+例：
+
+$$
+f(x, y) = -x^2 - y^2 + 2x + 8y
+$$
+
+$$
+\frac{\partial f}{\partial x} = -2x + 2 = 0, \qquad \frac{\partial f}{\partial y} = -2y + 8 = 0
+$$
+
+得 $x = 1$，$y = 4$，$f = 17$。
+
+两个变量时，二阶条件除了 $f_{xx}$ 和 $f_{yy}$ 的符号，还要考虑交叉项 $f_{xy}$（<Ref lesson="4.2" /> 讲一般的方法）。交叉项为 0 时，$f_{xx} < 0$ 且 $f_{yy} < 0$ 就是最大值。
+
+<Figure id="3-1" title="$f(x, y) = -x^2 - y^2 + 2x + 8y$ 的等高线。" observe="等高线是以最高点为圆心的圆。沿 $x$ 方向和沿 $y$ 方向切开，在圆心处都是山顶。">
+	<ContourPeak />
+</Figure>
+
+<Check id="C2" />
+
+## 有约束的优化：代入法 [#substitution]
+
+消费者的效用是 $U = xy$，两种商品的价格是 $p_x = 2$、$p_y = 4$，预算为 100 美元。花费不能超过预算，这是<Def id="budget-constraint">预算约束</Def>（budget constraint）；把钱花完时：
+
+$$
+2x + 4y = 100
+$$
+
+把 $y = 25 - \frac{x}{2}$ 代入效用：
+
+$$
+U = x\left(25 - \frac{x}{2}\right) = 25x - \frac{x^2}{2}, \qquad U' = 25 - x = 0
+$$
+
+得 $x^* = 25$，$y^* = 12.5$，$U^* = 312.5$。
+
+代入法的局限：约束复杂时很难解出一个变量再代入；而且它看不出“预算多 1 美元，效用能多多少”。
+
+## 约束下的最优点：挪一美元与相切 [#tangency]
+
+站在预算线上的某一点，从 $y$ 上少花 1 美元，在 $x$ 上多花 1 美元，总花费不变。1 美元能买 $\frac{1}{p_x}$ 单位的 $x$，所以 $x$ 增加 $\frac{1}{p_x}$ 单位、$y$ 减少 $\frac{1}{p_y}$ 单位。用 $MU_x = \frac{\partial U}{\partial x}$、$MU_y = \frac{\partial U}{\partial y}$ 表示边际效用，效用的变化约为
+
+$$
+\frac{MU_x}{p_x} - \frac{MU_y}{p_y}
+$$
+
+如果它大于 0，把钱从 $y$ 挪到 $x$ 能提高效用；小于 0 则反过来挪。所以在预算线内部的最优点，必须挪钱也无法改进：
+
+$$
+\frac{MU_x}{p_x} = \frac{MU_y}{p_y}
+$$
+
+把这个共同的值记为 $\lambda$。
+
+几何上，最优点处效用的等高线与预算线相切，两条曲线的梯度（垂直于曲线的方向）平行。记预算约束为 $g(x, y) = p_x x + p_y y$，则
+
+$$
+\nabla U = \lambda\,\nabla g
+$$
+
+<Figure id="5-1" title="预算线 $2x + 4y = 100$ 与 $U = xy$ 的等高线。" observe="拖动滑块让点沿预算线移动，比较两个读数，看它们相等时等高线和预算线是什么关系。">
+	<BudgetTangency />
+</Figure>
+
+## 拉格朗日乘数法 [#lagrange]
+
+把上一节的条件写成一套固定的步骤。构造
+
+$$
+\mathcal{L}(x, y, \lambda) = xy + \lambda\,(100 - 2x - 4y)
+$$
+
+即目标函数加上 $\lambda$ 乘以（资源总量 − 资源用量）。这里的 $\lambda$ 叫<Def id="lagrange-multiplier">拉格朗日乘数</Def>（Lagrange multiplier）。令三个偏导数为 0：
+
+| 方程 | 含义 |
+| --- | --- |
+| $\frac{\partial\mathcal{L}}{\partial x} = y - 2\lambda = 0$，$\frac{\partial\mathcal{L}}{\partial y} = x - 4\lambda = 0$ | 挪钱也无法改进 |
+| $\frac{\partial\mathcal{L}}{\partial\lambda} = 100 - 2x - 4y = 0$ | 在预算线上（就是约束本身） |
+
+前两式相除得 $\frac{y}{x} = \frac{1}{2}$，即 $x = 2y$。代入约束得 $y^* = 12.5$，$x^* = 25$，$\lambda = 6.25$，和代入法的结果相同。
+
+$\lambda$ 有两个含义：
+
+- 等边际原则：$\frac{MU_x}{p_x} = \frac{MU_y}{p_y} = \lambda$，即最后 1 美元花在哪种商品上，带来的效用都一样。
+- 约束放松一个单位（预算多 1 美元）时，最大效用约增加 $\lambda$。这叫<Def id="shadow-price">影子价格</Def>（shadow price）。它是近似值：预算为 101 时 $U^* \approx 318.78$，比 312.5 多约 6.28，接近 $\lambda = 6.25$。
+
+<Check id="C3" />
+
+## 角点解与局限 [#corner]
+
+拉格朗日法的解一定满足写进 $\mathcal{L}$ 的等式约束，但不保证 $x \ge 0$、$y \ge 0$，因为这两个条件没有写进去。
+
+例：$U = \ln x + y$，$p_x = 1$，$p_y = 10$，预算 $M = 5$。一阶条件为 $\frac{1}{x} = \lambda$、$1 = 10\lambda$，得 $\lambda = 0.1$，$x = 10$，$y = \frac{5 - 10}{10} = -0.5$。$y$ 是负数，不可行。
+
+真正的最优选择是把钱全部花在 $x$ 上：$x = 5$，$y = 0$。在这一点，$\frac{MU_x}{p_x} = \frac{1/5}{1} = 0.2$，大于 $\frac{MU_y}{p_y} = \frac{1}{10} = 0.1$，消费者还想把钱从 $y$ 挪到 $x$，但 $y$ 已经是 0。某个选择变量取边界值的最优解叫<Def id="corner-solution">角点解</Def>（corner solution），在角点处等边际条件不成立是正常的。
+
+<Figure id="7-1" title="预算线 $x + 10y = 5$ 与 $U = \ln x + y$ 的等高线。" observe="拉格朗日解落在预算线延长到 $y < 0$ 的部分。在可行的一段上，越往 $x$ 轴走，效用越高。">
+	<CornerSolution />
+</Figure>
+
+另外，预算约束本来是“花费不超过预算”，这里当作等式处理。偏好满足“越多越好”时，最优点一定花完预算，这样做没有问题。一般的不等式约束要用 KKT 条件（<Ref lesson="4.2" />）。
+
+<Check id="C4" />
+
+## 小结 [#summary]
+
+- 优化问题 = 目标函数 + 选择变量 + 约束。
+- 无约束：一阶条件是导数（或所有偏导数）为 0；二阶条件区分最大值和最小值。
+- 总成本 = 固定成本 + 可变成本；边际成本是总成本的导数。利润最大化的内部最优点满足 $MR = MC$。
+- 有约束：最优点处挪一美元也无法改进，几何上是相切，代数上是拉格朗日条件；$\lambda$ 是影子价格（近似值）。
+- 拉格朗日解满足等式约束，但可能违反非负约束，这时最优点是角点解。
+
+<CheckAll />
+
+## 练习题 [#exercises]
+
+<Exercises />

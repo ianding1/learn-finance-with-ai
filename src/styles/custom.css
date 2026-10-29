@@ -187,6 +187,54 @@
 	stroke: var(--sl-color-bg);
 	stroke-width: 2;
 }
+/* Lesson 0.1 annuity figure */
+.viz-pay {
+	fill: none;
+	stroke: var(--viz-muted);
+	stroke-width: 1.5;
+	stroke-dasharray: 4 3;
+}
+.viz-pv {
+	fill: var(--viz-a);
+	fill-opacity: 0.85;
+}
+/* Lesson 0.2 figures */
+.viz-contour,
+.viz-level {
+	fill: none;
+	stroke: var(--viz-muted);
+	stroke-width: 1.5;
+}
+.viz-budget {
+	stroke: var(--viz-a);
+	stroke-width: 2.5;
+}
+.viz-dashed {
+	stroke-dasharray: 6 5;
+}
+.viz-grad-u {
+	stroke: var(--viz-b);
+	stroke-width: 2.5;
+}
+.viz-grad-g {
+	stroke: var(--viz-violet);
+	stroke-width: 2.5;
+}
+.viz-arrow-u {
+	fill: var(--viz-b);
+}
+.viz-arrow-g {
+	fill: var(--viz-violet);
+}
+.viz-hollow {
+	fill: var(--sl-color-bg);
+	stroke: var(--viz-text);
+	stroke-width: 2;
+}
+.viz-infeasible {
+	fill: var(--viz-grid);
+	fill-opacity: 0.35;
+}
 .lfwai-sliders {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
@@ -243,6 +291,37 @@
 	border: none;
 	border-radius: 50%;
 	background: var(--viz-text);
+}
+.lfwai-legend .sw-box {
+	height: 0.75rem;
+	border: 1.5px dashed var(--viz-muted);
+}
+.lfwai-legend .sw-fill {
+	height: 0.75rem;
+	border: none;
+	background: var(--viz-a);
+}
+.lfwai-legend .sw-budget {
+	border-color: var(--viz-a);
+}
+.lfwai-legend .sw-dashed {
+	border-top-style: dashed;
+}
+.lfwai-legend .sw-level {
+	border-top-width: 2px;
+	border-color: var(--viz-muted);
+}
+.lfwai-legend .sw-gu {
+	border-color: var(--viz-b);
+}
+.lfwai-legend .sw-gg {
+	border-color: var(--viz-violet);
+}
+.lfwai-legend .sw-hollow {
+	width: 0.7rem;
+	height: 0.7rem;
+	border: 2px solid var(--viz-text);
+	border-radius: 50%;
 }
 .lfwai-readout {
 	margin: 0.5rem 0 0;

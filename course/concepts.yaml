@@ -9,20 +9,250 @@ summation:
   zh: 求和符号
   en: summation notation
 
+logarithm:
+  defined_in: prerequisite
+  zh: 对数
+  en: logarithm
+
+geometric-series:
+  defined_in: prerequisite
+  zh: 等比数列求和
+  en: geometric series
+
+derivative:
+  defined_in: prerequisite
+  zh: 导数
+  en: derivative
+
+# ---------- 0.1 ----------
+
+time-value-of-money:
+  defined_in: "0.1"
+  zh: 货币时间价值
+  en: time value of money
+  short:
+    zh: 同样数额的钱，越早拿到越值钱；不同时间的钱要折算到同一时点才能比较或相加。
+    en: The same amount of money is worth more the earlier you receive it, so amounts at different times must be moved to the same date before they are compared or added.
+
+compound-interest:
+  defined_in: "0.1"
+  zh: 复利
+  en: compound interest
+  short:
+    zh: 利息也计入本金、继续产生利息的计息方式。
+    en: Interest that is added to the principal and earns interest itself.
+
+future-value:
+  defined_in: "0.1"
+  zh: 终值
+  en: future value
+  short:
+    zh: 今天的一笔钱按复利增长到未来某一时点的金额。
+    en: The amount that a sum today grows to at a future date with compound interest.
+
+present-value:
+  defined_in: "0.1"
+  zh: 现值
+  en: present value
+  short:
+    zh: 未来的一笔钱折算到今天的价值。
+    en: The value today of an amount received in the future.
+
+discount-factor:
+  defined_in: "0.1"
+  zh: 折现因子
+  en: discount factor
+  short:
+    zh: 把未来一笔钱折算成现值时乘的系数 1/(1+r)ⁿ。
+    en: "The number that a future amount is multiplied by to get its present value: 1/(1+r)ⁿ."
+
+apr:
+  defined_in: "0.1"
+  zh: 名义年利率
+  en: annual percentage rate
+  short:
+    zh: 按年报出的利率（APR），等于每期利率乘以一年的期数，不考虑期内复利。
+    en: The quoted yearly rate (APR), equal to the rate per period times the number of periods in a year, without compounding within the year.
+
+ear:
+  defined_in: "0.1"
+  zh: 有效年利率
+  en: effective annual rate
+  short:
+    zh: 考虑一年内复利之后实际得到的年利率（EAR）。
+    en: The yearly rate actually earned once compounding within the year is taken into account (EAR).
+
+continuous-compounding:
+  defined_in: "0.1"
+  zh: 连续复利
+  en: continuous compounding
+  short:
+    zh: 复利频率趋于无穷时的极限，此时 FV = PV·e^(rT)。
+    en: The limit when compounding becomes infinitely frequent. Then FV = PV·e^(rT).
+
+annuity:
+  defined_in: "0.1"
+  zh: 年金
+  en: annuity
+  short:
+    zh: 一串金额相同、间隔相同、期数有限的付款。
+    en: A finite series of equal payments at equal intervals.
+
+perpetuity:
+  defined_in: "0.1"
+  zh: 永续年金
+  en: perpetuity
+  short:
+    zh: 金额相同、间隔相同、永远持续的付款，现值为 C/r。
+    en: Equal payments at equal intervals that continue forever. Its present value is C/r.
+
+annuity-due:
+  defined_in: "0.1"
+  zh: 期初年金
+  en: annuity due
+  short:
+    zh: 每期期初付款的年金。
+    en: An annuity whose payments are made at the start of each period.
+
+growing-perpetuity:
+  defined_in: "0.1"
+  zh: 增长永续年金
+  en: growing perpetuity
+  short:
+    zh: 每期按固定比例增长、永远持续的付款。
+    en: Payments that grow at a constant rate each period and continue forever.
+
+simple-return:
+  defined_in: "0.1"
+  zh: 简单收益率
+  en: simple return
+  short:
+    zh: 价格变化的比例 P₁/P₀ − 1；多期合成时要连乘。
+    en: The proportional price change P₁/P₀ − 1. Over several periods, simple returns compound by multiplication.
+
+log-return:
+  defined_in: "0.1"
+  zh: 对数收益率
+  en: log return
+  short:
+    zh: 价格比的自然对数 ln(P₁/P₀)；多期可以直接相加。
+    en: The natural logarithm of the price ratio, ln(P₁/P₀). Over several periods, log returns add.
+
+# ---------- 0.2 ----------
+
+objective-function:
+  defined_in: "0.2"
+  zh: 目标函数
+  en: objective function
+  short:
+    zh: 优化问题中要最大化或最小化的量。
+    en: The quantity that an optimization problem maximizes or minimizes.
+
+first-order-condition:
+  defined_in: "0.2"
+  zh: 一阶条件
+  en: first-order condition
+  short:
+    zh: 内部最优点处导数（或所有偏导数）为 0。
+    en: At an interior optimum, the derivative (or every partial derivative) is 0.
+
+second-order-condition:
+  defined_in: "0.2"
+  zh: 二阶条件
+  en: second-order condition
+  short:
+    zh: 用二阶导数的符号区分最大值和最小值。
+    en: The sign of the second derivative tells a maximum from a minimum.
+
+fixed-cost:
+  defined_in: "0.2"
+  zh: 固定成本
+  en: fixed cost
+  short:
+    zh: 总成本中不随产量变化的部分。
+    en: The part of total cost that does not change with output.
+
+variable-cost:
+  defined_in: "0.2"
+  zh: 可变成本
+  en: variable cost
+  short:
+    zh: 总成本中随产量变化的部分。
+    en: The part of total cost that changes with output.
+
+marginal-revenue:
+  defined_in: "0.2"
+  zh: 边际收入
+  en: marginal revenue
+  short:
+    zh: 多卖一单位带来的收入增加，即收入对产量的导数。
+    en: The extra revenue from selling one more unit, that is, the derivative of revenue with respect to output.
+
+marginal-cost:
+  defined_in: "0.2"
+  zh: 边际成本
+  en: marginal cost
+  short:
+    zh: 多生产一单位带来的成本增加，即成本对产量的导数。
+    en: The extra cost of producing one more unit, that is, the derivative of cost with respect to output.
+
 profit-maximization:
   defined_in: "0.2"
   zh: 利润最大化
   en: profit maximization
-
-budget-constraint:
-  defined_in: "0.2"
-  zh: 预算约束
-  en: budget constraint
+  short:
+    zh: 选择产量使利润最大；内部最优点满足边际收入等于边际成本。
+    en: Choosing output to make profit as large as possible. At an interior optimum, marginal revenue equals marginal cost.
 
 sunk-cost:
   defined_in: "0.2"
   zh: 沉没成本
   en: sunk cost
+  short:
+    zh: 已经付出、无论之后怎样决策都收不回的成本。
+    en: A cost that has already been paid and cannot be recovered whatever you decide next.
+
+partial-derivative:
+  defined_in: "0.2"
+  zh: 偏导数
+  en: partial derivative
+  short:
+    zh: 其他变量不变、只改变一个变量时函数的变化率。
+    en: The rate of change of a function when one variable changes and the others stay fixed.
+
+budget-constraint:
+  defined_in: "0.2"
+  zh: 预算约束
+  en: budget constraint
+  short:
+    zh: 各项支出之和不能超过可用的钱，例如两种商品时 px·x + py·y = M。
+    en: Total spending cannot exceed the money available, for example px·x + py·y = M with two goods.
+
+lagrange-multiplier:
+  defined_in: "0.2"
+  zh: 拉格朗日乘数
+  en: Lagrange multiplier
+  short:
+    zh: 求解有等式约束的优化问题时引入的变量 λ。
+    en: The variable λ introduced to solve an optimization problem with an equality constraint.
+
+shadow-price:
+  defined_in: "0.2"
+  zh: 影子价格
+  en: shadow price
+  short:
+    zh: 约束放松一个单位时最优目标值的近似增量。
+    en: The approximate increase in the optimal value of the objective when the constraint is relaxed by one unit.
+
+corner-solution:
+  defined_in: "0.2"
+  zh: 角点解
+  en: corner solution
+  short:
+    zh: 某个选择变量取边界值（如 0）的最优解。
+    en: An optimum at which a choice variable is at its boundary (for example, 0).
+
+# ---------- 0.3 ----------
 
 random-variable:
   defined_in: "0.3"
@@ -85,8 +315,8 @@ diversification:
   zh: 分散化
   en: diversification
   short:
-    zh: 只要相关系数小于 1，组合的标准差就小于各资产标准差的加权平均。
-    en: As long as the correlation is less than 1, the portfolio's standard deviation is less than the weighted average of the assets' standard deviations.
+    zh: 组合的标准差低于各资产标准差的加权平均时，组合得到的好处。
+    en: The benefit a portfolio gets when its standard deviation is lower than the weighted average of the assets' standard deviations.
 
 # Concepts taught in later lessons. Listed so that forward references can link to them.
 

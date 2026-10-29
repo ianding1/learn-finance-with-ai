@@ -1,0 +1,110 @@
+---
+// Figure 5-1 of lesson 0.2: budget line 2x + 4y = 100 and contour lines of U = xy. A slider moves a
+// point along the budget line; the figure shows the contour through it and the directions of
+// ∇U = (y, x) and ∇g = (2, 4). Both axes use the same scale, so that the gradients look perpendicular to the curves.
+// Parameters and ranges are registered in course/widgets.yaml (id: tangency). Keep them in sync.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		x: '在 x 上买的数量',
+		budget: '预算线 2x + 4y = 100',
+		contour: '经过该点的效用等高线',
+		gradU: '∇U 的方向',
+		gradG: '∇g 的方向',
+		readout: '当前点 (x, y) = ({x}, {y})，U = {u}。MUx/px = y/2 = {a}，MUy/py = x/4 = {b}。{move}',
+		toX: '把 1 美元从 y 挪到 x，效用会增加。',
+		toY: '把 1 美元从 x 挪到 y，效用会增加。',
+		none: '两者相等：往哪个方向挪钱都无法提高效用。',
+	},
+	en: {
+		x: 'Quantity of x',
+		budget: 'Budget line 2x + 4y = 100',
+		contour: 'Utility contour through the point',
+		gradU: 'Direction of ∇U',
+		gradG: 'Direction of ∇g',
+		readout: 'Point (x, y) = ({x}, {y}), U = {u}. MUx/px = y/2 = {a}; MUy/py = x/4 = {b}. {move}',
+		toX: 'Moving 1 dollar from y to x raises utility.',
+		toY: 'Moving 1 dollar from x to y raises utility.',
+		none: 'They are equal: moving money in either direction cannot raise utility.',
+	},
+}[lang];
+
+const xMax = 55;
+const yMax = 30;
+const levels = [150, 312.5, 500];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 370, pad: { l: 48, r: 20, t: 14, b: 44 } },
+	{ cls: 'viz-narrow', W: 360, H: 226, pad: { l: 40, r: 12, t: 14, b: 44 } },
+].map((g, i) => ({
+	...g,
+	id: i,
+	X: (x: number) => g.pad.l + (x / xMax) * (g.W - g.pad.l - g.pad.r),
+	Y: (y: number) => g.pad.t + (1 - y / yMax) * (g.H - g.pad.t - g.pad.b),
+}));
+const contour = (X: (x: number) => number, Y: (y: number) => number, u: number) => {
+	let d = '';
+	let first = true;
+	for (let i = 0; i <= 200; i++) {
+		const x = 1 + (i / 200) * (xMax - 1);
+		const y = u / x;
+		if (y > yMax) continue;
+		d += `${first ? 'M' : 'L'}${X(x).toFixed(1)},${Y(y).toFixed(1)}`;
+		first = false;
+	}
+	return d;
+};
+---
+
+<div class="lfwai-widget" data-widget="tangency" data-readout={L.readout} data-move={JSON.stringify([L.toX, L.toY, L.none])}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.x} = <output data-out="x">10</output></span>
+			<input type="range" min="2" max="48" step="0.5" value="10" data-param="x" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad, id, X, Y }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.budget} data-geom={JSON.stringify({ W, H, pad, xMax, yMax })}>
+			<defs>
+				<marker id={`lfwai-arrow-u-${id}`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+					<path d="M0,0 L10,5 L0,10 z" class="viz-arrow-u" />
+				</marker>
+				<marker id={`lfwai-arrow-g-${id}`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+					<path d="M0,0 L10,5 L0,10 z" class="viz-arrow-g" />
+				</marker>
+			</defs>
+			{[0, 10, 20, 30].map((y) => (
+				<g>
+					<line class="viz-grid" x1={pad.l} x2={W - pad.r} y1={Y(y)} y2={Y(y)} />
+					<text class="viz-tick" x={pad.l - 8} y={Y(y) + 4} text-anchor="end">{y}</text>
+				</g>
+			))}
+			{[0, 10, 20, 30, 40, 50].map((x) => (
+				<text class="viz-tick" x={X(x)} y={H - pad.b + 18} text-anchor="middle">{x}</text>
+			))}
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">x</text>
+			<text class="viz-tick" x={14} y={(pad.t + H - pad.b) / 2} text-anchor="middle">y</text>
+			<line class="viz-axis" x1={pad.l} x2={W - pad.r} y1={Y(0)} y2={Y(0)} />
+			<line class="viz-axis" x1={X(0)} x2={X(0)} y1={Y(0)} y2={Y(yMax)} />
+			{levels.map((u) => <path class="viz-level" d={contour(X, Y, u)} />)}
+			<line class="viz-budget" x1={X(0)} y1={Y(25)} x2={X(50)} y2={Y(0)} />
+			<path class="viz-port" data-el="contour" d="" />
+			<line class="viz-grad-u" data-el="gu" x1="0" y1="0" x2="0" y2="0" marker-end={`url(#lfwai-arrow-u-${id})`} />
+			<line class="viz-grad-g" data-el="gg" x1="0" y1="0" x2="0" y2="0" marker-end={`url(#lfwai-arrow-g-${id})`} />
+			<circle class="viz-cur" data-el="pt" r="6" cx="0" cy="0" />
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-budget"></span>{L.budget}</li>
+		<li><span class="sw sw-port"></span>{L.contour}</li>
+		<li><span class="sw sw-gu"></span>{L.gradU}</li>
+		<li><span class="sw sw-gg"></span>{L.gradG}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initTangency } from '../../scripts/widgets/tangency';
+	initTangency();
+</script>

@@ -1,0 +1,199 @@
+---
+title: 0.2 Optimization
+description: "Find optima with derivatives: first- and second-order conditions, profit maximization and fixed cost, partial derivatives, and the Lagrange multiplier method with a budget constraint, including corner solutions."
+lesson: "0.2"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import FixedCostProfit from '../../../../components/widgets/FixedCostProfit.astro';
+import ContourPeak from '../../../../components/widgets/ContourPeak.astro';
+import BudgetTangency from '../../../../components/widgets/BudgetTangency.astro';
+import CornerSolution from '../../../../components/widgets/CornerSolution.astro';
+
+## Optimization in economics [#what]
+
+A basic assumption in economics is that people and firms make the best choice they can under constraints. Every optimization problem has three parts: the <Def id="objective-function">objective function</Def> that is maximized or minimized, the variables that can be chosen, and the constraints.
+
+| Who | Objective | Choice variables | Constraints |
+| --- | --- | --- | --- |
+| Consumer | Maximize utility | How much of each of two goods to buy | Budget |
+| Firm | Maximize profit | Output | Cost |
+| Investor | Minimize variance | Weights of the assets | Target return; weights add up to 1 |
+
+The last row is the portfolio optimization of <Ref lesson="4.2" />.
+
+## One variable: derivatives and margins [#single-variable]
+
+The derivative is the slope of the graph of a function. Think of climbing a hill: at the top, the ground is flat and the slope is 0. So a point $x^*$ where a function has an interior maximum or minimum satisfies the <Def id="first-order-condition">first-order condition</Def>:
+
+$$
+f'(x^*) = 0
+$$
+
+Whether a point with slope 0 is a hilltop or a valley floor is decided by the <Def id="second-order-condition">second-order condition</Def>: $f''(x^*) < 0$ means a maximum, and $f''(x^*) > 0$ means a minimum.
+
+**The two parts of cost**. A firm's total cost $C(q)$ has two parts:
+
+$$
+C(q) = F + VC(q)
+$$
+
+- The <Def id="fixed-cost">fixed cost</Def> $F$: the part that must be paid however much is produced, for example rent and equipment leases. It does not depend on output $q$.
+- The <Def id="variable-cost">variable cost</Def> $VC(q)$: the part that changes with output, for example materials and piece-rate wages.
+
+A cost that has already been paid and cannot be recovered, whatever is decided later, is a <Def id="sunk-cost">sunk cost</Def>.
+
+In economics, "marginal" means the derivative. The increase in revenue from selling one more unit is the <Def id="marginal-revenue">marginal revenue</Def> (MR), and the increase in cost from producing one more unit is the <Def id="marginal-cost">marginal cost</Def> (MC):
+
+$$
+MC = C'(q)
+$$
+
+**Example: profit maximization**. The price is 40 dollars and the cost is $C(q) = 100 + q^2$, with $F = 100$ and $VC(q) = q^2$. Profit is
+
+$$
+\pi(q) = 40q - 100 - q^2
+$$
+
+The first-order condition is
+
+$$
+\pi'(q) = 40 - 2q = 0 \quad\Rightarrow\quad q^* = 20
+$$
+
+$\pi''(q) = -2 < 0$, so this is a maximum, and $\pi^* = 800 - 100 - 400 = 300$.
+
+$\pi'(q) = 0$ is the same as $MR - MC = 0$. Choosing output to make profit as large as possible is <Def id="profit-maximization">profit maximization</Def>; at an interior optimum, $MR = MC$. The intuition: as long as one more unit brings in more revenue than it costs, the firm should produce more.
+
+<Figure id="2-1" title="Profit $\pi(q) = 40q - q^2 - F$." observe="Move $F$ and watch how the profit curve and the output with the highest profit change.">
+	<FixedCostProfit />
+</Figure>
+
+<Check id="C1" />
+
+## Several variables: partial derivatives [#partial]
+
+For a function of two variables $f(x, y)$, the slope when $x$ changes and $y$ stays fixed is the <Def id="partial-derivative">partial derivative</Def> of $f$ with respect to $x$, written $\frac{\partial f}{\partial x}$. Without constraints, all partial derivatives are 0 at an interior optimum.
+
+Example:
+
+$$
+f(x, y) = -x^2 - y^2 + 2x + 8y
+$$
+
+$$
+\frac{\partial f}{\partial x} = -2x + 2 = 0, \qquad \frac{\partial f}{\partial y} = -2y + 8 = 0
+$$
+
+This gives $x = 1$, $y = 4$ and $f = 17$.
+
+With two variables, the second-order condition depends not only on the signs of $f_{xx}$ and $f_{yy}$ but also on the cross term $f_{xy}$ (<Ref lesson="4.2" /> covers the general method). When the cross term is 0, $f_{xx} < 0$ and $f_{yy} < 0$ mean a maximum.
+
+<Figure id="3-1" title="Contour lines of $f(x, y) = -x^2 - y^2 + 2x + 8y$." observe="The contour lines are circles around the highest point. A cut in the $x$ direction and a cut in the $y$ direction both have their top at the center.">
+	<ContourPeak />
+</Figure>
+
+<Check id="C2" />
+
+## Optimization with a constraint: substitution [#substitution]
+
+A consumer's utility is $U = xy$, the prices of the two goods are $p_x = 2$ and $p_y = 4$, and the budget is 100 dollars. Spending cannot exceed the budget; this is the <Def id="budget-constraint">budget constraint</Def>. When all the money is spent:
+
+$$
+2x + 4y = 100
+$$
+
+Substitute $y = 25 - \frac{x}{2}$ into the utility:
+
+$$
+U = x\left(25 - \frac{x}{2}\right) = 25x - \frac{x^2}{2}, \qquad U' = 25 - x = 0
+$$
+
+This gives $x^* = 25$, $y^* = 12.5$ and $U^* = 312.5$.
+
+Substitution has limits: when the constraint is complicated, it is hard to solve for one variable and substitute it; and it does not show how much more utility one more dollar of budget would buy.
+
+## The optimum under a constraint: moving one dollar and tangency [#tangency]
+
+Stand at a point on the budget line. Spend 1 dollar less on $y$ and 1 dollar more on $x$; total spending stays the same. 1 dollar buys $\frac{1}{p_x}$ units of $x$, so $x$ rises by $\frac{1}{p_x}$ units and $y$ falls by $\frac{1}{p_y}$ units. With the marginal utilities $MU_x = \frac{\partial U}{\partial x}$ and $MU_y = \frac{\partial U}{\partial y}$, utility changes by about
+
+$$
+\frac{MU_x}{p_x} - \frac{MU_y}{p_y}
+$$
+
+If this is positive, moving money from $y$ to $x$ raises utility; if it is negative, moving money the other way does. So at an optimum inside the budget line, moving money cannot help:
+
+$$
+\frac{MU_x}{p_x} = \frac{MU_y}{p_y}
+$$
+
+Call this common value $\lambda$.
+
+Geometrically, at the optimum the utility contour is tangent to the budget line, and the gradients of the two curves (the directions perpendicular to them) are parallel. Write the budget as $g(x, y) = p_x x + p_y y$; then
+
+$$
+\nabla U = \lambda\,\nabla g
+$$
+
+<Figure id="5-1" title="The budget line $2x + 4y = 100$ and contour lines of $U = xy$." observe="Move the slider to move the point along the budget line. Compare the two readings, and look at how the contour and the budget line meet when the readings are equal.">
+	<BudgetTangency />
+</Figure>
+
+## The Lagrange multiplier method [#lagrange]
+
+The condition from the previous section can be written as a fixed procedure. Form
+
+$$
+\mathcal{L}(x, y, \lambda) = xy + \lambda\,(100 - 2x - 4y)
+$$
+
+that is, the objective function plus $\lambda$ times (total resources − resources used). Here $\lambda$ is the <Def id="lagrange-multiplier">Lagrange multiplier</Def>. Set the three partial derivatives to 0:
+
+| Equation | Meaning |
+| --- | --- |
+| $\frac{\partial\mathcal{L}}{\partial x} = y - 2\lambda = 0$, $\frac{\partial\mathcal{L}}{\partial y} = x - 4\lambda = 0$ | Moving money cannot help |
+| $\frac{\partial\mathcal{L}}{\partial\lambda} = 100 - 2x - 4y = 0$ | On the budget line (the constraint itself) |
+
+Dividing the first two equations gives $\frac{y}{x} = \frac{1}{2}$, that is, $x = 2y$. Substituting into the constraint gives $y^* = 12.5$, $x^* = 25$ and $\lambda = 6.25$, the same as with substitution.
+
+$\lambda$ has two meanings:
+
+- The equal-margin principle: $\frac{MU_x}{p_x} = \frac{MU_y}{p_y} = \lambda$. The last dollar brings the same utility whichever good it is spent on.
+- When the constraint is relaxed by one unit (one more dollar of budget), the maximum utility rises by about $\lambda$. This is the <Def id="shadow-price">shadow price</Def>. It is an approximation: with a budget of 101, $U^* \approx 318.78$, about 6.28 more than 312.5, close to $\lambda = 6.25$.
+
+<Check id="C3" />
+
+## Corner solutions and limits [#corner]
+
+The Lagrange solution always satisfies the equality constraint written into $\mathcal{L}$, but it does not guarantee $x \ge 0$ and $y \ge 0$, because those conditions are not written into it.
+
+Example: $U = \ln x + y$, $p_x = 1$, $p_y = 10$ and a budget of $M = 5$. The first-order conditions are $\frac{1}{x} = \lambda$ and $1 = 10\lambda$, which give $\lambda = 0.1$, $x = 10$ and $y = \frac{5 - 10}{10} = -0.5$. $y$ is negative, which is not feasible.
+
+The true optimum is to spend all the money on $x$: $x = 5$, $y = 0$. At this point $\frac{MU_x}{p_x} = \frac{1/5}{1} = 0.2$, which is more than $\frac{MU_y}{p_y} = \frac{1}{10} = 0.1$. The consumer would like to move more money from $y$ to $x$, but $y$ is already 0. An optimum where a choice variable is at a boundary is a <Def id="corner-solution">corner solution</Def>. At a corner, it is normal for the equal-margin condition not to hold.
+
+<Figure id="7-1" title="The budget line $x + 10y = 5$ and contour lines of $U = \ln x + y$." observe="The Lagrange solution lies on the extension of the budget line where $y < 0$. On the feasible part, utility rises toward the $x$ axis.">
+	<CornerSolution />
+</Figure>
+
+Also, the budget constraint really says "spending is at most the budget", but here it is treated as an equation. When more is always better, the optimum spends the whole budget, so this causes no problem. General inequality constraints need the KKT conditions (<Ref lesson="4.2" />).
+
+<Check id="C4" />
+
+## Summary [#summary]
+
+- An optimization problem = objective function + choice variables + constraints.
+- Without constraints: the first-order condition is that the derivative (or every partial derivative) is 0; the second-order condition separates maxima from minima.
+- Total cost = fixed cost + variable cost; marginal cost is the derivative of total cost. At an interior optimum of profit maximization, $MR = MC$.
+- With a constraint: at the optimum, moving one dollar cannot help; geometrically this is tangency, and algebraically it is the Lagrange condition. $\lambda$ is the shadow price (an approximation).
+- The Lagrange solution satisfies the equality constraint but may violate the non-negativity constraints; then the optimum is a corner solution.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

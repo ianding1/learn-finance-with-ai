@@ -1,0 +1,61 @@
+---
+// Figure 3-1 of lesson 0.2: contour lines of f(x, y) = −x² − y² + 2x + 8y. The contours are
+// circles around the highest point (1, 4), where f = 17. Static.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: { top: '最高点 (1, 4)，f = 17', note1: '在这一点，沿 x 方向和', note2: '沿 y 方向的斜率都是 0' },
+	en: { top: 'Highest point (1, 4), f = 17', note1: 'At this point, the slope is 0', note2: 'in the x direction and in the y direction' },
+}[lang];
+
+const cx = 1;
+const cy = 4;
+const fMax = 17;
+const levels = [16, 13, 8, 1]; // f values; radius = sqrt(17 − f)
+const x0 = -4;
+const x1 = 6;
+const y0 = -1;
+const y1 = 9;
+// Wide: square plot on the left, notes on the right. Narrow: square plot, notes below.
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 330, plot: { x: 50, y: 10, s: 280 }, note: { x: 360, y: 150 } },
+	{ cls: 'viz-narrow', W: 360, H: 396, plot: { x: 50, y: 10, s: 280 }, note: { x: 12, y: 346 } },
+].map((l) => ({
+	...l,
+	X: (x: number) => l.plot.x + ((x - x0) / (x1 - x0)) * l.plot.s,
+	Y: (y: number) => l.plot.y + ((y1 - y) / (y1 - y0)) * l.plot.s,
+	R: (r: number) => (r / (x1 - x0)) * l.plot.s,
+}));
+const ticks = [-4, -2, 0, 2, 4, 6];
+const yTicks = [0, 2, 4, 6, 8];
+---
+
+{layouts.map(({ cls, W, H, plot, note, X, Y, R }) => (
+	<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.top}>
+		{ticks.map((x) => (
+			<g>
+				<line class="viz-grid" x1={X(x)} x2={X(x)} y1={plot.y} y2={plot.y + plot.s} />
+				<text class="viz-tick" x={X(x)} y={plot.y + plot.s + 18} text-anchor="middle">{x}</text>
+			</g>
+		))}
+		{yTicks.map((y) => (
+			<g>
+				<line class="viz-grid" x1={plot.x} x2={plot.x + plot.s} y1={Y(y)} y2={Y(y)} />
+				<text class="viz-tick" x={plot.x - 8} y={Y(y) + 4} text-anchor="end">{y}</text>
+			</g>
+		))}
+		<text class="viz-tick" x={plot.x + plot.s + 10} y={plot.y + plot.s + 4}>x</text>
+		<text class="viz-tick" x={plot.x - 4} y={plot.y - 0} text-anchor="end">y</text>
+		{levels.map((f) => (
+			<g>
+				<circle class="viz-contour" cx={X(cx)} cy={Y(cy)} r={R(Math.sqrt(fMax - f))} />
+				<text class="viz-small viz-halo" x={X(cx) + R(Math.sqrt(fMax - f)) * 0.71 + 4} y={Y(cy) - R(Math.sqrt(fMax - f)) * 0.71 - 4}>{`f = ${f}`}</text>
+			</g>
+		))}
+		<circle class="viz-min" cx={X(cx)} cy={Y(cy)} r="6" />
+		<text class="viz-label" x={note.x} y={note.y}>{L.top}</text>
+		<text class="viz-small" x={note.x} y={note.y + 20}>{L.note1}</text>
+		<text class="viz-small" x={note.x} y={note.y + 38}>{L.note2}</text>
+	</svg>
+))}

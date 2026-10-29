@@ -1,0 +1,73 @@
+---
+// Figure 4-1 of lesson 0.1: an annuity of 100 dollars at the end of each year. Each payment is drawn
+// as an outline bar, and its present value as a filled bar inside it. Sliders: rate r and years n.
+// Parameters and ranges are registered in course/widgets.yaml (id: annuity). Keep them in sync.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		r: '年利率 r',
+		n: '年数 n',
+		year: '第 {k} 年末',
+		axis: '时间（年）',
+		pay: '每年末付款 100 美元',
+		pv: '这笔付款的现值',
+		readout: '付款合计 {sum} 美元；现值合计 {pv} 美元。最后一笔付款的现值是 {last} 美元。',
+	},
+	en: {
+		r: 'Interest rate r',
+		n: 'Years n',
+		year: 'end of year {k}',
+		axis: 'Time (years)',
+		pay: 'Payment of 100 dollars at the end of each year',
+		pv: 'Present value of the payment',
+		readout: 'Total payments: {sum} dollars. Total present value: {pv} dollars. The present value of the last payment is {last} dollars.',
+	},
+}[lang];
+
+// Plot geometry: years 0..10 on the x axis, amounts 0..100 on the y axis.
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 260, pad: { l: 48, r: 16, t: 24, b: 48 } },
+	{ cls: 'viz-narrow', W: 360, H: 240, pad: { l: 40, r: 10, t: 24, b: 48 } },
+];
+---
+
+<div class="lfwai-widget" data-widget="annuity" data-readout={L.readout}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.r} = <output data-out="r">10%</output></span>
+			<input type="range" min="0" max="0.2" step="0.01" value="0.1" data-param="r" />
+		</label>
+		<label>
+			<span>{L.n} = <output data-out="n">3</output></span>
+			<input type="range" min="1" max="10" step="1" value="3" data-param="n" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.pay} data-geom={JSON.stringify({ W, H, pad })}>
+			{[0, 50, 100].map((v) => {
+				const y = pad.t + (1 - v / 100) * (H - pad.t - pad.b);
+				return (
+					<g>
+						<line class="viz-grid" x1={pad.l} x2={W - pad.r} y1={y} y2={y} />
+						<text class="viz-tick" x={pad.l - 8} y={y + 4} text-anchor="end">{v}</text>
+					</g>
+				);
+			})}
+			<line class="viz-axis" x1={pad.l} x2={W - pad.r} y1={H - pad.b} y2={H - pad.b} />
+			<g data-el="bars"></g>
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">{L.axis}</text>
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-box"></span>{L.pay}</li>
+		<li><span class="sw sw-fill"></span>{L.pv}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initAnnuity } from '../../scripts/widgets/annuity';
+	initAnnuity();
+</script>

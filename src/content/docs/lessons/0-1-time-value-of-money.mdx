@@ -1,0 +1,215 @@
+---
+title: 0.1 复利与货币时间价值
+description: 把不同时间的现金流折算到同一时点：终值与现值、APR 与 EAR、年金、永续年金、房贷，以及简单收益率与对数收益率。
+lesson: "0.1"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Exercises from '../../../components/Exercises.astro';
+import CheckAll from '../../../components/CheckAll.astro';
+import AnnuityTimeline from '../../../components/widgets/AnnuityTimeline.astro';
+
+## 为什么今天的钱更值钱 [#why]
+
+今天的 100 美元和一年后的 100 美元不一样值钱，原因有三个：
+
+- **机会成本**：今天的钱可以拿去投资，一年后变得更多。
+- **通胀**：一年后同样的 100 美元能买到的东西更少。
+- **风险**：未来的钱不一定能拿到。
+
+所以同样数额的钱，越早拿到越值钱，这叫<Def id="time-value-of-money">货币时间价值</Def>（time value of money）。不同时间的钱不能直接相加或比较，要先折算到同一个时点。金融里几乎所有的估值，都是把未来的现金流折算到今天。
+
+## 终值与现值 [#fv-pv]
+
+今天存 100 美元，年利率 10%。一年后是 110 美元；第二年不仅本金生息，第一年的利息 10 美元也生息，两年后是 $100 \times 1.1^2 = 121$ 美元。利息也继续产生利息，这叫<Def id="compound-interest">复利</Def>（compound interest）。只按本金计息叫单利。
+
+一般地，今天的金额 $PV$ 按年利率 $r$ 复利 $n$ 年后变为
+
+$$
+FV = PV\,(1+r)^n
+$$
+
+$FV$ 叫<Def id="future-value">终值</Def>（future value）。反过来，未来一笔 $FV$ 折算到今天是
+
+$$
+PV = \frac{FV}{(1+r)^n}
+$$
+
+$PV$ 叫<Def id="present-value">现值</Def>（present value）。乘在 $FV$ 前面的 $\frac{1}{(1+r)^n}$ 叫<Def id="discount-factor">折现因子</Def>（discount factor），这里的 $r$ 也叫折现率。把未来的钱折算到今天，叫折现。
+
+<Check id="C1" />
+
+## 复利频率：APR 与 EAR [#compounding]
+
+信用卡常写“年利率 24%，按月计息”：每月利率是 $24\% / 12 = 2\%$。一年后，1 美元变成
+
+$$
+1.02^{12} \approx 1.2682
+$$
+
+实际一年的利率约为 26.82%，比 24% 高，因为每个月的利息在下个月也生息。报价中的 24% 叫<Def id="apr">名义年利率</Def>（annual percentage rate，APR），实际得到的 26.82% 叫<Def id="ear">有效年利率</Def>（effective annual rate，EAR）。名义年利率为 $r$、一年复利 $m$ 次时：
+
+$$
+\text{EAR} = \left(1+\frac{r}{m}\right)^m - 1
+$$
+
+如果复利频率无限增加，$m \to \infty$ 时 $\left(1+\frac{r}{m}\right)^m \to e^r$（证明留作 <Ref check="Q7" />），这叫<Def id="continuous-compounding">连续复利</Def>（continuous compounding）：
+
+$$
+FV = PV\,e^{rT}
+$$
+
+一个常用的估算是 72 法则：利率为 $x$%时，本金翻倍大约需要 $72 / x$ 年。例如利率 8% 时大约 9 年。它来自 $(1+r)^n = 2$，即
+
+$$
+n = \frac{\ln 2}{\ln(1+r)} \approx \frac{0.693}{r}
+$$
+
+用 72 代替 69.3，是因为对常见的利率更准一些，而且 72 好整除。
+
+<Check id="C2" />
+
+## 年金 [#annuity]
+
+一串金额相同、间隔相同的付款叫<Def id="annuity">年金</Def>（annuity）。例如房贷月供、每月定投、债券的利息。
+
+这串钱今天值多少？不同时间的钱不能直接相加，要先各自折现再相加。例如每年末收 100 美元，共 3 年，折现率 10%：
+
+| 时间 | 今天 | 第 1 年末 | 第 2 年末 | 第 3 年末 |
+| --- | ---: | ---: | ---: | ---: |
+| 现金流（美元） | 0 | 100 | 100 | 100 |
+| 折现到今天（美元） |  | 90.909 | 82.645 | 75.131 |
+
+$$
+\frac{100}{1.1} + \frac{100}{1.1^2} + \frac{100}{1.1^3} \approx 248.69
+$$
+
+一共收 300 美元，今天只值约 248.69 美元。越晚的付款，折现得越多。
+
+每期期末付款 $C$、共 $n$ 期、每期利率 $r$ 时，这个加法可以写成一个公式（推导留作 <Ref check="Q6" />）：
+
+$$
+PV = \frac{C}{r}\left[1-(1+r)^{-n}\right]
+$$
+
+代入 $C = 100$、$r = 0.1$、$n = 3$，也得到 248.69。
+
+<Figure id="4-1" title="每年末付款 100 美元的年金：虚线框是每笔付款，实心柱是它的现值。" observe="拖动两个滑块，看哪些付款的现值缩得最多，以及现值合计和付款合计的差距怎样变化。">
+	<AnnuityTimeline />
+</Figure>
+
+<Check id="C3" />
+
+## 永续年金 [#perpetuity]
+
+把 1,000 美元存进银行，年利率 10%，每年末取出利息 100 美元，本金不动，可以永远取下去。所以“永远每年末收 100 美元”今天值 1,000 美元。
+
+金额相同、间隔相同、永远持续的付款叫<Def id="perpetuity">永续年金</Def>（perpetuity）。每期期末付款 $C$、每期利率 $r$ 时：
+
+$$
+PV = \frac{C}{r}
+$$
+
+<Check id="C4" />
+
+## 年金终值与期初年金 [#annuity-due]
+
+年金也可以问终值：每年末存 100 美元，共 3 年，利率 10%，第 3 年末一共有多少？第一笔存了 2 年，第二笔 1 年，第三笔刚存入：
+
+$$
+100 \times 1.1^2 + 100 \times 1.1 + 100 = 331
+$$
+
+一般地（推导同样留作 <Ref check="Q6" />）：
+
+$$
+FV = C\,\frac{(1+r)^n - 1}{r}
+$$
+
+到目前为止，付款都在每期期末，这叫普通年金，例如房贷月供和债券利息。如果付款在每期期初，例如房租通常月初交，就叫<Def id="annuity-due">期初年金</Def>（annuity due）。期初年金的现值和同样金额的普通年金相比是大还是小，大多少？请在 <Ref check="Q6" /> 中推导。
+
+## 房贷与定投 [#loans]
+
+银行今天借给你 $P$，你每月还 $C$。“公平”的意思是：按银行的利率，所有月供折现到今天正好等于 $P$。由年金公式反解出月供：
+
+$$
+C = \frac{P\,i}{1-(1+i)^{-n}}
+$$
+
+这里 $C$ 是每月的付款，所以 $i$ 是每月的利率（APR 除以 12），$n$ 是月数。
+
+例：贷款 500,000 美元，30 年，APR 6%。$i = 0.06 / 12 = 0.005$，$n = 360$：
+
+$$
+C = \frac{500{,}000 \times 0.005}{1-1.005^{-360}} \approx 2{,}997.75
+$$
+
+每月约 2,997.75 美元，360 个月共还约 1,079,191 美元，其中利息约 579,191 美元，比本金还多。
+
+定投正好反过来：每年末存 20,000 美元，共 30 年，年收益 7%。用年金终值公式：
+
+$$
+FV = 20{,}000 \times \frac{1.07^{30} - 1}{0.07} \approx 1{,}889{,}216
+$$
+
+30 年后约 189 万美元，其中自己投入的只有 60 万美元，其余都来自复利。
+
+## 增长永续年金 [#growing-perpetuity]
+
+有些付款永远持续，而且每年按固定比例增长。例如第 1 年末收房租 100 美元，以后每年涨 3%：100、103、106.09……这叫<Def id="growing-perpetuity">增长永续年金</Def>（growing perpetuity）。第 1 期期末的付款为 $C$、增长率为 $g$、折现率为 $r$ 时：
+
+$$
+PV = \frac{C}{r-g}
+$$
+
+例：$\frac{100}{0.10-0.03} \approx 1{,}428.57$。不增长时是 1,000 美元，增长抵消了一部分折现。
+
+公式要求 $g < r$，原因留作 <Ref check="Q2" />。这个公式是股利贴现模型的基础（<Ref lesson="3.9" />）。
+
+<Check id="C5" />
+
+## 简单收益率与对数收益率 [#returns]
+
+价格从 $P_0$ 变为 $P_1$，<Def id="simple-return">简单收益率</Def>（simple return）是
+
+$$
+R = \frac{P_1}{P_0} - 1
+$$
+
+多期的简单收益率要连乘，不能相加：
+
+$$
+1 + R_{0 \to 2} = (1+R_1)(1+R_2)
+$$
+
+例：价格 100 → 80 → 100。两期的简单收益率是 −20% 和 +25%，相加得 +5%，但价格其实没变；连乘 $0.8 \times 1.25 = 1$，两期收益为 0，这才对。
+
+<Def id="log-return">对数收益率</Def>（log return）是
+
+$$
+\ell = \ln\frac{P_1}{P_0}
+$$
+
+上面的例子中，两期的对数收益率是 $\ln 0.8 \approx -0.2231$ 和 $\ln 1.25 \approx 0.2231$，相加正好是 0。多期的对数收益率可以直接相加，为什么？请在 <Ref check="Q7" /> 中说明。
+
+## 前提与局限 [#assumptions]
+
+- 本课的公式假设利率不变、现金流确定。现实中的现金流有风险，风险体现在折现率里（<Ref lesson="3.10" />、<Ref lesson="4.4" />）。
+- 名义现金流要用名义利率折现，实际现金流（扣除通胀后）要用实际利率折现（<Ref lesson="1.3" />）。
+- 计算时可以用电子表格或 Python 的 `numpy-financial`（`npf.pmt`、`npf.pv`、`npf.fv`）验算。
+
+## 小结 [#summary]
+
+- 不同时间的钱要折算到同一时点才能比较和相加：$FV = PV(1+r)^n$，$PV = \frac{FV}{(1+r)^n}$。
+- APR 是报价，EAR 是一年内复利之后实际得到的利率：$\text{EAR} = (1+\frac{r}{m})^m - 1$。连续复利：$FV = PV\,e^{rT}$。
+- 年金现值：$\frac{C}{r}[1-(1+r)^{-n}]$；年金终值：$C\frac{(1+r)^n-1}{r}$；永续年金：$\frac{C}{r}$；增长永续年金：$\frac{C}{r-g}$。
+- 简单收益率多期连乘，对数收益率多期相加。
+
+<CheckAll />
+
+## 练习题 [#exercises]
+
+<Exercises />

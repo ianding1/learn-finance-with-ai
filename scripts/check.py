@@ -586,9 +586,16 @@ def check_numbers():
                 continue
             if round(float(results[k]), decimals(s)) != float(s):
                 err(file, f"expected {k} = {s}, but {rel(script)} computes {results[k]:.6g}")
+            # The answer may write the value with thousands separators ("2,997.75").
+            forms = {s, s.replace("-", "−")}
+            if abs(float(s)) >= 1000:
+                grouped = f"{float(s):,.{decimals(s)}f}"
+                forms |= {grouped, grouped.replace("-", "−")}
+                # inside LaTeX the separator is written {,}
+                forms |= {f.replace(",", "{,}") for f in list(forms)}
             for lang in LANGS:
                 ans = q["answer"][lang]
-                if s not in ans and s.replace("-", "−") not in ans:
+                if not any(f in ans for f in forms):
                     err(file, f"{q['id']}: the {lang} answer does not contain the value {s} ({k})")
 
 

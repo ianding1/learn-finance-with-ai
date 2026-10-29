@@ -1,0 +1,76 @@
+---
+// Figure 2-1 of lesson 0.2: profit π(q) = 40q − q² − F for an adjustable fixed cost F.
+// Parameters and ranges are registered in course/widgets.yaml (id: fixed-cost). Keep them in sync.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		F: '固定成本 F',
+		xAxis: '产量 q',
+		yAxis: '利润 π',
+		curve: '利润曲线',
+		peak: '利润最高的产量',
+		readout: '利润最高的产量 q = {q}，此时利润 π = {p}。',
+	},
+	en: {
+		F: 'Fixed cost F',
+		xAxis: 'Output q',
+		yAxis: 'Profit π',
+		curve: 'Profit curve',
+		peak: 'Output with the highest profit',
+		readout: 'The output with the highest profit is q = {q}, where the profit is π = {p}.',
+	},
+}[lang];
+
+const qMax = 40;
+const yMin = -600;
+const yMax = 400;
+const yTicks = [-600, -400, -200, 0, 200, 400];
+const xTicks = [0, 10, 20, 30, 40];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 320, pad: { l: 60, r: 20, t: 16, b: 48 } },
+	{ cls: 'viz-narrow', W: 360, H: 300, pad: { l: 52, r: 14, t: 16, b: 48 } },
+].map((g) => ({
+	...g,
+	X: (q: number) => g.pad.l + (q / qMax) * (g.W - g.pad.l - g.pad.r),
+	Y: (v: number) => g.pad.t + ((yMax - v) / (yMax - yMin)) * (g.H - g.pad.t - g.pad.b),
+}));
+---
+
+<div class="lfwai-widget" data-widget="fixed-cost" data-readout={L.readout}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.F} = <output data-out="F">100</output></span>
+			<input type="range" min="0" max="600" step="10" value="100" data-param="F" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad, X, Y }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.curve} data-geom={JSON.stringify({ W, H, pad, qMax, yMin, yMax })}>
+			{yTicks.map((v) => (
+				<g>
+					<line class={v === 0 ? 'viz-axis' : 'viz-grid'} x1={pad.l} x2={W - pad.r} y1={Y(v)} y2={Y(v)} />
+					<text class="viz-tick" x={pad.l - 8} y={Y(v) + 4} text-anchor="end">{v}</text>
+				</g>
+			))}
+			{xTicks.map((q) => (
+				<text class="viz-tick" x={X(q)} y={H - pad.b + 18} text-anchor="middle">{q}</text>
+			))}
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">{L.xAxis}</text>
+			<text class="viz-tick" transform={`translate(14 ${(pad.t + H - pad.b) / 2}) rotate(-90)`} text-anchor="middle">{L.yAxis}</text>
+			<path class="viz-port" data-el="curve" d="" />
+			<line class="viz-mean" data-el="peakline" x1="0" y1="0" x2="0" y2="0" />
+			<circle class="viz-min" data-el="peak" r="6" cx="0" cy="0" />
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-port"></span>{L.curve}</li>
+		<li><span class="sw sw-min"></span>{L.peak}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initFixedCost } from '../../scripts/widgets/fixed-cost';
+	initFixedCost();
+</script>

@@ -1,0 +1,215 @@
+---
+title: 0.1 Compounding and the Time Value of Money
+description: "Move cash flows at different times to the same date: future and present value, APR and EAR, annuities, perpetuities, mortgages, and simple and log returns."
+lesson: "0.1"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import AnnuityTimeline from '../../../../components/widgets/AnnuityTimeline.astro';
+
+## Why money today is worth more [#why]
+
+100 dollars today and 100 dollars in one year are not worth the same. There are three reasons:
+
+- **Opportunity cost**: money you have today can be invested and grow by next year.
+- **Inflation**: in one year, the same 100 dollars buys less.
+- **Risk**: you may not actually receive money that is promised for the future.
+
+So the same amount of money is worth more the earlier you receive it. This is the <Def id="time-value-of-money">time value of money</Def>. Amounts at different times cannot be added or compared directly; they must first be moved to the same date. Almost every valuation in finance moves future cash flows to today.
+
+## Future value and present value [#fv-pv]
+
+You deposit 100 dollars today at 10% per year. After one year you have 110 dollars. In the second year, both the principal and the first year's interest of 10 dollars earn interest, so after two years you have $100 \times 1.1^2 = 121$ dollars. Interest that itself earns interest is called <Def id="compound-interest">compound interest</Def>. Interest paid only on the principal is called simple interest.
+
+In general, an amount $PV$ today, compounded at an annual rate $r$ for $n$ years, grows to
+
+$$
+FV = PV\,(1+r)^n
+$$
+
+$FV$ is the <Def id="future-value">future value</Def>. In the other direction, an amount $FV$ in the future is worth this much today:
+
+$$
+PV = \frac{FV}{(1+r)^n}
+$$
+
+$PV$ is the <Def id="present-value">present value</Def>. The number $\frac{1}{(1+r)^n}$ that multiplies $FV$ is the <Def id="discount-factor">discount factor</Def>, and $r$ is also called the discount rate. Moving future money to today is called discounting.
+
+<Check id="C1" />
+
+## Compounding frequency: APR and EAR [#compounding]
+
+A credit card often says "24% per year, interest charged monthly". The monthly rate is $24\% / 12 = 2\%$. After one year, 1 dollar becomes
+
+$$
+1.02^{12} \approx 1.2682
+$$
+
+The actual rate for the year is about 26.82%, more than 24%, because each month's interest earns interest in the following months. The quoted 24% is the <Def id="apr">annual percentage rate</Def> (APR), and the 26.82% you actually pay is the <Def id="ear">effective annual rate</Def> (EAR). With an annual percentage rate $r$ compounded $m$ times a year:
+
+$$
+\text{EAR} = \left(1+\frac{r}{m}\right)^m - 1
+$$
+
+If interest is compounded more and more often, then as $m \to \infty$, $\left(1+\frac{r}{m}\right)^m \to e^r$ (the proof is left as <Ref check="Q7" />). This is <Def id="continuous-compounding">continuous compounding</Def>:
+
+$$
+FV = PV\,e^{rT}
+$$
+
+A common estimate is the rule of 72: at an interest rate of $x$%, money doubles in about $72 / x$ years. For example, at 8% it takes about 9 years. The rule comes from $(1+r)^n = 2$, that is,
+
+$$
+n = \frac{\ln 2}{\ln(1+r)} \approx \frac{0.693}{r}
+$$
+
+72 is used instead of 69.3 because it is a little more accurate for common rates and because 72 has many divisors.
+
+<Check id="C2" />
+
+## Annuities [#annuity]
+
+A series of equal payments at equal intervals is an <Def id="annuity">annuity</Def>. Examples are monthly mortgage payments, monthly investments in a fund, and the interest payments of a bond.
+
+What is this series of payments worth today? Amounts at different times cannot be added directly; each payment must be discounted first, and then the results are added. For example, you receive 100 dollars at the end of each year for 3 years, and the discount rate is 10%:
+
+| Time | Today | End of year 1 | End of year 2 | End of year 3 |
+| --- | ---: | ---: | ---: | ---: |
+| Cash flow (dollars) | 0 | 100 | 100 | 100 |
+| Discounted to today (dollars) |  | 90.909 | 82.645 | 75.131 |
+
+$$
+\frac{100}{1.1} + \frac{100}{1.1^2} + \frac{100}{1.1^3} \approx 248.69
+$$
+
+You receive 300 dollars in total, but today it is worth only about 248.69 dollars. The later a payment comes, the more it is discounted.
+
+With a payment $C$ at the end of each period, $n$ periods and a rate $r$ per period, this sum can be written as one formula (the derivation is left as <Ref check="Q6" />):
+
+$$
+PV = \frac{C}{r}\left[1-(1+r)^{-n}\right]
+$$
+
+With $C = 100$, $r = 0.1$ and $n = 3$, it also gives 248.69.
+
+<Figure id="4-1" title="An annuity of 100 dollars at the end of each year: each dashed box is a payment, and each solid bar is its present value." observe="Move the two sliders. See which payments lose the most present value, and how the gap between the total present value and the total payments changes.">
+	<AnnuityTimeline />
+</Figure>
+
+<Check id="C3" />
+
+## Perpetuities [#perpetuity]
+
+You deposit 1,000 dollars in a bank at 10% per year. At the end of each year you take out the interest of 100 dollars and leave the principal. You can do this forever. So "100 dollars at the end of every year, forever" is worth 1,000 dollars today.
+
+Equal payments at equal intervals that continue forever are a <Def id="perpetuity">perpetuity</Def>. With a payment $C$ at the end of each period and a rate $r$ per period:
+
+$$
+PV = \frac{C}{r}
+$$
+
+<Check id="C4" />
+
+## Future value of an annuity and annuities due [#annuity-due]
+
+You can also ask for the future value of an annuity. You deposit 100 dollars at the end of each year for 3 years at 10%. How much do you have at the end of year 3? The first deposit earns interest for 2 years, the second for 1 year, and the third is just deposited:
+
+$$
+100 \times 1.1^2 + 100 \times 1.1 + 100 = 331
+$$
+
+In general (the derivation is also left as <Ref check="Q6" />):
+
+$$
+FV = C\,\frac{(1+r)^n - 1}{r}
+$$
+
+So far, every payment has been at the end of a period. This is an ordinary annuity, for example mortgage payments and bond interest. If the payments are at the start of each period, as rent usually is, it is an <Def id="annuity-due">annuity due</Def>. Is the present value of an annuity due larger or smaller than that of an ordinary annuity with the same payments, and by how much? Work it out in <Ref check="Q6" />.
+
+## Mortgages and regular investing [#loans]
+
+A bank lends you $P$ today, and you pay back $C$ every month. "Fair" means that at the bank's interest rate, the present value of all the monthly payments is exactly $P$. Solving the annuity formula for the payment gives
+
+$$
+C = \frac{P\,i}{1-(1+i)^{-n}}
+$$
+
+Here $C$ is the payment each month, so $i$ is the interest rate per month (the APR divided by 12) and $n$ is the number of months.
+
+Example: a loan of 500,000 dollars for 30 years at an APR of 6%. $i = 0.06 / 12 = 0.005$ and $n = 360$:
+
+$$
+C = \frac{500{,}000 \times 0.005}{1-1.005^{-360}} \approx 2{,}997.75
+$$
+
+You pay about 2,997.75 dollars a month, about 1,079,191 dollars over 360 months. About 579,191 dollars of this is interest, which is more than the loan itself.
+
+Regular investing works the other way around. You invest 20,000 dollars at the end of each year for 30 years at 7% per year. With the future value formula for an annuity:
+
+$$
+FV = 20{,}000 \times \frac{1.07^{30} - 1}{0.07} \approx 1{,}889{,}216
+$$
+
+After 30 years you have about 1.89 million dollars. You put in only 600,000 dollars; the rest comes from compounding.
+
+## Growing perpetuities [#growing-perpetuity]
+
+Some payments continue forever and also grow at a fixed rate each year. For example, you receive rent of 100 dollars at the end of year 1, and the rent rises by 3% every year after that: 100, 103, 106.09, and so on. This is a <Def id="growing-perpetuity">growing perpetuity</Def>. With a payment $C$ at the end of period 1, a growth rate $g$ and a discount rate $r$:
+
+$$
+PV = \frac{C}{r-g}
+$$
+
+Example: $\frac{100}{0.10-0.03} \approx 1{,}428.57$. Without growth it would be 1,000 dollars; the growth offsets part of the discounting.
+
+The formula requires $g < r$; the reason is left as <Ref check="Q2" />. This formula is the basis of the dividend discount model (<Ref lesson="3.9" />).
+
+<Check id="C5" />
+
+## Simple returns and log returns [#returns]
+
+When a price changes from $P_0$ to $P_1$, the <Def id="simple-return">simple return</Def> is
+
+$$
+R = \frac{P_1}{P_0} - 1
+$$
+
+Simple returns over several periods must be multiplied, not added:
+
+$$
+1 + R_{0 \to 2} = (1+R_1)(1+R_2)
+$$
+
+Example: the price goes 100 → 80 → 100. The simple returns of the two periods are −20% and +25%. Adding them gives +5%, but the price has not changed. Multiplying gives $0.8 \times 1.25 = 1$, a return of 0 over the two periods, which is correct.
+
+The <Def id="log-return">log return</Def> is
+
+$$
+\ell = \ln\frac{P_1}{P_0}
+$$
+
+In the example above, the log returns of the two periods are $\ln 0.8 \approx -0.2231$ and $\ln 1.25 \approx 0.2231$, and their sum is exactly 0. Log returns over several periods can simply be added. Why? Explain it in <Ref check="Q7" />.
+
+## Assumptions and limits [#assumptions]
+
+- The formulas in this lesson assume a constant interest rate and certain cash flows. Real cash flows are risky, and the risk is reflected in the discount rate (<Ref lesson="3.10" />, <Ref lesson="4.4" />).
+- Nominal cash flows must be discounted with a nominal rate, and real cash flows (after inflation) with a real rate (<Ref lesson="1.3" />).
+- You can check calculations with a spreadsheet or with the Python package `numpy-financial` (`npf.pmt`, `npf.pv`, `npf.fv`).
+
+## Summary [#summary]
+
+- Amounts at different times must be moved to the same date before they are compared or added: $FV = PV(1+r)^n$, $PV = \frac{FV}{(1+r)^n}$.
+- The APR is the quoted rate; the EAR is the rate you actually get after compounding within the year: $\text{EAR} = (1+\frac{r}{m})^m - 1$. Continuous compounding: $FV = PV\,e^{rT}$.
+- Present value of an annuity: $\frac{C}{r}[1-(1+r)^{-n}]$; future value of an annuity: $C\frac{(1+r)^n-1}{r}$; perpetuity: $\frac{C}{r}$; growing perpetuity: $\frac{C}{r-g}$.
+- Simple returns over several periods are multiplied; log returns are added.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />
