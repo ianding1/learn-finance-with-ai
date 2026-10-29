@@ -21,6 +21,7 @@ import Quiz from '../../../components/Quiz.astro';
 - 终值与现值：$FV = PV(1+r)^n$，$PV = \frac{FV}{(1+r)^n}$；有效年利率：$\text{EAR} = \left(1 + \frac{r}{m}\right)^m - 1$
 - 年金（期末付款）：$PV = \frac{C}{r}\left[1 - (1+r)^{-n}\right]$，$FV = C\,\frac{(1+r)^n - 1}{r}$
 - 永续年金：$PV = \frac{C}{r}$；增长永续年金：$PV = \frac{C}{r - g}$（$C$ 为第 1 期期末的付款）
+- 对数收益率：$r = \ln(1 + R)$
 
 **优化**
 
@@ -40,7 +41,6 @@ import Quiz from '../../../components/Quiz.astro';
 **回归**
 
 - $b = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}$，$a = \bar y - b\,\bar x$，$R^2 = 1 - \frac{\text{SSR}}{\text{SST}}$
-- 遗漏变量：$\beta_1 + \beta_2 \cdot \frac{\text{Cov}(x_1, x_2)}{\text{Var}(x_1)}$
 
 ## 题目 [#questions]
 

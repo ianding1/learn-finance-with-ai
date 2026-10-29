@@ -68,7 +68,7 @@ stages:
           en: "The quiz for Stage 0 (0.1–0.5): time value of money, optimization, probability and portfolio variance, statistical inference and regression. 100 points, about 120 minutes."
         published: true
         introduces: []
-        uses: [annuity, annuity-due, growing-perpetuity, ear, first-order-condition, lagrange-multiplier, corner-solution, profit-maximization, fixed-cost, variable-cost, portfolio-variance, correlation, standard-error, t-statistic, confidence-interval, median, ols, r-squared, omitted-variable-bias]
+        uses: [annuity, annuity-due, future-value, ear, apr, log-return, simple-return, first-order-condition, second-order-condition, lagrange-multiplier, shadow-price, corner-solution, profit-maximization, marginal-revenue, marginal-cost, fixed-cost, random-variable, covariance, correlation, portfolio-variance, sample-mean, sample-standard-deviation, standard-error, t-statistic, statistical-significance, confidence-interval, median, right-skew, ols, regression-coefficient, residual, r-squared]
 
   - id: "1"
     title: { zh: "第 1 阶段：微观经济学", en: "Stage 1: Microeconomics" }

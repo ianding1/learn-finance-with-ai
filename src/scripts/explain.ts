@@ -44,6 +44,8 @@ function inContent(node: Node | null): HTMLElement | null {
 }
 
 export function initExplain() {
+	// No explanations during a quiz.
+	if (pageData().lesson?.exam) return;
 	const btn = document.createElement('button');
 	btn.type = 'button';
 	btn.className = 'lfwai-explain-btn';

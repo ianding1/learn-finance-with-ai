@@ -1,5 +1,5 @@
 # Answer key for quiz E0 (math and statistics tools, lessons 0.1–0.5). Shown to learners only inside the
-# generated scoring prompt. The quiz page shows only the questions, points and suggested times.
+# generated scoring prompt. The quiz page shows only the questions, points.
 # level: medium or hard (about 60–70% medium, 30–40% hard by points). It is not shown on the page.
 # expected: values are recomputed by course/verify/E0.py in CI and must appear verbatim in every answer text.
 
@@ -19,9 +19,9 @@ common_errors:
       Using the ordinary annuity formula when payments are at the start of each period: each payment compounds one period longer, so the future value is $(1+i)$ times that of an ordinary annuity, and the required payment is correspondingly smaller.
   - questions: [Q7]
     zh: |-
-      把按产量征收的税当作固定成本：从量税随产量变化，属于可变成本，会提高边际成本、降低最优产量。
+      把市场价格当作不变（$MR = p$）：价格随产量下降时，边际收入低于价格，下降得也更快。
     en: |-
-      Treating a per-unit tax as a fixed cost: a tax per unit changes with output, so it is a variable cost that raises marginal cost and lowers the optimal output.
+      Treating the market price as fixed ($MR = p$): when the price falls with output, marginal revenue is below the price and falls faster.
   - questions: [Q8]
     zh: |-
       直接接受一阶条件给出的负权重：不能卖空时权重必须在 0 和 1 之间，这时最优解在边界上。
@@ -29,9 +29,9 @@ common_errors:
       Accepting the negative weight given by the first-order condition: without short selling the weight must be between 0 and 1, and the optimum is then at the boundary.
   - questions: [Q9]
     zh: |-
-      求所需年数时把 24.01 舍入为 24：要让 $t > 1.96$，年数必须向上取整为 25。
+      认为 t 值与样本量成正比：标准误按 $\sqrt{n}$ 缩小，t 值只按 $\sqrt{n}$ 增长。
     en: |-
-      Rounding 24.01 down to 24 when finding the number of years: for $t > 1.96$ the number of years must be rounded up to 25.
+      Thinking that the t-statistic is proportional to the sample size: the standard error shrinks with $\sqrt{n}$, so the t-statistic grows only with $\sqrt{n}$.
 
 questions:
   # ---------- Part 1: true, false or uncertain (4 points each) ----------
@@ -40,76 +40,77 @@ questions:
     part: judge
     level: medium
     points: 4
-    concepts: [growing-perpetuity, annuity-due, present-value]
-    expected: { pv: "2000", pv_due: "2160" }
+    concepts: [log-return, simple-return]
+    expected: { log_x: "0.693", portfolio: "25", log_p: "0.223" }
     question:
       zh: |-
-        一项增长永续年金，第一笔付款 100 美元，增长率 3%，折现率 8%。如果改为每期期初付款（第一笔在今天支付，金额和增长率都不变），它的现值会变成原来的 1.08 倍。
+        多期的对数收益率可以直接相加。同样地，把资金平均分配在两只基金上，组合一年的对数收益率等于两只基金对数收益率的平均值。
       en: |-
-        A growing perpetuity has a first payment of 100 dollars, a growth rate of 3% and a discount rate of 8%. If every payment is made at the start of its period instead (the first payment today, with the same amounts and growth rate), its present value becomes 1.08 times as large.
+        Log returns over several periods can simply be added. In the same way, if money is split equally between two funds, the portfolio's log return for a year equals the average of the two funds' log returns.
     answer:
       zh: |-
-        真。每一笔付款都提前一期，每笔少折现一次，现值都乘以 1.08，所以总现值也乘以 1.08：期末付款时 $PV = \frac{100}{0.08 - 0.03} = 2{,}000$ 美元，期初付款时 $2{,}000 \times 1.08 = 2{,}160$ 美元。也可以看成今天的 100 美元加上一个第一笔为 103 美元的期末增长永续年金：$100 + \frac{103}{0.05} = 2{,}160$。
+        假。对数收益率能相加，是因为多期的价格比是各期价格比的乘积，对数把乘积变成和；组合的收益是两只基金收益的加权和，不是乘积，所以要用简单收益率按权重平均。
+        反例：X 一年涨 100%（对数收益率 $\ln 2 \approx 0.693$），Y 跌 50%（$\ln 0.5 \approx -0.693$），对数收益率的平均是 0。但等权组合的简单收益率是 $0.5 \times 100\% + 0.5 \times (-50\%) = 25$%，对数收益率是 $\ln 1.25 \approx 0.223$，不是 0。
       en: |-
-        True. Every payment comes one period earlier and is discounted once less, so each present value is multiplied by 1.08, and so is the total: with payments at the end of each period $PV = \frac{100}{0.08 - 0.03} = 2{,}000$ dollars; with payments at the start, $2{,}000 \times 1.08 = 2{,}160$ dollars. It can also be seen as 100 dollars today plus a growing perpetuity whose first end-of-period payment is 103 dollars: $100 + \frac{103}{0.05} = 2{,}160$.
+        False. Log returns add over time because the price ratio over several periods is the product of the ratios of each period, and the logarithm turns the product into a sum. A portfolio's return is a weighted sum of the funds' returns, not a product, so simple returns must be averaged by weight.
+        Counterexample: X rises 100% in a year (log return $\ln 2 \approx 0.693$) and Y falls 50% ($\ln 0.5 \approx -0.693$); the average of the log returns is 0. But the equally weighted portfolio's simple return is $0.5 \times 100\% + 0.5 \times (-50\%) = 25$%, and its log return is $\ln 1.25 \approx 0.223$, not 0.
     rubric:
       zh:
-        - "判断为真，并说明每笔付款提前一期、少折现一次，或用两种算法验证（4 分）。"
-        - "判断为真但理由不完整：2 分。只写判断：0 分。"
+        - "判断为假，并说明可加性来自时间上的连乘、组合是加权和，或给出反例（4 分）。"
+        - "判断为假但理由不完整：2 分。只写判断：0 分。"
       en:
-        - "States true and explains that each payment is one period earlier and discounted once less, or checks it by calculation (4 points)."
-        - "True with an incomplete reason: 2 points. Only the verdict: 0 points."
+        - "States false and explains that additivity comes from compounding over time while a portfolio is a weighted sum, or gives a counterexample (4 points)."
+        - "False with an incomplete reason: 2 points. Only the verdict: 0 points."
 
   - id: Q2
     kind: quiz
     part: judge
     level: medium
     points: 4
-    concepts: [lagrange-multiplier, first-order-condition, corner-solution, second-order-condition]
+    concepts: [shadow-price, lagrange-multiplier]
+    expected: { u100: "312.5", u200: "1250", approx: "625", actual: "937.5" }
     question:
       zh: |-
-        用拉格朗日乘数法求出的点同时满足一阶条件和预算约束，所以它一定是消费者在预算内能做出的最好选择。
+        消费者的效用 $U = xy$，$p_x = 2$，$p_y = 4$，预算 100 美元时拉格朗日乘数 $\lambda = 6.25$。所以预算增加到 200 美元时，最大效用大约增加 $6.25 \times 100 = 625$。
       en: |-
-        The point found with the Lagrange multiplier method satisfies the first-order conditions and the budget constraint, so it must be the best choice the consumer can make within the budget.
+        A consumer has utility $U = xy$ with $p_x = 2$ and $p_y = 4$; at a budget of 100 dollars the Lagrange multiplier is $\lambda = 6.25$. So if the budget rises to 200 dollars, the maximum utility rises by about $6.25 \times 100 = 625$.
     answer:
       zh: |-
-        假（或不确定）。至少有两个原因：(1) 拉格朗日解不保证非负，可能出现负的数量，这时真正的最优是角点解；(2) 一阶条件只是必要条件，满足它的点也可能是最小值或不是最优点，需要检查二阶条件或比较目标值。
+        假。$\lambda$ 是预算增加一个很小的量时最大效用的变化率，是局部的近似；预算变化很大时，$\lambda$ 本身也在变。这里 $U^* = \frac{M^2}{4p_xp_y} = \frac{M^2}{32}$：预算 100 时 $U^* = 312.5$，预算 200 时 $U^* = 1250$，实际增加 937.5，而不是 625（$\lambda = \frac{M}{16}$ 随预算增大）。
       en: |-
-        False (or uncertain). There are at least two reasons: (1) the Lagrange solution is not guaranteed to be non-negative and may contain a negative quantity, in which case the true optimum is a corner solution; (2) the first-order conditions are only necessary, so a point that satisfies them may be a minimum or not optimal, and the second-order condition must be checked or the objective values compared.
+        False. $\lambda$ is the rate at which maximum utility changes for a small increase in the budget, a local approximation; when the budget changes a lot, $\lambda$ itself changes. Here $U^* = \frac{M^2}{4p_xp_y} = \frac{M^2}{32}$: at a budget of 100, $U^* = 312.5$; at 200, $U^* = 1250$. The actual increase is 937.5, not 625 ($\lambda = \frac{M}{16}$ grows with the budget).
     rubric:
       zh:
-        - "判断为假或不确定，并给出至少一个正确的原因（非负约束 / 角点解，或一阶条件不充分）（4 分）。"
-        - "只写判断：0 分。"
+        - "判断为假，并说明 $\\lambda$ 只是小变化时的近似，或算出实际增加 937.5（4 分）。"
+        - "判断为假但理由不完整：2 分。只写判断：0 分。"
       en:
-        - "States false or uncertain and gives at least one correct reason (non-negativity and corner solutions, or first-order conditions not being sufficient) (4 points)."
-        - "Only the verdict: 0 points."
+        - "States false and explains that $\\lambda$ is an approximation for small changes, or computes the actual increase of 937.5 (4 points)."
+        - "False with an incomplete reason: 2 points. Only the verdict: 0 points."
 
   - id: Q3
     kind: quiz
     part: judge
     level: hard
     points: 4
-    concepts: [portfolio-variance, diversification, correlation]
-    expected: { sd: "19.62" }
+    concepts: [covariance, correlation, random-variable]
+    expected: { cov: "0" }
     question:
       zh: |-
-        两只股票的相关系数为 0.9。把资金平均分配在这两只股票上，组合的标准差一定低于两只股票中波动较低的那一只。
+        两项资产收益的协方差为 0，说明一项资产的收益不能告诉我们任何关于另一项资产收益的信息。
       en: |-
-        Two stocks have a correlation of 0.9. If money is split equally between them, the standard deviation of the portfolio must be lower than that of the less volatile stock.
+        If the covariance between the returns of two assets is 0, then one asset's return tells us nothing about the other asset's return.
     answer:
       zh: |-
-        假。反例：$\sigma_A = 10\%$，$\sigma_B = 30\%$，$\rho = 0.9$，等权时
-        $\sigma_P = \sqrt{0.25 \times 100 + 0.25 \times 900 + 2 \times 0.25 \times 0.9 \times 10 \times 30} = \sqrt{385} \approx 19.62\%$，高于 10%。组合标准差低于加权平均，但不一定低于两者中较小的那个；相关系数高、两者波动差别大时，加入高波动资产会提高风险。
+        假。协方差（和相关系数）只衡量线性关系。反例：三种情景等概率，A 的收益为 −10、0、10（%），B 的收益为 10、0、10（%），即 B 由 A 完全决定（$B = 0.1A^2$）。$E[A] = 0$，$E[B] \approx 6.67$，$\text{Cov} = \frac{1}{3}\big[(-10)(3.33) + 0 + (10)(3.33)\big] = 0$。协方差为 0，但知道 A 就完全知道 B。
       en: |-
-        False. Counterexample: $\sigma_A = 10\%$, $\sigma_B = 30\%$, $\rho = 0.9$; with equal weights
-        $\sigma_P = \sqrt{0.25 \times 100 + 0.25 \times 900 + 2 \times 0.25 \times 0.9 \times 10 \times 30} = \sqrt{385} \approx 19.62\%$, which is above 10%. The portfolio standard deviation is below the weighted average, but not necessarily below the smaller of the two; with a high correlation and very different volatilities, adding the more volatile asset raises risk.
+        False. Covariance (and correlation) measures only linear relationships. Counterexample: three equally likely scenarios, A returns −10, 0, 10 (%) and B returns 10, 0, 10 (%), so B is fully determined by A ($B = 0.1A^2$). $E[A] = 0$, $E[B] \approx 6.67$, and $\text{Cov} = \frac{1}{3}\big[(-10)(3.33) + 0 + (10)(3.33)\big] = 0$. The covariance is 0, yet knowing A tells us B exactly.
     rubric:
       zh:
-        - "判断为假，并给出具体反例或一般性的论证（4 分）。"
-        - "只说“相关系数高所以分散效果差”而没有说明为什么一定性的结论不成立：2 分。只写判断：0 分。"
+        - "判断为假，并给出协方差为 0 但有确定关系的反例，或说明协方差只衡量线性关系（4 分）。"
+        - "判断为假但理由不完整：2 分。只写判断：0 分。"
       en:
-        - "States false and gives a concrete counterexample or a general argument (4 points)."
-        - "Says only that a high correlation weakens diversification, without showing why the claim fails: 2 points. Only the verdict: 0 points."
+        - "States false and gives a counterexample with zero covariance but an exact relationship, or explains that covariance measures only linear relationships (4 points)."
+        - "False with an incomplete reason: 2 points. Only the verdict: 0 points."
 
   - id: Q4
     kind: quiz
@@ -166,197 +167,199 @@ questions:
     level: medium
     points: 16
     concepts: [annuity, annuity-due, future-value, ear, apr]
-    expected: { payment: "995.51", payment_due: "990.55", apr: "7.12", years: "24", exact: "23.8" }
+    expected: { payment: "995.51", payment_due: "990.55", apr: "7.12", fv_savings: "301129", payment_rest: "695.73" }
     question:
       zh: |-
         一个家庭希望 30 年后的退休账户里有 1,000,000 美元。账户的名义年利率为 6%，按月复利。
         (a) 如果每月月末存入相同的金额，每月需要存多少？（4 分）
         (b) 如果改为每月月初存入（第一笔今天存入），每月需要存多少？（4 分）
         (c) 这个家庭每月月末最多只能存 800 美元。要在 30 年后达到目标，账户的名义年利率（按月复利）至少要多少？写出你要解的方程。（5 分）
-        (d) 不用计算器估计：一次性投入一笔钱，年收益 6%（按年复利），大约多少年变成原来的 4 倍？再给出精确值。（3 分）
+        (d) 回到 (a) 的条件。如果这个家庭现在已经有 50,000 美元存款，放在同一个账户里，每月月末还需要存多少？（3 分）
       en: |-
         A household wants 1,000,000 dollars in its retirement account in 30 years. The account's annual percentage rate is 6%, compounded monthly.
         (a) If the same amount is deposited at the end of each month, how much must be deposited each month? (4 points)
         (b) If the deposits are made at the start of each month instead (the first one today), how much must be deposited each month? (4 points)
         (c) The household can deposit at most 800 dollars at the end of each month. What annual percentage rate (compounded monthly) is needed at least to reach the goal in 30 years? Write the equation you solve. (5 points)
-        (d) Without a calculator, estimate: a lump sum invested at 6% per year (compounded yearly) grows to 4 times its size in about how many years? Then give the exact value. (3 points)
+        (d) Return to the conditions of (a). If the household already has 50,000 dollars of savings in the same account, how much must it deposit at the end of each month? (3 points)
     answer:
       zh: |-
         (a) $i = 0.005$，$n = 360$。由年金终值公式 $FV = C\frac{(1+i)^n - 1}{i}$，$C = \frac{1{,}000{,}000 \times 0.005}{1.005^{360} - 1} \approx 995.51$ 美元。
         (b) 期初存入时每笔多复利一个月，终值是期末的 $1.005$ 倍，所以 $C = \frac{995.51}{1.005} \approx 990.55$ 美元。
         (c) 解 $800 \times \frac{(1+j)^{360} - 1}{j} = 1{,}000{,}000$，$j$ 为月利率。数值求解得 $j \approx 0.594\%$，名义年利率约 $12j \approx 7.12$%。
-        (d) 72 法则：翻倍约 $72/6 = 12$ 年，4 倍是翻倍两次，约 24 年。精确值 $\frac{\ln 4}{\ln 1.06} \approx 23.8$ 年。
+        (d) 现有存款 30 年后的终值 $50{,}000 \times 1.005^{360} \approx 301{,}129$ 美元，还差约 698,871 美元。$C = \frac{698{,}871 \times 0.005}{1.005^{360} - 1} \approx 695.73$ 美元。
       en: |-
         (a) $i = 0.005$ and $n = 360$. From the future value of an annuity, $FV = C\frac{(1+i)^n - 1}{i}$, so $C = \frac{1{,}000{,}000 \times 0.005}{1.005^{360} - 1} \approx 995.51$ dollars.
         (b) With deposits at the start of each month, each deposit compounds one more month, so the future value is $1.005$ times that of end-of-month deposits, and $C = \frac{995.51}{1.005} \approx 990.55$ dollars.
         (c) Solve $800 \times \frac{(1+j)^{360} - 1}{j} = 1{,}000{,}000$ for the monthly rate $j$. Solving numerically gives $j \approx 0.594\%$, so the annual percentage rate is about $12j \approx 7.12$%.
-        (d) Rule of 72: doubling takes about $72/6 = 12$ years, and 4 times is two doublings, about 24 years. Exact value: $\frac{\ln 4}{\ln 1.06} \approx 23.8$ years.
+        (d) In 30 years the existing savings grow to $50{,}000 \times 1.005^{360} \approx 301{,}129$ dollars, leaving about 698,871 dollars to reach. $C = \frac{698{,}871 \times 0.005}{1.005^{360} - 1} \approx 695.73$ dollars.
     rubric:
       zh:
         - "(a) 用月利率和月数，公式正确 2 分，数值正确 2 分。"
         - "(b) 指出期初付款终值多乘 $(1+i)$ 2 分，数值正确 2 分。"
         - "(c) 方程正确 3 分，数值约 7.12%（7.1% 左右均可）2 分。"
-        - "(d) 估计约 24 年 2 分，精确值约 23.8 年 1 分。"
+        - "(d) 现有存款的终值 1 分，月供约 695.73 美元 2 分。"
       en:
         - "(a) Uses the monthly rate and number of months: correct formula 2 points, correct value 2 points."
         - "(b) States that start-of-period payments multiply the future value by $(1+i)$: 2 points; correct value 2 points."
         - "(c) Correct equation 3 points; value about 7.12% (anything near 7.1% is fine) 2 points."
-        - "(d) Estimate of about 24 years 2 points; exact value about 23.8 years 1 point."
+        - "(d) Future value of the existing savings 1 point; payment of about 695.73 dollars 2 points."
 
   - id: Q7
     kind: quiz
     part: problem
     level: medium
     points: 16
-    concepts: [profit-maximization, marginal-cost, marginal-revenue, fixed-cost, variable-cost, first-order-condition]
-    expected: { q: "10", profit: "100", q_tax: "8", profit_tax: "28", profit_fee: "-200" }
+    concepts: [profit-maximization, marginal-revenue, marginal-cost, first-order-condition, second-order-condition, fixed-cost]
+    expected: { q: "20", p: "60", profit: "600", q_new: "18", p_new: "64", profit_new: "448", rise: "4" }
     question:
       zh: |-
-        一家完全竞争的厂商按市场价格 60 美元出售产品，成本为 $C(q) = 2q^2 + 20q + 100$。
-        (a) 求利润最高的产量和最大利润，并检查它是最大值。（4 分）
-        (b) 政府对每件产品征税 8 美元。新的最优产量和最大利润是多少？（4 分）
-        (c) 政府改为不征税，而是每年收取 300 美元的经营执照费。最优产量和最大利润是多少？长期来看这家厂商应该继续经营吗？（4 分）
-        (d) 一位同事说：“税和执照费都是每年交给政府的钱，所以它们对最优产量的影响一样。”指出这句话错在哪里。（4 分）
+        一家公司是某种产品唯一的卖家。它卖出 $q$ 件时，市场价格为 $p(q) = 100 - 2q$（美元）。成本为 $C(q) = 20q + 200$。
+        (a) 写出利润函数，求利润最高的产量、价格和最大利润，并检查是最大值。这时边际收入和边际成本各是多少？（6 分）
+        (b) 原料涨价，每件的成本从 20 美元变为 28 美元。新的最优产量、价格和最大利润是多少？（5 分）
+        (c) 一位同事说：“每件成本涨了 8 美元，公司就应该把价格提高 8 美元，把成本完全转嫁给顾客。”这个说法对吗？用 (a)、(b) 的结果和边际的推理说明。（5 分）
       en: |-
-        A firm in perfect competition sells at the market price of 60 dollars, and its cost is $C(q) = 2q^2 + 20q + 100$.
-        (a) Find the output with the highest profit and the maximum profit, and check that it is a maximum. (4 points)
-        (b) The government taxes each unit at 8 dollars. What are the new optimal output and maximum profit? (4 points)
-        (c) Instead of the tax, the government charges a business license fee of 300 dollars a year. What are the optimal output and the maximum profit? In the long run, should the firm stay in business? (4 points)
-        (d) A colleague says: "The tax and the license fee are both money paid to the government each year, so they affect the optimal output in the same way." Point out what is wrong with this. (4 points)
+        A firm is the only seller of a product. When it sells $q$ units, the market price is $p(q) = 100 - 2q$ (dollars). Its cost is $C(q) = 20q + 200$.
+        (a) Write the profit function. Find the output, the price and the maximum profit, and check that it is a maximum. What are marginal revenue and marginal cost there? (6 points)
+        (b) Materials become more expensive, and the cost per unit rises from 20 to 28 dollars. What are the new optimal output, price and maximum profit? (5 points)
+        (c) A colleague says: "The cost per unit rose by 8 dollars, so the firm should raise its price by 8 dollars and pass the whole cost on to customers." Is this right? Explain with the results of (a) and (b) and with marginal reasoning. (5 points)
     answer:
       zh: |-
-        (a) $\pi = 60q - 2q^2 - 20q - 100$，$\pi' = 40 - 4q = 0$，$q^* = 10$；$\pi'' = -4 < 0$，是最大值；$\pi^* = 600 - 200 - 200 - 100 = 100$。
-        (b) 税使每件的成本增加 8：$\pi' = 32 - 4q = 0$，$q^* = 8$；$\pi^* = 480 - 128 - 160 - 100 - 64 = 28$。
-        (c) 执照费与产量无关，求导为 0，$q^*$ 仍为 10；$\pi^* = 100 - 300 = -200$。长期利润为负，应该退出。
-        (d) 从量税随产量变化，是可变成本，会提高边际成本，使最优产量下降；执照费与产量无关，是固定成本，不改变边际成本和最优产量，只影响利润和是否值得经营。
+        (a) 收入 $R = (100 - 2q)q$，$\pi = 100q - 2q^2 - 20q - 200$。$\pi' = 80 - 4q = 0$，$q^* = 20$；$\pi'' = -4 < 0$，是最大值。价格 $p = 60$，$\pi^* = 1200 - 400 - 200 = 600$。$MR = R'(q) = 100 - 4q = 20$，等于 $MC = 20$。
+        (b) $\pi' = 72 - 4q = 0$，$q^* = 18$，$p = 64$，$\pi^* = 18 \times 64 - 28 \times 18 - 200 = 448$。
+        (c) 不对。价格只上涨 4 美元，即成本上涨的一半。原因：最优点满足 $MR = MC$。边际收入 $100 - 4q$ 随产量下降的速度是价格 $100 - 2q$ 的两倍；边际成本上升 8 时，产量只需减少 2 件就能让边际收入上升 8，而减少 2 件只让价格上升 4。如果把价格提高 8（产量减到 16），$MR = 36 > MC = 28$，多卖一件还能增加利润，所以不是最优的。
       en: |-
-        (a) $\pi = 60q - 2q^2 - 20q - 100$ and $\pi' = 40 - 4q = 0$, so $q^* = 10$; $\pi'' = -4 < 0$, so it is a maximum; $\pi^* = 600 - 200 - 200 - 100 = 100$.
-        (b) The tax adds 8 to the cost of each unit: $\pi' = 32 - 4q = 0$, so $q^* = 8$; $\pi^* = 480 - 128 - 160 - 100 - 64 = 28$.
-        (c) The license fee does not depend on output and its derivative is 0, so $q^*$ is still 10; $\pi^* = 100 - 300 = -200$. Long-run profit is negative, so the firm should exit.
-        (d) A per-unit tax changes with output, so it is a variable cost: it raises marginal cost and lowers the optimal output. The license fee does not depend on output, so it is a fixed cost: it changes neither marginal cost nor the optimal output, and affects only profit and whether staying in business is worthwhile.
+        (a) Revenue $R = (100 - 2q)q$, so $\pi = 100q - 2q^2 - 20q - 200$. $\pi' = 80 - 4q = 0$ gives $q^* = 20$; $\pi'' = -4 < 0$, so it is a maximum. The price is $p = 60$ and $\pi^* = 1200 - 400 - 200 = 600$. $MR = R'(q) = 100 - 4q = 20$, equal to $MC = 20$.
+        (b) $\pi' = 72 - 4q = 0$ gives $q^* = 18$, $p = 64$ and $\pi^* = 18 \times 64 - 28 \times 18 - 200 = 448$.
+        (c) No. The price rises by only 4 dollars, half of the cost increase. The reason: the optimum satisfies $MR = MC$. Marginal revenue $100 - 4q$ falls twice as fast with output as the price $100 - 2q$; when marginal cost rises by 8, output needs to fall by only 2 units for marginal revenue to rise by 8, and 2 fewer units raise the price by only 4. If the price were raised by 8 (output 16), $MR = 36 > MC = 28$, so selling one more unit would still add profit, which is not optimal.
     rubric:
       zh:
-        - "(a) 产量与利润各 1.5 分，检查二阶条件 1 分。"
-        - "(b) 产量 2 分，利润 2 分。"
-        - "(c) 产量不变 1 分，利润 −200 1 分，长期应退出并说明理由 2 分。"
-        - "(d) 区分可变成本与固定成本，并说明它们对边际成本的不同影响 4 分。"
+        - "(a) 利润函数与一阶条件 2 分；产量、价格、利润 2 分；二阶条件 1 分；指出 $MR = MC = 20$ 1 分。"
+        - "(b) 产量、价格、利润共 5 分（产量 2 分，价格 1 分，利润 2 分）。"
+        - "(c) 结论为不对、价格只涨 4 美元 2 分；用 $MR$ 与价格下降速度不同、或用 $MR > MC$ 说明涨 8 美元不是最优 3 分。"
       en:
-        - "(a) Output and profit 1.5 points each; checking the second-order condition 1 point."
-        - "(b) Output 2 points, profit 2 points."
-        - "(c) Unchanged output 1 point, profit −200 1 point, exit in the long run with a reason 2 points."
-        - "(d) Distinguishes variable from fixed cost and explains their different effect on marginal cost: 4 points."
+        - "(a) Profit function and first-order condition 2 points; output, price and profit 2 points; second-order condition 1 point; $MR = MC = 20$ 1 point."
+        - "(b) Output, price and profit 5 points in total (output 2, price 1, profit 2)."
+        - "(c) Not right, the price rises by only 4 dollars: 2 points; explains with marginal revenue falling faster than the price, or shows that raising the price by 8 gives $MR > MC$: 3 points."
 
   - id: Q8
     kind: quiz
     part: problem
     level: hard
     points: 18
-    concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, diversification, correlation]
-    expected: { w: "0.18", sd: "11.45", w_unconstrained: "-0.3", threshold: "0.6" }
+    concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, correlation]
+    expected: { rho: "-0.25", sd: "7.91", threshold: "0.5" }
     question:
       zh: |-
-        你只持有债券基金 B（$\sigma_B = 12\%$），在考虑把一部分资金（权重 $w$）换成股票基金 A（$\sigma_A = 20\%$）。两者的相关系数 $\rho = 0.3$。不允许卖空，即 $0 \le w \le 1$。
-        (a) 写出组合方差 $\sigma_P^2(w)$，用导数求使它最小的 $w$，并检查是最小值。（6 分）
-        (b) 求这时组合的标准差。加入波动更大的 A，为什么风险反而下降？（4 分）
-        (c) 如果相关系数是 0.8，(a) 的方法给出的 $w$ 是多少？在不能卖空的条件下，最小风险的组合是什么？一般地，$\rho$ 大于多少时，加入一点 A 就会提高风险？（8 分）
+        两只基金 A、B 的标准差为 $\sigma_A$、$\sigma_B$，相关系数为 $\rho$。组合中 A 的权重为 $w$，B 为 $1 - w$。
+        (a) 用导数推导使组合方差最小的权重 $w^*$（用 $\sigma_A$、$\sigma_B$、$\rho$ 表示），并说明它确实是最小值。（6 分）
+        (b) 已知 $\sigma_A = 20\%$，$\sigma_B = 10\%$，某位分析师算出的最小方差组合中 A 的权重是 25%。由此反推两只基金的相关系数，并求这个组合的标准差。（6 分）
+        (c) 仍取 $\sigma_A = 20\%$、$\sigma_B = 10\%$，不允许卖空（$0 \le w \le 1$）。相关系数在什么范围内时，最小方差组合完全不持有 A？说明理由。（6 分）
       en: |-
-        You hold only a bond fund B ($\sigma_B = 12\%$) and are considering moving part of your money (weight $w$) into a stock fund A ($\sigma_A = 20\%$). The correlation between them is $\rho = 0.3$. Short selling is not allowed, so $0 \le w \le 1$.
-        (a) Write the portfolio variance $\sigma_P^2(w)$, use the derivative to find the $w$ that minimizes it, and check that it is a minimum. (6 points)
-        (b) Find the portfolio standard deviation at this weight. Why does adding the more volatile A lower the risk? (4 points)
-        (c) If the correlation were 0.8, what $w$ would the method of (a) give? Without short selling, what is the minimum-risk portfolio? In general, for $\rho$ above what value does adding a little A raise the risk? (8 points)
+        Two funds A and B have standard deviations $\sigma_A$ and $\sigma_B$ and correlation $\rho$. The portfolio holds A with weight $w$ and B with weight $1 - w$.
+        (a) Use the derivative to derive the weight $w^*$ that minimizes the portfolio variance (in terms of $\sigma_A$, $\sigma_B$ and $\rho$), and show that it is a minimum. (6 points)
+        (b) With $\sigma_A = 20\%$ and $\sigma_B = 10\%$, an analyst finds that the minimum-variance portfolio holds 25% in A. Work back to the correlation between the two funds, and find the standard deviation of this portfolio. (6 points)
+        (c) Still with $\sigma_A = 20\%$ and $\sigma_B = 10\%$, short selling is not allowed ($0 \le w \le 1$). For what range of the correlation does the minimum-variance portfolio hold no A at all? Explain. (6 points)
     answer:
       zh: |-
-        (a) $\sigma_P^2 = 400w^2 + 144(1-w)^2 + 2w(1-w)(0.3)(20)(12) = 400w^2 + 144(1-w)^2 + 144w(1-w)$。
-        $\frac{d\sigma_P^2}{dw} = 800w - 288(1-w) + 144(1 - 2w) = 800w - 144 = 0$，$w^* = 0.18$。二阶导数 $800 > 0$，是最小值，且在 0 和 1 之间。
-        一般公式：$w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B} = \frac{144 - 72}{400} = 0.18$。
-        (b) $\sigma_P^2 = 0.0324 \times 400 + 0.6724 \times 144 + 144 \times 0.18 \times 0.82 \approx 131.04$，$\sigma_P \approx 11.45\% < 12\%$。相关系数小于 1，A 的波动和 B 的波动不完全同步，一部分会互相抵消；少量加入 A 时，A 自身方差的贡献（与 $w^2$ 成正比）很小，而减少 B 带来的方差下降更大。
-        (c) $w = \frac{144 - 0.8 \times 240}{400 + 144 - 2 \times 0.8 \times 240} = \frac{-48}{160} = -0.3$，是负数，需要卖空，不可行。在 $[0, 1]$ 上，$w = 0$ 处的导数 $2(\rho\sigma_A\sigma_B - \sigma_B^2) = 96 > 0$，方差随 $w$ 增加，所以最小风险的组合是角点 $w = 0$：只持有 B。
-        一般地，$w = 0$ 处的导数为 $2\sigma_B(\rho\sigma_A - \sigma_B)$，当 $\rho > \frac{\sigma_B}{\sigma_A} = 0.6$ 时为正，加入一点 A 就会提高风险。
+        (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$。
+        $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$，解得
+        $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。
+        二阶导数 $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\,\text{Var}(R_A - R_B) \ge 0$，$\rho < 1$ 或 $\sigma_A \ne \sigma_B$ 时为正，是最小值。
+        (b) $\frac{100 - 200\rho}{500 - 400\rho} = 0.25$，$100 - 200\rho = 125 - 100\rho$，$\rho = -0.25$。
+        $\sigma_P^2 = 0.0625 \times 400 + 0.5625 \times 100 + 2 \times 0.25 \times 0.75 \times (-0.25) \times 200 = 25 + 56.25 - 18.75 = 62.5$，$\sigma_P \approx 7.91\%$。
+        (c) 方差是 $w$ 的开口向上的二次函数。最小值点 $w^* \le 0$ 时，在 $[0, 1]$ 上方差随 $w$ 增加，最优是角点 $w = 0$。$w^* \le 0$ 即 $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$，$\rho \ge \frac{\sigma_B}{\sigma_A} = 0.5$。所以 $\rho \ge 0.5$ 时完全不持有 A（$\rho = 0.5$ 时 $w^*$ 恰好为 0）。
       en: |-
-        (a) $\sigma_P^2 = 400w^2 + 144(1-w)^2 + 2w(1-w)(0.3)(20)(12) = 400w^2 + 144(1-w)^2 + 144w(1-w)$.
-        $\frac{d\sigma_P^2}{dw} = 800w - 288(1-w) + 144(1 - 2w) = 800w - 144 = 0$, so $w^* = 0.18$. The second derivative is $800 > 0$, so it is a minimum, and it lies between 0 and 1.
-        General formula: $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B} = \frac{144 - 72}{400} = 0.18$.
-        (b) $\sigma_P^2 = 0.0324 \times 400 + 0.6724 \times 144 + 144 \times 0.18 \times 0.82 \approx 131.04$, so $\sigma_P \approx 11.45\% < 12\%$. The correlation is below 1, so the movements of A and B are not fully in step and partly offset each other; with a small weight in A, A's own variance contributes little (it is proportional to $w^2$), while the variance removed by holding less B is larger.
-        (c) $w = \frac{144 - 0.8 \times 240}{400 + 144 - 2 \times 0.8 \times 240} = \frac{-48}{160} = -0.3$, which is negative and would need short selling, so it is not feasible. On $[0, 1]$, the derivative at $w = 0$ is $2(\rho\sigma_A\sigma_B - \sigma_B^2) = 96 > 0$, so the variance rises with $w$, and the minimum-risk portfolio is the corner $w = 0$: hold only B.
-        In general, the derivative at $w = 0$ is $2\sigma_B(\rho\sigma_A - \sigma_B)$, which is positive when $\rho > \frac{\sigma_B}{\sigma_A} = 0.6$; then adding a little A raises the risk.
+        (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$.
+        $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$ gives
+        $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$.
+        The second derivative is $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\,\text{Var}(R_A - R_B) \ge 0$, positive when $\rho < 1$ or $\sigma_A \ne \sigma_B$, so it is a minimum.
+        (b) $\frac{100 - 200\rho}{500 - 400\rho} = 0.25$, so $100 - 200\rho = 125 - 100\rho$ and $\rho = -0.25$.
+        $\sigma_P^2 = 0.0625 \times 400 + 0.5625 \times 100 + 2 \times 0.25 \times 0.75 \times (-0.25) \times 200 = 25 + 56.25 - 18.75 = 62.5$, so $\sigma_P \approx 7.91\%$.
+        (c) The variance is a quadratic in $w$ that opens upward. When its minimum point $w^* \le 0$, the variance rises with $w$ on $[0, 1]$, and the optimum is the corner $w = 0$. $w^* \le 0$ means $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$, that is, $\rho \ge \frac{\sigma_B}{\sigma_A} = 0.5$. So for $\rho \ge 0.5$ the portfolio holds no A ($w^*$ is exactly 0 at $\rho = 0.5$).
     rubric:
       zh:
-        - "(a) 方差表达式 2 分，求导并解出 $w = 0.18$ 3 分，检查二阶条件 1 分。"
-        - "(b) 标准差约 11.45% 2 分，解释 2 分。"
-        - "(c) 算出 $-0.3$ 2 分；指出不可行、最优为角点 $w = 0$ 并说明理由 3 分；给出 $\\rho > \\sigma_B / \\sigma_A = 0.6$ 的条件 3 分。"
+        - "(a) 方差表达式与求导 3 分，$w^*$ 公式 2 分，二阶条件 1 分。"
+        - "(b) 解出 $\\rho = -0.25$ 4 分，标准差约 7.91% 2 分。"
+        - "(c) 指出最优为角点、需要 $w^* \\le 0$ 3 分；得出 $\\rho \\ge 0.5$ 3 分。"
       en:
-        - "(a) Variance expression 2 points; derivative and $w = 0.18$ 3 points; second-order check 1 point."
-        - "(b) Standard deviation about 11.45%: 2 points; explanation 2 points."
-        - "(c) $-0.3$: 2 points; not feasible and the optimum is the corner $w = 0$, with a reason: 3 points; the condition $\\rho > \\sigma_B / \\sigma_A = 0.6$: 3 points."
+        - "(a) Variance expression and derivative 3 points; formula for $w^*$ 2 points; second-order condition 1 point."
+        - "(b) $\\rho = -0.25$: 4 points; standard deviation about 7.91%: 2 points."
+        - "(c) The optimum is a corner when $w^* \\le 0$: 3 points; $\\rho \\ge 0.5$: 3 points."
 
   - id: Q9
     kind: quiz
     part: problem
     level: medium
     points: 15
-    concepts: [standard-error, t-statistic, confidence-interval, statistical-significance, median, right-skew]
-    expected: { se: "3.16", t: "1.26", lo: "-2.20", hi: "10.20", years: "25", median: "38.94" }
+    concepts: [sample-mean, sample-standard-deviation, standard-error, t-statistic, statistical-significance, median, right-skew]
+    expected: { mean: "4", s: "6.78", se: "3.03", t: "1.32", t10: "1.87", d: "0.676", mean_a: "1326.9", safe: "219.1" }
     question:
       zh: |-
-        (a) 一个策略过去 10 年的年超额收益平均为 4%，样本标准差为 10%。计算平均超额收益的标准误、t 值和 95% 置信区间。能否在 5% 水平上说明真实的平均超额收益大于 0？（5 分）
-        (b) 假设以后的样本均值和样本标准差保持不变，至少需要多少年的数据，才能在 5% 水平上显著？（4 分）
-        (c) 另一项投资每年等概率上涨 $u$ 或下跌 $u$（$0 < u < 1$）。说明它每年的期望收益是 0，但中位数财富随时间下降。投入 100 美元、$u = 30\%$ 时，20 年后的期望财富和中位数财富各是多少？（6 分）
+        (a) 一个策略过去 5 年的年超额收益为 8%、−2%、6%、12%、−4%。计算样本均值、样本标准差、标准误和 t 值。能否在 5% 水平上说明真实的平均超额收益大于 0？（6 分）
+        (b) 策略的提出者说：“如果接下来 5 年的表现和过去一样（样本均值和样本标准差不变），数据翻倍，t 值也会翻倍，到时候就显著了。”这个说法错在哪里？t 值会变成多少？（4 分）
+        (c) 投入 100 美元，投资 20 年。投资 B 每年确定收益 4%。投资 A 每年等概率使财富乘以 1.6 或 $d$。$d$ 为多少时，A 20 年后的中位数财富恰好等于 B 20 年后的财富？取这个 $d$，求 A 20 年后的期望财富。有人说：“A 的期望财富是 B 的 6 倍，所以只有一次机会的家庭应该选 A。”这个推理错在哪里？（5 分）
       en: |-
-        (a) Over the past 10 years, a strategy's annual excess return averaged 4% with a sample standard deviation of 10%. Calculate the standard error of the average excess return, the t-statistic and the 95% confidence interval. Can you conclude at the 5% level that the true average excess return is above 0? (5 points)
-        (b) If the sample mean and sample standard deviation stay the same, at least how many years of data are needed for significance at the 5% level? (4 points)
-        (c) Another investment rises by $u$ or falls by $u$ each year with equal probability ($0 < u < 1$). Show that its expected return each year is 0 but its median wealth falls over time. Starting with 100 dollars and $u = 30\%$, what are the mean and the median wealth after 20 years? (6 points)
+        (a) A strategy's annual excess returns over the past 5 years were 8%, −2%, 6%, 12% and −4%. Calculate the sample mean, the sample standard deviation, the standard error and the t-statistic. Can you conclude at the 5% level that the true average excess return is above 0? (6 points)
+        (b) The strategy's designer says: "If the next 5 years look like the past (the same sample mean and sample standard deviation), the data double, so the t-statistic doubles, and then it will be significant." What is wrong with this? What would the t-statistic be? (4 points)
+        (c) You invest 100 dollars for 20 years. Investment B returns a certain 4% a year. Investment A multiplies wealth each year by 1.6 or $d$ with equal probability. For what value of $d$ is A's median wealth after 20 years equal to B's wealth after 20 years? With this $d$, find A's mean wealth after 20 years. Someone says: "A's mean wealth is 6 times B's, so a household that gets only one try should choose A." What is wrong with this reasoning? (5 points)
     answer:
       zh: |-
-        (a) $\text{SE} = \frac{10}{\sqrt{10}} \approx 3.16$%，$t = \frac{4}{3.16} \approx 1.26 < 1.96$。95% 置信区间 $4 \pm 1.96 \times 3.16$，约 $[-2.20\%, 10.20\%]$，包含 0。不能说明真实的平均超额收益大于 0（也不能说明它等于 0）。
-        (b) 需要 $\frac{4}{10/\sqrt{n}} > 1.96$，即 $n > \left(\frac{1.96 \times 10}{4}\right)^2 = 24.01$，所以至少 25 年。
-        (c) 期望收益 $\frac{u + (-u)}{2} = 0$，期望财富保持 100 美元。一涨一跌的净效果是 $(1+u)(1-u) = 1 - u^2 < 1$，典型路径（一半上涨、一半下跌）的财富为 $100(1 - u^2)^{n/2}$，随时间下降。$u = 30\%$、20 年：期望 100 美元，中位数 $100 \times 0.91^{10} \approx 38.94$ 美元。
+        (a) $\bar R = \frac{8 - 2 + 6 + 12 - 4}{5} = 4$%。偏差 4、−6、2、8、−8，平方和 $16 + 36 + 4 + 64 + 64 = 184$，$s = \sqrt{184/4} = \sqrt{46} \approx 6.78$%。$\text{SE} = \frac{6.78}{\sqrt{5}} \approx 3.03$%，$t = \frac{4}{3.03} \approx 1.32 < 1.96$，不显著（样本这么小，用 t 分布的临界值 2.78 更严格，结论相同）。
+        (b) 标准误按 $\sqrt{n}$ 缩小，所以 t 值按 $\sqrt{n}$ 增长，不是按 $n$。数据翻倍时 t 值约为 $1.32 \times \sqrt{2} \approx 1.87$，仍小于 1.96，不显著。
+        (c) 中位数对应 10 次上涨、10 次下跌：$100 \times (1.6\,d)^{10} = 100 \times 1.04^{20} \approx 219.1$，所以 $1.6\,d = 1.04^2$，$d = 0.676$。A 的期望财富 $100 \times \left(\frac{1.6 + 0.676}{2}\right)^{20} = 100 \times 1.138^{20} \approx 1{,}326.9$ 美元，约为 B 的 6 倍。但期望被少数上涨次数很多的路径拉高；A 的中位数只和 B 一样，上涨少于 10 次（概率约 41%）时结果低于 B，而且坏的路径很差（例如 5 次上涨时只剩约 3 美元）。只有一次机会的家庭关心的是自己可能得到的结果，不能只看期望。
       en: |-
-        (a) $\text{SE} = \frac{10}{\sqrt{10}} \approx 3.16$% and $t = \frac{4}{3.16} \approx 1.26 < 1.96$. The 95% confidence interval is $4 \pm 1.96 \times 3.16$, about $[-2.20\%, 10.20\%]$, which contains 0. You cannot conclude that the true average excess return is above 0 (nor that it is 0).
-        (b) We need $\frac{4}{10/\sqrt{n}} > 1.96$, that is, $n > \left(\frac{1.96 \times 10}{4}\right)^2 = 24.01$, so at least 25 years.
-        (c) The expected return is $\frac{u + (-u)}{2} = 0$, so the mean wealth stays at 100 dollars. One rise and one fall together give $(1+u)(1-u) = 1 - u^2 < 1$, so the typical path (half rises, half falls) has wealth $100(1 - u^2)^{n/2}$, which falls over time. With $u = 30\%$ and 20 years: mean 100 dollars, median $100 \times 0.91^{10} \approx 38.94$ dollars.
+        (a) $\bar R = \frac{8 - 2 + 6 + 12 - 4}{5} = 4$%. The deviations are 4, −6, 2, 8 and −8, and the sum of squares is $16 + 36 + 4 + 64 + 64 = 184$, so $s = \sqrt{184/4} = \sqrt{46} \approx 6.78$%. $\text{SE} = \frac{6.78}{\sqrt{5}} \approx 3.03$% and $t = \frac{4}{3.03} \approx 1.32 < 1.96$, so it is not significant (with such a small sample, the t critical value of 2.78 is stricter, and the conclusion is the same).
+        (b) The standard error shrinks with $\sqrt{n}$, so the t-statistic grows with $\sqrt{n}$, not with $n$. With twice the data, the t-statistic would be about $1.32 \times \sqrt{2} \approx 1.87$, still below 1.96 and not significant.
+        (c) The median corresponds to 10 rises and 10 falls: $100 \times (1.6\,d)^{10} = 100 \times 1.04^{20} \approx 219.1$, so $1.6\,d = 1.04^2$ and $d = 0.676$. A's mean wealth is $100 \times \left(\frac{1.6 + 0.676}{2}\right)^{20} = 100 \times 1.138^{20} \approx 1{,}326.9$ dollars, about 6 times B's. But the mean is pulled up by a few paths with many rises; A's median is only equal to B, with fewer than 10 rises (probability about 41%) the result is below B, and the bad paths are very bad (with 5 rises only about 3 dollars are left). A household with one try cares about the result it may actually get, so it cannot look only at the mean.
     rubric:
       zh:
-        - "(a) 标准误、t 值、区间各 1 分，结论 2 分（不显著，并且不等于证明为 0）。"
-        - "(b) 不等式 2 分，得出 25 年（向上取整）2 分；答 24 年给 2 分。"
-        - "(c) 说明期望为 0、中位数下降 3 分；期望 100 和中位数约 38.94 各 1.5 分。"
+        - "(a) 均值、样本标准差各 1.5 分，标准误与 t 值 2 分，结论 1 分。"
+        - "(b) 指出 t 值按 $\\sqrt{n}$ 增长 2 分，算出约 1.87、仍不显著 2 分。"
+        - "(c) 求出 $d$ 2 分；期望财富 1 分；指出期望被少数路径拉高、中位数并不比 B 好、有相当大的概率低于 B 2 分。"
       en:
-        - "(a) Standard error, t-statistic and interval 1 point each; conclusion 2 points (not significant, which does not prove it is 0)."
-        - "(b) The inequality 2 points; 25 years (rounded up) 2 points; an answer of 24 years gets 2 points."
-        - "(c) Shows that the expected return is 0 and the median falls: 3 points; mean 100 and median about 38.94: 1.5 points each."
+        - "(a) Mean and sample standard deviation 1.5 points each; standard error and t-statistic 2 points; conclusion 1 point."
+        - "(b) The t-statistic grows with $\\sqrt{n}$: 2 points; about 1.87, still not significant: 2 points."
+        - "(c) Finds $d$: 2 points; mean wealth: 1 point; explains that the mean is pulled up by a few paths, the median is no better than B and there is a large probability of ending below B: 2 points."
 
   - id: Q10
     kind: quiz
     part: problem
     level: medium
     points: 15
-    concepts: [regression-coefficient, r-squared, t-statistic, confidence-interval, omitted-variable-bias]
-    expected: { t_a: "1.6", lo: "0.91", hi: "1.69" }
+    concepts: [regression-coefficient, r-squared, t-statistic, confidence-interval, residual]
+    expected: { t_a: "1.6", lo: "0.91", hi: "1.69", pred: "13.4" }
     question:
       zh: |-
         一只基金过去 60 个月的月收益对市场月收益（%）做回归，结果为：截距 $a = 0.4$（标准误 0.25），斜率 $b = 1.3$（标准误 0.2），$R^2 = 0.45$。
         (a) 截距在 5% 水平上显著不为 0 吗？写出斜率的 95% 置信区间。（5 分）
         (b) 一位分析师说：“$R^2$ 只有 0.45，说明这只基金的收益大部分不是市场带来的，而是基金经理的能力。”指出这个说法中的问题。（5 分）
-        (c) 这只基金主要持有小盘股。小盘股指数的收益与市场收益正相关，也会影响基金的收益。如果在回归中加入小盘股指数的收益，市场收益的系数会变大还是变小？为什么？（5 分）
+        (c) 这位分析师又说：“斜率是 1.3，所以如果明年市场涨 10%，这只基金一定会涨 13%。”指出这句话中至少两处问题。（5 分）
       en: |-
         A fund's monthly returns over the past 60 months are regressed on the market's monthly returns (%). The results: intercept $a = 0.4$ (standard error 0.25), slope $b = 1.3$ (standard error 0.2), $R^2 = 0.45$.
         (a) Is the intercept significantly different from 0 at the 5% level? Give the 95% confidence interval for the slope. (5 points)
         (b) An analyst says: "$R^2$ is only 0.45, so most of this fund's return does not come from the market but from the manager's skill." Point out the problems with this claim. (5 points)
-        (c) The fund holds mainly small-company stocks. The returns of a small-company stock index are positively correlated with the market's returns and also affect the fund's returns. If the small-company index return is added to the regression, will the coefficient on the market return become larger or smaller? Why? (5 points)
+        (c) The analyst adds: "The slope is 1.3, so if the market rises 10% next year, this fund will rise 13%." Point out at least two problems with this statement. (5 points)
     answer:
       zh: |-
         (a) 截距的 t 值 $\frac{0.4}{0.25} = 1.6 < 1.96$，不显著。斜率的区间 $1.3 \pm 1.96 \times 0.2$，约 $[0.91, 1.69]$。
         (b) $R^2$ 说的是月收益的“波动”中有多少能由市场解释，不是“平均收益”来自哪里。剩下 55% 的波动可能来自其他因素（例如小盘股、行业）或随机噪声，不能说明是能力。如果经理有能力，应该体现在截距（市场收益为 0 时的平均收益）上，而截距并不显著。
-        (c) 变小（更准确地说，原来的系数被高估了）。小盘股收益影响基金收益，且与市场收益正相关，回归只放市场时，小盘股的一部分作用被算到了市场头上（遗漏变量偏差 $\beta_2 \frac{\text{Cov}}{\text{Var}} > 0$）。加入小盘股后，这部分作用转移到小盘股的系数上，市场的系数下降。
+        (c) 问题包括（答出两处即可）：
+        - 回归给出的是平均关系，不是每一次都成立。$R^2 = 0.45$，基金收益的波动中有 55% 不能由市场解释，实际收益可能离预测很远。
+        - 斜率本身有估计误差，95% 置信区间约 0.91 到 1.69，对应 9.1% 到 16.9%。
+        - 回归用的是月收益，不能直接套到一年 10% 的涨幅上；而且即使按月计算，还要加上截距：$0.4 + 1.3 \times 10 = 13.4$。
       en: |-
         (a) The intercept's t-statistic is $\frac{0.4}{0.25} = 1.6 < 1.96$, so it is not significant. The slope's interval is $1.3 \pm 1.96 \times 0.2$, about $[0.91, 1.69]$.
         (b) $R^2$ is the share of the variation in monthly returns that the market explains, not where the average return comes from. The remaining 55% of the variation may come from other factors (for example small companies or industries) or random noise; it does not show skill. If the manager had skill, it would show up in the intercept (the average return when the market return is 0), and the intercept is not significant.
-        (c) Smaller (more precisely, the original coefficient was overstated). Small-company returns affect the fund and are positively correlated with the market, so when only the market is in the regression, part of the effect of small companies is attributed to the market (omitted variable bias $\beta_2 \frac{\text{Cov}}{\text{Var}} > 0$). When the small-company index is added, that part moves to its own coefficient, and the market coefficient falls.
+        (c) Problems include (any two are enough):
+        - The regression gives an average relation, not one that holds every time. With $R^2 = 0.45$, 55% of the variation in the fund's return is not explained by the market, so the actual return may be far from the prediction.
+        - The slope itself has an estimation error; its 95% confidence interval is about 0.91 to 1.69, which corresponds to 9.1% to 16.9%.
+        - The regression uses monthly returns and cannot be applied directly to a 10% rise over a year; and even for a month, the intercept must be added: $0.4 + 1.3 \times 10 = 13.4$.
     rubric:
       zh:
         - "(a) 截距 t 值 1.6、不显著 2 分；斜率区间约 0.91 到 1.69 3 分。"
         - "(b) 指出 $R^2$ 衡量的是波动的解释比例，不是收益来源 3 分；指出能力应看截距且截距不显著 2 分。"
-        - "(c) 结论为变小 2 分；用两个条件（影响基金、与市场正相关）说明遗漏变量偏差的方向 3 分。"
+        - "(c) 指出至少两处问题（平均关系与残差、斜率的不确定性、月数据与年收益不匹配或遗漏截距），第一处 3 分，第二处 2 分。"
       en:
         - "(a) Intercept t-statistic 1.6, not significant: 2 points; slope interval about 0.91 to 1.69: 3 points."
         - "(b) Points out that $R^2$ measures the share of variation explained, not where returns come from: 3 points; points out that skill would show in the intercept, which is not significant: 2 points."
-        - "(c) Concludes smaller: 2 points; explains the direction of omitted variable bias with both conditions (it affects the fund and is positively correlated with the market): 3 points."
+        - "(c) Points out at least two problems (an average relation with residuals, uncertainty in the slope, monthly data versus an annual return or the missing intercept): the first 3 points, the second 2 points."

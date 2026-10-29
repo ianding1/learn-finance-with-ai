@@ -21,6 +21,7 @@ import Quiz from '../../../../components/Quiz.astro';
 - Future and present value: $FV = PV(1+r)^n$, $PV = \frac{FV}{(1+r)^n}$; effective annual rate: $\text{EAR} = \left(1 + \frac{r}{m}\right)^m - 1$
 - Annuity (payments at the end of each period): $PV = \frac{C}{r}\left[1 - (1+r)^{-n}\right]$, $FV = C\,\frac{(1+r)^n - 1}{r}$
 - Perpetuity: $PV = \frac{C}{r}$; growing perpetuity: $PV = \frac{C}{r - g}$ ($C$ is the payment at the end of the first period)
+- Log return: $r = \ln(1 + R)$
 
 **Optimization**
 
@@ -40,7 +41,6 @@ import Quiz from '../../../../components/Quiz.astro';
 **Regression**
 
 - $b = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}$, $a = \bar y - b\,\bar x$, $R^2 = 1 - \frac{\text{SSR}}{\text{SST}}$
-- Omitted variable: $\beta_1 + \beta_2 \cdot \frac{\text{Cov}(x_1, x_2)}{\text{Var}(x_1)}$
 
 ## Questions [#questions]
 

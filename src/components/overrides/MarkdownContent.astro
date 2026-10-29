@@ -21,6 +21,8 @@ const data = {
 				id: l.id,
 				title: l.title[lang],
 				url: absolute(lessonPath(l, lang)),
+				// Quizzes have no "Explain this" button.
+				exam: !!l.exam,
 				// Explanations can be about any part of the lesson, so they get the whole lesson context.
 				context: key ? key.context.map((c) => '- ' + plainRich(c[lang], lang, l.id)).join('\n') : '',
 			}

@@ -10,6 +10,7 @@ export interface PageData {
 		id: string;
 		title: string;
 		url: string;
+		exam: boolean;
 		context: string;
 	};
 }
