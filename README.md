@@ -10,8 +10,7 @@ An economics and finance course written by AI, set in the US market. After the c
 4. Explain why diversification works, why risk and expected return are linked, and why most actively managed funds trail their index.
 5. Build and test a portfolio model for a US household, including accounts and taxes, asset allocation and retirement withdrawals.
 
-The depth is about that of upper-level undergraduate courses in economics and finance. You need basic
-calculus (derivatives); the course teaches the probability and statistics it uses.
+The depth is about that of upper-level undergraduate courses in economics and finance.
 
 The site is fully static and never calls an AI. For grading and explanations it builds a prompt that
 learners paste into their own AI assistant.

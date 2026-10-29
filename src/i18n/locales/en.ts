@@ -56,6 +56,14 @@ const locale: Locale = {
 		exercisesHeading: 'Exercises',
 		prevPage: 'Previous',
 		nextPage: 'Next',
+		heroChart: '1 dollar growing at 7% a year, compounded',
+		heroChartEnd: '{v} dollars',
+		heroYears: '{n} years',
+		continueAt: 'Continue: {title}',
+		routeTitle: 'The course',
+		routePublished: 'published',
+		routeUpcoming: 'being written',
+		routeQuiz: 'quiz',
 	},
 
 	prompts: {

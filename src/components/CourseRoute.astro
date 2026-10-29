@@ -1,0 +1,35 @@
+---
+// <CourseRoute /> — the course at a glance on the home page: one row per stage, one mark per lesson
+// (filled = published, ring = being written, diamond = quiz). Published lessons are links.
+import { toLang, t } from '../i18n/ui';
+import { stages, lessonPath } from '../lib/course';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+---
+
+<section class="lfwai-route not-content" aria-labelledby="lfwai-route-title">
+	<h2 id="lfwai-route-title">{t(lang, 'routeTitle')}</h2>
+	<ol>
+		{stages().map((s) => (
+			<li>
+				<span class="lfwai-route-stage">{s.title[lang]}</span>
+				<span class="lfwai-route-marks">
+					{s.lessons.map((l) => {
+						const cls = `lfwai-route-mark${l.exam ? ' is-quiz' : ''}${l.published ? ' is-published' : ''}`;
+						const label = `${l.exam ? '' : l.id + ' '}${l.title[lang]}`;
+						return l.published ? (
+							<a class={cls} href={lessonPath(l, lang)} title={label} aria-label={label}></a>
+						) : (
+							<span class={cls} title={`${label}${t(lang, 'paren', { text: t(lang, 'routeUpcoming') })}`}></span>
+						);
+					})}
+				</span>
+			</li>
+		))}
+	</ol>
+	<p class="lfwai-route-legend">
+		<span><span class="lfwai-route-mark is-published"></span>{t(lang, 'routePublished')}</span>
+		<span><span class="lfwai-route-mark"></span>{t(lang, 'routeUpcoming')}</span>
+		<span><span class="lfwai-route-mark is-quiz is-published"></span>{t(lang, 'routeQuiz')}</span>
+	</p>
+</section>

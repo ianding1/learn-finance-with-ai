@@ -56,7 +56,15 @@ export type UiKey =
 	| 'reportBody'
 	| 'exercisesHeading'
 	| 'prevPage'
-	| 'nextPage';
+	| 'nextPage'
+	| 'heroChart'
+	| 'heroChartEnd'
+	| 'heroYears'
+	| 'continueAt'
+	| 'routeTitle'
+	| 'routePublished'
+	| 'routeUpcoming'
+	| 'routeQuiz';
 
 export type UiStrings = Record<UiKey, string>;
 

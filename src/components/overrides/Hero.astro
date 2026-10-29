@@ -1,0 +1,70 @@
+---
+// Home page hero: title, tagline and the start button from the page's `hero` frontmatter, next to
+// a compound-growth curve (the first idea of the course). Once the learner has progress, the button
+// leads to the first lesson that is not done (src/scripts/home.ts).
+import { toLang, t } from '../../i18n/ui';
+import { lessons, lessonKey, lessonPath } from '../../lib/course';
+
+const route = Astro.locals.starlightRoute;
+const lang = toLang(route.lang);
+const hero = route.entry.data.hero!;
+const action = hero.actions?.[0];
+
+// 1 dollar at 7% a year for 40 years.
+const W = 560, H = 340, pad = { l: 16, r: 92, t: 24, b: 40 };
+const X = (y: number) => pad.l + (y / 40) * (W - pad.l - pad.r);
+const Y = (v: number) => pad.t + ((16 - v) / 16) * (H - pad.t - pad.b);
+const pts = Array.from({ length: 81 }, (_, i) => i / 2).map((y) => [X(y), Y(1.07 ** y)]);
+const line = 'M' + pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L');
+const area = `${line}L${X(40).toFixed(1)},${Y(0).toFixed(1)}L${X(0).toFixed(1)},${Y(0).toFixed(1)}Z`;
+const end = 1.07 ** 40;
+const marks = [10, 20, 30].map((y) => ({ x: X(y), y: Y(1.07 ** y), v: (1.07 ** y).toFixed(2) }));
+
+const data = {
+	label: t(lang, 'continueAt', { title: '{title}' }),
+	lessons: lessons()
+		.filter((l) => l.published && (lessonKey(l.id)?.questions.length ?? 0) > 0)
+		.map((l) => ({ id: l.id, title: `${l.id} ${l.title[lang]}`, href: lessonPath(l, lang), questions: lessonKey(l.id)!.questions.map((q) => q.id) })),
+};
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+---
+
+<div class="lfwai-hero">
+	<div class="lfwai-hero-text">
+		<h1 id="_top" data-page-title>{hero.title}</h1>
+		{hero.tagline && <p class="lfwai-hero-tagline" set:html={hero.tagline} />}
+		{action && (
+			<a class="lfwai-hero-start" href={action.link} data-start>{action.text}</a>
+		)}
+	</div>
+	<figure class="lfwai-hero-chart" aria-label={t(lang, 'heroChart')}>
+		<svg viewBox={`0 0 ${W} ${H}`} role="img" aria-hidden="true">
+			<line class="lfwai-hero-base" x1={X(0)} x2={X(40)} y1={Y(0)} y2={Y(0)} />
+			{[0, 10, 20, 30, 40].map((y) => (
+				<text class="lfwai-hero-tick" x={X(y)} y={H - 12} text-anchor={y === 0 ? 'start' : 'middle'}>
+					{y === 40 ? t(lang, 'heroYears', { n: 40 }) : y}
+				</text>
+			))}
+			<path class="lfwai-hero-area" d={area} />
+			<path class="lfwai-hero-line" d={line} pathLength="1" />
+			{marks.map((m) => (
+				<g class="lfwai-hero-mark">
+					<circle cx={m.x} cy={m.y} r="3.5" />
+					<text x={m.x - 8} y={m.y - 10} text-anchor="end">{m.v}</text>
+				</g>
+			))}
+			<circle class="lfwai-hero-start-dot" cx={X(0)} cy={Y(1)} r="4" />
+			<g class="lfwai-hero-end">
+				<circle cx={X(40)} cy={Y(end)} r="6" />
+				<text x={X(40) + 12} y={Y(end) + 6}>{t(lang, 'heroChartEnd', { v: end.toFixed(2) })}</text>
+			</g>
+		</svg>
+		<figcaption>{t(lang, 'heroChart')}</figcaption>
+	</figure>
+</div>
+<script type="application/json" id="lfwai-home-data" set:html={json}></script>
+
+<script>
+	import { initHome } from '../../scripts/home';
+	initHome();
+</script>
