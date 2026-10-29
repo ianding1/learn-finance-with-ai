@@ -43,16 +43,16 @@ context:
       Portfolio $R_P = wR_A + (1-w)R_B$: the expected value is linear; the variance $w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\text{Cov}$ is not.
   - concepts: [diversification]
     zh: |-
-      分散化：只要 $\rho < 1$，组合标准差就小于加权平均。$\rho = 0$ 时好处来自“方差相加、标准差不相加”（$\sqrt{a^2+b^2} < a+b$），不需要负的协方差项。分散化不需要负相关。
+      分散化：只要 $\rho < 1$，组合标准差就小于加权平均。$\rho = 0$ 时好处来自“方差相加、标准差不相加”（$\sqrt{a^2+b^2} < a+b$），不来自协方差项。分散化不需要负相关。
     en: |-
-      Diversification: as long as $\rho < 1$, the portfolio standard deviation is less than the weighted average. When $\rho = 0$, the benefit comes from "variances add, standard deviations do not" ($\sqrt{a^2+b^2} < a+b$); it does not need a negative covariance term. Diversification does not require negative correlation.
+      Diversification: as long as $\rho < 1$, the portfolio standard deviation is less than the weighted average. When $\rho = 0$, the benefit comes from "variances add, standard deviations do not" ($\sqrt{a^2+b^2} < a+b$), not from the covariance term. Diversification does not require negative correlation.
 
 common_errors:
   - questions: [Q1, C5]
     zh: |-
-      认为 $\rho = 0$ 时是负的协方差降低了风险：此时协方差项为 0。好处来自方差相加、标准差不相加；等价地说，加权平均对应 $\rho = 1$，而 $\rho = 0$ 时少了正的协方差项。
+      $\rho = 0$ 时用“受协方差影响”解释分散化：结论对，但理由不成立。此时协方差项为 0，好处来自方差相加、标准差不相加。
     en: |-
-      Thinking that at $\rho = 0$ a negative covariance lowers the risk: the covariance term is 0 in this case. The benefit comes from the fact that variances add but standard deviations do not; in other words, the weighted average corresponds to $\rho = 1$, and at $\rho = 0$ the positive covariance term is missing.
+      Explaining diversification at $\rho = 0$ by "the effect of covariance": the conclusion is right but the reason is wrong. The covariance term is 0 in this case; the benefit comes from the fact that variances add but standard deviations do not.
   - questions: [Q2]
     zh: |-
       认为“两只基金都涨了，所以正相关”：相关看的是相对各自期望的偏差方向，不是收益的正负；而且一次观测说明不了概率关系。
@@ -212,12 +212,10 @@ questions:
     rubric:
       zh:
         - "结论为假。"
-        - "理由正确：例如证明对正数 $a, b$ 有 $\\sqrt{a^2+b^2} < a+b$（方差相加、标准差不相加），或指出加权平均对应 $\\rho = 1$，而 $\\rho = 0$ 时少了正的协方差项。"
-        - "如果把理由说成“负的协方差降低了风险”，需要订正：$\\rho = 0$ 时协方差项为 0。"
+        - "理由必须指向“方差相加、标准差不相加”。用“受协方差影响”作理由在 $\\rho = 0$ 时不成立，需要订正。"
       en:
         - "States false."
-        - "The reason is correct: for example, a proof that $\\sqrt{a^2+b^2} < a+b$ for positive $a, b$ (variances add, standard deviations do not), or the observation that the weighted average corresponds to $\\rho = 1$, and at $\\rho = 0$ the positive covariance term is missing."
-        - "A reason saying that \"a negative covariance lowers the risk\" needs to be revised: at $\\rho = 0$ the covariance term is 0."
+        - "The reason must point to \"variances add, standard deviations do not\". A reason based on \"the effect of covariance\" does not hold at $\\rho = 0$ and needs to be revised."
 
   - id: Q2
     kind: exercise
