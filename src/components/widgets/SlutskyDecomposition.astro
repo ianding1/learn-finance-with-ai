@@ -1,0 +1,100 @@
+---
+// Figure 5-1 of lesson 1.2: U = xy, income M = 40, p_y = 1. The price of x changes from 2 to the slider
+// value. A: original choice; B: choice with the new prices and Slutsky-compensated income (A just
+// affordable); C: new choice. A→B is the substitution effect, B→C the income effect.
+// Parameters and ranges are registered in course/widgets.yaml (id: slutsky). Keep them in sync.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		p: 'x 的新价格 pₓ',
+		x: '商品 x 的数量',
+		y: 'y',
+		orig: '原来的预算线',
+		comp: '补偿后的预算线',
+		now: '新的预算线',
+		ic: '无差异曲线',
+		readout: 'A：x = {a}；B：x = {b}；C：x = {c}。替代效应 {se}，收入效应 {ie}，总效应 {te}。',
+	},
+	en: {
+		p: 'New price of x, pₓ',
+		x: 'Quantity of good x',
+		y: 'y',
+		orig: 'Original budget line',
+		comp: 'Compensated budget line',
+		now: 'New budget line',
+		ic: 'Indifference curves',
+		readout: 'A: x = {a}; B: x = {b}; C: x = {c}. Substitution effect {se}, income effect {ie}, total effect {te}.',
+	},
+}[lang];
+
+const xr = [0, 80];
+const yr = [0, 60];
+const xTicks = [0, 20, 40, 60, 80];
+const yTicks = [0, 20, 40, 60];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 360, pad: { l: 48, r: 20, t: 14, b: 44 } },
+	{ cls: 'viz-narrow', W: 360, H: 300, pad: { l: 40, r: 12, t: 14, b: 44 } },
+].map((g) => ({
+	...g,
+	X: (v: number) => g.pad.l + ((v - xr[0]) / (xr[1] - xr[0])) * (g.W - g.pad.l - g.pad.r),
+	Y: (v: number) => g.pad.t + ((yr[1] - v) / (yr[1] - yr[0])) * (g.H - g.pad.t - g.pad.b),
+}));
+---
+
+<div class="lfwai-widget" data-widget="slutsky" data-readout={L.readout}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.p} = <output data-out="p">1</output></span>
+			<input type="range" min="0.5" max="4" step="0.25" value="1" data-param="p" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad, X, Y }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.now} data-geom={JSON.stringify({ W, H, pad, xr, yr })}>
+			<defs>
+				<clipPath id={`slutsky-clip-${cls}`}>
+					<rect x={pad.l} y={pad.t} width={W - pad.l - pad.r} height={H - pad.t - pad.b} />
+				</clipPath>
+			</defs>
+			{yTicks.map((v) => (
+				<g>
+					<line class={v === 0 ? 'viz-axis' : 'viz-grid'} x1={pad.l} x2={W - pad.r} y1={Y(v)} y2={Y(v)} />
+					<text class="viz-tick" x={pad.l - 8} y={Y(v) + 4} text-anchor="end">{v}</text>
+				</g>
+			))}
+			{xTicks.map((v) => (
+				<text class="viz-tick" x={X(v)} y={H - pad.b + 18} text-anchor="middle">{v}</text>
+			))}
+			<line class="viz-axis" x1={pad.l} x2={pad.l} y1={pad.t} y2={H - pad.b} />
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">{L.x}</text>
+			<text class="viz-tick" transform={`translate(14 ${(pad.t + H - pad.b) / 2}) rotate(-90)`} text-anchor="middle">{L.y}</text>
+			<g clip-path={`url(#slutsky-clip-${cls})`}>
+				<path class="viz-level" data-el="icA" d="" />
+				<path class="viz-level" data-el="icB" d="" />
+				<path class="viz-level" data-el="icC" d="" />
+				<line class="viz-ols" x1={X(0)} y1={Y(40)} x2={X(20)} y2={Y(0)} />
+				<line class="viz-gap viz-dashed" data-el="comp" x1="0" y1="0" x2="0" y2="0" />
+				<line class="viz-budget" data-el="now" x1="0" y1="0" x2="0" y2="0" />
+			</g>
+			<circle class="viz-hollow" cx={X(10)} cy={Y(20)} r="6" />
+			<text class="viz-label" x={X(10) - 10} y={Y(20) - 10} text-anchor="end">A</text>
+			<circle class="viz-cur" data-el="B" r="6" cx="0" cy="0" />
+			<text class="viz-label" data-el="Bl" x="0" y="0">B</text>
+			<circle class="viz-min" data-el="C" r="6" cx="0" cy="0" />
+			<text class="viz-label" data-el="Cl" x="0" y="0">C</text>
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-ols"></span>{L.orig}</li>
+		<li><span class="sw sw-gap sw-dashed"></span>{L.comp}</li>
+		<li><span class="sw sw-budget"></span>{L.now}</li>
+		<li><span class="sw sw-level"></span>{L.ic}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initSlutsky } from '../../scripts/widgets/slutsky';
+	initSlutsky();
+</script>

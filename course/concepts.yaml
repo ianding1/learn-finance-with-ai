@@ -590,6 +590,80 @@ cross-price-elasticity:
     zh: 另一种商品的价格变化 1% 时，这种商品的需求量变化的百分比。
     en: The percentage change in the quantity demanded of a good when the price of another good changes by 1%.
 
+# ---------- 1.2 ----------
+
+preferences:
+  defined_in: "1.2"
+  zh: 偏好
+  en: preferences
+  short:
+    zh: 消费者对不同商品组合的排序。
+    en: A consumer's ranking of different bundles of goods.
+
+utility-function:
+  defined_in: "1.2"
+  zh: 效用函数
+  en: utility function
+  short:
+    zh: 给每个商品组合打分、分数越高越受偏好的函数；只用来排序。
+    en: A function that scores each bundle so that preferred bundles get higher scores; it is used only for ranking.
+
+marginal-utility:
+  defined_in: "1.2"
+  zh: 边际效用
+  en: marginal utility
+  short:
+    zh: 其他商品不变时，多消费一单位某种商品带来的效用增加。
+    en: The increase in utility from consuming one more unit of a good, other goods unchanged.
+
+indifference-curve:
+  defined_in: "1.2"
+  zh: 无差异曲线
+  en: indifference curve
+  short:
+    zh: 效用相同的所有商品组合连成的曲线。
+    en: The curve of all bundles that give the same utility.
+
+marginal-rate-of-substitution:
+  defined_in: "1.2"
+  zh: 边际替代率
+  en: marginal rate of substitution
+  short:
+    zh: 为了多得到一单位 x，消费者愿意放弃的 y 的数量，等于 MUx/MUy。
+    en: The quantity of y a consumer is willing to give up for one more unit of x; it equals MUx/MUy.
+
+substitution-effect:
+  defined_in: "1.2"
+  zh: 替代效应
+  en: substitution effect
+  short:
+    zh: 价格变化时，只因相对价格改变（购买力不变）而引起的需求量变化。
+    en: The change in quantity demanded caused only by the change in relative prices, with purchasing power held constant.
+
+income-effect:
+  defined_in: "1.2"
+  zh: 收入效应
+  en: income effect
+  short:
+    zh: 价格变化时，因实际购买力改变而引起的需求量变化。
+    en: The change in quantity demanded caused by the change in real purchasing power when a price changes.
+
+slutsky-equation:
+  defined_in: "1.2"
+  zh: Slutsky 方程
+  en: Slutsky equation
+  short:
+    zh: 把价格变化对需求的影响分解为替代效应和收入效应的方程。
+    en: The equation that splits the effect of a price change on demand into a substitution effect and an income effect.
+
+giffen-good:
+  defined_in: "1.2"
+  zh: 吉芬商品
+  en: Giffen good
+  short:
+    zh: 收入效应超过替代效应、价格上升时需求量反而增加的劣等品。
+    en: An inferior good whose income effect outweighs the substitution effect, so that the quantity demanded rises when its price rises.
+
 expected-utility:
   defined_in: "1.4"
   zh: 期望效用

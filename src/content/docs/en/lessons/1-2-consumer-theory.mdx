@@ -1,0 +1,123 @@
+---
+title: 1.2 Consumer Theory
+description: Preferences and utility functions, indifference curves and the marginal rate of substitution, the best choice under a budget constraint, and the substitution and income effects of a price change (the Slutsky decomposition).
+lesson: "1.2"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import SlutskyDecomposition from '../../../../components/widgets/SlutskyDecomposition.astro';
+
+## Preferences [#preferences]
+
+<Ref lesson="1.1" /> simply took the demand curve as given. This lesson derives demand from the consumer's choice: what the consumer wants, what he can afford, and what he finally chooses.
+
+A consumer chooses among bundles of goods. The bundle $(x, y)$ means $x$ units of good $x$ and $y$ units of good $y$. The consumer's ranking of bundles is called his <Def id="preferences">preferences</Def>. Economics usually assumes that preferences satisfy:
+
+- completeness: for any two bundles A and B, the consumer can say whether he prefers A, prefers B, or likes them equally;
+- transitivity: if he prefers A to B and B to C, he prefers A to C;
+- monotonicity: a bundle with no less of either good and more of at least one is better;
+- convexity: the average of two equally good bundles is at least as good as either of them. In other words, the consumer likes mixtures rather than extremes.
+
+## Utility functions [#utility]
+
+A function that gives each bundle a score, such that preferred bundles get higher scores, is called a <Def id="utility-function">utility function</Def>, for example $U(x, y) = xy$. <Ref lesson="0.2" /> already used this function.
+
+A utility function is only used for ranking; the size of the score has no meaning by itself. $U = xy$ gives the bundle $(2, 8)$ a score of 16 and $(3, 5)$ a score of 15; this says only that the first is better, not that it is "$\frac{16}{15}$ times as good". Therefore any strictly increasing transformation of a utility function (taking the logarithm, squaring, multiplying by a positive number) still represents the same preferences. This property is called ordinal utility.
+
+The increase in utility from consuming one more unit of $x$, other goods unchanged, is the <Def id="marginal-utility">marginal utility</Def> of $x$:
+
+$$
+MU_x = \frac{\partial U}{\partial x}, \qquad MU_y = \frac{\partial U}{\partial y}
+$$
+
+<Check id="C1" />
+
+## Indifference curves and the marginal rate of substitution [#mrs]
+
+The curve connecting all bundles with the same utility is called an <Def id="indifference-curve">indifference curve</Def>; it is the contour line of the utility function in the figures of <Ref lesson="0.2" />. Monotonicity makes indifference curves slope downward: with more $x$, there must be less $y$ to keep utility the same. Indifference curves further to the upper right have higher utility.
+
+The rate at which the consumer is willing to trade $y$ for $x$ along an indifference curve is called the <Def id="marginal-rate-of-substitution">marginal rate of substitution</Def> (MRS): to get one more unit of $x$, how many units of $y$ the consumer is willing to give up. It equals the absolute value of the slope of the indifference curve. Along an indifference curve, the change in utility is $MU_x\,dx + MU_y\,dy = 0$, so
+
+$$
+MRS = -\frac{dy}{dx}\bigg|_{U} = \frac{MU_x}{MU_y}
+$$
+
+Example: for $U = xy$, $MU_x = y$ and $MU_y = x$, so $MRS = \frac{y}{x}$. At the bundle $(4, 9)$, $MRS = 2.25$: the consumer is willing to give 2.25 units of $y$ for 1 unit of $x$.
+
+Convexity means that indifference curves bow toward the origin: the more $x$ and the less $y$ the consumer has, the less willing he is to give up more $y$ for $x$.
+
+<Check id="C2" />
+
+## The best choice [#optimal-choice]
+
+The consumer has income $M$, and the prices are $p_x$ and $p_y$. The affordable bundles satisfy the budget constraint (<Ref concept="budget-constraint" />) $p_x x + p_y y \le M$. The absolute value of the slope of the budget line is $\frac{p_x}{p_y}$: the rate at which the market trades $y$ for $x$.
+
+<Ref lesson="0.2" /> used the "move one dollar" argument to show that an interior optimum satisfies $\frac{MU_x}{p_x} = \frac{MU_y}{p_y}$. Rewritten:
+
+$$
+MRS = \frac{MU_x}{MU_y} = \frac{p_x}{p_y}
+$$
+
+The rate at which the consumer is willing to trade $y$ for $x$ equals the rate at which the market lets him trade $y$ for $x$. If $MRS > \frac{p_x}{p_y}$, the consumer values $x$ more than it costs in the market and should buy more $x$; in the opposite case he should buy less $x$. Geometrically, the indifference curve is tangent to the budget line.
+
+Writing the best choice as a function of prices and income, $x^*(p_x, p_y, M)$, gives the consumer's demand function. The demand curve of <Ref lesson="1.1" /> is obtained by holding the other price and income fixed, changing only $p_x$, and recording $x^*$.
+
+Example: $U = xy$, $p_x = 2$, $p_y = 1$, $M = 40$. From the result of an exercise in <Ref lesson="0.2" />, $x^* = \frac{M}{2p_x} = 10$ and $y^* = \frac{M}{2p_y} = 20$. Check: $MRS = \frac{20}{10} = 2 = \frac{p_x}{p_y}$.
+
+The tangency condition applies only when the optimum is inside the budget line and the indifference curves are smooth. Two special kinds of preferences:
+
+- perfect complements, such as left and right shoes, $U = \min(x, y)$. The indifference curves are right angles, and the optimum is at the corner of the angle, with no tangency;
+- perfect substitutes, such as two brands of the same bottled water, $U = x + y$. The indifference curves are straight lines, and the optimum is usually a corner solution (<Ref concept="corner-solution" />) where only one good is bought.
+
+<Check id="C3" />
+
+## Price changes: substitution and income effects [#slutsky]
+
+When $x$ becomes cheaper, the consumer usually buys more $x$. This change can be split into two parts:
+
+- the <Def id="substitution-effect">substitution effect</Def>: $x$ has become cheaper relative to $y$, so even with unchanged purchasing power the consumer uses $x$ in place of some $y$;
+- the <Def id="income-effect">income effect</Def>: the same income buys more, so the consumer's real purchasing power rises and he adjusts what he buys.
+
+How can the two be separated? One method is to first adjust the consumer's income so that, at the new prices, he can just afford his original bundle, and see what he chooses. In this step only relative prices have changed, so the result is the substitution effect. Then restore the original income; the remaining change is the income effect. This is the Slutsky decomposition.
+
+Example: $U = xy$, $M = 40$, $p_y = 1$, and $p_x$ falls from 2 to 1.
+
+- The original choice A: $x = 10$, $y = 20$.
+- Compensated income: affording A at the new prices requires $M' = 1 \times 10 + 1 \times 20 = 30$. The choice B: $x = \frac{30}{2 \times 1} = 15$.
+- The new choice C: $x = \frac{40}{2 \times 1} = 20$.
+
+The substitution effect is A to B, $x$ rises by 5; the income effect is B to C, $x$ rises by another 5; the total effect is an increase of 10.
+
+Written in derivatives, this decomposition is the <Def id="slutsky-equation">Slutsky equation</Def>:
+
+$$
+\frac{\partial x}{\partial p_x} = \frac{\partial x^s}{\partial p_x} \; - \; x\,\frac{\partial x}{\partial M}
+$$
+
+where $x^s$ is demand with income compensated as above. The first term on the right is the substitution effect, and the second (with its minus sign) is the income effect. The substitution effect always moves the quantity demanded opposite to the price ($\frac{\partial x^s}{\partial p_x} \le 0$). The direction of the income effect depends on whether $x$ is a normal or an inferior good (<Ref concept="income-elasticity" />): for a normal good, $\frac{\partial x}{\partial M} > 0$ and the two effects have the same direction; for an inferior good, the income effect goes against the substitution effect. If the income effect of an inferior good is so large that it outweighs the substitution effect, the quantity demanded rises when the price rises; such a good is called a <Def id="giffen-good">Giffen good</Def>. Giffen goods are very rare in practice. The derivation of the equation is left to <Ref check="Q4" />.
+
+<Figure id="5-1" title="$U = xy$, $M = 40$, $p_y = 1$; $p_x$ changes from 2 to the slider value. A is the original choice, B the choice with compensated income, C the new choice." observe="Move $p_x$ and watch the direction and size of the substitution effect (A to B) and the income effect (B to C).">
+	<SlutskyDecomposition />
+</Figure>
+
+This decomposition comes up again and again in finance. <Ref lesson="1.3" /> uses the same method for the effect of a higher interest rate on saving: saving earns more (the substitution effect), but savers also receive more interest income (the income effect), and the two can go in opposite directions.
+
+<Check id="C4" />
+
+## Summary [#summary]
+
+- Preferences rank bundles of goods; a utility function is only used for ranking, and strictly increasing transformations represent the same preferences.
+- An indifference curve connects bundles with the same utility; the marginal rate of substitution $MRS = \frac{MU_x}{MU_y}$ is the rate at which the consumer is willing to trade $y$ for $x$.
+- Interior optimum: $MRS = \frac{p_x}{p_y}$, where the indifference curve is tangent to the budget line. Perfect complements and perfect substitutes have no such tangency.
+- The total effect of a price change = substitution effect + income effect. The substitution effect always moves the quantity demanded opposite to the price; the direction of the income effect depends on whether the good is normal or inferior.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

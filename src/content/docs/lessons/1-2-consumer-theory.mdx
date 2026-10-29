@@ -1,0 +1,123 @@
+---
+title: 1.2 消费者理论
+description: 偏好与效用函数、无差异曲线与边际替代率、预算约束下的最优选择，以及价格变化的替代效应与收入效应（Slutsky 分解）。
+lesson: "1.2"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Exercises from '../../../components/Exercises.astro';
+import CheckAll from '../../../components/CheckAll.astro';
+import SlutskyDecomposition from '../../../components/widgets/SlutskyDecomposition.astro';
+
+## 偏好 [#preferences]
+
+<Ref lesson="1.1" /> 直接给出了需求曲线。这一课从消费者的选择推出需求：消费者想要什么，能买得起什么，最后选什么。
+
+消费者在不同的商品组合（bundle）之间做选择。组合 $(x, y)$ 表示买 $x$ 单位的商品 $x$ 和 $y$ 单位的商品 $y$。消费者对组合的排序叫<Def id="preferences">偏好</Def>（preferences）。经济学通常假设偏好满足：
+
+- 完备性（completeness）：任意两个组合 A 和 B，消费者都能说出更喜欢 A、更喜欢 B，还是两者一样好；
+- 传递性（transitivity）：喜欢 A 胜过 B、喜欢 B 胜过 C，就喜欢 A 胜过 C；
+- 多多益善（monotonicity）：两种商品都不减少、至少一种增加的组合更好；
+- 凸性（convexity）：两个一样好的组合，它们的平均至少和它们一样好。也就是说，消费者喜欢搭配，而不喜欢走极端。
+
+## 效用函数 [#utility]
+
+用一个数给每个组合打分，分数高的组合更受偏好，这个函数叫<Def id="utility-function">效用函数</Def>（utility function），例如 $U(x, y) = xy$。<Ref lesson="0.2" /> 已经用过这个函数。
+
+效用函数只用来排序，分数本身的大小没有意义。$U = xy$ 给组合 $(2, 8)$ 打 16 分、给 $(3, 5)$ 打 15 分，只说明前者更好，不说明“好 $\frac{16}{15}$ 倍”。因此，对效用函数做任何严格递增的变换（例如取对数、平方、乘以正数），得到的仍是同一种偏好。这种性质叫序数效用（ordinal utility）。
+
+其他商品不变时，多消费一单位 $x$ 带来的效用增加，叫 $x$ 的<Def id="marginal-utility">边际效用</Def>（marginal utility）：
+
+$$
+MU_x = \frac{\partial U}{\partial x}, \qquad MU_y = \frac{\partial U}{\partial y}
+$$
+
+<Check id="C1" />
+
+## 无差异曲线与边际替代率 [#mrs]
+
+效用相同的所有组合连成的曲线叫<Def id="indifference-curve">无差异曲线</Def>（indifference curve），也就是 <Ref lesson="0.2" /> 图中效用函数的等高线。多多益善使无差异曲线向右下方倾斜：$x$ 多了，$y$ 必须少一些，效用才能不变。越往右上方的无差异曲线，效用越高。
+
+沿着一条无差异曲线，消费者愿意用 $y$ 换 $x$ 的比率叫<Def id="marginal-rate-of-substitution">边际替代率</Def>（marginal rate of substitution，MRS）：为了多得到一单位 $x$，消费者愿意放弃多少单位 $y$。它等于无差异曲线斜率的绝对值。沿着无差异曲线，效用的变化 $MU_x\,dx + MU_y\,dy = 0$，所以
+
+$$
+MRS = -\frac{dy}{dx}\bigg|_{U} = \frac{MU_x}{MU_y}
+$$
+
+例：$U = xy$ 时 $MU_x = y$，$MU_y = x$，$MRS = \frac{y}{x}$。在组合 $(4, 9)$，$MRS = 2.25$：消费者愿意用 2.25 单位 $y$ 换 1 单位 $x$。
+
+凸性意味着无差异曲线凸向原点：$x$ 越多、$y$ 越少，消费者越不愿意再用 $y$ 换 $x$。
+
+<Check id="C2" />
+
+## 最优选择 [#optimal-choice]
+
+消费者的收入为 $M$，价格为 $p_x$ 和 $p_y$。能买得起的组合满足预算约束（<Ref concept="budget-constraint" />）$p_x x + p_y y \le M$。预算线的斜率绝对值是 $\frac{p_x}{p_y}$：市场上用 $y$ 换 $x$ 的比率。
+
+<Ref lesson="0.2" /> 用“挪一美元”的论证得出内部最优点满足 $\frac{MU_x}{p_x} = \frac{MU_y}{p_y}$。改写一下：
+
+$$
+MRS = \frac{MU_x}{MU_y} = \frac{p_x}{p_y}
+$$
+
+消费者愿意用 $y$ 换 $x$ 的比率，等于市场上能用 $y$ 换 $x$ 的比率。如果 $MRS > \frac{p_x}{p_y}$，消费者对 $x$ 的评价高于它在市场上的代价，应该多买 $x$；反之则少买 $x$。几何上，这就是无差异曲线与预算线相切。
+
+把最优选择写成价格和收入的函数 $x^*(p_x, p_y, M)$，就得到消费者的需求函数。<Ref lesson="1.1" /> 的需求曲线就是固定其他价格和收入、只改变 $p_x$ 时的 $x^*$。
+
+例：$U = xy$，$p_x = 2$，$p_y = 1$，$M = 40$。由 <Ref lesson="0.2" /> 练习题的结果，$x^* = \frac{M}{2p_x} = 10$，$y^* = \frac{M}{2p_y} = 20$。验证：$MRS = \frac{20}{10} = 2 = \frac{p_x}{p_y}$。
+
+相切条件只在最优点位于预算线内部、无差异曲线光滑时适用。两种特殊的偏好：
+
+- 完全互补（perfect complements），例如左鞋和右鞋，$U = \min(x, y)$。无差异曲线是直角，最优点在拐角处，没有相切；
+- 完全替代（perfect substitutes），例如两个品牌的同一种矿泉水，$U = x + y$。无差异曲线是直线，最优点通常是只买一种商品的角点解（<Ref concept="corner-solution" />）。
+
+<Check id="C3" />
+
+## 价格变化：替代效应与收入效应 [#slutsky]
+
+$x$ 降价时，消费者通常会多买 $x$。这个变化可以分成两部分：
+
+- <Def id="substitution-effect">替代效应</Def>（substitution effect）：$x$ 相对 $y$ 变便宜了，即使购买力不变，消费者也会用 $x$ 替代一部分 $y$；
+- <Def id="income-effect">收入效应</Def>（income effect）：同样的收入能买更多东西，消费者的实际购买力上升，因此调整购买量。
+
+怎样把两者分开？一种方法是先给消费者调整收入，使他在新价格下恰好买得起原来的组合，看他会怎样选择；这一步只有相对价格变了，得到的就是替代效应。再把收入恢复原状，剩下的变化就是收入效应。这叫 Slutsky 分解。
+
+例：$U = xy$，$M = 40$，$p_y = 1$，$p_x$ 从 2 降到 1。
+
+- 原来的选择 A：$x = 10$，$y = 20$。
+- 补偿收入：在新价格下买得起 A 需要 $M' = 1 \times 10 + 1 \times 20 = 30$。这时的选择 B：$x = \frac{30}{2 \times 1} = 15$。
+- 新的选择 C：$x = \frac{40}{2 \times 1} = 20$。
+
+替代效应是 A 到 B，$x$ 增加 5；收入效应是 B 到 C，$x$ 又增加 5；总效应是增加 10。
+
+把这个分解写成导数形式，就是 <Def id="slutsky-equation">Slutsky 方程</Def>（Slutsky equation）：
+
+$$
+\frac{\partial x}{\partial p_x} = \frac{\partial x^s}{\partial p_x} \; - \; x\,\frac{\partial x}{\partial M}
+$$
+
+其中 $x^s$ 是收入经过上面的补偿后的需求。右边第一项是替代效应，第二项（连同负号）是收入效应。替代效应总是使价格和需求量反方向变化（$\frac{\partial x^s}{\partial p_x} \le 0$）。收入效应的方向取决于 $x$ 是正常品还是劣等品（<Ref concept="income-elasticity" />）：正常品 $\frac{\partial x}{\partial M} > 0$，两个效应方向相同；劣等品的收入效应与替代效应方向相反。如果劣等品的收入效应大到超过替代效应，价格上升时需求量反而增加，这种商品叫<Def id="giffen-good">吉芬商品</Def>（Giffen good）。吉芬商品在现实中非常少见。这个方程的推导留作 <Ref check="Q4" />。
+
+<Figure id="5-1" title="$U = xy$，$M = 40$，$p_y = 1$，$p_x$ 从 2 变为滑块的值。A 是原来的选择，B 是补偿收入后的选择，C 是新的选择。" observe="拖动 $p_x$，看替代效应（A 到 B）和收入效应（B 到 C）的方向和大小。">
+	<SlutskyDecomposition />
+</Figure>
+
+这个分解在金融中会反复出现。<Ref lesson="1.3" /> 会用同样的方法分析利率上升对储蓄的影响：储蓄的回报提高了（替代效应），但储蓄者的利息收入也增加了（收入效应），两者可能方向相反。
+
+<Check id="C4" />
+
+## 小结 [#summary]
+
+- 偏好是对商品组合的排序；效用函数只用来排序，严格递增的变换表示同一种偏好。
+- 无差异曲线是效用相同的组合；边际替代率 $MRS = \frac{MU_x}{MU_y}$ 是消费者愿意用 $y$ 换 $x$ 的比率。
+- 内部最优点：$MRS = \frac{p_x}{p_y}$，无差异曲线与预算线相切。完全互补和完全替代的偏好没有这样的切点。
+- 价格变化的总效应 = 替代效应 + 收入效应。替代效应总是使需求量与价格反向变化；收入效应的方向取决于正常品还是劣等品。
+
+<CheckAll />
+
+## 练习题 [#exercises]
+
+<Exercises />
