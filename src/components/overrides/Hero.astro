@@ -1,6 +1,6 @@
 ---
 // Home page hero: title, tagline and the start button from the page's `hero` frontmatter, next to
-// a compound-growth curve (the first idea of the course). Once the learner has progress, the button
+// a decorative efficient frontier. Once the learner has progress, the button
 // leads to the first lesson that is not done (src/scripts/home.ts).
 import { toLang, t } from '../../i18n/ui';
 import { lessons, lessonKey, lessonPath } from '../../lib/course';
@@ -10,15 +10,31 @@ const lang = toLang(route.lang);
 const hero = route.entry.data.hero!;
 const action = hero.actions?.[0];
 
-// 1 dollar at 7% a year for 40 years.
-const W = 560, H = 340, pad = { l: 16, r: 92, t: 24, b: 40 };
-const X = (y: number) => pad.l + (y / 40) * (W - pad.l - pad.r);
-const Y = (v: number) => pad.t + ((16 - v) / 16) * (H - pad.t - pad.b);
-const pts = Array.from({ length: 81 }, (_, i) => i / 2).map((y) => [X(y), Y(1.07 ** y)]);
-const line = 'M' + pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L');
-const area = `${line}L${X(40).toFixed(1)},${Y(0).toFixed(1)}L${X(0).toFixed(1)},${Y(0).toFixed(1)}Z`;
-const end = 1.07 ** 40;
-const marks = [10, 20, 30].map((y) => ({ x: X(y), y: Y(1.07 ** y), v: (1.07 ** y).toFixed(2) }));
+// Decorative efficient frontier (no text): a cloud of possible portfolios, the frontier along their
+// upper-left edge, and the capital market line from the risk-free rate, tangent to the frontier.
+const W = 560, H = 360, pad = 20;
+const X = (sd: number) => pad + (sd / 0.3) * (W - 2 * pad);
+const Y = (mu: number) => H - pad - (mu / 0.16) * (H - 2 * pad);
+const sdMin = 0.08, muMin = 0.06, k = 0.75, rf = 0.025;
+const sdOf = (mu: number) => Math.sqrt(sdMin ** 2 + ((mu - muMin) / k) ** 2);
+const curve = (from: number, to: number) =>
+	'M' + Array.from({ length: 61 }, (_, i) => from + ((to - from) * i) / 60).map((mu) => `${X(sdOf(mu)).toFixed(1)},${Y(mu).toFixed(1)}`).join('L');
+const upper = curve(muMin, 0.15);
+const lower = curve(0.02, muMin);
+// Tangency portfolio: the frontier point with the highest (mu - rf) / sd.
+let tMu = muMin;
+for (let mu = muMin; mu <= 0.15; mu += 0.0005) if ((mu - rf) / sdOf(mu) > (tMu - rf) / sdOf(tMu)) tMu = mu;
+const slope = (tMu - rf) / sdOf(tMu);
+const cmlEnd = 0.28;
+const cml = `M${X(0).toFixed(1)},${Y(rf).toFixed(1)}L${X(cmlEnd).toFixed(1)},${Y(rf + slope * cmlEnd).toFixed(1)}`;
+// Random portfolios inside the frontier (fixed seed, so every build draws the same picture).
+let seed = 7;
+const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+const dots = Array.from({ length: 170 }, () => {
+	const mu = 0.022 + rand() * 0.12;
+	const sd = sdOf(mu) * (1.03 + rand() ** 1.6 * 1.1);
+	return { x: X(Math.min(sd, 0.29)), y: Y(mu), o: (0.25 + rand() * 0.45).toFixed(2) };
+});
 
 const data = {
 	label: t(lang, 'continueAt', { title: '{title}' }),
@@ -37,30 +53,17 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
 			<a class="lfwai-hero-start" href={action.link} data-start>{action.text}</a>
 		)}
 	</div>
-	<figure class="lfwai-hero-chart" aria-label={t(lang, 'heroChart')}>
-		<svg viewBox={`0 0 ${W} ${H}`} role="img" aria-hidden="true">
-			<line class="lfwai-hero-base" x1={X(0)} x2={X(40)} y1={Y(0)} y2={Y(0)} />
-			{[0, 10, 20, 30, 40].map((y) => (
-				<text class="lfwai-hero-tick" x={X(y)} y={H - 12} text-anchor={y === 0 ? 'start' : 'middle'}>
-					{y === 40 ? t(lang, 'heroYears', { n: 40 }) : y}
-				</text>
-			))}
-			<path class="lfwai-hero-area" d={area} />
-			<path class="lfwai-hero-line" d={line} pathLength="1" />
-			{marks.map((m) => (
-				<g class="lfwai-hero-mark">
-					<circle cx={m.x} cy={m.y} r="3.5" />
-					<text x={m.x - 8} y={m.y - 10} text-anchor="end">{m.v}</text>
-				</g>
-			))}
-			<circle class="lfwai-hero-start-dot" cx={X(0)} cy={Y(1)} r="4" />
-			<g class="lfwai-hero-end">
-				<circle cx={X(40)} cy={Y(end)} r="6" />
-				<text x={X(40) + 12} y={Y(end) + 6}>{t(lang, 'heroChartEnd', { v: end.toFixed(2) })}</text>
-			</g>
+	<div class="lfwai-hero-chart" aria-hidden="true">
+		<svg viewBox={`0 0 ${W} ${H}`}>
+			<path class="lfwai-hero-axis" d={`M${pad},${pad}V${H - pad}H${W - pad}`} />
+			{dots.map((d) => <circle class="lfwai-hero-dot" cx={d.x.toFixed(1)} cy={d.y.toFixed(1)} r="3" style={`opacity:${d.o}`} />)}
+			<path class="lfwai-hero-lower" d={lower} />
+			<path class="lfwai-hero-line" d={upper} pathLength="1" />
+			<path class="lfwai-hero-cml" d={cml} pathLength="1" />
+			<circle class="lfwai-hero-rf" cx={X(0)} cy={Y(rf)} r="5" />
+			<circle class="lfwai-hero-tangent" cx={X(sdOf(tMu))} cy={Y(tMu)} r="7" />
 		</svg>
-		<figcaption>{t(lang, 'heroChart')}</figcaption>
-	</figure>
+	</div>
 </div>
 <script type="application/json" id="lfwai-home-data" set:html={json}></script>
 
