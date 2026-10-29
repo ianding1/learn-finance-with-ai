@@ -46,7 +46,9 @@ history and answers inline. To publish a finished lesson:
      or a "note" for everyone; keep it only if it is a common misconception, and then put it in
      `common_errors` rather than in the text;
    - the text, figure captions and summary never state the answer to a check question or an
-     exercise, and no question only asks the learner to repeat an argument the text already makes;
+     exercise, and no question only asks the learner to repeat an argument the text already makes.
+     When an important result can be derived by the learner, the text sets up the question and
+     points to the exercise (`<Ref check="Q1" />`) instead of giving the derivation;
    - leave out the learning goals of the plan; the page starts with `## 课前复习 [#review]`;
    - every `##` heading gets a stable id: `## 分散化 [#diversification]`;
    - mark each concept definition with `<Def id="...">canonical term</Def>`;
