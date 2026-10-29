@@ -63,6 +63,12 @@ stages:
         slug: "e0-quiz"
         exam: true
         title: { zh: "测验 E0：数学与统计工具", en: "Quiz E0: Math and Statistics Tools" }
+        summary:
+          zh: "第 0 阶段（0.1–0.5）的测验：货币时间价值、优化、概率与组合方差、统计推断与回归。总分 100 分，建议用时 120 分钟。"
+          en: "The quiz for Stage 0 (0.1–0.5): time value of money, optimization, probability and portfolio variance, statistical inference and regression. 100 points, about 120 minutes."
+        published: true
+        introduces: []
+        uses: [annuity, annuity-due, growing-perpetuity, ear, first-order-condition, lagrange-multiplier, corner-solution, profit-maximization, fixed-cost, variable-cost, portfolio-variance, correlation, standard-error, t-statistic, confidence-interval, median, ols, r-squared, omitted-variable-bias]
 
   - id: "1"
     title: { zh: "第 1 阶段：微观经济学", en: "Stage 1: Microeconomics" }

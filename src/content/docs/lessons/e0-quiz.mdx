@@ -1,0 +1,47 @@
+---
+title: 测验 E0：数学与统计工具
+description: 第 0 阶段（0.1–0.5）的测验：货币时间价值、优化、概率与组合方差、统计推断与回归。总分 100 分，建议用时 120 分钟。
+lesson: "E0"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Quiz from '../../../components/Quiz.astro';
+
+## 说明 [#instructions]
+
+- 本测验考 <Ref lesson="0.1" /> 到 <Ref lesson="0.5" /> 的内容。总分 100 分，建议用时 120 分钟，各题注明了分值和建议用时。
+- 可以使用计算器或代码，不要查看讲义。需要的公式见下面的公式表。
+- 计算题要写出过程。按过程给分，只有答案、没有过程的部分不得分。
+- 把答案写在纸上（或打字）。做完后点击页面底部的“复制评分提示词”，连同答案一起发给你的 AI 助手；也可以分几次提交。
+
+## 公式表 [#formulas]
+
+**货币时间价值**
+
+- 终值与现值：$FV = PV(1+r)^n$，$PV = \frac{FV}{(1+r)^n}$；有效年利率：$\text{EAR} = \left(1 + \frac{r}{m}\right)^m - 1$
+- 年金（期末付款）：$PV = \frac{C}{r}\left[1 - (1+r)^{-n}\right]$，$FV = C\,\frac{(1+r)^n - 1}{r}$
+- 永续年金：$PV = \frac{C}{r}$；增长永续年金：$PV = \frac{C}{r - g}$（$C$ 为第 1 期期末的付款）
+
+**优化**
+
+- 一阶条件：$f'(x^*) = 0$；二阶条件：$f''(x^*) < 0$ 为最大值，$f''(x^*) > 0$ 为最小值
+- 拉格朗日函数：$\mathcal{L} = U(x, y) + \lambda\,(M - p_x x - p_y y)$
+
+**概率与组合**
+
+- $E[R] = \sum_i p_i R_i$，$\text{Var}(R) = \sum_i p_i (R_i - E[R])^2$，$\rho = \frac{\text{Cov}(R_A, R_B)}{\sigma_A \sigma_B}$
+- 两资产组合：$\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\,\sigma_A\sigma_B$
+
+**统计推断**
+
+- 样本标准差：$s = \sqrt{\frac{1}{n-1}\sum_t (R_t - \bar R)^2}$；标准误：$\text{SE}(\bar R) = \frac{s}{\sqrt{n}}$
+- 95% 置信区间：$\bar R \pm 1.96\,\text{SE}$；$t = \frac{\bar R}{\text{SE}}$
+
+**回归**
+
+- $b = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}$，$a = \bar y - b\,\bar x$，$R^2 = 1 - \frac{\text{SSR}}{\text{SST}}$
+- 遗漏变量：$\beta_1 + \beta_2 \cdot \frac{\text{Cov}(x_1, x_2)}{\text{Var}(x_1)}$
+
+## 题目 [#questions]
+
+<Quiz />

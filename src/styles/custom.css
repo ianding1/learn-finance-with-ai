@@ -442,8 +442,28 @@
 	font-weight: 700;
 	color: var(--sl-color-accent-high);
 }
+.lfwai-q-meta {
+	display: flex;
+	gap: 0.75rem;
+	white-space: nowrap;
+}
+.lfwai-q-points {
+	color: var(--sl-color-gray-3);
+}
 .lfwai-q-status {
 	white-space: nowrap;
+}
+.lfwai-q-status[data-state='full'] {
+	color: var(--sl-color-green-high);
+	font-weight: 600;
+}
+.lfwai-q-status[data-state='partial'] {
+	color: var(--sl-color-orange-high);
+	font-weight: 600;
+}
+.lfwai-q-status[data-state='wrong'] {
+	color: var(--sl-color-red-high);
+	font-weight: 600;
 }
 .lfwai-q-status[data-state='none'] {
 	color: var(--sl-color-gray-3);

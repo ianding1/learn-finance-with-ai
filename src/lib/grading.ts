@@ -13,6 +13,7 @@ import {
 
 export function questionLabel(q: Question, lang: Lang, n?: number): string {
 	if (q.kind === 'check') return t(lang, 'check', { id: q.id });
+	if (q.kind === 'quiz') return t(lang, 'quizItem', { n: n ?? q.id.replace(/\D/g, '') });
 	return t(lang, 'exerciseItem', { n: n ?? q.id.replace(/\D/g, '') });
 }
 
@@ -34,6 +35,8 @@ export function gradingPayload(lessonId: string, qs: Question[], lang: Lang) {
 		questions: qs.map((q) => ({
 			id: q.id,
 			label: questionLabel(q, lang, exerciseNumber.get(q.id)),
+			// Only quiz questions have points; the prompt then asks for scores instead of ok / revise.
+			points: q.kind === 'quiz' ? q.points : undefined,
 			question: plainRich(q.question[lang], lang, lessonId),
 			answer: plainRich(q.answer[lang], lang, lessonId),
 			rubric: q.rubric[lang].map((r) => plainRich(r, lang, lessonId)),

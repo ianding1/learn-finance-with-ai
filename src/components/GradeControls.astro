@@ -7,12 +7,14 @@ import { toJson } from '../lib/grading';
 interface Props {
 	lang: Lang;
 	payload: unknown;
+	/** true for a quiz (测验): the prompt asks for scores */
+	scored?: boolean;
 }
-const { lang, payload } = Astro.props;
+const { lang, payload, scored = false } = Astro.props;
 ---
 
 <div class="lfwai-controls">
-	<button type="button" class="lfwai-btn lfwai-btn-primary" data-grade>{t(lang, 'copyFeedback')}</button>
+	<button type="button" class="lfwai-btn lfwai-btn-primary" data-grade>{t(lang, scored ? 'copyGrading' : 'copyFeedback')}</button>
 	<p class="lfwai-hint">{t(lang, 'copyHint')}</p>
 	<details class="lfwai-result">
 		<summary>{t(lang, 'pasteResult')}</summary>

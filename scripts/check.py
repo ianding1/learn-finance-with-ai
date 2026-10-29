@@ -301,9 +301,17 @@ def check_keys():
                     err(where, f"unknown question '{qid}'")
         for q in key.get("questions", []):
             where = f"{file} [{q['id']}]"
-            if q.get("kind") not in ("check", "exercise"):
-                err(where, "kind must be check or exercise")
             kind = q.get("kind")
+            if l.get("exam"):
+                if kind != "quiz":
+                    err(where, "questions of a quiz must have kind: quiz")
+            elif kind not in ("check", "exercise"):
+                err(where, "kind must be check or exercise (quiz questions belong to a quiz)")
+            if kind == "quiz":
+                if not isinstance(q.get("points"), (int, float)) or q["points"] <= 0:
+                    err(where, "quiz questions need positive 'points'")
+                if q.get("part") not in ("judge", "problem"):
+                    err(where, "quiz questions need part: judge or problem")
             # Lesson questions (check questions and exercises) are reviewed without scores; only the
             # quizzes after a group of lessons are scored, and they are not in lesson key files.
             if kind in ("check", "exercise"):
@@ -326,6 +334,10 @@ def check_keys():
             if q.get("kind") == "check" and not q.get("section"):
                 err(where, "check questions need 'section' (the h2 id where the question appears)")
 
+        if l.get("exam"):
+            total = sum(q.get("points") or 0 for q in key.get("questions", []))
+            if total != 100:
+                err(file, f"quiz points add up to {total}, not 100")
         if not l.get("published"):
             continue
         for lang in LANGS:
@@ -333,6 +345,12 @@ def check_keys():
             if not p.exists():
                 continue
             body = body_of(p.read_text(encoding="utf-8"))
+            if l.get("exam"):
+                if sum(1 for name, _ in tags(body) if name == "Quiz") != 1:
+                    err(rel(p), "a quiz page must contain <Quiz /> exactly once")
+                if any(name in ("Check", "CheckAll", "Exercises") for name, _ in tags(body)):
+                    err(rel(p), "a quiz page shows its questions with <Quiz /> only")
+                continue
             used = [a.get("id") for name, a in tags(body) if name == "Check"]
             for qid in used:
                 if used.count(qid) > 1:
@@ -340,12 +358,12 @@ def check_keys():
                 q = next((x for x in key["questions"] if x["id"] == qid), None)
                 if q is None:
                     err(rel(p), f"<Check id=\"{qid}\"> has no entry in {file}")
-                elif q["kind"] == "exercise":
-                    err(rel(p), f"<Check id=\"{qid}\"> is an exercise; exercises are shown by <Exercises />")
+                elif q["kind"] != "check":
+                    err(rel(p), f"<Check id=\"{qid}\"> is not a check question")
             for q in key["questions"]:
-                if q["kind"] != "exercise" and q["id"] not in used:
+                if q["kind"] == "check" and q["id"] not in used:
                     err(rel(p), f"question {q['id']} in {file} is never shown (add <Check id=\"{q['id']}\" />)")
-            has_checks = any(q["kind"] != "exercise" for q in key["questions"])
+            has_checks = any(q["kind"] == "check" for q in key["questions"])
             n_all = sum(1 for name, _ in tags(body) if name == "CheckAll")
             if has_checks and n_all != 1:
                 err(rel(p), "the lesson has check questions, so the page must contain <CheckAll /> exactly once")
@@ -355,7 +373,7 @@ def check_keys():
                 err(rel(p), "the lesson has exercises, so the page must contain <Exercises /> exactly once")
             sections = section_of_tags(body)
             for q in key["questions"]:
-                if q["kind"] != "exercise" and q["id"] in sections and q.get("section") != sections[q["id"]]:
+                if q["kind"] == "check" and q["id"] in sections and q.get("section") != sections[q["id"]]:
                     err(rel(p), f"{q['id']} is shown in section '{sections[q['id']]}' but its key says section '{q.get('section')}'")
 
 

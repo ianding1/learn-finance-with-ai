@@ -33,8 +33,12 @@ export interface Concept {
 
 export interface Question {
 	id: string;
-	kind: 'check' | 'exercise';
+	kind: 'check' | 'exercise' | 'quiz';
 	section?: string;
+	/** quiz questions only: 'judge' (true / false / uncertain with reasons) or 'problem' */
+	part?: 'judge' | 'problem';
+	/** quiz questions only: suggested time in minutes */
+	minutes?: number;
 	level?: string;
 	star?: boolean;
 	/** quiz questions only; check questions and exercises are not scored */

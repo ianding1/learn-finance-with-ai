@@ -4,7 +4,7 @@
 import { pageData, ui } from './page-data';
 import { copyPrompt, flash } from './dialog';
 import { gradingPrompt } from './prompts';
-import { applyResult, loadProgress, parseResult, type QuestionStatus } from './profile';
+import { applyResult, loadProgress, parseResult, type ResultItem } from './profile';
 
 interface Payload {
 	lessonId: string;
@@ -12,23 +12,37 @@ interface Payload {
 	lessonUrl: string;
 	context: string[];
 	commonErrors: string[];
-	questions: { id: string; label: string; question: string; answer: string; rubric: string[] }[];
+	questions: { id: string; label: string; points?: number; question: string; answer: string; rubric: string[] }[];
 }
 
-/** "通过" / "需要订正" */
-export function resultText(r: { status: QuestionStatus }): string {
+/** "通过" / "需要订正" for a lesson question, "3/4 分" for a quiz question. */
+export function resultText(r: ResultItem): string {
+	if (r.score != null) return ui('scoreOf', { s: r.score, m: r.max ?? '?' });
 	return ui(r.status === 'ok' ? 'statusOk' : 'statusRevise');
 }
 
-/** Show the latest result of each question on the page: not answered, OK or needs revision. */
+/** Show the latest result of each question on the page: not answered, OK / needs revision, or a score. */
 function renderStatuses() {
 	const lessonId = pageData().lesson?.id;
 	const results = loadProgress().results.filter((r) => r.lesson === lessonId);
 	document.querySelectorAll<HTMLElement>('[data-q-status]').forEach((el) => {
 		const r = results.find((x) => x.id === el.dataset.qStatus);
-		el.textContent = !r ? ui('notAnswered') : r.status === 'ok' ? `✓ ${ui('statusOk')}` : ui('statusRevise');
-		el.dataset.state = r ? r.status : 'none';
+		let state = 'none';
+		let text = ui('notAnswered');
+		if (r?.score != null) {
+			const max = r.max ?? NaN;
+			state = r.score >= max ? 'full' : r.score <= 0 ? 'wrong' : 'partial';
+			text = (state === 'full' ? '✓ ' : '') + resultText(r);
+		} else if (r?.status) {
+			state = r.status;
+			text = r.status === 'ok' ? `✓ ${ui('statusOk')}` : ui('statusRevise');
+		}
+		el.textContent = text;
+		el.dataset.state = state;
 		el.hidden = false;
+		// A scored question shows its score instead of its maximum.
+		const points = el.parentElement?.querySelector<HTMLElement>('.lfwai-q-points');
+		if (points) points.hidden = state !== 'none';
 	});
 }
 

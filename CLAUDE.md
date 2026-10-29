@@ -96,7 +96,7 @@ history and answers inline. To publish a finished lesson:
 | --- | --- | --- | --- |
 | 随堂题 | check question | `check`, `<Check>`, submitted by `<CheckAll>` | no ("ok" / "revise") |
 | 练习题 | exercise | `exercise`, `<Exercises>` | no ("ok" / "revise") |
-| 测验 | quiz | `E0`, `E1`, ... in the curriculum (not built yet) | yes |
+| 测验 | quiz | `quiz`, `<Quiz>` on the page `lessons/e<n>-quiz.mdx` (`E0`, `E1`, ...) | yes (points, total 100) |
 
 ## Prompts
 
@@ -111,7 +111,8 @@ history and answers inline. To publish a finished lesson:
   empty "learner's answers" heading; the learner attaches a photo or types the answers after it.
 - Check questions (随堂题) and exercises (练习题) are reviewed without scores: the result marks each
   one "ok" or "revise". Only the quizzes after a group of lessons (测验, `E0`, `E1`, ... in the
-  curriculum) are scored (`points`); they are not built yet.
+  curriculum) are scored: their questions have `points` (total 100), and the scoring prompt asks
+  for a score per question with partial credit. A finished quiz shows its total in the outline.
 - Each question shows its latest result next to its label ("not answered", "OK", "needs revision").
   There is no progress summary under the submit buttons.
 - Learners may submit only some questions. The grader grades only the answered ones and lists only
@@ -119,6 +120,23 @@ history and answers inline. To publish a finished lesson:
 - Buttons copy the prompt directly to the clipboard. The dialog is only a fallback.
 - Explanation prompts contain the selected text, its paragraph, its section and the lesson context.
 - In Chinese text, write 提示词, not "prompt" (checked).
+
+## Writing a quiz
+
+Quizzes follow the exam rules in the author's curriculum ("阶段考试"):
+
+- Test understanding and use, not definitions or direct use of a formula. About 60–70% of the
+  points are medium and 30–40% hard (`level` in the key; never shown on the page).
+- Only lessons of the block and earlier; the questions carry no lesson or difficulty labels and no
+  hints. The page starts with instructions and a formula sheet.
+- Part 1 is true / false / uncertain with reasons (`part: judge`); a verdict without a reason gets
+  no points. Part 2 holds problems (`part: problem`), mostly chains of calculations at stage 0–3.
+- Calculation questions require working; rubrics give partial credit and state the points per part.
+- For each question, ask "can it be answered by recalling an example from a lesson?" and rework it
+  if so: reverse the calculation, change one assumption, find the error in an analysis, construct a
+  counterexample, or estimate an order of magnitude. Adapting an exercise with a new extension is fine.
+- Every numeric answer is in `expected` and recomputed in `course/verify/E<n>.py`.
+- The site's quizzes are for every learner; do not target one learner's weak points.
 
 ## Writing conventions
 
