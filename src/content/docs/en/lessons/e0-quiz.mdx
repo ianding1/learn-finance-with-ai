@@ -37,10 +37,12 @@ import Quiz from '../../../../components/Quiz.astro';
 
 - Sample standard deviation: $s = \sqrt{\frac{1}{n-1}\sum_t (R_t - \bar R)^2}$; standard error: $\text{SE}(\bar R) = \frac{s}{\sqrt{n}}$
 - 95% confidence interval: $\bar R \pm 1.96\,\text{SE}$; $t = \frac{\bar R}{\text{SE}}$
+- Standardizing: $z = \frac{x - \mu}{\sigma}$; if $\ln W$ follows $N(m, s^2)$, the median of $W$ is $e^m$ and its mean is $e^{m + s^2/2}$
 
 **Regression**
 
 - $b = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}$, $a = \bar y - b\,\bar x$, $R^2 = 1 - \frac{\text{SSR}}{\text{SST}}$
+- Omitted variable: when only $x_1$ is in the regression, the slope is close to $\beta_1 + \beta_2 \cdot \frac{\text{Cov}(x_1, x_2)}{\text{Var}(x_1)}$
 
 ## Questions [#questions]
 

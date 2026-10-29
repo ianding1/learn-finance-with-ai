@@ -37,10 +37,12 @@ import Quiz from '../../../components/Quiz.astro';
 
 - 样本标准差：$s = \sqrt{\frac{1}{n-1}\sum_t (R_t - \bar R)^2}$；标准误：$\text{SE}(\bar R) = \frac{s}{\sqrt{n}}$
 - 95% 置信区间：$\bar R \pm 1.96\,\text{SE}$；$t = \frac{\bar R}{\text{SE}}$
+- 标准化：$z = \frac{x - \mu}{\sigma}$；若 $\ln W$ 服从 $N(m, s^2)$，则 $W$ 的中位数为 $e^m$，均值为 $e^{m + s^2/2}$
 
 **回归**
 
 - $b = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}$，$a = \bar y - b\,\bar x$，$R^2 = 1 - \frac{\text{SSR}}{\text{SST}}$
+- 遗漏变量：只用 $x_1$ 回归时，斜率接近 $\beta_1 + \beta_2 \cdot \frac{\text{Cov}(x_1, x_2)}{\text{Var}(x_1)}$
 
 ## 题目 [#questions]
 
