@@ -1,0 +1,215 @@
+---
+title: 0.4 分布与统计推断
+description: 正态分布与肥尾，连乘财富的均值与中位数，以及从数据估计：样本标准差、标准误、置信区间与假设检验。
+lesson: "0.4"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Exercises from '../../../components/Exercises.astro';
+import CheckAll from '../../../components/CheckAll.astro';
+import NormalCurve from '../../../components/widgets/NormalCurve.astro';
+import FatTails from '../../../components/widgets/FatTails.astro';
+import CoinFlipWealth from '../../../components/widgets/CoinFlipWealth.astro';
+import ConfidenceIntervals from '../../../components/widgets/ConfidenceIntervals.astro';
+
+## 从情景表到正态分布 [#normal]
+
+<Ref lesson="0.3" /> 的情景表里，收益只有几种可能的取值。真实的收益可以是任何数。把很多年的收益画成直方图，柱子分得越来越细，就接近一条光滑的曲线，叫<Def id="probability-density">概率密度</Def>（probability density）。曲线下某一段的面积，等于收益落在这一段的概率；整条曲线下的面积是 1。
+
+最常用的一种是<Def id="normal-distribution">正态分布</Def>（normal distribution），记作 $N(\mu, \sigma^2)$：钟形、左右对称，由期望 $\mu$ 和标准差 $\sigma$ 完全确定。它有一个常用的规则：
+
+| 范围 | 落在范围内的概率 |
+| --- | ---: |
+| $\mu \pm 1\sigma$ | 约 68% |
+| $\mu \pm 2\sigma$ | 约 95% |
+| $\mu \pm 3\sigma$ | 约 99.7% |
+
+例：某资产的年收益服从 $N(8\%, 16\%^2)$。约 68% 的年份收益在 −8% 到 24% 之间，约 95% 的年份在 −24% 到 40% 之间。剩下的 5% 平分在两侧，所以约每 40 年有一年跌得比 −24% 更深。
+
+一个值离期望有几个标准差，叫<Def id="z-score">标准分数</Def>（z-score）：
+
+$$
+z = \frac{R - \mu}{\sigma}
+$$
+
+例如收益 −24% 时，$z = \frac{-24 - 8}{16} = -2$。任何正态分布标准化之后都是 $N(0, 1)$，所以只要一张标准正态分布的表，就能算出各种概率。
+
+<Figure id="1-1" title="$N(8\%, 16\%^2)$ 的概率密度。深色是 $\mu \pm \sigma$，浅色是 $\mu \pm 2\sigma$。" observe="两侧尾部各约占 2.5%，曲线左右对称。">
+	<NormalCurve />
+</Figure>
+
+<Check id="C1" />
+
+## 肥尾 [#fat-tails]
+
+真实的日收益和月收益中，极端的涨跌出现得比同样标准差的正态分布预测的更频繁，这叫<Def id="fat-tails">肥尾</Def>（fat tails）。肥尾分布通常中间更尖、尾部更厚。
+
+本课程后面仍然经常使用正态分布，因为它简单，年收益层面的误差较小，而且很多结论并不依赖正态性。但凡是涉及极端事件的问题，都要记住这个限制（<Ref lesson="4.13" />）。
+
+<Figure id="2-1" title="正态分布与标准差相同的肥尾分布。" observe="肥尾分布中间更尖；在右边的放大图里，离期望 3 个标准差以外，肥尾分布的曲线明显高于正态分布。">
+	<FatTails />
+</Figure>
+
+<Check id="C2" />
+
+## 均值与中位数 [#mean-median]
+
+投入 100 美元，每年抛一次硬币：正面财富乘以 1.5（+50%），反面乘以 0.6（−40%）。连续玩 10 年。
+
+想象 1,024 个人（$2^{10}$），每人各拿 100 美元独立玩 10 年。1,024 正好让每种正反组合按概率出现一次。这时有两个不同的问题：
+
+- 这群人平均每人有多少钱？把所有人的钱加起来，除以 1,024。这就是期望（<Ref concept="expected-value" />），也叫均值。
+- 一个普通人的结果是多少？把 1,024 人按财富从少到多排队，排在正中间那个人的财富，叫<Def id="median">中位数</Def>（median）。
+
+两者问的是不同的问题，可以差很远：
+
+| 正面次数 | 人数 | 每人财富（美元） | 这组人的钱占总财富 |
+| ---: | ---: | ---: | ---: |
+| 10 | 1 | 5,766 | 3.5% |
+| 9 | 10 | 2,307 | 13.8% |
+| 8 | 45 | 923 | 24.9% |
+| 7 | 120 | 369 | 26.6% |
+| 6 | 210 | 148 | 18.6% |
+| 5 | 252 | 59 | 8.9% |
+| 4 | 210 | 24 | 3.0% |
+| 3 及以下 | 176 | 9 以下 | 0.8% |
+
+均值约 162.9 美元（等于 $100 \times 1.05^{10}$），中位数是 59.0 美元（5 正 5 反）。高于均值的只有正面 7 次及以上的 176 人（17%），却拿走了总财富的 69%；最终亏钱的 638 人（62%）只占总财富的 13%。
+
+为什么均值在涨、中位数在跌？
+
+- 对整个群体：每年每人的钱期望乘以 $\frac{1.5 + 0.6}{2} = 1.05$，所以均值是 $100 \times 1.05^n$。
+- 对一个普通人：大约一半年份正面、一半反面，一正一反净效果是 $1.5 \times 0.6 = 0.9$，所以中位数大约是 $100 \times 0.9^{n/2}$。
+
+这并不矛盾。钱按比例增减：幸运的人本钱越滚越大，+50% 加上的美元越来越多；不幸的人本钱越来越小，−40% 扣掉的美元越来越少，最多亏到接近 0。总财富的增长几乎都来自少数幸运者。亏损有下限、盈利没有上限，分布的右侧拖出长尾，把均值拉到中位数的右边，这叫<Def id="right-skew">右偏</Def>（right skew）。
+
+**选读**。财富的对数是各年对数收益率之和（<Ref concept="log-return" />）：
+
+$$
+\ln W_n = \ln W_0 + \sum_{t=1}^{n} \ln(1 + R_t)
+$$
+
+年数多时，这个和近似服从正态分布，所以财富近似服从<Def id="lognormal-distribution">对数正态分布</Def>（lognormal distribution）。若 $\ln W_n$ 的期望为 $m$、标准差为 $s$，则财富的中位数是 $e^m$，均值是 $e^{m + s^2/2}$：波动越大、年数越长，两者分得越开。股票的财富有同样的机制，只是差距没有这个例子大（<Ref lesson="4.1" />）。
+
+<Figure id="3-1" title="投入 100 美元，每年等概率乘以 1.5 或 0.6：各种结果的概率。" observe="拖动年数 $n$，看均值和中位数怎样移动，以及财富低于 100 美元的概率怎样变化。">
+	<CoinFlipWealth />
+</Figure>
+
+<Check id="C3" />
+
+## 从数据估计：样本均值与样本标准差 [#estimation]
+
+<Ref lesson="0.3" /> 的情景表假设我们知道概率，所以能直接算出真实的 $\mu$ 和 $\sigma$，它们叫总体参数。现实中只有一段历史数据，只能用数据去估计它们，这叫<Def id="parameter-estimation">参数估计</Def>（parameter estimation）。用数据算出的估计值叫样本统计量：
+
+- <Def id="sample-mean">样本均值</Def>（sample mean）$\bar R$，用来估计 $\mu$；
+- <Def id="sample-standard-deviation">样本标准差</Def>（sample standard deviation）$s$，用来估计 $\sigma$。
+
+例：某基金 5 年的收益（%）为 20、−5、15、30、−10。
+
+第 1 步，样本均值：
+
+$$
+\bar R = \frac{20 - 5 + 15 + 30 - 10}{5} = 10
+$$
+
+第 2 步，每年减去样本均值得到偏差，再平方：
+
+| 年份 | 收益 $R_t$ | 偏差 $R_t - \bar R$ | 偏差平方 |
+| ---: | ---: | ---: | ---: |
+| 1 | 20 | 10 | 100 |
+| 2 | −5 | −15 | 225 |
+| 3 | 15 | 5 | 25 |
+| 4 | 30 | 20 | 400 |
+| 5 | −10 | −20 | 400 |
+| 合计 |  | 0 | 1,150 |
+
+第 3 步，偏差平方和除以 $n - 1 = 4$ 得到样本方差，再开平方得到样本标准差：
+
+$$
+s^2 = \frac{1}{n-1}\sum_{t=1}^{n} (R_t - \bar R)^2 = \frac{1150}{4} = 287.5, \qquad s = \sqrt{287.5} \approx 16.96
+$$
+
+和 <Ref lesson="0.3" /> 相比：那里按概率加权；这里每一年是一个观测，相当于每年权重相同，但分母是 $n - 1$ 而不是 $n$。
+
+为什么除以 $n - 1$？偏差是相对样本均值 $\bar R$ 算的，而不是相对真实的 $\mu$。$\bar R$ 是从这 5 个数自己算出来的，总是正好落在它们的中心，所以这 5 个数离 $\bar R$ 的距离，平均来说比离真实 $\mu$ 的距离小。直接除以 $n$ 会系统性地低估 $\sigma$，除以 $n - 1$ 正好修正这一点。
+
+另一个角度：偏差之和一定是 0（上表最后一行）。知道其中 4 个偏差，第 5 个就确定了，真正可以自由变化的只有 $n - 1 = 4$ 个，这叫<Def id="degrees-of-freedom">自由度</Def>（degrees of freedom）。$n$ 很大时除以 $n$ 和除以 $n - 1$ 几乎没有差别；$n$ 小时差别明显（本例除以 5 得 15.17，除以 4 得 16.96）。
+
+<Check id="C4" />
+
+## 标准误与置信区间 [#standard-error]
+
+样本均值本身也是随机的。想象 100 段平行的历史：每一段都从同一个真实分布（$\mu = 8\%$，$\sigma = 16\%$）中抽出 20 年的收益，各自算出一个 $\bar R$。这 100 个 $\bar R$ 不会相同，有的 3%，有的 13%，围绕真实的 8% 散开。我们实际生活在其中一段历史里，只看得到其中一个 $\bar R$。
+
+这 100 个 $\bar R$ 的标准差，叫样本均值的<Def id="standard-error">标准误</Def>（standard error，SE）。它回答的问题是：换一段历史，算出的平均收益通常会差多少。
+
+如果每年的收益相互独立、方差都是 $\sigma^2$，由 <Ref lesson="0.3" /> 的线性组合公式（<Ref concept="portfolio-variance" />），权重都是 $\frac{1}{n}$、协方差都是 0：
+
+$$
+\text{Var}(\bar R) = n \cdot \frac{1}{n^2}\sigma^2 = \frac{\sigma^2}{n}, \qquad \text{SE}(\bar R) = \frac{\sigma}{\sqrt{n}}
+$$
+
+例：$\sigma = 16\%$，$n = 20$ 时，$\text{SE} = 16 / \sqrt{20} \approx 3.58\%$。实际中不知道 $\sigma$，就用样本标准差代替：$\text{SE} \approx s / \sqrt{n}$。上一节 5 年的例子中，$\text{SE} \approx 16.96 / \sqrt{5} \approx 7.58\%$。
+
+**置信区间**。根据<Def id="central-limit-theorem">中心极限定理</Def>（central limit theorem），很多独立观测的平均值近似服从正态分布。所以 $\bar R$ 近似服从中心为 $\mu$、标准差为 SE 的正态分布。按第一节的规则，约 95% 的平行历史中，$\bar R$ 落在 $\mu \pm 1.96\,\text{SE}$ 之内（1.96 是“2 个标准差”的精确值）。
+
+反过来，在每一段历史里，都以自己的 $\bar R$ 为中心画一个区间：
+
+$$
+\bar R \pm 1.96 \times \text{SE}
+$$
+
+在约 95% 的历史中，这个区间会罩住真实的 $\mu$。这叫 95% <Def id="confidence-interval">置信区间</Def>（confidence interval）。准确的说法是：用这种方法造区间，100 段历史中约 95 段的区间包含真实的 $\mu$；我们不知道自己这一段是不是其余的 5 段之一。
+
+例：20 年数据，$\sigma = 16\%$，样本均值 8%，95% 置信区间约为 $[1.0\%, 15.0\%]$。用 20 年的数据估计平均收益，误差有正负 7 个百分点左右。
+
+**小样本**。用 $s$ 代替 $\sigma$ 时，$s$ 本身也有误差；样本小时，区间应该更宽。精确的做法是把 1.96 换成 <Def id="t-distribution">t 分布</Def>（t distribution）的临界值：$n = 5$ 时约 2.78，$n = 20$ 时约 2.09，$n$ 很大时趋近 1.96。本课程的计算题统一用 1.96，除非题目另有说明。
+
+<Figure id="5-1" title="100 段平行的历史：每段从 $N(8\%, 16\%^2)$ 中抽出 $n$ 年收益，点是样本均值，横线是用 $s$ 算出的 95% 置信区间。" observe="数一数有多少个区间罩住了 8%；比较 100 个样本均值的标准差和 $\sigma/\sqrt{n}$；把 $n$ 调小，多按几次“重新抽样”。">
+	<ConfidenceIntervals />
+</Figure>
+
+<Check id="C5" />
+
+<Check id="C6" />
+
+<Check id="C7" />
+
+## 假设检验 [#hypothesis-test]
+
+一个策略过去的平均收益是正的，能说明它的真实期望收益大于 0 吗？<Def id="hypothesis-test">假设检验</Def>（hypothesis test）回答这类问题：先假设真实期望为 0（原假设 $H_0$：$\mu = 0$），再看数据和这个假设是否明显不符。
+
+样本均值离 0 有几个标准误，叫<Def id="t-statistic">t 值</Def>（t-statistic）：
+
+$$
+t = \frac{\bar R}{\text{SE}}
+$$
+
+如果 $\mu$ 真的是 0，$|t| > 1.96$ 的概率只有约 5%。所以 $|t| > 1.96$ 时，说结果在 5% 水平上具有<Def id="statistical-significance">统计显著性</Def>（statistical significance）。等价的说法是：95% 置信区间不包含 0。
+
+例：上一节 20 年的例子中，$t = 8 / 3.58 \approx 2.24 > 1.96$，在 5% 水平上显著。
+
+显著性有几个局限：
+
+- 显著不等于重要：样本很大时，很小的差别也会显著。
+- 不显著不等于真实值为 0：可能只是数据太少，区间太宽。
+- 即使策略完全无效，每次检验也有约 5% 的概率碰巧显著。同时检验很多个策略、只报告显著的那几个，这叫<Def id="multiple-testing">多重检验</Def>（multiple testing）问题（<Ref lesson="4.9" />）。它会带来什么后果，请在 <Ref check="Q6" /> 中分析。
+
+<Check id="C8" />
+
+## 小结 [#summary]
+
+- 正态分布由 $\mu$ 和 $\sigma$ 决定：$\mu \pm 1\sigma$、$\pm 2\sigma$、$\pm 3\sigma$ 内的概率约为 68%、95%、99.7%。真实收益有肥尾。
+- 均值是一群人的平均，中位数是排在中间那个人。财富按比例增减、亏损有下限，分布右偏，均值大于中位数。
+- 样本标准差：偏差平方和除以 $n - 1$ 再开平方。
+- 标准误是换一段历史时样本均值通常差多少，约为 $s / \sqrt{n}$；95% 置信区间是 $\bar R \pm 1.96\,\text{SE}$。
+- $|t| > 1.96$ 时在 5% 水平上显著；显著性有局限，同时检验很多假设时要格外小心。
+
+<CheckAll />
+
+## 练习题 [#exercises]
+
+<Exercises />

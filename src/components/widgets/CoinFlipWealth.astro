@@ -1,0 +1,64 @@
+---
+// Figure 3-1 of lesson 0.4: 100 dollars, each year ×1.5 or ×0.6 with equal probability, for n years.
+// Bars: the probability of each outcome, on a log scale of wealth (green: more than 100, red: less).
+// Vertical lines: the mean and the median. Slider: years n.
+// Parameters and ranges are registered in course/widgets.yaml (id: coin-flip). Keep them in sync.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		n: '年数 n',
+		axis: '财富（美元，对数刻度）',
+		gain: '财富高于 100 美元的结果',
+		loss: '财富低于 100 美元的结果',
+		mean: '均值',
+		median: '中位数',
+		readout: '均值 {mean} 美元，中位数 {median} 美元；财富低于 100 美元的概率 {loss}。',
+	},
+	en: {
+		n: 'Years n',
+		axis: 'Wealth (dollars, log scale)',
+		gain: 'Outcomes with more than 100 dollars',
+		loss: 'Outcomes with less than 100 dollars',
+		mean: 'Mean',
+		median: 'Median',
+		readout: 'Mean {mean} dollars, median {median} dollars; probability of less than 100 dollars: {loss}.',
+	},
+}[lang];
+
+const ticks = [0.01, 1, 100, 10000, 1000000];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 280, pad: { l: 20, r: 20, t: 30, b: 52 } },
+	{ cls: 'viz-narrow', W: 360, H: 260, pad: { l: 14, r: 14, t: 30, b: 52 } },
+].map((g) => ({ ...g, X: (w: number) => g.pad.l + ((Math.log10(w) + 2.5) / 9) * (g.W - g.pad.l - g.pad.r) }));
+---
+
+<div class="lfwai-widget" data-widget="coin-flip" data-readout={L.readout} data-labels={JSON.stringify({ mean: L.mean, median: L.median })}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.n} = <output data-out="n">10</output></span>
+			<input type="range" min="1" max="20" step="1" value="10" data-param="n" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad, X }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.axis} data-geom={JSON.stringify({ W, H, pad })}>
+			<line class="viz-axis" x1={pad.l} x2={W - pad.r} y1={H - pad.b} y2={H - pad.b} />
+			{ticks.map((t) => (
+				<text class="viz-tick" x={X(t)} y={H - pad.b + 18} text-anchor="middle">{t.toLocaleString('en-US')}</text>
+			))}
+			<text class="viz-tick" x={W / 2} y={H - 8} text-anchor="middle">{L.axis}</text>
+			<g data-el="bars"></g>
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-fill-pos"></span>{L.gain}</li>
+		<li><span class="sw sw-fill-neg"></span>{L.loss}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initCoinFlip } from '../../scripts/widgets/coin-flip';
+	initCoinFlip();
+</script>

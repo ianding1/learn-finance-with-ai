@@ -1,0 +1,89 @@
+---
+// Figure 2-1 of lesson 0.5: six months of market returns (x) and a stock's returns (y). Sliders set the
+// intercept a and slope b of a line; red segments are the residuals. Dashed: the least-squares line.
+// Parameters and ranges are registered in course/widgets.yaml (id: regression). Keep them in sync.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		a: '截距 a',
+		b: '斜率 b',
+		x: '市场月收益 x（%）',
+		y: '股票月收益 y（%）',
+		fit: '你的直线 y = a + bx',
+		ols: '最小二乘直线',
+		resid: '残差',
+		readout: '你的直线的残差平方和是 {ssr}；最小二乘直线的残差平方和是 {min}。',
+	},
+	en: {
+		a: 'Intercept a',
+		b: 'Slope b',
+		x: 'Market monthly return x (%)',
+		y: 'Stock monthly return y (%)',
+		fit: 'Your line y = a + bx',
+		ols: 'Least-squares line',
+		resid: 'Residuals',
+		readout: 'The sum of squared residuals of your line is {ssr}; that of the least-squares line is {min}.',
+	},
+}[lang];
+
+const DATA = { x: [-4, -2, -1, 1, 2, 4], y: [-4, -3, -0.5, 2.5, 3, 8] };
+const xr = [-6, 6];
+const yr = [-8, 10];
+const xTicks = [-6, -4, -2, 0, 2, 4, 6];
+const yTicks = [-8, -4, 0, 4, 8];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 340, pad: { l: 56, r: 20, t: 14, b: 48 } },
+	{ cls: 'viz-narrow', W: 360, H: 320, pad: { l: 48, r: 12, t: 14, b: 48 } },
+].map((g) => ({
+	...g,
+	X: (v: number) => g.pad.l + ((v - xr[0]) / (xr[1] - xr[0])) * (g.W - g.pad.l - g.pad.r),
+	Y: (v: number) => g.pad.t + ((yr[1] - v) / (yr[1] - yr[0])) * (g.H - g.pad.t - g.pad.b),
+}));
+---
+
+<div class="lfwai-widget" data-widget="regression" data-readout={L.readout} data-points={JSON.stringify(DATA)}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.a} = <output data-out="a">0.0</output></span>
+			<input type="range" min="-3" max="5" step="0.1" value="0" data-param="a" />
+		</label>
+		<label>
+			<span>{L.b} = <output data-out="b">1.00</output></span>
+			<input type="range" min="0" max="3" step="0.05" value="1" data-param="b" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad, X, Y }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.fit} data-geom={JSON.stringify({ W, H, pad, xr, yr })}>
+			{yTicks.map((v) => (
+				<g>
+					<line class="viz-grid" x1={pad.l} x2={W - pad.r} y1={Y(v)} y2={Y(v)} />
+					<text class="viz-tick" x={pad.l - 8} y={Y(v) + 4} text-anchor="end">{v}</text>
+				</g>
+			))}
+			{xTicks.map((v) => (
+				<text class="viz-tick" x={X(v)} y={H - pad.b + 18} text-anchor="middle">{v}</text>
+			))}
+			<line class="viz-axis" x1={X(0)} x2={X(0)} y1={pad.t} y2={H - pad.b} />
+			<line class="viz-axis" x1={pad.l} x2={W - pad.r} y1={Y(0)} y2={Y(0)} />
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">{L.x}</text>
+			<text class="viz-tick" transform={`translate(14 ${(pad.t + H - pad.b) / 2}) rotate(-90)`} text-anchor="middle">{L.y}</text>
+			<line class="viz-ols" x1={X(xr[0])} y1={Y(1 + 1.5 * xr[0])} x2={X(xr[1])} y2={Y(1 + 1.5 * xr[1])} />
+			<g data-el="resid"></g>
+			<line class="viz-fit" data-el="line" x1="0" y1="0" x2="0" y2="0" />
+			{DATA.x.map((v, i) => <circle class="viz-point" cx={X(v)} cy={Y(DATA.y[i])} r="5" />)}
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-fit"></span>{L.fit}</li>
+		<li><span class="sw sw-ols"></span>{L.ols}</li>
+		<li><span class="sw sw-resid"></span>{L.resid}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initRegression } from '../../scripts/widgets/regression';
+	initRegression();
+</script>

@@ -1,0 +1,53 @@
+---
+// Figure 1-1 of lesson 0.4: the density of N(8, 16²) with the ranges μ ± σ and μ ± 2σ shaded. Static.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: { axis: '年收益（%）', one: '约 68%', two: '约 95%', tail: '约 2.5%' },
+	en: { axis: 'Annual return (%)', one: 'about 68%', two: 'about 95%', tail: 'about 2.5%' },
+}[lang];
+
+const mu = 8;
+const sigma = 16;
+const lo = mu - 3.5 * sigma;
+const hi = mu + 3.5 * sigma;
+const pdf = (x: number) => Math.exp(-0.5 * ((x - mu) / sigma) ** 2) / (sigma * Math.sqrt(2 * Math.PI));
+const top = pdf(mu) * 1.12;
+const ticks = [-3, -2, -1, 0, 1, 2, 3].map((k) => mu + k * sigma);
+
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 280, pad: { l: 20, r: 20, t: 20, b: 52 } },
+	{ cls: 'viz-narrow', W: 360, H: 250, pad: { l: 12, r: 12, t: 20, b: 52 } },
+].map((g) => {
+	const X = (x: number) => g.pad.l + ((x - lo) / (hi - lo)) * (g.W - g.pad.l - g.pad.r);
+	const Y = (y: number) => g.H - g.pad.b - (y / top) * (g.H - g.pad.t - g.pad.b);
+	const path = (a: number, b: number, closed: boolean) => {
+		const n = 120;
+		let d = '';
+		for (let i = 0; i <= n; i++) {
+			const x = a + ((b - a) * i) / n;
+			d += `${i ? 'L' : 'M'}${X(x).toFixed(1)},${Y(pdf(x)).toFixed(1)}`;
+		}
+		return closed ? `${d}L${X(b).toFixed(1)},${Y(0)}L${X(a).toFixed(1)},${Y(0)}Z` : d;
+	};
+	return { ...g, X, Y, path };
+});
+---
+
+{layouts.map(({ cls, W, H, pad, X, Y, path }) => (
+	<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label="N(8, 16²)">
+		<path class="viz-area-2" d={path(mu - 2 * sigma, mu + 2 * sigma, true)} />
+		<path class="viz-area-1" d={path(mu - sigma, mu + sigma, true)} />
+		<path class="viz-curve" d={path(lo, hi, false)} />
+		<line class="viz-axis" x1={pad.l} x2={W - pad.r} y1={Y(0)} y2={Y(0)} />
+		{ticks.map((t) => (
+			<text class="viz-tick" x={X(t)} y={Y(0) + 18} text-anchor="middle">{t}</text>
+		))}
+		<text class="viz-tick" x={W / 2} y={H - 8} text-anchor="middle">{L.axis}</text>
+		<text class="viz-small viz-halo" x={X(mu)} y={Y(pdf(mu) * 0.45)} text-anchor="middle">{L.one}</text>
+		<text class="viz-small viz-halo" x={X(mu)} y={Y(pdf(mu) * 0.12)} text-anchor="middle">{L.two}</text>
+		<text class="viz-small viz-halo" x={X(mu - 2.6 * sigma)} y={Y(pdf(mu) * 0.2)} text-anchor="middle">{L.tail}</text>
+		<text class="viz-small viz-halo" x={X(mu + 2.6 * sigma)} y={Y(pdf(mu) * 0.2)} text-anchor="middle">{L.tail}</text>
+	</svg>
+))}

@@ -1,0 +1,72 @@
+---
+// Figure 5-1 of lesson 0.4: 100 parallel histories. Each history draws n yearly returns from a normal
+// distribution with mean 8% and standard deviation 16%, and computes its sample mean (dot) and the 95%
+// confidence interval sample mean ± 1.96 s/√n (line). Gray: the interval contains 8%; red: it does not.
+// Slider: years n. Button: draw new histories.
+// Parameters and ranges are registered in course/widgets.yaml (id: ci-sim). Keep them in sync.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		n: '每段历史的年数 n',
+		redraw: '重新抽样',
+		axis: '平均年收益（%）',
+		truth: '真实期望 8%',
+		hit: '包含真实期望的区间',
+		miss: '没有包含真实期望的区间',
+		readout: '100 个区间中有 {hit} 个包含真实期望 8%。100 个样本均值的标准差为 {sd}%，理论值 σ/√n = {se}%。',
+	},
+	en: {
+		n: 'Years in each history, n',
+		redraw: 'Draw again',
+		axis: 'Average annual return (%)',
+		truth: 'True mean 8%',
+		hit: 'Interval contains the true mean',
+		miss: 'Interval does not contain the true mean',
+		readout: '{hit} of the 100 intervals contain the true mean of 8%. The standard deviation of the 100 sample means is {sd}%; the theoretical value σ/√n is {se}%.',
+	},
+}[lang];
+
+const lo = -40;
+const hi = 56;
+const ticks = [-40, -24, -8, 8, 24, 40, 56];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 360, pad: { l: 20, r: 20, t: 22, b: 52 } },
+	{ cls: 'viz-narrow', W: 360, H: 340, pad: { l: 14, r: 14, t: 22, b: 52 } },
+].map((g) => ({ ...g, X: (v: number) => g.pad.l + ((v - lo) / (hi - lo)) * (g.W - g.pad.l - g.pad.r) }));
+---
+
+<div class="lfwai-widget" data-widget="ci-sim" data-readout={L.readout}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.n} = <output data-out="n">20</output></span>
+			<input type="range" min="2" max="50" step="1" value="20" data-param="n" />
+		</label>
+		<div><button type="button" class="lfwai-btn" data-action="redraw">{L.redraw}</button></div>
+	</div>
+	{layouts.map(({ cls, W, H, pad, X }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.axis} data-geom={JSON.stringify({ W, H, pad, lo, hi })}>
+			{ticks.map((t) => (
+				<g>
+					<line class="viz-grid" x1={X(t)} x2={X(t)} y1={pad.t} y2={H - pad.b} />
+					<text class="viz-tick" x={X(t)} y={H - pad.b + 18} text-anchor="middle">{t}</text>
+				</g>
+			))}
+			<text class="viz-tick" x={W / 2} y={H - 8} text-anchor="middle">{L.axis}</text>
+			<g data-el="rows"></g>
+			<line class="viz-mean" x1={X(8)} x2={X(8)} y1={pad.t - 6} y2={H - pad.b} />
+			<text class="viz-small viz-halo" x={X(8) + 4} y={pad.t - 8}>{L.truth}</text>
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-hit"></span>{L.hit}</li>
+		<li><span class="sw sw-miss"></span>{L.miss}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initConfidenceIntervals } from '../../scripts/widgets/confidence-intervals';
+	initConfidenceIntervals();
+</script>

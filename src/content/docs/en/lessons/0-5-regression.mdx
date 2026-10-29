@@ -1,0 +1,175 @@
+---
+title: 0.5 Regression
+description: "Describe the relation between two variables with a line: ordinary least squares, what the coefficients mean, R², the standard error of a coefficient, omitted variable bias, and correlation and causation."
+lesson: "0.5"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import RegressionFit from '../../../../components/widgets/RegressionFit.astro';
+
+## The regression line [#regression]
+
+In months when the market rises 1%, how much does a certain stock rise on average? Here are 6 months of data: $x$ is the market's monthly return and $y$ is the stock's monthly return (%).
+
+| Month | Market $x$ | Stock $y$ |
+| ---: | ---: | ---: |
+| 1 | −4 | −4 |
+| 2 | −2 | −3 |
+| 3 | −1 | −0.5 |
+| 4 | 1 | 2.5 |
+| 5 | 2 | 3 |
+| 6 | 4 | 8 |
+
+Draw each month as a point. The points lie roughly along a line, but not exactly on it. Describing how the average of $y$ changes with $x$ by a line is called <Def id="regression">regression</Def>:
+
+$$
+y_i = a + b\,x_i + e_i
+$$
+
+$a$ is the intercept and $b$ is the slope. $\hat y_i = a + b\,x_i$ is the fitted value that the line gives at $x_i$; the actual value minus the fitted value, $e_i = y_i - \hat y_i$, is the <Def id="residual">residual</Def>. The residual is positive when the point is above the line and negative when it is below. $y$ is called the dependent variable and $x$ the explanatory variable.
+
+<Check id="C1" />
+
+## Ordinary least squares [#ols]
+
+Infinitely many lines pass through these points. Which one should we choose? The most common rule is to make the sum of the squared residuals as small as possible:
+
+$$
+\min_{a,\,b}\ \sum_{i=1}^{n} (y_i - a - b\,x_i)^2
+$$
+
+This is <Def id="ols">ordinary least squares</Def> (OLS). Squaring plays the same role as in the variance: positive and negative residuals do not cancel, and large deviations are penalized more. Solving this optimization problem (with the first-order conditions of <Ref lesson="0.2" />; the derivation is left as <Ref check="Q5" />) gives
+
+$$
+b = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}, \qquad a = \bar y - b\,\bar x
+$$
+
+The numerator and denominator of the slope are the sample covariance and the sample variance (both multiplied by $n - 1$), so $b$ can also be written as $\frac{\text{Cov}(x, y)}{\text{Var}(x)}$ (<Ref concept="covariance" />). The second formula shows that the regression line always passes through the point $(\bar x, \bar y)$.
+
+Example: in the table above, $\bar x = 0$ and $\bar y = 1$.
+
+| $x_i - \bar x$ | $y_i - \bar y$ | Product | $(x_i - \bar x)^2$ |
+| ---: | ---: | ---: | ---: |
+| −4 | −5 | 20 | 16 |
+| −2 | −4 | 8 | 4 |
+| −1 | −1.5 | 1.5 | 1 |
+| 1 | 1.5 | 1.5 | 1 |
+| 2 | 2 | 4 | 4 |
+| 4 | 7 | 28 | 16 |
+| Total |  | 63 | 42 |
+
+$$
+b = \frac{63}{42} = 1.5, \qquad a = 1 - 1.5 \times 0 = 1
+$$
+
+The regression line is $\hat y = 1 + 1.5x$. The 6 residuals are 1, −1, 0, 0, −1 and 1, and the sum of their squares is 4.
+
+<Figure id="2-1" title="Six months of market and stock returns. Use the sliders to move a line; the red segments are its residuals." observe="Change the intercept and the slope, and see whether your line can have a smaller sum of squared residuals than the least-squares line.">
+	<RegressionFit />
+</Figure>
+
+<Check id="C2" />
+
+## What the coefficients mean [#coefficients]
+
+The number in front of the explanatory variable in a regression is a <Def id="regression-coefficient">regression coefficient</Def>. The slope $b$ means: when $x$ rises by one unit, $y$ changes by $b$ units on average.
+
+In the example, $b = 1.5$: for each percentage point of market return, the stock's monthly return is 1.5 percentage points higher on average. The intercept $a = 1$: in months when the market return is 0, the stock returns 1% on average. In finance, the slope from regressing a stock's return on the market return is the stock's beta (<Ref concept="beta" />), which <Ref lesson="4.5" /> covers in detail.
+
+Three things to keep in mind when reading a regression coefficient:
+
+- A coefficient has units, and its size depends on the units of $x$ and $y$.
+- A coefficient describes an average relation, not one that holds every time: each point also has a residual.
+- The intercept is the fitted value at $x = 0$. If $x = 0$ is far outside the range of the data, the intercept itself may have no practical meaning.
+
+<Check id="C3" />
+
+## Goodness of fit: R² [#r-squared]
+
+How much of the variation in $y$ does the line explain? Split the total variation of $y$ into two parts:
+
+$$
+\underbrace{\sum_i (y_i - \bar y)^2}_{\text{SST}} = \underbrace{\sum_i (\hat y_i - \bar y)^2}_{\text{ESS}} + \underbrace{\sum_i e_i^2}_{\text{SSR}}
+$$
+
+SST is the total sum of squares, ESS the sum of squares explained by the regression, and SSR the sum of squared residuals. For the OLS line, this split always holds. The share of the total variation that the regression explains is <Def id="r-squared">R-squared</Def> ($R^2$):
+
+$$
+R^2 = 1 - \frac{\text{SSR}}{\text{SST}}
+$$
+
+$R^2$ lies between 0 and 1. In the example, $\text{SST} = 25 + 16 + 2.25 + 2.25 + 4 + 49 = 98.5$ and $\text{SSR} = 4$, so $R^2 = 1 - \frac{4}{98.5} \approx 0.96$: about 96% of the variation in the stock's monthly return is explained by the variation in the market.
+
+<Check id="C4" />
+
+## How precise is a coefficient? [#inference]
+
+Like the sample mean in <Ref lesson="0.4" />, a regression coefficient is computed from one stretch of data and would be different with other data. The standard error of the slope is
+
+$$
+\text{SE}(b) = \frac{s_e}{\sqrt{\sum_i (x_i - \bar x)^2}}, \qquad s_e = \sqrt{\frac{\text{SSR}}{n - 2}}
+$$
+
+$s_e$ is the standard deviation of the residuals. The divisor is $n - 2$ because two parameters, $a$ and $b$, were estimated, so 2 degrees of freedom are lost (<Ref concept="degrees-of-freedom" />).
+
+In the example, $s_e = \sqrt{4 / 4} = 1$ and $\text{SE}(b) = \frac{1}{\sqrt{42}} \approx 0.154$. The t-statistic (<Ref concept="t-statistic" />) for testing whether the slope is 0 is
+
+$$
+t = \frac{b}{\text{SE}(b)} = \frac{1.5}{0.154} \approx 9.7
+$$
+
+This is far above 1.96, so the slope is significantly different from 0. The 95% confidence interval for the slope is $b \pm 1.96 \times \text{SE}(b)$, about $[1.20, 1.80]$. (With only 6 points, a critical value of the t distribution would strictly be more appropriate, and the interval would be wider; the numbers here are only a demonstration.)
+
+<Check id="C5" />
+
+## Omitted variable bias [#omitted-variable]
+
+Suppose $y$ is really determined by two variables:
+
+$$
+y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \varepsilon
+$$
+
+but only $x_1$ is put into the regression. The coefficient of $x_1$ then reflects more than the effect of $x_1$ itself: if $x_2$ is correlated with $x_1$, part of the effect of $x_2$ is attributed to $x_1$. With a lot of data, the slope from regressing on $x_1$ alone is close to
+
+$$
+\beta_1 + \beta_2 \cdot \frac{\text{Cov}(x_1, x_2)}{\text{Var}(x_1)}
+$$
+
+The extra second term is the <Def id="omitted-variable-bias">omitted variable bias</Def>. It is non-zero only when two conditions both hold: the omitted variable really affects $y$ ($\beta_2 \ne 0$), and it is correlated with the variable in the regression ($\text{Cov}(x_1, x_2) \ne 0$).
+
+Example: wages are regressed on years of education. People with more ability tend to get more education, and ability itself also raises wages. Ability is not in the regression, so the coefficient of education also picks up part of the effect of ability.
+
+<Check id="C6" />
+
+## Correlation and causation [#causation]
+
+A significant regression coefficient only shows that two variables move together; it does not show that one causes the other. This is the difference between <Def id="correlation-vs-causation">correlation and causation</Def>. A correlation may come from:
+
+- Reverse causation: $y$ affects $x$, rather than $x$ affecting $y$.
+- A common cause: a third variable affects both $x$ and $y$. This is the omitted variable of the previous section.
+- Chance: when many variables are tested, some will be significant by luck (<Ref concept="multiple-testing" />).
+
+To establish causation, you need evidence that rules out these possibilities, such as a randomized experiment, or a natural situation in which only $x$ changes and everything else stays the same. Most regressions in investing (for example, estimating beta and factor exposures, <Ref lesson="4.6" />) only need to describe how variables move together and do not need causation. But when a regression result is used to recommend "do $x$ and you will get $y$", the question of causation must be answered.
+
+<Check id="C7" />
+
+## Summary [#summary]
+
+- Regression describes how the average of $y$ changes with $x$ by a line $\hat y = a + bx$; a residual is the actual value minus the fitted value.
+- OLS minimizes the sum of squared residuals: $b = \frac{\sum (x_i - \bar x)(y_i - \bar y)}{\sum (x_i - \bar x)^2}$, $a = \bar y - b\bar x$.
+- The slope is the average change in $y$ when $x$ rises by one unit, and it has units.
+- $R^2 = 1 - \frac{\text{SSR}}{\text{SST}}$ is the share of the variation that the regression explains.
+- The standard error of the slope is $\frac{s_e}{\sqrt{\sum (x_i - \bar x)^2}}$; t-statistics and confidence intervals work as in <Ref lesson="0.4" />.
+- Leaving out a variable that affects $y$ and is correlated with $x$ biases the coefficient. Correlation is not causation.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

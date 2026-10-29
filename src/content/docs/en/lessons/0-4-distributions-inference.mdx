@@ -1,0 +1,215 @@
+---
+title: 0.4 Distributions and Statistical Inference
+description: "The normal distribution and fat tails, the mean and median of compounding wealth, and estimating from data: sample standard deviation, standard error, confidence intervals and hypothesis tests."
+lesson: "0.4"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import NormalCurve from '../../../../components/widgets/NormalCurve.astro';
+import FatTails from '../../../../components/widgets/FatTails.astro';
+import CoinFlipWealth from '../../../../components/widgets/CoinFlipWealth.astro';
+import ConfidenceIntervals from '../../../../components/widgets/ConfidenceIntervals.astro';
+
+## From scenario tables to the normal distribution [#normal]
+
+In the scenario tables of <Ref lesson="0.3" />, a return could take only a few values. Real returns can be any number. If you draw a histogram of many years of returns and make the bars narrower and narrower, it approaches a smooth curve, the <Def id="probability-density">probability density</Def>. The area under the curve over an interval is the probability that the return falls in that interval; the area under the whole curve is 1.
+
+The most common one is the <Def id="normal-distribution">normal distribution</Def>, written $N(\mu, \sigma^2)$: bell-shaped, symmetric, and fully determined by its mean $\mu$ and standard deviation $\sigma$. A useful rule:
+
+| Range | Probability of falling in the range |
+| --- | ---: |
+| $\mu \pm 1\sigma$ | about 68% |
+| $\mu \pm 2\sigma$ | about 95% |
+| $\mu \pm 3\sigma$ | about 99.7% |
+
+Example: an asset's annual return follows $N(8\%, 16\%^2)$. In about 68% of years the return is between −8% and 24%, and in about 95% of years between −24% and 40%. The remaining 5% is split equally between the two sides, so about one year in 40 has a loss deeper than −24%.
+
+The number of standard deviations a value is from the mean is its <Def id="z-score">z-score</Def>:
+
+$$
+z = \frac{R - \mu}{\sigma}
+$$
+
+For example, for a return of −24%, $z = \frac{-24 - 8}{16} = -2$. Every normal distribution becomes $N(0, 1)$ after standardizing, so one table of the standard normal distribution gives all such probabilities.
+
+<Figure id="1-1" title="Probability density of $N(8\%, 16\%^2)$. Dark: $\mu \pm \sigma$; light: $\mu \pm 2\sigma$." observe="Each tail holds about 2.5%, and the curve is symmetric.">
+	<NormalCurve />
+</Figure>
+
+<Check id="C1" />
+
+## Fat tails [#fat-tails]
+
+In real daily and monthly returns, extreme rises and falls occur more often than a normal distribution with the same standard deviation predicts. This is called <Def id="fat-tails">fat tails</Def>. A fat-tailed distribution is usually more peaked in the middle and thicker in the tails.
+
+Later in this course we still often use the normal distribution, because it is simple, its error is small for annual returns, and many conclusions do not depend on normality. But whenever a question involves extreme events, keep this limit in mind (<Ref lesson="4.13" />).
+
+<Figure id="2-1" title="A normal distribution and a fat-tailed distribution with the same standard deviation." observe="The fat-tailed distribution is more peaked in the middle; in the enlarged panel on the right, beyond 3 standard deviations from the mean, its curve is clearly above the normal curve.">
+	<FatTails />
+</Figure>
+
+<Check id="C2" />
+
+## Mean and median [#mean-median]
+
+You invest 100 dollars and flip a coin each year: heads, your wealth is multiplied by 1.5 (+50%); tails, by 0.6 (−40%). You play for 10 years.
+
+Imagine 1,024 people ($2^{10}$), each playing independently with 100 dollars for 10 years. With 1,024 people, each sequence of heads and tails occurs exactly once, in line with its probability. There are now two different questions:
+
+- How much money does this group have per person on average? Add up everyone's money and divide by 1,024. This is the expected value (<Ref concept="expected-value" />), also called the mean.
+- What is the result for a typical person? Line up the 1,024 people from least to most wealth; the wealth of the person in the middle is the <Def id="median">median</Def>.
+
+The two answer different questions, and they can be far apart:
+
+| Number of heads | People | Wealth per person (dollars) | Share of total wealth |
+| ---: | ---: | ---: | ---: |
+| 10 | 1 | 5,766 | 3.5% |
+| 9 | 10 | 2,307 | 13.8% |
+| 8 | 45 | 923 | 24.9% |
+| 7 | 120 | 369 | 26.6% |
+| 6 | 210 | 148 | 18.6% |
+| 5 | 252 | 59 | 8.9% |
+| 4 | 210 | 24 | 3.0% |
+| 3 or fewer | 176 | under 9 | 0.8% |
+
+The mean is about 162.9 dollars (equal to $100 \times 1.05^{10}$), and the median is 59.0 dollars (5 heads, 5 tails). Only the 176 people with 7 or more heads (17%) are above the mean, yet they hold 69% of the total wealth; the 638 people who end with a loss (62%) hold only 13%.
+
+Why does the mean rise while the median falls?
+
+- For the whole group: each year, each person's money is multiplied by $\frac{1.5 + 0.6}{2} = 1.05$ on average, so the mean is $100 \times 1.05^n$.
+- For a typical person: about half the years are heads and half tails. One head and one tail together give $1.5 \times 0.6 = 0.9$, so the median is about $100 \times 0.9^{n/2}$.
+
+There is no contradiction. Money grows and shrinks in proportion: for the lucky people the base keeps growing, so +50% adds more and more dollars; for the unlucky people the base keeps shrinking, so −40% takes away fewer and fewer dollars, and they can lose at most almost everything. Almost all the growth of total wealth comes from a few lucky people. Losses have a floor and gains have no ceiling, so the distribution has a long tail on the right that pulls the mean above the median. This is called <Def id="right-skew">right skew</Def>.
+
+**Optional**. The logarithm of wealth is the sum of the yearly log returns (<Ref concept="log-return" />):
+
+$$
+\ln W_n = \ln W_0 + \sum_{t=1}^{n} \ln(1 + R_t)
+$$
+
+With many years, this sum is approximately normal, so wealth approximately follows a <Def id="lognormal-distribution">lognormal distribution</Def>. If $\ln W_n$ has mean $m$ and standard deviation $s$, the median of wealth is $e^m$ and its mean is $e^{m + s^2/2}$: the more volatile the returns and the more years, the further apart the two are. Wealth invested in stocks works the same way, though the gap is smaller than in this example (<Ref lesson="4.1" />).
+
+<Figure id="3-1" title="100 dollars, multiplied each year by 1.5 or 0.6 with equal probability: the probability of each outcome." observe="Move the number of years $n$. Watch how the mean and the median move, and how the probability of ending below 100 dollars changes.">
+	<CoinFlipWealth />
+</Figure>
+
+<Check id="C3" />
+
+## Estimating from data: sample mean and sample standard deviation [#estimation]
+
+The scenario tables in <Ref lesson="0.3" /> assume that we know the probabilities, so the true $\mu$ and $\sigma$ can be computed directly; they are called population parameters. In reality we only have one stretch of historical data and must estimate them from it. This is <Def id="parameter-estimation">parameter estimation</Def>. Estimates computed from data are called sample statistics:
+
+- the <Def id="sample-mean">sample mean</Def> $\bar R$, which estimates $\mu$;
+- the <Def id="sample-standard-deviation">sample standard deviation</Def> $s$, which estimates $\sigma$.
+
+Example: a fund's returns (%) over 5 years are 20, −5, 15, 30 and −10.
+
+Step 1, the sample mean:
+
+$$
+\bar R = \frac{20 - 5 + 15 + 30 - 10}{5} = 10
+$$
+
+Step 2, subtract the sample mean from each year to get the deviations, and square them:
+
+| Year | Return $R_t$ | Deviation $R_t - \bar R$ | Squared deviation |
+| ---: | ---: | ---: | ---: |
+| 1 | 20 | 10 | 100 |
+| 2 | −5 | −15 | 225 |
+| 3 | 15 | 5 | 25 |
+| 4 | 30 | 20 | 400 |
+| 5 | −10 | −20 | 400 |
+| Total |  | 0 | 1,150 |
+
+Step 3, divide the sum of squared deviations by $n - 1 = 4$ to get the sample variance, and take the square root to get the sample standard deviation:
+
+$$
+s^2 = \frac{1}{n-1}\sum_{t=1}^{n} (R_t - \bar R)^2 = \frac{1150}{4} = 287.5, \qquad s = \sqrt{287.5} \approx 16.96
+$$
+
+Compare with <Ref lesson="0.3" />: there, outcomes were weighted by probability; here, each year is one observation, so each year gets the same weight, but the divisor is $n - 1$, not $n$.
+
+Why divide by $n - 1$? The deviations are measured from the sample mean $\bar R$, not from the true $\mu$. $\bar R$ is computed from these same 5 numbers and always sits exactly at their center, so on average the 5 numbers are closer to $\bar R$ than to the true $\mu$. Dividing by $n$ would systematically underestimate $\sigma$; dividing by $n - 1$ corrects exactly for this.
+
+Another way to see it: the deviations always add up to 0 (the last row of the table). Once you know 4 of them, the fifth is fixed, so only $n - 1 = 4$ of them are free to vary. This number is the <Def id="degrees-of-freedom">degrees of freedom</Def>. When $n$ is large, dividing by $n$ or by $n - 1$ makes almost no difference; when $n$ is small, the difference is clear (here, dividing by 5 gives 15.17 and dividing by 4 gives 16.96).
+
+<Check id="C4" />
+
+## Standard error and confidence intervals [#standard-error]
+
+The sample mean is itself random. Imagine 100 parallel histories: in each one, 20 years of returns are drawn from the same true distribution ($\mu = 8\%$, $\sigma = 16\%$), and each history computes its own $\bar R$. These 100 values of $\bar R$ are not equal; some are 3%, some 13%, spread around the true 8%. We actually live in one of these histories and see only one $\bar R$.
+
+The standard deviation of these 100 values of $\bar R$ is the <Def id="standard-error">standard error</Def> (SE) of the sample mean. It answers the question: in another history, how much would the average return typically differ?
+
+If the returns of different years are independent and all have variance $\sigma^2$, then by the formula for a linear combination in <Ref lesson="0.3" /> (<Ref concept="portfolio-variance" />), with all weights equal to $\frac{1}{n}$ and all covariances 0:
+
+$$
+\text{Var}(\bar R) = n \cdot \frac{1}{n^2}\sigma^2 = \frac{\sigma^2}{n}, \qquad \text{SE}(\bar R) = \frac{\sigma}{\sqrt{n}}
+$$
+
+Example: with $\sigma = 16\%$ and $n = 20$, $\text{SE} = 16 / \sqrt{20} \approx 3.58\%$. In practice $\sigma$ is unknown, so the sample standard deviation is used instead: $\text{SE} \approx s / \sqrt{n}$. In the 5-year example of the previous section, $\text{SE} \approx 16.96 / \sqrt{5} \approx 7.58\%$.
+
+**Confidence intervals**. By the <Def id="central-limit-theorem">central limit theorem</Def>, the average of many independent observations is approximately normally distributed. So $\bar R$ is approximately normal with center $\mu$ and standard deviation SE. By the rule in the first section, in about 95% of the parallel histories $\bar R$ falls within $\mu \pm 1.96\,\text{SE}$ (1.96 is the exact value behind "2 standard deviations").
+
+Turned around: in each history, draw an interval centered on that history's own $\bar R$:
+
+$$
+\bar R \pm 1.96 \times \text{SE}
+$$
+
+In about 95% of the histories, this interval covers the true $\mu$. This is a 95% <Def id="confidence-interval">confidence interval</Def>. The exact statement is: if intervals are built this way, about 95 of 100 histories produce an interval that contains the true $\mu$; we do not know whether our own history is one of the other 5.
+
+Example: 20 years of data, $\sigma = 16\%$ and a sample mean of 8% give a 95% confidence interval of about $[1.0\%, 15.0\%]$. With 20 years of data, the error in the estimated average return is about plus or minus 7 percentage points.
+
+**Small samples**. When $s$ replaces $\sigma$, $s$ has its own error, so with a small sample the interval should be wider. The exact method replaces 1.96 with a critical value of the <Def id="t-distribution">t distribution</Def>: about 2.78 for $n = 5$, about 2.09 for $n = 20$, and close to 1.96 for large $n$. The calculations in this course use 1.96 unless a question says otherwise.
+
+<Figure id="5-1" title="100 parallel histories: each draws $n$ years of returns from $N(8\%, 16\%^2)$; the dot is the sample mean and the line is the 95% confidence interval computed with $s$." observe="Count how many intervals cover 8%. Compare the standard deviation of the 100 sample means with $\sigma/\sqrt{n}$. Make $n$ small and press the Draw again button several times.">
+	<ConfidenceIntervals />
+</Figure>
+
+<Check id="C5" />
+
+<Check id="C6" />
+
+<Check id="C7" />
+
+## Hypothesis tests [#hypothesis-test]
+
+A strategy had a positive average return in the past. Does that show that its true expected return is above 0? A <Def id="hypothesis-test">hypothesis test</Def> answers questions like this: first assume that the true mean is 0 (the null hypothesis $H_0$: $\mu = 0$), then check whether the data clearly contradict this assumption.
+
+The number of standard errors that the sample mean is from 0 is the <Def id="t-statistic">t-statistic</Def>:
+
+$$
+t = \frac{\bar R}{\text{SE}}
+$$
+
+If $\mu$ really is 0, the probability that $|t| > 1.96$ is only about 5%. So when $|t| > 1.96$, the result is said to have <Def id="statistical-significance">statistical significance</Def> at the 5% level. Equivalently, the 95% confidence interval does not contain 0.
+
+Example: in the 20-year example of the previous section, $t = 8 / 3.58 \approx 2.24 > 1.96$, which is significant at the 5% level.
+
+Significance has limits:
+
+- Significant does not mean important: with a very large sample, even a tiny difference is significant.
+- Not significant does not mean the true value is 0: there may simply be too little data, so the interval is too wide.
+- Even a completely useless strategy has about a 5% chance of being significant by luck in each test. Testing many strategies and reporting only the significant ones is the problem of <Def id="multiple-testing">multiple testing</Def> (<Ref lesson="4.9" />). What it leads to is for you to analyze in <Ref check="Q6" />.
+
+<Check id="C8" />
+
+## Summary [#summary]
+
+- A normal distribution is determined by $\mu$ and $\sigma$: the probabilities within $\mu \pm 1\sigma$, $\pm 2\sigma$ and $\pm 3\sigma$ are about 68%, 95% and 99.7%. Real returns have fat tails.
+- The mean is the average over a group; the median is the person in the middle. When wealth grows and shrinks in proportion and losses have a floor, the distribution is right-skewed and the mean is above the median.
+- Sample standard deviation: divide the sum of squared deviations by $n - 1$ and take the square root.
+- The standard error is how much the sample mean typically differs in another history, about $s / \sqrt{n}$; the 95% confidence interval is $\bar R \pm 1.96\,\text{SE}$.
+- $|t| > 1.96$ means significance at the 5% level; significance has limits, and testing many hypotheses at once needs special care.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

@@ -1,0 +1,175 @@
+---
+title: 0.5 回归
+description: 用一条直线描述两个变量的关系：普通最小二乘法、系数的含义、R²、系数的标准误，以及遗漏变量偏差和相关与因果。
+lesson: "0.5"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Exercises from '../../../components/Exercises.astro';
+import CheckAll from '../../../components/CheckAll.astro';
+import RegressionFit from '../../../components/widgets/RegressionFit.astro';
+
+## 回归直线 [#regression]
+
+市场涨 1% 的月份，某只股票平均涨多少？下面是 6 个月的数据：$x$ 是市场的月收益，$y$ 是这只股票的月收益（%）。
+
+| 月份 | 市场 $x$ | 股票 $y$ |
+| ---: | ---: | ---: |
+| 1 | −4 | −4 |
+| 2 | −2 | −3 |
+| 3 | −1 | −0.5 |
+| 4 | 1 | 2.5 |
+| 5 | 2 | 3 |
+| 6 | 4 | 8 |
+
+把每个月画成一个点，这些点大致沿一条直线分布，但不会正好在直线上。用一条直线描述 $y$ 的平均值怎样随 $x$ 变化，叫<Def id="regression">回归</Def>（regression）：
+
+$$
+y_i = a + b\,x_i + e_i
+$$
+
+$a$ 是截距，$b$ 是斜率。$\hat y_i = a + b\,x_i$ 是直线在 $x_i$ 处给出的拟合值；实际值减去拟合值 $e_i = y_i - \hat y_i$ 叫<Def id="residual">残差</Def>（residual）。点在直线上方时残差为正，在下方时为负。$y$ 叫因变量，$x$ 叫自变量。
+
+<Check id="C1" />
+
+## 普通最小二乘法 [#ols]
+
+穿过这些点的直线有无数条，选哪一条？最常用的标准是：让所有残差的平方和最小，
+
+$$
+\min_{a,\,b}\ \sum_{i=1}^{n} (y_i - a - b\,x_i)^2
+$$
+
+这叫<Def id="ols">普通最小二乘法</Def>（ordinary least squares，OLS）。平方的作用和方差里一样：正负残差不会互相抵消，大的偏离受到更大的惩罚。解这个优化问题（用 <Ref lesson="0.2" /> 的一阶条件，推导留作 <Ref check="Q5" />）得到：
+
+$$
+b = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}, \qquad a = \bar y - b\,\bar x
+$$
+
+斜率的分子和分母分别是样本协方差和样本方差（同乘以 $n - 1$），所以 $b$ 也可以写成 $\frac{\text{Cov}(x, y)}{\text{Var}(x)}$（<Ref concept="covariance" />）。第二个式子说明，回归直线一定经过点 $(\bar x, \bar y)$。
+
+例：上表中 $\bar x = 0$，$\bar y = 1$。
+
+| $x_i - \bar x$ | $y_i - \bar y$ | 乘积 | $(x_i - \bar x)^2$ |
+| ---: | ---: | ---: | ---: |
+| −4 | −5 | 20 | 16 |
+| −2 | −4 | 8 | 4 |
+| −1 | −1.5 | 1.5 | 1 |
+| 1 | 1.5 | 1.5 | 1 |
+| 2 | 2 | 4 | 4 |
+| 4 | 7 | 28 | 16 |
+| 合计 |  | 63 | 42 |
+
+$$
+b = \frac{63}{42} = 1.5, \qquad a = 1 - 1.5 \times 0 = 1
+$$
+
+回归直线是 $\hat y = 1 + 1.5x$。6 个残差是 1、−1、0、0、−1、1，平方和为 4。
+
+<Figure id="2-1" title="6 个月的市场收益与股票收益。你可以用滑块调整一条直线，红线是它的残差。" observe="调整截距和斜率，看你的直线的残差平方和能不能比最小二乘直线更小。">
+	<RegressionFit />
+</Figure>
+
+<Check id="C2" />
+
+## 系数的含义 [#coefficients]
+
+回归方程中自变量前面的系数叫<Def id="regression-coefficient">回归系数</Def>（regression coefficient）。斜率 $b$ 的含义是：$x$ 增加一个单位时，$y$ 平均变化 $b$ 个单位。
+
+上例中 $b = 1.5$：市场的月收益每高 1 个百分点，这只股票的月收益平均高 1.5 个百分点。截距 $a = 1$：市场收益为 0 的月份，这只股票平均收益 1%。在金融中，用股票收益对市场收益做回归得到的斜率就是这只股票的 beta（<Ref concept="beta" />），<Ref lesson="4.5" /> 会详细讲。
+
+读回归系数时要注意三点：
+
+- 系数有单位，它的大小取决于 $x$ 和 $y$ 用什么单位。
+- 系数描述的是平均关系，不是每一次都成立：每个点还有残差。
+- 截距是 $x = 0$ 时的拟合值。如果 $x = 0$ 远在数据范围之外，截距本身可能没有实际意义。
+
+<Check id="C3" />
+
+## 拟合优度 R² [#r-squared]
+
+直线能解释 $y$ 的多少变化？把 $y$ 的总变化分成两部分：
+
+$$
+\underbrace{\sum_i (y_i - \bar y)^2}_{\text{SST}} = \underbrace{\sum_i (\hat y_i - \bar y)^2}_{\text{ESS}} + \underbrace{\sum_i e_i^2}_{\text{SSR}}
+$$
+
+SST 是总平方和，ESS 是回归解释的平方和，SSR 是残差平方和。对 OLS 直线，这个分解总是成立。回归解释的部分占总变化的比例叫<Def id="r-squared">决定系数</Def>（R-squared，$R^2$）：
+
+$$
+R^2 = 1 - \frac{\text{SSR}}{\text{SST}}
+$$
+
+$R^2$ 在 0 和 1 之间。上例中 $\text{SST} = 25 + 16 + 2.25 + 2.25 + 4 + 49 = 98.5$，$\text{SSR} = 4$，$R^2 = 1 - \frac{4}{98.5} \approx 0.96$：这只股票月收益的变化中，约 96% 可以由市场的变化解释。
+
+<Check id="C4" />
+
+## 系数有多准 [#inference]
+
+和 <Ref lesson="0.4" /> 的样本均值一样，回归系数也是从一段数据算出来的，换一段数据就会不同。斜率的标准误是：
+
+$$
+\text{SE}(b) = \frac{s_e}{\sqrt{\sum_i (x_i - \bar x)^2}}, \qquad s_e = \sqrt{\frac{\text{SSR}}{n - 2}}
+$$
+
+$s_e$ 是残差的标准差。这里除以 $n - 2$，因为估计了 $a$ 和 $b$ 两个参数，自由度少了 2（<Ref concept="degrees-of-freedom" />）。
+
+上例中 $s_e = \sqrt{4 / 4} = 1$，$\text{SE}(b) = \frac{1}{\sqrt{42}} \approx 0.154$。检验斜率是否为 0 的 t 值（<Ref concept="t-statistic" />）是
+
+$$
+t = \frac{b}{\text{SE}(b)} = \frac{1.5}{0.154} \approx 9.7
+$$
+
+远大于 1.96，斜率显著不为 0。斜率的 95% 置信区间是 $b \pm 1.96 \times \text{SE}(b)$，约为 $[1.20, 1.80]$。（只有 6 个点时，严格来说应该用 t 分布的临界值，区间会更宽；这里只是为了演示。）
+
+<Check id="C5" />
+
+## 遗漏变量偏差 [#omitted-variable]
+
+假设 $y$ 实际上由两个变量决定：
+
+$$
+y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \varepsilon
+$$
+
+但回归中只放了 $x_1$。这时 $x_1$ 的系数不只反映 $x_1$ 自己的作用：如果 $x_2$ 和 $x_1$ 相关，$x_2$ 的一部分作用会被算到 $x_1$ 头上。数据很多时，只用 $x_1$ 回归得到的斜率接近
+
+$$
+\beta_1 + \beta_2 \cdot \frac{\text{Cov}(x_1, x_2)}{\text{Var}(x_1)}
+$$
+
+多出来的第二项叫<Def id="omitted-variable-bias">遗漏变量偏差</Def>（omitted variable bias）。它不为 0 需要两个条件同时成立：被遗漏的变量确实影响 $y$（$\beta_2 \ne 0$），而且它和放进回归的变量相关（$\text{Cov}(x_1, x_2) \ne 0$）。
+
+例：用工资对受教育年数做回归。能力强的人往往受教育更多，能力本身也会提高工资。回归中没有能力这个变量，于是受教育年数的系数里混进了能力的作用。
+
+<Check id="C6" />
+
+## 相关与因果 [#causation]
+
+回归系数显著，只说明两个变量一起变化，不说明一个是另一个的原因。这就是<Def id="correlation-vs-causation">相关与因果</Def>（correlation and causation）的区别。相关可能来自：
+
+- 反向因果：$y$ 影响 $x$，而不是 $x$ 影响 $y$。
+- 共同原因：第三个变量同时影响 $x$ 和 $y$。这正是上一节的遗漏变量。
+- 巧合：检验了很多变量，总有一些碰巧显著（<Ref concept="multiple-testing" />）。
+
+要确认因果，需要能排除这些可能的证据，例如随机实验，或者只有 $x$ 发生变化、其他条件不变的自然情形。投资中的大多数回归（例如估计 beta 和因子暴露，<Ref lesson="4.6" />）只需要描述“一起变化”的关系，不需要因果；但用回归结果去建议“做 $x$ 就能得到 $y$”时，就必须回答因果问题。
+
+<Check id="C7" />
+
+## 小结 [#summary]
+
+- 回归用一条直线 $\hat y = a + bx$ 描述 $y$ 的平均值怎样随 $x$ 变化；残差是实际值减去拟合值。
+- OLS 让残差平方和最小：$b = \frac{\sum (x_i - \bar x)(y_i - \bar y)}{\sum (x_i - \bar x)^2}$，$a = \bar y - b\bar x$。
+- 斜率：$x$ 增加一个单位时 $y$ 的平均变化，有单位。
+- $R^2 = 1 - \frac{\text{SSR}}{\text{SST}}$ 是回归解释的变化所占的比例。
+- 斜率的标准误 $\frac{s_e}{\sqrt{\sum (x_i - \bar x)^2}}$，t 值和置信区间的用法同 <Ref lesson="0.4" />。
+- 遗漏一个既影响 $y$、又与 $x$ 相关的变量，会使系数有偏差。相关不等于因果。
+
+<CheckAll />
+
+## 练习题 [#exercises]
+
+<Exercises />

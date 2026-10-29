@@ -235,6 +235,62 @@
 	fill: var(--viz-grid);
 	fill-opacity: 0.35;
 }
+/* Lesson 0.4 and 0.5 figures */
+.viz-curve,
+.viz-curve-fat,
+.viz-fit {
+	fill: none;
+	stroke-width: 2.5;
+}
+.viz-curve {
+	stroke: var(--viz-a);
+}
+.viz-curve-fat {
+	stroke: var(--viz-b);
+}
+.viz-area-1 {
+	fill: var(--viz-a);
+	fill-opacity: 0.35;
+}
+.viz-area-2 {
+	fill: var(--viz-a);
+	fill-opacity: 0.15;
+}
+.viz-median {
+	stroke: var(--viz-violet);
+	stroke-width: 2;
+}
+.viz-ci-hit {
+	stroke: var(--viz-muted);
+	stroke-width: 1.5;
+}
+.viz-ci-hit-dot {
+	fill: var(--viz-b);
+}
+.viz-ci-miss {
+	stroke: var(--viz-neg);
+	stroke-width: 2;
+}
+.viz-ci-miss-dot {
+	fill: var(--viz-neg);
+}
+.viz-point {
+	fill: var(--viz-a);
+	fill-opacity: 0.8;
+}
+.viz-fit {
+	stroke: var(--viz-b);
+}
+.viz-ols {
+	stroke: var(--viz-muted);
+	stroke-width: 1.5;
+	stroke-dasharray: 6 4;
+}
+.viz-resid {
+	stroke: var(--viz-neg);
+	stroke-width: 1;
+	stroke-opacity: 0.7;
+}
 .lfwai-sliders {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
@@ -295,6 +351,38 @@
 .lfwai-legend .sw-box {
 	height: 0.75rem;
 	border: 1.5px dashed var(--viz-muted);
+}
+.lfwai-legend .sw-curve {
+	border-color: var(--viz-a);
+}
+.lfwai-legend .sw-fat {
+	border-color: var(--viz-b);
+}
+.lfwai-legend .sw-fill-pos,
+.lfwai-legend .sw-fill-neg {
+	height: 0.75rem;
+	border: none;
+	background: var(--viz-pos);
+}
+.lfwai-legend .sw-fill-neg {
+	background: var(--viz-neg);
+}
+.lfwai-legend .sw-hit {
+	border-color: var(--viz-muted);
+}
+.lfwai-legend .sw-miss {
+	border-color: var(--viz-neg);
+}
+.lfwai-legend .sw-fit {
+	border-color: var(--viz-b);
+}
+.lfwai-legend .sw-ols {
+	border-top-style: dashed;
+	border-color: var(--viz-muted);
+}
+.lfwai-legend .sw-resid {
+	border-top-width: 1.5px;
+	border-color: var(--viz-neg);
 }
 .lfwai-legend .sw-fill {
 	height: 0.75rem;
