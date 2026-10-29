@@ -860,7 +860,7 @@ body {
 /* One bold element (the growth curve); everything else is quiet and separated by whitespace only. */
 .lfwai-hero {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
 	align-items: center;
 	gap: 2.5rem;
 	padding-block: 2.5rem 1.5rem;
@@ -879,7 +879,7 @@ body {
 .lfwai-hero-tagline {
 	margin: 1rem 0 0;
 	font-size: var(--sl-text-xl);
-	text-wrap: balance;
+	text-wrap: pretty;
 	line-height: 1.5;
 	color: var(--sl-color-gray-2);
 }
