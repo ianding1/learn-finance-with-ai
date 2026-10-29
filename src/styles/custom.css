@@ -878,8 +878,8 @@ body {
 }
 .lfwai-hero-tagline {
 	margin: 1rem 0 0;
-	max-width: 26em;
 	font-size: var(--sl-text-xl);
+	text-wrap: balance;
 	line-height: 1.5;
 	color: var(--sl-color-gray-2);
 }
@@ -989,26 +989,25 @@ body {
 
 /* Skills and course route, below the hero */
 :root[data-has-hero] .sl-markdown-content {
-	max-width: 46rem;
+	max-width: 52rem;
 }
-:root[data-has-hero] .sl-markdown-content h2#skills {
-	margin-top: 1rem;
+:root[data-has-hero] .sl-markdown-content h2 {
 	font-size: var(--sl-text-2xl);
 }
-:root[data-has-hero] .sl-markdown-content h2#skills + ul {
+:root[data-has-hero] .sl-markdown-content > ul {
 	list-style: none;
 	padding: 0;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-	gap: 1.25rem 2.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+	gap: 1rem 2.5rem;
 }
-:root[data-has-hero] .sl-markdown-content h2#skills + ul li {
+:root[data-has-hero] .sl-markdown-content > ul > li {
 	margin: 0;
 	padding-inline-start: 1rem;
 	position: relative;
 	line-height: 1.65;
 }
-:root[data-has-hero] .sl-markdown-content h2#skills + ul li::before {
+:root[data-has-hero] .sl-markdown-content > ul > li::before {
 	content: '';
 	position: absolute;
 	inset-inline-start: 0;
@@ -1017,7 +1016,7 @@ body {
 	height: 0.4rem;
 	background: var(--viz-a);
 }
-:root[data-has-hero] .sl-markdown-content h2#skills + ul + p {
+:root[data-has-hero] .sl-markdown-content > ul + p {
 	color: var(--sl-color-gray-3);
 	font-size: var(--sl-text-sm);
 }
@@ -1037,7 +1036,7 @@ body {
 }
 .lfwai-route li {
 	display: grid;
-	grid-template-columns: minmax(10rem, 15rem) 1fr;
+	grid-template-columns: minmax(10rem, 19rem) 1fr;
 	align-items: center;
 	gap: 1rem;
 }
