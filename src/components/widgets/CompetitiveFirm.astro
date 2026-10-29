@@ -1,0 +1,112 @@
+---
+// Figure 4-1 of lesson 1.5: a price-taking firm with short-run cost C(q) = 72 + q³ − 10q² + 40q.
+// The slider sets the market price P; the firm produces where P = MC on the rising part of MC, or shuts
+// down when P is below the minimum of AVC (15). The shaded rectangle is profit (green) or loss (red).
+// Parameters and ranges are registered in course/widgets.yaml (id: competitive-firm). Keep them in sync.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		p: '市场价格 P',
+		x: '产量 q',
+		y: '美元',
+		mc: '边际成本 MC',
+		atc: '平均总成本 ATC',
+		avc: '平均可变成本 AVC',
+		price: '价格',
+		readout: '最优产量 q = {q}，利润 = {pi}（停产时的利润为 −72）。',
+		shut: '价格低于 AVC 的最低点，停产：q = 0，利润 = −72（损失全部固定成本）。',
+	},
+	en: {
+		p: 'Market price P',
+		x: 'Output q',
+		y: 'Dollars',
+		mc: 'Marginal cost MC',
+		atc: 'Average total cost ATC',
+		avc: 'Average variable cost AVC',
+		price: 'Price',
+		readout: 'Best output q = {q}, profit = {pi} (profit if the firm shuts down: −72).',
+		shut: 'The price is below the minimum of AVC, so the firm shuts down: q = 0, profit = −72 (the whole fixed cost is lost).',
+	},
+}[lang];
+
+const xr = [0, 10];
+const yr = [0, 80];
+const xTicks = [0, 2, 4, 6, 8, 10];
+const yTicks = [0, 20, 40, 60, 80];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 340, pad: { l: 44, r: 20, t: 14, b: 44 } },
+	{ cls: 'viz-narrow', W: 360, H: 300, pad: { l: 38, r: 12, t: 14, b: 44 } },
+].map((g) => ({
+	...g,
+	X: (v: number) => g.pad.l + ((v - xr[0]) / (xr[1] - xr[0])) * (g.W - g.pad.l - g.pad.r),
+	Y: (v: number) => g.pad.t + ((yr[1] - v) / (yr[1] - yr[0])) * (g.H - g.pad.t - g.pad.b),
+}));
+const mc = (q: number) => 3 * q * q - 20 * q + 40;
+const avc = (q: number) => q * q - 10 * q + 40;
+const atc = (q: number) => avc(q) + 72 / q;
+const path = (X: (v: number) => number, Y: (v: number) => number, f: (q: number) => number, q0: number) => {
+	let d = '';
+	let first = true;
+	for (let i = 0; i <= 200; i++) {
+		const q = q0 + (i / 200) * (xr[1] - q0);
+		const v = f(q);
+		if (v > yr[1] + 5) continue;
+		d += `${first ? 'M' : 'L'}${X(q).toFixed(1)},${Y(v).toFixed(1)}`;
+		first = false;
+	}
+	return d;
+};
+---
+
+<div class="lfwai-widget" data-widget="competitive-firm" data-readout={L.readout} data-shut={L.shut}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.p} = <output data-out="p">35</output></span>
+			<input type="range" min="10" max="50" step="1" value="35" data-param="p" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad, X, Y }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.mc} data-geom={JSON.stringify({ W, H, pad, xr, yr })}>
+			<defs>
+				<clipPath id={`firm-clip-${cls}`}>
+					<rect x={pad.l} y={pad.t} width={W - pad.l - pad.r} height={H - pad.t - pad.b} />
+				</clipPath>
+			</defs>
+			{yTicks.map((v) => (
+				<g>
+					<line class={v === 0 ? 'viz-axis' : 'viz-grid'} x1={pad.l} x2={W - pad.r} y1={Y(v)} y2={Y(v)} />
+					<text class="viz-tick" x={pad.l - 8} y={Y(v) + 4} text-anchor="end">{v}</text>
+				</g>
+			))}
+			{xTicks.map((v) => (
+				<text class="viz-tick" x={X(v)} y={H - pad.b + 18} text-anchor="middle">{v}</text>
+			))}
+			<line class="viz-axis" x1={pad.l} x2={pad.l} y1={pad.t} y2={H - pad.b} />
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">{L.x}</text>
+			<text class="viz-tick" transform={`translate(14 ${(pad.t + H - pad.b) / 2}) rotate(-90)`} text-anchor="middle">{L.y}</text>
+			<g clip-path={`url(#firm-clip-${cls})`}>
+				<rect class="viz-profit" data-el="rect" x="0" y="0" width="0" height="0" />
+				<path class="viz-curve-fat" d={path(X, Y, mc, 0.3)} />
+				<path class="viz-curve" d={path(X, Y, atc, 1)} />
+				<path class="viz-curve viz-dashed" d={path(X, Y, avc, 0.3)} />
+				<line class="viz-mean" data-el="price" x1="0" y1="0" x2="0" y2="0" />
+				<line class="viz-mean" data-el="vq" x1="0" y1="0" x2="0" y2="0" />
+			</g>
+			<circle class="viz-min" data-el="pt" r="6" cx="0" cy="0" />
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-fat"></span>{L.mc}</li>
+		<li><span class="sw sw-curve"></span>{L.atc}</li>
+		<li><span class="sw sw-curve sw-dashed"></span>{L.avc}</li>
+		<li><span class="sw sw-avg"></span>{L.price}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initCompetitiveFirm } from '../../scripts/widgets/competitive-firm';
+	initCompetitiveFirm();
+</script>

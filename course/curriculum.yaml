@@ -109,7 +109,15 @@ stages:
         published: true
         introduces: [expected-utility, risk-aversion, absolute-risk-aversion, relative-risk-aversion, certainty-equivalent, risk-premium, crra-utility]
         uses: [expected-value, variance, random-variable, utility-function, standard-error, median, logarithm, derivative, first-order-condition]
-      - { id: "1.5", slug: "1-5-producer-theory", title: { zh: "生产者理论", en: "Producer Theory" } }
+      - id: "1.5"
+        slug: "1-5-producer-theory"
+        title: { zh: "生产者理论", en: "Producer Theory" }
+        summary:
+          zh: "生产函数、边际产量与规模报酬，短期成本曲线，完全竞争厂商的产量与停产决策，以及长期均衡与经济利润。"
+          en: "Production functions, marginal products and returns to scale, short-run cost curves, the output and shutdown decisions of a competitive firm, and long-run equilibrium and economic profit."
+        published: true
+        introduces: [production-function, short-run, long-run, marginal-product, returns-to-scale, average-cost, perfect-competition, shutdown-point, economic-profit]
+        uses: [fixed-cost, variable-cost, marginal-cost, marginal-revenue, profit-maximization, sunk-cost, partial-derivative, first-order-condition, second-order-condition, supply, demand, market-equilibrium]
       - { id: "1.6", slug: "1-6-market-structure", title: { zh: "市场结构", en: "Market Structure" } }
       - { id: "1.7", slug: "1-7-game-theory", title: { zh: "博弈论基础", en: "Basic Game Theory" } }
       - { id: "1.8", slug: "1-8-welfare-market-failure", title: { zh: "福利与市场失灵", en: "Welfare and Market Failure" } }

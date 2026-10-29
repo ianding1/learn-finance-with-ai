@@ -1,0 +1,111 @@
+---
+title: 1.5 生产者理论
+description: 生产函数、边际产量与规模报酬，短期成本曲线，完全竞争厂商的产量与停产决策，以及长期均衡与经济利润。
+lesson: "1.5"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Exercises from '../../../components/Exercises.astro';
+import CheckAll from '../../../components/CheckAll.astro';
+import CompetitiveFirm from '../../../components/widgets/CompetitiveFirm.astro';
+
+## 生产函数 [#production-function]
+
+<Ref lesson="1.1" /> 的供给曲线从哪里来？这一课从厂商的生产和成本推出供给。
+
+厂商用资本 $K$（机器、厂房）和劳动 $L$ 生产产品。投入与最大产量之间的关系叫<Def id="production-function">生产函数</Def>（production function），$Q = f(K, L)$。常用的例子是 Cobb–Douglas 生产函数：
+
+$$
+Q = K^{\alpha} L^{\beta}
+$$
+
+在<Def id="short-run">短期</Def>（short run），至少有一种投入（通常是资本）来不及调整；在<Def id="long-run">长期</Def>（long run），所有投入都可以调整，厂商也可以进入或退出行业。短期和长期按能否调整投入区分，而不是按日历上的时间长短。
+
+其他投入不变时，多投入一单位劳动带来的产量增加，叫劳动的<Def id="marginal-product">边际产量</Def>（marginal product）：
+
+$$
+MP_L = \frac{\partial Q}{\partial L}, \qquad MP_K = \frac{\partial Q}{\partial K}
+$$
+
+例：$Q = K^{0.5}L^{0.5}$，短期资本固定为 $K = 16$，则 $Q = 4\sqrt{L}$。工人越多，每多雇一个人增加的产量越少：机器数量不变，工人越来越挤。这叫边际收益递减规律（law of diminishing marginal returns）。
+
+<Check id="C1" />
+
+## 规模报酬 [#returns-to-scale]
+
+边际产量说的是只增加一种投入。如果所有投入按同一比例增加呢？把 $K$ 和 $L$ 都变为原来的 $t$ 倍（$t > 1$），比较产量的变化，就是<Def id="returns-to-scale">规模报酬</Def>（returns to scale）：
+
+- $f(tK, tL) = t\,f(K, L)$：规模报酬不变（constant returns to scale）；
+- $f(tK, tL) > t\,f(K, L)$：规模报酬递增（increasing returns to scale）；
+- $f(tK, tL) < t\,f(K, L)$：规模报酬递减（decreasing returns to scale）。
+
+对 Cobb–Douglas 函数，$f(tK, tL) = t^{\alpha + \beta} f(K, L)$，所以规模报酬由 $\alpha + \beta$ 与 1 的大小决定。规模报酬递增的行业（例如有巨大固定投入的网络和软件），大企业有成本优势，<Ref lesson="1.6" /> 会讨论它与市场结构的关系。
+
+<Check id="C2" />
+
+## 成本曲线 [#cost-curves]
+
+<Ref lesson="0.2" /> 把总成本分为固定成本和可变成本（<Ref concept="fixed-cost" />、<Ref concept="variable-cost" />）。在短期，资本固定，它的成本是固定成本；劳动随产量变化，是可变成本。除以产量，得到<Def id="average-cost">平均成本</Def>（average cost）：
+
+$$
+\text{AVC} = \frac{VC(q)}{q}, \qquad \text{ATC} = \frac{C(q)}{q} = \text{AVC} + \frac{FC}{q}
+$$
+
+AVC 是平均可变成本，ATC 是平均总成本。边际成本 $MC = C'(q)$（<Ref concept="marginal-cost" />）是多生产一单位的成本。
+
+一个典型的短期成本函数是
+
+$$
+C(q) = 72 + q^3 - 10q^2 + 40q
+$$
+
+固定成本 72，$VC = q^3 - 10q^2 + 40q$，$MC = 3q^2 - 20q + 40$，$\text{AVC} = q^2 - 10q + 40$。产量很低时，增加工人能更好地分工，MC 下降；产量超过一定水平后，边际收益递减使 MC 上升。所以 MC 和 AVC 都是先降后升的 U 形曲线。随着产量增加，固定成本被分摊到更多产品上，ATC 与 AVC 的差距 $\frac{FC}{q}$ 越来越小。
+
+画出这三条曲线会发现，MC 正好穿过 AVC 和 ATC 的最低点。为什么？请在 <Ref check="Q2" /> 中证明。
+
+<Check id="C3" />
+
+## 完全竞争厂商 [#competitive-firm]
+
+市场中有很多厂商，产品相同，每个厂商都太小，影响不了市场价格；厂商可以自由进入和退出。这样的市场叫<Def id="perfect-competition">完全竞争</Def>（perfect competition）。每个厂商只能接受市场价格 $P$，它的边际收入就是 $P$。
+
+由 <Ref lesson="0.2" />，利润最高的产量满足 $P = MC$，而且要在 MC 上升的部分（二阶条件）。
+
+但还要问：生产是否比不生产更好？在短期，固定成本无论生产与否都要付，相当于沉没成本（<Ref concept="sunk-cost" />）。不生产时利润为 $-FC$；生产 $q$ 时利润为 $Pq - VC(q) - FC$。所以只要收入能覆盖可变成本，即 $P \ge \text{AVC}(q)$，生产就比停产好：多出的部分还能抵消一部分固定成本。价格低于 AVC 的最低点时，厂商应停产。这个价格叫<Def id="shutdown-point">停产点</Def>（shutdown point）。
+
+因此，完全竞争厂商的短期供给曲线是 MC 曲线在 AVC 最低点以上的部分。把所有厂商的供给量加起来，就是 <Ref lesson="1.1" /> 的市场供给曲线。
+
+<Figure id="4-1" title="成本 $C(q) = 72 + q^3 - 10q^2 + 40q$ 的完全竞争厂商。阴影是利润（绿色）或亏损（红色）。" observe="降低价格，看厂商什么时候开始亏损、什么时候停产；比较这两个价格分别对应哪条曲线的最低点。">
+	<CompetitiveFirm />
+</Figure>
+
+<Check id="C4" />
+
+## 长期均衡与经济利润 [#long-run]
+
+经济学的成本包括所有投入的机会成本：店主自己的时间、自己投入的资本，即使没有付钱给别人，也有其他用途。收入减去包括机会成本在内的全部成本，叫<Def id="economic-profit">经济利润</Def>（economic profit）。会计利润只扣除实际支付的成本，通常高于经济利润。经济利润为 0 意味着这项业务的回报正好等于投入在别处能得到的回报（正常回报），而不是“没赚钱”。
+
+在长期：
+
+- 厂商选择所有投入。生产一定产量时，成本最低的投入组合满足 $\frac{MP_L}{w} = \frac{MP_K}{r}$（$w$ 是工资，$r$ 是资本的租金）：最后 1 美元花在哪种投入上，增加的产量都一样，和 <Ref lesson="1.2" /> 的消费者最优条件同理。
+- 如果行业有正的经济利润，新厂商会进入，供给增加，价格下降；如果有亏损，厂商会退出，价格上升。
+
+进入和退出一直持续到经济利润为 0：长期均衡价格等于长期平均成本的最低点，每个厂商都在成本最低的规模上生产。
+
+这对投资者有重要含义：在没有进入障碍的完全竞争行业，超额利润会被竞争压到 0，企业的资本回报率长期接近资本的机会成本。持续获得高资本回报率的企业，一定有某种阻止竞争者进入的原因，<Ref lesson="1.6" /> 会讨论这些“护城河”。
+
+## 小结 [#summary]
+
+- 生产函数 $Q = f(K, L)$；边际产量递减说的是只增加一种投入，规模报酬说的是所有投入同比例增加。
+- 短期成本：$\text{ATC} = \text{AVC} + \frac{FC}{q}$，MC、AVC、ATC 通常是 U 形，MC 穿过 AVC 和 ATC 的最低点。
+- 完全竞争厂商：$P = MC$（MC 上升的部分）；价格低于 AVC 的最低点时停产。短期供给曲线是 AVC 最低点以上的 MC 曲线。
+- 长期：进入和退出使经济利润为 0，价格等于长期平均成本的最低点；成本最低的投入组合满足 $\frac{MP_L}{w} = \frac{MP_K}{r}$。
+
+<CheckAll />
+
+## 练习题 [#exercises]
+
+<Exercises />

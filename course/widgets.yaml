@@ -89,3 +89,10 @@ risk-premium:
     h: { min: 10, max: 90, step: 10, default: 50 }
   fixed:
     wealth: 100
+
+competitive-firm:
+  component: src/components/widgets/CompetitiveFirm.astro
+  params:
+    p: { min: 10, max: 50, step: 1, default: 35 }
+  fixed:
+    fixed_cost: 72

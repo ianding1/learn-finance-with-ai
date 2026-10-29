@@ -1,0 +1,111 @@
+---
+title: 1.5 Producer Theory
+description: Production functions, marginal products and returns to scale, short-run cost curves, the output and shutdown decisions of a competitive firm, and long-run equilibrium and economic profit.
+lesson: "1.5"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import CompetitiveFirm from '../../../../components/widgets/CompetitiveFirm.astro';
+
+## The production function [#production-function]
+
+Where does the supply curve of <Ref lesson="1.1" /> come from? This lesson derives supply from the production and costs of firms.
+
+A firm uses capital $K$ (machines, buildings) and labor $L$ to make a product. The relation between inputs and the maximum output is the <Def id="production-function">production function</Def>, $Q = f(K, L)$. A common example is the Cobb–Douglas production function:
+
+$$
+Q = K^{\alpha} L^{\beta}
+$$
+
+In the <Def id="short-run">short run</Def>, at least one input (usually capital) cannot be adjusted in time; in the <Def id="long-run">long run</Def>, all inputs can be adjusted, and firms can also enter or leave the industry. The short run and the long run are distinguished by which inputs can be adjusted, not by a length of calendar time.
+
+The extra output from one more unit of labor, with the other inputs fixed, is the <Def id="marginal-product">marginal product</Def> of labor:
+
+$$
+MP_L = \frac{\partial Q}{\partial L}, \qquad MP_K = \frac{\partial Q}{\partial K}
+$$
+
+Example: $Q = K^{0.5}L^{0.5}$ with capital fixed at $K = 16$ in the short run, so $Q = 4\sqrt{L}$. The more workers there are, the less each additional worker adds: the number of machines stays the same, and the workers get more and more crowded. This is the law of diminishing marginal returns.
+
+<Check id="C1" />
+
+## Returns to scale [#returns-to-scale]
+
+The marginal product is about increasing one input only. What if all inputs increase in the same proportion? Multiply both $K$ and $L$ by $t$ ($t > 1$) and compare the change in output. This is <Def id="returns-to-scale">returns to scale</Def>:
+
+- $f(tK, tL) = t\,f(K, L)$: constant returns to scale;
+- $f(tK, tL) > t\,f(K, L)$: increasing returns to scale;
+- $f(tK, tL) < t\,f(K, L)$: decreasing returns to scale.
+
+For the Cobb–Douglas function, $f(tK, tL) = t^{\alpha + \beta} f(K, L)$, so returns to scale depend on whether $\alpha + \beta$ is above, equal to or below 1. In industries with increasing returns to scale (for example networks and software, which need very large fixed investments), large firms have a cost advantage. <Ref lesson="1.6" /> discusses how this affects market structure.
+
+<Check id="C2" />
+
+## Cost curves [#cost-curves]
+
+<Ref lesson="0.2" /> divided total cost into fixed and variable costs (<Ref concept="fixed-cost" />, <Ref concept="variable-cost" />). In the short run capital is fixed, and its cost is a fixed cost; labor changes with output and is a variable cost. Dividing by output gives the <Def id="average-cost">average cost</Def>:
+
+$$
+\text{AVC} = \frac{VC(q)}{q}, \qquad \text{ATC} = \frac{C(q)}{q} = \text{AVC} + \frac{FC}{q}
+$$
+
+AVC is average variable cost and ATC is average total cost. Marginal cost $MC = C'(q)$ (<Ref concept="marginal-cost" />) is the cost of producing one more unit.
+
+A typical short-run cost function is
+
+$$
+C(q) = 72 + q^3 - 10q^2 + 40q
+$$
+
+The fixed cost is 72, $VC = q^3 - 10q^2 + 40q$, $MC = 3q^2 - 20q + 40$ and $\text{AVC} = q^2 - 10q + 40$. At very low output, more workers allow a better division of labor, and MC falls; beyond some level of output, diminishing marginal returns make MC rise. So MC and AVC are both U-shaped: first falling, then rising. As output grows, the fixed cost is spread over more units, and the gap $\frac{FC}{q}$ between ATC and AVC shrinks.
+
+If you draw these three curves, you will see that MC passes exactly through the minimum points of AVC and ATC. Why? Prove it in <Ref check="Q2" />.
+
+<Check id="C3" />
+
+## The competitive firm [#competitive-firm]
+
+Suppose a market has many firms selling the same product, each too small to affect the market price, and firms can enter and exit freely. Such a market is called <Def id="perfect-competition">perfect competition</Def>. Each firm must accept the market price $P$, so its marginal revenue is $P$.
+
+By <Ref lesson="0.2" />, the profit-maximizing output satisfies $P = MC$, on the rising part of MC (the second-order condition).
+
+But we must also ask: is producing better than not producing? In the short run the fixed cost must be paid whether or not the firm produces, so it works like a sunk cost (<Ref concept="sunk-cost" />). Without production, profit is $-FC$; producing $q$ gives a profit of $Pq - VC(q) - FC$. So as long as revenue covers the variable cost, that is, $P \ge \text{AVC}(q)$, producing is better than shutting down: what is left over offsets part of the fixed cost. When the price is below the minimum of AVC, the firm should shut down. This price is called the <Def id="shutdown-point">shutdown point</Def>.
+
+So the short-run supply curve of a competitive firm is the part of the MC curve above the minimum of AVC. Adding up the quantities supplied by all firms gives the market supply curve of <Ref lesson="1.1" />.
+
+<Figure id="4-1" title="A competitive firm with cost $C(q) = 72 + q^3 - 10q^2 + 40q$. The shaded area is profit (green) or loss (red)." observe="Lower the price and watch when the firm starts to lose money and when it shuts down; compare which curve has its minimum at each of these two prices.">
+	<CompetitiveFirm />
+</Figure>
+
+<Check id="C4" />
+
+## Long-run equilibrium and economic profit [#long-run]
+
+In economics, costs include the opportunity cost of every input: the owner's own time and the owner's own capital have other uses, even when nobody is paid for them. Revenue minus all costs, including opportunity costs, is <Def id="economic-profit">economic profit</Def>. Accounting profit subtracts only the costs actually paid, so it is usually higher than economic profit. Zero economic profit means that the business earns exactly what its inputs could earn elsewhere (a normal return); it does not mean "no money was made".
+
+In the long run:
+
+- The firm chooses all inputs. To produce a given output, the lowest-cost input mix satisfies $\frac{MP_L}{w} = \frac{MP_K}{r}$ ($w$ is the wage and $r$ is the rental rate of capital): the last dollar spent on each input adds the same output. This is the same logic as the consumer's optimality condition in <Ref lesson="1.2" />.
+- If the industry has positive economic profit, new firms enter, supply rises and the price falls; if it has losses, firms exit and the price rises.
+
+Entry and exit continue until economic profit is 0: the long-run equilibrium price equals the minimum of long-run average cost, and each firm produces at the lowest-cost scale.
+
+This matters for investors: in a perfectly competitive industry without barriers to entry, competition drives excess profit to 0, and a firm's return on capital stays close to the opportunity cost of capital in the long run. A firm that keeps earning a high return on capital must have some reason that keeps competitors out. <Ref lesson="1.6" /> discusses these "moats".
+
+## Summary [#summary]
+
+- Production function $Q = f(K, L)$; diminishing marginal product is about increasing one input, and returns to scale are about increasing all inputs in the same proportion.
+- Short-run costs: $\text{ATC} = \text{AVC} + \frac{FC}{q}$. MC, AVC and ATC are usually U-shaped, and MC passes through the minimum points of AVC and ATC.
+- Competitive firm: $P = MC$ (on the rising part of MC); shut down when the price is below the minimum of AVC. The short-run supply curve is the MC curve above the minimum of AVC.
+- Long run: entry and exit drive economic profit to 0, and the price equals the minimum of long-run average cost; the lowest-cost input mix satisfies $\frac{MP_L}{w} = \frac{MP_K}{r}$.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

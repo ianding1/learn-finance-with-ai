@@ -788,6 +788,79 @@ crra-utility:
     zh: "相对风险厌恶系数为常数 γ 的效用函数 W^(1−γ)/(1−γ)，γ = 1 时为 ln W。"
     en: "The utility function W^(1−γ)/(1−γ) with constant relative risk aversion γ; ln W when γ = 1."
 
+# ---------- 1.5 ----------
+production-function:
+  defined_in: "1.5"
+  zh: 生产函数
+  en: production function
+  short:
+    zh: "投入（资本 K、劳动 L）与最大产量之间的关系 Q = f(K, L)。"
+    en: "The relation Q = f(K, L) between inputs (capital K, labor L) and the maximum output."
+
+short-run:
+  defined_in: "1.5"
+  zh: 短期
+  en: short run
+  short:
+    zh: "至少有一种投入（通常是资本）来不及调整的时期。"
+    en: "A period in which at least one input (usually capital) cannot be adjusted."
+
+long-run:
+  defined_in: "1.5"
+  zh: 长期
+  en: long run
+  short:
+    zh: "所有投入都可以调整、厂商可以进入或退出行业的时期。"
+    en: "A period in which all inputs can be adjusted and firms can enter or exit the industry."
+
+marginal-product:
+  defined_in: "1.5"
+  zh: 边际产量
+  en: marginal product
+  short:
+    zh: "其他投入不变时，多投入一单位某种投入带来的产量增加，如 MP_L = ∂Q/∂L。"
+    en: "The extra output from one more unit of an input with the other inputs fixed, such as MP_L = ∂Q/∂L."
+
+returns-to-scale:
+  defined_in: "1.5"
+  zh: 规模报酬
+  en: returns to scale
+  short:
+    zh: "所有投入同比例增加 t 倍时，产量增加多于、等于或少于 t 倍（递增、不变、递减）。"
+    en: "Whether output rises by more than, exactly or less than t times when all inputs rise t times (increasing, constant, decreasing)."
+
+average-cost:
+  defined_in: "1.5"
+  zh: 平均成本
+  en: average cost
+  short:
+    zh: "成本除以产量：平均可变成本 AVC = VC/q，平均总成本 ATC = C/q。"
+    en: "Cost divided by output: average variable cost AVC = VC/q and average total cost ATC = C/q."
+
+perfect-competition:
+  defined_in: "1.5"
+  zh: 完全竞争
+  en: perfect competition
+  short:
+    zh: "厂商众多、产品相同、可以自由进出，每个厂商都只能接受市场价格的市场。"
+    en: "A market with many firms, identical products and free entry and exit, where every firm takes the market price as given."
+
+shutdown-point:
+  defined_in: "1.5"
+  zh: 停产点
+  en: shutdown point
+  short:
+    zh: "AVC 的最低点；价格低于它时，厂商短期内停产比生产好。"
+    en: "The minimum of AVC; below this price a firm does better by shutting down in the short run."
+
+economic-profit:
+  defined_in: "1.5"
+  zh: 经济利润
+  en: economic profit
+  short:
+    zh: "收入减去包括机会成本在内的全部成本；为 0 时投入获得正常回报。"
+    en: "Revenue minus all costs including opportunity costs; when it is 0 the inputs earn a normal return."
+
 risk-measures:
   defined_in: "4.1"
   zh: 风险度量

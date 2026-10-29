@@ -286,6 +286,15 @@
 	stroke-width: 1.5;
 	stroke-dasharray: 6 4;
 }
+/* Lesson 1.5 figure */
+.viz-profit {
+	fill: var(--viz-pos);
+	fill-opacity: 0.25;
+}
+.viz-loss {
+	fill: var(--viz-neg);
+	fill-opacity: 0.25;
+}
 .viz-resid {
 	stroke: var(--viz-neg);
 	stroke-width: 1;
