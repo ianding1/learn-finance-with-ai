@@ -914,12 +914,9 @@ body {
 	display: block;
 	width: 100%;
 	height: auto;
-	overflow: visible;
+	overflow: hidden;
 }
-.lfwai-hero-band {
-	fill: var(--viz-a);
-	opacity: 0.12;
-}
+
 .lfwai-hero-median {
 	fill: none;
 	stroke: var(--viz-a);
@@ -943,7 +940,7 @@ body {
 /* The bands fade in, then the median and the simulated path draw once; the end point follows. */
 @media (prefers-reduced-motion: no-preference) {
 	.lfwai-hero-band {
-		animation: lfwai-appear-band 0.9s ease-out both;
+		animation: lfwai-appear 0.9s ease-out both;
 	}
 	.lfwai-hero-median,
 	.lfwai-hero-path {
@@ -953,10 +950,6 @@ body {
 	.lfwai-hero-tip {
 		animation: lfwai-appear 0.4s ease-out 2.1s both;
 	}
-}
-@keyframes lfwai-appear-band {
-	from { opacity: 0; }
-	to { opacity: 0.12; }
 }
 @keyframes lfwai-draw {
 	from { stroke-dashoffset: 1; }

@@ -15,7 +15,8 @@ const action = hero.actions?.[0];
 const W = 560, H = 360, pad = 20;
 const T = 30, mu = 0.05, sig = 0.16;
 const X = (t: number) => pad + (t / T) * (W - 2 * pad);
-const Y = (logW: number) => H / 2 + 24 - (logW / 2.6) * (H - 2 * pad);
+// log wealth from -0.25 to 3.05 covers the outer band at 30 years.
+const Y = (logW: number) => H - pad - ((logW + 0.25) / 3.3) * (H - 2 * pad);
 const ts = Array.from({ length: 61 }, (_, i) => (i / 60) * T);
 const at = (z: number) => ts.map((t) => [X(t), Y(mu * t + z * sig * Math.sqrt(t))] as const);
 const pts = (a: readonly (readonly [number, number])[]) => a.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L');
@@ -56,8 +57,14 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
 	</div>
 	<div class="lfwai-hero-chart" aria-hidden="true">
 		<svg viewBox={`0 0 ${W} ${H}`}>
-			<path class="lfwai-hero-band" d={outer} />
-			<path class="lfwai-hero-band" d={inner} />
+			<defs>
+				<linearGradient id="lfwai-fan" x1="0" x2="1" y1="0" y2="0">
+					<stop offset="0" stop-color="var(--viz-a)" stop-opacity="0.04" />
+					<stop offset="1" stop-color="var(--viz-a)" stop-opacity="0.16" />
+				</linearGradient>
+			</defs>
+			<path class="lfwai-hero-band" d={outer} fill="url(#lfwai-fan)" />
+			<path class="lfwai-hero-band" d={inner} fill="url(#lfwai-fan)" />
 			<path class="lfwai-hero-median" d={median} pathLength="1" />
 			<path class="lfwai-hero-path" d={path} pathLength="1" />
 			<circle class="lfwai-hero-origin" cx={X(0)} cy={Y(0)} r="5" />
