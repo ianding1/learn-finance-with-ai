@@ -118,7 +118,15 @@ stages:
         published: true
         introduces: [production-function, short-run, long-run, marginal-product, returns-to-scale, average-cost, perfect-competition, shutdown-point, economic-profit]
         uses: [fixed-cost, variable-cost, marginal-cost, marginal-revenue, profit-maximization, sunk-cost, partial-derivative, first-order-condition, second-order-condition, supply, demand, market-equilibrium]
-      - { id: "1.6", slug: "1-6-market-structure", title: { zh: "市场结构", en: "Market Structure" } }
+      - id: "1.6"
+        slug: "1-6-market-structure"
+        title: { zh: "市场结构", en: "Market Structure" }
+        summary:
+          zh: "垄断与定价能力、价格歧视、寡头竞争（古诺与伯特兰）、垄断竞争，以及进入壁垒与护城河对长期利润的意义。"
+          en: "Monopoly and market power, price discrimination, oligopoly (Cournot and Bertrand), monopolistic competition, and what barriers to entry and moats mean for long-run profit."
+        published: true
+        introduces: [monopoly, lerner-index, price-discrimination, oligopoly, cournot-model, bertrand-model, monopolistic-competition, barriers-to-entry, natural-monopoly, economic-moat]
+        uses: [marginal-revenue, marginal-cost, profit-maximization, price-elasticity, demand, perfect-competition, economic-profit, long-run, returns-to-scale, average-cost, fixed-cost, first-order-condition]
       - { id: "1.7", slug: "1-7-game-theory", title: { zh: "博弈论基础", en: "Basic Game Theory" } }
       - { id: "1.8", slug: "1-8-welfare-market-failure", title: { zh: "福利与市场失灵", en: "Welfare and Market Failure" } }
       - { id: "1.9", slug: "1-9-information-economics", title: { zh: "信息经济学", en: "Information Economics" } }

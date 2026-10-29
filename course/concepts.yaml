@@ -861,6 +861,87 @@ economic-profit:
     zh: "收入减去包括机会成本在内的全部成本；为 0 时投入获得正常回报。"
     en: "Revenue minus all costs including opportunity costs; when it is 0 the inputs earn a normal return."
 
+# ---------- 1.6 ----------
+monopoly:
+  defined_in: "1.6"
+  zh: 垄断
+  en: monopoly
+  short:
+    zh: "市场中只有一个卖者、产品没有相近替代品的市场结构；按 MR = MC 定产量，价格由需求曲线决定。"
+    en: "A market with a single seller of a product without close substitutes; it sets output where MR = MC and reads the price from the demand curve."
+
+lerner-index:
+  defined_in: "1.6"
+  zh: 勒纳指数
+  en: Lerner index
+  short:
+    zh: "(P − MC)/P，价格高出边际成本的比例；利润最大时等于 1/|ε|，衡量定价能力。"
+    en: "(P − MC)/P, the share of the price above marginal cost; at the profit maximum it equals 1/|ε| and measures market power."
+
+price-discrimination:
+  defined_in: "1.6"
+  zh: 价格歧视
+  en: price discrimination
+  short:
+    zh: "对不同买者收取与成本差别无关的不同价格；分一、二、三级。"
+    en: "Charging different buyers different prices that do not reflect cost differences; first, second or third degree."
+
+oligopoly:
+  defined_in: "1.6"
+  zh: 寡头
+  en: oligopoly
+  short:
+    zh: "只有少数几个厂商、彼此的决策相互影响的市场。"
+    en: "A market with only a few firms whose decisions affect each other."
+
+cournot-model:
+  defined_in: "1.6"
+  zh: 古诺模型
+  en: Cournot model
+  short:
+    zh: "厂商同时选择产量的寡头模型；均衡产量介于垄断和完全竞争之间。"
+    en: "An oligopoly model in which firms choose quantities simultaneously; equilibrium output lies between monopoly and perfect competition."
+
+bertrand-model:
+  defined_in: "1.6"
+  zh: 伯特兰模型
+  en: Bertrand model
+  short:
+    zh: "厂商同时选择价格的寡头模型；产品和成本相同时，两个厂商就使价格等于边际成本。"
+    en: "An oligopoly model in which firms choose prices simultaneously; with identical products and costs, two firms already drive the price to marginal cost."
+
+monopolistic-competition:
+  defined_in: "1.6"
+  zh: 垄断竞争
+  en: monopolistic competition
+  short:
+    zh: "厂商很多、产品有差别、可以自由进入的市场；长期经济利润为 0。"
+    en: "A market with many firms, differentiated products and free entry; economic profit is 0 in the long run."
+
+barriers-to-entry:
+  defined_in: "1.6"
+  zh: 进入壁垒
+  en: barriers to entry
+  short:
+    zh: "阻止新厂商进入或模仿的因素：规模经济、网络效应、转换成本、无形资产、成本优势。"
+    en: "Factors that keep new firms from entering or imitating: economies of scale, network effects, switching costs, intangible assets, cost advantages."
+
+natural-monopoly:
+  defined_in: "1.6"
+  zh: 自然垄断
+  en: natural monopoly
+  short:
+    zh: "在整个市场需求范围内平均成本都在下降，由一家厂商生产成本最低的行业。"
+    en: "An industry in which average cost falls over the whole range of market demand, so one firm can produce at the lowest cost."
+
+economic-moat:
+  defined_in: "1.6"
+  zh: 护城河
+  en: economic moat
+  short:
+    zh: "使企业的经济利润能长期保持为正的持久竞争优势。"
+    en: "A durable competitive advantage that keeps a firm's economic profit positive for a long time."
+
 risk-measures:
   defined_in: "4.1"
   zh: 风险度量

@@ -1,0 +1,134 @@
+---
+title: 1.6 Market Structure
+description: Monopoly and market power, price discrimination, oligopoly (Cournot and Bertrand), monopolistic competition, and what barriers to entry and moats mean for long-run profit.
+lesson: "1.6"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import CournotFirms from '../../../../components/widgets/CournotFirms.astro';
+
+## Monopoly [#monopoly]
+
+The competitive firm of <Ref lesson="1.5" /> must accept the market price. At the other extreme, a market has a single seller whose product has no close substitutes. This is <Def id="monopoly">monopoly</Def>. A monopolist faces the whole market demand curve: to sell more, it must lower its price.
+
+Let the demand curve be $P(Q)$. Revenue is $R(Q) = P(Q)\,Q$, and marginal revenue (<Ref concept="marginal-revenue" />) is
+
+$$
+MR = P + Q\,\frac{dP}{dQ}
+$$
+
+The second term is negative: to sell one more unit, the firm must sell not only that unit at a lower price but also every earlier unit. So a monopolist has $MR < P$. For linear demand $P = a - bQ$, $R = aQ - bQ^2$ and $MR = a - 2bQ$: the MR curve has the same intercept as the demand curve and twice its slope.
+
+Profit is still maximized where $MR = MC$ (<Ref lesson="0.2" />), and the price is then read from the demand curve. Example: demand is $P = 100 - Q$, marginal cost is a constant 20, and there is no fixed cost. $MR = 100 - 2Q = 20$ gives $Q = 40$ and $P = 60$, and profit is $(60 - 20) \times 40 = 1600$. If this market were perfectly competitive, the price would equal marginal cost, 20, and output would be 80. The monopolist produces less and charges more: some buyers are willing to pay more than the cost of production but do not get the product. <Ref lesson="1.8" /> measures this loss.
+
+Write MR in terms of the price elasticity of demand (<Ref concept="price-elasticity" />). With $|\varepsilon| = -\frac{dQ}{dP}\frac{P}{Q}$,
+
+$$
+MR = P\left(1 - \frac{1}{|\varepsilon|}\right)
+$$
+
+Substituting into $MR = MC$ and rearranging gives
+
+$$
+\frac{P - MC}{P} = \frac{1}{|\varepsilon|}
+$$
+
+The left side is the <Def id="lerner-index">Lerner index</Def>, the share of the price that lies above marginal cost. It measures market power. The less elastic the demand, that is, the harder it is for buyers to find substitutes, the higher the markup; a competitive firm faces infinitely elastic demand and has a Lerner index of 0. On which part of the demand curve does a monopolist produce? Answer this in <Ref check="Q1" />.
+
+<Check id="C1" />
+
+## Price discrimination [#price-discrimination]
+
+The monopolist above charges every buyer the same price. If it can charge different buyers different prices, and the differences do not reflect differences in cost, this is <Def id="price-discrimination">price discrimination</Def>. Price discrimination needs three conditions: the firm has market power; it can tell apart (or get buyers to reveal) who is willing to pay more; and buyers cannot resell to each other.
+
+- First-degree (perfect) price discrimination: charge each buyer the highest price he or she is willing to pay. The firm sells until the price equals marginal cost, and buyers gain nothing.
+- Second-degree price discrimination: offer different quantities or versions (volume discounts, basic and premium versions) and let buyers choose.
+- Third-degree price discrimination: split buyers into groups by observable traits (students, regions, new and existing customers), with one price per group.
+
+Under third-degree price discrimination, the firm sets $MR_i = MC$ in each market separately. By the Lerner index, the group with less elastic demand pays more. There are many examples in finance: the same fund charges institutional and individual investors different fees (different share classes), and brokers charge large and small clients different commissions.
+
+<Check id="C2" />
+
+## Oligopoly: the Cournot model [#cournot]
+
+A market with only a few firms is an <Def id="oligopoly">oligopoly</Def>. Unlike perfect competition and monopoly, an oligopolist's profit depends on its rivals' decisions, so each firm must consider what its rivals will do. <Ref lesson="1.7" /> analyzes such problems systematically with game theory; here we look at two classic models.
+
+In the <Def id="cournot-model">Cournot model</Def>, firms make the same product and choose their quantities at the same time, and the price is set by total output. Take two firms with demand $P = a - b(q_1 + q_2)$ and marginal cost $c$ for both. Firm 1's profit is
+
+$$
+\pi_1 = \left(a - b(q_1 + q_2) - c\right) q_1
+$$
+
+Given $q_2$, differentiate with respect to $q_1$ and set the result to 0:
+
+$$
+q_1 = \frac{a - c - b\,q_2}{2b}
+$$
+
+This is firm 1's reaction function: the more its rival produces, the less it wants to produce. The same holds for firm 2. In equilibrium, each firm's output is the best response to the other's output, and neither wants to change on its own. The two firms are symmetric, so setting $q_1 = q_2 = q$ gives
+
+$$
+q = \frac{a - c}{3b}
+$$
+
+Total output $\frac{2(a - c)}{3b}$ lies between the monopoly output $\frac{a - c}{2b}$ and the competitive output $\frac{a - c}{b}$. When a firm raises its output, it considers only how the lower price affects its own output, not its rival's, so together the two firms produce more than a monopolist would. What happens as the number of firms grows? <Ref fig="3-1" /> shows the equilibrium with $n$ firms; the general formula is derived in <Ref check="Q2" />.
+
+<Figure id="3-1" title="Cournot equilibrium with $n$ identical firms: demand $P = 100 - Q$, marginal cost 20. The shaded area is total industry profit." observe="Start with 1 firm and add firms one by one. Watch how the price, total output and total industry profit change, and which point the equilibrium approaches.">
+	<CournotFirms />
+</Figure>
+
+<Check id="C3" />
+
+## Oligopoly: the Bertrand model [#bertrand]
+
+In the <Def id="bertrand-model">Bertrand model</Def>, firms make the same product and choose their prices at the same time, and buyers buy only from the firm with the lowest price (splitting equally when prices are equal). Both firms have marginal cost $c$.
+
+If the rival's price is above $c$, a firm can take the whole market by pricing slightly below it, nearly doubling its profit. So no price above $c$ can last, and the only equilibrium is for both firms to price at $c$, with zero economic profit. With only two firms, the result is the same as under perfect competition. This is the Bertrand paradox.
+
+The Cournot and Bertrand models give very different results. The number of firms alone does not decide how intense competition is; the way firms compete also matters: whether products are identical, whether capacity can expand quickly, and whether buyers can compare prices easily. In industries with identical products and ample capacity (for example some commodity and transport industries), price wars can keep profits low even with only a few companies. Firms may also avoid price wars through product differentiation, capacity limits or long-term cooperation (<Ref lesson="1.7" />).
+
+<Check id="C4" />
+
+## Monopolistic competition [#monopolistic-competition]
+
+Many industries lie between perfect competition and monopoly: there are many firms and entry is free, but each firm's product is a little different (restaurants, clothing brands, hair salons). This is <Def id="monopolistic-competition">monopolistic competition</Def>.
+
+Because products differ, each firm faces a downward-sloping demand curve and has some market power: it prices where $MR = MC$, above marginal cost. In the short run, a popular firm can earn a positive economic profit. But entry is free: the profit attracts new firms with similar products, which take some of the customers. Each firm's demand curve shifts left until the price equals average cost and economic profit is 0.
+
+So a distinctive product alone does not bring lasting profit. As long as others can offer a similar product at a similar cost, competition removes the excess profit.
+
+## Barriers to entry and moats [#moats]
+
+<Ref lesson="1.5" /> showed that economic profit is 0 in the long run in an industry with free entry. Conversely, if a firm earns a positive economic profit for a long time (a return on capital above the opportunity cost of capital), something must keep competitors from entering or imitating. Such things are called <Def id="barriers-to-entry">barriers to entry</Def>. Common sources are:
+
+- **Economies of scale**: with high fixed costs and increasing returns to scale (<Ref concept="returns-to-scale" />), average cost falls with output, and a small entrant has higher costs. If average cost falls over the whole range of market demand, one firm can produce at the lowest cost. This is a <Def id="natural-monopoly">natural monopoly</Def>, for example an electricity grid or a water pipe network.
+- **Network effects**: the more people use a product, the more valuable it is to each user (payment networks, social platforms, exchanges). Even with an identical product, a new entrant finds it hard to attract its first users.
+- **Switching costs**: changing to another product is costly for customers (a company's core software, a household's main bank account).
+- **Intangible assets**: brands, patents, and government licenses and franchises.
+- **Cost advantages**: unique resources, locations or production processes.
+
+Investors call a firm's durable competitive advantage an <Def id="economic-moat">economic moat</Def>: it keeps the firm's economic profit positive for a long time, instead of letting competition remove it quickly as in <Ref concept="monopolistic-competition" />. To judge a moat, ask: could a well-funded competitor copy this firm's product at a similar cost and take its customers? If so, today's high profit is unlikely to last.
+
+Two more points. First, moats can narrow: technological change can make economies of scale and network effects disappear, and patents expire. Second, a firm with a moat is not necessarily a good investment, because its price may already reflect the advantage; the valuation lessons of stage 3 discuss this.
+
+<Check id="C5" />
+
+## Summary [#summary]
+
+- A monopolist faces downward-sloping demand, so $MR < P$; it sets output where $MR = MC$ and reads the price from the demand curve, producing less than under perfect competition at a higher price.
+- Lerner index $\frac{P - MC}{P} = \frac{1}{|\varepsilon|}$: the less elastic the demand, the higher the markup.
+- Price discrimination needs market power, a way to tell buyers apart and no resale; under third-degree price discrimination, the group with less elastic demand pays more.
+- Cournot model (firms choose quantities): equilibrium output lies between monopoly and perfect competition. Bertrand model (firms choose prices, identical products): two firms already drive the price to marginal cost.
+- Monopolistic competition: differentiated products but free entry; economic profit is 0 in the long run.
+- Lasting excess profit needs barriers to entry: economies of scale, network effects, switching costs, intangible assets and cost advantages, that is, a moat.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

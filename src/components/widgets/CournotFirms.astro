@@ -1,0 +1,85 @@
+---
+// Figure 3-1 of lesson 1.6: Cournot competition among n identical firms with demand P = 100 − Q and
+// constant marginal cost 20. The slider sets n; the point is the equilibrium (Q, P), the shaded area is
+// total industry profit, and the hollow point is the competitive outcome P = MC.
+// Parameters and ranges are registered in course/widgets.yaml (id: cournot). Keep them in sync.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	zh: {
+		n: '厂商数目 n',
+		x: '市场总产量 Q',
+		y: '价格（美元）',
+		demand: '需求 P = 100 − Q',
+		mc: '边际成本 MC = 20',
+		eq: '古诺均衡',
+		comp: '完全竞争（P = MC）',
+		readout: '每家厂商产量 q = {q}，总产量 Q = {Q}，价格 P = {P}，行业总利润 = {pi}。',
+	},
+	en: {
+		n: 'Number of firms n',
+		x: 'Total market output Q',
+		y: 'Price (dollars)',
+		demand: 'Demand P = 100 − Q',
+		mc: 'Marginal cost MC = 20',
+		eq: 'Cournot equilibrium',
+		comp: 'Perfect competition (P = MC)',
+		readout: 'Output per firm q = {q}, total output Q = {Q}, price P = {P}, total industry profit = {pi}.',
+	},
+}[lang];
+
+const xr = [0, 100];
+const yr = [0, 100];
+const ticks = [0, 20, 40, 60, 80, 100];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 340, pad: { l: 50, r: 20, t: 14, b: 44 } },
+	{ cls: 'viz-narrow', W: 360, H: 300, pad: { l: 50, r: 12, t: 14, b: 44 } },
+].map((g) => ({
+	...g,
+	X: (v: number) => g.pad.l + ((v - xr[0]) / (xr[1] - xr[0])) * (g.W - g.pad.l - g.pad.r),
+	Y: (v: number) => g.pad.t + ((yr[1] - v) / (yr[1] - yr[0])) * (g.H - g.pad.t - g.pad.b),
+}));
+---
+
+<div class="lfwai-widget" data-widget="cournot" data-readout={L.readout}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.n} = <output data-out="n">2</output></span>
+			<input type="range" min="1" max="20" step="1" value="2" data-param="n" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad, X, Y }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.eq} data-geom={JSON.stringify({ W, H, pad, xr, yr })}>
+			{ticks.map((v) => (
+				<g>
+					<line class={v === 0 ? 'viz-axis' : 'viz-grid'} x1={pad.l} x2={W - pad.r} y1={Y(v)} y2={Y(v)} />
+					<text class="viz-tick" x={pad.l - 8} y={Y(v) + 4} text-anchor="end">{v}</text>
+					<text class="viz-tick" x={X(v)} y={H - pad.b + 18} text-anchor="middle">{v}</text>
+				</g>
+			))}
+			<line class="viz-axis" x1={pad.l} x2={pad.l} y1={pad.t} y2={H - pad.b} />
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">{L.x}</text>
+			<text class="viz-tick" transform={`translate(12 ${(pad.t + H - pad.b) / 2}) rotate(-90)`} text-anchor="middle">{L.y}</text>
+			<rect class="viz-profit" data-el="rect" x="0" y="0" width="0" height="0" />
+			<line class="viz-curve" x1={X(0)} y1={Y(100)} x2={X(100)} y2={Y(0)} />
+			<line class="viz-curve-fat" x1={X(0)} y1={Y(20)} x2={X(100)} y2={Y(20)} />
+			<line class="viz-mean" data-el="vq" x1="0" y1="0" x2="0" y2="0" />
+			<line class="viz-mean" data-el="vp" x1="0" y1="0" x2="0" y2="0" />
+			<circle class="viz-hollow" r="6" cx={X(80)} cy={Y(20)} />
+			<circle class="viz-min" data-el="pt" r="6" cx="0" cy="0" />
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-curve"></span>{L.demand}</li>
+		<li><span class="sw sw-fat"></span>{L.mc}</li>
+		<li><span class="sw sw-min"></span>{L.eq}</li>
+		<li><span class="sw sw-hollow"></span>{L.comp}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initCournot } from '../../scripts/widgets/cournot';
+	initCournot();
+</script>

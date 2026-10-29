@@ -96,3 +96,11 @@ competitive-firm:
     p: { min: 10, max: 50, step: 1, default: 35 }
   fixed:
     fixed_cost: 72
+
+cournot:
+  component: src/components/widgets/CournotFirms.astro
+  params:
+    n: { min: 1, max: 20, step: 1, default: 2 }
+  fixed:
+    a: 100
+    c: 20
