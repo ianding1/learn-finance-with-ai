@@ -511,7 +511,8 @@
 .lfwai-controls {
 	margin-top: 1.5rem;
 }
-.lfwai-all-help + .lfwai-controls {
+.lfwai-all-help + .lfwai-controls,
+.lfwai-q-head + .lfwai-controls {
 	margin-top: 0.75rem;
 }
 .lfwai-hint {
