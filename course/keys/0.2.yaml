@@ -12,49 +12,49 @@
 lesson: "0.2"
 
 context:
-  - zh: |-
+  - zh-cn: |-
       学习者会求导，学过 [[0.1]]；还没有学消费者理论（[[1.2]]）、生产者理论（[[1.5]]）和组合优化（[[4.2]]）。
     en: |-
       The learner can take derivatives and has studied [[0.1]]. The learner has not yet studied consumer theory ([[1.2]]), producer theory ([[1.5]]) or portfolio optimization ([[4.2]]).
   - concepts: [first-order-condition, second-order-condition]
-    zh: |-
+    zh-cn: |-
       讲义给出一阶条件 $f'(x^*) = 0$，以及二阶条件：$f''(x^*) < 0$ 是最大值，$f''(x^*) > 0$ 是最小值。讲义没有讨论二阶导数为 0 的情形，也没有讨论局部最优与全局最优的区别。
     en: |-
       The lesson gives the first-order condition $f'(x^*) = 0$ and the second-order condition: $f''(x^*) < 0$ means a maximum and $f''(x^*) > 0$ a minimum. The lesson does not discuss the case where the second derivative is 0, or the difference between local and global optima.
   - concepts: [fixed-cost, variable-cost, marginal-cost, marginal-revenue, profit-maximization, sunk-cost]
-    zh: |-
+    zh-cn: |-
       讲义定义了总成本 $C(q) = F + VC(q)$：固定成本 $F$ 与产量无关，可变成本 $VC(q)$ 随产量变化；$MC = C'(q)$；利润最大化的内部最优点满足 $MR = MC$；沉没成本是已经付出、收不回的成本。讲义用例子 $\pi(q) = 40q - 100 - q^2$（$q^* = 20$，$\pi^* = 300$）演示了利润最大化，并有一张可以调整 $F$ 的互动图，但没有解释固定成本对最优产量、利润和是否经营的影响，这些留给题目。
     en: |-
       The lesson defines total cost $C(q) = F + VC(q)$: the fixed cost $F$ does not depend on output, and the variable cost $VC(q)$ changes with output; $MC = C'(q)$; at an interior optimum of profit maximization, $MR = MC$; a sunk cost is a cost that has already been paid and cannot be recovered. The lesson shows profit maximization with the example $\pi(q) = 40q - 100 - q^2$ ($q^* = 20$, $\pi^* = 300$) and has an interactive figure in which $F$ can be changed, but it does not explain how the fixed cost affects the optimal output, the profit or whether to stay in business; that is left to the questions.
   - concepts: [partial-derivative]
-    zh: |-
+    zh-cn: |-
       讲义例子：$f(x, y) = -x^2 - y^2 + 2x + 8y$ 在 $(1, 4)$ 取最大值 17。讲义说明交叉项 $f_{xy}$ 为 0 时，$f_{xx} < 0$ 且 $f_{yy} < 0$ 即为最大值。
     en: |-
       Example in the lesson: $f(x, y) = -x^2 - y^2 + 2x + 8y$ has its maximum 17 at $(1, 4)$. The lesson states that when the cross term $f_{xy}$ is 0, $f_{xx} < 0$ and $f_{yy} < 0$ give a maximum.
   - concepts: [budget-constraint, lagrange-multiplier, shadow-price]
-    zh: |-
+    zh-cn: |-
       讲义例子：$U = xy$，$p_x = 2$，$p_y = 4$，预算 100；$\mathcal{L} = xy + \lambda(100 - 2x - 4y)$，解得 $x^* = 25$，$y^* = 12.5$，$\lambda = 6.25$。讲义用“挪一美元”的论证得出内部最优点满足 $\frac{MU_x}{p_x} = \frac{MU_y}{p_y} = \lambda$（挪 1 美元时 $x$ 增加 $\frac{1}{p_x}$ 单位、$y$ 减少 $\frac{1}{p_y}$ 单位），几何上是等高线与预算线相切。$\lambda$ 是影子价格：预算多 1 美元时最大效用的近似增量（预算 101 时多约 6.28）。讲义只用了 $\lambda(\text{总量} - \text{用量})$ 这一种写法，没有讨论其他符号约定，也没有给出一般价格和预算下的需求函数。
     en: |-
       Example in the lesson: $U = xy$, $p_x = 2$, $p_y = 4$, budget 100; $\mathcal{L} = xy + \lambda(100 - 2x - 4y)$ gives $x^* = 25$, $y^* = 12.5$ and $\lambda = 6.25$. The lesson uses the "move one dollar" argument to show that an interior optimum satisfies $\frac{MU_x}{p_x} = \frac{MU_y}{p_y} = \lambda$ (moving 1 dollar raises $x$ by $\frac{1}{p_x}$ units and lowers $y$ by $\frac{1}{p_y}$ units); geometrically, the contour is tangent to the budget line. $\lambda$ is the shadow price: the approximate increase in maximum utility when the budget rises by 1 dollar (about 6.28 at a budget of 101). The lesson uses only the form $\lambda(\text{total} - \text{use})$; it does not discuss other sign conventions and does not give demand functions for general prices and budgets.
   - concepts: [corner-solution]
-    zh: |-
+    zh-cn: |-
       讲义例子：$U = \ln x + y$，$p_x = 1$，$p_y = 10$，$M = 5$。拉格朗日解 $x = 10$，$y = -0.5$ 不可行；真正的最优是角点 $x = 5$，$y = 0$，此时 $\frac{MU_x}{p_x} = 0.2 > \frac{MU_y}{p_y} = 0.1$。讲义说明拉格朗日解满足写进 $\mathcal{L}$ 的等式约束，但不保证非负。
     en: |-
       Example in the lesson: $U = \ln x + y$, $p_x = 1$, $p_y = 10$, $M = 5$. The Lagrange solution $x = 10$, $y = -0.5$ is not feasible; the true optimum is the corner $x = 5$, $y = 0$, where $\frac{MU_x}{p_x} = 0.2 > \frac{MU_y}{p_y} = 0.1$. The lesson explains that the Lagrange solution satisfies the equality constraint written into $\mathcal{L}$ but is not guaranteed to be non-negative.
 
 common_errors:
   - questions: [Q1]
-    zh: |-
+    zh-cn: |-
       把一阶条件当作充分条件：导数为 0 的点也可能是最小值或拐点。
     en: |-
       Treating the first-order condition as sufficient: a point where the derivative is 0 can also be a minimum or an inflection point.
   - questions: [C4]
-    zh: |-
+    zh-cn: |-
       拉格朗日法解出负数时直接接受，没有检查非负约束。
     en: |-
       Accepting a negative Lagrange solution without checking the non-negativity constraints.
   - questions: [C4]
-    zh: |-
+    zh-cn: |-
       “挪一美元”时把 $x$ 和 $y$ 各挪 1 单位：价格不为 1 时，这样会离开预算线。挪 1 美元是 $x$ 变化 $\frac{1}{p_x}$ 单位、$y$ 变化 $\frac{1}{p_y}$ 单位。
     en: |-
       Moving one unit of $x$ and one unit of $y$ when "moving one dollar": when prices are not 1, this leaves the budget line. Moving 1 dollar changes $x$ by $\frac{1}{p_x}$ units and $y$ by $\frac{1}{p_y}$ units.
@@ -67,19 +67,19 @@ questions:
     concepts: [first-order-condition, second-order-condition, fixed-cost, profit-maximization]
     expected: { q: "10", profit: "250", profit_new: "100" }
     question:
-      zh: |-
+      zh-cn: |-
         $\pi(q) = 60q - 3q^2 - 50$，其中 50 是固定成本。求利润最高的产量 $q^*$ 和最大利润。如果固定成本从 50 变成 200，$q^*$ 会变吗？最大利润呢？为什么？
       en: |-
         $\pi(q) = 60q - 3q^2 - 50$, where 50 is the fixed cost. Find the output $q^*$ with the highest profit and the maximum profit. If the fixed cost rises from 50 to 200, does $q^*$ change? Does the maximum profit? Why?
     answer:
-      zh: |-
+      zh-cn: |-
         $\pi'(q) = 60 - 6q = 0$，$q^* = 10$；$\pi'' = -6 < 0$，是最大值；$\pi^* = 600 - 300 - 50 = 250$。
         固定成本变为 200 时 $q^*$ 仍为 10，最大利润变为 100。固定成本与 $q$ 无关，求导为 0，不影响一阶条件；它只让利润曲线整体下移 150。
       en: |-
         $\pi'(q) = 60 - 6q = 0$, so $q^* = 10$; $\pi'' = -6 < 0$, so it is a maximum; $\pi^* = 600 - 300 - 50 = 250$.
         When the fixed cost is 200, $q^*$ is still 10 and the maximum profit is 100. The fixed cost does not depend on $q$, so its derivative is 0 and it does not enter the first-order condition; it only shifts the whole profit curve down by 150.
     rubric:
-      zh:
+      zh-cn:
         - "$q^*$ 和最大利润正确，并检查了是最大值。"
         - "$q^*$ 不变、最大利润变为 100，理由是固定成本的导数为 0。"
       en:
@@ -92,17 +92,17 @@ questions:
     concepts: [partial-derivative, first-order-condition]
     expected: { x: "2", y: "3", f: "13" }
     question:
-      zh: |-
+      zh-cn: |-
         $f(x, y) = -x^2 - y^2 + 4x + 6y$ 在哪一点取最大值？最大值是多少？
       en: |-
         At which point does $f(x, y) = -x^2 - y^2 + 4x + 6y$ reach its maximum? What is the maximum value?
     answer:
-      zh: |-
+      zh-cn: |-
         $\frac{\partial f}{\partial x} = -2x + 4 = 0$，$\frac{\partial f}{\partial y} = -2y + 6 = 0$，得 $x = 2$，$y = 3$。$f(2, 3) = -4 - 9 + 8 + 18 = 13$。$f_{xx} = f_{yy} = -2 < 0$ 且交叉项为 0，所以是最大值。
       en: |-
         $\frac{\partial f}{\partial x} = -2x + 4 = 0$ and $\frac{\partial f}{\partial y} = -2y + 6 = 0$ give $x = 2$, $y = 3$. $f(2, 3) = -4 - 9 + 8 + 18 = 13$. $f_{xx} = f_{yy} = -2 < 0$ and the cross term is 0, so it is a maximum.
     rubric:
-      zh:
+      zh-cn:
         - "两个偏导数同时为 0，点 $(2, 3)$ 正确。"
         - "最大值 13 正确。"
       en:
@@ -115,19 +115,19 @@ questions:
     concepts: [lagrange-multiplier, shadow-price, budget-constraint]
     expected: { x: "20", y: "10", lambda: "10" }
     question:
-      zh: |-
+      zh-cn: |-
         $U = xy$，$p_x = 1$，$p_y = 2$，预算 40 美元。用拉格朗日乘数法求 $x^*$、$y^*$ 和 $\lambda$，并用一句话说明这里 $\lambda$ 的含义。
       en: |-
         $U = xy$, $p_x = 1$, $p_y = 2$, and the budget is 40 dollars. Use the Lagrange multiplier method to find $x^*$, $y^*$ and $\lambda$, and explain in one sentence what $\lambda$ means here.
     answer:
-      zh: |-
+      zh-cn: |-
         $\mathcal{L} = xy + \lambda(40 - x - 2y)$。$y = \lambda$，$x = 2\lambda$，代入 $x + 2y = 40$ 得 $\lambda = 10$，$x^* = 20$，$y^* = 10$，$U^* = 200$。
         含义：预算多 1 美元，最大效用约增加 10（预算为 41 时 $U^* = 210.125$，多 10.125）。
       en: |-
         $\mathcal{L} = xy + \lambda(40 - x - 2y)$. $y = \lambda$ and $x = 2\lambda$; substituting into $x + 2y = 40$ gives $\lambda = 10$, $x^* = 20$, $y^* = 10$ and $U^* = 200$.
         Meaning: if the budget rises by 1 dollar, the maximum utility rises by about 10 (at a budget of 41, $U^* = 210.125$, which is 10.125 more).
     rubric:
-      zh:
+      zh-cn:
         - "$x^*$、$y^*$、$\\lambda$ 正确。"
         - "说明 $\\lambda$ 是预算多 1 美元时最大效用的近似增量。"
       en:
@@ -140,19 +140,19 @@ questions:
     concepts: [corner-solution, lagrange-multiplier, budget-constraint]
     expected: { lambda: "0.25", x_lag: "2", y_lag: "-0.25", x: "1.5", u: "0.405" }
     question:
-      zh: |-
+      zh-cn: |-
         $U = \ln x + y$，$p_x = 2$，$p_y = 4$，预算 $M = 3$。用拉格朗日乘数法求解，结果合理吗？真正的最优选择是什么？用“挪一美元”的论证说明。
       en: |-
         $U = \ln x + y$, $p_x = 2$, $p_y = 4$, and the budget is $M = 3$. Solve it with the Lagrange multiplier method. Is the result reasonable? What is the true optimal choice? Explain with the "move one dollar" argument.
     answer:
-      zh: |-
+      zh-cn: |-
         一阶条件 $\frac{1}{x} = 2\lambda$、$1 = 4\lambda$，得 $\lambda = 0.25$，$x = 2$，$y = \frac{3 - 4}{4} = -0.25$。$y$ 为负数，不可行。
         真正的最优是角点 $x = 1.5$，$y = 0$，$U = \ln 1.5 \approx 0.405$。在这一点 $\frac{MU_x}{p_x} = \frac{1/1.5}{2} = \frac{1}{3}$，大于 $\frac{MU_y}{p_y} = \frac{1}{4}$：从 $y$ 挪钱到 $x$ 能提高效用，但 $y$ 已经是 0，无法再挪；反过来把钱从 $x$ 挪到 $y$ 会降低效用（例如挪 1 美元：$x = 1$，$y = 0.25$，$U = 0.25$）。
       en: |-
         The first-order conditions $\frac{1}{x} = 2\lambda$ and $1 = 4\lambda$ give $\lambda = 0.25$, $x = 2$ and $y = \frac{3 - 4}{4} = -0.25$. $y$ is negative, so this is not feasible.
         The true optimum is the corner $x = 1.5$, $y = 0$, with $U = \ln 1.5 \approx 0.405$. At this point $\frac{MU_x}{p_x} = \frac{1/1.5}{2} = \frac{1}{3}$, which is more than $\frac{MU_y}{p_y} = \frac{1}{4}$: moving money from $y$ to $x$ would raise utility, but $y$ is already 0; moving money from $x$ to $y$ lowers utility (for example, moving 1 dollar gives $x = 1$, $y = 0.25$, $U = 0.25$).
     rubric:
-      zh:
+      zh-cn:
         - "拉格朗日解正确，并指出 $y < 0$ 不可行。"
         - "角点解 $x = 1.5$、$y = 0$ 正确。"
         - "用每美元边际效用的比较说明角点为什么最优。"
@@ -167,17 +167,17 @@ questions:
     level: A
     concepts: [first-order-condition, second-order-condition]
     question:
-      zh: |-
+      zh-cn: |-
         判断真假并说明理由：若 $f'(x^*) = 0$，则 $x^*$ 一定是 $f$ 的最大值点。
       en: |-
         Determine whether this statement is true or false, and explain: if $f'(x^*) = 0$, then $x^*$ is a maximum point of $f$.
     answer:
-      zh: |-
+      zh-cn: |-
         假。导数为 0 的点也可能是最小值点（如 $f = x^2$ 在 0 处），或者既不是最大值也不是最小值的拐点（如 $f = x^3$ 在 0 处）。一阶条件是必要条件，不是充分条件；还要用二阶条件判断，而且二阶条件只能说明是局部最大值。
       en: |-
         False. A point where the derivative is 0 can also be a minimum (for example $f = x^2$ at 0), or an inflection point that is neither a maximum nor a minimum (for example $f = x^3$ at 0). The first-order condition is necessary, not sufficient; the second-order condition is also needed, and it only shows a local maximum.
     rubric:
-      zh:
+      zh-cn:
         - "结论为假。"
         - "举出反例（最小值或拐点），或说明一阶条件只是必要条件。"
       en:
@@ -189,19 +189,19 @@ questions:
     level: A
     concepts: [fixed-cost, variable-cost, marginal-cost, profit-maximization, sunk-cost]
     question:
-      zh: |-
+      zh-cn: |-
         总成本由固定成本和可变成本组成。解释为什么固定成本不影响利润最大化的产量，但会影响利润，以及长期是否值得经营。
       en: |-
         Total cost consists of fixed cost and variable cost. Explain why the fixed cost does not affect the profit-maximizing output, but does affect the profit and whether it is worth staying in business in the long run.
     answer:
-      zh: |-
+      zh-cn: |-
         边际成本是可变成本的导数，固定成本与产量无关，求导为 0，不进入 $MR = MC$，所以不影响 $q^*$。
         固定成本让利润曲线整体下移 $F$，最大利润减少 $F$。如果长期最大利润小于 0，就不值得经营，应该退出。即使亏损，$q^*$ 仍是亏得最少的产量。
       en: |-
         Marginal cost is the derivative of variable cost. The fixed cost does not depend on output, so its derivative is 0; it does not enter $MR = MC$ and does not affect $q^*$.
         The fixed cost shifts the whole profit curve down by $F$, so the maximum profit falls by $F$. If the maximum profit is negative in the long run, it is not worth staying in business, and the firm should exit. Even with a loss, $q^*$ is the output with the smallest loss.
     rubric:
-      zh:
+      zh-cn:
         - "用导数说明固定成本不影响 $q^*$。"
         - "说明固定成本使最大利润减少 $F$，长期利润为负时应退出。"
       en:
@@ -214,17 +214,17 @@ questions:
     concepts: [marginal-revenue, marginal-cost, profit-maximization]
     expected: { q: "20", profit: "350" }
     question:
-      zh: |-
+      zh-cn: |-
         完全竞争的厂商按市场价格 $p = 50$ 出售产品，成本为 $C(q) = q^2 + 10q + 50$。求利润最高的产量 $q^*$ 和最大利润。
       en: |-
         A firm in perfect competition sells at the market price $p = 50$, and its cost is $C(q) = q^2 + 10q + 50$. Find the output $q^*$ with the highest profit and the maximum profit.
     answer:
-      zh: |-
+      zh-cn: |-
         $MR = 50$，$MC = 2q + 10$，$MR = MC$ 得 $q^* = 20$。利润 $= 50 \times 20 - (400 + 200 + 50) = 1000 - 650 = 350$。
       en: |-
         $MR = 50$ and $MC = 2q + 10$; $MR = MC$ gives $q^* = 20$. Profit $= 50 \times 20 - (400 + 200 + 50) = 1000 - 650 = 350$.
     rubric:
-      zh:
+      zh-cn:
         - "$q^*$ 正确。"
         - "最大利润正确，成本的三项都计入。"
       en:
@@ -237,12 +237,12 @@ questions:
     concepts: [lagrange-multiplier, budget-constraint]
     expected: { x: "10", y: "10", lambda: "100", u: "1000" }
     question:
-      zh: |-
+      zh-cn: |-
         $U = x^2 y$，$p_x = 2$，$p_y = 1$，预算 $M = 30$。用拉格朗日乘数法求 $x^*$、$y^*$、$\lambda$，以及两种商品的支出各占预算的比例。
       en: |-
         $U = x^2 y$, $p_x = 2$, $p_y = 1$, and the budget is $M = 30$. Use the Lagrange multiplier method to find $x^*$, $y^*$ and $\lambda$, and the share of the budget spent on each good.
     answer:
-      zh: |-
+      zh-cn: |-
         $\mathcal{L} = x^2 y + \lambda(30 - 2x - y)$。一阶条件 $2xy = 2\lambda$、$x^2 = \lambda$，得 $xy = x^2$，即 $x(x - y) = 0$。
         $x = 0$ 时 $U = 0$，不是最大值，舍去；所以 $x = y$，代入 $2x + y = 30$ 得 $x^* = y^* = 10$，$\lambda = 100$，$U^* = 1000$。
         支出：$x$ 上 20 美元，占 2/3；$y$ 上 10 美元，占 1/3。
@@ -251,7 +251,7 @@ questions:
         $x = 0$ gives $U = 0$, which is not a maximum, so it is rejected. So $x = y$, and $2x + y = 30$ gives $x^* = y^* = 10$, $\lambda = 100$ and $U^* = 1000$.
         Spending: 20 dollars on $x$, which is 2/3 of the budget, and 10 dollars on $y$, which is 1/3.
     rubric:
-      zh:
+      zh-cn:
         - "一阶条件正确，并处理了 $x = 0$ 的情形。"
         - "$x^*$、$y^*$、$\\lambda$ 正确。"
         - "支出比例为 2/3 与 1/3。"
@@ -265,12 +265,12 @@ questions:
     level: C
     concepts: [lagrange-multiplier, budget-constraint]
     question:
-      zh: |-
+      zh-cn: |-
         对一般的价格 $p_x$、$p_y$ 和预算 $M$，求 $U = xy$ 的需求函数 $x^*$、$y^*$ 与 $\lambda$。从结果中能看出哪些经济含义？至少说明两点。
       en: |-
         For general prices $p_x$, $p_y$ and budget $M$, find the demand functions $x^*$, $y^*$ and $\lambda$ for $U = xy$. What economic meaning can you see in the result? Explain at least two points.
     answer:
-      zh: |-
+      zh-cn: |-
         $\mathcal{L} = xy + \lambda(M - p_x x - p_y y)$，$y = \lambda p_x$，$x = \lambda p_y$，代入约束得
         $x^* = \frac{M}{2p_x}$，$y^* = \frac{M}{2p_y}$，$\lambda = \frac{M}{2p_xp_y}$。
         含义：(1) 每种商品的支出都是预算的一半（$p_x x^* = p_y y^* = \frac{M}{2}$），支出占比与价格无关。(2) $x^*$ 的式子里没有 $p_y$：$y$ 涨价时，消费者只减少 $y$，对 $x$ 的需求不变（[[1.2]] 会用替代效应和收入效应相互抵消来解释）。其他正确的含义也可以，例如需求随预算成比例增加、随自身价格下降。
@@ -279,7 +279,7 @@ questions:
         $x^* = \frac{M}{2p_x}$, $y^* = \frac{M}{2p_y}$ and $\lambda = \frac{M}{2p_xp_y}$.
         Meaning: (1) spending on each good is half of the budget ($p_x x^* = p_y y^* = \frac{M}{2}$), so the spending shares do not depend on prices. (2) $p_y$ does not appear in $x^*$: when $y$ becomes more expensive, the consumer buys less $y$ but the same amount of $x$ ([[1.2]] explains this as the substitution effect and the income effect cancelling out). Other correct points are also acceptable, for example that demand rises in proportion to the budget and falls with the good's own price.
     rubric:
-      zh:
+      zh-cn:
         - "需求函数和 $\\lambda$ 正确。"
         - "说明至少两点正确的经济含义，例如支出占比固定、$x^*$ 与 $p_y$ 无关。"
       en:
@@ -292,19 +292,19 @@ questions:
     star: true
     concepts: [lagrange-multiplier, shadow-price]
     question:
-      zh: |-
+      zh-cn: |-
         由 [[check:Q5]] 求出最大效用 $U^*(M)$，验证 $\frac{dU^*}{dM} = \lambda$。如果把拉格朗日函数写成 $xy + \lambda(p_x x + p_y y - M)$，$x^*$、$y^*$ 和 $\lambda$ 会有什么变化？$\lambda$ 的含义要怎样调整？
       en: |-
         Use [[check:Q5]] to find the maximum utility $U^*(M)$, and verify that $\frac{dU^*}{dM} = \lambda$. If the Lagrangian is written as $xy + \lambda(p_x x + p_y y - M)$ instead, how do $x^*$, $y^*$ and $\lambda$ change? How must the meaning of $\lambda$ be adjusted?
     answer:
-      zh: |-
+      zh-cn: |-
         $U^* = x^* y^* = \frac{M^2}{4p_xp_y}$，$\frac{dU^*}{dM} = \frac{M}{2p_xp_y} = \lambda$。
         换成另一种写法后，一阶条件只是 $\lambda$ 变号，$x^*$、$y^*$ 不变，$\lambda = -\frac{M}{2p_xp_y}$。这时 $\frac{dU^*}{dM} = -\lambda > 0$：影子价格是 $-\lambda$，经济含义不变，只是符号约定不同。
       en: |-
         $U^* = x^* y^* = \frac{M^2}{4p_xp_y}$ and $\frac{dU^*}{dM} = \frac{M}{2p_xp_y} = \lambda$.
         With the other form, only the sign of $\lambda$ in the first-order conditions changes: $x^*$ and $y^*$ stay the same and $\lambda = -\frac{M}{2p_xp_y}$. Then $\frac{dU^*}{dM} = -\lambda > 0$: the shadow price is $-\lambda$. The economic meaning is the same; only the sign convention differs.
     rubric:
-      zh:
+      zh-cn:
         - "$U^*(M)$ 和导数正确，等于 $\\lambda$。"
         - "指出换写法后 $x^*$、$y^*$ 不变，$\\lambda$ 变号，影子价格是 $-\\lambda$。"
       en:

@@ -7,39 +7,39 @@
 lesson: "E0"
 
 context:
-  - zh: |-
+  - zh-cn: |-
       测验 E0 考 [[0.1]] 到 [[0.5]]：货币时间价值、优化、概率与组合方差、分布与统计推断、回归。学习者可以用计算器或代码，卷首有公式表（年金、永续年金、EAR、一阶条件、组合方差、标准误、对数正态分布的中位数和均值、OLS、遗漏变量等）。计算用 1.96 作为 95% 的临界值，除非题目另有说明。
     en: |-
       Quiz E0 covers [[0.1]] to [[0.5]]: time value of money, optimization, probability and portfolio variance, distributions and inference, and regression. The learner may use a calculator or code, and the quiz starts with a formula sheet (annuities, perpetuities, EAR, first-order conditions, portfolio variance, standard error, the median and mean of a lognormal distribution, OLS, omitted variables and so on). Calculations use 1.96 as the 95% critical value unless a question says otherwise.
 
 common_errors:
   - questions: [Q4]
-    zh: |-
+    zh-cn: |-
       认为检验 20 个无效策略时“出现显著结果的概率是 5%”：5% 是每一次检验的误报概率，至少一次误报的概率要按 $1 - 0.95^{20}$ 计算。
     en: |-
       Thinking that when 20 useless strategies are tested, "the probability of a significant result is 5%": 5% is the false-positive probability of each test, and the probability of at least one false positive is $1 - 0.95^{20}$.
   - questions: [Q6]
-    zh: |-
+    zh-cn: |-
       每年取款、按月复利时直接用名义年利率 6% 作为年折现率：应先换算成有效年利率。另一个常见错误是忽略第一笔在退休当天取出（期初年金、期初开始的增长永续年金）。
     en: |-
       Using the nominal rate of 6% as the annual discount rate for yearly withdrawals with monthly compounding: it must first be converted to the effective annual rate. Another common error is ignoring that the first withdrawal is on the day of retirement (an annuity due, and a growing perpetuity that starts now).
   - questions: [Q7]
-    zh: |-
+    zh-cn: |-
       把市场价格当作不变（$MR = p$）；或者只看一阶条件，不比较“完全不生产”（$q = 0$）这个边界上的利润。
     en: |-
       Treating the market price as fixed ($MR = p$); or using only the first-order condition without comparing the profit at the boundary of not producing at all ($q = 0$).
   - questions: [Q8]
-    zh: |-
+    zh-cn: |-
       直接接受一阶条件给出的负权重：不能卖空时权重必须在 0 和 1 之间，这时最优解在边界上。
     en: |-
       Accepting the negative weight given by the first-order condition: without short selling the weight must be between 0 and 1, and the optimum is then at the boundary.
   - questions: [Q9]
-    zh: |-
+    zh-cn: |-
       把多年对数收益率之和的标准差算成一年的 $n$ 倍：各年独立时方差是 $n$ 倍，标准差只是 $\sqrt{n}$ 倍。
     en: |-
       Taking the standard deviation of the sum of several years of log returns as $n$ times that of one year: with independent years the variance is $n$ times as large, so the standard deviation is only $\sqrt{n}$ times as large.
   - questions: [Q10]
-    zh: |-
+    zh-cn: |-
       把 $R^2$ 理解为“平均收益中有多少来自市场”：$R^2$ 说的是波动（方差）中有多少能由市场解释。
     en: |-
       Reading $R^2$ as "the share of the average return that comes from the market": $R^2$ is the share of the variation (variance) that the market explains.
@@ -54,19 +54,19 @@ questions:
     concepts: [present-value, discount-factor]
     expected: { a5: "122.78", b5: "120.94", a10: "77.11", b10: "105.18" }
     question:
-      zh: |-
+      zh-cn: |-
         在 5% 的折现率下，项目 A 的现值高于项目 B。两个项目都只有未来的正现金流。那么在 10% 的折现率下，A 的现值也一定高于 B。
       en: |-
         At a discount rate of 5%, project A has a higher present value than project B. Both projects have only positive future cash flows. Then at a discount rate of 10%, A must also have a higher present value than B.
     answer:
-      zh: |-
+      zh-cn: |-
         假。折现率上升时，越晚到的现金流现值下降得越多（折现因子 $(1+r)^{-t}$ 对 $r$ 的敏感度随 $t$ 增大）。所以现金流较晚的项目在高折现率下可能被反超。
         反例：A 在第 10 年末付 200 美元，B 在第 3 年末付 140 美元。5% 时 A 的现值 $\frac{200}{1.05^{10}} \approx 122.78$，B 的现值 $\frac{140}{1.05^{3}} \approx 120.94$，A 更高；10% 时 A 的现值 $\frac{200}{1.1^{10}} \approx 77.11$，B 的现值 $\frac{140}{1.1^{3}} \approx 105.18$，B 更高。
       en: |-
         False. When the discount rate rises, later cash flows lose more present value (the sensitivity of the discount factor $(1+r)^{-t}$ to $r$ grows with $t$). So a project with later cash flows can fall behind at a higher discount rate.
         Counterexample: A pays 200 dollars at the end of year 10, and B pays 140 dollars at the end of year 3. At 5%, A is worth $\frac{200}{1.05^{10}} \approx 122.78$ and B is worth $\frac{140}{1.05^{3}} \approx 120.94$, so A is higher; at 10%, A is worth $\frac{200}{1.1^{10}} \approx 77.11$ and B is worth $\frac{140}{1.1^{3}} \approx 105.18$, so B is higher.
     rubric:
-      zh:
+      zh-cn:
         - "判断为假，并给出数值反例，或说明较晚的现金流对折现率更敏感（4 分）。"
         - "判断为假但理由不完整：2 分。只写判断：0 分。"
       en:
@@ -80,17 +80,17 @@ questions:
     concepts: [shadow-price, lagrange-multiplier]
     expected: { u100: "312.5", u200: "1250", approx: "625", actual: "937.5" }
     question:
-      zh: |-
+      zh-cn: |-
         消费者的效用 $U = xy$，$p_x = 2$，$p_y = 4$，预算 100 美元时拉格朗日乘数 $\lambda = 6.25$。预算增加到 200 美元时，最大效用的增加量大于 $6.25 \times 100 = 625$。
       en: |-
         A consumer has utility $U = xy$ with $p_x = 2$ and $p_y = 4$; at a budget of 100 dollars the Lagrange multiplier is $\lambda = 6.25$. If the budget rises to 200 dollars, the maximum utility rises by more than $6.25 \times 100 = 625$.
     answer:
-      zh: |-
+      zh-cn: |-
         真。$\lambda$ 只是预算增加一个很小的量时最大效用的变化率；预算变化很大时，$\lambda$ 本身也在变，$6.25 \times 100 = 625$ 只是近似。这里 $U^* = \frac{M^2}{4p_xp_y} = \frac{M^2}{32}$，$\lambda = \frac{dU^*}{dM} = \frac{M}{16}$ 随预算增大，所以预算从 100 增加到 200 的过程中，每一美元带来的效用都不少于 6.25。预算 100 时 $U^* = 312.5$，预算 200 时 $U^* = 1250$，实际增加 937.5，大于 625。
       en: |-
         True. $\lambda$ is only the rate at which maximum utility changes for a small increase in the budget; when the budget changes a lot, $\lambda$ itself changes, and $6.25 \times 100 = 625$ is only an approximation. Here $U^* = \frac{M^2}{4p_xp_y} = \frac{M^2}{32}$ and $\lambda = \frac{dU^*}{dM} = \frac{M}{16}$ grows with the budget, so as the budget rises from 100 to 200, every dollar adds at least 6.25 to utility. At a budget of 100, $U^* = 312.5$; at 200, $U^* = 1250$. The actual increase is 937.5, more than 625.
     rubric:
-      zh:
+      zh-cn:
         - "判断为真，并说明 $\\lambda$ 随预算增大（$\\lambda = \\frac{M}{16}$），或算出实际增加 937.5（4 分）。"
         - "判断为真但理由不完整（例如只说 $\\lambda$ 是近似、没有说明方向）：2 分。只写判断：0 分。"
       en:
@@ -105,17 +105,17 @@ questions:
     concepts: [covariance, correlation, random-variable]
     expected: { cov: "0" }
     question:
-      zh: |-
+      zh-cn: |-
         两项资产收益的协方差为 0，说明一项资产的收益不能告诉我们任何关于另一项资产收益的信息。
       en: |-
         If the covariance between the returns of two assets is 0, then one asset's return tells us nothing about the other asset's return.
     answer:
-      zh: |-
+      zh-cn: |-
         假。协方差（和相关系数）只衡量线性关系。反例：三种情景等概率，A 的收益为 −10、0、10（%），B 的收益为 10、0、10（%），即 B 由 A 完全决定（$B = 0.1A^2$）。$E[A] = 0$，$E[B] \approx 6.67$，$\text{Cov} = \frac{1}{3}\big[(-10)(3.33) + 0 + (10)(3.33)\big] = 0$。协方差为 0，但知道 A 就完全知道 B。
       en: |-
         False. Covariance (and correlation) measures only linear relationships. Counterexample: three equally likely scenarios, A returns −10, 0, 10 (%) and B returns 10, 0, 10 (%), so B is fully determined by A ($B = 0.1A^2$). $E[A] = 0$, $E[B] \approx 6.67$, and $\text{Cov} = \frac{1}{3}\big[(-10)(3.33) + 0 + (10)(3.33)\big] = 0$. The covariance is 0, yet knowing A tells us B exactly.
     rubric:
-      zh:
+      zh-cn:
         - "判断为假，并给出协方差为 0 但有确定关系的反例，或说明协方差只衡量线性关系（4 分）。"
         - "判断为假但理由不完整：2 分。只写判断：0 分。"
       en:
@@ -130,17 +130,17 @@ questions:
     concepts: [multiple-testing, hypothesis-test]
     expected: { p: "64" }
     question:
-      zh: |-
+      zh-cn: |-
         一位研究者检验了 20 个互不相关的选股策略，假设它们其实都没有效果。每个策略都在 5% 的水平上检验，那么至少有一个策略显示为“显著有效”的概率约为 5%。
       en: |-
         A researcher tests 20 unrelated stock-picking strategies, and suppose that none of them actually works. Each strategy is tested at the 5% level. Then the probability that at least one strategy shows up as "significantly effective" is about 5%.
     answer:
-      zh: |-
+      zh-cn: |-
         假。5% 是每一次检验在策略无效时误报的概率。20 次检验相互独立时，全部不误报的概率是 $0.95^{20}$，至少一次误报的概率是 $1 - 0.95^{20} \approx 64$%。平均来说会有 $20 \times 0.05 = 1$ 个策略看起来显著。所以从很多次检验中挑出一个显著的结果，并不能说明它有效。
       en: |-
         False. 5% is the probability that one test gives a false positive when the strategy does not work. With 20 independent tests, the probability of no false positive is $0.95^{20}$, so the probability of at least one is $1 - 0.95^{20} \approx 64$%. On average $20 \times 0.05 = 1$ strategy looks significant. So picking one significant result out of many tests does not show that it works.
     rubric:
-      zh:
+      zh-cn:
         - "判断为假，并算出约 64%（或说明至少一次误报的概率远大于 5%）（4 分）。"
         - "判断为假但理由不完整：2 分。只写判断：0 分。"
       en:
@@ -154,17 +154,17 @@ questions:
     points: 4
     concepts: [omitted-variable-bias, regression-coefficient]
     question:
-      zh: |-
+      zh-cn: |-
         在 $y$ 对 $x$ 的回归中，加入一个对 $y$ 有很大影响、但与 $x$ 不相关的新变量 $z$。数据很多时，$x$ 的系数基本不变。
       en: |-
         A new variable $z$ that has a large effect on $y$ but is uncorrelated with $x$ is added to a regression of $y$ on $x$. With a lot of data, the coefficient on $x$ stays about the same.
     answer:
-      zh: |-
+      zh-cn: |-
         真。只用 $x$ 回归时，数据很多时斜率接近 $\beta_x + \beta_z \cdot \frac{\text{Cov}(x, z)}{\text{Var}(x)}$。遗漏 $z$ 造成的偏差需要两个条件：$z$ 影响 $y$（$\beta_z \ne 0$），而且 $z$ 与 $x$ 相关。这里 $\text{Cov}(x, z) = 0$，无论 $\beta_z$ 多大，遗漏 $z$ 都不造成偏差，加入 $z$ 后 $x$ 的系数基本不变。例如真实关系为 $y = 1 + 2x + 3z + \varepsilon$，$x$ 与 $z$ 不相关，加入 $z$ 前后 $x$ 的系数都接近 2。加入 $z$ 会提高 $R^2$、减小残差，但不改变 $x$ 的系数。
       en: |-
         True. When only $x$ is in the regression, with a lot of data the slope is close to $\beta_x + \beta_z \cdot \frac{\text{Cov}(x, z)}{\text{Var}(x)}$. A bias from leaving out $z$ needs two conditions: $z$ affects $y$ ($\beta_z \ne 0$), and $z$ is correlated with $x$. Here $\text{Cov}(x, z) = 0$, so however large $\beta_z$ is, leaving out $z$ causes no bias, and the coefficient on $x$ stays about the same when $z$ is added. For example, if the true relation is $y = 1 + 2x + 3z + \varepsilon$ and $x$ is uncorrelated with $z$, the coefficient on $x$ is close to 2 both before and after $z$ is added. Adding $z$ raises $R^2$ and makes the residuals smaller, but does not change the coefficient on $x$.
     rubric:
-      zh:
+      zh-cn:
         - "判断为真，并用遗漏变量公式说明偏差需要 $z$ 与 $x$ 相关（4 分）。"
         - "判断为真但理由不完整：2 分。只写判断：0 分。"
       en:
@@ -180,7 +180,7 @@ questions:
     concepts: [ear, annuity, annuity-due, future-value, growing-perpetuity]
     expected: { ear: "6.17", pv: "801486", c: "797.88", w: "31464" }
     question:
-      zh: |-
+      zh-cn: |-
         一个家庭计划 30 年后退休。退休后每年年初从账户取 60,000 美元，共取 25 年，第一笔在退休当天取出。账户的名义年利率始终为 6%，按月复利。
         (a) 退休当天账户里至少要有多少钱？（6 分）
         (b) 从现在起每月月末存入相同的金额，30 年后正好达到 (a) 的金额。每月要存多少？（4 分）
@@ -191,7 +191,7 @@ questions:
         (b) Starting now, the household deposits the same amount at the end of each month and reaches exactly the amount in (a) after 30 years. How much must it deposit each month? (4 points)
         (c) The household changes its plan: after retirement the withdrawals continue forever (for its children), still once at the start of each year with the first on the day of retirement, but each year 2% more than the year before. With the amount from (a) at retirement, how much can it withdraw in the first year? (6 points)
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 取款每年一次，而利息按月复利，所以要用有效年利率：$R = 1.005^{12} - 1 \approx 6.17$%。取款在每年年初，是期初年金：
         $PV = 60{,}000 \times \frac{1 - (1+R)^{-25}}{R} \times (1+R) \approx 801{,}486$ 美元。
         （直接用 6% 作为年利率会得到约 813,021 美元；按期末年金计算则会少算一期利息。）
@@ -208,7 +208,7 @@ questions:
         $PV = W + \frac{W(1+g)}{R - g} = W \cdot \frac{1+R}{R-g}$.
         $W = 801{,}486 \times \frac{R - 0.02}{1 + R} \approx 31{,}464$ dollars.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 换算有效年利率 2 分；按期初年金求现值，约 801,486 美元 4 分。直接用 6% 或按期末年金计算、其余正确：最多 3 分。"
         - "(b) 列出年金终值方程 2 分，约 797.88 美元 2 分。用 (a) 的错误结果但方法正确：给满分。"
         - "(c) 正确处理第一笔在退休当天（$W \\cdot \\frac{1+R}{R-g}$ 或等价形式）4 分，约 31,464 美元 2 分。"
@@ -225,7 +225,7 @@ questions:
     concepts: [profit-maximization, marginal-revenue, marginal-cost, first-order-condition, second-order-condition, fixed-cost, sunk-cost]
     expected: { q: "20", p: "60", profit: "600", p_new: "64", rise: "4", c_shut: "60", c_sunk: "100" }
     question:
-      zh: |-
+      zh-cn: |-
         一家公司是某种产品唯一的卖家。卖出 $q$ 件时，市场价格为 $p(q) = 100 - 2q$（美元）。每件的成本为 $c$，每年另有固定成本 $F$，即 $C(q) = cq + F$。
         (a) 求利润最高的产量 $q^*$ 和价格 $p^*$（用 $c$ 表示），并检查是最大值。$c = 20$、$F = 200$ 时，$q^*$、$p^*$ 和最大利润各是多少？（5 分）
         (b) 原料涨价，$c$ 从 20 变为 28。一位同事说：“每件成本涨了 8 美元，就应该把价格提高 8 美元，把成本完全转嫁给顾客。”用 (a) 的结果判断这个说法，并用边际收入和边际成本说明原因。（5 分）
@@ -236,7 +236,7 @@ questions:
         (b) Material prices rise and $c$ goes from 20 to 28. A colleague says: "Each unit costs 8 dollars more, so we should raise the price by 8 dollars and pass the whole cost on to customers." Use the result of (a) to judge this statement, and explain with marginal revenue and marginal cost. (5 points)
         (c) Let $F = 200$, and suppose the company does not pay this fixed cost if it stops producing. Above what value of $c$ should the company stop producing? How does the answer change if the 200 dollars is a sunk cost that has already been paid and cannot be recovered? (6 points)
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\pi = (100 - 2q)q - cq - F$。$\pi' = 100 - c - 4q = 0$，$q^* = \frac{100 - c}{4}$；$\pi'' = -4 < 0$，是最大值。$p^* = 100 - 2q^* = \frac{100 + c}{2}$，$\pi^* = \frac{(100 - c)^2}{8} - F$。$c = 20$、$F = 200$ 时 $q^* = 20$，$p^* = 60$，$\pi^* = 800 - 200 = 600$。
         (b) 不对。$p^* = \frac{100 + c}{2}$，成本每涨 1 美元价格只涨 0.5 美元：$c = 28$ 时 $p^* = 64$，只上涨 4 美元。原因：最优点满足 $MR = MC$。边际收入 $100 - 4q$ 随产量下降的速度是价格 $100 - 2q$ 的两倍；边际成本上升 8 时，产量只需减少 2 件就能让边际收入上升 8，而减少 2 件只让价格上升 4。如果把价格提高 8（产量减到 16），$MR = 36 > MC = 28$，多卖一件还能增加利润。
         (c) 固定成本可以避免时，要比较最优产量的利润和不生产（$q = 0$，利润 0）。生产要求 $\frac{(100 - c)^2}{8} \ge 200$，即 $100 - c \ge 40$，$c \le 60$。所以 $c > 60$ 时应停产，尽管一阶条件仍给出正的产量（例如 $c = 64$ 时 $q^* = 9$，但利润为负）。
@@ -247,7 +247,7 @@ questions:
         (c) When the fixed cost can be avoided, the profit at the optimal output must be compared with not producing ($q = 0$, profit 0). Producing requires $\frac{(100 - c)^2}{8} \ge 200$, that is, $100 - c \ge 40$ and $c \le 60$. So for $c > 60$ the company should stop, even though the first-order condition still gives a positive output (for example, $c = 64$ gives $q^* = 9$ with a negative profit).
         If the 200 dollars is a sunk cost, it is paid whether or not the company produces, so it does not affect the decision: the company produces as long as selling one more unit makes money, that is, as long as the marginal revenue of 100 at $q = 0$ is above $c$. So it stops only when $c \ge 100$.
     rubric:
-      zh:
+      zh-cn:
         - "(a) $q^*$、$p^*$ 的表达式和二阶条件 3 分；数值 20、60、600 2 分。"
         - "(b) 判断不对，指出价格只涨 4 美元 2 分；用 $MR$ 比价格下降得快说明原因 3 分。"
         - "(c) 比较最优利润与不生产的利润，得出 $c > 60$ 时停产 4 分；沉没成本不影响决策、$c \\ge 100$ 才停产 2 分。"
@@ -264,7 +264,7 @@ questions:
     concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, correlation]
     expected: { rho: "-0.25", sd: "7.91", threshold: "0.5" }
     question:
-      zh: |-
+      zh-cn: |-
         两只基金 A、B 的标准差为 $\sigma_A$、$\sigma_B$，相关系数为 $\rho$。组合中 A 的权重为 $w$，B 为 $1 - w$。
         (a) 用导数推导使组合方差最小的权重 $w^*$（用 $\sigma_A$、$\sigma_B$、$\rho$ 表示），并说明它确实是最小值。（6 分）
         (b) 已知 $\sigma_A = 20\%$，$\sigma_B = 10\%$，某位分析师算出的最小方差组合中 A 的权重是 25%。由此反推两只基金的相关系数，并求这个组合的标准差。（6 分）
@@ -275,7 +275,7 @@ questions:
         (b) With $\sigma_A = 20\%$ and $\sigma_B = 10\%$, an analyst finds that the minimum-variance portfolio holds 25% in A. Work back to the correlation between the two funds, and find the standard deviation of this portfolio. (6 points)
         (c) Still with $\sigma_A = 20\%$ and $\sigma_B = 10\%$, short selling is not allowed ($0 \le w \le 1$). For what range of the correlation does the minimum-variance portfolio hold no A at all? Explain. (6 points)
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$。
         $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$，解得
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。
@@ -292,7 +292,7 @@ questions:
         $\sigma_P^2 = 0.0625 \times 400 + 0.5625 \times 100 + 2 \times 0.25 \times 0.75 \times (-0.25) \times 200 = 25 + 56.25 - 18.75 = 62.5$, so $\sigma_P \approx 7.91\%$.
         (c) The variance is a quadratic in $w$ that opens upward. When its minimum point $w^* \le 0$, the variance rises with $w$ on $[0, 1]$, and the optimum is the corner $w = 0$. $w^* \le 0$ means $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$, that is, $\rho \ge \frac{\sigma_B}{\sigma_A} = 0.5$. So for $\rho \ge 0.5$ the portfolio holds no A ($w^*$ is exactly 0 at $\rho = 0.5$).
     rubric:
-      zh:
+      zh-cn:
         - "(a) 方差表达式与求导 3 分，$w^*$ 公式 2 分，二阶条件 1 分。"
         - "(b) 解出 $\\rho = -0.25$ 4 分，标准差约 7.91% 2 分。"
         - "(c) 指出最优为角点、需要 $w^* \\le 0$ 3 分；得出 $\\rho \\ge 0.5$ 3 分。"
@@ -309,7 +309,7 @@ questions:
     concepts: [normal-distribution, z-score, log-return, lognormal-distribution, median, right-skew]
     expected: { p1: "35", p25: "2.6", median: "575.5", mean: "862.8", below: "67" }
     question:
-      zh: |-
+      zh-cn: |-
         某股票指数每年的对数收益率服从正态分布，期望 7%，标准差 18%，各年相互独立。需要时可用标准正态分布的累积分布函数 $\Phi$ 的这些值：$\Phi(0.39) = 0.652$，$\Phi(0.45) = 0.674$，$\Phi(0.78) = 0.782$，$\Phi(1.17) = 0.879$，$\Phi(1.94) = 0.974$。
         (a) 某一年指数下跌（对数收益率小于 0）的概率约为多少？（4 分）
         (b) 持有 25 年，25 年后指数低于今天的概率约为多少？（5 分）
@@ -320,7 +320,7 @@ questions:
         (b) Holding for 25 years, what is the probability that after 25 years the index is below its level today? (5 points)
         (c) You invest 100 dollars today. What are the median and the mean of your wealth after 25 years? A retirement planning report uses this mean to describe "about how much you will have in 25 years". About what share of investors end with less than this amount? (6 points)
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $z = \frac{0 - 7}{18} \approx -0.39$，$P = 1 - \Phi(0.39) \approx 0.348$，约 35%。
         (b) 对数收益率可以相加，25 年的总对数收益率服从正态分布：期望 $25 \times 7\% = 175\%$；各年独立，方差是 25 倍，标准差为 $18\% \times \sqrt{25} = 90\%$。$z = \frac{0 - 175}{90} \approx -1.94$，$P \approx 1 - 0.974 = 2.6$%。（把标准差算成 $25 \times 18\% = 450\%$ 会得到 $z \approx -0.39$，与一年的结果相同，这是错的。）
         (c) $\ln W = \ln 100 + S$，其中 $S$ 的期望 $m = 1.75$、标准差 $s = 0.9$。中位数 $100\,e^{1.75} \approx 575.5$ 美元，均值 $100\,e^{1.75 + 0.81/2} = 100\,e^{2.155} \approx 862.8$ 美元。
@@ -331,7 +331,7 @@ questions:
         (c) $\ln W = \ln 100 + S$, where $S$ has mean $m = 1.75$ and standard deviation $s = 0.9$. The median is $100\,e^{1.75} \approx 575.5$ dollars and the mean is $100\,e^{1.75 + 0.81/2} = 100\,e^{2.155} \approx 862.8$ dollars.
         Wealth below the mean means $S < 2.155$, $z = \frac{2.155 - 1.75}{0.9} = 0.45$, with probability $\Phi(0.45) \approx 0.674$: about 67% of investors do not reach this amount. The distribution of wealth is right-skewed and the mean is pulled up by a few very good paths, so using the mean for "about how much you will have" is too optimistic.
     rubric:
-      zh:
+      zh-cn:
         - "(a) $z$ 值 2 分，约 35% 2 分。"
         - "(b) 期望 175% 1 分；标准差按 $\\sqrt{25}$ 放大得 90% 2 分；约 2.6% 2 分。标准差按 25 倍放大：最多 1 分。"
         - "(c) 中位数 2 分，均值 2 分；约 67% 并说明均值被右偏拉高 2 分。"
@@ -348,7 +348,7 @@ questions:
     concepts: [r-squared, residual, regression-coefficient, t-statistic, confidence-interval, statistical-significance]
     expected: { sd_f: "7.75", sd_e: "5.75", t_a: "1.6", ilo: "-0.09", ihi: "0.89", pred: "5.6", lo: "-5.7", hi: "16.9" }
     question:
-      zh: |-
+      zh-cn: |-
         用一只基金过去 60 个月的月收益对市场月收益（%）做回归，结果为：截距 $a = 0.4$（标准误 0.25），斜率 $b = 1.3$（标准误 0.2），$R^2 = 0.45$。同期市场月收益的标准差为 4%。
         (a) 求基金月收益的标准差，以及残差的标准差。（5 分）
         (b) 一位分析师说：“截距是每月 0.4%，一年约 4.8%，说明基金经理每年能比市场多赚将近 5 个百分点。”评价这个说法。（4 分）
@@ -359,7 +359,7 @@ questions:
         (b) An analyst says: "The intercept is 0.4% a month, about 4.8% a year, so the fund manager can earn almost 5 percentage points a year more than the market." Evaluate this statement. (4 points)
         (c) In one month the market rises 4%. Ignoring the estimation error of the coefficients and assuming that the residuals are approximately normal, predict the fund's return for this month, and give the range in which about 95% of such months fall. Someone says: "The market rose 4% this month, so this fund cannot lose money this month." Is this right? (6 points)
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 拟合值 $a + bx$ 的方差为 $b^2\sigma_m^2 = 1.69 \times 16 = 27.04$。$R^2$ 是拟合值的方差占基金收益方差的比例，所以 $\sigma_f^2 = \frac{27.04}{0.45} \approx 60.09$，$\sigma_f \approx 7.75$%。残差的方差是剩下的部分：$(1 - R^2)\sigma_f^2 \approx 33.05$，残差标准差约 5.75%。
         (b) 截距的 t 值 $\frac{0.4}{0.25} = 1.6 < 1.96$，在 5% 水平上不显著；95% 置信区间 $0.4 \pm 1.96 \times 0.25$，约 $[-0.09, 0.89]$，包含 0。4.8% 只是点估计，数据不能区分能力和运气，不能据此说经理能稳定地多赚。
         (c) 预测 $0.4 + 1.3 \times 4 = 5.6$%。范围约 $5.6 \pm 1.96 \times 5.75$，即 $[-5.7, 16.9]$（%）。说法不对：范围的下限是负数。残差的标准差和预测值差不多大，即使市场涨了 4%，基金在相当一部分这样的月份里仍会亏钱。回归给出的是平均关系，不是每个月都成立。
@@ -368,7 +368,7 @@ questions:
         (b) The t-statistic of the intercept is $\frac{0.4}{0.25} = 1.6 < 1.96$, not significant at the 5% level; the 95% confidence interval $0.4 \pm 1.96 \times 0.25$ is about $[-0.09, 0.89]$ and contains 0. 4.8% is only a point estimate; the data cannot separate skill from luck, so they do not show that the manager can reliably earn more.
         (c) The prediction is $0.4 + 1.3 \times 4 = 5.6$%. The range is about $5.6 \pm 1.96 \times 5.75$, that is, $[-5.7, 16.9]$ (%). The statement is wrong: the lower end of the range is negative. The residual standard deviation is about as large as the prediction, so even when the market rises 4%, the fund still loses money in a fair share of such months. The regression gives an average relation, not one that holds every month.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 用 $R^2$ 与方差的关系求出基金标准差约 7.75% 3 分；残差标准差约 5.75% 2 分。"
         - "(b) 计算截距的 t 值或置信区间并得出不显著 3 分；说明点估计不能证明能力 1 分。"
         - "(c) 预测 5.6% 2 分；用残差标准差给出范围约 −5.7% 到 16.9% 2 分；指出可能亏钱、回归只是平均关系 2 分。用 (a) 的错误结果但方法正确：不扣分。"

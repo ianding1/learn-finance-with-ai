@@ -12,44 +12,44 @@
 lesson: "1.1"
 
 context:
-  - zh: |-
+  - zh-cn: |-
       学习者学过导数、一阶条件、边际收入和边际成本（[[0.2]]）。本课是微观经济学的第一课；还没有学消费者理论（[[1.2]]）、生产者理论（[[1.5]]）和税收归宿（[[1.8]]）。
     en: |-
       The learner has studied derivatives, first-order conditions, marginal revenue and marginal cost ([[0.2]]). This is the first lesson of microeconomics; the learner has not yet studied consumer theory ([[1.2]]), producer theory ([[1.5]]) or tax incidence ([[1.8]]).
   - concepts: [demand, supply, market-equilibrium, comparative-statics]
-    zh: |-
+    zh-cn: |-
       讲义例子：咖啡豆需求 $Q_d = 100 - 2P$，供给 $Q_s = -20 + 4P$（$P \ge 5$），均衡 $P^* = 20$、$Q^* = 60$；价格 25 时过剩 30，价格 15 时短缺 30。收入上升使需求变为 $Q_d = 130 - 2P$，新均衡 $P^* = 25$、$Q^* = 80$。讲义区分了沿曲线移动（价格变化）和整条曲线移动（其他条件变化），给出比较静态的三个步骤。讲义没有讨论需求和供给同时移动的情形。
     en: |-
       Example in the lesson: coffee bean demand $Q_d = 100 - 2P$ and supply $Q_s = -20 + 4P$ ($P \ge 5$), equilibrium $P^* = 20$ and $Q^* = 60$; at a price of 25 there is a surplus of 30, at 15 a shortage of 30. Higher income changes demand to $Q_d = 130 - 2P$, with the new equilibrium $P^* = 25$ and $Q^* = 80$. The lesson distinguishes a movement along a curve (a price change) from a shift of the whole curve (a change in other conditions) and gives three steps for comparative statics. The lesson does not discuss demand and supply shifting at the same time.
   - questions: [C2]
-    zh: |-
+    zh-cn: |-
       [[fig:4-1]] 的需求为 $Q_d = 100 + \Delta D - 2P$，供给为 $Q_s = -20 + \Delta S + 4P$，滑块 $\Delta D$、$\Delta S$ 从 −30 到 30，步长 5。
     en: |-
       In [[fig:4-1]], demand is $Q_d = 100 + \Delta D - 2P$ and supply is $Q_s = -20 + \Delta S + 4P$; the sliders $\Delta D$ and $\Delta S$ go from −30 to 30 in steps of 5.
   - concepts: [price-elasticity]
-    zh: |-
+    zh-cn: |-
       讲义定义 $\varepsilon = \frac{dQ}{dP} \cdot \frac{P}{Q}$，按绝对值分为富有弹性、缺乏弹性和单位弹性；给出中点法公式；例：$Q = 100 - 2P$ 在 $P = 20$ 处 $\varepsilon \approx -0.67$。讲义列出影响弹性的因素：替代品、占支出的比例、必需品、时间长短。讲义没有说明弹性是否沿直线需求曲线变化，也没有给出弹性与总收入的关系（留给练习题）。
     en: |-
       The lesson defines $\varepsilon = \frac{dQ}{dP} \cdot \frac{P}{Q}$, classifies it by absolute value as elastic, inelastic or unit elastic, and gives the midpoint (arc) formula; example: $Q = 100 - 2P$ at $P = 20$ gives $\varepsilon \approx -0.67$. The lesson lists what affects elasticity: substitutes, the share of spending, necessity and the time horizon. The lesson does not say whether elasticity changes along a linear demand curve and does not give the relation between elasticity and total revenue (left to exercises).
   - concepts: [income-elasticity, cross-price-elasticity]
-    zh: |-
+    zh-cn: |-
       讲义定义收入弹性（正常品、奢侈品 $> 1$、必需品 $0$ 到 $1$、劣等品 $< 0$）和交叉价格弹性（替代品 $> 0$、互补品 $< 0$），并提到必需品公司的收入受经济衰退影响较小、定价能力与需求缺乏弹性有关。
     en: |-
       The lesson defines the income elasticity (normal goods, luxuries $> 1$, necessities between $0$ and $1$, inferior goods $< 0$) and the cross-price elasticity (substitutes $> 0$, complements $< 0$), and mentions that companies selling necessities see their revenue affected less by recessions and that pricing power is related to inelastic demand.
 
 common_errors:
   - questions: [C1]
-    zh: |-
+    zh-cn: |-
       把短缺和过剩弄反：价格低于均衡时需求量大于供给量，是短缺。
     en: |-
       Confusing a shortage with a surplus: below the equilibrium price the quantity demanded exceeds the quantity supplied, which is a shortage.
   - questions: [C2, Q3]
-    zh: |-
+    zh-cn: |-
       把沿曲线的移动当成曲线移动：例如需求增加使价格上升后，说“供给也增加了”。供给曲线没有动，增加的是供给量。
     en: |-
       Treating a movement along a curve as a shift of the curve: for example, saying that "supply also increased" after higher demand raised the price. The supply curve did not move; the quantity supplied increased.
   - questions: [C3, Q1, Q5]
-    zh: |-
+    zh-cn: |-
       用斜率代替弹性，或把弹性算成 $\frac{dQ}{dP} \cdot \frac{Q}{P}$（比值写反）。
     en: |-
       Using the slope instead of the elasticity, or computing $\frac{dQ}{dP} \cdot \frac{Q}{P}$ (the ratio upside down).
@@ -62,19 +62,19 @@ questions:
     concepts: [market-equilibrium, demand, supply]
     expected: { p: "26", q: "42", gap: "30" }
     question:
-      zh: |-
+      zh-cn: |-
         某商品的需求为 $Q_d = 120 - 3P$，供给为 $Q_s = 2P - 10$。求均衡价格和均衡数量。如果价格被固定在 20，会出现过剩还是短缺？数量是多少？
       en: |-
         A good has demand $Q_d = 120 - 3P$ and supply $Q_s = 2P - 10$. Find the equilibrium price and quantity. If the price is fixed at 20, is there a surplus or a shortage, and how large is it?
     answer:
-      zh: |-
+      zh-cn: |-
         $120 - 3P = 2P - 10$，$P^* = 26$，$Q^* = 120 - 78 = 42$。
         价格为 20 时，需求量 $120 - 60 = 60$，供给量 $40 - 10 = 30$，需求量大于供给量，短缺 30。
       en: |-
         $120 - 3P = 2P - 10$ gives $P^* = 26$ and $Q^* = 120 - 78 = 42$.
         At a price of 20, the quantity demanded is $120 - 60 = 60$ and the quantity supplied is $40 - 10 = 30$. Demand exceeds supply: a shortage of 30.
     rubric:
-      zh:
+      zh-cn:
         - "均衡价格 26、数量 42。"
         - "价格 20 时为短缺，数量 30。"
       en:
@@ -88,12 +88,12 @@ questions:
     widget: { id: supply-demand, set: { dS: -30 } }
     expected: { p: "25", q: "50" }
     question:
-      zh: |-
+      zh-cn: |-
         在 [[fig:4-1]] 中保持 $\Delta D = 0$，把 $\Delta S$ 调到 −30。新的均衡价格和数量是多少？举出一个可能使咖啡豆的供给这样减少的原因。和讲义中收入上升的例子相比，价格和数量的变化方向有什么不同？
       en: |-
         In [[fig:4-1]], keep $\Delta D = 0$ and set $\Delta S$ to −30. What are the new equilibrium price and quantity? Give one possible reason why the supply of coffee beans could fall like this. Compared with the example of higher income in the lesson, how do the directions of the changes in price and quantity differ?
     answer:
-      zh: |-
+      zh-cn: |-
         供给变为 $Q_s = -50 + 4P$。$100 - 2P = -50 + 4P$，$P^* = 25$，$Q^* = 50$。
         可能的原因：产区歉收、运费或人工成本上升等使每个价格下的供给量减少。
         两个例子中价格都上升了，但数量的方向相反：需求增加时数量增加（60 到 80），供给减少时数量减少（60 到 50）。
@@ -102,7 +102,7 @@ questions:
         Possible reasons: a poor harvest in the growing regions, or higher shipping or labor costs, which lower the quantity supplied at every price.
         In both examples the price rises, but the quantity moves in opposite directions: it rises when demand increases (60 to 80) and falls when supply decreases (60 to 50).
     rubric:
-      zh:
+      zh-cn:
         - "新均衡价格 25、数量 50。"
         - "给出一个使供给减少的合理原因（投入成本、产量冲击等，而不是买方方面的原因）。"
         - "指出价格都上升、数量方向相反。"
@@ -117,19 +117,19 @@ questions:
     concepts: [price-elasticity]
     expected: { q: "40", e: "-1.5", dq: "3" }
     question:
-      zh: |-
+      zh-cn: |-
         需求为 $Q = 100 - 2P$。在 $P = 30$ 处，需求的价格弹性是多少？这一点的需求富有弹性还是缺乏弹性？如果价格从 30 上升 2%，需求量大约变化多少？
       en: |-
         Demand is $Q = 100 - 2P$. What is the price elasticity of demand at $P = 30$? Is demand elastic or inelastic at this point? If the price rises 2% from 30, by about how much does the quantity demanded change?
     answer:
-      zh: |-
+      zh-cn: |-
         $Q = 100 - 60 = 40$，$\varepsilon = -2 \times \frac{30}{40} = -1.5$。绝对值大于 1，富有弹性。
         价格上升 2%，需求量约减少 $1.5 \times 2\% = 3$%。
       en: |-
         $Q = 100 - 60 = 40$, so $\varepsilon = -2 \times \frac{30}{40} = -1.5$. The absolute value is above 1: demand is elastic.
         A 2% price rise lowers the quantity demanded by about $1.5 \times 2\% = 3$%.
     rubric:
-      zh:
+      zh-cn:
         - "弹性 −1.5（写成绝对值 1.5 并说明方向也可）。"
         - "判断为富有弹性。"
         - "需求量约减少 3%。"
@@ -144,21 +144,21 @@ questions:
     concepts: [income-elasticity, cross-price-elasticity]
     expected: { ei: "-0.3", ex: "0.4" }
     question:
-      zh: |-
+      zh-cn: |-
         (a) 某地居民收入上升 10% 后，一种速冻食品的销量下降了 3%（其他条件不变）。它的收入弹性是多少？是哪一类商品？
         (b) 咖啡涨价 10% 后，茶的销量上升了 4%（其他条件不变）。交叉价格弹性是多少？咖啡和茶是什么关系？
       en: |-
         (a) After incomes in an area rise 10%, sales of a frozen food fall 3% (other things equal). What is its income elasticity? What kind of good is it?
         (b) After coffee prices rise 10%, sales of tea rise 4% (other things equal). What is the cross-price elasticity? How are coffee and tea related?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\varepsilon_I = \frac{-3\%}{10\%} = -0.3$，小于 0，是劣等品。
         (b) $\varepsilon_{xy} = \frac{4\%}{10\%} = 0.4$，大于 0，咖啡和茶是替代品。
       en: |-
         (a) $\varepsilon_I = \frac{-3\%}{10\%} = -0.3$, below 0: an inferior good.
         (b) $\varepsilon_{xy} = \frac{4\%}{10\%} = 0.4$, above 0: coffee and tea are substitutes.
     rubric:
-      zh:
+      zh-cn:
         - "收入弹性 −0.3，劣等品。"
         - "交叉价格弹性 0.4，替代品。"
       en:
@@ -172,12 +172,12 @@ questions:
     concepts: [price-elasticity]
     expected: { e10: "-0.25", e25: "-1", e40: "-4" }
     question:
-      zh: |-
+      zh-cn: |-
         判断真假并说明理由：需求曲线是一条直线，斜率处处相同，所以沿着这条需求曲线，需求的价格弹性也处处相同。用 $Q = 100 - 2P$ 在 $P = 10$、$25$、$40$ 处的弹性说明。
       en: |-
         Determine whether this statement is true or false, and explain: a demand curve is a straight line with the same slope everywhere, so the price elasticity of demand is also the same everywhere along it. Use the elasticity of $Q = 100 - 2P$ at $P = 10$, $25$ and $40$ to illustrate.
     answer:
-      zh: |-
+      zh-cn: |-
         假。弹性 $\varepsilon = \frac{dQ}{dP} \cdot \frac{P}{Q}$ 除了斜率，还取决于 $\frac{P}{Q}$，而沿着直线需求曲线，价格越高、数量越小，$\frac{P}{Q}$ 越大。
         $P = 10$：$Q = 80$，$\varepsilon = -2 \times \frac{10}{80} = -0.25$；$P = 25$：$Q = 50$，$\varepsilon = -1$；$P = 40$：$Q = 20$，$\varepsilon = -4$。
         直线需求曲线在价格低的一段缺乏弹性，在价格高的一段富有弹性，中点处是单位弹性。
@@ -186,7 +186,7 @@ questions:
         $P = 10$: $Q = 80$ and $\varepsilon = -2 \times \frac{10}{80} = -0.25$; $P = 25$: $Q = 50$ and $\varepsilon = -1$; $P = 40$: $Q = 20$ and $\varepsilon = -4$.
         A linear demand curve is inelastic at low prices, elastic at high prices and unit elastic at its midpoint.
     rubric:
-      zh:
+      zh-cn:
         - "结论为假。"
         - "指出弹性还取决于 $P/Q$。"
         - "三个弹性 −0.25、−1、−4。"
@@ -202,7 +202,7 @@ questions:
     concepts: [price-elasticity, marginal-revenue, first-order-condition]
     expected: { p: "25", q: "50", r: "1250", e: "-1" }
     question:
-      zh: |-
+      zh-cn: |-
         (a) 总收入 $R = P \cdot Q(P)$。证明 $\frac{dR}{dP} = Q\,(1 + \varepsilon)$，并说明：需求富有弹性、缺乏弹性和单位弹性时，提价分别使收入增加、减少还是不变。
         (b) 需求为 $Q = 100 - 2P$。使总收入最大的价格是多少？这时的数量、收入和弹性各是多少？
         (c) 一家利润最大化的公司（成本随产量增加）会把价格定在需求缺乏弹性的区间吗？用 (a) 的结论说明。
@@ -211,7 +211,7 @@ questions:
         (b) Demand is $Q = 100 - 2P$. Which price maximizes total revenue? What are the quantity, the revenue and the elasticity at that price?
         (c) Would a profit-maximizing company (whose cost rises with output) set its price in the range where demand is inelastic? Use the result of (a) to explain.
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\frac{dR}{dP} = Q + P\,\frac{dQ}{dP} = Q\left(1 + \frac{dQ}{dP} \cdot \frac{P}{Q}\right) = Q\,(1 + \varepsilon)$。
         $\varepsilon < -1$（富有弹性）时 $1 + \varepsilon < 0$，提价使收入减少；$-1 < \varepsilon < 0$（缺乏弹性）时提价使收入增加；$\varepsilon = -1$ 时收入不变（一阶近似）。
         (b) $R = P(100 - 2P) = 100P - 2P^2$，$R' = 100 - 4P = 0$，$P = 25$，$Q = 50$，$R = 1250$，$\varepsilon = -2 \times \frac{25}{50} = -1$。收入最大处正是单位弹性点。
@@ -222,7 +222,7 @@ questions:
         (b) $R = P(100 - 2P) = 100P - 2P^2$ and $R' = 100 - 4P = 0$ give $P = 25$, $Q = 50$, $R = 1250$ and $\varepsilon = -2 \times \frac{25}{50} = -1$. Revenue is highest exactly at the unit-elastic point.
         (c) No. In the inelastic range a price increase raises revenue, and the lower output lowers cost, so profit must rise; the company would keep raising the price until it is in the elastic range.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 用乘积法则推出公式，并正确说明三种情形。"
         - "(b) 价格 25、数量 50、收入 1250、弹性 −1。"
         - "(c) 结论为不会，理由同时用到收入增加和成本下降。"
@@ -237,14 +237,14 @@ questions:
     concepts: [comparative-statics, market-equilibrium]
     expected: { p: "20", q: "90" }
     question:
-      zh: |-
+      zh-cn: |-
         (a) 讲义中的咖啡豆市场（$Q_d = 100 - 2P$，$Q_s = -20 + 4P$）同时发生两个变化：收入上升使需求在每个价格下增加 30，新的烘焙技术使供给在每个价格下增加 30。新的均衡价格和数量是多少？
         (b) 一般地，需求在每个价格下增加 $a$，供给在每个价格下增加 $b$（$a, b > 0$）。均衡数量一定增加吗？均衡价格呢？在什么条件下价格上升？
       en: |-
         (a) In the coffee bean market of the lesson ($Q_d = 100 - 2P$, $Q_s = -20 + 4P$), two things happen at once: higher income raises demand by 30 at every price, and a new roasting technology raises supply by 30 at every price. What are the new equilibrium price and quantity?
         (b) In general, demand rises by $a$ and supply rises by $b$ at every price ($a, b > 0$). Does the equilibrium quantity always rise? What about the equilibrium price? Under what condition does the price rise?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $130 - 2P = 10 + 4P$，$P^* = 20$，$Q^* = 90$。价格不变，数量增加 30。
         (b) $100 + a - 2P = -20 + b + 4P$，$P^* = 20 + \frac{a - b}{6}$，$Q^* = 60 + \frac{4a + 2b}{6}$。
         数量一定增加（两个移动都使数量增加）。价格的方向不确定：需求增加推高价格，供给增加压低价格；$a > b$ 时价格上升，$a < b$ 时价格下降，$a = b$ 时不变（在这两条曲线的斜率下）。只知道两条曲线都向右移动，不能判断价格的方向。
@@ -253,7 +253,7 @@ questions:
         (b) $100 + a - 2P = -20 + b + 4P$ gives $P^* = 20 + \frac{a - b}{6}$ and $Q^* = 60 + \frac{4a + 2b}{6}$.
         The quantity always rises (both shifts raise it). The direction of the price is ambiguous: higher demand pushes it up and higher supply pushes it down; the price rises when $a > b$, falls when $a < b$ and does not change when $a = b$ (with these slopes). Knowing only that both curves shift to the right is not enough to tell which way the price moves.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 价格 20、数量 90。"
         - "(b) 数量一定增加，价格方向不确定，并给出价格上升的条件。"
       en:
@@ -266,7 +266,7 @@ questions:
     concepts: [price-elasticity, comparative-statics]
     expected: { price_up: "56.25", rev_up: "25" }
     question:
-      zh: |-
+      zh-cn: |-
         某种农产品的需求为 $Q = A\,P^{-0.5}$（$A > 0$ 为常数）。
         (a) 证明这条需求曲线上每一点的价格弹性都是 −0.5。
         (b) 一年歉收，供应到市场的数量比正常年份少 20%，全部卖出。价格上升多少？农民的总收入变化多少？
@@ -277,7 +277,7 @@ questions:
         (b) In a year with a poor harvest, the quantity brought to market is 20% below a normal year, and all of it is sold. By how much does the price rise? How much does the farmers' total revenue change?
         (c) Why can farmers as a whole earn more in a year with a poor harvest, while a single farmer whose own harvest alone is poor earns less?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\frac{dQ}{dP} = -0.5\,A\,P^{-1.5}$，$\varepsilon = -0.5\,A\,P^{-1.5} \cdot \frac{P}{A\,P^{-0.5}} = -0.5$，与 $P$ 无关。
         (b) $P = (Q/A)^{-2}$。数量变为原来的 0.8 倍，价格变为原来的 $0.8^{-2} = 1.5625$ 倍，上升 56.25%。总收入 $PQ = A\,P^{0.5}$，变为原来的 $\sqrt{1.5625} = 1.25$ 倍，增加 25%。（也可以写成 $1.5625 \times 0.8 = 1.25$。）
         (c) 需求缺乏弹性：全体农民的产量减少时，市场价格上升的百分比大于数量减少的百分比，总收入增加。只有一家农民歉收时，他的产量太小，不影响市场价格，他按原价出售更少的产品，收入下降。
@@ -286,7 +286,7 @@ questions:
         (b) $P = (Q/A)^{-2}$. The quantity is 0.8 times its normal level, so the price is $0.8^{-2} = 1.5625$ times its normal level, a rise of 56.25%. Total revenue $PQ = A\,P^{0.5}$ is $\sqrt{1.5625} = 1.25$ times its normal level, an increase of 25%. (Equivalently, $1.5625 \times 0.8 = 1.25$.)
         (c) Demand is inelastic: when all farmers produce less, the market price rises by a larger percentage than the quantity falls, so total revenue rises. When only one farmer has a poor harvest, his output is too small to affect the market price; he sells less at the old price and earns less.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 求导并化简，得到与价格无关的 −0.5。"
         - "(b) 价格上升 56.25%，总收入增加 25%。"
         - "(c) 区分全体（价格随总产量变化）与个体（价格不变）。"
@@ -301,7 +301,7 @@ questions:
     concepts: [price-elasticity]
     expected: { up: "-0.67", down: "-1", mid: "-0.82" }
     question:
-      zh: |-
+      zh-cn: |-
         一家书店把某本书的价格从 4 美元提高到 5 美元，每周销量从 120 本降到 100 本。
         (a) 以原来的价格和销量为基数计算百分比，弹性是多少？
         (b) 如果反过来，价格从 5 美元降到 4 美元，销量从 100 本升到 120 本，以原来的价格和销量为基数，弹性是多少？
@@ -312,7 +312,7 @@ questions:
         (b) If instead the price falls from 5 dollars to 4 dollars and sales rise from 100 to 120, what is the elasticity with the original price and quantity as the base?
         (c) Compute the elasticity with the midpoint method. Why is the midpoint method better for describing the elasticity between these two observations?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\frac{-20/120}{1/4} = \frac{-16.7\%}{25\%} \approx -0.67$。
         (b) $\frac{20/100}{-1/5} = \frac{20\%}{-20\%} = -1$。
         (c) $\frac{-20/110}{1/4.5} \approx \frac{-18.2\%}{22.2\%} \approx -0.82$。
@@ -323,7 +323,7 @@ questions:
         (c) $\frac{-20/110}{1/4.5} \approx \frac{-18.2\%}{22.2\%} \approx -0.82$.
         For the same stretch of the demand curve, using the starting point as the base gives a different elasticity depending on the direction; the midpoint method uses the averages of the two points as the base, so it gives the same result in either direction and is better for describing the elasticity between the two points.
     rubric:
-      zh:
+      zh-cn:
         - "三个弹性约 −0.67、−1、−0.82。"
         - "说明中点法的结果与方向无关。"
       en:
@@ -336,7 +336,7 @@ questions:
     concepts: [price-elasticity, cross-price-elasticity]
     expected: { e: "-0.5", rev: "4.5", dq: "-2", rev2: "7.8" }
     question:
-      zh: |-
+      zh-cn: |-
         一家流媒体公司把月费从 10 美元提高到 11 美元，订阅人数减少了 5%（其他条件不变）。
         (a) 以原来的价格和人数为基数，需求的价格弹性是多少？
         (b) 月费收入变化了百分之几？
@@ -347,7 +347,7 @@ questions:
         (b) By what percentage does the fee revenue change?
         (c) Suppose a competitor also raises its price by 10% at the same time, and the cross-price elasticity of this company's subscribers with respect to the competitor's price is 0.3. By about how much do this company's subscribers and fee revenue change? Why does a price increase work better when competitors raise their prices too?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\varepsilon = \frac{-5\%}{10\%} = -0.5$，缺乏弹性。
         (b) 收入变为原来的 $1.1 \times 0.95 = 1.045$ 倍，增加 4.5%。
         (c) 订阅人数约变化 $-0.5 \times 10\% + 0.3 \times 10\% = -2$%。收入约变为 $1.1 \times 0.98 = 1.078$ 倍，增加约 7.8%。
@@ -358,7 +358,7 @@ questions:
         (c) Subscribers change by about $-0.5 \times 10\% + 0.3 \times 10\% = -2$%. Revenue becomes about $1.1 \times 0.98 = 1.078$ times the original, an increase of about 7.8%.
         The two services are substitutes: the competitor's price increase keeps some users or brings some over, which offsets the loss caused by this company's own increase. When only one company raises its price, users switch more easily to the substitute that is now relatively cheaper.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 弹性 −0.5。"
         - "(b) 收入增加 4.5%（只写 5% 减去 10% 之类的近似也可，但要说明）。"
         - "(c) 人数约减少 2%，收入约增加 7.8%，并用替代品解释。"

@@ -12,40 +12,40 @@
 lesson: "1.3"
 
 context:
-  - zh: |-
+  - zh-cn: |-
       学习者学过现值与复利（[[0.1]]）、一阶条件（[[0.2]]）、无差异曲线、边际替代率、替代效应与收入效应（[[1.2]]）。还没有学不确定性下的选择和风险厌恶（[[1.4]]），也没有学债券与 TIPS（[[3.3]]、[[3.6]]）。
     en: |-
       The learner has studied present value and compounding ([[0.1]]), first-order conditions ([[0.2]]), and indifference curves, the marginal rate of substitution and substitution and income effects ([[1.2]]). The learner has not yet studied choice under uncertainty and risk aversion ([[1.4]]), or bonds and TIPS ([[3.3]], [[3.6]]).
   - concepts: [intertemporal-budget-constraint, time-preference, euler-equation, consumption-smoothing]
-    zh: |-
+    zh-cn: |-
       讲义给出跨期预算约束 $c_1 + \frac{c_2}{1+r} = y_1 + \frac{y_2}{1+r} = W$，预算线经过收入点、斜率 $-(1+r)$；效用 $U = u(c_1) + \beta u(c_2)$，$\beta = \frac{1}{1+\rho}$；Euler 方程 $u'(c_1) = \beta(1+r)u'(c_2)$，$\beta(1+r) = 1$ 时 $c_1 = c_2$。讲义例子：$u = \ln c$，$\beta = 0.95$，$y_1 = 80$，$y_2 = 22$，$r = 10\%$，$W = 100$，$c_1 = \frac{100}{1.95} \approx 51.28$，$c_2 \approx 53.59$，储蓄 28.72。讲义没有给出对数效用下 $c_1$ 的一般公式。
     en: |-
       The lesson gives the intertemporal budget constraint $c_1 + \frac{c_2}{1+r} = y_1 + \frac{y_2}{1+r} = W$, a budget line through the income point with slope $-(1+r)$; utility $U = u(c_1) + \beta u(c_2)$ with $\beta = \frac{1}{1+\rho}$; the Euler equation $u'(c_1) = \beta(1+r)u'(c_2)$, with $c_1 = c_2$ when $\beta(1+r) = 1$. Example in the lesson: $u = \ln c$, $\beta = 0.95$, $y_1 = 80$, $y_2 = 22$, $r = 10\%$, $W = 100$, $c_1 = \frac{100}{1.95} \approx 51.28$, $c_2 \approx 53.59$, saving 28.72. The lesson does not give a general formula for $c_1$ under log utility.
   - concepts: [substitution-effect, income-effect]
     questions: [C3, Q2, Q3]
-    zh: |-
+    zh-cn: |-
       讲义说明：利率上升时替代效应使 $c_1$ 下降；收入效应对储蓄者使 $c_1$ 上升、对借款者使 $c_1$ 下降；借款者一定少借，储蓄者储蓄的方向不确定。[[fig:3-1]] 为 $U = \ln c_1 + 0.95\ln c_2$、$y_1 = 80$，滑块 $r$ 从 0 到 30（%，步长 1），$y_2$ 从 0 到 60（步长 2），默认 $r = 10$、$y_2 = 22$。
     en: |-
       The lesson explains that when the interest rate rises, the substitution effect lowers $c_1$; the income effect raises $c_1$ for a saver and lowers it for a borrower; a borrower always borrows less, while the direction for a saver is ambiguous. [[fig:3-1]] uses $U = \ln c_1 + 0.95\ln c_2$ and $y_1 = 80$; the slider $r$ goes from 0 to 30 (%, step 1) and $y_2$ from 0 to 60 (step 2), with defaults $r = 10$ and $y_2 = 22$.
   - concepts: [inflation, nominal-interest-rate, real-interest-rate, fisher-equation]
-    zh: |-
+    zh-cn: |-
       讲义给出 Fisher 方程 $1 + r = \frac{1+i}{1+\pi}$，$r \approx i - \pi$（例：5% 与 3% 得 1.94%）；区分事前和事后实际利率（通胀高于预期时借款者受益）；名义现金流用名义利率折现，实际现金流用实际利率折现。讲义提醒这里的“名义”与 [[0.1]] 的名义年利率（APR）不同。讲义没有讨论利息税。
     en: |-
       The lesson gives the Fisher equation $1 + r = \frac{1+i}{1+\pi}$, $r \approx i - \pi$ (example: 5% and 3% give 1.94%); distinguishes ex ante and ex post real rates (borrowers gain when inflation is higher than expected); and states that nominal cash flows are discounted at nominal rates and real cash flows at real rates. The lesson notes that "nominal" here differs from the nominal annual rate (APR) of [[0.1]]. The lesson does not discuss taxes on interest.
 
 common_errors:
   - questions: [C1, Q1]
-    zh: |-
+    zh-cn: |-
       把跨期预算约束写成 $c_1 + c_2 = y_1 + y_2$，忽略利息；或把明天的收入按 $(1 + r)$ 相乘而不是相除。
     en: |-
       Writing the intertemporal budget constraint as $c_1 + c_2 = y_1 + y_2$, ignoring interest; or multiplying tomorrow's income by $(1 + r)$ instead of dividing.
   - questions: [Q1, Q5]
-    zh: |-
+    zh-cn: |-
       把 Euler 方程决定的消费增长方向当作储蓄方向：$\beta(1+r) > 1$ 只说明 $c_2 > c_1$，是否储蓄还取决于收入在两期的分布。
     en: |-
       Reading the direction of consumption growth from the Euler equation as the direction of saving: $\beta(1+r) > 1$ only says $c_2 > c_1$; whether the consumer saves also depends on how income is spread over the two periods.
   - questions: [C4, Q4, Q6]
-    zh: |-
+    zh-cn: |-
       用名义利率折现实际现金流（或反过来）；或在 Fisher 方程中把 $i$ 和 $\pi$ 用错位置。
     en: |-
       Discounting real cash flows at a nominal rate (or the reverse), or putting $i$ and $\pi$ in the wrong places in the Fisher equation.
@@ -58,12 +58,12 @@ questions:
     concepts: [intertemporal-budget-constraint]
     expected: { w: "90", c2max: "99", c2a: "55", c2b: "22" }
     question:
-      zh: |-
+      zh-cn: |-
         $y_1 = 60$，$y_2 = 33$，$r = 10\%$。消费者的财富（收入的现值）是多少？如果今天什么也不消费，明天最多能消费多少？今天消费 40 时明天能消费多少？今天消费 70 时呢？后两种情况下他今天在储蓄还是借款？
       en: |-
         $y_1 = 60$, $y_2 = 33$ and $r = 10\%$. What is the consumer's wealth (the present value of income)? If he consumes nothing today, what is the most he can consume tomorrow? How much can he consume tomorrow if he consumes 40 today? And if he consumes 70 today? Is he saving or borrowing today in the last two cases?
     answer:
-      zh: |-
+      zh-cn: |-
         财富 $W = 60 + \frac{33}{1.1} = 90$。今天不消费，明天最多 $60 \times 1.1 + 33 = 99$。
         今天消费 40：储蓄 20，明天 $20 \times 1.1 + 33 = 55$。
         今天消费 70：借款 10，明天要还 11，只剩 $33 - 11 = 22$。
@@ -72,7 +72,7 @@ questions:
         Consuming 40 today: he saves 20, and tomorrow has $20 \times 1.1 + 33 = 55$.
         Consuming 70 today: he borrows 10, repays 11 tomorrow, and has $33 - 11 = 22$ left.
     rubric:
-      zh:
+      zh-cn:
         - "财富 90，明天最多 99。"
         - "今天消费 40 时明天 55（储蓄）；消费 70 时明天 22（借款）。"
       en:
@@ -85,12 +85,12 @@ questions:
     concepts: [euler-equation, time-preference]
     expected: { ratio: "0.945", c1: "52.63", c2: "49.74" }
     question:
-      zh: |-
+      zh-cn: |-
         $u(c) = \ln c$，$\beta = 0.9$，$r = 5\%$，财富 $W = 100$。用 Euler 方程求 $\frac{c_2}{c_1}$，再求 $c_1$ 和 $c_2$。为什么这个人明天的消费比今天少？
       en: |-
         $u(c) = \ln c$, $\beta = 0.9$, $r = 5\%$ and wealth $W = 100$. Use the Euler equation to find $\frac{c_2}{c_1}$, then find $c_1$ and $c_2$. Why does this person consume less tomorrow than today?
     answer:
-      zh: |-
+      zh-cn: |-
         Euler 方程：$\frac{1}{c_1} = 0.9 \times 1.05 \times \frac{1}{c_2}$，$\frac{c_2}{c_1} = 0.945$。
         $c_1 + \frac{0.945\,c_1}{1.05} = 100$，$c_1\,(1 + 0.9) = 100$，$c_1 \approx 52.63$，$c_2 \approx 49.74$。
         $\beta\,(1 + r) = 0.945 < 1$：利率不足以补偿他对现在的偏好，所以他让消费随时间下降。
@@ -99,7 +99,7 @@ questions:
         $c_1 + \frac{0.945\,c_1}{1.05} = 100$ gives $c_1\,(1 + 0.9) = 100$, so $c_1 \approx 52.63$ and $c_2 \approx 49.74$.
         $\beta\,(1 + r) = 0.945 < 1$: the interest rate does not make up for his preference for the present, so he lets consumption fall over time.
     rubric:
-      zh:
+      zh-cn:
         - "$\\frac{c_2}{c_1} = 0.945$。"
         - "$c_1 \\approx 52.63$，$c_2 \\approx 49.74$。"
         - "用 $\\beta(1+r) < 1$ 解释。"
@@ -115,19 +115,19 @@ questions:
     widget: { id: fisher, set: { r: 20 } }
     expected: { c1: "50.43", s: "29.57" }
     question:
-      zh: |-
+      zh-cn: |-
         在 [[fig:3-1]] 中保持 $y_2 = 22$，把利率从 10% 调到 20%。今天的消费和储蓄各是多少？储蓄比利率为 10% 时（28.72）多还是少？对这个储蓄者，替代效应和收入效应哪个更强？
       en: |-
         In [[fig:3-1]], keep $y_2 = 22$ and raise the interest rate from 10% to 20%. What are consumption and saving today? Is saving higher or lower than at 10% (28.72)? For this saver, which is stronger, the substitution effect or the income effect?
     answer:
-      zh: |-
+      zh-cn: |-
         $W = 80 + \frac{22}{1.2} \approx 98.33$，$c_1 = \frac{98.33}{1.95} \approx 50.43$，储蓄 $80 - 50.43 \approx 29.57$。
         储蓄比 28.72 多。利率上升使今天的消费相对变贵（替代效应，储蓄增加），同时使储蓄者更富有（收入效应，储蓄减少）；这里储蓄增加，说明替代效应更强。
       en: |-
         $W = 80 + \frac{22}{1.2} \approx 98.33$, $c_1 = \frac{98.33}{1.95} \approx 50.43$, and saving is $80 - 50.43 \approx 29.57$.
         Saving is higher than 28.72. A higher rate makes consumption today relatively more expensive (substitution effect, more saving) and makes the saver richer (income effect, less saving); saving rises here, so the substitution effect is stronger.
     rubric:
-      zh:
+      zh-cn:
         - "$c_1 \\approx 50.43$，储蓄约 29.57，比原来多。"
         - "指出替代效应更强，并说明两个效应的方向。"
       en:
@@ -140,12 +140,12 @@ questions:
     concepts: [fisher-equation, real-interest-rate, nominal-interest-rate, inflation]
     expected: { ex_ante: "1.92", ex_post: "-0.93" }
     question:
-      zh: |-
+      zh-cn: |-
         一年期贷款的名义利率是 6%，签约时双方预期通胀为 4%。(a) 事前实际利率是多少（用精确公式）？(b) 一年后实际通胀是 7%，事后实际利率是多少？(c) 借款者和贷款者谁受益？
       en: |-
         A one-year loan has a nominal interest rate of 6%, and when it is signed both sides expect inflation of 4%. (a) What is the ex ante real interest rate (use the exact formula)? (b) A year later, actual inflation turns out to be 7%. What is the ex post real interest rate? (c) Who gains, the borrower or the lender?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\frac{1.06}{1.04} - 1 \approx 1.92$%（近似 2%）。
         (b) $\frac{1.06}{1.07} - 1 \approx -0.93$%。
         (c) 借款者受益：他还的钱的购买力比预期的少，贷款者实际上亏损了购买力。
@@ -154,7 +154,7 @@ questions:
         (b) $\frac{1.06}{1.07} - 1 \approx -0.93$%.
         (c) The borrower gains: the money he repays buys less than expected, and the lender loses purchasing power.
     rubric:
-      zh:
+      zh-cn:
         - "事前约 1.92%，事后约 −0.93%。"
         - "借款者受益。"
       en:
@@ -168,19 +168,19 @@ questions:
     concepts: [euler-equation, intertemporal-budget-constraint]
     expected: { c1: "51.28", b: "31.28" }
     question:
-      zh: |-
+      zh-cn: |-
         判断真假并说明理由：如果 $\beta\,(1 + r) > 1$，消费者明天的消费比今天多，所以他今天一定在储蓄。用 $u = \ln c$、$\beta = 0.95$、$r = 10\%$、$y_1 = 20$、$y_2 = 88$ 检验。
       en: |-
         Determine whether this statement is true or false, and explain: if $\beta\,(1 + r) > 1$, the consumer consumes more tomorrow than today, so he must be saving today. Check it with $u = \ln c$, $\beta = 0.95$, $r = 10\%$, $y_1 = 20$ and $y_2 = 88$.
     answer:
-      zh: |-
+      zh-cn: |-
         假。Euler 方程只决定消费的增长方向（$c_2 > c_1$），是否储蓄还取决于收入在两期的分布。
         检验：$W = 20 + \frac{88}{1.1} = 100$，$c_1 = \frac{100}{1.95} \approx 51.28$，$c_2 = 1.045 \times 51.28 \approx 53.59 > c_1$，但今天的收入只有 20，他要借款约 31.28。收入集中在未来的人（如学生）即使消费随时间增长，今天也可能在借款。
       en: |-
         False. The Euler equation determines only the direction of consumption growth ($c_2 > c_1$); whether the consumer saves also depends on how income is spread over the two periods.
         Check: $W = 20 + \frac{88}{1.1} = 100$, $c_1 = \frac{100}{1.95} \approx 51.28$ and $c_2 = 1.045 \times 51.28 \approx 53.59 > c_1$, but today's income is only 20, so he borrows about 31.28. People whose income comes mostly in the future (such as students) may borrow today even though their consumption grows over time.
     rubric:
-      zh:
+      zh-cn:
         - "结论为假。"
         - "算出 $c_1 \\approx 51.28$，借款约 31.28。"
         - "区分消费增长方向与储蓄方向。"
@@ -195,7 +195,7 @@ questions:
     star: true
     concepts: [euler-equation, substitution-effect, income-effect, intertemporal-budget-constraint]
     question:
-      zh: |-
+      zh-cn: |-
         $u(c) = \ln c$，财富 $W = y_1 + \frac{y_2}{1 + r}$。
         (a) 证明 $c_1 = \frac{W}{1 + \beta}$，$c_2 = \frac{\beta\,(1 + r)\,W}{1 + \beta}$。
         (b) 如果明天没有收入（$y_2 = 0$），证明储蓄 $s = y_1 - c_1$ 与利率无关。用替代效应和收入效应解释。
@@ -206,7 +206,7 @@ questions:
         (b) If there is no income tomorrow ($y_2 = 0$), show that saving $s = y_1 - c_1$ does not depend on the interest rate. Explain with the substitution and income effects.
         (c) If $y_2 > 0$, does saving rise or fall when the interest rate rises? Why?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) Euler 方程 $\frac{1}{c_1} = \frac{\beta\,(1 + r)}{c_2}$ 给出 $c_2 = \beta\,(1 + r)\,c_1$。代入 $c_1 + \frac{c_2}{1 + r} = W$：$c_1\,(1 + \beta) = W$，所以 $c_1 = \frac{W}{1 + \beta}$，$c_2 = \frac{\beta\,(1 + r)\,W}{1 + \beta}$。
         (b) $y_2 = 0$ 时 $W = y_1$，$s = y_1 - \frac{y_1}{1 + \beta} = \frac{\beta\,y_1}{1 + \beta}$，不含 $r$。利率上升时，替代效应使今天少消费，收入效应（储蓄者变富）使今天多消费；对数效用下两者正好抵消。
         (c) 储蓄增加。$c_1 = \frac{1}{1 + \beta}\left(y_1 + \frac{y_2}{1 + r}\right)$，利率上升使明天收入的现值下降，财富减少，$c_1$ 下降，储蓄 $y_1 - c_1$ 增加。直观上，储蓄额相对较小时收入效应较弱，替代效应占优。
@@ -215,7 +215,7 @@ questions:
         (b) With $y_2 = 0$, $W = y_1$ and $s = y_1 - \frac{y_1}{1 + \beta} = \frac{\beta\,y_1}{1 + \beta}$, which contains no $r$. When the rate rises, the substitution effect lowers consumption today and the income effect (the saver becomes richer) raises it; with log utility the two cancel exactly.
         (c) Saving rises. $c_1 = \frac{1}{1 + \beta}\left(y_1 + \frac{y_2}{1 + r}\right)$; a higher rate lowers the present value of tomorrow's income, so wealth falls, $c_1$ falls, and saving $y_1 - c_1$ rises. Intuitively, when the amount saved is relatively small, the income effect is weaker and the substitution effect dominates.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 由 Euler 方程和预算约束推出两个公式。"
         - "(b) 得到 $s = \\frac{\\beta y_1}{1 + \\beta}$，并用两个效应抵消解释。"
         - "(c) 储蓄增加，理由是未来收入的现值下降。"
@@ -230,7 +230,7 @@ questions:
     concepts: [substitution-effect, income-effect, intertemporal-budget-constraint]
     expected: { b10: "31.54", b20: "27.69" }
     question:
-      zh: |-
+      zh-cn: |-
         一个学生今天收入 $y_1 = 30$，毕业后收入 $y_2 = 99$，$u = \ln c$，$\beta = 0.95$。
         (a) 利率为 10% 时，他今天借多少？
         (b) 利率升到 20% 时呢？
@@ -241,7 +241,7 @@ questions:
         (b) What if the rate rises to 20%?
         (c) Use the substitution and income effects to explain why a borrower's response to a higher interest rate has a definite direction.
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $W = 30 + \frac{99}{1.1} = 120$，$c_1 = \frac{120}{1.95} \approx 61.54$，借款约 31.54。
         (b) $W = 30 + \frac{99}{1.2} = 112.5$，$c_1 = \frac{112.5}{1.95} \approx 57.69$，借款约 27.69，比原来少。
         (c) 替代效应：今天的消费变贵，$c_1$ 下降。收入效应：借款者要付更多利息，变得更穷，$c_1$ 也下降。两个效应方向相同，所以借款一定减少。
@@ -250,7 +250,7 @@ questions:
         (b) $W = 30 + \frac{99}{1.2} = 112.5$ and $c_1 = \frac{112.5}{1.95} \approx 57.69$, so he borrows about 27.69, less than before.
         (c) Substitution effect: consumption today becomes more expensive, so $c_1$ falls. Income effect: the borrower pays more interest and becomes poorer, so $c_1$ also falls. Both effects point the same way, so borrowing must fall.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 借款约 31.54；(b) 约 27.69。"
         - "(c) 两个效应都使 $c_1$ 下降。"
       en:
@@ -263,7 +263,7 @@ questions:
     concepts: [real-interest-rate, fisher-equation, present-value]
     expected: { r: "2.94", pv: "7484", wrong: "6139" }
     question:
-      zh: |-
+      zh-cn: |-
         一份合同承诺 10 年后支付一笔钱，其购买力相当于今天的 10,000 美元（也就是说，金额随通胀增长）。名义利率为 5%，预期通胀每年 2%。
         (a) 实际利率是多少？用实际利率计算这份合同的现值。
         (b) 先算出 10 年后的名义金额，再用名义利率折现。结果和 (a) 一样吗？
@@ -274,7 +274,7 @@ questions:
         (b) First find the nominal amount paid in 10 years, then discount it at the nominal rate. Is the result the same as in (a)?
         (c) Someone discounts 10,000 dollars directly at 5%. What does he get, and what is wrong?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $r = \frac{1.05}{1.02} - 1 \approx 2.94$%。现值 $\frac{10{,}000}{1.0294^{10}} \approx 7484$ 美元。
         (b) 名义金额 $10{,}000 \times 1.02^{10} \approx 12{,}190$ 美元，$\frac{12{,}190}{1.05^{10}} \approx 7484$ 美元，结果相同。
         (c) $\frac{10{,}000}{1.05^{10}} \approx 6139$ 美元。10,000 美元是用今天的购买力表示的实际金额，却用名义利率折现，相当于把通胀扣了两次，低估了现值。
@@ -283,7 +283,7 @@ questions:
         (b) The nominal amount is $10{,}000 \times 1.02^{10} \approx 12{,}190$ dollars, and $\frac{12{,}190}{1.05^{10}} \approx 7484$ dollars: the same result.
         (c) $\frac{10{,}000}{1.05^{10}} \approx 6139$ dollars. The 10,000 dollars is a real amount in today's purchasing power, but it was discounted at a nominal rate; this removes inflation twice and understates the present value.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 实际利率约 2.94%，现值约 7,484 美元。"
         - "(b) 结果相同。"
         - "(c) 约 6,139 美元，指出实际现金流配名义利率的错误。"
@@ -298,21 +298,21 @@ questions:
     concepts: [euler-equation, consumption-smoothing, real-interest-rate]
     expected: { r: "4.17", s: "48.98" }
     question:
-      zh: |-
+      zh-cn: |-
         (a) 一个人的 $\beta = 0.96$。实际利率为多少时，他的消费在两期之间完全平滑？
         (b) 有人说：“实际利率为负时，储蓄就是亏钱，所以理性的人不会储蓄。”用 $u = \ln c$、$\beta = 0.96$、$y_1 = 100$、$y_2 = 0$（例如明天退休、没有收入）、实际利率 −2% 评价这个说法。
       en: |-
         (a) A person has $\beta = 0.96$. At what real interest rate is his consumption perfectly smooth over the two periods?
         (b) Someone says: "When the real interest rate is negative, saving loses money, so a rational person does not save." Evaluate this with $u = \ln c$, $\beta = 0.96$, $y_1 = 100$, $y_2 = 0$ (for example, he retires tomorrow and has no income) and a real rate of −2%.
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 需要 $\beta\,(1 + r) = 1$，$r = \frac{1}{0.96} - 1 \approx 4.17$%。
         (b) 说法错误。不储蓄意味着明天消费为 0，对数效用下这是最差的选择。由 $c_1 = \frac{W}{1 + \beta}$，$W = 100$，$c_1 = \frac{100}{1.96} \approx 51.02$，储蓄约 48.98，明天消费 $48.98 \times 0.98 \approx 48.0$。储蓄的目的是平滑消费，即使回报为负，把一部分购买力带到收入很低的时期仍然值得。
       en: |-
         (a) This requires $\beta\,(1 + r) = 1$, so $r = \frac{1}{0.96} - 1 \approx 4.17$%.
         (b) The statement is wrong. Not saving means zero consumption tomorrow, the worst possible outcome with log utility. From $c_1 = \frac{W}{1 + \beta}$ with $W = 100$, $c_1 = \frac{100}{1.96} \approx 51.02$, so he saves about 48.98 and consumes $48.98 \times 0.98 \approx 48.0$ tomorrow. The purpose of saving is to smooth consumption; even with a negative return, carrying some purchasing power into a period with very low income is worthwhile.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 约 4.17%。"
         - "(b) 储蓄约 48.98，并用消费平滑解释为什么负实际利率下仍会储蓄。"
       en:
@@ -325,7 +325,7 @@ questions:
     concepts: [real-interest-rate, nominal-interest-rate, fisher-equation, inflation]
     expected: { real3: "0", real5: "-1.9", pre5: "-0.95" }
     question:
-      zh: |-
+      zh-cn: |-
         银行存款的名义利率为 4%，利息要缴 25% 的税（按名义利息计税；税率为本题假设）。
         (a) 通胀为 3% 时，税后实际利率是多少？
         (b) 通胀为 5% 时，税前和税后的实际利率各是多少？
@@ -336,7 +336,7 @@ questions:
         (b) With inflation at 5%, what are the before-tax and after-tax real interest rates?
         (c) Why does taxing nominal interest hurt savers more when inflation is higher?
     answer:
-      zh: |-
+      zh-cn: |-
         税后名义利率 $4\% \times (1 - 0.25) = 3\%$。
         (a) $\frac{1.03}{1.03} - 1 = 0$：税后实际利率为 0。
         (b) 税前 $\frac{1.04}{1.05} - 1 \approx -0.95$%；税后 $\frac{1.03}{1.05} - 1 \approx -1.9$%。
@@ -347,7 +347,7 @@ questions:
         (b) Before tax: $\frac{1.04}{1.05} - 1 \approx -0.95$%; after tax: $\frac{1.03}{1.05} - 1 \approx -1.9$%.
         (c) The tax falls on nominal interest, part of which only compensates for inflation and is not a real gain. The higher the inflation, the larger this part, the more "false income" is taxed, and the further the after-tax real rate falls.
     rubric:
-      zh:
+      zh-cn:
         - "税后名义利率 3%。"
         - "(a) 0；(b) 税前约 −0.95%，税后约 −1.9%。"
         - "(c) 指出名义利息中补偿通胀的部分也被征税。"

@@ -2,7 +2,7 @@
 """Deterministic consistency checks for the course. Runs in CI on every pull request.
 
     python3 scripts/check.py                 run all checks (exit 1 on any error)
-    python3 scripts/check.py --update-lock   record the current Chinese sources as translated
+    python3 scripts/check.py --update-lock   record that all language versions match each other
 
 Requires PyYAML. See CLAUDE.md for what each check enforces and why.
 """
@@ -21,8 +21,13 @@ ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "src/content/docs"
 COURSE = ROOT / "course"
 LOCK = COURSE / "translation-lock.json"
-LANGS = ["zh", "en"]  # zh is the source language (root locale); others live under docs/<lang>/
-SOURCE = "zh"
+# All languages have the same status. Pages live in docs/<code>/, YAML text under the key <code>.
+LANG_CONFIG = json.loads((ROOT / "src/i18n/languages.json").read_text(encoding="utf-8"))
+LANGS = [l["code"] for l in LANG_CONFIG["languages"]]
+DEFAULT = LANG_CONFIG["default"]
+# Structure and formulas of every language version are compared with this one (only for messages).
+REF = DEFAULT if DEFAULT in LANGS else LANGS[0]
+CHINESE = [l for l in LANGS if l.startswith("zh")]
 
 FORBIDDEN_WORDS = ["学员", "教案", "修订记录", "briefing"]
 
@@ -59,18 +64,19 @@ keys = {p.stem: load_yaml(p) for p in sorted((COURSE / "keys").glob("*.yaml"))}
 
 
 def doc_path(lang: str, slug_path: str) -> Path:
-    return DOCS / (slug_path if lang == SOURCE else f"{lang}/{slug_path}")
+    return DOCS / lang / slug_path
 
 
 def source_docs() -> list[Path]:
-    """All source-language pages (relative to docs/), excluding other locale folders."""
-    out = []
-    for p in sorted(DOCS.rglob("*.md*")):
-        r = p.relative_to(DOCS)
-        if r.parts[0] in LANGS and r.parts[0] != SOURCE:
-            continue
-        out.append(r)
-    return out
+    """Every page (relative to docs/<lang>/) that exists in at least one language."""
+    out = set()
+    for lang in LANGS:
+        folder = DOCS / lang
+        out |= {p.relative_to(folder) for p in folder.rglob("*.md*")} if folder.exists() else set()
+    for p in DOCS.iterdir():
+        if p.name not in LANGS:
+            err(rel(p), f"src/content/docs/ may only contain language folders {LANGS} (see src/i18n/languages.json)")
+    return sorted(out)
 
 
 def split_frontmatter(text: str) -> tuple[dict, str]:
@@ -222,9 +228,9 @@ def check_concepts():
 # ---------------------------------------------------------------- 3. answer keys
 
 def walk_bilingual(node, path: str, fn):
-    """Call fn(path, node) for every mapping that has a 'zh' key."""
+    """Call fn(path, node) for every mapping that holds text in one or more languages."""
     if isinstance(node, dict):
-        if SOURCE in node:
+        if any(lang in node for lang in LANGS):
             fn(path, node)
         for k, v in node.items():
             if k not in LANGS:
@@ -237,15 +243,20 @@ def walk_bilingual(node, path: str, fn):
 
 def check_bilingual(file: str, data):
     def fn(path, node):
-        src = node[SOURCE]
+        present = [lang for lang in LANGS if node.get(lang) not in (None, "", [])]
         for lang in LANGS:
-            v = node.get(lang)
-            if v in (None, "", []):
+            if lang not in present:
                 err(file, f"{path}: missing '{lang}'")
-            elif type(v) is not type(src):
-                err(file, f"{path}: '{lang}' has a different type from '{SOURCE}'")
+        if not present:
+            return
+        ref = present[0]
+        src = node[ref]
+        for lang in present[1:]:
+            v = node[lang]
+            if type(v) is not type(src):
+                err(file, f"{path}: '{lang}' has a different type from '{ref}'")
             elif isinstance(src, list) and len(v) != len(src):
-                err(file, f"{path}: '{lang}' has {len(v)} items, '{SOURCE}' has {len(src)}")
+                err(file, f"{path}: '{lang}' has {len(v)} items, '{ref}' has {len(src)}")
 
     walk_bilingual(data, "", fn)
 
@@ -281,7 +292,7 @@ def check_keys():
         for n, c in enumerate(key.get("context", [])):
             where = f"{file} context[{n}]"
             if not isinstance(c, dict):
-                err(where, "each context item must be a mapping with zh/en and optional concepts/questions")
+                err(where, "each context item must be a mapping with text in every language and optional concepts/questions")
                 continue
             for cid in c.get("concepts", []):
                 if cid not in concepts:
@@ -294,7 +305,7 @@ def check_keys():
         for n, e in enumerate(key.get("common_errors", [])):
             where = f"{file} common_errors[{n}]"
             if not isinstance(e, dict) or not e.get("questions"):
-                err(where, "each common error needs 'questions' (the questions it is relevant to) and zh/en")
+                err(where, "each common error needs 'questions' (the questions it is relevant to) and text in every language")
                 continue
             for qid in e["questions"]:
                 if qid not in qids:
@@ -387,7 +398,7 @@ def check_keys():
 
 def lesson_targets(l: dict) -> dict:
     """Anchors available in a published lesson: heading ids, figure ids, question ids."""
-    p = doc_path(SOURCE, f"lessons/{l['slug']}.mdx")
+    p = doc_path(REF, f"lessons/{l['slug']}.mdx")
     if not l.get("published") or not p.exists():
         return {"sec": set(), "fig": set(), "check": set()}
     body = body_of(p.read_text(encoding="utf-8"))
@@ -504,13 +515,14 @@ def check_plain_references():
 # ---------------------------------------------------------------- 6. headings and translation parity
 
 def check_structure():
+    """Every page exists in every language, with the same heading ids, components and formulas."""
     for r in source_docs():
         is_lesson = r.parts[0] == "lessons"
         versions = {}
         for lang in LANGS:
             p = doc_path(lang, str(r))
             if not p.exists():
-                err(rel(doc_path(SOURCE, str(r))), f"missing '{lang}' version {rel(p)}")
+                err(rel(p), f"missing: the page exists in another language but not in '{lang}'")
                 continue
             body = body_of(p.read_text(encoding="utf-8"))
             versions[lang] = (p, body)
@@ -524,13 +536,14 @@ def check_structure():
                 err(rel(p), f"duplicate heading ids {sorted(dup)}")
         if len(versions) < 2:
             continue
-        (sp, sb) = versions[SOURCE]
+        ref = REF if REF in versions else next(iter(versions))
+        (sp, sb) = versions[ref]
+        sig = lambda body: [(n, tuple(sorted((k, v) for k, v in a.items() if k not in TEXT_ATTRS))) for n, a in tags(body)]
         for lang, (p, b) in versions.items():
-            if lang == SOURCE:
+            if lang == ref:
                 continue
             if heading_ids(sb) != heading_ids(b):
                 err(rel(p), f"heading ids differ from {rel(sp)}: {heading_ids(b)} vs {heading_ids(sb)}")
-            sig = lambda body: [(n, tuple(sorted((k, v) for k, v in a.items() if k not in TEXT_ATTRS))) for n, a in tags(body)]
             if sig(sb) != sig(b):
                 diff = [x for x in sig(sb) if x not in sig(b)] + [x for x in sig(b) if x not in sig(sb)]
                 err(rel(p), f"components or their attributes differ from {rel(sp)} (order matters): {diff[:5] or 'order differs'}")
@@ -538,45 +551,53 @@ def check_structure():
             if ms != mt:
                 only_s = [x for x in ms if x not in mt]
                 only_t = [x for x in mt if x not in ms]
-                err(rel(p), f"formulas differ from {rel(sp)}. Only in {SOURCE}: {only_s[:3]}; only in {lang}: {only_t[:3]}")
-    # pages that exist only in a translation
-    for lang in LANGS:
-        if lang == SOURCE:
-            continue
-        folder = DOCS / lang
-        for p in sorted(folder.rglob("*.md*")) if folder.exists() else []:
-            r = p.relative_to(folder)
-            if not (DOCS / r).exists():
-                err(rel(p), f"no source page {rel(DOCS / r)}")
+                err(rel(p), f"formulas differ from {rel(sp)}. Only in {ref}: {only_s[:3]}; only in {lang}: {only_t[:3]}")
 
 
 # ---------------------------------------------------------------- 7. translation lock
 
-def lock_entries() -> dict[str, str]:
-    entries = {}
+def lock_entries() -> dict[str, dict[str, str]]:
+    """Hash of every language version of every translatable unit: a page, or one text field in YAML."""
+    entries: dict[str, dict[str, str]] = {}
     for r in source_docs():
-        entries[f"src/content/docs/{r}"] = sha((DOCS / r).read_text(encoding="utf-8"))
+        entries[f"src/content/docs/<lang>/{r}"] = {
+            lang: sha(doc_path(lang, str(r)).read_text(encoding="utf-8")) for lang in LANGS if doc_path(lang, str(r)).exists()
+        }
     files = {"course/curriculum.yaml": curriculum, "course/concepts.yaml": concepts}
     files.update({f"course/keys/{k}.yaml": v for k, v in keys.items()})
     for file, data in files.items():
         def fn(path, node, file=file):
-            entries[f"{file}#{path}"] = sha(json.dumps(node[SOURCE], ensure_ascii=False))
+            entries[f"{file}#{path}"] = {lang: sha(json.dumps(node[lang], ensure_ascii=False)) for lang in LANGS if lang in node}
         walk_bilingual(data, "", fn)
     return dict(sorted(entries.items()))
 
 
 def check_lock(update: bool):
+    """The lock records the hashes of all language versions at the moment they were last in sync.
+
+    When one language changes and the others do not, the others need to be updated. Once every
+    version says the same thing again, `npm run i18n:lock` records the new state.
+    """
     current = lock_entries()
     if update:
         LOCK.write_text(json.dumps(current, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-        print(f"Updated {rel(LOCK)} ({len(current)} entries).")
+        print(f"Updated {rel(LOCK)} ({len(current)} entries, languages {LANGS}).")
         return
     locked = json.loads(LOCK.read_text(encoding="utf-8")) if LOCK.exists() else {}
-    for k, h in current.items():
-        if k not in locked:
-            err(k, "new Chinese source text has no translation record. Write the English version, then run `npm run i18n:lock`")
-        elif locked[k] != h:
-            err(k, "Chinese source changed after the last translation. Update the English version, then run `npm run i18n:lock`")
+    hint = "When all language versions say the same thing, run `npm run i18n:lock`"
+    for k, hashes in current.items():
+        old = locked.get(k)
+        if not isinstance(old, dict) or set(old) != set(hashes):
+            err(k, f"not recorded for every language in translation-lock.json. {hint}")
+            continue
+        changed = [lang for lang in LANGS if lang in hashes and hashes[lang] != old[lang]]
+        if not changed:
+            continue
+        others = [lang for lang in LANGS if lang in hashes and lang not in changed]
+        if others:
+            err(k, f"changed in {changed} since the languages were last in sync; update {others} to match. {hint}")
+        else:
+            err(k, f"every language version changed. {hint}")
     for k in locked:
         if k not in current:
             err(k, "stale entry in translation-lock.json. Run `npm run i18n:lock`")
@@ -674,63 +695,103 @@ def check_lint():
         for w in FORBIDDEN_WORDS:
             if w in text:
                 err(rel(p), f"contains '{w}': remove private teaching notes before publishing")
-    # Chinese text uses Chinese quotation marks. Straight quotes next to Chinese characters
-    # are turned into wrongly paired curly quotes by Markdown typography.
-    straight = re.compile(r'"(?=[\u4e00-\u9fff])|(?<=[\u4e00-\u9fff\u3002\uff0c\uff1f\uff01])"')
+    # Rules for Chinese text (every Chinese variant in languages.json).
+    for lang in CHINESE:
+        check_chinese(lang)
+    check_locales()
+    check_widget_labels()
+
+
+def chinese_texts(lang: str):
+    """(where, text, is_mdx) for every piece of text in one Chinese variant."""
     for r in source_docs():
-        p = doc_path(SOURCE, str(r))
-        if straight.search(prose_only(body_of(p.read_text(encoding="utf-8")))):
-            err(rel(p), 'Chinese text contains straight double quotes ("); use “ and ”')
+        p = doc_path(lang, str(r))
+        if p.exists():
+            yield rel(p), body_of(p.read_text(encoding="utf-8")), True
     for lesson_id, key in keys.items():
-        def fn(path, node, lesson_id=lesson_id):
-            for s in all_strings(node[SOURCE]):
-                if straight.search(s):
-                    err(f"course/keys/{lesson_id}.yaml", f'{path}: Chinese text contains straight double quotes ("); use “ and ”')
-        walk_bilingual(key, "", fn)
+        found = []
+        walk_bilingual(key, "", lambda path, node: found.append((path, node.get(lang))))
+        for path, v in found:
+            for s in all_strings(v):
+                yield f"course/keys/{lesson_id}.yaml {path}", s, False
+
+
+def check_chinese(lang: str):
+    # Straight quotes next to Chinese characters become wrongly paired curly quotes in Markdown.
+    straight = re.compile(r'"(?=[\u4e00-\u9fff])|(?<=[\u4e00-\u9fff\u3002\uff0c\uff1f\uff01])"')
     # No space after full-width punctuation. A bold run that ends with full-width punctuation and is
     # followed directly by a Chinese character does not render as bold in Markdown (CommonMark
-    # flanking rules), so put the punctuation after the closing **.
+    # flanking rules), so the punctuation goes after the closing **.
     space_after = re.compile(r"[。，；：！？、]\**[ \t]+\**[\u4e00-\u9fff]")
     bold_punct = re.compile(r"[。，；：！？、]\*\*[\u4e00-\u9fff]")
-    for r in source_docs():
-        p = doc_path(SOURCE, str(r))
+    for where, text, is_mdx in chinese_texts(lang):
+        prose = prose_only(text) if is_mdx else MATH.sub(" ", text)
+        if straight.search(prose):
+            err(where, 'Chinese text contains straight double quotes ("); use “ and ”')
+        # The Chinese word for prompt is 提示词 (Simplified) or 提示詞 (Traditional).
+        if re.search(r"prompt", prose, re.I):
+            err(where, "Chinese text uses 'prompt'; write 提示词 / 提示詞")
         # Math becomes "x" so that the space after an inline formula is not mistaken for a stray space.
-        prose = MATH.sub("x", strip_code(body_of(p.read_text(encoding="utf-8"))))
-        for m in space_after.finditer(prose):
-            err(rel(p), f"space after Chinese punctuation: '{m.group(0)}'")
-        for line in prose.split("\n"):
+        spaced = MATH.sub("x", strip_code(text))
+        for m in space_after.finditer(spaced):
+            err(where, f"space after Chinese punctuation: '{m.group(0)}'")
+        if not is_mdx:
+            continue
+        for line in spaced.split("\n"):
             for m in bold_punct.finditer(line):
                 # Only a closing ** (an odd number of ** before it on the line) is a problem.
                 if line[: m.start() + 1].count("**") % 2 == 1:
-                    err(rel(p), f"bold ends with Chinese punctuation before a character, so it will not render; move the punctuation after **: '{m.group(0)}'")
-    for lesson_id, key in keys.items():
-        def fn3(path, node, lesson_id=lesson_id):
-            for s in all_strings(node[SOURCE]):
-                for m in space_after.finditer(MATH.sub("x", s)):
-                    err(f"course/keys/{lesson_id}.yaml", f"{path}: space after Chinese punctuation: '{m.group(0)}'")
-        walk_bilingual(key, "", fn3)
+                    err(where, f"bold ends with Chinese punctuation before a character, so it will not render; move the punctuation after **: '{m.group(0)}'")
 
-    # Chinese text says 提示词, not "prompt".
-    for r in source_docs():
-        p = doc_path(SOURCE, str(r))
-        if re.search(r"prompt", prose_only(body_of(p.read_text(encoding="utf-8"))), re.I):
-            err(rel(p), "Chinese text uses 'prompt'; write 提示词")
-    for lesson_id, key in keys.items():
-        def fn2(path, node, lesson_id=lesson_id):
-            for s in all_strings(node[SOURCE]):
-                if re.search(r"prompt", s, re.I):
-                    err(f"course/keys/{lesson_id}.yaml", f"{path}: Chinese text uses 'prompt'; write 提示词")
-        walk_bilingual(key, "", fn2)
-    zh_ui = (ROOT / "src/i18n/ui.ts").read_text(encoding="utf-8").split("const en")[0]
-    for m in re.finditer(r"^\s*(\w+): '([^']*)'", zh_ui, re.M):
-        if re.search(r"prompt", m.group(2), re.I):
-            err("src/i18n/ui.ts", f"Chinese UI string '{m.group(1)}' uses 'prompt'; write 提示词")
-    prompts = (ROOT / "src/scripts/prompts.ts").read_text(encoding="utf-8")
-    for chunk in prompts.split("export function ")[1:]:
-        name = chunk.split("(")[0]
-        for lang in ("zh", "en"):
-            if f"DISCLAIMER.{lang}" not in chunk:
-                err("src/scripts/prompts.ts", f"{name}() does not include DISCLAIMER.{lang}")
+
+def check_locales():
+    """Each language has a locale module with every UI string and prompts that include the disclaimer."""
+    types = (ROOT / "src/i18n/types.ts").read_text(encoding="utf-8")
+    ui_keys = set(re.findall(r"\|\s*'(\w+)'", types.split("export type UiKey")[1].split(";")[0]))
+    folder = ROOT / "src/i18n/locales"
+    for f in sorted(folder.glob("*.ts")):
+        if f.stem not in LANGS:
+            err(rel(f), f"no language '{f.stem}' in src/i18n/languages.json")
+    for lang in LANGS:
+        f = folder / f"{lang}.ts"
+        if not f.exists():
+            err(rel(f), f"language '{lang}' needs a locale module (copy another one and translate it)")
+            continue
+        src = f.read_text(encoding="utf-8")
+        ui = src.split("ui: {", 1)[1].split("\n\t},", 1)[0] if "ui: {" in src else ""
+        defined = set(re.findall(r"^\t\t(\w+):", ui, re.M))
+        for k in sorted(ui_keys - defined):
+            err(rel(f), f"missing UI string '{k}'")
+        for k in sorted(defined - ui_keys):
+            err(rel(f), f"UI string '{k}' is not declared in src/i18n/types.ts (UiKey)")
+        if lang in CHINESE:
+            for m in re.finditer(r"^\t\t(\w+): '([^']*)'", ui, re.M):
+                if re.search(r"prompt", m.group(2), re.I):
+                    err(rel(f), f"Chinese UI string '{m.group(1)}' uses 'prompt'; write 提示词 / 提示詞")
+        if not re.search(r"const DISCLAIMER\s*=", src):
+            err(rel(f), "defines no DISCLAIMER (the statement that the course content is AI-generated)")
+        bodies = re.split(r"^\t\t(feedback|quiz|explain)\(", src, flags=re.M)
+        found = dict(zip(bodies[1::2], bodies[2::2]))
+        for name in ("feedback", "quiz", "explain"):
+            if name not in found:
+                err(rel(f), f"missing prompt template {name}()")
+            elif "${DISCLAIMER}" not in found[name]:
+                err(rel(f), f"prompt template {name}() does not include ${{DISCLAIMER}}")
+
+
+def check_widget_labels():
+    """Label tables in widgets (`const L = { <code>: {...}, ... }[lang]`) cover every language."""
+    for f in sorted((ROOT / "src/components/widgets").glob("*.astro")):
+        src = f.read_text(encoding="utf-8")
+        if "const L = {" not in src:
+            continue
+        table = src.split("const L = {", 1)[1].split("}[lang]", 1)[0]
+        defined = set(re.findall(r"^\t'?([a-z][a-z-]*)'?: \{", table, re.M))
+        for lang in LANGS:
+            if lang not in defined:
+                err(rel(f), f"label table has no '{lang}' entry")
+        for code in sorted(defined - set(LANGS)):
+            err(rel(f), f"label table has '{code}', which is not in src/i18n/languages.json")
 
 
 # ---------------------------------------------------------------- main

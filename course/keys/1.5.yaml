@@ -12,39 +12,39 @@
 lesson: "1.5"
 
 context:
-  - zh: |-
+  - zh-cn: |-
       学习者学过固定成本、可变成本、边际成本、利润最大化（价格接受者 $P = MC$）和沉没成本（[[0.2]]），供给与需求（[[1.1]]），以及消费者最优条件 $\frac{MU_x}{p_x} = \frac{MU_y}{p_y}$（[[1.2]]）。还没有学垄断和其他市场结构（[[1.6]]）。
     en: |-
       The learner has studied fixed and variable costs, marginal cost, profit maximization (a price taker sets $P = MC$) and sunk costs ([[0.2]]), supply and demand ([[1.1]]), and the consumer's optimality condition $\frac{MU_x}{p_x} = \frac{MU_y}{p_y}$ ([[1.2]]). The learner has not yet studied monopoly or other market structures ([[1.6]]).
   - concepts: [production-function, marginal-product, returns-to-scale, short-run, long-run]
-    zh: |-
+    zh-cn: |-
       讲义定义生产函数、短期与长期（按能否调整投入区分）、边际产量和边际收益递减；例：$Q = K^{0.5}L^{0.5}$，$K = 16$ 时 $Q = 4\sqrt{L}$。规模报酬：Cobb–Douglas 函数 $f(tK, tL) = t^{\alpha+\beta}f(K, L)$。讲义没有讨论边际产量递减与规模报酬之间的关系。
     en: |-
       The lesson defines the production function, the short run and the long run (distinguished by whether inputs can be adjusted), the marginal product and diminishing marginal returns; example: $Q = K^{0.5}L^{0.5}$ with $K = 16$ gives $Q = 4\sqrt{L}$. Returns to scale: for Cobb–Douglas, $f(tK, tL) = t^{\alpha+\beta}f(K, L)$. The lesson does not discuss the relation between diminishing marginal products and returns to scale.
   - concepts: [average-cost, shutdown-point, perfect-competition]
-    zh: |-
+    zh-cn: |-
       讲义的成本函数 $C(q) = 72 + q^3 - 10q^2 + 40q$，$MC = 3q^2 - 20q + 40$，$\text{AVC} = q^2 - 10q + 40$，$\text{ATC} = \text{AVC} + \frac{72}{q}$。讲义说明 MC 穿过 AVC 和 ATC 的最低点（证明留给练习题），但没有算出这两个最低点。完全竞争厂商：$P = MC$（上升部分），价格低于 AVC 最低点时停产，短期供给是 AVC 最低点以上的 MC。[[fig:4-1]] 的价格滑块从 10 到 50，步长 1，默认 35。
     en: |-
       The lesson's cost function is $C(q) = 72 + q^3 - 10q^2 + 40q$, with $MC = 3q^2 - 20q + 40$, $\text{AVC} = q^2 - 10q + 40$ and $\text{ATC} = \text{AVC} + \frac{72}{q}$. The lesson states that MC passes through the minimum points of AVC and ATC (the proof is left to an exercise) but does not compute these minimum points. Competitive firm: $P = MC$ (rising part), shut down when the price is below the minimum of AVC; short-run supply is MC above the minimum of AVC. In [[fig:4-1]] the price slider goes from 10 to 50 in steps of 1, default 35.
   - concepts: [economic-profit, long-run]
-    zh: |-
+    zh-cn: |-
       讲义说明经济利润扣除包括机会成本在内的全部成本；长期中进入和退出使经济利润为 0，价格等于长期平均成本的最低点；成本最低的投入组合满足 $\frac{MP_L}{w} = \frac{MP_K}{r}$；没有进入障碍的行业，资本回报率长期接近资本的机会成本。
     en: |-
       The lesson explains that economic profit subtracts all costs, including opportunity costs; in the long run, entry and exit drive economic profit to 0, and the price equals the minimum of long-run average cost; the cost-minimizing input mix satisfies $\frac{MP_L}{w} = \frac{MP_K}{r}$; in industries without barriers to entry, the return on capital stays close to the opportunity cost of capital in the long run.
 
 common_errors:
   - questions: [C4, Q3]
-    zh: |-
+    zh-cn: |-
       用平均总成本判断短期是否停产：短期内固定成本已经无法避免，停产的标准是价格低于 AVC 的最低点，而不是 ATC。
     en: |-
       Using average total cost to decide whether to shut down in the short run: the fixed cost cannot be avoided in the short run, so the test is whether the price is below the minimum of AVC, not ATC.
   - questions: [C1, C2, Q1]
-    zh: |-
+    zh-cn: |-
       把边际产量递减和规模报酬递减混为一谈：前者只增加一种投入，后者所有投入同比例增加。
     en: |-
       Confusing diminishing marginal product with decreasing returns to scale: the first increases one input only, the second increases all inputs in the same proportion.
   - questions: [Q5]
-    zh: |-
+    zh-cn: |-
       只扣除实际支付的成本，忽略店主自己的时间和资本的机会成本，把会计利润当作经济利润。
     en: |-
       Subtracting only the costs actually paid and ignoring the opportunity cost of the owner's own time and capital, treating accounting profit as economic profit.
@@ -57,12 +57,12 @@ questions:
     concepts: [marginal-product, short-run]
     expected: { mp4: "1", mp16: "0.5", q16: "16" }
     question:
-      zh: |-
+      zh-cn: |-
         $Q = K^{0.5}L^{0.5}$，短期 $K = 16$。求劳动的边际产量 $MP_L$，并计算 $L = 4$ 和 $L = 16$ 时的边际产量和产量。这说明了什么？
       en: |-
         $Q = K^{0.5}L^{0.5}$ with $K = 16$ in the short run. Find the marginal product of labor $MP_L$, and compute the marginal product and output at $L = 4$ and $L = 16$. What does this show?
     answer:
-      zh: |-
+      zh-cn: |-
         $Q = 4\sqrt{L}$，$MP_L = \frac{2}{\sqrt{L}}$。
         $L = 4$：$Q = 8$，$MP_L = 1$。$L = 16$：$Q = 16$，$MP_L = 0.5$。
         劳动增加到 4 倍，产量只增加到 2 倍，边际产量减半：资本固定时，劳动的边际产量递减。
@@ -71,7 +71,7 @@ questions:
         $L = 4$: $Q = 8$ and $MP_L = 1$. $L = 16$: $Q = 16$ and $MP_L = 0.5$.
         Four times the labor gives only twice the output, and the marginal product halves: with capital fixed, the marginal product of labor diminishes.
     rubric:
-      zh:
+      zh-cn:
         - "$MP_L = \\frac{2}{\\sqrt{L}}$。"
         - "两个点的边际产量 1 和 0.5（产量 8 和 16）。"
         - "指出边际产量递减。"
@@ -86,12 +86,12 @@ questions:
     concepts: [returns-to-scale]
     expected: { a: "1.87", b: "2.83" }
     question:
-      zh: |-
+      zh-cn: |-
         判断下列生产函数的规模报酬：(a) $Q = K^{0.3}L^{0.6}$；(b) $Q = K\,L^{0.5}$；(c) $Q = 2K + 3L$。投入都翻倍时，(a) 和 (b) 的产量分别变为原来的多少倍？
       en: |-
         Determine the returns to scale of each production function: (a) $Q = K^{0.3}L^{0.6}$; (b) $Q = K\,L^{0.5}$; (c) $Q = 2K + 3L$. When all inputs double, by what factor does output change in (a) and (b)?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $0.3 + 0.6 = 0.9 < 1$，规模报酬递减；投入翻倍，产量变为 $2^{0.9} \approx 1.87$ 倍。
         (b) $1 + 0.5 = 1.5 > 1$，规模报酬递增；产量变为 $2^{1.5} \approx 2.83$ 倍。
         (c) $2(tK) + 3(tL) = t(2K + 3L)$，规模报酬不变。
@@ -100,7 +100,7 @@ questions:
         (b) $1 + 0.5 = 1.5 > 1$: increasing returns to scale; output is multiplied by $2^{1.5} \approx 2.83$.
         (c) $2(tK) + 3(tL) = t(2K + 3L)$: constant returns to scale.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 递减，约 1.87 倍；(b) 递增，约 2.83 倍。"
         - "(c) 不变。"
       en:
@@ -113,19 +113,19 @@ questions:
     concepts: [average-cost, marginal-cost]
     expected: { mc: "8", avc: "16", atc: "34" }
     question:
-      zh: |-
+      zh-cn: |-
         对讲义的成本函数 $C(q) = 72 + q^3 - 10q^2 + 40q$，计算 $q = 4$ 时的 MC、AVC 和 ATC。这时再多生产一单位，AVC 会上升还是下降？为什么？
       en: |-
         For the lesson's cost function $C(q) = 72 + q^3 - 10q^2 + 40q$, compute MC, AVC and ATC at $q = 4$. If one more unit is produced at this point, does AVC rise or fall? Why?
     answer:
-      zh: |-
+      zh-cn: |-
         $MC = 3 \times 16 - 80 + 40 = 8$，$\text{AVC} = 16 - 40 + 40 = 16$，$\text{ATC} = 16 + \frac{72}{4} = 34$。
         MC 小于 AVC：新增的一单位比现有的平均可变成本便宜，会把平均值拉低，所以 AVC 下降。
       en: |-
         $MC = 3 \times 16 - 80 + 40 = 8$, $\text{AVC} = 16 - 40 + 40 = 16$ and $\text{ATC} = 16 + \frac{72}{4} = 34$.
         MC is below AVC: the extra unit costs less than the current average variable cost, so it pulls the average down, and AVC falls.
     rubric:
-      zh:
+      zh-cn:
         - "MC 8，AVC 16，ATC 34。"
         - "MC < AVC，所以 AVC 下降。"
       en:
@@ -139,19 +139,19 @@ questions:
     widget: { id: competitive-firm, set: { p: 20 } }
     expected: { q: "5.44", profit: "-45.85" }
     question:
-      zh: |-
+      zh-cn: |-
         在 [[fig:4-1]] 中把价格调到 20。厂商的最优产量和利润是多少？它在亏损，为什么仍然应该生产，而不是停产？
       en: |-
         In [[fig:4-1]], set the price to 20. What are the firm's best output and profit? It is losing money; why should it still produce rather than shut down?
     answer:
-      zh: |-
+      zh-cn: |-
         $3q^2 - 20q + 40 = 20$，取 MC 上升部分的根 $q = \frac{20 + \sqrt{160}}{6} \approx 5.44$，利润 $20 \times 5.44 - C(5.44) \approx -45.85$。
         停产时利润为 $-72$（固定成本照付）。生产时虽然亏损 45.85，但比停产少亏约 26：价格高于 AVC，收入覆盖了全部可变成本，还抵消了一部分固定成本。
       en: |-
         $3q^2 - 20q + 40 = 20$; taking the root on the rising part of MC, $q = \frac{20 + \sqrt{160}}{6} \approx 5.44$, and profit is $20 \times 5.44 - C(5.44) \approx -45.85$.
         Shutting down gives a profit of $-72$ (the fixed cost is still paid). Producing loses 45.85, about 26 less than shutting down: the price is above AVC, so revenue covers all variable costs and part of the fixed cost.
     rubric:
-      zh:
+      zh-cn:
         - "产量约 5.44，利润约 −45.85。"
         - "与停产的 −72 比较，用价格高于 AVC 解释。"
       en:
@@ -164,17 +164,17 @@ questions:
     level: A
     concepts: [marginal-product, returns-to-scale]
     question:
-      zh: |-
+      zh-cn: |-
         判断真假并说明理由：如果一个生产函数对资本和劳动的边际产量都递减，那么它一定是规模报酬递减的。用 $Q = K^{0.6}L^{0.6}$ 检验。
       en: |-
         Determine whether this statement is true or false, and explain: if a production function has diminishing marginal products of both capital and labor, it must have decreasing returns to scale. Check it with $Q = K^{0.6}L^{0.6}$.
     answer:
-      zh: |-
+      zh-cn: |-
         假。$MP_L = 0.6\,K^{0.6}L^{-0.4}$，随 $L$ 增加而下降；$MP_K$ 同理，两个边际产量都递减。但 $f(tK, tL) = t^{1.2}f(K, L)$，所有投入翻倍时产量变为 $2^{1.2} \approx 2.3$ 倍，规模报酬递增。边际产量递减是只增加一种投入（其他投入固定）时的性质，规模报酬是所有投入同时增加时的性质，两者没有必然联系。
       en: |-
         False. $MP_L = 0.6\,K^{0.6}L^{-0.4}$ falls as $L$ rises, and the same holds for $MP_K$, so both marginal products diminish. But $f(tK, tL) = t^{1.2}f(K, L)$: doubling all inputs multiplies output by $2^{1.2} \approx 2.3$, so returns to scale are increasing. Diminishing marginal product is a property of increasing one input with the others fixed; returns to scale concern increasing all inputs together. One does not imply the other.
     rubric:
-      zh:
+      zh-cn:
         - "结论为假。"
         - "验证两个边际产量递减，并算出规模报酬递增。"
         - "区分“一种投入”与“全部投入”。"
@@ -189,7 +189,7 @@ questions:
     star: true
     concepts: [average-cost, marginal-cost]
     question:
-      zh: |-
+      zh-cn: |-
         (a) 证明：在 ATC 的最低点，$MC = \text{ATC}$。提示：对 $\text{ATC}(q) = \frac{C(q)}{q}$ 求导。
         (b) 证明：$MC > \text{ATC}$ 时 ATC 随产量上升，$MC < \text{ATC}$ 时 ATC 下降。用“考试平均分”的例子解释这个关系。
         (c) 同样的结论对 AVC 成立吗？为什么 MC 先穿过 AVC 的最低点，再穿过 ATC 的最低点？
@@ -198,7 +198,7 @@ questions:
         (b) Show that ATC rises with output when $MC > \text{ATC}$ and falls when $MC < \text{ATC}$. Explain the relation with the example of an average exam score.
         (c) Does the same hold for AVC? Why does MC pass through the minimum of AVC before the minimum of ATC?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\text{ATC}'(q) = \frac{C'(q)\,q - C(q)}{q^2} = \frac{1}{q}\left(MC - \text{ATC}\right)$。最低点处导数为 0，所以 $MC = \text{ATC}$。
         (b) 由 (a)，$\text{ATC}'$ 的符号与 $MC - \text{ATC}$ 相同。就像平均分：新考的一次分数高于目前的平均分，平均分上升；低于平均分，平均分下降。
         (c) 成立：$\text{AVC}' = \frac{1}{q}(MC - \text{AVC})$，推导相同。$\text{ATC} = \text{AVC} + \frac{FC}{q}$，ATC 在 AVC 之上；在 AVC 的最低点，MC 等于 AVC，因此小于 ATC，ATC 仍在下降，它的最低点在更大的产量处。（讲义的例子中 AVC 最低点在 $q = 5$，ATC 最低点在 $q = 6$。）
@@ -207,7 +207,7 @@ questions:
         (b) From (a), $\text{ATC}'$ has the same sign as $MC - \text{ATC}$. It is like an average score: if the next exam score is above the current average, the average rises; if below, it falls.
         (c) Yes: $\text{AVC}' = \frac{1}{q}(MC - \text{AVC})$ by the same steps. Since $\text{ATC} = \text{AVC} + \frac{FC}{q}$, ATC lies above AVC; at the minimum of AVC, MC equals AVC and is therefore below ATC, so ATC is still falling and its minimum lies at a larger output. (In the lesson's example, AVC is lowest at $q = 5$ and ATC at $q = 6$.)
     rubric:
-      zh:
+      zh-cn:
         - "(a) 用商的求导法则得到 $\\text{ATC}' = \\frac{1}{q}(MC - \\text{ATC})$。"
         - "(b) 说明符号关系并给出平均分的类比。"
         - "(c) 对 AVC 同样成立，并用 ATC 在 AVC 之上解释先后顺序。"
@@ -222,7 +222,7 @@ questions:
     concepts: [shutdown-point, average-cost, perfect-competition]
     expected: { shut: "15", qs: "5", be: "28", qb: "6" }
     question:
-      zh: |-
+      zh-cn: |-
         对讲义的成本函数 $C(q) = 72 + q^3 - 10q^2 + 40q$：
         (a) 求停产点：AVC 的最低点在哪个产量，最低值是多少？
         (b) 求盈亏平衡点：ATC 的最低点在哪个产量，最低值是多少？
@@ -233,7 +233,7 @@ questions:
         (b) Find the break-even point: at what output is ATC lowest, and what is its minimum value?
         (c) Describe the firm's short-run decision and profit when the price is below 15, between 15 and 28, and above 28.
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\text{AVC} = q^2 - 10q + 40$，$\text{AVC}' = 2q - 10 = 0$，$q = 5$，最低值 15。（验证 $MC(5) = 75 - 100 + 40 = 15$。）
         (b) $\text{ATC}' = 2q - 10 - \frac{72}{q^2} = 0$，$q = 6$ 满足（$12 - 10 - 2 = 0$），最低值 $36 - 60 + 40 + 12 = 28$。（验证 $MC(6) = 28$。）
         (c) 价格低于 15：停产，亏损固定成本 72。价格在 15 到 28 之间：按 $P = MC$ 生产，有亏损，但亏得比停产少。价格高于 28：按 $P = MC$ 生产，有正的经济利润。
@@ -242,7 +242,7 @@ questions:
         (b) $\text{ATC}' = 2q - 10 - \frac{72}{q^2} = 0$ is satisfied by $q = 6$ ($12 - 10 - 2 = 0$), and the minimum is $36 - 60 + 40 + 12 = 28$. (Check: $MC(6) = 28$.)
         (c) Price below 15: shut down and lose the fixed cost of 72. Price between 15 and 28: produce where $P = MC$, making a loss, but a smaller one than from shutting down. Price above 28: produce where $P = MC$ and earn a positive economic profit.
     rubric:
-      zh:
+      zh-cn:
         - "(a) $q = 5$，最低 AVC 15。"
         - "(b) $q = 6$，最低 ATC 28。"
         - "(c) 三个价格区间的决策正确。"
@@ -257,7 +257,7 @@ questions:
     concepts: [long-run, perfect-competition, economic-profit, market-equilibrium]
     expected: { n0: "120", n1: "170", q_sr: "6.97", p_sr: "46.35" }
     question:
-      zh: |-
+      zh-cn: |-
         一个完全竞争行业中，所有厂商（现有的和潜在进入的）的成本都与讲义相同：$C(q) = 72 + q^3 - 10q^2 + 40q$。假设长期中厂商可以自由进入和退出，且进入不改变成本。市场需求为 $Q_d = 1000 - 10P$。
         (a) 长期均衡价格、市场数量和厂商数目各是多少？
         (b) 需求增加到 $Q_d = 1300 - 10P$。短期内厂商数目不变，新的价格和每个厂商的产量大约是多少？（可以用计算器或代码求解。）厂商有经济利润吗？
@@ -268,7 +268,7 @@ questions:
         (b) Demand rises to $Q_d = 1300 - 10P$. In the short run the number of firms is fixed. About what are the new price and the output of each firm? (You may solve with a calculator or code.) Do firms earn an economic profit?
         (c) What happens in the long run? What are the new long-run price and number of firms?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 长期价格等于 ATC 最低点 28，每个厂商生产 6。市场数量 $1000 - 280 = 720$，厂商数目 $\frac{720}{6} = 120$。
         (b) 每个厂商按 $P = 3q^2 - 20q + 40$ 供给，市场供给 $120q$。解 $120q = 1300 - 10\,(3q^2 - 20q + 40)$，即 $30q^2 - 80q - 900 = 0$，$q \approx 6.97$，$P \approx 46.35$。价格高于 ATC（约 $6.97^2 - 69.7 + 40 + \frac{72}{6.97} \approx 29.2$），有正的经济利润。
         (c) 正的经济利润吸引新厂商进入，供给增加，价格回落，直到价格回到 28。市场数量 $1300 - 280 = 1020$，厂商数目 $\frac{1020}{6} = 170$。长期中需求增加只增加厂商数目，不改变价格（成本不变的行业，长期供给曲线是水平的）。
@@ -277,7 +277,7 @@ questions:
         (b) Each firm supplies along $P = 3q^2 - 20q + 40$, so market supply is $120q$. Solving $120q = 1300 - 10\,(3q^2 - 20q + 40)$, that is, $30q^2 - 80q - 900 = 0$, gives $q \approx 6.97$ and $P \approx 46.35$. The price is above ATC (about $6.97^2 - 69.7 + 40 + \frac{72}{6.97} \approx 29.2$), so firms earn a positive economic profit.
         (c) The positive profit attracts new firms; supply rises and the price falls until it returns to 28. Market quantity is $1300 - 280 = 1020$, and there are $\frac{1020}{6} = 170$ firms. In the long run, higher demand only adds firms and does not change the price (with constant costs, the long-run supply curve is horizontal).
     rubric:
-      zh:
+      zh-cn:
         - "(a) 价格 28，数量 720，120 家厂商。"
         - "(b) $q \\approx 6.97$，$P \\approx 46.35$，有正的经济利润。"
         - "(c) 价格回到 28，170 家厂商。"
@@ -292,7 +292,7 @@ questions:
     concepts: [economic-profit, long-run]
     expected: { acc: "80", econ: "-2" }
     question:
-      zh: |-
+      zh-cn: |-
         一位店主经营一家咖啡馆，一年的收入 300（千美元），房租、原料和员工工资等实际支出 220。她不领工资；如果去别的公司工作，年薪是 70。她投入了 200 的自有资金，这笔钱投资在别处每年可以得到 6% 的回报。
         (a) 会计利润和经济利润各是多少？
         (b) 从长期看，她应该继续经营吗？
@@ -303,7 +303,7 @@ questions:
         (b) In the long run, should she keep running the café?
         (c) Someone says: "This café makes 80,000 dollars a year, a return of 40% (80 / 200), a very good investment." Point out the problem with this statement.
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 会计利润 $300 - 220 = 80$。机会成本：她自己的时间 70，资金 $200 \times 6\% = 12$。经济利润 $80 - 70 - 12 = -2$。
         (b) 经济利润为负，说明她的时间和资金在别处能得到更多。如果预计情况不会改善，长期应该退出（关店去工作并把资金投在别处）。不过差距很小，她如果从经营中得到其他满足，也可能选择继续。
         (c) 80 中有 70 实际上是她自己劳动的报酬，不是资本的回报。扣除这部分后，资本只得到 $80 - 70 = 10$，回报率 5%，低于 6% 的机会成本。
@@ -312,7 +312,7 @@ questions:
         (b) The economic profit is negative: her time and money would earn more elsewhere. If she does not expect things to improve, she should exit in the long run (close the café, take the job and invest the money elsewhere). The gap is small, though, and she might stay if running the café gives her other satisfaction.
         (c) 70 of the 80 is really payment for her own labor, not a return on capital. After subtracting it, the capital earns only $80 - 70 = 10$, a return of 5%, below the opportunity cost of 6%.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 会计利润 80，经济利润 −2。"
         - "(b) 长期应退出（或说明继续的条件）。"
         - "(c) 指出 80 中包含店主劳动的报酬，资本回报率只有约 5%。"
@@ -327,7 +327,7 @@ questions:
     concepts: [production-function, long-run, returns-to-scale, marginal-product]
     expected: { L: "20", K: "80", cost: "640", ac: "16" }
     question:
-      zh: |-
+      zh-cn: |-
         长期中厂商可以同时选择 $K$ 和 $L$。生产函数 $Q = K^{0.5}L^{0.5}$，工资 $w = 16$，资本租金 $r = 4$。
         (a) 用成本最低的条件求 $K$ 与 $L$ 的比例。
         (b) 生产 $Q = 40$ 时，成本最低的 $K$、$L$ 和总成本各是多少？平均成本是多少？
@@ -338,7 +338,7 @@ questions:
         (b) To produce $Q = 40$, what are the cost-minimizing $K$ and $L$ and the total cost? What is the average cost?
         (c) If output doubles to 80, what is the average cost? How does this relate to returns to scale?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $MP_L = 0.5\,K^{0.5}L^{-0.5}$，$MP_K = 0.5\,K^{-0.5}L^{0.5}$，$\frac{MP_L}{MP_K} = \frac{K}{L} = \frac{w}{r} = 4$，所以 $K = 4L$。
         (b) $Q = \sqrt{4L \cdot L} = 2L = 40$，$L = 20$，$K = 80$。总成本 $16 \times 20 + 4 \times 80 = 640$，平均成本 $\frac{640}{40} = 16$。
         (c) $L = 40$，$K = 160$，成本 1280，平均成本仍是 16。规模报酬不变（$0.5 + 0.5 = 1$），投入和成本与产量同比例增加，长期平均成本是水平的。
@@ -347,7 +347,7 @@ questions:
         (b) $Q = \sqrt{4L \cdot L} = 2L = 40$ gives $L = 20$ and $K = 80$. Total cost is $16 \times 20 + 4 \times 80 = 640$ and average cost is $\frac{640}{40} = 16$.
         (c) $L = 40$ and $K = 160$, cost 1280, average cost still 16. Returns to scale are constant ($0.5 + 0.5 = 1$): inputs and cost rise in proportion to output, so long-run average cost is flat.
     rubric:
-      zh:
+      zh-cn:
         - "(a) $K = 4L$。"
         - "(b) $L = 20$，$K = 80$，总成本 640，平均成本 16。"
         - "(c) 平均成本不变，与规模报酬不变联系。"

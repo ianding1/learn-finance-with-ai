@@ -15,7 +15,7 @@ interface Payload {
 	questions: { id: string; label: string; points?: number; question: string; answer: string; rubric: string[] }[];
 }
 
-/** "通过" / "需要订正" for a lesson question, "3/4 分" for a quiz question. */
+/** "OK" / "needs revision" for a lesson question, "3/4 points" for a quiz question. */
 export function resultText(r: ResultItem): string {
 	if (r.score != null) return ui('scoreOf', { s: r.score, m: r.max ?? '?' });
 	return ui(r.status === 'ok' ? 'statusOk' : 'statusRevise');

@@ -12,39 +12,39 @@
 lesson: "0.1"
 
 context:
-  - zh: |-
+  - zh-cn: |-
       本课金额以美元为单位，利率以年为单位，除非题目另有说明。学习者已经学过指数、对数和等比数列求和；还没有学 NPV（[[3.2]]）、债券定价（[[3.3]]）和股利贴现模型（[[3.9]]）。
     en: |-
       In this lesson, amounts are in dollars and rates are per year unless a question says otherwise. The learner knows exponents, logarithms and geometric series. The learner has not yet studied NPV ([[3.2]]), bond pricing ([[3.3]]) or the dividend discount model ([[3.9]]).
   - concepts: [future-value, present-value, discount-factor, compound-interest]
-    zh: |-
+    zh-cn: |-
       $FV = PV(1+r)^n$，$PV = \frac{FV}{(1+r)^n}$；$\frac{1}{(1+r)^n}$ 是折现因子。
     en: |-
       $FV = PV(1+r)^n$ and $PV = \frac{FV}{(1+r)^n}$; $\frac{1}{(1+r)^n}$ is the discount factor.
   - concepts: [apr, ear, continuous-compounding]
-    zh: |-
+    zh-cn: |-
       $\text{EAR} = (1 + \frac{r}{m})^m - 1$，其中 $r$ 是名义年利率（APR），$m$ 是一年的复利次数。讲义给出了连续复利 $FV = PV\,e^{rT}$，极限 $(1+\frac{r}{m})^m \to e^r$ 的证明留给练习题。讲义没有讨论 EAR 是否随 $m$ 单调增加。
     en: |-
       $\text{EAR} = (1 + \frac{r}{m})^m - 1$, where $r$ is the annual percentage rate (APR) and $m$ is the number of compounding periods per year. The lesson gives continuous compounding, $FV = PV\,e^{rT}$, and leaves the proof of the limit $(1+\frac{r}{m})^m \to e^r$ to an exercise. The lesson does not discuss whether the EAR increases with $m$.
   - concepts: [annuity, perpetuity, annuity-due, growing-perpetuity]
-    zh: |-
+    zh-cn: |-
       讲义给出的公式（每期期末付款 $C$，每期利率 $r$，共 $n$ 期）：年金现值 $\frac{C}{r}[1-(1+r)^{-n}]$；年金终值 $C\frac{(1+r)^n-1}{r}$；永续年金 $\frac{C}{r}$；增长永续年金 $\frac{C}{r-g}$（$C$ 为第 1 期期末的付款）。讲义没有给出这些公式的推导，也没有给出期初年金的公式。房贷月供 $C = \frac{P\,i}{1-(1+i)^{-n}}$，$i$ 为月利率，$n$ 为月数。
     en: |-
       Formulas given in the lesson (payment $C$ at the end of each period, rate $r$ per period, $n$ periods): annuity present value $\frac{C}{r}[1-(1+r)^{-n}]$; annuity future value $C\frac{(1+r)^n-1}{r}$; perpetuity $\frac{C}{r}$; growing perpetuity $\frac{C}{r-g}$ ($C$ is the payment at the end of the first period). The lesson does not derive these formulas and does not give the formula for an annuity due. Mortgage payment: $C = \frac{P\,i}{1-(1+i)^{-n}}$, with the monthly rate $i$ and the number of months $n$.
   - questions: [Q4]
-    zh: |-
+    zh-cn: |-
       讲义中的房贷例子：贷款 500,000 美元，30 年，APR 6% 按月复利，月供约 2,997.75 美元，总利息约 579,191 美元。
     en: |-
       Mortgage example in the lesson: a loan of 500,000 dollars for 30 years at an APR of 6% compounded monthly. The monthly payment is about 2,997.75 dollars and the total interest is about 579,191 dollars.
   - concepts: [simple-return, log-return]
-    zh: |-
+    zh-cn: |-
       简单收益率 $R = \frac{P_1}{P_0} - 1$，多期连乘；对数收益率 $\ell = \ln\frac{P_1}{P_0}$，讲义说明多期可以相加（用 100 → 80 → 100 的例子），但没有解释原因。
     en: |-
       Simple return $R = \frac{P_1}{P_0} - 1$, which compounds by multiplication over several periods. Log return $\ell = \ln\frac{P_1}{P_0}$; the lesson states that log returns add over several periods (with the example 100 → 80 → 100) but does not explain why.
 
 common_errors:
   - questions: [Q4]
-    zh: |-
+    zh-cn: |-
       按月付款却用年利率和年数代入年金公式：每月付款时，利率要用月利率，期数要用月数。
     en: |-
       Using the annual rate and the number of years in the annuity formula for monthly payments: with monthly payments, the rate must be the monthly rate and the number of periods must be the number of months.
@@ -57,17 +57,17 @@ questions:
     concepts: [present-value]
     expected: { pv: "7472.58" }
     question:
-      zh: |-
+      zh-cn: |-
         5 年后你会收到 10,000 美元。年利率 6% 时，这笔钱今天值多少？
       en: |-
         You will receive 10,000 dollars in 5 years. At an interest rate of 6% per year, what is it worth today?
     answer:
-      zh: |-
+      zh-cn: |-
         $PV = \frac{10{,}000}{1.06^5} \approx 7{,}472.58$ 美元。
       en: |-
         $PV = \frac{10{,}000}{1.06^5} \approx 7{,}472.58$ dollars.
     rubric:
-      zh:
+      zh-cn:
         - "用 $(1+r)^n$ 折现，指数是 5。"
         - "数值正确。"
       en:
@@ -80,17 +80,17 @@ questions:
     concepts: [apr, ear]
     expected: { ear: "12.55" }
     question:
-      zh: |-
+      zh-cn: |-
         名义年利率 12%，按季度复利。有效年利率是多少？
       en: |-
         The annual percentage rate is 12%, compounded quarterly. What is the effective annual rate?
     answer:
-      zh: |-
+      zh-cn: |-
         每季度利率 3%，$\text{EAR} = 1.03^4 - 1 \approx 12.55$%。
       en: |-
         The quarterly rate is 3%, so $\text{EAR} = 1.03^4 - 1 \approx 12.55$%.
     rubric:
-      zh:
+      zh-cn:
         - "每期利率为 12% / 4 = 3%，复利 4 次。"
         - "EAR 约为 12.55%，大于 12%。"
       en:
@@ -103,19 +103,19 @@ questions:
     concepts: [annuity, present-value]
     expected: { pv: "86.78" }
     question:
-      zh: |-
+      zh-cn: |-
         每年末收 50 美元，共 2 年，折现率 10%。这串现金流今天值多少？分别用逐笔折现和年金公式计算。
       en: |-
         You receive 50 dollars at the end of each year for 2 years, and the discount rate is 10%. What are these cash flows worth today? Compute it by discounting each payment and with the annuity formula.
     answer:
-      zh: |-
+      zh-cn: |-
         逐笔折现：$\frac{50}{1.1} + \frac{50}{1.1^2} \approx 45.45 + 41.32$，合计约 86.78 美元。
         年金公式：$\frac{50}{0.1}\left[1 - 1.1^{-2}\right] \approx 86.78$。
       en: |-
         Discounting each payment: $\frac{50}{1.1} + \frac{50}{1.1^2} \approx 45.45 + 41.32$, about 86.78 dollars in total.
         Annuity formula: $\frac{50}{0.1}\left[1 - 1.1^{-2}\right] \approx 86.78$.
     rubric:
-      zh:
+      zh-cn:
         - "两笔付款分别折现，第二笔折现两次。"
         - "两种方法结果一致，约 86.78 美元。"
       en:
@@ -128,17 +128,17 @@ questions:
     concepts: [perpetuity]
     expected: { pv: "1000000" }
     question:
-      zh: |-
+      zh-cn: |-
         利率 4%。想从明年起永远每年末领 40,000 美元，今天需要存多少钱？
       en: |-
         The interest rate is 4%. You want to receive 40,000 dollars at the end of every year forever, starting next year. How much do you need to deposit today?
     answer:
-      zh: |-
+      zh-cn: |-
         $PV = \frac{40{,}000}{0.04} = 1{,}000{,}000$ 美元。每年的利息正好是 40,000 美元，本金不动。
       en: |-
         $PV = \frac{40{,}000}{0.04} = 1{,}000{,}000$ dollars. The interest each year is exactly 40,000 dollars, and the principal stays the same.
     rubric:
-      zh:
+      zh-cn:
         - "用永续年金公式 $\\frac{C}{r}$。"
         - "数值正确。"
       en:
@@ -151,19 +151,19 @@ questions:
     concepts: [growing-perpetuity]
     expected: { pv: "100000" }
     question:
-      zh: |-
+      zh-cn: |-
         一项资产第 1 年末付 5,000 美元，以后每年增长 2%，永远持续。折现率 7%，它今天值多少？如果把 5,000 美元误当成今天的付款，会有什么问题？
       en: |-
         An asset pays 5,000 dollars at the end of the first year, and the payment grows by 2% every year forever. The discount rate is 7%. What is it worth today? What goes wrong if you take the 5,000 dollars to be a payment made today?
     answer:
-      zh: |-
+      zh-cn: |-
         $PV = \frac{5{,}000}{0.07 - 0.02} = 100{,}000$ 美元。
         公式中的 $C$ 是第 1 期期末的付款。如果 5,000 美元是今天的付款，那么第 1 年末的付款是 5,100 美元，应代入 5,100，今天的 5,000 美元另外加上。
       en: |-
         $PV = \frac{5{,}000}{0.07 - 0.02} = 100{,}000$ dollars.
         In the formula, $C$ is the payment at the end of the first period. If 5,000 dollars were paid today, the payment at the end of the first year would be 5,100 dollars, which is what goes into the formula, and the 5,000 dollars paid today is added separately.
     rubric:
-      zh:
+      zh-cn:
         - "现值正确。"
         - "指出 $C$ 是第 1 期期末的付款，今天的付款不在公式里。"
       en:
@@ -176,19 +176,19 @@ questions:
     level: A
     concepts: [apr, ear, continuous-compounding]
     question:
-      zh: |-
+      zh-cn: |-
         判断真假并说明理由：名义年利率相同时，复利频率越高，有效年利率越高。有效年利率有没有上限？如果有，是多少？
       en: |-
         Determine whether this statement is true or false, and explain: with the same annual percentage rate, the more often interest is compounded, the higher the effective annual rate. Does the effective annual rate have an upper limit? If so, what is it?
     answer:
-      zh: |-
+      zh-cn: |-
         真。复利越频繁，利息越早计入本金、越早开始生息，所以 $(1+\frac{r}{m})^m$ 随 $m$ 增大（$r > 0$ 时）。
         有上限：$m \to \infty$ 时 $(1+\frac{r}{m})^m \to e^r$，所以 EAR 的上限是 $e^r - 1$，即连续复利对应的有效年利率。
       en: |-
         True. The more often interest is compounded, the earlier interest is added to the principal and starts to earn interest, so $(1+\frac{r}{m})^m$ increases with $m$ (when $r > 0$).
         There is an upper limit: as $m \to \infty$, $(1+\frac{r}{m})^m \to e^r$, so the upper limit of the EAR is $e^r - 1$, the effective annual rate under continuous compounding.
     rubric:
-      zh:
+      zh-cn:
         - "结论为真，并给出理由（利息更早生息，或其他正确论证）。"
         - "上限是 $e^r - 1$。"
       en:
@@ -200,19 +200,19 @@ questions:
     level: A
     concepts: [growing-perpetuity, geometric-series]
     question:
-      zh: |-
+      zh-cn: |-
         判断真假并说明理由：当 $g \ge r$ 时，公式 $\frac{C}{r-g}$ 说明增长永续年金的价值是无穷大。
       en: |-
         Determine whether this statement is true or false, and explain: when $g \ge r$, the formula $\frac{C}{r-g}$ shows that the value of a growing perpetuity is infinite.
     answer:
-      zh: |-
+      zh-cn: |-
         假。$g = r$ 时公式没有定义，$g > r$ 时公式给出负数，都不能说明价值是无穷大。
         公式来自等比数列 $\sum_{t \ge 1} \frac{C(1+g)^{t-1}}{(1+r)^t}$ 的求和，只在公比 $\frac{1+g}{1+r} < 1$ 时成立。$g \ge r$ 时每一项都不小于 $\frac{C}{1+r}$，和发散到无穷大，但这是级数本身的结论，公式在这时已经不适用。现实中也没有资产能永远以不低于折现率的速度增长。
       en: |-
         False. When $g = r$ the formula is undefined, and when $g > r$ it gives a negative number; neither shows that the value is infinite.
         The formula comes from summing the geometric series $\sum_{t \ge 1} \frac{C(1+g)^{t-1}}{(1+r)^t}$ and holds only when the ratio $\frac{1+g}{1+r} < 1$. When $g \ge r$, every term is at least $\frac{C}{1+r}$ and the sum diverges to infinity, but that is a conclusion about the series itself; the formula no longer applies. In reality, no asset can grow forever at a rate at least as high as the discount rate.
     rubric:
-      zh:
+      zh-cn:
         - "结论为假。"
         - "指出公式只在公比小于 1（$g < r$）时成立；$g \\ge r$ 时级数发散，公式不适用。"
       en:
@@ -225,17 +225,17 @@ questions:
     concepts: [ear, apr]
     expected: { ear_A: "5.127", ear_B: "5.10" }
     question:
-      zh: |-
+      zh-cn: |-
         银行 A 的存款名义年利率 5.0%，按日复利（一年 365 天）；银行 B 的名义年利率 5.1%，按年复利。哪家更好？计算两者的有效年利率。
       en: |-
         Bank A offers a deposit rate with an APR of 5.0%, compounded daily (365 days a year). Bank B offers an APR of 5.1%, compounded once a year. Which is better? Compute the effective annual rate of each.
     answer:
-      zh: |-
+      zh-cn: |-
         A：$(1 + \frac{0.05}{365})^{365} - 1 \approx 5.127$%；B：5.10%。A 更好。
       en: |-
         A: $(1 + \frac{0.05}{365})^{365} - 1 \approx 5.127$%; B: 5.10%. A is better.
     rubric:
-      zh:
+      zh-cn:
         - "两个 EAR 都正确。"
         - "按 EAR 而不是 APR 比较，结论为 A 更好。"
       en:
@@ -248,19 +248,19 @@ questions:
     concepts: [annuity, apr]
     expected: { payment: "4085.42", interest: "235375", saving: "343816" }
     question:
-      zh: |-
+      zh-cn: |-
         房贷 500,000 美元，15 年期，名义年利率 5.5%，按月复利、每月还款。(a) 月供是多少？(b) 总利息比讲义中 30 年、6% 的方案少多少？
       en: |-
         A mortgage of 500,000 dollars for 15 years, with an APR of 5.5% compounded monthly and monthly payments. (a) What is the monthly payment? (b) How much less total interest is paid than in the 30-year, 6% example in the lesson?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $i = 0.055/12$，$n = 180$，$C = \frac{500{,}000\,i}{1-(1+i)^{-180}} \approx 4{,}085.42$ 美元。
         (b) 总利息 $180 \times 4{,}085.42 - 500{,}000 \approx 235{,}375$ 美元；30 年方案约 579,191 美元；少约 343,816 美元。
       en: |-
         (a) $i = 0.055/12$, $n = 180$, $C = \frac{500{,}000\,i}{1-(1+i)^{-180}} \approx 4{,}085.42$ dollars.
         (b) Total interest is $180 \times 4{,}085.42 - 500{,}000 \approx 235{,}375$ dollars; the 30-year plan pays about 579,191 dollars, so about 343,816 dollars less.
     rubric:
-      zh:
+      zh-cn:
         - "用月利率和月数计算月供。"
         - "总利息为总还款减去本金，并与 30 年方案比较。"
       en:
@@ -273,19 +273,19 @@ questions:
     concepts: [future-value, compound-interest]
     expected: { less: "23.5" }
     question:
-      zh: |-
+      zh-cn: |-
         两只跟踪同一指数的基金，扣费前的年收益都是 7%，年费率分别为 1.00% 和 0.05%（费用直接从年收益中扣除）。一次性投入 10,000 美元，30 年后高费率基金的终值比低费率基金少百分之几？如果改成每年定投，费率造成的差距会更大还是更小？为什么？
       en: |-
         Two funds track the same index. Before fees, both return 7% a year. Their annual fees are 1.00% and 0.05% (the fee is subtracted directly from the annual return). You invest 10,000 dollars once. After 30 years, by what percentage is the future value of the high-fee fund lower than that of the low-fee fund? If you invested every year instead, would the gap caused by fees be larger or smaller? Why?
     answer:
-      zh: |-
+      zh-cn: |-
         终值之比为 $\left(\frac{1.06}{1.0695}\right)^{30} \approx 0.765$，高费率基金少约 23.5%（以低费率基金为基数）。
         每年定投时差距更小（每年年初定投时约少 16.3%），因为后投入的钱复利的时间短，费率拖累的年数也少。
       en: |-
         The ratio of future values is $\left(\frac{1.06}{1.0695}\right)^{30} \approx 0.765$, so the high-fee fund ends about 23.5% lower (relative to the low-fee fund).
         With yearly investments the gap is smaller (about 16.3% lower when investing at the start of each year), because money invested later compounds for fewer years, so the fee reduces it for fewer years.
     rubric:
-      zh:
+      zh-cn:
         - "扣费后收益为 6% 和 6.95%，终值之比约 0.765。"
         - "“少百分之几”以低费率基金为基数。"
         - "定投时差距更小，并用复利时间的长短解释。"
@@ -300,12 +300,12 @@ questions:
     star: true
     concepts: [annuity, annuity-due, perpetuity, geometric-series]
     question:
-      zh: |-
+      zh-cn: |-
         推导普通年金的现值公式 $PV = \frac{C}{r}[1-(1+r)^{-n}]$，再由它推出年金终值公式和期初年金的现值公式。
       en: |-
         Derive the present value of an ordinary annuity, $PV = \frac{C}{r}[1-(1+r)^{-n}]$. Then use it to derive the future value of an annuity and the present value of an annuity due.
     answer:
-      zh: |-
+      zh-cn: |-
         现值：$PV = \sum_{t=1}^{n} \frac{C}{(1+r)^t}$ 是首项 $\frac{C}{1+r}$、公比 $\frac{1}{1+r}$ 的等比数列，求和得 $\frac{C}{r}[1-(1+r)^{-n}]$。也可以看成两个永续年金之差：从第 1 期起的永续年金 $\frac{C}{r}$，减去从第 $n+1$ 期起的永续年金，后者的现值为 $\frac{C}{r}(1+r)^{-n}$。
         终值：$FV = PV(1+r)^n = C\frac{(1+r)^n-1}{r}$。
         期初年金：每笔付款都早一期，少折现一次，所以 $PV_{\text{期初}} = (1+r)\,PV_{\text{普通}}$。
@@ -314,7 +314,7 @@ questions:
         Future value: $FV = PV(1+r)^n = C\frac{(1+r)^n-1}{r}$.
         Annuity due: each payment comes one period earlier and is discounted once less, so $PV_{\text{due}} = (1+r)\,PV_{\text{ordinary}}$.
     rubric:
-      zh:
+      zh-cn:
         - "现值推导正确（等比数列求和或两个永续年金之差）。"
         - "由现值推出终值。"
         - "期初年金为普通年金的 $(1+r)$ 倍，并说明原因。"
@@ -328,19 +328,19 @@ questions:
     level: C
     concepts: [continuous-compounding, log-return, logarithm, derivative]
     question:
-      zh: |-
+      zh-cn: |-
         证明 $\lim_{m\to\infty}\left(1+\frac{r}{m}\right)^m = e^r$，并解释为什么多期的对数收益率可以相加。
       en: |-
         Prove that $\lim_{m\to\infty}\left(1+\frac{r}{m}\right)^m = e^r$, and explain why log returns over several periods can be added.
     answer:
-      zh: |-
+      zh-cn: |-
         取对数：$m\ln(1+\frac{r}{m})$。令 $x = \frac{r}{m}$，则它等于 $r \cdot \frac{\ln(1+x)}{x}$。$m \to \infty$ 时 $x \to 0$，而 $\lim_{x\to0}\frac{\ln(1+x)}{x}$ 正是 $\ln t$ 在 $t = 1$ 处的导数，等于 1。所以对数趋于 $r$，由 $e^x$ 的连续性，原式趋于 $e^r$。
         对数收益率：$\ln\frac{P_2}{P_0} = \ln\left(\frac{P_2}{P_1}\cdot\frac{P_1}{P_0}\right) = \ln\frac{P_2}{P_1} + \ln\frac{P_1}{P_0}$。多期的价格比是各期价格比的乘积，对数把乘法变成加法。
       en: |-
         Take logarithms: $m\ln(1+\frac{r}{m})$. Let $x = \frac{r}{m}$; then this equals $r \cdot \frac{\ln(1+x)}{x}$. As $m \to \infty$, $x \to 0$, and $\lim_{x\to0}\frac{\ln(1+x)}{x}$ is the derivative of $\ln t$ at $t = 1$, which is 1. So the logarithm tends to $r$, and by the continuity of $e^x$ the expression tends to $e^r$.
         Log returns: $\ln\frac{P_2}{P_0} = \ln\left(\frac{P_2}{P_1}\cdot\frac{P_1}{P_0}\right) = \ln\frac{P_2}{P_1} + \ln\frac{P_1}{P_0}$. The price ratio over several periods is the product of the ratios of each period, and the logarithm turns multiplication into addition.
     rubric:
-      zh:
+      zh-cn:
         - "极限的证明完整，关键的一步有理由（导数定义、洛必达法则或泰勒展开均可）。"
         - "用对数的性质说明对数收益率可加。"
       en:

@@ -12,39 +12,39 @@
 lesson: "1.6"
 
 context:
-  - zh: |-
+  - zh-cn: |-
       学习者学过利润最大化 $MR = MC$（[[0.2]]）、需求价格弹性（[[1.1]]）、完全竞争、规模报酬、经济利润和长期均衡（[[1.5]]）。还没有学博弈论（纳什均衡、囚徒困境，[[1.7]]）和消费者剩余、无谓损失（[[1.8]]）。
     en: |-
       The learner has studied profit maximization $MR = MC$ ([[0.2]]), the price elasticity of demand ([[1.1]]), and perfect competition, returns to scale, economic profit and long-run equilibrium ([[1.5]]). The learner has not yet studied game theory (Nash equilibrium, the prisoner's dilemma, [[1.7]]) or consumer surplus and deadweight loss ([[1.8]]).
   - concepts: [monopoly, lerner-index, price-discrimination]
-    zh: |-
+    zh-cn: |-
       讲义推导了 $MR = P + Q\frac{dP}{dQ}$、线性需求 $P = a - bQ$ 时 $MR = a - 2bQ$、$MR = P\left(1 - \frac{1}{|\varepsilon|}\right)$ 和勒纳指数 $\frac{P - MC}{P} = \frac{1}{|\varepsilon|}$。例：$P = 100 - Q$，$MC = 20$，垄断产量 40、价格 60、利润 1600。讲义没有说明垄断者在需求曲线的哪一段生产（留给练习题）。价格歧视分一、二、三级；三级价格歧视在每个市场令 $MR_i = MC$。
     en: |-
       The lesson derives $MR = P + Q\frac{dP}{dQ}$, $MR = a - 2bQ$ for linear demand $P = a - bQ$, $MR = P\left(1 - \frac{1}{|\varepsilon|}\right)$ and the Lerner index $\frac{P - MC}{P} = \frac{1}{|\varepsilon|}$. Example: $P = 100 - Q$ and $MC = 20$ give monopoly output 40, price 60 and profit 1600. The lesson does not say on which part of the demand curve a monopolist produces (left to an exercise). Price discrimination is first, second or third degree; under third-degree discrimination the firm sets $MR_i = MC$ in each market.
   - concepts: [oligopoly, cournot-model, bertrand-model]
-    zh: |-
+    zh-cn: |-
       讲义推导了两个厂商的古诺反应函数 $q_1 = \frac{a - c - b\,q_2}{2b}$ 和对称均衡 $q = \frac{a - c}{3b}$，但没有给出 $n$ 个厂商的一般公式（留给练习题）。[[fig:3-1]]：需求 $P = 100 - Q$，边际成本 20，厂商数目滑块从 1 到 20，默认 2，读数显示每家产量、总产量、价格和行业总利润。伯特兰模型：产品相同、成本相同时，两个厂商的价格都等于边际成本（伯特兰悖论）；讲义没有讨论成本不同的情形。
     en: |-
       The lesson derives the two-firm Cournot reaction function $q_1 = \frac{a - c - b\,q_2}{2b}$ and the symmetric equilibrium $q = \frac{a - c}{3b}$, but does not give the general formula for $n$ firms (left to an exercise). [[fig:3-1]]: demand $P = 100 - Q$, marginal cost 20, a slider for the number of firms from 1 to 20 (default 2); the readout shows output per firm, total output, the price and total industry profit. Bertrand model: with identical products and equal costs, both firms set the price equal to marginal cost (the Bertrand paradox); the lesson does not discuss unequal costs.
   - concepts: [monopolistic-competition, barriers-to-entry, economic-moat, natural-monopoly]
-    zh: |-
+    zh-cn: |-
       垄断竞争：产品有差别、可以自由进入，短期可有利润，长期价格等于平均成本、经济利润为 0。进入壁垒的来源：规模经济（自然垄断）、网络效应、转换成本、无形资产（品牌、专利、牌照）、成本优势。护城河是使经济利润长期为正的持久竞争优势；讲义提醒护城河会变窄，且有护城河的企业不一定是好的投资（价格可能已经反映）。
     en: |-
       Monopolistic competition: differentiated products and free entry; profit is possible in the short run, but in the long run the price equals average cost and economic profit is 0. Sources of barriers to entry: economies of scale (natural monopoly), network effects, switching costs, intangible assets (brands, patents, licenses) and cost advantages. A moat is a durable competitive advantage that keeps economic profit positive for a long time; the lesson notes that moats can narrow and that a firm with a moat is not necessarily a good investment (the price may already reflect it).
 
 common_errors:
   - questions: [C1, Q6]
-    zh: |-
+    zh-cn: |-
       垄断者令 $P = MC$，或者求出 $MR = MC$ 的产量后用 MC 或 MR 而不是需求曲线来定价。
     en: |-
       Having the monopolist set $P = MC$, or, after finding the output where $MR = MC$, reading the price from MC or MR instead of from the demand curve.
   - questions: [C1, C2]
-    zh: |-
+    zh-cn: |-
       对线性需求 $P = a - bQ$，把 MR 的斜率写成 $-b$ 而不是 $-2b$；或者需求写成 $Q = \ldots - kP$ 时没有先改写成 $P$ 的形式。
     en: |-
       For linear demand $P = a - bQ$, writing the slope of MR as $-b$ instead of $-2b$, or not first rewriting demand of the form $Q = \ldots - kP$ in terms of $P$.
   - questions: [Q4]
-    zh: |-
+    zh-cn: |-
       统一定价时把两个市场的需求直接相加，忽略了价格超过 30 时市场 B 的需求为 0（总需求曲线有折点）。
     en: |-
       Under uniform pricing, adding the two demand curves directly and ignoring that demand in market B is 0 when the price is above 30 (the total demand curve has a kink).
@@ -57,19 +57,19 @@ questions:
     concepts: [monopoly, lerner-index]
     expected: { q: "20", p: "80", profit: "800", lerner: "0.5" }
     question:
-      zh: |-
+      zh-cn: |-
         垄断者面对需求 $P = 120 - 2Q$，边际成本恒为 40，没有固定成本。求利润最大的产量、价格和利润，以及这时的勒纳指数。用这一点的需求弹性验证 $\frac{P - MC}{P} = \frac{1}{|\varepsilon|}$。
       en: |-
         A monopolist faces demand $P = 120 - 2Q$ with a constant marginal cost of 40 and no fixed cost. Find the profit-maximizing output, price and profit, and the Lerner index at that point. Use the elasticity of demand at that point to check $\frac{P - MC}{P} = \frac{1}{|\varepsilon|}$.
     answer:
-      zh: |-
+      zh-cn: |-
         $MR = 120 - 4Q = 40$，$Q = 20$，$P = 120 - 40 = 80$，利润 $(80 - 40) \times 20 = 800$。
         勒纳指数 $\frac{80 - 40}{80} = 0.5$。$Q = 60 - \frac{P}{2}$，$\frac{dQ}{dP} = -\frac12$，$|\varepsilon| = \frac12 \times \frac{80}{20} = 2$，$\frac{1}{|\varepsilon|} = 0.5$，相符。
       en: |-
         $MR = 120 - 4Q = 40$ gives $Q = 20$, $P = 120 - 40 = 80$, and profit $(80 - 40) \times 20 = 800$.
         Lerner index $\frac{80 - 40}{80} = 0.5$. $Q = 60 - \frac{P}{2}$, so $\frac{dQ}{dP} = -\frac12$ and $|\varepsilon| = \frac12 \times \frac{80}{20} = 2$, giving $\frac{1}{|\varepsilon|} = 0.5$, which matches.
     rubric:
-      zh:
+      zh-cn:
         - "$Q = 20$，$P = 80$，利润 800。"
         - "勒纳指数 0.5，弹性 2，两边相等。"
       en:
@@ -82,12 +82,12 @@ questions:
     concepts: [price-discrimination, lerner-index]
     expected: { qa: "45", pa: "55", qb: "20", pb: "20" }
     question:
-      zh: |-
+      zh-cn: |-
         一个厂商能把买者分成两组并防止转卖，边际成本恒为 10。A 组需求 $Q_A = 100 - P_A$，B 组需求 $Q_B = 60 - 2P_B$。求两组的价格和销量。哪一组的需求在均衡点更缺乏弹性？这与勒纳指数一致吗？
       en: |-
         A firm can split buyers into two groups and prevent resale. Marginal cost is a constant 10. Group A has demand $Q_A = 100 - P_A$ and group B has demand $Q_B = 60 - 2P_B$. Find the price and quantity in each group. In which group is demand less elastic at the optimum? Is this consistent with the Lerner index?
     answer:
-      zh: |-
+      zh-cn: |-
         A 组：$P_A = 100 - Q_A$，$MR_A = 100 - 2Q_A = 10$，$Q_A = 45$，$P_A = 55$。
         B 组：$P_B = 30 - \frac{Q_B}{2}$，$MR_B = 30 - Q_B = 10$，$Q_B = 20$，$P_B = 20$。
         弹性：A 组 $|\varepsilon| = 1 \times \frac{55}{45} \approx 1.22$，B 组 $|\varepsilon| = 2 \times \frac{20}{20} = 2$。A 组更缺乏弹性，价格更高。勒纳指数：A 组 $\frac{45}{55} \approx 0.82 = \frac{1}{1.22}$，B 组 $\frac{10}{20} = 0.5 = \frac12$，一致。
@@ -96,7 +96,7 @@ questions:
         Group B: $P_B = 30 - \frac{Q_B}{2}$, $MR_B = 30 - Q_B = 10$, so $Q_B = 20$ and $P_B = 20$.
         Elasticity: group A $|\varepsilon| = 1 \times \frac{55}{45} \approx 1.22$, group B $|\varepsilon| = 2 \times \frac{20}{20} = 2$. Demand in group A is less elastic, and its price is higher. Lerner index: group A $\frac{45}{55} \approx 0.82 = \frac{1}{1.22}$, group B $\frac{10}{20} = 0.5 = \frac12$, consistent.
     rubric:
-      zh:
+      zh-cn:
         - "A 组 45 和 55，B 组 20 和 20。"
         - "A 组更缺乏弹性，用勒纳指数验证。"
       en:
@@ -110,19 +110,19 @@ questions:
     widget: { id: cournot, set: { n: 10 } }
     expected: { p1: "60", p2: "46.67", p10: "27.27", q10: "72.73" }
     question:
-      zh: |-
+      zh-cn: |-
         在 [[fig:3-1]] 中，把厂商数目分别调到 1、2 和 10，记下价格和总产量。厂商数目为 1 时的结果对应哪种市场结构？厂商越来越多时，价格和总产量趋向什么？
       en: |-
         In [[fig:3-1]], set the number of firms to 1, 2 and 10, and write down the price and total output each time. Which market structure does the result with 1 firm correspond to? As the number of firms grows, what do the price and total output approach?
     answer:
-      zh: |-
+      zh-cn: |-
         1 家：价格 60，总产量 40。2 家：价格 46.67，总产量 53.33。10 家：价格 27.27，总产量 72.73。
         1 家时就是垄断（与讲义的垄断例子相同）。厂商越多，价格越低、总产量越高，趋向完全竞争的结果：价格等于边际成本 20，总产量 80；行业总利润趋向 0。
       en: |-
         1 firm: price 60, total output 40. 2 firms: price 46.67, total output 53.33. 10 firms: price 27.27, total output 72.73.
         With 1 firm the result is monopoly (the same as the lesson's monopoly example). With more firms the price falls and total output rises, approaching the competitive outcome: price equal to marginal cost, 20, and total output 80; total industry profit approaches 0.
     rubric:
-      zh:
+      zh-cn:
         - "三组读数正确（60、46.67、27.27 及对应产量）。"
         - "1 家是垄断；趋向 $P = MC = 20$，总产量 80。"
       en:
@@ -135,19 +135,19 @@ questions:
     concepts: [bertrand-model]
     expected: { price: "120" }
     question:
-      zh: |-
+      zh-cn: |-
         两家航空公司在同一条航线上按伯特兰模型竞争，服务相同。甲公司每位乘客的边际成本是 100 美元，乙公司是 120 美元。均衡价格大约是多少？谁得到乘客？各自的利润如何？
       en: |-
         Two airlines compete on the same route as in the Bertrand model, with identical service. Airline A's marginal cost per passenger is 100 dollars and airline B's is 120 dollars. About what is the equilibrium price? Who gets the passengers? What are their profits?
     answer:
-      zh: |-
+      zh-cn: |-
         价格约为 120 美元（略低于乙的成本）。乙不会把价格定在 120 以下，否则每位乘客都亏损；甲只要定价略低于 120，就能得到全部乘客，而定得更低只会减少利润。所以甲得到全部乘客，每位乘客赚约 20 美元；乙没有乘客，利润为 0。
         成本较低的一方赚到的是成本差，而不是垄断利润：乙的存在限制了甲的定价。
       en: |-
         The price is about 120 dollars (just below B's cost). B will not price below 120, since it would lose money on every passenger; A gets all the passengers by pricing just below 120, and pricing any lower would only reduce its profit. So A gets all the passengers and earns about 20 dollars per passenger; B has no passengers and zero profit.
         The lower-cost firm earns the cost difference, not a monopoly profit: B's presence limits A's price.
     rubric:
-      zh:
+      zh-cn:
         - "价格约 120（略低于高成本方的成本）。"
         - "甲得到全部乘客，每人赚约 20；乙利润为 0。"
       en:
@@ -159,7 +159,7 @@ questions:
     section: moats
     concepts: [barriers-to-entry, economic-moat, monopolistic-competition]
     question:
-      zh: |-
+      zh-cn: |-
         下面三家企业目前都有正的经济利润。分别判断它们主要依靠哪种进入壁垒，或者没有明显的壁垒；哪一家的利润最可能被竞争消除？
         (a) 一个支付网络：商户接受它，是因为很多消费者使用它；消费者使用它，是因为很多商户接受它。
         (b) 一家为大企业提供财务核算软件的公司，客户更换系统需要迁移多年的数据并重新培训员工。
@@ -170,7 +170,7 @@ questions:
         (b) A company that sells accounting software to large firms; a customer that changes systems must migrate years of data and retrain its staff.
         (c) A very popular new-style tea shop in a city with hundreds of tea shops, where opening a new shop is not expensive.
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 网络效应：新的支付网络既没有商户也没有消费者，很难起步。
         (b) 转换成本：即使竞争者的软件更便宜，客户换用的代价也很高。
         (c) 没有明显的壁垒，属于垄断竞争：产品有特色，但别人很容易模仿配方和风格开新店。它的利润最可能被竞争消除，长期趋向 0。
@@ -179,7 +179,7 @@ questions:
         (b) Switching costs: even if a competitor's software is cheaper, changing is expensive for the customer.
         (c) No clear barrier; this is monopolistic competition: the product is distinctive, but others can easily copy the recipes and style and open new shops. Its profit is the most likely to be competed away, toward 0 in the long run.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 网络效应；(b) 转换成本。"
         - "(c) 没有明显壁垒（垄断竞争），利润最可能消失。"
       en:
@@ -192,21 +192,21 @@ questions:
     level: A
     concepts: [monopoly, lerner-index, price-elasticity]
     question:
-      zh: |-
+      zh-cn: |-
         (a) 证明：边际成本为正时，利润最大的垄断者一定在需求富有弹性（$|\varepsilon| > 1$）的部分生产。
         (b) 一家垄断企业的经理说：“我们的需求缺乏弹性，涨价 10% 销量只下降 3%。”如果这是真的，企业应该怎么做？为什么？
       en: |-
         (a) Show that when marginal cost is positive, a profit-maximizing monopolist always produces where demand is elastic ($|\varepsilon| > 1$).
         (b) A manager of a monopoly says: "Our demand is inelastic: a 10% price increase lowers sales by only 3%." If this is true, what should the firm do, and why?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 最优点 $MR = MC > 0$。$MR = P\left(1 - \frac{1}{|\varepsilon|}\right) > 0$ 要求 $\frac{1}{|\varepsilon|} < 1$，即 $|\varepsilon| > 1$。在缺乏弹性的部分，MR 为负，减少产量反而增加收入。
         (b) 应该涨价。弹性约 0.3 < 1，涨价使收入增加（价格上升的比例大于销量下降的比例），同时销量减少使成本下降，利润一定增加。应一直涨价到需求变得富有弹性、满足 $MR = MC$ 为止。所以“需求缺乏弹性”不可能是利润最大化的垄断者的现状。
       en: |-
         (a) At the optimum $MR = MC > 0$. $MR = P\left(1 - \frac{1}{|\varepsilon|}\right) > 0$ requires $\frac{1}{|\varepsilon|} < 1$, that is, $|\varepsilon| > 1$. Where demand is inelastic, MR is negative, and producing less would actually raise revenue.
         (b) The firm should raise its price. The elasticity is about 0.3 < 1, so a higher price raises revenue (the price rises by a larger percentage than sales fall), while lower sales reduce cost, so profit certainly rises. It should keep raising the price until demand becomes elastic and $MR = MC$. So "inelastic demand" cannot describe a profit-maximizing monopolist's current position.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 由 $MR = MC > 0$ 和 MR 的弹性形式推出 $|\\varepsilon| > 1$。"
         - "(b) 应涨价：收入上升、成本下降；指出目前的位置不是最优。"
       en:
@@ -219,7 +219,7 @@ questions:
     concepts: [cournot-model, oligopoly, perfect-competition]
     expected: { p4: "36" }
     question:
-      zh: |-
+      zh-cn: |-
         $n$ 个相同的厂商进行古诺竞争，需求 $P = a - bQ$，边际成本都为 $c$。
         (a) 写出厂商 $i$ 的利润和一阶条件（记其他厂商的总产量为 $Q_{-i}$），利用对称性求每个厂商的产量、总产量和价格。
         (b) 检验 $n = 1$ 和 $n \to \infty$ 时的结果。
@@ -230,7 +230,7 @@ questions:
         (b) Check the results for $n = 1$ and $n \to \infty$.
         (c) With the data of [[fig:3-1]] ($a = 100$, $b = 1$, $c = 20$), compute the price when $n = 4$ and check it in the figure.
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\pi_i = \left(a - b(q_i + Q_{-i}) - c\right) q_i$，一阶条件 $a - c - 2b\,q_i - b\,Q_{-i} = 0$。对称时 $Q_{-i} = (n - 1)q$，得 $a - c - (n + 1)b\,q = 0$，$q = \frac{a - c}{(n + 1)b}$。总产量 $Q = \frac{n}{n + 1}\cdot\frac{a - c}{b}$，价格 $P = a - bQ = \frac{a + nc}{n + 1}$。
         (b) $n = 1$：$Q = \frac{a - c}{2b}$，$P = \frac{a + c}{2}$，即垄断。$n \to \infty$：$Q \to \frac{a - c}{b}$，$P \to c$，即完全竞争。
         (c) $P = \frac{100 + 80}{5} = 36$。
@@ -239,7 +239,7 @@ questions:
         (b) $n = 1$: $Q = \frac{a - c}{2b}$ and $P = \frac{a + c}{2}$, which is monopoly. $n \to \infty$: $Q \to \frac{a - c}{b}$ and $P \to c$, which is perfect competition.
         (c) $P = \frac{100 + 80}{5} = 36$.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 一阶条件正确，利用对称性得到 $q = \\frac{a - c}{(n + 1)b}$ 和 $P = \\frac{a + nc}{n + 1}$。"
         - "(b) 两个极限分别对应垄断和完全竞争。"
         - "(c) 价格 36。"
@@ -254,7 +254,7 @@ questions:
     concepts: [cournot-model, monopoly, oligopoly]
     expected: { qc: "26.67", pic: "711.11", pim: "800", qd: "30", pid: "900", pio: "600" }
     question:
-      zh: |-
+      zh-cn: |-
         两个厂商，需求 $P = 100 - Q$，边际成本都为 20，没有固定成本。
         (a) 古诺均衡时每个厂商的产量和利润是多少？
         (b) 如果两个厂商合谋，像一个垄断者一样生产，并平分产量和利润，每个厂商的利润是多少？
@@ -265,7 +265,7 @@ questions:
         (b) If the two firms collude, producing as a single monopolist and splitting output and profit equally, what is each firm's profit?
         (c) Under collusion, if firm 2 keeps to the agreement and firm 1 secretly changes its output, what is firm 1's best output? What are the two firms' profits? What does this show about collusion?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $q = \frac{80}{3} \approx 26.67$，$P = 100 - 53.33 = 46.67$，每个厂商的利润 $(46.67 - 20) \times 26.67 \approx 711.11$。
         (b) 垄断产量 40，价格 60，总利润 1600，每个厂商 800。
         (c) 由反应函数 $q_1 = \frac{80 - q_2}{2} = \frac{80 - 20}{2} = 30$，价格 $100 - 50 = 50$。厂商 1 利润 $30 \times 30 = 900$，厂商 2 利润 $20 \times 30 = 600$。
@@ -276,7 +276,7 @@ questions:
         (c) From the reaction function, $q_1 = \frac{80 - q_2}{2} = \frac{80 - 20}{2} = 30$, and the price is $100 - 50 = 50$. Firm 1 earns $30 \times 30 = 900$ and firm 2 earns $20 \times 30 = 600$.
         Each firm has an incentive to break the agreement: if the other keeps it, producing more raises its own profit from 800 to 900. If both reason this way, they return to the Cournot equilibrium and each earns only 711.11. Collusion is better for both, but it is unstable. [[1.7]] analyzes this situation as a prisoner's dilemma.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 约 26.67 和 711.11。"
         - "(b) 800。"
         - "(c) 产量 30，利润 900 和 600；指出违约的动机使合谋不稳定。"
@@ -292,7 +292,7 @@ questions:
     concepts: [price-discrimination, monopoly]
     expected: { pu: "55", piu: "2025", pid: "2225" }
     question:
-      zh: |-
+      zh-cn: |-
         沿用 [[check:C2]] 的两组买者（$Q_A = 100 - P_A$，$Q_B = 60 - 2P_B$，边际成本 10）。
         (a) 如果法律禁止价格歧视，厂商只能对两组收同一个价格。求利润最大的价格和利润。（注意：价格高于某个水平时，B 组不再购买。）
         (b) 与价格歧视时的总利润比较。
@@ -303,7 +303,7 @@ questions:
         (b) Compare with the total profit under price discrimination.
         (c) Is the ban on price discrimination good or bad for buyers in group B? For total sales?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 价格不超过 30 时两组都购买，总需求 $Q = 160 - 3P$，利润 $(P - 10)(160 - 3P)$ 的导数 $190 - 6P$ 在 $P \le 30$ 时为正，所以在这一段最优是 $P = 30$，此时 B 组销量为 0，利润 $20 \times 70 = 1400$。价格高于 30 时只有 A 组购买，最优 $P = 55$，利润 $45 \times 45 = 2025$。比较得统一定价为 55，利润 2025，只卖给 A 组。
         (b) 价格歧视时 A 组利润 $45 \times 45 = 2025$，B 组利润 $(20 - 10) \times 20 = 200$，总利润 2225，比统一定价多 200。
         (c) 对 B 组是坏事：价格歧视时他们能以 20 买到 20 单位，禁止后他们完全买不到。A 组的价格不变（55）。总销量从 65 降到 45。可见禁止价格歧视不一定帮助低价的那一组；当低需求的市场在统一定价下会被放弃时，价格歧视反而增加了销量。
@@ -312,7 +312,7 @@ questions:
         (b) Under price discrimination, profit is $45 \times 45 = 2025$ from group A and $(20 - 10) \times 20 = 200$ from group B, a total of 2225, which is 200 more than with a uniform price.
         (c) It is bad for group B: with price discrimination they buy 20 units at 20, and with the ban they buy nothing. Group A's price is unchanged (55). Total sales fall from 65 to 45. So banning price discrimination does not necessarily help the low-price group; when uniform pricing would abandon the low-demand market, price discrimination actually increases sales.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 注意到总需求在 30 处有折点，分两段比较，得到统一价格 55、利润 2025。"
         - "(b) 价格歧视总利润 2225。"
         - "(c) B 组变差（买不到），A 组不变，总销量下降。"
@@ -327,7 +327,7 @@ questions:
     concepts: [lerner-index, monopoly, price-elasticity]
     expected: { p1: "90", p2: "40" }
     question:
-      zh: |-
+      zh-cn: |-
         一家企业的边际成本恒为 30，估计它的需求弹性在相关范围内大约恒为 $-1.5$。
         (a) 利润最大的价格是多少？
         (b) 一个相近的竞争产品上市后，这家企业的需求弹性变为 $-4$。新的利润最大的价格是多少？
@@ -338,7 +338,7 @@ questions:
         (b) After a close competing product is launched, the firm's demand elasticity becomes $-4$. What is the new profit-maximizing price?
         (c) Use this example to explain why a firm's markup falls when its industry gains competitors or when customers can compare prices more easily.
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 由 $\frac{P - MC}{P} = \frac{1}{|\varepsilon|}$，$P = \frac{MC}{1 - 1/|\varepsilon|} = \frac{30}{1 - 2/3} = 90$。
         (b) $P = \frac{30}{1 - 1/4} = 40$。
         (c) 有了相近的替代品，顾客对价格更敏感，需求弹性变大，勒纳指数 $\frac{1}{|\varepsilon|}$ 下降（从约 0.67 降到 0.25），加价随之下降。顾客更容易比较价格也有同样的效果。
@@ -347,7 +347,7 @@ questions:
         (b) $P = \frac{30}{1 - 1/4} = 40$.
         (c) With close substitutes available, customers are more sensitive to price, demand becomes more elastic, and the Lerner index $\frac{1}{|\varepsilon|}$ falls (from about 0.67 to 0.25), so the markup falls. Easier price comparison has the same effect.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 90。"
         - "(b) 40。"
         - "(c) 用弹性变大、勒纳指数下降解释。"
@@ -362,7 +362,7 @@ questions:
     concepts: [natural-monopoly, monopoly, returns-to-scale, average-cost]
     expected: { qm: "45", pm: "55", pim: "1125", loss: "-900", qa: "78.54", pa: "21.46" }
     question:
-      zh: |-
+      zh-cn: |-
         一个城市的自来水供应，成本 $C(Q) = 900 + 10Q$（900 是管网的固定成本），需求 $P = 100 - Q$。
         (a) 说明平均成本随产量一直下降。为什么由一家企业供应比两家各建一套管网成本更低？
         (b) 如果放任企业垄断定价，产量、价格和利润各是多少？
@@ -375,7 +375,7 @@ questions:
         (c) If the regulator requires the price to equal marginal cost, what is the firm's profit? Can this requirement last in the long run?
         (d) The regulator instead requires the price to equal average cost (zero economic profit for the firm). Find output and price (take the larger output).
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $\text{AC} = 10 + \frac{900}{Q}$，随 $Q$ 增加而下降。两家企业各建一套管网，要付两次固定成本 900，生产同样的总产量，总成本多 900。这就是自然垄断。
         (b) $MR = 100 - 2Q = 10$，$Q = 45$，$P = 55$，利润 $45 \times 45 - 900 = 1125$。
         (c) $P = 10$，$Q = 90$，收入恰好等于可变成本，利润 $-900$。企业无法收回管网成本，长期会退出，除非政府补贴 900。
@@ -386,7 +386,7 @@ questions:
         (c) $P = 10$ and $Q = 90$; revenue just covers variable cost, so profit is $-900$. The firm cannot recover the cost of the network and will exit in the long run, unless the government pays a subsidy of 900.
         (d) $100 - Q = 10 + \frac{900}{Q}$, that is, $Q^2 - 90Q + 900 = 0$, gives $Q = \frac{90 + \sqrt{4500}}{2} \approx 78.54$ and $P \approx 21.46$. Compared with monopoly pricing, output is higher and the price is lower, and the firm still recovers its costs.
     rubric:
-      zh:
+      zh-cn:
         - "(a) 平均成本下降；两套管网多付一次固定成本。"
         - "(b) 45、55、1125。"
         - "(c) 利润 −900，长期不可维持（除非补贴）。"

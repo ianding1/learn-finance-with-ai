@@ -6,316 +6,316 @@
 
 summation:
   defined_in: prerequisite
-  zh: 求和符号
+  zh-cn: 求和符号
   en: summation notation
 
 logarithm:
   defined_in: prerequisite
-  zh: 对数
+  zh-cn: 对数
   en: logarithm
 
 geometric-series:
   defined_in: prerequisite
-  zh: 等比数列求和
+  zh-cn: 等比数列求和
   en: geometric series
 
 derivative:
   defined_in: prerequisite
-  zh: 导数
+  zh-cn: 导数
   en: derivative
 
 # ---------- 0.1 ----------
 
 time-value-of-money:
   defined_in: "0.1"
-  zh: 货币时间价值
+  zh-cn: 货币时间价值
   en: time value of money
   short:
-    zh: 同样数额的钱，越早拿到越值钱；不同时间的钱要折算到同一时点才能比较或相加。
+    zh-cn: 同样数额的钱，越早拿到越值钱；不同时间的钱要折算到同一时点才能比较或相加。
     en: The same amount of money is worth more the earlier you receive it, so amounts at different times must be moved to the same date before they are compared or added.
 
 compound-interest:
   defined_in: "0.1"
-  zh: 复利
+  zh-cn: 复利
   en: compound interest
   short:
-    zh: 利息也计入本金、继续产生利息的计息方式。
+    zh-cn: 利息也计入本金、继续产生利息的计息方式。
     en: Interest that is added to the principal and earns interest itself.
 
 future-value:
   defined_in: "0.1"
-  zh: 终值
+  zh-cn: 终值
   en: future value
   short:
-    zh: 今天的一笔钱按复利增长到未来某一时点的金额。
+    zh-cn: 今天的一笔钱按复利增长到未来某一时点的金额。
     en: The amount that a sum today grows to at a future date with compound interest.
 
 present-value:
   defined_in: "0.1"
-  zh: 现值
+  zh-cn: 现值
   en: present value
   short:
-    zh: 未来的一笔钱折算到今天的价值。
+    zh-cn: 未来的一笔钱折算到今天的价值。
     en: The value today of an amount received in the future.
 
 discount-factor:
   defined_in: "0.1"
-  zh: 折现因子
+  zh-cn: 折现因子
   en: discount factor
   short:
-    zh: 把未来一笔钱折算成现值时乘的系数 1/(1+r)ⁿ。
+    zh-cn: 把未来一笔钱折算成现值时乘的系数 1/(1+r)ⁿ。
     en: "The number that a future amount is multiplied by to get its present value: 1/(1+r)ⁿ."
 
 apr:
   defined_in: "0.1"
-  zh: 名义年利率
+  zh-cn: 名义年利率
   en: annual percentage rate
   short:
-    zh: 按年报出的利率（APR），等于每期利率乘以一年的期数，不考虑期内复利。
+    zh-cn: 按年报出的利率（APR），等于每期利率乘以一年的期数，不考虑期内复利。
     en: The quoted yearly rate (APR), equal to the rate per period times the number of periods in a year, without compounding within the year.
 
 ear:
   defined_in: "0.1"
-  zh: 有效年利率
+  zh-cn: 有效年利率
   en: effective annual rate
   short:
-    zh: 考虑一年内复利之后实际得到的年利率（EAR）。
+    zh-cn: 考虑一年内复利之后实际得到的年利率（EAR）。
     en: The yearly rate actually earned once compounding within the year is taken into account (EAR).
 
 continuous-compounding:
   defined_in: "0.1"
-  zh: 连续复利
+  zh-cn: 连续复利
   en: continuous compounding
   short:
-    zh: 复利频率趋于无穷时的极限，此时 FV = PV·e^(rT)。
+    zh-cn: 复利频率趋于无穷时的极限，此时 FV = PV·e^(rT)。
     en: The limit when compounding becomes infinitely frequent. Then FV = PV·e^(rT).
 
 annuity:
   defined_in: "0.1"
-  zh: 年金
+  zh-cn: 年金
   en: annuity
   short:
-    zh: 一串金额相同、间隔相同、期数有限的付款。
+    zh-cn: 一串金额相同、间隔相同、期数有限的付款。
     en: A finite series of equal payments at equal intervals.
 
 perpetuity:
   defined_in: "0.1"
-  zh: 永续年金
+  zh-cn: 永续年金
   en: perpetuity
   short:
-    zh: 金额相同、间隔相同、永远持续的付款，现值为 C/r。
+    zh-cn: 金额相同、间隔相同、永远持续的付款，现值为 C/r。
     en: Equal payments at equal intervals that continue forever. Its present value is C/r.
 
 annuity-due:
   defined_in: "0.1"
-  zh: 期初年金
+  zh-cn: 期初年金
   en: annuity due
   short:
-    zh: 每期期初付款的年金。
+    zh-cn: 每期期初付款的年金。
     en: An annuity whose payments are made at the start of each period.
 
 growing-perpetuity:
   defined_in: "0.1"
-  zh: 增长永续年金
+  zh-cn: 增长永续年金
   en: growing perpetuity
   short:
-    zh: 每期按固定比例增长、永远持续的付款。
+    zh-cn: 每期按固定比例增长、永远持续的付款。
     en: Payments that grow at a constant rate each period and continue forever.
 
 simple-return:
   defined_in: "0.1"
-  zh: 简单收益率
+  zh-cn: 简单收益率
   en: simple return
   short:
-    zh: 价格变化的比例 P₁/P₀ − 1；多期合成时要连乘。
+    zh-cn: 价格变化的比例 P₁/P₀ − 1；多期合成时要连乘。
     en: The proportional price change P₁/P₀ − 1. Over several periods, simple returns compound by multiplication.
 
 log-return:
   defined_in: "0.1"
-  zh: 对数收益率
+  zh-cn: 对数收益率
   en: log return
   short:
-    zh: 价格比的自然对数 ln(P₁/P₀)；多期可以直接相加。
+    zh-cn: 价格比的自然对数 ln(P₁/P₀)；多期可以直接相加。
     en: The natural logarithm of the price ratio, ln(P₁/P₀). Over several periods, log returns add.
 
 # ---------- 0.2 ----------
 
 objective-function:
   defined_in: "0.2"
-  zh: 目标函数
+  zh-cn: 目标函数
   en: objective function
   short:
-    zh: 优化问题中要最大化或最小化的量。
+    zh-cn: 优化问题中要最大化或最小化的量。
     en: The quantity that an optimization problem maximizes or minimizes.
 
 first-order-condition:
   defined_in: "0.2"
-  zh: 一阶条件
+  zh-cn: 一阶条件
   en: first-order condition
   short:
-    zh: 内部最优点处导数（或所有偏导数）为 0。
+    zh-cn: 内部最优点处导数（或所有偏导数）为 0。
     en: At an interior optimum, the derivative (or every partial derivative) is 0.
 
 second-order-condition:
   defined_in: "0.2"
-  zh: 二阶条件
+  zh-cn: 二阶条件
   en: second-order condition
   short:
-    zh: 用二阶导数的符号区分最大值和最小值。
+    zh-cn: 用二阶导数的符号区分最大值和最小值。
     en: The sign of the second derivative tells a maximum from a minimum.
 
 fixed-cost:
   defined_in: "0.2"
-  zh: 固定成本
+  zh-cn: 固定成本
   en: fixed cost
   short:
-    zh: 总成本中不随产量变化的部分。
+    zh-cn: 总成本中不随产量变化的部分。
     en: The part of total cost that does not change with output.
 
 variable-cost:
   defined_in: "0.2"
-  zh: 可变成本
+  zh-cn: 可变成本
   en: variable cost
   short:
-    zh: 总成本中随产量变化的部分。
+    zh-cn: 总成本中随产量变化的部分。
     en: The part of total cost that changes with output.
 
 marginal-revenue:
   defined_in: "0.2"
-  zh: 边际收入
+  zh-cn: 边际收入
   en: marginal revenue
   short:
-    zh: 多卖一单位带来的收入增加，即收入对产量的导数。
+    zh-cn: 多卖一单位带来的收入增加，即收入对产量的导数。
     en: The extra revenue from selling one more unit, that is, the derivative of revenue with respect to output.
 
 marginal-cost:
   defined_in: "0.2"
-  zh: 边际成本
+  zh-cn: 边际成本
   en: marginal cost
   short:
-    zh: 多生产一单位带来的成本增加，即成本对产量的导数。
+    zh-cn: 多生产一单位带来的成本增加，即成本对产量的导数。
     en: The extra cost of producing one more unit, that is, the derivative of cost with respect to output.
 
 profit-maximization:
   defined_in: "0.2"
-  zh: 利润最大化
+  zh-cn: 利润最大化
   en: profit maximization
   short:
-    zh: 选择产量使利润最大；内部最优点满足边际收入等于边际成本。
+    zh-cn: 选择产量使利润最大；内部最优点满足边际收入等于边际成本。
     en: Choosing output to make profit as large as possible. At an interior optimum, marginal revenue equals marginal cost.
 
 sunk-cost:
   defined_in: "0.2"
-  zh: 沉没成本
+  zh-cn: 沉没成本
   en: sunk cost
   short:
-    zh: 已经付出、无论之后怎样决策都收不回的成本。
+    zh-cn: 已经付出、无论之后怎样决策都收不回的成本。
     en: A cost that has already been paid and cannot be recovered whatever you decide next.
 
 partial-derivative:
   defined_in: "0.2"
-  zh: 偏导数
+  zh-cn: 偏导数
   en: partial derivative
   short:
-    zh: 其他变量不变、只改变一个变量时函数的变化率。
+    zh-cn: 其他变量不变、只改变一个变量时函数的变化率。
     en: The rate of change of a function when one variable changes and the others stay fixed.
 
 budget-constraint:
   defined_in: "0.2"
-  zh: 预算约束
+  zh-cn: 预算约束
   en: budget constraint
   short:
-    zh: 各项支出之和不能超过可用的钱，例如两种商品时 px·x + py·y = M。
+    zh-cn: 各项支出之和不能超过可用的钱，例如两种商品时 px·x + py·y = M。
     en: Total spending cannot exceed the money available, for example px·x + py·y = M with two goods.
 
 lagrange-multiplier:
   defined_in: "0.2"
-  zh: 拉格朗日乘数
+  zh-cn: 拉格朗日乘数
   en: Lagrange multiplier
   short:
-    zh: 求解有等式约束的优化问题时引入的变量 λ。
+    zh-cn: 求解有等式约束的优化问题时引入的变量 λ。
     en: The variable λ introduced to solve an optimization problem with an equality constraint.
 
 shadow-price:
   defined_in: "0.2"
-  zh: 影子价格
+  zh-cn: 影子价格
   en: shadow price
   short:
-    zh: 约束放松一个单位时最优目标值的近似增量。
+    zh-cn: 约束放松一个单位时最优目标值的近似增量。
     en: The approximate increase in the optimal value of the objective when the constraint is relaxed by one unit.
 
 corner-solution:
   defined_in: "0.2"
-  zh: 角点解
+  zh-cn: 角点解
   en: corner solution
   short:
-    zh: 某个选择变量取边界值（如 0）的最优解。
+    zh-cn: 某个选择变量取边界值（如 0）的最优解。
     en: An optimum at which a choice variable is at its boundary (for example, 0).
 
 # ---------- 0.3 ----------
 
 random-variable:
   defined_in: "0.3"
-  zh: 随机变量
+  zh-cn: 随机变量
   en: random variable
   short:
-    zh: 取值不确定、但知道各取值概率的量。
+    zh-cn: 取值不确定、但知道各取值概率的量。
     en: A quantity whose value is uncertain but whose possible values and their probabilities are known.
 
 expected-value:
   defined_in: "0.3"
-  zh: 期望
+  zh-cn: 期望
   en: expected value
   short:
-    zh: 按概率加权的平均结果，即同样的情况重复很多次后的平均值。
+    zh-cn: 按概率加权的平均结果，即同样的情况重复很多次后的平均值。
     en: The probability-weighted average outcome, that is, the average over many repetitions of the same situation.
 
 variance:
   defined_in: "0.3"
-  zh: 方差
+  zh-cn: 方差
   en: variance
   short:
-    zh: 偏离期望的平方的加权平均，单位是原单位的平方（如 %²）。
+    zh-cn: 偏离期望的平方的加权平均，单位是原单位的平方（如 %²）。
     en: The probability-weighted average of squared deviations from the expected value. Its unit is the square of the original unit (for example, %²).
 
 standard-deviation:
   defined_in: "0.3"
-  zh: 标准差
+  zh-cn: 标准差
   en: standard deviation
   short:
-    zh: 方差的平方根，单位与原变量相同；在金融中也叫波动率。
+    zh-cn: 方差的平方根，单位与原变量相同；在金融中也叫波动率。
     en: The square root of the variance, in the same unit as the variable. In finance it is also called volatility.
 
 covariance:
   defined_in: "0.3"
-  zh: 协方差
+  zh-cn: 协方差
   en: covariance
   short:
-    zh: 两个变量相对各自期望的偏差之积的加权平均；同向为正，反向为负。
+    zh-cn: 两个变量相对各自期望的偏差之积的加权平均；同向为正，反向为负。
     en: The probability-weighted average of the product of two variables' deviations from their expected values. It is positive when they move in the same direction and negative when they move in opposite directions.
 
 correlation:
   defined_in: "0.3"
-  zh: 相关系数
+  zh-cn: 相关系数
   en: correlation coefficient
   short:
-    zh: 协方差除以两个标准差的积，取值在 −1 到 1 之间，没有单位。
+    zh-cn: 协方差除以两个标准差的积，取值在 −1 到 1 之间，没有单位。
     en: The covariance divided by the product of the two standard deviations. It has no unit and lies between −1 and 1.
 
 portfolio-variance:
   defined_in: "0.3"
-  zh: 组合方差
+  zh-cn: 组合方差
   en: portfolio variance
   short:
-    zh: 两资产组合的方差等于各自方差按权重平方加权，再加上协方差项。
+    zh-cn: 两资产组合的方差等于各自方差按权重平方加权，再加上协方差项。
     en: The variance of a two-asset portfolio is the sum of each variance times its squared weight, plus a covariance term.
 
 diversification:
   defined_in: "0.3"
-  zh: 分散化
+  zh-cn: 分散化
   en: diversification
   short:
-    zh: 组合的标准差低于各资产标准差的加权平均时，组合得到的好处。
+    zh-cn: 组合的标准差低于各资产标准差的加权平均时，组合得到的好处。
     en: The benefit a portfolio gets when its standard deviation is lower than the weighted average of the assets' standard deviations.
 
 # Concepts taught in later lessons. Listed so that forward references can link to them.
@@ -324,640 +324,640 @@ diversification:
 
 probability-density:
   defined_in: "0.4"
-  zh: 概率密度
+  zh-cn: 概率密度
   en: probability density
   short:
-    zh: 描述连续随机变量的曲线；曲线下某一段的面积等于取值落在这一段的概率。
+    zh-cn: 描述连续随机变量的曲线；曲线下某一段的面积等于取值落在这一段的概率。
     en: A curve for a continuous random variable; the area under the curve over an interval is the probability of a value in that interval.
 
 normal-distribution:
   defined_in: "0.4"
-  zh: 正态分布
+  zh-cn: 正态分布
   en: normal distribution
   short:
-    zh: 钟形、左右对称的分布，由期望 μ 和标准差 σ 完全确定，记作 N(μ, σ²)。
+    zh-cn: 钟形、左右对称的分布，由期望 μ 和标准差 σ 完全确定，记作 N(μ, σ²)。
     en: A bell-shaped, symmetric distribution that is fully determined by its mean μ and standard deviation σ, written N(μ, σ²).
 
 z-score:
   defined_in: "0.4"
-  zh: 标准分数
+  zh-cn: 标准分数
   en: z-score
   short:
-    zh: 一个值离期望有几个标准差：z = (x − μ)/σ。
+    zh-cn: 一个值离期望有几个标准差：z = (x − μ)/σ。
     en: "How many standard deviations a value is from the mean: z = (x − μ)/σ."
 
 fat-tails:
   defined_in: "0.4"
-  zh: 肥尾
+  zh-cn: 肥尾
   en: fat tails
   short:
-    zh: 极端值出现得比同样标准差的正态分布更频繁。
+    zh-cn: 极端值出现得比同样标准差的正态分布更频繁。
     en: Extreme values occur more often than in a normal distribution with the same standard deviation.
 
 median:
   defined_in: "0.4"
-  zh: 中位数
+  zh-cn: 中位数
   en: median
   short:
-    zh: 把所有可能结果从小到大排列时排在正中间的值；一半的结果低于它，一半高于它。
+    zh-cn: 把所有可能结果从小到大排列时排在正中间的值；一半的结果低于它，一半高于它。
     en: The middle value when all outcomes are sorted; half of the outcomes are below it and half above.
 
 right-skew:
   defined_in: "0.4"
-  zh: 右偏
+  zh-cn: 右偏
   en: right skew
   short:
-    zh: 分布的右侧拖出长尾，期望大于中位数。
+    zh-cn: 分布的右侧拖出长尾，期望大于中位数。
     en: A distribution with a long tail on the right, so the mean is above the median.
 
 lognormal-distribution:
   defined_in: "0.4"
-  zh: 对数正态分布
+  zh-cn: 对数正态分布
   en: lognormal distribution
   short:
-    zh: 取对数后服从正态分布的分布；长期连乘的财富近似服从它。
+    zh-cn: 取对数后服从正态分布的分布；长期连乘的财富近似服从它。
     en: A distribution whose logarithm is normal; wealth that compounds over many periods is approximately lognormal.
 
 parameter-estimation:
   defined_in: "0.4"
-  zh: 参数估计
+  zh-cn: 参数估计
   en: parameter estimation
   short:
-    zh: 用样本数据推断总体参数（例如真实的期望和标准差）。
+    zh-cn: 用样本数据推断总体参数（例如真实的期望和标准差）。
     en: Using sample data to infer population parameters, such as the true mean and standard deviation.
 
 sample-mean:
   defined_in: "0.4"
-  zh: 样本均值
+  zh-cn: 样本均值
   en: sample mean
   short:
-    zh: 样本中各观测值的算术平均，用来估计真实的期望。
+    zh-cn: 样本中各观测值的算术平均，用来估计真实的期望。
     en: The average of the observations in a sample, used to estimate the true mean.
 
 sample-standard-deviation:
   defined_in: "0.4"
-  zh: 样本标准差
+  zh-cn: 样本标准差
   en: sample standard deviation
   short:
-    zh: 偏差平方和除以 n − 1 再开平方，用来估计真实的标准差。
+    zh-cn: 偏差平方和除以 n − 1 再开平方，用来估计真实的标准差。
     en: The square root of the sum of squared deviations divided by n − 1, used to estimate the true standard deviation.
 
 degrees-of-freedom:
   defined_in: "0.4"
-  zh: 自由度
+  zh-cn: 自由度
   en: degrees of freedom
   short:
-    zh: 在计算一个统计量时可以自由变化的数据个数。
+    zh-cn: 在计算一个统计量时可以自由变化的数据个数。
     en: The number of values that are free to vary when a statistic is computed.
 
 standard-error:
   defined_in: "0.4"
-  zh: 标准误
+  zh-cn: 标准误
   en: standard error
   short:
-    zh: 估计值（例如样本均值）在不同样本之间的标准差，衡量估计的精度。
+    zh-cn: 估计值（例如样本均值）在不同样本之间的标准差，衡量估计的精度。
     en: The standard deviation of an estimate, such as the sample mean, across different samples; it measures how precise the estimate is.
 
 central-limit-theorem:
   defined_in: "0.4"
-  zh: 中心极限定理
+  zh-cn: 中心极限定理
   en: central limit theorem
   short:
-    zh: 很多独立随机变量的平均值近似服从正态分布。
+    zh-cn: 很多独立随机变量的平均值近似服从正态分布。
     en: The average of many independent random variables is approximately normally distributed.
 
 confidence-interval:
   defined_in: "0.4"
-  zh: 置信区间
+  zh-cn: 置信区间
   en: confidence interval
   short:
-    zh: 按某种方法从样本构造的区间；用这种方法构造的区间中，有约定比例（如 95%）会包含真实参数。
+    zh-cn: 按某种方法从样本构造的区间；用这种方法构造的区间中，有约定比例（如 95%）会包含真实参数。
     en: An interval built from a sample by a method such that a stated share (for example 95%) of the intervals built this way contain the true parameter.
 
 t-distribution:
   defined_in: "0.4"
-  zh: t 分布
+  zh-cn: t 分布
   en: t distribution
   short:
-    zh: 用样本标准差代替真实标准差时所用的分布，比正态分布尾部更厚；样本越大越接近正态分布。
+    zh-cn: 用样本标准差代替真实标准差时所用的分布，比正态分布尾部更厚；样本越大越接近正态分布。
     en: The distribution used when the sample standard deviation replaces the true one; it has thicker tails than the normal distribution and approaches it as the sample grows.
 
 hypothesis-test:
   defined_in: "0.4"
-  zh: 假设检验
+  zh-cn: 假设检验
   en: hypothesis test
   short:
-    zh: 判断数据是否与某个假设（如真实期望为 0）明显不符的方法。
+    zh-cn: 判断数据是否与某个假设（如真实期望为 0）明显不符的方法。
     en: A method for deciding whether the data clearly contradict a hypothesis, such as a true mean of 0.
 
 t-statistic:
   defined_in: "0.4"
-  zh: t 值
+  zh-cn: t 值
   en: t-statistic
   short:
-    zh: 估计值除以它的标准误：估计值离 0 有几个标准误。
+    zh-cn: 估计值除以它的标准误：估计值离 0 有几个标准误。
     en: "An estimate divided by its standard error: how many standard errors the estimate is from 0."
 
 statistical-significance:
   defined_in: "0.4"
-  zh: 统计显著性
+  zh-cn: 统计显著性
   en: statistical significance
   short:
-    zh: 如果原假设成立，得到这样极端的结果的概率低于约定的水平（如 5%）。
+    zh-cn: 如果原假设成立，得到这样极端的结果的概率低于约定的水平（如 5%）。
     en: If the null hypothesis were true, a result this extreme would occur with a probability below a chosen level, such as 5%.
 
 multiple-testing:
   defined_in: "0.4"
-  zh: 多重检验
+  zh-cn: 多重检验
   en: multiple testing
   short:
-    zh: 同时检验很多个假设时，碰巧出现显著结果的问题。
+    zh-cn: 同时检验很多个假设时，碰巧出现显著结果的问题。
     en: The problem of results that are significant by chance when many hypotheses are tested.
 
 # ---------- 0.5 ----------
 
 regression:
   defined_in: "0.5"
-  zh: 回归
+  zh-cn: 回归
   en: regression
   short:
-    zh: 用一条直线（或其他函数）描述一个变量的平均值怎样随另一个变量变化。
+    zh-cn: 用一条直线（或其他函数）描述一个变量的平均值怎样随另一个变量变化。
     en: Describing how the average of one variable changes with another variable, with a line or another function.
 
 ols:
   defined_in: "0.5"
-  zh: 普通最小二乘法
+  zh-cn: 普通最小二乘法
   en: ordinary least squares
   short:
-    zh: 选择截距和斜率，使残差平方和最小的估计方法（OLS）。
+    zh-cn: 选择截距和斜率，使残差平方和最小的估计方法（OLS）。
     en: The estimation method that chooses the intercept and slope to minimize the sum of squared residuals (OLS).
 
 residual:
   defined_in: "0.5"
-  zh: 残差
+  zh-cn: 残差
   en: residual
   short:
-    zh: 实际值减去回归直线给出的拟合值。
+    zh-cn: 实际值减去回归直线给出的拟合值。
     en: The actual value minus the fitted value given by the regression line.
 
 regression-coefficient:
   defined_in: "0.5"
-  zh: 回归系数
+  zh-cn: 回归系数
   en: regression coefficient
   short:
-    zh: 回归方程中自变量前的系数；斜率表示自变量增加一个单位时，因变量平均变化多少。
+    zh-cn: 回归方程中自变量前的系数；斜率表示自变量增加一个单位时，因变量平均变化多少。
     en: The number in front of an explanatory variable in a regression; the slope is the average change in the dependent variable per unit increase in the explanatory variable.
 
 r-squared:
   defined_in: "0.5"
-  zh: 决定系数
+  zh-cn: 决定系数
   en: R-squared
   short:
-    zh: 因变量的方差中被回归解释的比例（R²），在 0 和 1 之间。
+    zh-cn: 因变量的方差中被回归解释的比例（R²），在 0 和 1 之间。
     en: The share of the variance of the dependent variable that the regression explains (R²), between 0 and 1.
 
 omitted-variable-bias:
   defined_in: "0.5"
-  zh: 遗漏变量偏差
+  zh-cn: 遗漏变量偏差
   en: omitted variable bias
   short:
-    zh: 回归中漏掉了一个既影响因变量、又与自变量相关的变量，使系数的估计出现偏差。
+    zh-cn: 回归中漏掉了一个既影响因变量、又与自变量相关的变量，使系数的估计出现偏差。
     en: Bias in a coefficient estimate caused by leaving out a variable that affects the dependent variable and is correlated with an explanatory variable.
 
 correlation-vs-causation:
   defined_in: "0.5"
-  zh: 相关与因果
+  zh-cn: 相关与因果
   en: correlation and causation
   short:
-    zh: 两个变量相关，不代表一个是另一个的原因。
+    zh-cn: 两个变量相关，不代表一个是另一个的原因。
     en: Two variables being correlated does not mean that one causes the other.
 
 # ---------- 1.1 ----------
 
 demand:
   defined_in: "1.1"
-  zh: 需求
+  zh-cn: 需求
   en: demand
   short:
-    zh: 在其他条件不变时，一种商品的价格与买方愿意并且能够购买的数量之间的关系。
+    zh-cn: 在其他条件不变时，一种商品的价格与买方愿意并且能够购买的数量之间的关系。
     en: The relation between the price of a good and the quantity that buyers are willing and able to buy, other things being equal.
 
 supply:
   defined_in: "1.1"
-  zh: 供给
+  zh-cn: 供给
   en: supply
   short:
-    zh: 在其他条件不变时，一种商品的价格与卖方愿意并且能够出售的数量之间的关系。
+    zh-cn: 在其他条件不变时，一种商品的价格与卖方愿意并且能够出售的数量之间的关系。
     en: The relation between the price of a good and the quantity that sellers are willing and able to sell, other things being equal.
 
 market-equilibrium:
   defined_in: "1.1"
-  zh: 市场均衡
+  zh-cn: 市场均衡
   en: market equilibrium
   short:
-    zh: 需求量等于供给量时的价格和数量。
+    zh-cn: 需求量等于供给量时的价格和数量。
     en: The price and quantity at which the quantity demanded equals the quantity supplied.
 
 comparative-statics:
   defined_in: "1.1"
-  zh: 比较静态
+  zh-cn: 比较静态
   en: comparative statics
   short:
-    zh: 比较某个外部条件改变前后的两个均衡，而不研究调整的过程。
+    zh-cn: 比较某个外部条件改变前后的两个均衡，而不研究调整的过程。
     en: Comparing the equilibria before and after a change in an outside condition, without studying the path of adjustment.
 
 price-elasticity:
   defined_in: "1.1"
-  zh: 需求的价格弹性
+  zh-cn: 需求的价格弹性
   en: price elasticity of demand
   short:
-    zh: 价格变化 1% 时，需求量变化的百分比。
+    zh-cn: 价格变化 1% 时，需求量变化的百分比。
     en: The percentage change in the quantity demanded when the price changes by 1%.
 
 income-elasticity:
   defined_in: "1.1"
-  zh: 收入弹性
+  zh-cn: 收入弹性
   en: income elasticity
   short:
-    zh: 收入变化 1% 时，需求量变化的百分比。
+    zh-cn: 收入变化 1% 时，需求量变化的百分比。
     en: The percentage change in the quantity demanded when income changes by 1%.
 
 cross-price-elasticity:
   defined_in: "1.1"
-  zh: 交叉价格弹性
+  zh-cn: 交叉价格弹性
   en: cross-price elasticity
   short:
-    zh: 另一种商品的价格变化 1% 时，这种商品的需求量变化的百分比。
+    zh-cn: 另一种商品的价格变化 1% 时，这种商品的需求量变化的百分比。
     en: The percentage change in the quantity demanded of a good when the price of another good changes by 1%.
 
 # ---------- 1.2 ----------
 
 preferences:
   defined_in: "1.2"
-  zh: 偏好
+  zh-cn: 偏好
   en: preferences
   short:
-    zh: 消费者对不同商品组合的排序。
+    zh-cn: 消费者对不同商品组合的排序。
     en: A consumer's ranking of different bundles of goods.
 
 utility-function:
   defined_in: "1.2"
-  zh: 效用函数
+  zh-cn: 效用函数
   en: utility function
   short:
-    zh: 给每个商品组合打分、分数越高越受偏好的函数；只用来排序。
+    zh-cn: 给每个商品组合打分、分数越高越受偏好的函数；只用来排序。
     en: A function that scores each bundle so that preferred bundles get higher scores; it is used only for ranking.
 
 marginal-utility:
   defined_in: "1.2"
-  zh: 边际效用
+  zh-cn: 边际效用
   en: marginal utility
   short:
-    zh: 其他商品不变时，多消费一单位某种商品带来的效用增加。
+    zh-cn: 其他商品不变时，多消费一单位某种商品带来的效用增加。
     en: The increase in utility from consuming one more unit of a good, other goods unchanged.
 
 indifference-curve:
   defined_in: "1.2"
-  zh: 无差异曲线
+  zh-cn: 无差异曲线
   en: indifference curve
   short:
-    zh: 效用相同的所有商品组合连成的曲线。
+    zh-cn: 效用相同的所有商品组合连成的曲线。
     en: The curve of all bundles that give the same utility.
 
 marginal-rate-of-substitution:
   defined_in: "1.2"
-  zh: 边际替代率
+  zh-cn: 边际替代率
   en: marginal rate of substitution
   short:
-    zh: 为了多得到一单位 x，消费者愿意放弃的 y 的数量，等于 MUx/MUy。
+    zh-cn: 为了多得到一单位 x，消费者愿意放弃的 y 的数量，等于 MUx/MUy。
     en: The quantity of y a consumer is willing to give up for one more unit of x; it equals MUx/MUy.
 
 substitution-effect:
   defined_in: "1.2"
-  zh: 替代效应
+  zh-cn: 替代效应
   en: substitution effect
   short:
-    zh: 价格变化时，只因相对价格改变（购买力不变）而引起的需求量变化。
+    zh-cn: 价格变化时，只因相对价格改变（购买力不变）而引起的需求量变化。
     en: The change in quantity demanded caused only by the change in relative prices, with purchasing power held constant.
 
 income-effect:
   defined_in: "1.2"
-  zh: 收入效应
+  zh-cn: 收入效应
   en: income effect
   short:
-    zh: 价格变化时，因实际购买力改变而引起的需求量变化。
+    zh-cn: 价格变化时，因实际购买力改变而引起的需求量变化。
     en: The change in quantity demanded caused by the change in real purchasing power when a price changes.
 
 slutsky-equation:
   defined_in: "1.2"
-  zh: Slutsky 方程
+  zh-cn: Slutsky 方程
   en: Slutsky equation
   short:
-    zh: 把价格变化对需求的影响分解为替代效应和收入效应的方程。
+    zh-cn: 把价格变化对需求的影响分解为替代效应和收入效应的方程。
     en: The equation that splits the effect of a price change on demand into a substitution effect and an income effect.
 
 giffen-good:
   defined_in: "1.2"
-  zh: 吉芬商品
+  zh-cn: 吉芬商品
   en: Giffen good
   short:
-    zh: 收入效应超过替代效应、价格上升时需求量反而增加的劣等品。
+    zh-cn: 收入效应超过替代效应、价格上升时需求量反而增加的劣等品。
     en: An inferior good whose income effect outweighs the substitution effect, so that the quantity demanded rises when its price rises.
 
 # ---------- 1.3 ----------
 
 intertemporal-budget-constraint:
   defined_in: "1.3"
-  zh: 跨期预算约束
+  zh-cn: 跨期预算约束
   en: intertemporal budget constraint
   short:
-    zh: 各期消费的现值等于各期收入的现值。
+    zh-cn: 各期消费的现值等于各期收入的现值。
     en: "The present value of consumption over time equals the present value of income."
 
 time-preference:
   defined_in: "1.3"
-  zh: 时间偏好
+  zh-cn: 时间偏好
   en: time preference
   short:
-    zh: 对现在的消费比对未来的消费看得更重。
+    zh-cn: 对现在的消费比对未来的消费看得更重。
     en: "Valuing consumption now more than the same consumption in the future."
 
 euler-equation:
   defined_in: "1.3"
-  zh: Euler 方程
+  zh-cn: Euler 方程
   en: Euler equation
   short:
-    zh: 跨期最优消费的条件 u′(c₁) = β(1 + r)u′(c₂)。
+    zh-cn: 跨期最优消费的条件 u′(c₁) = β(1 + r)u′(c₂)。
     en: "The condition for the best consumption over time, u′(c₁) = β(1 + r)u′(c₂)."
 
 consumption-smoothing:
   defined_in: "1.3"
-  zh: 消费平滑
+  zh-cn: 消费平滑
   en: consumption smoothing
   short:
-    zh: 通过储蓄和借款，使各期消费比收入更平稳。
+    zh-cn: 通过储蓄和借款，使各期消费比收入更平稳。
     en: "Using saving and borrowing to keep consumption steadier over time than income."
 
 inflation:
   defined_in: "1.3"
-  zh: 通货膨胀率
+  zh-cn: 通货膨胀率
   en: inflation rate
   short:
-    zh: 物价总水平的年增长率。
+    zh-cn: 物价总水平的年增长率。
     en: "The yearly growth rate of the general price level."
 
 nominal-interest-rate:
   defined_in: "1.3"
-  zh: 名义利率
+  zh-cn: 名义利率
   en: nominal interest rate
   short:
-    zh: 用货币衡量的回报率。
+    zh-cn: 用货币衡量的回报率。
     en: "The rate of return measured in money."
 
 real-interest-rate:
   defined_in: "1.3"
-  zh: 实际利率
+  zh-cn: 实际利率
   en: real interest rate
   short:
-    zh: 用购买力衡量的回报率，约等于名义利率减通胀率。
+    zh-cn: 用购买力衡量的回报率，约等于名义利率减通胀率。
     en: "The rate of return measured in purchasing power, about the nominal rate minus inflation."
 
 fisher-equation:
   defined_in: "1.3"
-  zh: Fisher 方程
+  zh-cn: Fisher 方程
   en: Fisher equation
   short:
-    zh: 1 + 实际利率 = (1 + 名义利率) / (1 + 通胀率)。
+    zh-cn: 1 + 实际利率 = (1 + 名义利率) / (1 + 通胀率)。
     en: "1 + real rate = (1 + nominal rate) / (1 + inflation)."
 
 # ---------- 1.4 ----------
 
 expected-utility:
   defined_in: "1.4"
-  zh: 期望效用
+  zh-cn: 期望效用
   en: expected utility
   short:
-    zh: "各种结果的效用按概率加权的平均值。"
+    zh-cn: "各种结果的效用按概率加权的平均值。"
     en: "The probability-weighted average of the utility of each outcome."
 
 risk-aversion:
   defined_in: "1.4"
-  zh: 风险厌恶
+  zh-cn: 风险厌恶
   en: risk aversion
   short:
-    zh: "宁愿确定地得到赌局的期望值，也不参加赌局；等价于效用函数是凹函数。"
+    zh-cn: "宁愿确定地得到赌局的期望值，也不参加赌局；等价于效用函数是凹函数。"
     en: "Preferring the expected value of a gamble for sure to the gamble itself; equivalent to a concave utility function."
 
 absolute-risk-aversion:
   defined_in: "1.4"
-  zh: 绝对风险厌恶系数
+  zh-cn: 绝对风险厌恶系数
   en: coefficient of absolute risk aversion
   short:
-    zh: "A(W) = −u″(W)/u′(W)，衡量对固定金额赌局的厌恶程度。"
+    zh-cn: "A(W) = −u″(W)/u′(W)，衡量对固定金额赌局的厌恶程度。"
     en: "A(W) = −u″(W)/u′(W), which measures aversion to gambles of fixed dollar size."
 
 relative-risk-aversion:
   defined_in: "1.4"
-  zh: 相对风险厌恶系数
+  zh-cn: 相对风险厌恶系数
   en: coefficient of relative risk aversion
   short:
-    zh: "R(W) = −W u″(W)/u′(W)，衡量对按财富比例的赌局的厌恶程度。"
+    zh-cn: "R(W) = −W u″(W)/u′(W)，衡量对按财富比例的赌局的厌恶程度。"
     en: "R(W) = −W u″(W)/u′(W), which measures aversion to gambles proportional to wealth."
 
 certainty-equivalent:
   defined_in: "1.4"
-  zh: 确定性等价
+  zh-cn: 确定性等价
   en: certainty equivalent
   short:
-    zh: "与赌局的期望效用相同的确定金额。"
+    zh-cn: "与赌局的期望效用相同的确定金额。"
     en: "The sure amount that gives the same utility as the expected utility of a gamble."
 
 risk-premium:
   defined_in: "1.4"
-  zh: 风险溢价
+  zh-cn: 风险溢价
   en: risk premium
   short:
-    zh: "期望值减去确定性等价：为消除风险愿意放弃的期望财富。"
+    zh-cn: "期望值减去确定性等价：为消除风险愿意放弃的期望财富。"
     en: "The expected value minus the certainty equivalent: the expected wealth one is willing to give up to remove the risk."
 
 crra-utility:
   defined_in: "1.4"
-  zh: CRRA 效用
+  zh-cn: CRRA 效用
   en: CRRA utility
   short:
-    zh: "相对风险厌恶系数为常数 γ 的效用函数 W^(1−γ)/(1−γ)，γ = 1 时为 ln W。"
+    zh-cn: "相对风险厌恶系数为常数 γ 的效用函数 W^(1−γ)/(1−γ)，γ = 1 时为 ln W。"
     en: "The utility function W^(1−γ)/(1−γ) with constant relative risk aversion γ; ln W when γ = 1."
 
 # ---------- 1.5 ----------
 production-function:
   defined_in: "1.5"
-  zh: 生产函数
+  zh-cn: 生产函数
   en: production function
   short:
-    zh: "投入（资本 K、劳动 L）与最大产量之间的关系 Q = f(K, L)。"
+    zh-cn: "投入（资本 K、劳动 L）与最大产量之间的关系 Q = f(K, L)。"
     en: "The relation Q = f(K, L) between inputs (capital K, labor L) and the maximum output."
 
 short-run:
   defined_in: "1.5"
-  zh: 短期
+  zh-cn: 短期
   en: short run
   short:
-    zh: "至少有一种投入（通常是资本）来不及调整的时期。"
+    zh-cn: "至少有一种投入（通常是资本）来不及调整的时期。"
     en: "A period in which at least one input (usually capital) cannot be adjusted."
 
 long-run:
   defined_in: "1.5"
-  zh: 长期
+  zh-cn: 长期
   en: long run
   short:
-    zh: "所有投入都可以调整、厂商可以进入或退出行业的时期。"
+    zh-cn: "所有投入都可以调整、厂商可以进入或退出行业的时期。"
     en: "A period in which all inputs can be adjusted and firms can enter or exit the industry."
 
 marginal-product:
   defined_in: "1.5"
-  zh: 边际产量
+  zh-cn: 边际产量
   en: marginal product
   short:
-    zh: "其他投入不变时，多投入一单位某种投入带来的产量增加，如 MP_L = ∂Q/∂L。"
+    zh-cn: "其他投入不变时，多投入一单位某种投入带来的产量增加，如 MP_L = ∂Q/∂L。"
     en: "The extra output from one more unit of an input with the other inputs fixed, such as MP_L = ∂Q/∂L."
 
 returns-to-scale:
   defined_in: "1.5"
-  zh: 规模报酬
+  zh-cn: 规模报酬
   en: returns to scale
   short:
-    zh: "所有投入同比例增加 t 倍时，产量增加多于、等于或少于 t 倍（递增、不变、递减）。"
+    zh-cn: "所有投入同比例增加 t 倍时，产量增加多于、等于或少于 t 倍（递增、不变、递减）。"
     en: "Whether output rises by more than, exactly or less than t times when all inputs rise t times (increasing, constant, decreasing)."
 
 average-cost:
   defined_in: "1.5"
-  zh: 平均成本
+  zh-cn: 平均成本
   en: average cost
   short:
-    zh: "成本除以产量：平均可变成本 AVC = VC/q，平均总成本 ATC = C/q。"
+    zh-cn: "成本除以产量：平均可变成本 AVC = VC/q，平均总成本 ATC = C/q。"
     en: "Cost divided by output: average variable cost AVC = VC/q and average total cost ATC = C/q."
 
 perfect-competition:
   defined_in: "1.5"
-  zh: 完全竞争
+  zh-cn: 完全竞争
   en: perfect competition
   short:
-    zh: "厂商众多、产品相同、可以自由进出，每个厂商都只能接受市场价格的市场。"
+    zh-cn: "厂商众多、产品相同、可以自由进出，每个厂商都只能接受市场价格的市场。"
     en: "A market with many firms, identical products and free entry and exit, where every firm takes the market price as given."
 
 shutdown-point:
   defined_in: "1.5"
-  zh: 停产点
+  zh-cn: 停产点
   en: shutdown point
   short:
-    zh: "AVC 的最低点；价格低于它时，厂商短期内停产比生产好。"
+    zh-cn: "AVC 的最低点；价格低于它时，厂商短期内停产比生产好。"
     en: "The minimum of AVC; below this price a firm does better by shutting down in the short run."
 
 economic-profit:
   defined_in: "1.5"
-  zh: 经济利润
+  zh-cn: 经济利润
   en: economic profit
   short:
-    zh: "收入减去包括机会成本在内的全部成本；为 0 时投入获得正常回报。"
+    zh-cn: "收入减去包括机会成本在内的全部成本；为 0 时投入获得正常回报。"
     en: "Revenue minus all costs including opportunity costs; when it is 0 the inputs earn a normal return."
 
 # ---------- 1.6 ----------
 monopoly:
   defined_in: "1.6"
-  zh: 垄断
+  zh-cn: 垄断
   en: monopoly
   short:
-    zh: "市场中只有一个卖者、产品没有相近替代品的市场结构；按 MR = MC 定产量，价格由需求曲线决定。"
+    zh-cn: "市场中只有一个卖者、产品没有相近替代品的市场结构；按 MR = MC 定产量，价格由需求曲线决定。"
     en: "A market with a single seller of a product without close substitutes; it sets output where MR = MC and reads the price from the demand curve."
 
 lerner-index:
   defined_in: "1.6"
-  zh: 勒纳指数
+  zh-cn: 勒纳指数
   en: Lerner index
   short:
-    zh: "(P − MC)/P，价格高出边际成本的比例；利润最大时等于 1/|ε|，衡量定价能力。"
+    zh-cn: "(P − MC)/P，价格高出边际成本的比例；利润最大时等于 1/|ε|，衡量定价能力。"
     en: "(P − MC)/P, the share of the price above marginal cost; at the profit maximum it equals 1/|ε| and measures market power."
 
 price-discrimination:
   defined_in: "1.6"
-  zh: 价格歧视
+  zh-cn: 价格歧视
   en: price discrimination
   short:
-    zh: "对不同买者收取与成本差别无关的不同价格；分一、二、三级。"
+    zh-cn: "对不同买者收取与成本差别无关的不同价格；分一、二、三级。"
     en: "Charging different buyers different prices that do not reflect cost differences; first, second or third degree."
 
 oligopoly:
   defined_in: "1.6"
-  zh: 寡头
+  zh-cn: 寡头
   en: oligopoly
   short:
-    zh: "只有少数几个厂商、彼此的决策相互影响的市场。"
+    zh-cn: "只有少数几个厂商、彼此的决策相互影响的市场。"
     en: "A market with only a few firms whose decisions affect each other."
 
 cournot-model:
   defined_in: "1.6"
-  zh: 古诺模型
+  zh-cn: 古诺模型
   en: Cournot model
   short:
-    zh: "厂商同时选择产量的寡头模型；均衡产量介于垄断和完全竞争之间。"
+    zh-cn: "厂商同时选择产量的寡头模型；均衡产量介于垄断和完全竞争之间。"
     en: "An oligopoly model in which firms choose quantities simultaneously; equilibrium output lies between monopoly and perfect competition."
 
 bertrand-model:
   defined_in: "1.6"
-  zh: 伯特兰模型
+  zh-cn: 伯特兰模型
   en: Bertrand model
   short:
-    zh: "厂商同时选择价格的寡头模型；产品和成本相同时，两个厂商就使价格等于边际成本。"
+    zh-cn: "厂商同时选择价格的寡头模型；产品和成本相同时，两个厂商就使价格等于边际成本。"
     en: "An oligopoly model in which firms choose prices simultaneously; with identical products and costs, two firms already drive the price to marginal cost."
 
 monopolistic-competition:
   defined_in: "1.6"
-  zh: 垄断竞争
+  zh-cn: 垄断竞争
   en: monopolistic competition
   short:
-    zh: "厂商很多、产品有差别、可以自由进入的市场；长期经济利润为 0。"
+    zh-cn: "厂商很多、产品有差别、可以自由进入的市场；长期经济利润为 0。"
     en: "A market with many firms, differentiated products and free entry; economic profit is 0 in the long run."
 
 barriers-to-entry:
   defined_in: "1.6"
-  zh: 进入壁垒
+  zh-cn: 进入壁垒
   en: barriers to entry
   short:
-    zh: "阻止新厂商进入或模仿的因素：规模经济、网络效应、转换成本、无形资产、成本优势。"
+    zh-cn: "阻止新厂商进入或模仿的因素：规模经济、网络效应、转换成本、无形资产、成本优势。"
     en: "Factors that keep new firms from entering or imitating: economies of scale, network effects, switching costs, intangible assets, cost advantages."
 
 natural-monopoly:
   defined_in: "1.6"
-  zh: 自然垄断
+  zh-cn: 自然垄断
   en: natural monopoly
   short:
-    zh: "在整个市场需求范围内平均成本都在下降，由一家厂商生产成本最低的行业。"
+    zh-cn: "在整个市场需求范围内平均成本都在下降，由一家厂商生产成本最低的行业。"
     en: "An industry in which average cost falls over the whole range of market demand, so one firm can produce at the lowest cost."
 
 economic-moat:
   defined_in: "1.6"
-  zh: 护城河
+  zh-cn: 护城河
   en: economic moat
   short:
-    zh: "使企业的经济利润能长期保持为正的持久竞争优势。"
+    zh-cn: "使企业的经济利润能长期保持为正的持久竞争优势。"
     en: "A durable competitive advantage that keeps a firm's economic profit positive for a long time."
 
 risk-measures:
   defined_in: "4.1"
-  zh: 风险度量
+  zh-cn: 风险度量
   en: risk measures
 
 efficient-frontier:
   defined_in: "4.2"
-  zh: 有效前沿
+  zh-cn: 有效前沿
   en: efficient frontier
 
 beta:
   defined_in: "4.4"
-  zh: beta 系数
+  zh-cn: beta 系数
   en: beta
 
 systematic-risk:
   defined_in: "4.5"
-  zh: 系统性风险
+  zh-cn: 系统性风险
   en: systematic risk

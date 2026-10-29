@@ -7,7 +7,7 @@ import { toJson } from '../lib/grading';
 interface Props {
 	lang: Lang;
 	payload: unknown;
-	/** true for a quiz (测验): the prompt asks for scores */
+	/** true for a quiz: the prompt asks for scores */
 	scored?: boolean;
 }
 const { lang, payload, scored = false } = Astro.props;

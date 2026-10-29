@@ -6,7 +6,7 @@ import { toLang } from '../../i18n/ui';
 
 const lang = toLang(Astro.locals.starlightRoute.lang);
 const L = {
-	zh: { normal: '正态分布', fat: '肥尾分布（标准差相同）', axis: '离期望几个标准差', zoom: '右尾放大' },
+	'zh-cn': { normal: '正态分布', fat: '肥尾分布（标准差相同）', axis: '离期望几个标准差', zoom: '右尾放大' },
 	en: { normal: 'Normal distribution', fat: 'Fat-tailed distribution (same standard deviation)', axis: 'Standard deviations from the mean', zoom: 'Right tail, enlarged' },
 }[lang];
 

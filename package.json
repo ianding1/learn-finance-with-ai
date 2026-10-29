@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "跟 AI 学金融 — a static economics and finance course with AI-graded exercises",
+  "description": "Learn Finance with AI: a static, multilingual economics and finance course with AI-graded exercises",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

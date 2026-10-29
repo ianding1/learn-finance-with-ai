@@ -7,7 +7,7 @@ import { toLang } from '../../i18n/ui';
 
 const lang = toLang(Astro.locals.starlightRoute.lang);
 const L = {
-	zh: {
+	'zh-cn': {
 		g: '相对风险厌恶系数 γ',
 		h: '赌局的幅度 h',
 		x: '财富 W（千美元）',
@@ -16,6 +16,7 @@ const L = {
 		chord: '两个结果之间的连线',
 		ev: '期望财富',
 		ce: '确定性等价',
+		rp: '风险溢价',
 		readout: '期望财富 100，确定性等价 {ce}，风险溢价 {rp}。',
 	},
 	en: {
@@ -27,6 +28,7 @@ const L = {
 		chord: 'Line between the two outcomes',
 		ev: 'Expected wealth',
 		ce: 'Certainty equivalent',
+		rp: 'Risk premium',
 		readout: 'Expected wealth 100, certainty equivalent {ce}, risk premium {rp}.',
 	},
 }[lang];
@@ -88,7 +90,7 @@ const layouts = [
 		<li><span class="sw sw-curve"></span>{L.curve}</li>
 		<li><span class="sw sw-ols"></span>{L.chord}</li>
 		<li><span class="sw sw-min"></span>{L.ce}</li>
-		<li><span class="sw sw-gap"></span>{lang === 'zh' ? '风险溢价' : 'Risk premium'}</li>
+		<li><span class="sw sw-gap"></span>{L.rp}</li>
 	</ul>
 	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
 </div>

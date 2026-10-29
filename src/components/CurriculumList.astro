@@ -29,7 +29,7 @@ const lang = toLang(Astro.locals.starlightRoute.lang);
 						) : (
 							<span class="lfwai-muted">
 								{l.title[lang]}
-								<span class="ref-status">{lang === 'en' ? ` (${t(lang, 'unpublished')})` : `（${t(lang, 'unpublished')}）`}</span>
+								<span class="ref-status">{t(lang, 'paren', { text: t(lang, 'unpublished') })}</span>
 							</span>
 						)}
 					</li>

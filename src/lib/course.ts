@@ -3,12 +3,13 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'yaml';
 import katex from 'katex';
-import { t, type Lang } from '../i18n/ui';
+import { t, type Lang, type Localized } from '../i18n/ui';
 
 const ROOT = process.cwd();
 const read = (p: string) => parse(readFileSync(join(ROOT, p), 'utf8'));
 
-export type Bi = { zh: string; en: string };
+/** Text in every language, keyed by language code (see src/i18n/languages.json). */
+export type Bi = Localized;
 
 export interface Lesson {
 	id: string;
@@ -26,8 +27,8 @@ export interface Lesson {
 export interface Concept {
 	id: string;
 	defined_in: string;
-	zh: string;
-	en: string;
+	/** canonical term in each language, keyed by language code */
+	[lang: string]: any;
 	short?: Bi;
 }
 
@@ -45,16 +46,18 @@ export interface Question {
 	concepts: string[];
 	question: Bi;
 	answer: Bi;
-	rubric: { zh: string[]; en: string[] };
+	rubric: Localized<string[]>;
 	widget?: { id: string; set: Record<string, number> };
 }
 
-export interface ContextItem extends Bi {
+export interface ContextItem {
+	[lang: string]: any;
 	concepts?: string[];
 	questions?: string[];
 }
 
-export interface CommonError extends Bi {
+export interface CommonError {
+	[lang: string]: any;
 	questions: string[];
 }
 
@@ -147,7 +150,7 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
 const SITE = (import.meta.env.SITE || 'https://ianding1.github.io').replace(/\/$/, '');
 
 export function localePrefix(lang: Lang) {
-	return lang === 'en' ? 'en/' : '';
+	return `${lang}/`;
 }
 
 export function pagePath(lang: Lang, slug: string, hash?: string) {
@@ -230,9 +233,9 @@ export function refHtml(target: RefTarget, lang: Lang, current?: string): string
 	if (!r.href) {
 		const status =
 			r.isConcept && r.lessonId
-				? `${t(lang, 'lessonPrefix', { id: r.lessonId })}${lang === 'en' ? ', ' : '，'}${t(lang, 'unpublished')}`
+				? t(lang, 'lessonUnpublished', { id: r.lessonId })
 				: t(lang, 'unpublished');
-		const suffix = !r.unpublished ? '' : lang === 'en' ? ` <span class="ref-status">(${status})</span>` : `<span class="ref-status">（${status}）</span>`;
+		const suffix = r.unpublished ? `<span class="ref-status">${esc(t(lang, 'paren', { text: status }))}</span>` : '';
 		return `<span class="${cls}"${notes ? ` data-preview="${esc(notes)}"` : ''}>${esc(r.text)}${suffix}</span>`;
 	}
 	return `<a class="${cls}" href="${esc(r.href)}"${notes ? ` data-preview="${esc(notes)}"` : ''}>${esc(r.text)}</a>`;

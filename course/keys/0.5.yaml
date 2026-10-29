@@ -12,44 +12,44 @@
 lesson: "0.5"
 
 context:
-  - zh: |-
+  - zh-cn: |-
       学习者学过期望、方差、协方差、相关系数（[[0.3]]），标准误、t 值、置信区间（[[0.4]]），以及一阶条件和偏导数（[[0.2]]）。本课只讲一个自变量的回归；还没有学 CAPM（[[4.4]]）和多因子模型（[[4.6]]）。
     en: |-
       The learner has studied expected value, variance, covariance and correlation ([[0.3]]), standard errors, t-statistics and confidence intervals ([[0.4]]), and first-order conditions and partial derivatives ([[0.2]]). This lesson covers regression with one explanatory variable only; the learner has not yet studied the CAPM ([[4.4]]) or multi-factor models ([[4.6]]).
   - concepts: [regression, residual, ols, regression-coefficient]
-    zh: |-
+    zh-cn: |-
       讲义给出 $y_i = a + b\,x_i + e_i$，残差 $e_i = y_i - \hat y_i$；OLS 使残差平方和最小，$b = \frac{\sum (x_i - \bar x)(y_i - \bar y)}{\sum (x_i - \bar x)^2}$，$a = \bar y - b\bar x$（推导留给练习题）。讲义例子：6 个月市场收益 −4、−2、−1、1、2、4，股票收益 −4、−3、−0.5、2.5、3、8，回归直线 $\hat y = 1 + 1.5x$，残差平方和 4。讲义说明斜率是 $x$ 增加一个单位时 $y$ 的平均变化，系数有单位，截距在 $x = 0$ 远离数据范围时可能没有意义。讲义没有讨论斜率与相关系数之间的关系。
     en: |-
       The lesson gives $y_i = a + b\,x_i + e_i$ and the residual $e_i = y_i - \hat y_i$; OLS minimizes the sum of squared residuals, $b = \frac{\sum (x_i - \bar x)(y_i - \bar y)}{\sum (x_i - \bar x)^2}$ and $a = \bar y - b\bar x$ (the derivation is left to an exercise). Example in the lesson: 6 months of market returns −4, −2, −1, 1, 2, 4 and stock returns −4, −3, −0.5, 2.5, 3, 8, with the regression line $\hat y = 1 + 1.5x$ and a sum of squared residuals of 4. The lesson explains that the slope is the average change in $y$ when $x$ rises by one unit, that coefficients have units, and that the intercept may be meaningless when $x = 0$ is far outside the data. The lesson does not discuss the relation between the slope and the correlation coefficient.
   - concepts: [r-squared]
-    zh: |-
+    zh-cn: |-
       $R^2 = 1 - \frac{\text{SSR}}{\text{SST}}$，是 $y$ 的变化中被回归解释的比例。讲义例子 $R^2 \approx 0.96$。讲义没有说明 $R^2$ 与相关系数的关系，也没有讨论 $R^2$ 低时的解读。
     en: |-
       $R^2 = 1 - \frac{\text{SSR}}{\text{SST}}$, the share of the variation of $y$ that the regression explains. Example in the lesson: $R^2 \approx 0.96$. The lesson does not state the relation between $R^2$ and the correlation coefficient and does not discuss how to read a low $R^2$.
   - concepts: [standard-error, t-statistic, confidence-interval]
-    zh: |-
+    zh-cn: |-
       斜率的标准误 $\text{SE}(b) = \frac{s_e}{\sqrt{\sum (x_i - \bar x)^2}}$，$s_e = \sqrt{\frac{\text{SSR}}{n-2}}$；t 值 $\frac{b}{\text{SE}(b)}$；95% 置信区间 $b \pm 1.96\,\text{SE}(b)$。
     en: |-
       Standard error of the slope: $\text{SE}(b) = \frac{s_e}{\sqrt{\sum (x_i - \bar x)^2}}$ with $s_e = \sqrt{\frac{\text{SSR}}{n-2}}$; t-statistic $\frac{b}{\text{SE}(b)}$; 95% confidence interval $b \pm 1.96\,\text{SE}(b)$.
   - concepts: [omitted-variable-bias, correlation-vs-causation]
-    zh: |-
+    zh-cn: |-
       讲义给出：真实关系为 $y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \varepsilon$、只用 $x_1$ 回归时，斜率接近 $\beta_1 + \beta_2 \frac{\text{Cov}(x_1, x_2)}{\text{Var}(x_1)}$；偏差不为 0 需要 $\beta_2 \ne 0$ 且 $x_1$、$x_2$ 相关。讲义例子：工资对受教育年数回归，遗漏了能力。相关的三种来源：反向因果、共同原因、巧合（多重检验）。
     en: |-
       The lesson states: if the true relation is $y = \alpha + \beta_1 x_1 + \beta_2 x_2 + \varepsilon$ and $y$ is regressed on $x_1$ only, the slope is close to $\beta_1 + \beta_2 \frac{\text{Cov}(x_1, x_2)}{\text{Var}(x_1)}$; the bias is not 0 only if $\beta_2 \ne 0$ and $x_1$ and $x_2$ are correlated. Example in the lesson: wages regressed on years of education, with ability left out. Three sources of correlation: reverse causation, a common cause, and chance (multiple testing).
 
 common_errors:
   - questions: [C1]
-    zh: |-
+    zh-cn: |-
       残差的符号弄反：残差是实际值减去拟合值，点在直线上方时为正。
     en: |-
       Getting the sign of the residual wrong: the residual is the actual value minus the fitted value, positive when the point is above the line.
   - questions: [Q2]
-    zh: |-
+    zh-cn: |-
       把斜率的大小当作相关程度：斜率有单位，取决于 $x$ 和 $y$ 的尺度；相关系数没有单位。
     en: |-
       Reading the size of the slope as the strength of the correlation: the slope has units and depends on the scales of $x$ and $y$, while the correlation has no units.
   - questions: [C6, Q4]
-    zh: |-
+    zh-cn: |-
       只说“遗漏了变量”，没有说明偏差的方向：方向由被遗漏变量对 $y$ 的作用的符号和它与 $x$ 的协方差的符号共同决定。
     en: |-
       Saying only that "a variable was left out" without the direction of the bias: the direction depends on the sign of the omitted variable's effect on $y$ and the sign of its covariance with $x$.
@@ -62,17 +62,17 @@ questions:
     concepts: [regression, residual]
     expected: { fit: "6", resid: "-2" }
     question:
-      zh: |-
+      zh-cn: |-
         回归直线为 $\hat y = 2 + 0.8x$。数据中有一个点 $x = 5$，$y = 4$。它的拟合值和残差各是多少？这个点在直线上方还是下方？
       en: |-
         The regression line is $\hat y = 2 + 0.8x$. One data point has $x = 5$ and $y = 4$. What are its fitted value and its residual? Is the point above or below the line?
     answer:
-      zh: |-
+      zh-cn: |-
         拟合值 $\hat y = 2 + 0.8 \times 5 = 6$，残差 $e = 4 - 6 = -2$。残差为负，点在直线下方。
       en: |-
         Fitted value $\hat y = 2 + 0.8 \times 5 = 6$; residual $e = 4 - 6 = -2$. The residual is negative, so the point is below the line.
     rubric:
-      zh:
+      zh-cn:
         - "拟合值 6，残差 −2。"
         - "点在直线下方。"
       en:
@@ -85,19 +85,19 @@ questions:
     concepts: [ols, regression-coefficient]
     expected: { b: "1.4", a: "0.5" }
     question:
-      zh: |-
+      zh-cn: |-
         数据：$x$ = 1、2、3、4，$y$ = 2、3、5、6。用最小二乘法求回归直线的斜率和截距。
       en: |-
         Data: $x$ = 1, 2, 3, 4 and $y$ = 2, 3, 5, 6. Use least squares to find the slope and intercept of the regression line.
     answer:
-      zh: |-
+      zh-cn: |-
         $\bar x = 2.5$，$\bar y = 4$。$\sum (x_i - \bar x)(y_i - \bar y) = 3 + 0.5 + 0.5 + 3 = 7$，$\sum (x_i - \bar x)^2 = 5$。
         $b = \frac{7}{5} = 1.4$，$a = 4 - 1.4 \times 2.5 = 0.5$。回归直线 $\hat y = 0.5 + 1.4x$。
       en: |-
         $\bar x = 2.5$ and $\bar y = 4$. $\sum (x_i - \bar x)(y_i - \bar y) = 3 + 0.5 + 0.5 + 3 = 7$ and $\sum (x_i - \bar x)^2 = 5$.
         $b = \frac{7}{5} = 1.4$ and $a = 4 - 1.4 \times 2.5 = 0.5$. The regression line is $\hat y = 0.5 + 1.4x$.
     rubric:
-      zh:
+      zh-cn:
         - "两个和计算正确（7 和 5）。"
         - "斜率 1.4、截距 0.5。"
       en:
@@ -110,12 +110,12 @@ questions:
     concepts: [regression-coefficient]
     expected: { per_sqft: "200", price: "450", per_m2: "2.15" }
     question:
-      zh: |-
+      zh-cn: |-
         某地区房价的回归结果为：房价（千美元）$= 50 + 0.2 \times$ 面积（平方英尺）。(a) 0.2 是什么意思？写出单位。(b) 预测一套 2,000 平方英尺的房子的价格。(c) 如果面积改用平方米（1 平方米约 10.76 平方英尺），其他不变，斜率会变成多少？
       en: |-
         A regression of house prices in an area gives: price (thousand dollars) $= 50 + 0.2 \times$ area (square feet). (a) What does 0.2 mean? Give its units. (b) Predict the price of a 2,000-square-foot house. (c) If area were measured in square meters instead (1 square meter is about 10.76 square feet), with nothing else changed, what would the slope be?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) 面积每多 1 平方英尺，房价平均高 0.2 千美元，即 200 美元。单位是千美元 / 平方英尺。
         (b) $50 + 0.2 \times 2000 = 450$ 千美元，即约 45 万美元。
         (c) 1 平方米约等于 10.76 平方英尺，所以每平方米房价平均高 $0.2 \times 10.76 \approx 2.15$ 千美元。斜率的数值随单位变化，但描述的关系不变。
@@ -124,7 +124,7 @@ questions:
         (b) $50 + 0.2 \times 2000 = 450$ thousand dollars, about 450,000 dollars.
         (c) 1 square meter is about 10.76 square feet, so each square meter raises the price by about $0.2 \times 10.76 \approx 2.15$ thousand dollars on average. The number changes with the units, but the relation it describes does not.
     rubric:
-      zh:
+      zh-cn:
         - "斜率的含义和单位正确（平均每平方英尺 200 美元）。"
         - "预测 450 千美元。"
         - "换单位后斜率约 2.15 千美元 / 平方米。"
@@ -139,19 +139,19 @@ questions:
     concepts: [r-squared, residual]
     expected: { ssr: "0.2", sst: "10", r2: "0.98" }
     question:
-      zh: |-
+      zh-cn: |-
         对 [[check:C2]] 的数据和你求出的回归直线，计算残差平方和、总平方和与 $R^2$，并用一句话说明 $R^2$ 的含义。
       en: |-
         For the data in [[check:C2]] and the regression line you found, compute the sum of squared residuals, the total sum of squares and $R^2$, and explain $R^2$ in one sentence.
     answer:
-      zh: |-
+      zh-cn: |-
         拟合值 1.9、3.3、4.7、6.1，残差 0.1、−0.3、0.3、−0.1，残差平方和 $0.01 + 0.09 + 0.09 + 0.01 = 0.2$。
         总平方和 $4 + 1 + 1 + 4 = 10$。$R^2 = 1 - \frac{0.2}{10} = 0.98$：$y$ 的变化中 98% 可以由 $x$ 解释。
       en: |-
         Fitted values 1.9, 3.3, 4.7, 6.1; residuals 0.1, −0.3, 0.3, −0.1; sum of squared residuals $0.01 + 0.09 + 0.09 + 0.01 = 0.2$.
         Total sum of squares $4 + 1 + 1 + 4 = 10$. $R^2 = 1 - \frac{0.2}{10} = 0.98$: 98% of the variation of $y$ is explained by $x$.
     rubric:
-      zh:
+      zh-cn:
         - "残差平方和 0.2、总平方和 10。"
         - "$R^2 = 0.98$，含义说明正确。"
       en:
@@ -164,17 +164,17 @@ questions:
     concepts: [standard-error, t-statistic, confidence-interval, regression-coefficient]
     expected: { t: "2.4", lo: "0.22", hi: "2.18" }
     question:
-      zh: |-
+      zh-cn: |-
         一个回归得到斜率 $b = 1.2$，标准误 $\text{SE}(b) = 0.5$，数据有 40 个点。斜率在 5% 水平上显著不为 0 吗？写出 95% 置信区间。
       en: |-
         A regression gives the slope $b = 1.2$ with standard error $\text{SE}(b) = 0.5$, from 40 data points. Is the slope significantly different from 0 at the 5% level? Give the 95% confidence interval.
     answer:
-      zh: |-
+      zh-cn: |-
         $t = \frac{1.2}{0.5} = 2.4 > 1.96$，显著。95% 置信区间 $1.2 \pm 1.96 \times 0.5$，即 $[0.22, 2.18]$，不包含 0。区间很宽：斜率可能小到 0.22，也可能大到 2.18。
       en: |-
         $t = \frac{1.2}{0.5} = 2.4 > 1.96$, so it is significant. The 95% confidence interval is $1.2 \pm 1.96 \times 0.5$, that is, $[0.22, 2.18]$, which does not contain 0. The interval is wide: the slope could be as small as 0.22 or as large as 2.18.
     rubric:
-      zh:
+      zh-cn:
         - "t 值 2.4，显著。"
         - "区间约为 0.22 到 2.18。"
       en:
@@ -186,17 +186,17 @@ questions:
     section: omitted-variable
     concepts: [omitted-variable-bias]
     question:
-      zh: |-
+      zh-cn: |-
         在某个城市，用房价对“到市中心的距离”做回归，得到正的斜率：离市中心越远，房子越贵。一个可能被遗漏的变量是房子的面积。说明为什么面积可能造成偏差，以及偏差的方向。距离对房价的真实作用可能是什么符号？
       en: |-
         In a city, house prices are regressed on "distance from the city center", and the slope is positive: the farther from the center, the more expensive the house. One variable that may have been left out is the size of the house. Explain why size may cause a bias and in which direction. What sign might the true effect of distance on price have?
     answer:
-      zh: |-
+      zh-cn: |-
         面积满足两个条件：它影响房价（越大越贵，$\beta_2 > 0$），而且和距离相关（离市中心越远，房子往往越大，协方差为正）。所以偏差项 $\beta_2 \frac{\text{Cov}}{\text{Var}}$ 为正，距离的系数被高估。在面积相同的情况下，距离的真实作用很可能是负的（越远越便宜），回归里的正斜率主要来自远处的房子更大。
       en: |-
         Size meets both conditions: it affects the price (bigger is more expensive, $\beta_2 > 0$), and it is correlated with distance (houses farther from the center tend to be bigger, a positive covariance). So the bias term $\beta_2 \frac{\text{Cov}}{\text{Var}}$ is positive and the distance coefficient is overstated. For houses of the same size, the true effect of distance is probably negative (farther is cheaper); the positive slope mainly comes from houses far away being bigger.
     rubric:
-      zh:
+      zh-cn:
         - "说明面积既影响房价、又与距离相关。"
         - "偏差为正，距离的真实作用可能为负。"
       en:
@@ -208,12 +208,12 @@ questions:
     section: causation
     concepts: [correlation-vs-causation, omitted-variable-bias]
     question:
-      zh: |-
+      zh-cn: |-
         数据显示，持有指数基金的家庭，平均净资产比不持有的家庭高得多。有人得出结论：买指数基金会让家庭变富。给出至少两种其他的解释。
       en: |-
         Data show that households that hold index funds have a much higher average net worth than households that do not. Someone concludes that buying index funds makes households rich. Give at least two other explanations.
     answer:
-      zh: |-
+      zh-cn: |-
         - 反向因果：家庭有了钱，才更可能去投资、买指数基金。
         - 共同原因：收入、受教育程度、理财知识等，同时让家庭更可能买指数基金、也更可能积累财富。
         - 其他也可以，例如年龄（年龄大的家庭积累了更多财富，也更可能有退休账户里的指数基金）。
@@ -222,7 +222,7 @@ questions:
         - A common cause: income, education or financial knowledge make a household both more likely to buy index funds and more likely to build wealth.
         - Other answers are possible, for example age (older households have built more wealth and are more likely to hold index funds in retirement accounts).
     rubric:
-      zh:
+      zh-cn:
         - "给出至少两种合理的其他解释（反向因果、共同原因等）。"
       en:
         - "Gives at least two reasonable other explanations (reverse causation, a common cause, and so on)."
@@ -233,17 +233,17 @@ questions:
     level: A
     concepts: [r-squared, regression-coefficient]
     question:
-      zh: |-
+      zh-cn: |-
         判断真假并说明理由：一个回归的 $R^2$ 只有 0.05，说明 $x$ 对 $y$ 没有影响。
       en: |-
         Determine whether this statement is true or false, and explain: a regression with an $R^2$ of only 0.05 shows that $x$ has no effect on $y$.
     answer:
-      zh: |-
+      zh-cn: |-
         假。$R^2$ 是 $y$ 的变化中由 $x$ 解释的比例。$R^2$ 低说明还有很多别的因素影响 $y$，不说明 $x$ 的作用为 0：斜率可以不小，在样本大时也可以显著。例如个股月收益中只有一小部分由某个因素解释，但这个因素对平均收益的影响仍然可能很重要。
       en: |-
         False. $R^2$ is the share of the variation of $y$ explained by $x$. A low $R^2$ means that many other factors affect $y$; it does not mean that the effect of $x$ is 0. The slope can be sizable, and with a large sample it can be significant. For example, a factor may explain only a small part of a stock's monthly returns and still matter a lot for its average return.
     rubric:
-      zh:
+      zh-cn:
         - "结论为假。"
         - "区分“解释的比例”与“作用的大小 / 是否显著”。"
       en:
@@ -255,17 +255,17 @@ questions:
     level: A
     concepts: [regression-coefficient, correlation]
     question:
-      zh: |-
+      zh-cn: |-
         判断真假并说明理由：两个回归中，A 的斜率是 2.0，B 的斜率是 0.5，所以 A 中两个变量的相关性比 B 中强。
       en: |-
         Determine whether this statement is true or false, and explain: in two regressions, the slope in A is 2.0 and the slope in B is 0.5, so the two variables in A are more strongly correlated than those in B.
     answer:
-      zh: |-
+      zh-cn: |-
         假（不一定）。斜率有单位，取决于 $x$ 和 $y$ 的尺度；相关系数没有单位。由 $b = \frac{\text{Cov}(x,y)}{\text{Var}(x)}$ 和 $\rho = \frac{\text{Cov}(x,y)}{\sigma_x\sigma_y}$ 得 $b = \rho\,\frac{\sigma_y}{\sigma_x}$。$y$ 的波动大或 $x$ 的波动小时，相关性弱也可能得到大的斜率。例如把 $y$ 的单位从美元换成美分，斜率乘以 100，相关系数不变。
       en: |-
         False (not necessarily). The slope has units and depends on the scales of $x$ and $y$; the correlation has no units. From $b = \frac{\text{Cov}(x,y)}{\text{Var}(x)}$ and $\rho = \frac{\text{Cov}(x,y)}{\sigma_x\sigma_y}$ we get $b = \rho\,\frac{\sigma_y}{\sigma_x}$. When $y$ varies a lot or $x$ varies little, a weak correlation can still give a large slope. For example, measuring $y$ in cents instead of dollars multiplies the slope by 100 and leaves the correlation unchanged.
     rubric:
-      zh:
+      zh-cn:
         - "结论为假或不一定。"
         - "说明斜率取决于尺度，最好给出 $b = \\rho\\,\\sigma_y / \\sigma_x$ 或换单位的例子。"
       en:
@@ -278,12 +278,12 @@ questions:
     concepts: [ols, regression-coefficient, r-squared]
     expected: { b: "1.1", a: "0.57", r2: "0.91" }
     question:
-      zh: |-
+      zh-cn: |-
         6 个月的数据：市场月收益 $x$ = −3、−1、0、2、4、4（%），某基金月收益 $y$ = −2、−2、1、3、6、4（%）。计算回归直线的斜率、截距和 $R^2$，并说明斜率和截距在这里的含义。
       en: |-
         Six months of data: market monthly returns $x$ = −3, −1, 0, 2, 4, 4 (%) and a fund's monthly returns $y$ = −2, −2, 1, 3, 6, 4 (%). Calculate the slope, intercept and $R^2$ of the regression line, and explain what the slope and intercept mean here.
     answer:
-      zh: |-
+      zh-cn: |-
         $\bar x = 1$，$\bar y \approx 1.667$。$\sum (x_i - \bar x)(y_i - \bar y) = 44$，$\sum (x_i - \bar x)^2 = 40$，$b = 1.1$，$a = 1.667 - 1.1 \times 1 \approx 0.57$。
         残差平方和约 4.93，总平方和约 53.33，$R^2 \approx 0.91$。
         含义：市场月收益每高 1 个百分点，这只基金平均高 1.1 个百分点；市场收益为 0 的月份，基金平均收益约 0.57%。只有 6 个月的数据，这些估计的误差很大。
@@ -292,7 +292,7 @@ questions:
         The sum of squared residuals is about 4.93 and the total sum of squares about 53.33, so $R^2 \approx 0.91$.
         Meaning: for each percentage point of market return, the fund returns 1.1 percentage points more on average; in a month with a market return of 0, the fund's average return is about 0.57%. With only 6 months of data, these estimates have large errors.
     rubric:
-      zh:
+      zh-cn:
         - "斜率、截距、$R^2$ 正确。"
         - "含义说明正确，最好指出样本太小。"
       en:
@@ -305,12 +305,12 @@ questions:
     concepts: [omitted-variable-bias]
     expected: { biased: "3.5", unbiased: "2", negative: "0.5" }
     question:
-      zh: |-
+      zh-cn: |-
         真实关系为 $y = 1 + 2x_1 + 3x_2 + \varepsilon$，$\text{Var}(x_1) = 4$，$\text{Cov}(x_1, x_2) = 2$。(a) 数据很多时，只用 $x_1$ 做回归，斜率接近多少？(b) 如果 $\text{Cov}(x_1, x_2) = 0$ 呢？(c) 如果 $x_2$ 的系数是 −3（其他同 (a)）呢？
       en: |-
         The true relation is $y = 1 + 2x_1 + 3x_2 + \varepsilon$, with $\text{Var}(x_1) = 4$ and $\text{Cov}(x_1, x_2) = 2$. (a) With a lot of data, what is the slope from regressing $y$ on $x_1$ only? (b) What if $\text{Cov}(x_1, x_2) = 0$? (c) What if the coefficient of $x_2$ is −3 (otherwise as in (a))?
     answer:
-      zh: |-
+      zh-cn: |-
         (a) $2 + 3 \times \frac{2}{4} = 3.5$，高估了 $x_1$ 的作用。
         (b) 偏差项为 0，斜率接近 2：被遗漏的变量与 $x_1$ 不相关时没有偏差。
         (c) $2 - 3 \times \frac{2}{4} = 0.5$，低估了 $x_1$ 的作用。
@@ -319,7 +319,7 @@ questions:
         (b) The bias term is 0 and the slope is close to 2: there is no bias when the omitted variable is uncorrelated with $x_1$.
         (c) $2 - 3 \times \frac{2}{4} = 0.5$, which understates the effect of $x_1$.
     rubric:
-      zh:
+      zh-cn:
         - "三问数值正确：3.5、2、0.5。"
         - "说明偏差的方向（高估 / 无偏 / 低估）。"
       en:
@@ -332,12 +332,12 @@ questions:
     star: true
     concepts: [ols, first-order-condition, partial-derivative]
     question:
-      zh: |-
+      zh-cn: |-
         推导普通最小二乘法的公式：对 $S(a, b) = \sum_i (y_i - a - b\,x_i)^2$ 求偏导数并令其为 0，证明 $a = \bar y - b\bar x$，$b = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}$。再说明残差之和为 0。
       en: |-
         Derive the formulas of ordinary least squares: take the partial derivatives of $S(a, b) = \sum_i (y_i - a - b\,x_i)^2$, set them to 0, and show that $a = \bar y - b\bar x$ and $b = \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i (x_i - \bar x)^2}$. Then show that the residuals add up to 0.
     answer:
-      zh: |-
+      zh-cn: |-
         $\frac{\partial S}{\partial a} = -2\sum_i (y_i - a - bx_i) = 0$，即 $\sum_i e_i = 0$（残差之和为 0），两边除以 $n$ 得 $\bar y - a - b\bar x = 0$，$a = \bar y - b\bar x$。
         $\frac{\partial S}{\partial b} = -2\sum_i x_i (y_i - a - bx_i) = 0$。代入 $a$：$\sum_i x_i\big((y_i - \bar y) - b(x_i - \bar x)\big) = 0$。因为 $\sum_i \bar x (y_i - \bar y) = 0$、$\sum_i \bar x (x_i - \bar x) = 0$，可以把 $x_i$ 换成 $x_i - \bar x$，得 $\sum_i (x_i - \bar x)(y_i - \bar y) = b\sum_i (x_i - \bar x)^2$，即所求公式。
         （$S$ 是 $a, b$ 的凸二次函数，所以这个驻点是最小值。）
@@ -346,7 +346,7 @@ questions:
         $\frac{\partial S}{\partial b} = -2\sum_i x_i (y_i - a - bx_i) = 0$. Substituting $a$: $\sum_i x_i\big((y_i - \bar y) - b(x_i - \bar x)\big) = 0$. Since $\sum_i \bar x (y_i - \bar y) = 0$ and $\sum_i \bar x (x_i - \bar x) = 0$, $x_i$ can be replaced by $x_i - \bar x$, giving $\sum_i (x_i - \bar x)(y_i - \bar y) = b\sum_i (x_i - \bar x)^2$, which is the formula.
         ($S$ is a convex quadratic function of $a$ and $b$, so this stationary point is a minimum.)
     rubric:
-      zh:
+      zh-cn:
         - "两个一阶条件正确，并由第一个推出 $a$ 和残差之和为 0。"
         - "由第二个推出 $b$，替换 $x_i$ 为 $x_i - \\bar x$ 的一步有理由。"
       en:
@@ -358,19 +358,19 @@ questions:
     level: C
     concepts: [r-squared, correlation, ols]
     question:
-      zh: |-
+      zh-cn: |-
         证明：只有一个自变量（并有截距）的回归中，$R^2$ 等于 $x$ 与 $y$ 的样本相关系数的平方。
       en: |-
         Prove that in a regression with one explanatory variable (and an intercept), $R^2$ equals the square of the sample correlation between $x$ and $y$.
     answer:
-      zh: |-
+      zh-cn: |-
         记 $S_{xy} = \sum (x_i - \bar x)(y_i - \bar y)$，$S_{xx} = \sum (x_i - \bar x)^2$，$S_{yy} = \sum (y_i - \bar y)^2$。$\hat y_i - \bar y = b(x_i - \bar x)$，所以回归解释的平方和为 $b^2 S_{xx} = \frac{S_{xy}^2}{S_{xx}}$。
         $R^2 = \frac{b^2 S_{xx}}{S_{yy}} = \frac{S_{xy}^2}{S_{xx}S_{yy}} = \rho^2$，其中 $\rho = \frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}}$ 是样本相关系数。（用到了总平方和的分解 SST = 解释部分 + SSR。）
       en: |-
         Write $S_{xy} = \sum (x_i - \bar x)(y_i - \bar y)$, $S_{xx} = \sum (x_i - \bar x)^2$ and $S_{yy} = \sum (y_i - \bar y)^2$. Since $\hat y_i - \bar y = b(x_i - \bar x)$, the explained sum of squares is $b^2 S_{xx} = \frac{S_{xy}^2}{S_{xx}}$.
         $R^2 = \frac{b^2 S_{xx}}{S_{yy}} = \frac{S_{xy}^2}{S_{xx}S_{yy}} = \rho^2$, where $\rho = \frac{S_{xy}}{\sqrt{S_{xx}S_{yy}}}$ is the sample correlation. (This uses the decomposition SST = explained part + SSR.)
     rubric:
-      zh:
+      zh-cn:
         - "用 $\\hat y_i - \\bar y = b(x_i - \\bar x)$ 写出解释的平方和。"
         - "化简得到 $\\rho^2$。"
       en:
@@ -382,12 +382,12 @@ questions:
     level: C
     concepts: [correlation-vs-causation, omitted-variable-bias, regression-coefficient]
     question:
-      zh: |-
+      zh-cn: |-
         一份报告用 30 个国家的数据做回归，发现一国的利率越低，同一年股市涨得越多，斜率显著。报告据此建议：央行降息就能让股市上涨。评估这个建议：回归结果本身说明了什么，没有说明什么？至少给出两种其他解释，并说明需要什么样的证据才能支持报告的结论。
       en: |-
         A report regresses data from 30 countries and finds that the lower a country's interest rate, the more its stock market rises in the same year, with a significant slope. The report concludes that a central bank can make the stock market rise by cutting rates. Evaluate this advice: what does the regression itself show, and what does it not show? Give at least two other explanations, and say what kind of evidence would be needed to support the report's conclusion.
     answer:
-      zh: |-
+      zh-cn: |-
         回归只说明在这些国家、这段时间里，低利率和股市上涨一起出现；不说明降息是原因。
         其他解释：(1) 共同原因：经济状况、通胀等同时影响利率和股市（例如通胀低的国家利率低、股市估值也高），回归遗漏了这些变量。(2) 反向因果或同时决定：股市和经济的变化会影响央行的利率决策。(3) 只有 30 个观测，国家之间差别很大，结果可能不稳定，也可能是检验了很多变量后挑出的结果。
         需要的证据：只有利率变化、其他条件基本不变的情形（例如出乎市场意料的利率决定前后股市的反应），或者在回归中控制主要的共同原因并检验结果是否稳定。
@@ -396,7 +396,7 @@ questions:
         Other explanations: (1) a common cause: economic conditions, inflation and so on affect both rates and stock markets (for example, countries with low inflation have low rates and high stock valuations), and these variables are left out of the regression; (2) reverse causation or joint determination: changes in stock markets and the economy affect the central bank's rate decisions; (3) with only 30 observations and very different countries, the result may not be stable, and it may have been picked after testing many variables.
         Evidence needed: situations where only the interest rate changes and other conditions stay about the same (for example, how stock markets react around rate decisions that surprise the market), or regressions that control for the main common causes and check whether the result holds.
     rubric:
-      zh:
+      zh-cn:
         - "指出回归只说明相关，不说明降息是原因。"
         - "给出至少两种其他解释（共同原因 / 遗漏变量、反向因果、样本小或多重检验）。"
         - "提出能支持因果结论的证据。"

@@ -8,8 +8,9 @@ one, run `python3 scripts/check.py` and mention its output instead.
 The reviewer does **not** judge whether the economics or finance content is correct. All content is
 AI-generated and its accuracy cannot be verified by review. These rules are about consistency.
 
-Terms: *source* = the Chinese version (root locale). *Translation* = the English version under
-`src/content/docs/en/` and the `en` fields in `course/`.
+Terms: a *language version* is one language's page under `src/content/docs/<code>/` or one
+language's field (`en`, `zh-cn`, ...) in `course/`. All language versions have the same status; the
+languages are listed in `src/i18n/languages.json`.
 
 ## R1. Hidden forward references
 
@@ -24,14 +25,14 @@ A lesson must not rely on a concept that is taught later, unless it says so.
 - Check that the `uses` list of the lesson in `curriculum.yaml` is honest: every earlier concept the
   lesson relies on is listed, and nothing is listed that the lesson does not use.
 
-## R2. Translation has the same meaning
+## R2. All language versions have the same meaning
 
-`check.py` only proves that the translator saw the newest source. Check the meaning.
+`check.py` only proves that every language version was updated together. Check the meaning.
 
-- Every sentence, number, condition, unit and formula in the source has an equivalent in the
-  translation, and nothing is added. Pay special attention to question text: the conditions of a
+- Every sentence, number, condition, unit and formula in one language version has an equivalent in
+  every other version, and nothing is added. Pay special attention to question text: the conditions of a
   question must be identical in every language.
-- The translation uses the canonical term from `course/concepts.yaml` for every concept.
+- Every language version uses the canonical term from `course/concepts.yaml` for every concept.
 - English text uses plain, standard English without idioms, so that second-language readers can
   follow it.
 
