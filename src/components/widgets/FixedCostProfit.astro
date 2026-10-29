@@ -29,8 +29,8 @@ const yMax = 400;
 const yTicks = [-600, -400, -200, 0, 200, 400];
 const xTicks = [0, 10, 20, 30, 40];
 const layouts = [
-	{ cls: 'viz-wide', W: 640, H: 320, pad: { l: 60, r: 20, t: 16, b: 48 } },
-	{ cls: 'viz-narrow', W: 360, H: 300, pad: { l: 52, r: 14, t: 16, b: 48 } },
+	{ cls: 'viz-wide', W: 640, H: 320, pad: { l: 74, r: 20, t: 16, b: 48 } },
+	{ cls: 'viz-narrow', W: 360, H: 300, pad: { l: 68, r: 14, t: 16, b: 48 } },
 ].map((g) => ({
 	...g,
 	X: (q: number) => g.pad.l + (q / qMax) * (g.W - g.pad.l - g.pad.r),
