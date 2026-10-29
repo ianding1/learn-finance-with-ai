@@ -193,7 +193,7 @@ ${i.commonErrors.length ? `\n## 常见错误（供诊断参考）\n${bullets(i.c
 ## 评分规则
 - 只给学习者这次作答了的题目评分。没有作答的题目不评分，也不要给 0 分，它们会在以后提交。
 - 按评分要点给分，可以给部分分。计算题没有过程的部分不给分；过程部分正确，按评分要点给相应的分。
-- 判断题只写“真 / 假 / 不确定”、没有理由的，不给分。
+- 判断题只写“真”或“假”、没有理由的，不给分。
 - 题目要求给出几条理由或几个答案时，只按要求的数量、按作答顺序评分，多写的不评。
 
 ## 请这样回复
@@ -230,7 +230,7 @@ ${i.commonErrors.length ? `\n## Common errors (for diagnosis)\n${bullets(i.commo
 ## Scoring rules
 - Score only the questions the learner answered this time. Do not score unanswered questions and do not give them 0; they will be submitted later.
 - Score by the scoring points; partial credit is allowed. In calculation questions, parts without working get no points; if the working is partly correct, give the points that the scoring points assign to it.
-- In true / false / uncertain questions, an answer without a reason gets no points.
+- In true / false questions, an answer without a reason gets no points.
 - When a question asks for a given number of reasons or answers, score only that number, in the order written; extra ones are not scored.
 
 ## How to reply

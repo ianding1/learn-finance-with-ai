@@ -129,7 +129,7 @@ Quizzes follow the exam rules in the author's curriculum ("阶段考试"):
   points are medium and 30–40% hard (`level` in the key; never shown on the page).
 - Only lessons of the block and earlier; the questions carry no lesson or difficulty labels and no
   hints. The page starts with instructions and a formula sheet.
-- Part 1 is true / false / uncertain with reasons (`part: judge`); a verdict without a reason gets
+- Part 1 is true / false with reasons (both verdicts occur; no "uncertain") (`part: judge`); a verdict without a reason gets
   no points. Part 2 holds problems (`part: problem`), mostly chains of calculations at stage 0–3.
 - Calculation questions require working; rubrics give partial credit and state the points per part.
 - For each question, ask "can it be answered by recalling an example from a lesson?" and rework it

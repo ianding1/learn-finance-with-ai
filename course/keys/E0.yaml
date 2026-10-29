@@ -45,7 +45,7 @@ common_errors:
       Reading $R^2$ as "the share of the average return that comes from the market": $R^2$ is the share of the variation (variance) that the market explains.
 
 questions:
-  # ---------- Part 1: true, false or uncertain (4 points each) ----------
+  # ---------- Part 1: true or false (4 points each) ----------
   - id: Q1
     kind: quiz
     part: judge
@@ -81,21 +81,21 @@ questions:
     expected: { u100: "312.5", u200: "1250", approx: "625", actual: "937.5" }
     question:
       zh: |-
-        消费者的效用 $U = xy$，$p_x = 2$，$p_y = 4$，预算 100 美元时拉格朗日乘数 $\lambda = 6.25$。所以预算增加到 200 美元时，最大效用大约增加 $6.25 \times 100 = 625$。
+        消费者的效用 $U = xy$，$p_x = 2$，$p_y = 4$，预算 100 美元时拉格朗日乘数 $\lambda = 6.25$。预算增加到 200 美元时，最大效用的增加量大于 $6.25 \times 100 = 625$。
       en: |-
-        A consumer has utility $U = xy$ with $p_x = 2$ and $p_y = 4$; at a budget of 100 dollars the Lagrange multiplier is $\lambda = 6.25$. So if the budget rises to 200 dollars, the maximum utility rises by about $6.25 \times 100 = 625$.
+        A consumer has utility $U = xy$ with $p_x = 2$ and $p_y = 4$; at a budget of 100 dollars the Lagrange multiplier is $\lambda = 6.25$. If the budget rises to 200 dollars, the maximum utility rises by more than $6.25 \times 100 = 625$.
     answer:
       zh: |-
-        假。$\lambda$ 是预算增加一个很小的量时最大效用的变化率，是局部的近似；预算变化很大时，$\lambda$ 本身也在变。这里 $U^* = \frac{M^2}{4p_xp_y} = \frac{M^2}{32}$：预算 100 时 $U^* = 312.5$，预算 200 时 $U^* = 1250$，实际增加 937.5，而不是 625（$\lambda = \frac{M}{16}$ 随预算增大）。
+        真。$\lambda$ 只是预算增加一个很小的量时最大效用的变化率；预算变化很大时，$\lambda$ 本身也在变，$6.25 \times 100 = 625$ 只是近似。这里 $U^* = \frac{M^2}{4p_xp_y} = \frac{M^2}{32}$，$\lambda = \frac{dU^*}{dM} = \frac{M}{16}$ 随预算增大，所以预算从 100 增加到 200 的过程中，每一美元带来的效用都不少于 6.25。预算 100 时 $U^* = 312.5$，预算 200 时 $U^* = 1250$，实际增加 937.5，大于 625。
       en: |-
-        False. $\lambda$ is the rate at which maximum utility changes for a small increase in the budget, a local approximation; when the budget changes a lot, $\lambda$ itself changes. Here $U^* = \frac{M^2}{4p_xp_y} = \frac{M^2}{32}$: at a budget of 100, $U^* = 312.5$; at 200, $U^* = 1250$. The actual increase is 937.5, not 625 ($\lambda = \frac{M}{16}$ grows with the budget).
+        True. $\lambda$ is only the rate at which maximum utility changes for a small increase in the budget; when the budget changes a lot, $\lambda$ itself changes, and $6.25 \times 100 = 625$ is only an approximation. Here $U^* = \frac{M^2}{4p_xp_y} = \frac{M^2}{32}$ and $\lambda = \frac{dU^*}{dM} = \frac{M}{16}$ grows with the budget, so as the budget rises from 100 to 200, every dollar adds at least 6.25 to utility. At a budget of 100, $U^* = 312.5$; at 200, $U^* = 1250$. The actual increase is 937.5, more than 625.
     rubric:
       zh:
-        - "判断为假，并说明 $\\lambda$ 只是小变化时的近似，或算出实际增加 937.5（4 分）。"
-        - "判断为假但理由不完整：2 分。只写判断：0 分。"
+        - "判断为真，并说明 $\\lambda$ 随预算增大（$\\lambda = \\frac{M}{16}$），或算出实际增加 937.5（4 分）。"
+        - "判断为真但理由不完整（例如只说 $\\lambda$ 是近似、没有说明方向）：2 分。只写判断：0 分。"
       en:
-        - "States false and explains that $\\lambda$ is an approximation for small changes, or computes the actual increase of 937.5 (4 points)."
-        - "False with an incomplete reason: 2 points. Only the verdict: 0 points."
+        - "States true and explains that $\\lambda$ grows with the budget ($\\lambda = \\frac{M}{16}$), or computes the actual increase of 937.5 (4 points)."
+        - "True with an incomplete reason (for example, only that $\\lambda$ is an approximation, without the direction): 2 points. Only the verdict: 0 points."
 
   - id: Q3
     kind: quiz
@@ -155,21 +155,21 @@ questions:
     concepts: [omitted-variable-bias, regression-coefficient]
     question:
       zh: |-
-        在 $y$ 对 $x$ 的回归中加入一个对 $y$ 有很大影响的新变量 $z$，$x$ 的系数一定会明显改变。
+        在 $y$ 对 $x$ 的回归中，加入一个对 $y$ 有很大影响、但与 $x$ 不相关的新变量 $z$。数据很多时，$x$ 的系数基本不变。
       en: |-
-        If a new variable $z$ that has a large effect on $y$ is added to a regression of $y$ on $x$, the coefficient on $x$ must change noticeably.
+        A new variable $z$ that has a large effect on $y$ but is uncorrelated with $x$ is added to a regression of $y$ on $x$. With a lot of data, the coefficient on $x$ stays about the same.
     answer:
       zh: |-
-        假。只用 $x$ 回归时，数据很多时斜率接近 $\beta_x + \beta_z \cdot \frac{\text{Cov}(x, z)}{\text{Var}(x)}$。遗漏 $z$ 造成的偏差需要两个条件：$z$ 影响 $y$（$\beta_z \ne 0$），而且 $z$ 与 $x$ 相关。如果 $\text{Cov}(x, z) = 0$，无论 $\beta_z$ 多大，$x$ 的系数都基本不变。例如真实关系为 $y = 1 + 2x + 3z + \varepsilon$，$x$ 与 $z$ 不相关，加入 $z$ 前后 $x$ 的系数都接近 2。加入 $z$ 会提高 $R^2$、减小残差，但不改变 $x$ 的系数。
+        真。只用 $x$ 回归时，数据很多时斜率接近 $\beta_x + \beta_z \cdot \frac{\text{Cov}(x, z)}{\text{Var}(x)}$。遗漏 $z$ 造成的偏差需要两个条件：$z$ 影响 $y$（$\beta_z \ne 0$），而且 $z$ 与 $x$ 相关。这里 $\text{Cov}(x, z) = 0$，无论 $\beta_z$ 多大，遗漏 $z$ 都不造成偏差，加入 $z$ 后 $x$ 的系数基本不变。例如真实关系为 $y = 1 + 2x + 3z + \varepsilon$，$x$ 与 $z$ 不相关，加入 $z$ 前后 $x$ 的系数都接近 2。加入 $z$ 会提高 $R^2$、减小残差，但不改变 $x$ 的系数。
       en: |-
-        False. When only $x$ is in the regression, with a lot of data the slope is close to $\beta_x + \beta_z \cdot \frac{\text{Cov}(x, z)}{\text{Var}(x)}$. A bias from leaving out $z$ needs two conditions: $z$ affects $y$ ($\beta_z \ne 0$), and $z$ is correlated with $x$. If $\text{Cov}(x, z) = 0$, the coefficient on $x$ stays about the same however large $\beta_z$ is. For example, if the true relation is $y = 1 + 2x + 3z + \varepsilon$ and $x$ is uncorrelated with $z$, the coefficient on $x$ is close to 2 both before and after $z$ is added. Adding $z$ raises $R^2$ and makes the residuals smaller, but does not change the coefficient on $x$.
+        True. When only $x$ is in the regression, with a lot of data the slope is close to $\beta_x + \beta_z \cdot \frac{\text{Cov}(x, z)}{\text{Var}(x)}$. A bias from leaving out $z$ needs two conditions: $z$ affects $y$ ($\beta_z \ne 0$), and $z$ is correlated with $x$. Here $\text{Cov}(x, z) = 0$, so however large $\beta_z$ is, leaving out $z$ causes no bias, and the coefficient on $x$ stays about the same when $z$ is added. For example, if the true relation is $y = 1 + 2x + 3z + \varepsilon$ and $x$ is uncorrelated with $z$, the coefficient on $x$ is close to 2 both before and after $z$ is added. Adding $z$ raises $R^2$ and makes the residuals smaller, but does not change the coefficient on $x$.
     rubric:
       zh:
-        - "判断为假，并指出只有 $z$ 与 $x$ 相关时系数才会改变（可用遗漏变量公式或反例）（4 分）。"
-        - "判断为假但理由不完整：2 分。只写判断：0 分。"
+        - "判断为真，并用遗漏变量公式说明偏差需要 $z$ 与 $x$ 相关（4 分）。"
+        - "判断为真但理由不完整：2 分。只写判断：0 分。"
       en:
-        - "States false and points out that the coefficient changes only when $z$ is correlated with $x$ (with the omitted variable formula or a counterexample) (4 points)."
-        - "False with an incomplete reason: 2 points. Only the verdict: 0 points."
+        - "States true and uses the omitted variable formula to show that a bias needs $z$ to be correlated with $x$ (4 points)."
+        - "True with an incomplete reason: 2 points. Only the verdict: 0 points."
 
   # ---------- Part 2: problems ----------
   - id: Q6

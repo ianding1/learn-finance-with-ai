@@ -35,7 +35,7 @@ export interface Question {
 	id: string;
 	kind: 'check' | 'exercise' | 'quiz';
 	section?: string;
-	/** quiz questions only: 'judge' (true / false / uncertain with reasons) or 'problem' */
+	/** quiz questions only: 'judge' (true / false with reasons) or 'problem' */
 	part?: 'judge' | 'problem';
 	level?: string;
 	star?: boolean;
