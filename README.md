@@ -2,15 +2,13 @@
 
 Website: https://ianding1.github.io/learn-finance-with-ai/ · [简体中文说明](README.zh-CN.md)
 
-An economics and finance course written by AI, set in the US market. After the course you will be able to:
+An economics and finance course written by AI, set in the US market. The course teaches you to:
 
 1. Analyze firms and markets like an economist: how competition, incentives and asymmetric information shape prices and profits.
 2. Explain how interest rates, inflation, the business cycle and monetary policy move the prices of different assets.
 3. Read financial statements and value bonds and stocks.
 4. Explain why diversification works, why risk and expected return are linked, and why most actively managed funds trail their index.
-5. Build and test a portfolio model for a US household, including accounts and taxes, asset allocation and retirement withdrawals.
-
-The depth is about that of upper-level undergraduate courses in economics and finance.
+5. Understand what it takes to build a portfolio for a US household, including accounts and taxes, asset allocation and retirement withdrawals.
 
 The site is fully static and never calls an AI. For grading and explanations it builds a prompt that
 learners paste into their own AI assistant.
