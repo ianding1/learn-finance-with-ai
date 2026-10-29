@@ -859,10 +859,6 @@ body {
 /* ---------- Home page ---------- */
 /* One bold element (the growth curve); everything else is quiet and separated by whitespace only. */
 .lfwai-hero {
-	display: grid;
-	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-	align-items: center;
-	gap: 2.5rem;
 	padding-block: 2.5rem 1.5rem;
 }
 .lfwai-hero h1 {
@@ -907,58 +903,6 @@ body {
 	outline: 2px solid var(--sl-color-accent-high);
 	outline-offset: 3px;
 }
-.lfwai-hero-chart {
-	margin: 0;
-}
-.lfwai-hero-chart svg {
-	display: block;
-	width: 100%;
-	height: auto;
-	overflow: hidden;
-}
-
-.lfwai-hero-median {
-	fill: none;
-	stroke: var(--viz-a);
-	stroke-width: 3;
-	stroke-linecap: round;
-}
-.lfwai-hero-path {
-	fill: none;
-	stroke: var(--viz-b);
-	stroke-width: 1.75;
-	stroke-linejoin: round;
-}
-.lfwai-hero-origin {
-	fill: var(--viz-a);
-}
-.lfwai-hero-tip {
-	fill: var(--viz-b);
-	stroke: var(--sl-color-bg);
-	stroke-width: 3;
-}
-/* The bands fade in, then the median and the simulated path draw once; the end point follows. */
-@media (prefers-reduced-motion: no-preference) {
-	.lfwai-hero-band {
-		animation: lfwai-appear 0.9s ease-out both;
-	}
-	.lfwai-hero-median,
-	.lfwai-hero-path {
-		stroke-dasharray: 1;
-		animation: lfwai-draw 1.8s cubic-bezier(0.45, 0, 0.55, 1) 0.3s both;
-	}
-	.lfwai-hero-tip {
-		animation: lfwai-appear 0.4s ease-out 2.1s both;
-	}
-}
-@keyframes lfwai-draw {
-	from { stroke-dashoffset: 1; }
-	to { stroke-dashoffset: 0; }
-}
-@keyframes lfwai-appear {
-	from { opacity: 0; }
-}
-
 /* Skills and course route, below the hero */
 :root[data-has-hero] .sl-markdown-content {
 	max-width: 52rem;
@@ -1058,8 +1002,6 @@ a.lfwai-route-mark:focus-visible {
 }
 @media (max-width: 50rem) {
 	.lfwai-hero {
-		grid-template-columns: 1fr;
-		gap: 2rem;
 		padding-block: 1.5rem 0.5rem;
 	}
 	.lfwai-route li {

@@ -1,7 +1,6 @@
 ---
-// Home page hero: title, tagline and the start button from the page's `hero` frontmatter, next to
-// a decorative fan chart of investment outcomes. Once the learner has progress, the button
-// leads to the first lesson that is not done (src/scripts/home.ts).
+// Home page hero: title, tagline and the start button from the page's `hero` frontmatter. Once the
+// learner has progress, the button leads to the first lesson that is not done (src/scripts/home.ts).
 import { toLang, t } from '../../i18n/ui';
 import { lessons, lessonKey, lessonPath } from '../../lib/course';
 
@@ -9,34 +8,6 @@ const route = Astro.locals.starlightRoute;
 const lang = toLang(route.lang);
 const hero = route.entry.data.hero!;
 const action = hero.actions?.[0];
-
-// Decorative fan chart (no text): the range of outcomes of an investment over 30 years on a log scale
-// (bands: 5-95% and 25-75% of outcomes), the median path, and one simulated path through them.
-const W = 560, H = 360, pad = 20;
-const T = 30, mu = 0.05, sig = 0.16;
-const X = (t: number) => pad + (t / T) * (W - 2 * pad);
-// log wealth from -0.25 to 3.05 covers the outer band at 30 years.
-const Y = (logW: number) => H - pad - ((logW + 0.25) / 3.3) * (H - 2 * pad);
-const ts = Array.from({ length: 61 }, (_, i) => (i / 60) * T);
-const at = (z: number) => ts.map((t) => [X(t), Y(mu * t + z * sig * Math.sqrt(t))] as const);
-const pts = (a: readonly (readonly [number, number])[]) => a.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join('L');
-const band = (z: number) => `M${pts(at(z))}L${pts(at(-z).reverse())}Z`;
-const outer = band(1.645);
-const inner = band(0.674);
-const median = `M${pts(at(0))}`;
-// One simulated monthly path (fixed seed, chosen so that the path stays inside the outer band).
-let seed = 12;
-const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-const n = 360;
-let x = 0;
-const walk: [number, number][] = [[X(0), Y(0)]];
-for (let i = 1; i <= n; i++) {
-	const z = Math.sqrt(-2 * Math.log(rand())) * Math.cos(2 * Math.PI * rand());
-	x += mu * (T / n) + sig * Math.sqrt(T / n) * z;
-	walk.push([X((i / n) * T), Y(x)]);
-}
-const path = `M${pts(walk)}`;
-const endPt = walk[walk.length - 1];
 
 const data = {
 	label: t(lang, 'continueAt', { title: '{title}' }),
@@ -54,22 +25,6 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
 		{action && (
 			<a class="lfwai-hero-start" href={action.link} data-start>{action.text}</a>
 		)}
-	</div>
-	<div class="lfwai-hero-chart" aria-hidden="true">
-		<svg viewBox={`0 0 ${W} ${H}`}>
-			<defs>
-				<linearGradient id="lfwai-fan" x1="0" x2="1" y1="0" y2="0">
-					<stop offset="0" stop-color="var(--viz-a)" stop-opacity="0.04" />
-					<stop offset="1" stop-color="var(--viz-a)" stop-opacity="0.16" />
-				</linearGradient>
-			</defs>
-			<path class="lfwai-hero-band" d={outer} fill="url(#lfwai-fan)" />
-			<path class="lfwai-hero-band" d={inner} fill="url(#lfwai-fan)" />
-			<path class="lfwai-hero-median" d={median} pathLength="1" />
-			<path class="lfwai-hero-path" d={path} pathLength="1" />
-			<circle class="lfwai-hero-origin" cx={X(0)} cy={Y(0)} r="5" />
-			<circle class="lfwai-hero-tip" cx={endPt[0].toFixed(1)} cy={endPt[1].toFixed(1)} r="6" />
-		</svg>
 	</div>
 </div>
 <script type="application/json" id="lfwai-home-data" set:html={json}></script>
