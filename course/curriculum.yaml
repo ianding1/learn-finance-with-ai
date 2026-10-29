@@ -100,7 +100,15 @@ stages:
         published: true
         introduces: [intertemporal-budget-constraint, time-preference, euler-equation, consumption-smoothing, inflation, nominal-interest-rate, real-interest-rate, fisher-equation]
         uses: [present-value, compound-interest, apr, marginal-rate-of-substitution, indifference-curve, substitution-effect, income-effect, budget-constraint, first-order-condition, logarithm, derivative]
-      - { id: "1.4", slug: "1-4-choice-under-uncertainty", title: { zh: "不确定性下的选择", en: "Choice Under Uncertainty" } }
+      - id: "1.4"
+        slug: "1-4-choice-under-uncertainty"
+        title: { zh: "不确定性下的选择", en: "Choice Under Uncertainty" }
+        summary:
+          zh: "期望效用、风险厌恶、确定性等价与风险溢价、保险的经济学，以及金融学中最常用的 CRRA 效用函数。"
+          en: "Expected utility, risk aversion, the certainty equivalent and the risk premium, the economics of insurance, and CRRA utility, the most common utility function in finance."
+        published: true
+        introduces: [expected-utility, risk-aversion, absolute-risk-aversion, relative-risk-aversion, certainty-equivalent, risk-premium, crra-utility]
+        uses: [expected-value, variance, random-variable, utility-function, standard-error, median, logarithm, derivative, first-order-condition]
       - { id: "1.5", slug: "1-5-producer-theory", title: { zh: "生产者理论", en: "Producer Theory" } }
       - { id: "1.6", slug: "1-6-market-structure", title: { zh: "市场结构", en: "Market Structure" } }
       - { id: "1.7", slug: "1-7-game-theory", title: { zh: "博弈论基础", en: "Basic Game Theory" } }

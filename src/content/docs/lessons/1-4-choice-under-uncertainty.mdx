@@ -1,0 +1,140 @@
+---
+title: 1.4 不确定性下的选择
+description: 期望效用、风险厌恶、确定性等价与风险溢价、保险的经济学，以及金融学中最常用的 CRRA 效用函数。
+lesson: "1.4"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Exercises from '../../../components/Exercises.astro';
+import CheckAll from '../../../components/CheckAll.astro';
+import RiskPremium from '../../../components/widgets/RiskPremium.astro';
+
+## 赌局与期望值 [#lotteries]
+
+投资、保险、职业选择都是在结果不确定的情况下做决定。把不确定的结果写成“每种结果及其概率”的形式，就像 <Ref lesson="0.3" /> 的情景表，这样的结果叫赌局（lottery）。
+
+只看期望值够不够？设想你有 10 万美元，有人提出一个赌局：抛硬币，正面你赢 5 万美元，反面你输 5 万美元。期望收益是 0，但大多数人会拒绝。如果正面赢 6 万、反面输 5 万，期望收益为正（5,000 美元），很多人仍然会拒绝。可见人们不只看期望，还在意结果的波动。
+
+## 期望效用 [#expected-utility]
+
+经济学的标准做法是：用效用函数 $u(W)$ 衡量财富 $W$ 带来的满足，再对效用取期望。赌局的<Def id="expected-utility">期望效用</Def>（expected utility）是
+
+$$
+E[u(W)] = \sum_i p_i\,u(W_i)
+$$
+
+人们选择期望效用最高的方案。与 <Ref lesson="1.2" /> 不同，这里效用的大小有意义：要用它对不同结果加权平均。$u$ 只能做正的线性变换 $a + b\,u$（$b > 0$），不能任意做递增变换，否则会改变对赌局的排序。
+
+<Check id="C1" />
+
+## 风险厌恶 [#risk-aversion]
+
+如果一个人总是更喜欢确定地得到赌局的期望值，而不是参加这个赌局，他就是<Def id="risk-aversion">风险厌恶</Def>（risk averse）的：
+
+$$
+u\big(E[W]\big) > E\big[u(W)\big]
+$$
+
+这个不等式对所有赌局成立，等价于 $u$ 是严格凹函数（$u'' < 0$）：财富越多，再多 1 美元带来的效用增加越小。上面例子中，输掉 5 万美元减少的效用，大于赢得 5 万美元增加的效用。
+
+- $u$ 是直线（$u'' = 0$）：风险中性（risk neutral），只看期望值；
+- $u$ 是凸函数（$u'' > 0$）：风险偏好（risk loving）。
+
+风险厌恶的程度用 Arrow–Pratt 系数衡量。<Def id="absolute-risk-aversion">绝对风险厌恶系数</Def>（coefficient of absolute risk aversion）和<Def id="relative-risk-aversion">相对风险厌恶系数</Def>（coefficient of relative risk aversion）分别是
+
+$$
+A(W) = -\frac{u''(W)}{u'(W)}, \qquad R(W) = -\frac{W\,u''(W)}{u'(W)}
+$$
+
+除以 $u'$ 使系数不受 $u$ 的正线性变换影响。$A$ 适合衡量对固定金额赌局的态度，$R$ 适合衡量对按财富比例的赌局的态度。
+
+<Check id="C2" />
+
+## 确定性等价与风险溢价 [#certainty-equivalent]
+
+一个确定的金额，如果它给的效用和赌局的期望效用一样，就叫这个赌局的<Def id="certainty-equivalent">确定性等价</Def>（certainty equivalent，CE）：
+
+$$
+u(\text{CE}) = E\big[u(W)\big]
+$$
+
+期望值与确定性等价之差，叫<Def id="risk-premium">风险溢价</Def>（risk premium）：为了消除风险，这个人愿意放弃的期望财富。
+
+$$
+\pi = E[W] - \text{CE}
+$$
+
+例：$u(W) = \ln W$，财富 100（千美元），赌局使财富等概率变为 150 或 50。$E[W] = 100$，
+
+$$
+E[\ln W] = \tfrac{1}{2}\ln 150 + \tfrac{1}{2}\ln 50 = \ln\sqrt{7500}, \qquad \text{CE} = \sqrt{7500} \approx 86.60
+$$
+
+风险溢价约 13.40：这个人宁愿确定地拿 86.6，也不愿意参加期望为 100 的赌局。
+
+对小赌局，风险溢价有一个近似公式（推导留作 <Ref check="Q2" />）：
+
+$$
+\pi \approx \tfrac{1}{2}\,A(W)\,\sigma^2
+$$
+
+$\sigma^2$ 是赌局的方差。风险溢价与方差成正比：风险每增加一倍（标准差），溢价增加到四倍。上例中 $A = \frac{1}{W} = 0.01$，$\sigma = 50$，近似值 $\frac{1}{2} \times 0.01 \times 2500 = 12.5$，与精确值 13.40 相近；赌局越大，近似越不准确。
+
+<Figure id="4-1" title="财富 100（千美元），赌局使财富等概率变为 $100 - h$ 或 $100 + h$。效用函数 $u(W) = \frac{W^{1-\gamma}}{1-\gamma}$（$\gamma = 1$ 时为 $\ln W$），纵轴已标准化。" observe="连线中点的高度是期望效用；从这个高度水平找到曲线上的点，就是确定性等价。增大 $\gamma$ 或 $h$，看风险溢价怎样变化。">
+	<RiskPremium />
+</Figure>
+
+<Check id="C3" />
+
+## 保险 [#insurance]
+
+风险厌恶解释了为什么人们愿意付出高于预期损失的保费来购买保险。
+
+例：一个家庭的财富为 100（千美元），其中房子值 75。每年有 1% 的概率发生火灾，房子全部损失。预期损失为 $0.01 \times 75 = 0.75$。设 $u = \ln W$，不买保险时
+
+$$
+E[u] = 0.99\ln 100 + 0.01\ln 25, \qquad \text{CE} = 100^{0.99} \times 25^{0.01} \approx 98.62
+$$
+
+买全额保险后财富确定为 $100 - P$（$P$ 是保费）。只要 $100 - P \ge 98.62$，即 $P \le 1.38$，买保险就更好。这个家庭愿意付的最高保费约 1.38，接近预期损失的两倍。
+
+保险公司为什么愿意承担风险？它承保大量相互独立的保单，按 <Ref lesson="0.4" /> 的道理，平均每份保单的赔付几乎是确定的，保险公司可以近似看作风险中性。只要保费在 0.75 和 1.38 之间，双方都比不保险更好。
+
+<Check id="C4" />
+
+## CRRA 效用 [#crra]
+
+金融学中最常用的效用函数是
+
+$$
+u(W) = \frac{W^{1-\gamma}}{1-\gamma} \quad (\gamma > 0,\ \gamma \ne 1), \qquad u(W) = \ln W \quad (\gamma = 1)
+$$
+
+计算可得 $R(W) = \gamma$：相对风险厌恶系数是常数，所以叫<Def id="crra-utility">CRRA 效用</Def>（constant relative risk aversion）。$\gamma$ 越大越厌恶风险，对数效用是 $\gamma = 1$ 的特例。
+
+CRRA 的重要性质是：一个人对“财富按某个比例涨跌”的赌局的态度，与他的财富多少无关。用比例表示时，风险溢价的近似公式变为
+
+$$
+\frac{\pi}{W} \approx \tfrac{1}{2}\,\gamma\,\sigma^2
+$$
+
+这里 $\sigma$ 是财富变化百分比的标准差。这个性质使 CRRA 投资者把财富中固定的比例投入风险资产，不论财富多少。<Ref lesson="4.3" /> 会用它推出最优的股票比例，<Ref lesson="4.12" /> 会用它分析一生的资产配置。研究中对 $\gamma$ 的估计大多在 1 到 10 之间。
+
+<Ref lesson="0.4" /> 说过，财富的期望值会被少数极好的结果拉高，中位数更能代表典型的结果。对数效用投资者最大化 $E[\ln W]$，也就是最大化对数收益率的期望，与关心中位数的思路一致（<Ref check="Q4" />）。
+
+## 小结 [#summary]
+
+- 期望效用：$E[u(W)] = \sum p_i\,u(W_i)$；效用只能做正的线性变换。
+- 风险厌恶等价于 $u$ 是凹函数；程度用 $A = -\frac{u''}{u'}$ 和 $R = -\frac{W u''}{u'}$ 衡量。
+- 确定性等价满足 $u(\text{CE}) = E[u(W)]$；风险溢价 $\pi = E[W] - \text{CE} \approx \frac{1}{2} A \sigma^2$。
+- 风险厌恶的人愿意付出高于预期损失的保费；承保大量独立风险的保险公司接近风险中性。
+- CRRA 效用的相对风险厌恶为常数 $\gamma$，按比例的风险溢价约为 $\frac{1}{2}\gamma\sigma^2$。
+
+<CheckAll />
+
+## 练习题 [#exercises]
+
+<Exercises />

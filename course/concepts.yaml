@@ -730,10 +730,63 @@ fisher-equation:
     zh: 1 + 实际利率 = (1 + 名义利率) / (1 + 通胀率)。
     en: "1 + real rate = (1 + nominal rate) / (1 + inflation)."
 
+# ---------- 1.4 ----------
+
 expected-utility:
   defined_in: "1.4"
   zh: 期望效用
   en: expected utility
+  short:
+    zh: "各种结果的效用按概率加权的平均值。"
+    en: "The probability-weighted average of the utility of each outcome."
+
+risk-aversion:
+  defined_in: "1.4"
+  zh: 风险厌恶
+  en: risk aversion
+  short:
+    zh: "宁愿确定地得到赌局的期望值，也不参加赌局；等价于效用函数是凹函数。"
+    en: "Preferring the expected value of a gamble for sure to the gamble itself; equivalent to a concave utility function."
+
+absolute-risk-aversion:
+  defined_in: "1.4"
+  zh: 绝对风险厌恶系数
+  en: coefficient of absolute risk aversion
+  short:
+    zh: "A(W) = −u″(W)/u′(W)，衡量对固定金额赌局的厌恶程度。"
+    en: "A(W) = −u″(W)/u′(W), which measures aversion to gambles of fixed dollar size."
+
+relative-risk-aversion:
+  defined_in: "1.4"
+  zh: 相对风险厌恶系数
+  en: coefficient of relative risk aversion
+  short:
+    zh: "R(W) = −W u″(W)/u′(W)，衡量对按财富比例的赌局的厌恶程度。"
+    en: "R(W) = −W u″(W)/u′(W), which measures aversion to gambles proportional to wealth."
+
+certainty-equivalent:
+  defined_in: "1.4"
+  zh: 确定性等价
+  en: certainty equivalent
+  short:
+    zh: "与赌局的期望效用相同的确定金额。"
+    en: "The sure amount that gives the same utility as the expected utility of a gamble."
+
+risk-premium:
+  defined_in: "1.4"
+  zh: 风险溢价
+  en: risk premium
+  short:
+    zh: "期望值减去确定性等价：为消除风险愿意放弃的期望财富。"
+    en: "The expected value minus the certainty equivalent: the expected wealth one is willing to give up to remove the risk."
+
+crra-utility:
+  defined_in: "1.4"
+  zh: CRRA 效用
+  en: CRRA utility
+  short:
+    zh: "相对风险厌恶系数为常数 γ 的效用函数 W^(1−γ)/(1−γ)，γ = 1 时为 ln W。"
+    en: "The utility function W^(1−γ)/(1−γ) with constant relative risk aversion γ; ln W when γ = 1."
 
 risk-measures:
   defined_in: "4.1"

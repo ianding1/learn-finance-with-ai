@@ -1,0 +1,140 @@
+---
+title: 1.4 Choice Under Uncertainty
+description: Expected utility, risk aversion, the certainty equivalent and the risk premium, the economics of insurance, and CRRA utility, the most common utility function in finance.
+lesson: "1.4"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import RiskPremium from '../../../../components/widgets/RiskPremium.astro';
+
+## Gambles and expected value [#lotteries]
+
+Investing, buying insurance and choosing a career are all decisions made when the outcome is uncertain. An uncertain outcome written as "each outcome and its probability", like the scenario tables of <Ref lesson="0.3" />, is called a gamble (lottery).
+
+Is the expected value enough? Imagine you have 100,000 dollars and someone offers a gamble: flip a coin; heads you win 50,000 dollars, tails you lose 50,000 dollars. The expected gain is 0, but most people refuse. If heads wins 60,000 and tails loses 50,000, the expected gain is positive (5,000 dollars), and many people still refuse. So people look not only at the expected value; they also care about how much the outcome varies.
+
+## Expected utility [#expected-utility]
+
+The standard approach in economics is to measure the satisfaction from wealth $W$ with a utility function $u(W)$ and then take the expectation of utility. The <Def id="expected-utility">expected utility</Def> of a gamble is
+
+$$
+E[u(W)] = \sum_i p_i\,u(W_i)
+$$
+
+People choose the option with the highest expected utility. Unlike in <Ref lesson="1.2" />, the size of utility matters here: it is used to average the outcomes with weights. $u$ allows only positive linear transformations $a + b\,u$ ($b > 0$), not any increasing transformation; otherwise the ranking of gambles could change.
+
+<Check id="C1" />
+
+## Risk aversion [#risk-aversion]
+
+A person who always prefers receiving the expected value of a gamble for sure to taking the gamble shows <Def id="risk-aversion">risk aversion</Def>:
+
+$$
+u\big(E[W]\big) > E\big[u(W)\big]
+$$
+
+This inequality holds for all gambles exactly when $u$ is strictly concave ($u'' < 0$): the more wealth one has, the less utility one more dollar adds. In the example above, losing 50,000 dollars lowers utility by more than winning 50,000 dollars raises it.
+
+- $u$ is a straight line ($u'' = 0$): risk neutral, looking only at expected values;
+- $u$ is convex ($u'' > 0$): risk loving.
+
+The degree of risk aversion is measured by the Arrow–Pratt coefficients. The <Def id="absolute-risk-aversion">coefficient of absolute risk aversion</Def> and the <Def id="relative-risk-aversion">coefficient of relative risk aversion</Def> are
+
+$$
+A(W) = -\frac{u''(W)}{u'(W)}, \qquad R(W) = -\frac{W\,u''(W)}{u'(W)}
+$$
+
+Dividing by $u'$ makes the coefficients unaffected by positive linear transformations of $u$. $A$ measures the attitude to gambles of a fixed dollar size, and $R$ the attitude to gambles proportional to wealth.
+
+<Check id="C2" />
+
+## Certainty equivalent and risk premium [#certainty-equivalent]
+
+A sure amount that gives the same utility as the expected utility of a gamble is called the gamble's <Def id="certainty-equivalent">certainty equivalent</Def> (CE):
+
+$$
+u(\text{CE}) = E\big[u(W)\big]
+$$
+
+The difference between the expected value and the certainty equivalent is called the <Def id="risk-premium">risk premium</Def>: the expected wealth a person is willing to give up to remove the risk.
+
+$$
+\pi = E[W] - \text{CE}
+$$
+
+Example: $u(W) = \ln W$, wealth 100 (thousand dollars), and a gamble that changes wealth to 150 or 50 with equal probability. $E[W] = 100$, and
+
+$$
+E[\ln W] = \tfrac{1}{2}\ln 150 + \tfrac{1}{2}\ln 50 = \ln\sqrt{7500}, \qquad \text{CE} = \sqrt{7500} \approx 86.60
+$$
+
+The risk premium is about 13.40: this person would rather have 86.6 for sure than take a gamble with an expected value of 100.
+
+For small gambles there is an approximation for the risk premium (derived in <Ref check="Q2" />):
+
+$$
+\pi \approx \tfrac{1}{2}\,A(W)\,\sigma^2
+$$
+
+where $\sigma^2$ is the variance of the gamble. The risk premium is proportional to the variance: doubling the risk (the standard deviation) makes the premium four times as large. In the example, $A = \frac{1}{W} = 0.01$ and $\sigma = 50$, so the approximation gives $\frac{1}{2} \times 0.01 \times 2500 = 12.5$, close to the exact 13.40; the larger the gamble, the less accurate the approximation.
+
+<Figure id="4-1" title="Wealth 100 (thousand dollars) and a gamble that changes wealth to $100 - h$ or $100 + h$ with equal probability. Utility function $u(W) = \frac{W^{1-\gamma}}{1-\gamma}$ ($\ln W$ when $\gamma = 1$); the vertical axis is rescaled." observe="The height of the midpoint of the line is the expected utility; moving horizontally from that height to the curve gives the certainty equivalent. Increase $\gamma$ or $h$ and watch how the risk premium changes.">
+	<RiskPremium />
+</Figure>
+
+<Check id="C3" />
+
+## Insurance [#insurance]
+
+Risk aversion explains why people are willing to pay more than the expected loss to buy insurance.
+
+Example: a household has wealth of 100 (thousand dollars), of which its house is worth 75. Each year there is a 1% chance of a fire that destroys the house. The expected loss is $0.01 \times 75 = 0.75$. With $u = \ln W$ and no insurance,
+
+$$
+E[u] = 0.99\ln 100 + 0.01\ln 25, \qquad \text{CE} = 100^{0.99} \times 25^{0.01} \approx 98.62
+$$
+
+With full insurance, wealth is $100 - P$ for sure, where $P$ is the premium. Insurance is better as long as $100 - P \ge 98.62$, that is, $P \le 1.38$. The highest premium this household would pay is about 1.38, nearly twice the expected loss.
+
+Why is the insurer willing to bear the risk? It insures a large number of independent policies; by the reasoning of <Ref lesson="0.4" />, the average payout per policy is almost certain, so the insurer can be treated as roughly risk neutral. Any premium between 0.75 and 1.38 makes both sides better off than without insurance.
+
+<Check id="C4" />
+
+## CRRA utility [#crra]
+
+The most common utility function in finance is
+
+$$
+u(W) = \frac{W^{1-\gamma}}{1-\gamma} \quad (\gamma > 0,\ \gamma \ne 1), \qquad u(W) = \ln W \quad (\gamma = 1)
+$$
+
+A calculation gives $R(W) = \gamma$: the coefficient of relative risk aversion is constant, hence the name <Def id="crra-utility">CRRA utility</Def> (constant relative risk aversion). The larger $\gamma$, the more risk averse; log utility is the special case $\gamma = 1$.
+
+An important property of CRRA is that a person's attitude toward a gamble in which "wealth rises or falls by some proportion" does not depend on how wealthy he is. In proportional terms, the approximation for the risk premium becomes
+
+$$
+\frac{\pi}{W} \approx \tfrac{1}{2}\,\gamma\,\sigma^2
+$$
+
+where $\sigma$ is the standard deviation of the percentage change in wealth. This property makes a CRRA investor put a fixed share of wealth into risky assets, however wealthy he is. <Ref lesson="4.3" /> uses it to derive the best share in stocks, and <Ref lesson="4.12" /> uses it to analyze asset allocation over a lifetime. Most estimates of $\gamma$ in research lie between 1 and 10.
+
+<Ref lesson="0.4" /> showed that the expected value of wealth is pulled up by a few very good outcomes and that the median better represents a typical outcome. An investor with log utility maximizes $E[\ln W]$, that is, the expected log return, which is in line with caring about the median (<Ref check="Q4" />).
+
+## Summary [#summary]
+
+- Expected utility: $E[u(W)] = \sum p_i\,u(W_i)$; utility allows only positive linear transformations.
+- Risk aversion is equivalent to a concave $u$; its degree is measured by $A = -\frac{u''}{u'}$ and $R = -\frac{W u''}{u'}$.
+- The certainty equivalent satisfies $u(\text{CE}) = E[u(W)]$; the risk premium is $\pi = E[W] - \text{CE} \approx \frac{1}{2} A \sigma^2$.
+- Risk-averse people are willing to pay premiums above the expected loss; an insurer with many independent risks is close to risk neutral.
+- CRRA utility has constant relative risk aversion $\gamma$, and the proportional risk premium is about $\frac{1}{2}\gamma\sigma^2$.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

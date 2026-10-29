@@ -81,3 +81,11 @@ fisher:
   fixed:
     y1: 80
     beta: 0.95
+
+risk-premium:
+  component: src/components/widgets/RiskPremium.astro
+  params:
+    g: { min: 0, max: 5, step: 0.5, default: 1 }
+    h: { min: 10, max: 90, step: 10, default: 50 }
+  fixed:
+    wealth: 100
