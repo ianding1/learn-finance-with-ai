@@ -92,7 +92,7 @@ For changes to `src/scripts/prompts.ts` or to the data that prompts use:
 - Every prompt still contains all the content needed for the task, so that an assistant that cannot
   open URLs can still do it.
 - The grading prompt still asks for the result block in the format that `src/scripts/profile.ts` parses.
-- Grading prompts do not include the learner profile and end with the heading for the learner's
+- Grading prompts contain nothing about the learner and end with the heading for the learner's
   answers. They tell the AI to review only answered questions and never to give 0 points for
   unanswered ones.
 - In key files, every fact a question needs from the lesson (example data, figure parameters) is in a

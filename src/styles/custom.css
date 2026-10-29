@@ -275,25 +275,16 @@
 	font-weight: 700;
 	color: var(--sl-color-accent-high);
 }
-.lfwai-q-meta {
-	display: flex;
-	gap: 0.75rem;
+.lfwai-q-status {
 	white-space: nowrap;
 }
-.lfwai-q-points,
 .lfwai-q-status[data-state='none'] {
 	color: var(--sl-color-gray-3);
 }
-.lfwai-q-status[data-state='full'],
 .lfwai-q-status[data-state='ok'] {
 	color: var(--sl-color-green-high);
 	font-weight: 600;
 }
-.lfwai-q-status[data-state='partial'] {
-	color: var(--sl-color-orange-high);
-	font-weight: 600;
-}
-.lfwai-q-status[data-state='wrong'],
 .lfwai-q-status[data-state='revise'] {
 	color: var(--sl-color-red-high);
 	font-weight: 600;
@@ -310,7 +301,6 @@
 	color: var(--sl-color-gray-2);
 }
 .lfwai-group textarea,
-.lfwai-profile textarea,
 .lfwai-dialog textarea {
 	width: 100%;
 	padding: 0.5rem 0.75rem;
@@ -441,7 +431,7 @@
 	cursor: pointer;
 }
 
-/* ---------- Curriculum and profile ---------- */
+/* ---------- Curriculum ---------- */
 .lfwai-curriculum h3 {
 	margin-top: 1.5rem;
 	font-size: var(--sl-text-lg);
@@ -467,59 +457,25 @@
 .lfwai-muted {
 	color: var(--sl-color-gray-3);
 }
-.lfwai-profile section {
-	margin-bottom: 2rem;
-}
-.lfwai-profile h3 {
-	margin: 1rem 0 0.5rem;
-	font-size: var(--sl-text-lg);
-}
-.lfwai-profile table {
-	border-collapse: collapse;
-	border-top: 1.5px solid var(--sl-color-gray-3);
-	border-bottom: 1.5px solid var(--sl-color-gray-3);
+/* Lesson status in the course outline: not started / in progress / done. */
+.lfwai-lstatus {
+	margin-inline-start: auto;
+	white-space: nowrap;
 	font-size: var(--sl-text-sm);
-	font-variant-numeric: tabular-nums;
+	color: var(--sl-color-gray-3);
 }
-.lfwai-profile th,
-.lfwai-profile td {
-	padding: 0.35rem 0.75rem;
-	text-align: start;
+.lfwai-lstatus[data-state='progress'] {
+	color: var(--sl-color-orange-high);
 }
-.lfwai-profile thead th {
-	border-bottom: 1px solid var(--sl-color-gray-4);
-}
-.lfwai-check {
-	display: flex;
-	align-items: flex-start;
-	gap: 0.5rem;
-	margin-top: 0.75rem;
-	font-size: var(--sl-text-sm);
-	color: var(--sl-color-gray-2);
-}
-.lfwai-check input {
-	margin-top: 0.3rem;
+.lfwai-lstatus[data-state='done'] {
+	color: var(--sl-color-green-high);
+	font-weight: 600;
 }
 .lfwai-all-help {
 	margin: 0.25rem 0 0;
 	font-size: var(--sl-text-sm);
 	color: var(--sl-color-gray-2);
 }
-.lfwai-row {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-}
-
-/* ---------- Review at the start of a lesson ---------- */
-.lfwai-prereq {
-	margin: 0 0 0.5rem;
-	line-height: 1.8;
-}
-.lfwai-review .lfwai-btn {
-	margin-top: 0.25rem;
-}
-
 /* =====================================================================================
    Chinese typography (pages with lang="zh-CN")
    Starlight's defaults are designed for Latin text. These rules follow common Chinese
@@ -657,12 +613,4 @@ body {
    brighter in the dark theme (gray-1 is defined per theme by Starlight). */
 :root {
 	--sl-color-text: var(--sl-color-gray-1);
-}
-
-
-/* Concepts that the review prompt will cover (<Review>). */
-.lfwai-review-focus {
-	margin: 0.5rem 0;
-	font-size: var(--sl-text-sm);
-	color: var(--sl-color-gray-2);
 }

@@ -7,8 +7,6 @@ import type { Lang } from '../i18n/ui';
 export interface PromptQuestion {
 	id: string;
 	label: string;
-	/** only quiz questions have points; lesson questions are not scored */
-	points?: number;
 	question: string;
 	answer: string;
 	rubric: string[];
@@ -24,8 +22,6 @@ export interface GradingInput {
 	/** common errors relevant to these questions only */
 	commonErrors: string[];
 	questions: PromptQuestion[];
-	/** concept id -> name: the concepts these questions test, the only ids the grader may report */
-	conceptIds: Record<string, string>;
 }
 
 const DISCLAIMER = {
@@ -39,83 +35,60 @@ const fence = (s: string) => `"""\n${s.trim()}\n"""`;
 const bullets = (xs: string[]) => xs.map((x) => `- ${x}`).join('\n');
 
 /**
- * Grading prompt. No learner profile is included: the grader should judge each answer on its own.
- * The prompt ends where the learner's answers begin: the learner attaches a photo or types the
- * answers after it, and may answer only some of the questions.
- *
- * Two modes: lesson questions (随堂题 and 练习题) are reviewed without points, and each answered
- * question is marked "ok" or "revise"; quizzes (测验, not built yet) have points and are scored.
+ * Feedback prompt for check questions and exercises. It contains nothing about the learner, so that
+ * each answer is judged on its own. The prompt ends where the learner's answers begin: the learner
+ * attaches a photo or types the answers after it, and may answer only some of the questions.
+ * Nothing is scored: each answered question is marked "ok" or "revise".
  */
 export function gradingPrompt(i: GradingInput): string {
 	const zh = i.lang === 'zh';
-	const scored = i.questions.every((q) => q.points != null);
-	const ids = Object.entries(i.conceptIds)
-		.map(([id, name]) => (zh ? `${id}（${name}）` : `${id} (${name})`))
-		.join(zh ? '、' : ', ');
-	const first = i.questions[0];
-	const example = JSON.stringify({
-		v: 1,
-		lesson: i.lessonId,
-		// One example item only: listing every question would invite the grader to include all of them.
-		items: [scored ? { id: first?.id ?? '', score: 0, max: first?.points ?? 0 } : { id: first?.id ?? '', status: 'ok' }],
-		mastered: [],
-		weak: [],
-		note: '',
-	});
-	const maxList = i.questions.map((q) => (zh ? `${q.id}（${q.points} 分）` : `${q.id} (${q.points})`)).join(zh ? '、' : ', ');
+	// One example item only: listing every question would invite the AI to include all of them.
+	const example = JSON.stringify({ v: 2, lesson: i.lessonId, items: [{ id: i.questions[0]?.id ?? '', status: 'ok' }] });
 	const idList = i.questions.map((q) => q.id).join(zh ? '、' : ', ');
 
 	const qs = i.questions
 		.map((q) =>
 			zh
-				? `### ${q.label}${scored ? `（${q.points} 分）` : `（id：${q.id}）`}
+				? `### ${q.label}（id：${q.id}）
 题目：
 ${q.question}
 
 参考答案：
 ${q.answer}
 
-${scored ? '评分要点' : '批改要点'}：
+批改要点：
 ${bullets(q.rubric)}`
-				: `### ${q.label}${scored ? ` (${q.points} points)` : ` (id: ${q.id})`}
+				: `### ${q.label} (id: ${q.id})
 Question:
 ${q.question}
 
 Reference answer:
 ${q.answer}
 
-${scored ? 'Grading points' : 'What to check'}:
+What to check:
 ${bullets(q.rubric)}`,
 		)
 		.join('\n\n');
 
 	if (zh) {
-		const task = scored ? '评卷' : '批改';
-		const steps = scored
-			? `1. 只批改学习者这次作答了的题目。没有作答的题目不评分，也不要给 0 分，它们会在以后提交。
-2. 逐题评分：给出得分，指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。结论正确但理由不成立时，按评分要点扣分。`
-			: `1. 这些题**不打分**。只批改学习者这次作答了的题目，没有作答的题目不要提及，它们会在以后提交。
-2. 逐题指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。`;
-		const itemsRule = scored
-			? `items 中只列出这次批改了的题目，每题一项，score 填实际得分，max 填满分。各题的 id 与满分：${maxList}。`
-			: `items 中只列出这次批改了的题目，每题一项。status 填 "ok"（基本正确，只有小问题）或 "revise"（有实质错误，需要订正）。各题的 id：${idList}。`;
-		return `你是${COURSE.zh}课程的老师。请${task}学习者在第 ${i.lessonId} 课《${i.lessonTitle}》中的作答。学习者的答案附在本提示词之后（照片或文字），可能只包含其中一部分题目。
+		return `你是${COURSE.zh}课程的老师。请批改学习者在第 ${i.lessonId} 课《${i.lessonTitle}》中的作答。学习者的答案附在本提示词之后（照片或文字），可能只包含其中一部分题目。
 
 ## 重要说明
-${DISCLAIMER.zh}如果你认为参考答案或${scored ? '评分' : '批改'}要点本身有误，请明确指出错在哪里，并按正确的答案${task}，不要因为学习者没有照搬错误的参考答案而判错。
+${DISCLAIMER.zh}如果你认为参考答案或批改要点本身有误，请明确指出错在哪里，并按正确的答案批改，不要因为学习者没有照搬错误的参考答案而判错。
 
 ## 课程页面
 ${i.lessonUrl}
-（如果你能访问网页，可以参考；不能访问也没有关系，${task}需要的内容都已写在下面。）
+（如果你能访问网页，可以参考；不能访问也没有关系，批改需要的内容都已写在下面。）
 
 ## 与这些题目相关的课程要点
 ${bullets(i.context)}
 
-## 题目、参考答案与${scored ? '评分' : '批改'}要点
+## 题目、参考答案与批改要点
 ${qs}
 ${i.commonErrors.length ? `\n## 常见错误（供诊断参考）\n${bullets(i.commonErrors)}\n` : ''}
 ## 请这样回复
-${steps}
+1. 这些题**不打分**。只批改学习者这次作答了的题目，没有作答的题目不要提及，它们会在以后提交。
+2. 逐题指出哪里正确、哪里有错。重点检查推理和理由，不只看最终数字。
 3. 对错误之处，用学习者能理解的方式讲解，必要时举一个小例子。不要只重复参考答案。
 4. 如果作答反映出对某个概念的误解，明确指出是哪个概念。
 5. 用中文回复，数学公式使用 LaTeX。
@@ -125,25 +98,16 @@ ${steps}
 ${example}
 LFWAI-RESULT>>>
 
-${itemsRule}mastered（已掌握）和 weak（需要多练习）只能使用这些概念 id：${ids}。note 用一句话概括这次作答反映出的主要问题（不超过 100 字），它会被保存到学习档案中。
+items 中只列出这次批改了的题目，每题一项。status 填 "ok"（基本正确，只有小问题）或 "revise"（有实质错误，需要订正）。各题的 id：${idList}。
 
 ## 学习者的答案
 `;
 	}
 
-	const task = scored ? 'Grade' : 'Review';
-	const steps = scored
-		? `1. Grade only the questions the learner answered this time. Do not grade or give 0 points to unanswered questions; they will be submitted later.
-2. Grade each question: give the score and say what is correct and what is wrong. Check the reasoning, not only the final numbers. If the conclusion is right but the reason does not hold, deduct points according to the grading points.`
-		: `1. These questions are **not scored**. Review only the questions the learner answered this time. Do not mention unanswered questions; they will be submitted later.
-2. For each question, say what is correct and what is wrong. Check the reasoning, not only the final numbers.`;
-	const itemsRule = scored
-		? `List only the questions you graded in "items", one entry per question, with the actual score in "score" and the full points in "max". Question ids and full points: ${maxList}. `
-		: `List only the questions you reviewed in "items", one entry per question. Set "status" to "ok" (essentially correct, only minor issues) or "revise" (a substantive error that needs to be corrected). Question ids: ${idList}. `;
-	return `You are a teacher for the course ${COURSE.en}. ${task} the learner's answers for Lesson ${i.lessonId}, "${i.lessonTitle}". The learner's answers follow this prompt (a photo or text) and may cover only some of the questions.
+	return `You are a teacher for the course ${COURSE.en}. Review the learner's answers for Lesson ${i.lessonId}, "${i.lessonTitle}". The learner's answers follow this prompt (a photo or text) and may cover only some of the questions.
 
 ## Important
-${DISCLAIMER.en} If you believe a reference answer or a ${scored ? 'grading point' : 'checking point'} is itself wrong, say clearly what is wrong and judge against the correct answer. Do not mark the learner wrong because they did not copy a wrong reference answer.
+${DISCLAIMER.en} If you believe a reference answer or a checking point is itself wrong, say clearly what is wrong and judge against the correct answer. Do not mark the learner wrong because they did not copy a wrong reference answer.
 
 ## Lesson page
 ${i.lessonUrl}
@@ -152,11 +116,12 @@ ${i.lessonUrl}
 ## Lesson facts relevant to these questions
 ${bullets(i.context)}
 
-## Questions, reference answers and ${scored ? 'grading points' : 'what to check'}
+## Questions, reference answers and what to check
 ${qs}
 ${i.commonErrors.length ? `\n## Common errors (for diagnosis)\n${bullets(i.commonErrors)}\n` : ''}
 ## How to reply
-${steps}
+1. These questions are **not scored**. Review only the questions the learner answered this time. Do not mention unanswered questions; they will be submitted later.
+2. For each question, say what is correct and what is wrong. Check the reasoning, not only the final numbers.
 3. For each error, explain it in a way the learner can understand, with a small example if useful. Do not only repeat the reference answer.
 4. If an answer shows a misunderstanding of a concept, name the concept.
 5. Reply in English. Use LaTeX for formulas.
@@ -166,7 +131,7 @@ ${steps}
 ${example}
 LFWAI-RESULT>>>
 
-${itemsRule}"mastered" and "weak" (needs more practice) may only contain these concept ids: ${ids}. "note" is one sentence (at most 30 words) that sums up the main problem shown by these answers; it is saved to the learner profile.
+List only the questions you reviewed in "items", one entry per question. Set "status" to "ok" (essentially correct, only minor issues) or "revise" (a substantive error that needs to be corrected). Question ids: ${idList}.
 
 ## The learner's answers
 `;
@@ -182,8 +147,6 @@ export interface ExplainInput {
 	selection: string;
 	paragraph: string;
 	context?: string;
-	/** "About me" lines, or empty when the learner turned this off or has nothing relevant */
-	aboutMe: string;
 }
 
 export function explainPrompt(i: ExplainInput): string {
@@ -209,7 +172,6 @@ export function explainPrompt(i: ExplainInput): string {
 ${fence(i.selection)}`);
 		if (!sameAsSelection) parts.push(`它所在的段落：\n${fence(i.paragraph)}`);
 		if (i.context) parts.push(`本课要点（供你了解上下文）：\n${i.context}`);
-		if (i.aboutMe) parts.push(`关于我：\n${i.aboutMe}`);
 		parts.push(`请这样讲解：
 1. 先用一两句话说明这段话的意思。
 2. 再解释为什么是这样，补上中间省略的步骤；如果涉及公式，说明每个符号的含义。
@@ -230,7 +192,6 @@ The text I selected:
 ${fence(i.selection)}`);
 	if (!sameAsSelection) parts.push(`The paragraph it is in:\n${fence(i.paragraph)}`);
 	if (i.context) parts.push(`Key points of the lesson (for context):\n${i.context}`);
-	if (i.aboutMe) parts.push(`About me:\n${i.aboutMe}`);
 	parts.push(`Please explain it this way:
 1. First state the meaning of the passage in one or two sentences.
 2. Then explain why it is true, and fill in any steps that were skipped. If there is a formula, explain what each symbol means.
@@ -239,80 +200,4 @@ ${fence(i.selection)}`);
 5. End with one short question that lets me check my understanding (do not give the answer yet).
 Reply in English. Use LaTeX for formulas.`);
 	return parts.join('\n\n') + '\n';
-}
-
-export interface ReviewConcept {
-	name: string;
-	/** one-sentence definition, if the course has one */
-	short?: string;
-	/** where it is taught, e.g. 第 0.2 课《优化》; empty for assumed background */
-	where?: string;
-}
-
-/**
- * Personalized review at the start of a lesson. The AI writes a few short questions on the given
- * concepts, waits for the learner's answers, then comments on them. Nothing is scored.
- */
-export function reviewPrompt(i: {
-	lang: Lang;
-	lessonId: string;
-	lessonTitle: string;
-	pageUrl: string;
-	concepts: ReviewConcept[];
-	/** true when the concepts come from the learner profile, false when they are the lesson prerequisites */
-	fromProfile: boolean;
-	aboutMe: string;
-}): string {
-	const zh = i.lang === 'zh';
-	const list = i.concepts
-		.map((c) =>
-			zh
-				? `- ${c.name}${c.where ? `（${c.where}）` : ''}${c.short ? `：${c.short}` : ''}`
-				: `- ${c.name}${c.where ? ` (${c.where})` : ''}${c.short ? `: ${c.short}` : ''}`,
-		)
-		.join('\n');
-	if (zh) {
-		return `我在学习${COURSE.zh}课程，马上要开始第 ${i.lessonId} 课《${i.lessonTitle}》（${i.pageUrl}）。开始之前，请帮我做一次简短的复习。
-说明：${DISCLAIMER.zh}
-
-${i.fromProfile ? '这些是我之前需要多练习的概念：' : '这些是本课需要的前置知识：'}
-${list}
-${i.aboutMe ? `\n关于我：\n${i.aboutMe}\n` : ''}
-请这样做：
-1. 针对上面的概念出 3 道简短的题，每道一两分钟能答完。重点考理解和容易混淆的地方，而不是背定义。
-2. 只用到这些概念和它们之前的内容，不要提前考第 ${i.lessonId} 课的新内容。
-3. 先只给题目，不要给答案。等我回答后，再逐题讲评，指出错误并简单解释。
-4. 不需要打分。
-用中文回复，数学公式使用 LaTeX。
-`;
-	}
-	return `I am studying the course ${COURSE.en} and am about to start Lesson ${i.lessonId}, "${i.lessonTitle}" (${i.pageUrl}). Before I start, please give me a short review.
-Note: ${DISCLAIMER.en}
-
-${i.fromProfile ? 'These are concepts I need to practice more:' : 'These are the prerequisites of this lesson:'}
-${list}
-${i.aboutMe ? `\nAbout me:\n${i.aboutMe}\n` : ''}
-Please do this:
-1. Write 3 short questions on the concepts above, each answerable in one or two minutes. Focus on understanding and on points that are easy to confuse, not on recalling definitions.
-2. Use only these concepts and what comes before them. Do not test the new content of Lesson ${i.lessonId}.
-3. Give only the questions first, without answers. After I answer, comment on each answer, point out errors and explain briefly.
-4. Do not give scores.
-Reply in English. Use LaTeX for formulas.
-`;
-}
-
-/** Sent once at the start of a study conversation, so later prompts do not need to repeat it. */
-export function sessionPrompt(lang: Lang, siteUrl: string, aboutMe: string): string {
-	if (lang === 'zh') {
-		return `接下来我会配合${COURSE.zh}课程学习（网站：${siteUrl}）。这是一门以美国市场为背景的经济学与金融课程，目标是高年级本科水平。
-说明：${DISCLAIMER.zh}如果你发现课程内容有误，请指出。
-${aboutMe ? `\n关于我：\n${aboutMe}\n` : ''}
-在这次对话中，我会粘贴网站生成的评卷提示词或讲解提示词，请按提示词中的要求回复。其他时候回答我的问题时，请参考上面关于我的信息：对需要多练习的概念多解释一步，并按我的学习偏好调整讲解方式。请用中文回复，数学公式使用 LaTeX。
-`;
-	}
-	return `I will use you while studying the course ${COURSE.en} (website: ${siteUrl}). It is an economics and finance course set in the US market, at an upper-undergraduate level.
-Note: ${DISCLAIMER.en} If you find an error in the course content, please point it out.
-${aboutMe ? `\nAbout me:\n${aboutMe}\n` : ''}
-In this conversation I will paste grading prompts or explanation prompts generated by the website. Please reply as each prompt asks. At other times, use the information about me above when you answer: explain one more step for the concepts I need to practice, and adapt your explanations to my learning preferences. Reply in English. Use LaTeX for formulas.
-`;
 }

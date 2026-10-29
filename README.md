@@ -13,8 +13,8 @@
 网站是纯静态的，本身不调用任何 AI，也不收集数据。
 
 - **阅读**：每一课有讲解、推导和互动图。选中看不懂的文字，点击"展开讲解"，网站会生成一个讲解提示词。
-- **练习**：在纸上写完随堂题（随讲解出现）和练习题（每课结尾）后，复制网站生成的提示词，连同答案照片一起发给你自己的 AI 助手（Claude、ChatGPT、Gemini 等），由 AI 批改，不计分。每学完一组课程有一次计分的测验。每课开头可以复制个性化的复习提示词，按你需要多练习的概念出题。
-- **记录**：把 AI 返回的结果块粘贴回网站，得分和需要多练习的概念只保存在你的浏览器中。评卷提示词不包含学习档案；讲解提示词只附上相关的部分，可以关闭。
+- **练习**：在纸上写完随堂题（随讲解出现）和练习题（每课结尾）后，复制网站生成的提示词，连同答案照片一起发给你自己的 AI 助手（Claude、ChatGPT、Gemini 等），由 AI 批改，不计分。每学完一组课程有一次计分的测验。
+- **记录**：把 AI 返回的结果块粘贴回网站，每道题的结果只保存在你的浏览器中，课程大纲里显示每一课是未开始、学习中还是已完成。提示词不包含你的任何个人信息。
 
 ## 参与贡献
 
@@ -59,11 +59,10 @@ The website is fully static. It does not call any AI and does not collect data.
   exercises (at the end of the lesson) on paper, then copy the prompt the site
   generates and send it with a photo of your answers to your own AI assistant (Claude, ChatGPT,
   Gemini or another one). The AI reviews your answers without scores. A scored quiz follows each
-  group of lessons. At the start of each lesson
-  you can copy a personalized review prompt built from the concepts you need to practice.
-- **Track**: paste the result block from the AI back into the site. Scores and the concepts to
-  practice are saved only in your browser. Grading prompts never include the profile; explanation
-  prompts include only the relevant part, and this can be turned off.
+  group of lessons.
+- **Track**: paste the result block from the AI back into the site. The result of each question is
+  saved only in your browser, and the course outline shows whether each lesson is not started, in
+  progress or done. The prompts contain no personal information.
 
 ### Contributing
 

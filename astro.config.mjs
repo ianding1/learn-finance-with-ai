@@ -51,7 +51,6 @@ export default defineConfig({
 					items: [
 						{ slug: 'guide/how-to-use' },
 						{ slug: 'guide/curriculum' },
-						{ slug: 'guide/profile' },
 					],
 				},
 				...lessonGroups,

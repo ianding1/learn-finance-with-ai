@@ -15,8 +15,8 @@ All content is AI-generated; the site says so on every page and in every prompt.
 | `course/widgets.yaml` | Slider ranges of interactive figures. |
 | `course/translation-lock.json` | Hash of each Chinese source at the time it was last translated. Generated. |
 | `src/content/docs/` | Chinese pages (source, root locale). `src/content/docs/en/` holds the English pages. |
-| `src/components/` | `Ref`, `Def`, `Figure`, `Review`, `Check`, `CheckAll`, `Exercises`, `CurriculumList`, `ProfilePanel`, `widgets/*`. |
-| `src/scripts/` | Browser code: prompt templates, learner profile (localStorage), selection "Explain this". |
+| `src/components/` | `Ref`, `Def`, `Figure`, `Check`, `CheckAll`, `Exercises`, `CurriculumList`, `widgets/*`. |
+| `src/scripts/` | Browser code: prompt templates, learning progress (localStorage), lesson status, selection "Explain this". |
 | `scripts/check.py` | Blocking consistency checks (CI). |
 | `.github/review-rules.md` | Rules for the advisory AI review of pull requests. |
 
@@ -49,7 +49,7 @@ history and answers inline. To publish a finished lesson:
      exercise, and no question only asks the learner to repeat an argument the text already makes.
      When an important result can be derived by the learner, the text sets up the question and
      points to the exercise (`<Ref check="Q1" />`) instead of giving the derivation;
-   - leave out the learning goals of the plan; the page starts with `## 课前复习 [#review]`;
+   - leave out the learning goals and the review part of the plan; the page starts with the first section;
    - every `##` heading gets a stable id: `## 分散化 [#diversification]`;
    - mark each concept definition with `<Def id="...">canonical term</Def>`;
    - every reference to a lesson, section, figure, question or concept uses `<Ref ... />`;
@@ -58,8 +58,7 @@ history and answers inline. To publish a finished lesson:
    context item with the `concepts` or `questions` it serves (leave both out only for facts every
    question needs), and each common error with its `questions`. Any fact a question needs from the
    lesson (example data, figure parameters) must be in a context item tagged for that question.
-   Place `<Review />` under `## 课前复习 [#review]` at the start, `<Check id="..."/>` (question
-   text only) in the right section, `<CheckAll />` after the
+   Place `<Check id="..."/>` (question text only) in the right section, `<CheckAll />` after the
    summary and `<Exercises />` at the end.
 5. Put every numeric answer in `expected` and recompute it in `course/verify/<id>.py`.
 6. Write the English page at `src/content/docs/en/lessons/<slug>.mdx` and every `en` field.
@@ -82,7 +81,7 @@ history and answers inline. To publish a finished lesson:
 - Slider values named in questions are reachable; slider attributes match `course/widgets.yaml`.
 - No private teaching notes (学员, 教案, 修订记录, briefing) in published content.
 - Context items and common errors in key files refer to existing concepts and questions.
-- Every lesson page contains `<Review />` exactly once. A lesson with check questions contains
+- A lesson with check questions contains
   `<CheckAll />` exactly once, and a lesson with
   exercises contains `<Exercises />` exactly once.
 - Check questions and exercises have no `points`, and their rubrics do not mention points.
@@ -98,15 +97,15 @@ history and answers inline. To publish a finished lesson:
 | 随堂题 | check question | `check`, `<Check>`, submitted by `<CheckAll>` | no ("ok" / "revise") |
 | 练习题 | exercise | `exercise`, `<Exercises>` | no ("ok" / "revise") |
 | 测验 | quiz | `E0`, `E1`, ... in the curriculum (not built yet) | yes |
-| 课前复习 | review before the lesson | `<Review>` | no |
-
-There are no fixed review questions. `<Review>` lists the lesson's prerequisites (`uses`) and copies a
-personalized review prompt: the AI writes a few questions on the concepts the learner needs to
-practice (taught before this lesson), or on the prerequisites when the profile has none.
 
 ## Prompts
 
-- Grading prompts never include the learner profile, so that the grader judges each answer on its own.
+- The site stores only learning progress: the latest result ("ok" / "revise") of each submitted
+  question, in localStorage. It stores nothing else about the learner (no background, preferences,
+  concept status or notes), has no progress page and no review feature, and no prompt contains
+  anything about the learner.
+- The course outline shows one status per lesson: not started (no question submitted), in progress
+  (some submitted), done (all submitted, including questions that need revision).
 - Answers are not entered on the site. Check questions are submitted together by
   `<CheckAll />` at the end of the lesson, and exercises by `<Exercises />`. The prompt ends with an
   empty "learner's answers" heading; the learner attaches a photo or types the answers after it.
@@ -118,8 +117,7 @@ practice (taught before this lesson), or on the prerequisites when the profile h
 - Learners may submit only some questions. The grader grades only the answered ones and lists only
   those in the result block; other questions keep their earlier result or stay "not answered".
 - Buttons copy the prompt directly to the clipboard. The dialog is only a fallback.
-- Explanation prompts include the learner's background, preferences and the concepts of the current
-  lesson that they need to practice, unless the learner turned this off. Scores are never included.
+- Explanation prompts contain the selected text, its paragraph, its section and the lesson context.
 - In Chinese text, write 提示词, not "prompt" (checked).
 
 ## Writing conventions

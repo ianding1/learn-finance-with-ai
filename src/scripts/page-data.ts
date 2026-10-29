@@ -4,7 +4,6 @@ import type { Lang } from '../i18n/ui';
 export interface PageData {
 	lang: Lang;
 	ui: Record<string, string>;
-	site: string;
 	pageTitle: string;
 	pageUrl: string;
 	lesson: null | {
@@ -12,11 +11,7 @@ export interface PageData {
 		title: string;
 		url: string;
 		context: string;
-		/** concept ids introduced or used by the lesson; used to pick relevant profile entries */
-		concepts: string[];
 	};
-	/** concept id -> name in the page language */
-	concepts: Record<string, string>;
 }
 
 let cached: PageData | null = null;

@@ -349,8 +349,6 @@ def check_keys():
             n_all = sum(1 for name, _ in tags(body) if name == "CheckAll")
             if has_checks and n_all != 1:
                 err(rel(p), "the lesson has check questions, so the page must contain <CheckAll /> exactly once")
-            if sum(1 for name, _ in tags(body) if name == "Review") != 1:
-                err(rel(p), "a lesson page must contain <Review /> exactly once (prerequisites and personalized review)")
             has_ex = any(q["kind"] == "exercise" for q in key["questions"])
             n_ex = sum(1 for name, _ in tags(body) if name == "Exercises")
             if has_ex and n_ex != 1:

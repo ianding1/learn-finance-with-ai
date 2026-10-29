@@ -1,7 +1,11 @@
 ---
-// The full course outline from course/curriculum.yaml, with links to published lessons.
+// The full course outline from course/curriculum.yaml, with links to published lessons. Each
+// published lesson with questions shows the learner's status (not started / in progress / done),
+// filled in from the stored progress by src/scripts/lesson-status.ts.
 import { toLang, t } from '../i18n/ui';
-import { stages, lessonPath } from '../lib/course';
+import { stages, lessonPath, lessonKey } from '../lib/course';
+
+const qids = (id: string) => (lessonKey(id)?.questions ?? []).map((q) => q.id);
 
 const lang = toLang(Astro.locals.starlightRoute.lang);
 ---
@@ -15,7 +19,12 @@ const lang = toLang(Astro.locals.starlightRoute.lang);
 					<li class={l.exam ? 'is-exam' : ''}>
 						<span class="lfwai-cid">{l.id}</span>
 						{l.published ? (
-							<a href={lessonPath(l, lang)}>{l.title[lang]}</a>
+							<>
+								<a href={lessonPath(l, lang)}>{l.title[lang]}</a>
+								{qids(l.id).length > 0 && (
+									<span class="lfwai-lstatus" data-lesson-status={l.id} data-questions={qids(l.id).join(',')} hidden></span>
+								)}
+							</>
 						) : (
 							<span class="lfwai-muted">
 								{l.title[lang]}
@@ -28,3 +37,8 @@ const lang = toLang(Astro.locals.starlightRoute.lang);
 		</section>
 	))}
 </div>
+
+<script>
+	import { initLessonStatus } from '../scripts/lesson-status';
+	initLessonStatus();
+</script>

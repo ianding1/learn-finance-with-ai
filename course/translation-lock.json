@@ -169,8 +169,7 @@
  "course/keys/0.3.yaml#questions[Q7].question": "0898d752ae72ae0c",
  "course/keys/0.3.yaml#questions[Q7].rubric": "3c76dd7561c5fd6f",
  "src/content/docs/guide/curriculum.mdx": "88e4cac72d61da47",
- "src/content/docs/guide/how-to-use.mdx": "13b3ea022ad2bb05",
- "src/content/docs/guide/profile.mdx": "48fff5e5c158ee14",
- "src/content/docs/index.mdx": "a4f36824d8a776ee",
- "src/content/docs/lessons/0-3-probability.mdx": "6f51768a41e18123"
+ "src/content/docs/guide/how-to-use.mdx": "35c4991adb88cd0d",
+ "src/content/docs/index.mdx": "656cba41592bbc9d",
+ "src/content/docs/lessons/0-3-probability.mdx": "f9f8da608b8ec387"
 }

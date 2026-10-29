@@ -4,7 +4,7 @@
 import { pageData, ui } from './page-data';
 import { copyPrompt, flash } from './dialog';
 import { gradingPrompt } from './prompts';
-import { applyResult, loadProfile, parseResult } from './profile';
+import { applyResult, loadProgress, parseResult, type QuestionStatus } from './profile';
 
 interface Payload {
 	lessonId: string;
@@ -12,39 +12,23 @@ interface Payload {
 	lessonUrl: string;
 	context: string[];
 	commonErrors: string[];
-	conceptIds: Record<string, string>;
-	questions: { id: string; label: string; points?: number; question: string; answer: string; rubric: string[] }[];
+	questions: { id: string; label: string; question: string; answer: string; rubric: string[] }[];
 }
 
-/** "2/3" for a scored question, "通过" / "需要订正" for an exercise. */
-export function resultText(r: { score: number | null; max: number | null; status: 'ok' | 'revise' | null }): string {
-	if (r.status) return ui(r.status === 'ok' ? 'statusOk' : 'statusRevise');
-	return `${r.score ?? '?'}/${r.max ?? '?'}`;
+/** "通过" / "需要订正" */
+export function resultText(r: { status: QuestionStatus }): string {
+	return ui(r.status === 'ok' ? 'statusOk' : 'statusRevise');
 }
 
-/** Show the latest result of each question on the page: not answered, score, or review status. */
+/** Show the latest result of each question on the page: not answered, OK or needs revision. */
 function renderStatuses() {
 	const lessonId = pageData().lesson?.id;
-	const results = loadProfile().results.filter((r) => r.lesson === lessonId);
+	const results = loadProgress().results.filter((r) => r.lesson === lessonId);
 	document.querySelectorAll<HTMLElement>('[data-q-status]').forEach((el) => {
 		const r = results.find((x) => x.id === el.dataset.qStatus);
-		const points = el.parentElement?.querySelector<HTMLElement>('.lfwai-q-points');
-		let state = 'none';
-		let text = ui('notAnswered');
-		if (r?.status) {
-			state = r.status;
-			text = r.status === 'ok' ? `✓ ${ui('statusOk')}` : ui('statusRevise');
-		} else if (r && r.score != null) {
-			const max = r.max ?? NaN;
-			state = r.score >= max ? 'full' : r.score <= 0 ? 'wrong' : 'partial';
-			const mark = state === 'full' ? '✓ ' : state === 'wrong' ? '✗ ' : '';
-			text = mark + ui('scoreOf', { s: r.score, m: r.max ?? '?' });
-		}
-		el.textContent = text;
-		el.dataset.state = state;
+		el.textContent = !r ? ui('notAnswered') : r.status === 'ok' ? `✓ ${ui('statusOk')}` : ui('statusRevise');
+		el.dataset.state = r ? r.status : 'none';
 		el.hidden = false;
-		// A graded question shows its score instead of the maximum.
-		if (points) points.hidden = state !== 'none';
 	});
 }
 
@@ -66,7 +50,6 @@ export function initGradeGroups() {
 				lessonUrl: payload.lessonUrl,
 				context: payload.context,
 				commonErrors: payload.commonErrors,
-				conceptIds: payload.conceptIds,
 				questions: payload.questions,
 			});
 			copyPrompt(text, () => flash(btn, ui('copiedGrading')));
@@ -81,8 +64,8 @@ export function initGradeGroups() {
 				status.dataset.state = 'error';
 				return;
 			}
-			// Only the questions in the result are updated; earlier scores of other questions stay.
-			applyResult(r, new Set(Object.keys(pageData().concepts)));
+			// Only the questions in the result are updated; other questions keep their earlier result.
+			applyResult(r);
 			status.textContent = ui('saved');
 			status.dataset.state = 'ok';
 			resultArea.value = '';
