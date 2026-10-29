@@ -1,6 +1,6 @@
 # Answer key for quiz E0 (math and statistics tools, lessons 0.1–0.5). Shown to learners only inside the
 # generated scoring prompt. The quiz page shows only the questions and their points.
-# level: medium or hard (about 60–70% medium, 30–40% hard by points). It is not shown on the page.
+# hard_points: points of the hard parts of a question (difficulty is judged per part); the quiz has 20–30 in total. Not shown on the page.
 # expected: values are recomputed by course/verify/E0.py in CI and must appear verbatim in every answer text.
 # Each question tests a different idea; the parts of a problem build on each other.
 
@@ -49,7 +49,7 @@ questions:
   - id: Q1
     kind: quiz
     part: judge
-    level: medium
+    hard_points: 0
     points: 4
     concepts: [present-value, discount-factor]
     expected: { a5: "122.78", b5: "120.94", a10: "77.11", b10: "105.18" }
@@ -75,7 +75,7 @@ questions:
   - id: Q2
     kind: quiz
     part: judge
-    level: medium
+    hard_points: 0
     points: 4
     concepts: [shadow-price, lagrange-multiplier]
     expected: { u100: "312.5", u200: "1250", approx: "625", actual: "937.5" }
@@ -100,7 +100,7 @@ questions:
   - id: Q3
     kind: quiz
     part: judge
-    level: hard
+    hard_points: 0
     points: 4
     concepts: [covariance, correlation, random-variable]
     expected: { cov: "0" }
@@ -125,7 +125,7 @@ questions:
   - id: Q4
     kind: quiz
     part: judge
-    level: medium
+    hard_points: 0
     points: 4
     concepts: [multiple-testing, hypothesis-test]
     expected: { p: "64" }
@@ -150,7 +150,7 @@ questions:
   - id: Q5
     kind: quiz
     part: judge
-    level: medium
+    hard_points: 0
     points: 4
     concepts: [omitted-variable-bias, regression-coefficient]
     question:
@@ -175,7 +175,7 @@ questions:
   - id: Q6
     kind: quiz
     part: problem
-    level: medium
+    hard_points: 0
     points: 16
     concepts: [ear, annuity, annuity-due, future-value, growing-perpetuity]
     expected: { ear: "6.17", pv: "801486", c: "797.88", w: "31464" }
@@ -220,7 +220,7 @@ questions:
   - id: Q7
     kind: quiz
     part: problem
-    level: medium
+    hard_points: 6
     points: 16
     concepts: [profit-maximization, marginal-revenue, marginal-cost, first-order-condition, second-order-condition, fixed-cost, sunk-cost]
     expected: { q: "20", p: "60", profit: "600", p_new: "64", rise: "4", c_shut: "60", c_sunk: "100" }
@@ -259,7 +259,7 @@ questions:
   - id: Q8
     kind: quiz
     part: problem
-    level: hard
+    hard_points: 12
     points: 18
     concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, correlation]
     expected: { rho: "-0.25", sd: "7.91", threshold: "0.5" }
@@ -304,7 +304,7 @@ questions:
   - id: Q9
     kind: quiz
     part: problem
-    level: hard
+    hard_points: 11
     points: 15
     concepts: [normal-distribution, z-score, log-return, lognormal-distribution, median, right-skew]
     expected: { p1: "35", p25: "2.6", median: "575.5", mean: "862.8", below: "67" }
@@ -343,7 +343,7 @@ questions:
   - id: Q10
     kind: quiz
     part: problem
-    level: medium
+    hard_points: 0
     points: 15
     concepts: [r-squared, residual, regression-coefficient, t-statistic, confidence-interval, statistical-significance]
     expected: { sd_f: "7.75", sd_e: "5.75", t_a: "1.6", ilo: "-0.09", ihi: "0.89", pred: "5.6", lo: "-5.7", hi: "16.9" }

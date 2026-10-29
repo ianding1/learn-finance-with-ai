@@ -85,6 +85,7 @@ history and answers inline. To publish a finished lesson:
   `<CheckAll />` exactly once, and a lesson with
   exercises contains `<Exercises />` exactly once.
 - Check questions and exercises have no `points`, and their rubrics do not mention points.
+- Quiz questions have `points` (total 100) and `hard_points` (0 to `points`); the hard parts total 20–30.
 - Chinese text uses Chinese quotation marks and the word 提示词, has no space after full-width
   punctuation, and never ends a bold run with full-width punctuation directly before a character
   (write `**……正负**。` instead of `**……正负。**`, which Markdown does not render as bold).
@@ -125,8 +126,9 @@ history and answers inline. To publish a finished lesson:
 
 Quizzes follow the exam rules in the author's curriculum ("阶段考试"):
 
-- Test understanding and use, not definitions or direct use of a formula. About 60–70% of the
-  points are medium and 30–40% hard (`level` in the key; never shown on the page).
+- Test understanding and use, not definitions or direct use of a formula. Difficulty is judged per
+  part: the hard parts total 20–30 points (`hard_points` per question in the key; never shown on the page).
+- Each question has its own core point; basic concepts used along the way may repeat.
 - Only lessons of the block and earlier; the questions carry no lesson or difficulty labels and no
   hints. The page starts with instructions and a formula sheet.
 - Part 1 is true / false with reasons (both verdicts occur; no "uncertain") (`part: judge`); a verdict without a reason gets

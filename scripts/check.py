@@ -312,6 +312,9 @@ def check_keys():
                     err(where, "quiz questions need positive 'points'")
                 if q.get("part") not in ("judge", "problem"):
                     err(where, "quiz questions need part: judge or problem")
+                hp = q.get("hard_points")
+                if not isinstance(hp, (int, float)) or hp < 0 or hp > (q.get("points") or 0):
+                    err(where, "quiz questions need hard_points between 0 and their points")
             # Lesson questions (check questions and exercises) are reviewed without scores; only the
             # quizzes after a group of lessons are scored, and they are not in lesson key files.
             if kind in ("check", "exercise"):
@@ -338,6 +341,9 @@ def check_keys():
             total = sum(q.get("points") or 0 for q in key.get("questions", []))
             if total != 100:
                 err(file, f"quiz points add up to {total}, not 100")
+            hard = sum(q.get("hard_points") or 0 for q in key.get("questions", []))
+            if not 20 <= hard <= 30:
+                err(file, f"hard parts of the quiz add up to {hard} points, not 20-30")
         if not l.get("published"):
             continue
         for lang in LANGS:
