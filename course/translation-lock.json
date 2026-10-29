@@ -122,7 +122,7 @@
  "course/curriculum.yaml#stages[7].lessons[7.8].title": "06710b886fc73ba2",
  "course/curriculum.yaml#stages[7].lessons[7.9].title": "b48011b9e5f689ba",
  "course/curriculum.yaml#stages[7].title": "879d33785fbb60a7",
- "course/keys/0.3.yaml#common_errors[0]": "4074bf25b055defa",
+ "course/keys/0.3.yaml#common_errors[0]": "2fbbfb71566863f4",
  "course/keys/0.3.yaml#common_errors[1]": "f37c40c7174fcbdd",
  "course/keys/0.3.yaml#common_errors[2]": "061342d439f36e51",
  "course/keys/0.3.yaml#context[0]": "53892bb3502b6934",
@@ -131,7 +131,7 @@
  "course/keys/0.3.yaml#context[3]": "e5eb06f97792c15b",
  "course/keys/0.3.yaml#context[4]": "2d8ad40205a15896",
  "course/keys/0.3.yaml#context[5]": "fe5d38bf86a27049",
- "course/keys/0.3.yaml#context[6]": "9c2f62cd786f4dbb",
+ "course/keys/0.3.yaml#context[6]": "8c11ec9bb592f9c0",
  "course/keys/0.3.yaml#questions[C1].answer": "68f71f91f5cfc5c3",
  "course/keys/0.3.yaml#questions[C1].question": "854be768686e5848",
  "course/keys/0.3.yaml#questions[C1].rubric": "b2305c07bf4c9f8c",
@@ -147,9 +147,9 @@
  "course/keys/0.3.yaml#questions[C5].answer": "8e07fe1e30332c2d",
  "course/keys/0.3.yaml#questions[C5].question": "b9237572553e955c",
  "course/keys/0.3.yaml#questions[C5].rubric": "d880ff49a387ee50",
- "course/keys/0.3.yaml#questions[Q1].answer": "24ee3a1fb6564c2e",
- "course/keys/0.3.yaml#questions[Q1].question": "b58967c3d042d586",
- "course/keys/0.3.yaml#questions[Q1].rubric": "cbf92976419a5b89",
+ "course/keys/0.3.yaml#questions[Q1].answer": "692dfe7ade94e273",
+ "course/keys/0.3.yaml#questions[Q1].question": "0af4d25238a1aae3",
+ "course/keys/0.3.yaml#questions[Q1].rubric": "9b2ee274037cd889",
  "course/keys/0.3.yaml#questions[Q2].answer": "9da79bb95335fa6a",
  "course/keys/0.3.yaml#questions[Q2].question": "85e5e0a8ff88995f",
  "course/keys/0.3.yaml#questions[Q2].rubric": "3cc7c5008e1b6541",
@@ -172,5 +172,5 @@
  "src/content/docs/guide/how-to-use.mdx": "13b3ea022ad2bb05",
  "src/content/docs/guide/profile.mdx": "48fff5e5c158ee14",
  "src/content/docs/index.mdx": "a4f36824d8a776ee",
- "src/content/docs/lessons/0-3-probability.mdx": "1d6cb418feaa8e2d"
+ "src/content/docs/lessons/0-3-probability.mdx": "ddb6f2c01bdc452e"
 }

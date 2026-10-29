@@ -145,17 +145,17 @@ Look at three cases.
 
 **$\rho = 1$**: the right side is a perfect square, and $\sigma_P = w\sigma_A + (1-w)\sigma_B$. The portfolio standard deviation equals the weighted average, so there is no benefit.
 
-**$\rho = 0$**: the covariance term is 0, but
+**$\rho = 0$**: the covariance term is 0, and
 
 $$
-\sigma_P = \sqrt{w^2\sigma_A^2 + (1-w)^2\sigma_B^2} < w\sigma_A + (1-w)\sigma_B
+\sigma_P = \sqrt{w^2\sigma_A^2 + (1-w)^2\sigma_B^2}
 $$
 
-because $\sqrt{a^2 + b^2} < a + b$ for positive $a, b$ (after squaring both sides, the right side has an extra $2ab$). So in this case the benefit comes from the fact that **variances add, but standard deviations do not**. It does not come from the covariance term. Compare a right triangle: the hypotenuse is shorter than the sum of the other two sides. Two uncorrelated sources of variation are like two perpendicular directions.
+Is this larger or smaller than the weighted average $w\sigma_A + (1-w)\sigma_B$, and why? Work it out yourself in <Ref check="Q1" />.
 
-**The general case**: the covariance term only changes the size of the benefit. When $\rho > 0$ the benefit is smaller; when $\rho < 0$ it is larger; when $\rho = 1$ it is exactly 0. When $\rho = -1$ you can choose a weight that makes $\sigma_P = 0$ (<Ref check="Q6" />).
+**$\rho = -1$**: you can choose a weight that makes $\sigma_P = 0$ (<Ref check="Q6" />).
 
-Conclusion: **as long as $\rho < 1$, there is a benefit from <Def id="diversification">diversification</Def>. Diversification does not require negative correlation.** In reality, the correlation between most assets is between 0 and 1, so diversification helps but cannot remove all risk (<Ref concept="systematic-risk" />).
+When the portfolio standard deviation is lower than the weighted average of the standard deviations of the assets, we say that the portfolio benefits from <Def id="diversification">diversification</Def>. In reality, the correlation between most assets is between 0 and 1. How far the risk can go down when you hold many assets is the topic of <Ref check="Q7" />.
 
 <Figure id="6-1" title="Portfolio standard deviation against the weight in A. $\sigma_A = 20\%$, $\sigma_B = 10\%$." observe="Move $\rho$ and compare the portfolio curve with the dashed weighted-average line. At $\rho = 1$ they coincide; the smaller $\rho$ is, the further the curve bends down.">
 	<DiversificationSlider />
@@ -168,7 +168,7 @@ Conclusion: **as long as $\rho < 1$, there is a benefit from <Def id="diversific
 - Expected value: the probability-weighted average. Variance: the probability-weighted average of squared deviations (%²). Standard deviation: the square root of the variance (%).
 - Covariance: positive when the deviations from each expected value have the same direction, negative when they have opposite directions. Correlation coefficient: the covariance scaled to $[-1, 1]$.
 - The expected value of a portfolio is a weighted average; the variance of a portfolio has an extra covariance term and is **not** a weighted average.
-- As long as $\rho < 1$ there is a benefit from diversification; at $\rho = 0$ the benefit comes from the fact that variances add but standard deviations do not.
+- At $\rho = 1$ the portfolio standard deviation equals the weighted average, so there is no benefit from diversification.
 
 <CheckAll />
 
