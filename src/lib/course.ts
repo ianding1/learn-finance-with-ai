@@ -37,8 +37,6 @@ export interface Question {
 	section?: string;
 	/** quiz questions only: 'judge' (true / false / uncertain with reasons) or 'problem' */
 	part?: 'judge' | 'problem';
-	/** quiz questions only: suggested time in minutes */
-	minutes?: number;
 	level?: string;
 	star?: boolean;
 	/** quiz questions only; check questions and exercises are not scored */

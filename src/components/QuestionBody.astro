@@ -1,5 +1,5 @@
 ---
-// One question: label, result, points and suggested time (quiz questions only), and text. Answers are not entered on the site; the learner writes
+// One question: label, result, points (quiz questions only) and text. Answers are not entered on the site; the learner writes
 // them on paper (or types them after the copied prompt) and submits them at the end of the lesson.
 // The result (not answered / OK / needs revision) is filled in from the stored progress by
 // src/scripts/questions.ts.
@@ -21,10 +21,7 @@ const { q, lang, lessonId, label } = Astro.props;
 		<span class="lfwai-q-meta">
 			<span class="lfwai-q-status" data-q-status={q.id} hidden></span>
 			{q.points != null && (
-				<span class="lfwai-q-points">
-					{t(lang, 'points', { n: q.points })}
-					{q.minutes != null && ` · ${t(lang, 'minutes', { n: q.minutes })}`}
-				</span>
+				<span class="lfwai-q-points">{t(lang, 'points', { n: q.points })}</span>
 			)}
 		</span>
 	</div>

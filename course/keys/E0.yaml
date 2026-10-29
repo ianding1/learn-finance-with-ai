@@ -40,7 +40,6 @@ questions:
     part: judge
     level: medium
     points: 4
-    minutes: 5
     concepts: [growing-perpetuity, annuity-due, present-value]
     expected: { pv: "2000", pv_due: "2160" }
     question:
@@ -66,7 +65,6 @@ questions:
     part: judge
     level: medium
     points: 4
-    minutes: 5
     concepts: [lagrange-multiplier, first-order-condition, corner-solution, second-order-condition]
     question:
       zh: |-
@@ -91,7 +89,6 @@ questions:
     part: judge
     level: hard
     points: 4
-    minutes: 5
     concepts: [portfolio-variance, diversification, correlation]
     expected: { sd: "19.62" }
     question:
@@ -119,7 +116,6 @@ questions:
     part: judge
     level: hard
     points: 4
-    minutes: 5
     concepts: [standard-error, sample-mean]
     question:
       zh: |-
@@ -144,7 +140,6 @@ questions:
     part: judge
     level: hard
     points: 4
-    minutes: 5
     concepts: [ols, regression-coefficient, correlation, r-squared]
     question:
       zh: |-
@@ -170,7 +165,6 @@ questions:
     part: problem
     level: medium
     points: 16
-    minutes: 20
     concepts: [annuity, annuity-due, future-value, ear, apr]
     expected: { payment: "995.51", payment_due: "990.55", apr: "7.12", years: "24", exact: "23.8" }
     question:
@@ -214,7 +208,6 @@ questions:
     part: problem
     level: medium
     points: 16
-    minutes: 20
     concepts: [profit-maximization, marginal-cost, marginal-revenue, fixed-cost, variable-cost, first-order-condition]
     expected: { q: "10", profit: "100", q_tax: "8", profit_tax: "28", profit_fee: "-200" }
     question:
@@ -258,7 +251,6 @@ questions:
     part: problem
     level: hard
     points: 18
-    minutes: 25
     concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, diversification, correlation]
     expected: { w: "0.18", sd: "11.45", w_unconstrained: "-0.3", threshold: "0.6" }
     question:
@@ -302,7 +294,6 @@ questions:
     part: problem
     level: medium
     points: 15
-    minutes: 15
     concepts: [standard-error, t-statistic, confidence-interval, statistical-significance, median, right-skew]
     expected: { se: "3.16", t: "1.26", lo: "-2.20", hi: "10.20", years: "25", median: "38.94" }
     question:
@@ -338,7 +329,6 @@ questions:
     part: problem
     level: medium
     points: 15
-    minutes: 15
     concepts: [regression-coefficient, r-squared, t-statistic, confidence-interval, omitted-variable-bias]
     expected: { t_a: "1.6", lo: "0.91", hi: "1.69" }
     question:
