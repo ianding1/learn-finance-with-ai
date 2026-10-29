@@ -664,6 +664,72 @@ giffen-good:
     zh: 收入效应超过替代效应、价格上升时需求量反而增加的劣等品。
     en: An inferior good whose income effect outweighs the substitution effect, so that the quantity demanded rises when its price rises.
 
+# ---------- 1.3 ----------
+
+intertemporal-budget-constraint:
+  defined_in: "1.3"
+  zh: 跨期预算约束
+  en: intertemporal budget constraint
+  short:
+    zh: 各期消费的现值等于各期收入的现值。
+    en: "The present value of consumption over time equals the present value of income."
+
+time-preference:
+  defined_in: "1.3"
+  zh: 时间偏好
+  en: time preference
+  short:
+    zh: 对现在的消费比对未来的消费看得更重。
+    en: "Valuing consumption now more than the same consumption in the future."
+
+euler-equation:
+  defined_in: "1.3"
+  zh: Euler 方程
+  en: Euler equation
+  short:
+    zh: 跨期最优消费的条件 u′(c₁) = β(1 + r)u′(c₂)。
+    en: "The condition for the best consumption over time, u′(c₁) = β(1 + r)u′(c₂)."
+
+consumption-smoothing:
+  defined_in: "1.3"
+  zh: 消费平滑
+  en: consumption smoothing
+  short:
+    zh: 通过储蓄和借款，使各期消费比收入更平稳。
+    en: "Using saving and borrowing to keep consumption steadier over time than income."
+
+inflation:
+  defined_in: "1.3"
+  zh: 通货膨胀率
+  en: inflation rate
+  short:
+    zh: 物价总水平的年增长率。
+    en: "The yearly growth rate of the general price level."
+
+nominal-interest-rate:
+  defined_in: "1.3"
+  zh: 名义利率
+  en: nominal interest rate
+  short:
+    zh: 用货币衡量的回报率。
+    en: "The rate of return measured in money."
+
+real-interest-rate:
+  defined_in: "1.3"
+  zh: 实际利率
+  en: real interest rate
+  short:
+    zh: 用购买力衡量的回报率，约等于名义利率减通胀率。
+    en: "The rate of return measured in purchasing power, about the nominal rate minus inflation."
+
+fisher-equation:
+  defined_in: "1.3"
+  zh: Fisher 方程
+  en: Fisher equation
+  short:
+    zh: 1 + 实际利率 = (1 + 名义利率) / (1 + 通胀率)。
+    en: "1 + real rate = (1 + nominal rate) / (1 + inflation)."
+
 expected-utility:
   defined_in: "1.4"
   zh: 期望效用

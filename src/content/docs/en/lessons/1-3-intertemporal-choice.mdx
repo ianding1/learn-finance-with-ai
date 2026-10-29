@@ -1,0 +1,118 @@
+---
+title: 1.3 Intertemporal Choice
+description: "The two-period consumption model (the Fisher model): the intertemporal budget constraint, time preference, the Euler equation and consumption smoothing, the substitution and income effects of interest rates on saving, and nominal and real interest rates."
+lesson: "1.3"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import FisherTwoPeriod from '../../../../components/widgets/FisherTwoPeriod.astro';
+
+## The two-period model [#two-period]
+
+Saving means exchanging consumption today for consumption tomorrow; borrowing is the reverse. The consumer of <Ref lesson="1.2" /> chose between two goods; this lesson replaces the two "goods" with consumption today, $c_1$, and consumption tomorrow, $c_2$. This framework is called the Fisher model.
+
+The consumer has income $y_1$ today and $y_2$ tomorrow and can save or borrow at the interest rate $r$. Saving $s = y_1 - c_1$ today (borrowing when it is negative) leaves $c_2 = y_2 + (1 + r)\,s$ to spend tomorrow. Eliminating $s$:
+
+$$
+c_1 + \frac{c_2}{1 + r} = y_1 + \frac{y_2}{1 + r}
+$$
+
+This is the <Def id="intertemporal-budget-constraint">intertemporal budget constraint</Def>: the present value of consumption equals the present value of income (<Ref concept="present-value" />). The right-hand side is called the consumer's wealth $W$.
+
+Example: $y_1 = 80$, $y_2 = 22$, $r = 10\%$. Wealth is $W = 80 + \frac{22}{1.1} = 100$. Spending all income today leaves only 22 for tomorrow; spending 1 less today gives 1.1 more tomorrow.
+
+In the $(c_1, c_2)$ plane, the budget line passes through the income point $(y_1, y_2)$ with slope $-(1 + r)$: the price of consumption today, measured in consumption tomorrow, is $1 + r$. To the left of the income point the consumer saves; to the right he borrows.
+
+<Check id="C1" />
+
+## Time preference and the best consumption [#optimal-consumption]
+
+People usually value consumption now more highly. A common utility function is
+
+$$
+U = u(c_1) + \beta\,u(c_2), \qquad 0 < \beta < 1
+$$
+
+$\beta$ is the subjective discount factor: 1 unit of utility tomorrow is worth only $\beta$ units today. This weight on the present is called <Def id="time-preference">time preference</Def> and is often expressed by the rate of time preference $\rho$, with $\beta = \frac{1}{1 + \rho}$. $u$ is increasing and concave (for example, $u(c) = \ln c$): the more one consumes, the less utility one more unit adds.
+
+Using the condition of <Ref lesson="1.2" />, the marginal rate of substitution between consumption today and tomorrow equals the "price ratio" $1 + r$:
+
+$$
+\frac{u'(c_1)}{\beta\,u'(c_2)} = 1 + r \qquad\Longleftrightarrow\qquad u'(c_1) = \beta\,(1 + r)\,u'(c_2)
+$$
+
+This is the <Def id="euler-equation">Euler equation</Def>. Its meaning: consuming 1 unit less today loses $u'(c_1)$; saved, it becomes $1 + r$ units tomorrow, worth $\beta\,(1 + r)\,u'(c_2)$ in today's terms. At the optimum the two are equal.
+
+- If $\beta\,(1 + r) = 1$, the Euler equation requires $u'(c_1) = u'(c_2)$, that is, $c_1 = c_2$: consumption is perfectly smooth over the two periods.
+- If $\beta\,(1 + r) > 1$, the interest rate more than makes up for impatience, and consumption is higher tomorrow than today; below 1, the reverse.
+
+Because $u$ is concave, people prefer steady consumption over time rather than consumption that rises and falls with income. Saving when income is high and borrowing or drawing on savings when income is low, to keep consumption steady, is called <Def id="consumption-smoothing">consumption smoothing</Def>. Saving for retirement is consumption smoothing: income falls after retirement, but consumption need not fall as much.
+
+Example: $u(c) = \ln c$, $\beta = 0.95$, the rest as above. $u'(c) = \frac{1}{c}$, so the Euler equation gives $c_2 = \beta\,(1 + r)\,c_1 = 1.045\,c_1$. Substituting into the budget constraint:
+
+$$
+c_1 + \frac{1.045\,c_1}{1.1} = 100 \quad\Rightarrow\quad c_1 = \frac{100}{1.95} \approx 51.28, \qquad c_2 \approx 53.59
+$$
+
+Saving today is $80 - 51.28 = 28.72$.
+
+<Check id="C2" />
+
+## Interest rates and saving [#interest-rate]
+
+Do people save more when the interest rate rises? Use the decomposition of <Ref lesson="1.2" />:
+
+- Substitution effect: the "price" of consumption today, $1 + r$, rises, so consumption today becomes relatively more expensive; the substitution effect lowers $c_1$ and raises saving.
+- Income effect: a saver earns more interest on the same savings and becomes richer, so he wants to consume more in every period, including $c_1$; a borrower pays more interest and becomes poorer, so he lowers $c_1$.
+
+For a borrower, both effects lead to less borrowing ($c_1$ falls). For a saver, the two effects go in opposite directions, and the change in saving depends on which is stronger. So "a higher interest rate always makes people save more" does not hold in theory, which is also why empirical studies often find that saving responds only weakly to interest rates.
+
+<Figure id="3-1" title="$U = \ln c_1 + 0.95 \ln c_2$, income today $y_1 = 80$. The budget line passes through the income point with slope $-(1 + r)$." observe="Change the interest rate and watch the budget line turn around the income point and the best consumption move; then change tomorrow's income and compare how savers and borrowers respond.">
+	<FisherTwoPeriod />
+</Figure>
+
+<Check id="C3" />
+
+## Nominal and real interest rates [#real-rate]
+
+The interest rate a bank quotes is measured in money: deposit 100 dollars and get 105 dollars back a year later. But what we care about is how much we can buy. The yearly growth rate of the general price level is called the <Def id="inflation">inflation rate</Def>, written $\pi$.
+
+- The rate of return measured in money is the <Def id="nominal-interest-rate">nominal interest rate</Def>, written $i$.
+- The rate of return measured in purchasing power is the <Def id="real-interest-rate">real interest rate</Def>, written $r$.
+
+Note: "nominal" here is in contrast to inflation and is not the same as the "nominal annual rate" (APR) of <Ref lesson="0.1" />, which is in contrast to the compounding frequency.
+
+Today 1 dollar buys 1 unit of goods. Saved, it becomes $1 + i$ dollars a year later, while the price of the goods becomes $1 + \pi$, so it buys $\frac{1 + i}{1 + \pi}$ units:
+
+$$
+1 + r = \frac{1 + i}{1 + \pi} \qquad\Longrightarrow\qquad r \approx i - \pi
+$$
+
+This is the <Def id="fisher-equation">Fisher equation</Def>. The approximation is accurate enough when interest rates and inflation are not high. Example: a nominal rate of 5% and inflation of 3% give a real rate of $\frac{1.05}{1.03} - 1 \approx 1.94\%$, about 2% by the approximation.
+
+When a loan is signed, future inflation is not yet known, so two real rates must be distinguished:
+
+- the ex ante real rate uses expected inflation; it is the rate on which borrowers and lenders base their decisions;
+- the ex post real rate uses the inflation that actually occurs; it is the return actually received. When inflation is higher than expected, borrowers gain and savers lose.
+
+The $r$ in the Fisher model is the real interest rate, because $c_1$ and $c_2$ are quantities of consumption, not amounts of money. Present value calculations must also be consistent: discount nominal cash flows at the nominal rate and real cash flows (expressed in today's purchasing power) at the real rate. <Ref lesson="3.6" /> introduces inflation-protected bonds (TIPS), which lock in a real rate directly.
+
+<Check id="C4" />
+
+## Summary [#summary]
+
+- Intertemporal budget constraint: the present value of consumption equals the present value of income; the budget line passes through the income point with slope $-(1 + r)$.
+- The best consumption satisfies the Euler equation $u'(c_1) = \beta\,(1 + r)\,u'(c_2)$; when $\beta\,(1 + r) = 1$, consumption is perfectly smooth.
+- A higher interest rate: a borrower always borrows less; for a saver the substitution and income effects go in opposite directions, and saving may rise or fall.
+- Fisher equation: $1 + r = \frac{1 + i}{1 + \pi}$, $r \approx i - \pi$. Discount nominal cash flows at nominal rates and real cash flows at real rates.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

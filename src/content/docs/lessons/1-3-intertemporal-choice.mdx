@@ -1,0 +1,118 @@
+---
+title: 1.3 跨期选择
+description: 两期消费模型（Fisher 模型）：跨期预算约束、时间偏好、Euler 方程与消费平滑，利率变化对储蓄的替代效应与收入效应，以及名义利率与实际利率。
+lesson: "1.3"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Exercises from '../../../components/Exercises.astro';
+import CheckAll from '../../../components/CheckAll.astro';
+import FisherTwoPeriod from '../../../components/widgets/FisherTwoPeriod.astro';
+
+## 两期模型 [#two-period]
+
+储蓄就是把今天的消费换成明天的消费，借款则相反。<Ref lesson="1.2" /> 的消费者在两种商品之间选择；这一课把两种“商品”换成今天的消费 $c_1$ 和明天的消费 $c_2$，这个框架叫 Fisher 模型。
+
+消费者今天的收入是 $y_1$，明天的收入是 $y_2$，可以按利率 $r$ 存钱或借钱。今天储蓄 $s = y_1 - c_1$（为负时就是借款），明天就有 $c_2 = y_2 + (1 + r)\,s$ 可以花。消去 $s$：
+
+$$
+c_1 + \frac{c_2}{1 + r} = y_1 + \frac{y_2}{1 + r}
+$$
+
+这是<Def id="intertemporal-budget-constraint">跨期预算约束</Def>（intertemporal budget constraint）：消费的现值等于收入的现值（<Ref concept="present-value" />）。右边叫消费者的财富 $W$。
+
+例：$y_1 = 80$，$y_2 = 22$，$r = 10\%$。财富 $W = 80 + \frac{22}{1.1} = 100$。今天把收入全部花掉，明天就只有 22；今天少花 1，明天就多 1.1。
+
+在 $(c_1, c_2)$ 平面上，预算线经过收入点 $(y_1, y_2)$，斜率是 $-(1 + r)$：今天的消费用明天的消费来衡量的价格是 $1 + r$。收入点左边是储蓄，右边是借款。
+
+<Check id="C1" />
+
+## 时间偏好与最优消费 [#optimal-consumption]
+
+人们通常更看重眼前的消费。一种常用的效用函数是
+
+$$
+U = u(c_1) + \beta\,u(c_2), \qquad 0 < \beta < 1
+$$
+
+$\beta$ 是主观折现因子：明天的 1 单位效用只相当于今天的 $\beta$ 单位。这种对现在的偏重叫<Def id="time-preference">时间偏好</Def>（time preference），常用时间偏好率 $\rho$ 表示，$\beta = \frac{1}{1 + \rho}$。$u$ 是递增、凹的函数（例如 $u(c) = \ln c$）：消费越多，再多消费一单位带来的效用增加越小。
+
+用 <Ref lesson="1.2" /> 的条件：今天和明天消费之间的边际替代率等于“价格比” $1 + r$，
+
+$$
+\frac{u'(c_1)}{\beta\,u'(c_2)} = 1 + r \qquad\Longleftrightarrow\qquad u'(c_1) = \beta\,(1 + r)\,u'(c_2)
+$$
+
+这叫 <Def id="euler-equation">Euler 方程</Def>（Euler equation）。它的含义是：今天少消费 1 单位，损失 $u'(c_1)$；存起来明天得到 $1 + r$ 单位，按今天衡量值 $\beta\,(1 + r)\,u'(c_2)$。最优时两者相等。
+
+- 如果 $\beta\,(1 + r) = 1$，Euler 方程要求 $u'(c_1) = u'(c_2)$，即 $c_1 = c_2$：消费在两期之间完全平滑。
+- 如果 $\beta\,(1 + r) > 1$，利率足以补偿耐心不足，明天的消费比今天多；小于 1 时则相反。
+
+由于 $u$ 是凹的，人们希望各期的消费比较平稳，而不是随收入大起大落。收入高的时候储蓄、收入低的时候借款或动用储蓄，以保持消费平稳，这叫<Def id="consumption-smoothing">消费平滑</Def>（consumption smoothing）。为退休储蓄就是消费平滑：退休后收入下降，消费不必同样下降。
+
+例：$u(c) = \ln c$，$\beta = 0.95$，其他同上。$u'(c) = \frac{1}{c}$，Euler 方程给出 $c_2 = \beta\,(1 + r)\,c_1 = 1.045\,c_1$。代入预算约束：
+
+$$
+c_1 + \frac{1.045\,c_1}{1.1} = 100 \quad\Rightarrow\quad c_1 = \frac{100}{1.95} \approx 51.28, \qquad c_2 \approx 53.59
+$$
+
+今天储蓄 $80 - 51.28 = 28.72$。
+
+<Check id="C2" />
+
+## 利率变化与储蓄 [#interest-rate]
+
+利率上升时，人们会储蓄更多吗？用 <Ref lesson="1.2" /> 的分解来看：
+
+- 替代效应：今天消费的“价格” $1 + r$ 上升，今天的消费相对变贵，替代效应使 $c_1$ 下降、储蓄增加。
+- 收入效应：对储蓄者来说，同样的储蓄能得到更多利息，他变得更富有，会想增加各期的消费，包括 $c_1$；对借款者来说，利息负担加重，他变得更穷，会减少 $c_1$。
+
+对借款者，两个效应都使他少借（$c_1$ 下降）。对储蓄者，两个效应方向相反，储蓄的变化取决于哪个更强。所以“利率上升一定使人们多储蓄”在理论上并不成立，这也是为什么实证研究中储蓄对利率的反应往往很弱。
+
+<Figure id="3-1" title="$U = \ln c_1 + 0.95 \ln c_2$，今天的收入 $y_1 = 80$。预算线经过收入点，斜率为 $-(1 + r)$。" observe="改变利率，看预算线怎样绕收入点转动、最优消费怎样移动；再改变明天的收入，比较储蓄者和借款者的反应。">
+	<FisherTwoPeriod />
+</Figure>
+
+<Check id="C3" />
+
+## 名义利率与实际利率 [#real-rate]
+
+银行报出的利率是用货币衡量的：存 100 美元，一年后拿回 105 美元。但我们关心的是能买到多少东西。物价总水平的年增长率叫<Def id="inflation">通货膨胀率</Def>（inflation rate），记为 $\pi$。
+
+- 用货币衡量的回报率叫<Def id="nominal-interest-rate">名义利率</Def>（nominal interest rate），记为 $i$。
+- 用购买力衡量的回报率叫<Def id="real-interest-rate">实际利率</Def>（real interest rate），记为 $r$。
+
+注意：这里的“名义”是相对于通胀而言的，与 <Ref lesson="0.1" /> 中“名义年利率”（APR，相对于复利频率而言）不是一回事。
+
+今天的 1 美元能买 1 单位商品。存起来，一年后有 $1 + i$ 美元，而商品的价格变为 $1 + \pi$，所以能买 $\frac{1 + i}{1 + \pi}$ 单位商品：
+
+$$
+1 + r = \frac{1 + i}{1 + \pi} \qquad\Longrightarrow\qquad r \approx i - \pi
+$$
+
+这叫 <Def id="fisher-equation">Fisher 方程</Def>（Fisher equation）。近似式在利率和通胀都不高时足够准确。例：名义利率 5%，通胀 3%，实际利率 $\frac{1.05}{1.03} - 1 \approx 1.94\%$，近似为 2%。
+
+借贷合同签订时，未来的通胀还不知道，所以要区分两个实际利率：
+
+- 事前（ex ante）实际利率：用预期通胀计算，是借贷双方决策时依据的利率；
+- 事后（ex post）实际利率：用实际发生的通胀计算，是实际得到的回报。通胀高于预期时，借款者受益、储蓄者受损。
+
+Fisher 模型中的 $r$ 指的是实际利率，因为 $c_1$ 和 $c_2$ 是消费的数量，不是金额。做现值计算时也要保持一致：名义现金流用名义利率折现，实际现金流（用今天的购买力表示）用实际利率折现。<Ref lesson="3.6" /> 会介绍直接锁定实际利率的通胀保值债券（TIPS）。
+
+<Check id="C4" />
+
+## 小结 [#summary]
+
+- 跨期预算约束：消费的现值等于收入的现值；预算线经过收入点，斜率为 $-(1 + r)$。
+- 最优消费满足 Euler 方程 $u'(c_1) = \beta\,(1 + r)\,u'(c_2)$；$\beta\,(1 + r) = 1$ 时消费完全平滑。
+- 利率上升：借款者一定少借；储蓄者的替代效应和收入效应方向相反，储蓄可能增加也可能减少。
+- Fisher 方程：$1 + r = \frac{1 + i}{1 + \pi}$，$r \approx i - \pi$。名义现金流用名义利率折现，实际现金流用实际利率折现。
+
+<CheckAll />
+
+## 练习题 [#exercises]
+
+<Exercises />

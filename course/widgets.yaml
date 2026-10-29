@@ -72,3 +72,12 @@ slutsky:
     M: 40
     p_y: 1
     p_x_original: 2
+
+fisher:
+  component: src/components/widgets/FisherTwoPeriod.astro
+  params:
+    r: { min: 0, max: 30, step: 1, default: 10 }
+    y2: { min: 0, max: 60, step: 2, default: 22 }
+  fixed:
+    y1: 80
+    beta: 0.95
