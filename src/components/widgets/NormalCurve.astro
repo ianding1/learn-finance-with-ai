@@ -1,11 +1,12 @@
 ---
-// Figure 1-1 of lesson 0.4: the density of N(8, 16²) with the ranges μ ± σ and μ ± 2σ shaded. Static.
+// Figure 1-1 of lesson 0.4: the density of N(8, 16²) with the ranges μ ± σ and μ ± 2σ shaded and labeled
+// with the probability of each band (68% in the middle, 13.5% on each side, 2.5% in each tail). Static.
 import { toLang } from '../../i18n/ui';
 
 const lang = toLang(Astro.locals.starlightRoute.lang);
 const L = {
-	zh: { axis: '年收益（%）', one: '约 68%', two: '约 95%', tail: '约 2.5%' },
-	en: { axis: 'Annual return (%)', one: 'about 68%', two: 'about 95%', tail: 'about 2.5%' },
+	zh: { axis: '年收益（%）', one: '约 68%', two: '约 13.5%', tail: '约 2.5%' },
+	en: { axis: 'Annual return (%)', one: 'about 68%', two: 'about 13.5%', tail: 'about 2.5%' },
 }[lang];
 
 const mu = 8;
@@ -46,7 +47,8 @@ const layouts = [
 		))}
 		<text class="viz-tick" x={W / 2} y={H - 8} text-anchor="middle">{L.axis}</text>
 		<text class="viz-small viz-halo" x={X(mu)} y={Y(pdf(mu) * 0.45)} text-anchor="middle">{L.one}</text>
-		<text class="viz-small viz-halo" x={X(mu)} y={Y(pdf(mu) * 0.12)} text-anchor="middle">{L.two}</text>
+		<text class="viz-small viz-halo" x={X(mu - 1.5 * sigma)} y={Y(pdf(mu) * 0.12)} text-anchor="middle">{L.two}</text>
+		<text class="viz-small viz-halo" x={X(mu + 1.5 * sigma)} y={Y(pdf(mu) * 0.12)} text-anchor="middle">{L.two}</text>
 		<text class="viz-small viz-halo" x={X(mu - 2.6 * sigma)} y={Y(pdf(mu) * 0.2)} text-anchor="middle">{L.tail}</text>
 		<text class="viz-small viz-halo" x={X(mu + 2.6 * sigma)} y={Y(pdf(mu) * 0.2)} text-anchor="middle">{L.tail}</text>
 	</svg>

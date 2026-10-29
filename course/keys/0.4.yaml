@@ -229,9 +229,9 @@ questions:
         In [[fig:5-1]], set the number of years to 5 and press "Draw again" several times. About how many intervals contain the true mean? Why is it often fewer than 95?
     answer:
       zh: |-
-        通常在 85 到 92 个之间，常常少于 95 个。原因：区间用样本标准差 $s$ 代替 $\sigma$，$n = 5$ 时 $s$ 的误差很大，有时明显偏小，区间就太窄；1.96 没有考虑这部分误差。应改用 t 分布的临界值（$n = 5$ 时约 2.78），区间更宽，覆盖率回到约 95%。
+        每次抽样的结果不同，大约在 80 到 95 个之间，平均约 88 个，常常少于 95 个。原因：区间用样本标准差 $s$ 代替 $\sigma$，$n = 5$ 时 $s$ 的误差很大，有时明显偏小，区间就太窄；1.96 没有考虑这部分误差。应改用 t 分布的临界值（$n = 5$ 时约 2.78），区间更宽，覆盖率回到约 95%。
       en: |-
-        Usually between 85 and 92, often fewer than 95. The reason: the interval uses the sample standard deviation $s$ instead of $\sigma$, and with $n = 5$ the error in $s$ is large; sometimes $s$ is clearly too small and the interval is too narrow. 1.96 does not account for this error. The critical value of the t distribution (about 2.78 for $n = 5$) should be used instead; the intervals are then wider and about 95% of them cover the true mean.
+        The count differs from draw to draw, roughly between 80 and 95, about 88 on average, and often fewer than 95. The reason: the interval uses the sample standard deviation $s$ instead of $\sigma$, and with $n = 5$ the error in $s$ is large; sometimes $s$ is clearly too small and the interval is too narrow. 1.96 does not account for this error. The critical value of the t distribution (about 2.78 for $n = 5$) should be used instead; the intervals are then wider and about 95% of them cover the true mean.
     rubric:
       zh:
         - "观察到少于 95 个（具体数目因抽样而异）。"

@@ -69,12 +69,15 @@ export function initCoinFlip() {
 						}),
 					);
 				}
-				for (const [v, name, cls, dy] of [
-					[mean, labels.mean, 'viz-mean', 0],
-					[median, labels.median, 'viz-median', 14],
+				// The mean is to the right of the median, so its label goes on the right and the median's on the left.
+				for (const [v, name, cls, side] of [
+					[mean, labels.mean, 'viz-mean', 1],
+					[median, labels.median, 'viz-median', -1],
 				] as const) {
 					box.appendChild(el('line', { class: cls, x1: X(v), x2: X(v), y1: g.pad.t - 6, y2: g.H - g.pad.b }));
-					box.appendChild(el('text', { class: 'viz-small viz-halo', x: X(v) + 4, y: g.pad.t + 4 + dy }, name));
+					box.appendChild(
+						el('text', { class: 'viz-small viz-halo', x: X(v) + 4 * side, y: g.pad.t + 4, 'text-anchor': side > 0 ? 'start' : 'end' }, name),
+					);
 				}
 			}
 
