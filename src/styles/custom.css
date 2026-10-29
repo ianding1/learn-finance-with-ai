@@ -916,70 +916,47 @@ body {
 	height: auto;
 	overflow: visible;
 }
-.lfwai-hero-axis {
-	fill: none;
-	stroke: var(--viz-grid);
-	stroke-width: 1.5;
+.lfwai-hero-band {
+	fill: var(--viz-a);
+	opacity: 0.12;
 }
-.lfwai-hero-dot {
+.lfwai-hero-median {
+	fill: none;
+	stroke: var(--viz-a);
+	stroke-width: 3;
+	stroke-linecap: round;
+}
+.lfwai-hero-path {
+	fill: none;
+	stroke: var(--viz-b);
+	stroke-width: 1.75;
+	stroke-linejoin: round;
+}
+.lfwai-hero-origin {
 	fill: var(--viz-a);
 }
-.lfwai-hero-lower {
-	fill: none;
-	stroke: var(--viz-a);
-	stroke-width: 2;
-	stroke-dasharray: 4 5;
-	opacity: 0.5;
-}
-.lfwai-hero-line {
-	fill: none;
-	stroke: var(--viz-a);
-	stroke-width: 3.5;
-	stroke-linecap: round;
-}
-.lfwai-hero-cml {
-	fill: none;
-	stroke: var(--viz-b);
-	stroke-width: 2.5;
-	stroke-linecap: round;
-}
-.lfwai-hero-rf {
-	fill: var(--sl-color-bg);
-	stroke: var(--viz-b);
-	stroke-width: 2.5;
-}
-.lfwai-hero-tangent {
+.lfwai-hero-tip {
 	fill: var(--viz-b);
 	stroke: var(--sl-color-bg);
 	stroke-width: 3;
 }
-/* The frontier and the capital market line draw once on load; the two points follow. */
+/* The bands fade in, then the median and the simulated path draw once; the end point follows. */
 @media (prefers-reduced-motion: no-preference) {
-	.lfwai-hero-dot {
-		animation: lfwai-appear 0.8s ease-out both;
+	.lfwai-hero-band {
+		animation: lfwai-appear-band 0.9s ease-out both;
 	}
-	.lfwai-hero-line,
-	.lfwai-hero-cml {
+	.lfwai-hero-median,
+	.lfwai-hero-path {
 		stroke-dasharray: 1;
-		animation: lfwai-draw 1.2s cubic-bezier(0.55, 0, 0.45, 1) both;
+		animation: lfwai-draw 1.8s cubic-bezier(0.45, 0, 0.55, 1) 0.3s both;
 	}
-	.lfwai-hero-line {
-		animation-delay: 0.4s;
+	.lfwai-hero-tip {
+		animation: lfwai-appear 0.4s ease-out 2.1s both;
 	}
-	.lfwai-hero-cml {
-		animation-delay: 1.4s;
-	}
-	.lfwai-hero-lower,
-	.lfwai-hero-rf,
-	.lfwai-hero-tangent {
-		animation: lfwai-appear 0.4s ease-out both;
-	}
-	.lfwai-hero-rf {
-		animation-delay: 1.3s;
-	}
-	.lfwai-hero-tangent {
-		animation-delay: 2.4s;
-	}
+}
+@keyframes lfwai-appear-band {
+	from { opacity: 0; }
+	to { opacity: 0.12; }
 }
 @keyframes lfwai-draw {
 	from { stroke-dashoffset: 1; }
