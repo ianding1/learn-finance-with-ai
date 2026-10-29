@@ -532,6 +532,64 @@ correlation-vs-causation:
     zh: 两个变量相关，不代表一个是另一个的原因。
     en: Two variables being correlated does not mean that one causes the other.
 
+# ---------- 1.1 ----------
+
+demand:
+  defined_in: "1.1"
+  zh: 需求
+  en: demand
+  short:
+    zh: 在其他条件不变时，一种商品的价格与买方愿意并且能够购买的数量之间的关系。
+    en: The relation between the price of a good and the quantity that buyers are willing and able to buy, other things being equal.
+
+supply:
+  defined_in: "1.1"
+  zh: 供给
+  en: supply
+  short:
+    zh: 在其他条件不变时，一种商品的价格与卖方愿意并且能够出售的数量之间的关系。
+    en: The relation between the price of a good and the quantity that sellers are willing and able to sell, other things being equal.
+
+market-equilibrium:
+  defined_in: "1.1"
+  zh: 市场均衡
+  en: market equilibrium
+  short:
+    zh: 需求量等于供给量时的价格和数量。
+    en: The price and quantity at which the quantity demanded equals the quantity supplied.
+
+comparative-statics:
+  defined_in: "1.1"
+  zh: 比较静态
+  en: comparative statics
+  short:
+    zh: 比较某个外部条件改变前后的两个均衡，而不研究调整的过程。
+    en: Comparing the equilibria before and after a change in an outside condition, without studying the path of adjustment.
+
+price-elasticity:
+  defined_in: "1.1"
+  zh: 需求的价格弹性
+  en: price elasticity of demand
+  short:
+    zh: 价格变化 1% 时，需求量变化的百分比。
+    en: The percentage change in the quantity demanded when the price changes by 1%.
+
+income-elasticity:
+  defined_in: "1.1"
+  zh: 收入弹性
+  en: income elasticity
+  short:
+    zh: 收入变化 1% 时，需求量变化的百分比。
+    en: The percentage change in the quantity demanded when income changes by 1%.
+
+cross-price-elasticity:
+  defined_in: "1.1"
+  zh: 交叉价格弹性
+  en: cross-price elasticity
+  short:
+    zh: 另一种商品的价格变化 1% 时，这种商品的需求量变化的百分比。
+    en: The percentage change in the quantity demanded of a good when the price of another good changes by 1%.
+
 expected-utility:
   defined_in: "1.4"
   zh: 期望效用

@@ -1,0 +1,168 @@
+---
+title: 1.1 Supply and Demand
+description: Demand and supply, market equilibrium, comparative statics for the effects of changing conditions, and the price, income and cross-price elasticities.
+lesson: "1.1"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import SupplyDemand from '../../../../components/widgets/SupplyDemand.astro';
+
+## Demand [#demand]
+
+The quantity that buyers are willing and able to buy at a given price is the quantity demanded. The relation between the price and the quantity demanded, other things being equal, is called <Def id="demand">demand</Def>.
+
+Example: the weekly demand for coffee beans in a city is
+
+$$
+Q_d = 100 - 2P
+$$
+
+where $P$ is the price per bag (dollars) and $Q_d$ is the quantity demanded (thousand bags).
+
+| Price $P$ | Quantity demanded $Q_d$ |
+| ---: | ---: |
+| 10 | 80 |
+| 20 | 60 |
+| 30 | 40 |
+| 40 | 20 |
+
+Drawing this table as a curve gives the demand curve. By convention, economists put the price on the vertical axis and the quantity on the horizontal axis. The demand curve slopes downward: other things being equal, the higher the price, the smaller the quantity demanded. This is the law of demand. <Ref lesson="1.2" /> analyzes the reasons in detail: when the price rises, buyers turn to other goods, and the same income buys less.
+
+"Other things" include buyers' income, the prices of related goods (substitutes or complements), preferences, expectations about future prices and the number of buyers. Two kinds of change must be kept apart:
+
+- a change in the quantity demanded caused by a change in price is a movement along the same demand curve;
+- a change in demand caused by a change in other conditions is a shift of the whole demand curve. For example, when income rises, people want more coffee beans at every price, and the demand curve shifts to the right.
+
+## Supply [#supply]
+
+The quantity that sellers are willing and able to sell at a given price is the quantity supplied. The relation between the price and the quantity supplied, other things being equal, is called <Def id="supply">supply</Def>. Example:
+
+$$
+Q_s = -20 + 4P
+$$
+
+Below a price of 5 dollars no seller is willing to sell, so this equation applies only for $P \ge 5$. The supply curve slopes upward: the higher the price, the more profitable it is to produce one more unit. Recall from <Ref lesson="0.2" /> that a firm selling at the market price sets output where the price equals marginal cost (<Ref concept="marginal-cost" />); marginal cost rises with output, so the higher the price, the more the firm is willing to produce. <Ref lesson="1.5" /> derives the supply curve from cost curves.
+
+Other conditions that affect supply include the prices of inputs such as materials and wages, technology, the number of sellers and expectations about future prices. As with demand, a change in price is a movement along the supply curve, and a change in other conditions shifts the whole supply curve.
+
+## Market equilibrium [#equilibrium]
+
+The price and quantity at which the quantity demanded equals the quantity supplied are called the <Def id="market-equilibrium">market equilibrium</Def>. In the example above:
+
+$$
+100 - 2P = -20 + 4P \quad\Rightarrow\quad P^* = 20, \qquad Q^* = 100 - 2 \times 20 = 60
+$$
+
+The equilibrium price is 20 dollars per bag, and the equilibrium quantity is 60 thousand bags per week.
+
+Why does the market settle here? Suppose the price is 25 dollars: the quantity demanded is 50 and the quantity supplied is 80, so sellers cannot sell 30 thousand bags. This is a surplus. Sellers cut the price, and it falls back toward 20 dollars. Suppose the price is 15 dollars: the quantity demanded is 70 and the quantity supplied is 40, a shortage of 30 thousand bags. Buyers are willing to pay more, and the price rises. Only at the equilibrium price does no one want to change the price.
+
+<Check id="C1" />
+
+## Comparative statics [#comparative-statics]
+
+How does the equilibrium change when outside conditions change? Comparing the equilibria before and after the change, without studying the path of adjustment from one to the other, is called <Def id="comparative-statics">comparative statics</Def>.
+
+Example: incomes in the city rise, and the quantity demanded rises by 30 thousand bags at every price, so demand becomes $Q_d = 130 - 2P$. The new equilibrium:
+
+$$
+130 - 2P = -20 + 4P \quad\Rightarrow\quad P^* = 25, \qquad Q^* = 80
+$$
+
+The price rises by 5 dollars and the quantity by 20 thousand bags. Note that the supply curve did not move: the quantity supplied rose from 60 to 80 by moving along the supply curve, because the price rose.
+
+Comparative statics takes three steps:
+
+1. Does the change affect demand, supply, or both?
+2. In which direction does the curve shift?
+3. What are the new equilibrium price and quantity, and are they higher or lower than before?
+
+<Figure id="4-1" title="Demand $Q_d = 100 + \Delta D - 2P$ and supply $Q_s = -20 + \Delta S + 4P$. The sliders shift the curves horizontally; the dashed lines are the original curves." observe="Shift the demand curve and the supply curve one at a time, and compare the directions in which the equilibrium price and quantity change.">
+	<SupplyDemand />
+</Figure>
+
+<Check id="C2" />
+
+## Price elasticity of demand [#price-elasticity]
+
+The slope of the demand curve tells us how much the quantity demanded falls when the price rises by 1 dollar, but the slope depends on the units: measure the price in cents instead of dollars, and the slope becomes one hundredth of its value. To compare how different goods respond to price, we use percentages. The percentage change in the quantity demanded when the price changes by 1% is called the <Def id="price-elasticity">price elasticity of demand</Def>:
+
+$$
+\varepsilon = \frac{\%\Delta Q}{\%\Delta P} = \frac{dQ}{dP} \cdot \frac{P}{Q}
+$$
+
+The demand curve slopes downward, so $\varepsilon$ is negative. By convention it is classified by its absolute value:
+
+| Absolute value | Name | Meaning |
+| --- | --- | --- |
+| $\lvert\varepsilon\rvert > 1$ | elastic | the quantity demanded changes by a larger percentage than the price |
+| $\lvert\varepsilon\rvert < 1$ | inelastic | the quantity demanded changes by a smaller percentage than the price |
+| $\lvert\varepsilon\rvert = 1$ | unit elastic | the two percentages are equal |
+
+Example: at the equilibrium $P = 20$, $Q = 60$, the slope of the demand curve is $\frac{dQ}{dP} = -2$, so
+
+$$
+\varepsilon = -2 \times \frac{20}{60} \approx -0.67
+$$
+
+A 1% price rise lowers the quantity demanded by about 0.67%; demand is inelastic at this point. Is the elasticity the same everywhere along a linear demand curve? Decide in <Ref check="Q1" />.
+
+With only two observations of price and quantity, the percentages can be computed with the averages of the two points as the base. This is the midpoint method (arc elasticity):
+
+$$
+\varepsilon \approx \frac{(Q_2 - Q_1) / \bar Q}{(P_2 - P_1) / \bar P}, \qquad \bar Q = \frac{Q_1 + Q_2}{2}, \quad \bar P = \frac{P_1 + P_2}{2}
+$$
+
+The size of the elasticity depends on:
+
+- whether close substitutes exist: the more substitutes, the more elastic the demand;
+- the good's share of spending: the larger the share, the more sensitive buyers are to the price;
+- whether the good is a necessity: demand for necessities is inelastic;
+- the time horizon: the longer the time, the more chances buyers have to find substitutes or change habits, and the more elastic the demand.
+
+When a company raises its price, does its revenue $R = P \times Q$ rise or fall? It depends on the elasticity; derive the exact relation in <Ref check="Q2" />.
+
+<Check id="C3" />
+
+## Income elasticity and cross-price elasticity [#other-elasticities]
+
+The idea of elasticity applies to any two variables. The percentage change in the quantity demanded when income changes by 1% is called the <Def id="income-elasticity">income elasticity</Def>:
+
+$$
+\varepsilon_I = \frac{\%\Delta Q}{\%\Delta I}
+$$
+
+- $\varepsilon_I > 0$: a normal good, of which people buy more as income rises. Goods with $\varepsilon_I > 1$ are luxuries, and goods with $0 < \varepsilon_I < 1$ are necessities.
+- $\varepsilon_I < 0$: an inferior good, of which people buy less as income rises; for example, when incomes rise, people take long-distance buses less and fly more.
+
+The percentage change in the quantity demanded of good $x$ when the price of another good $y$ changes by 1% is called the <Def id="cross-price-elasticity">cross-price elasticity</Def>:
+
+$$
+\varepsilon_{xy} = \frac{\%\Delta Q_x}{\%\Delta P_y}
+$$
+
+- $\varepsilon_{xy} > 0$: substitutes, such as two streaming services: when one raises its price, the other gains users.
+- $\varepsilon_{xy} < 0$: complements, such as printers and ink cartridges: when cartridges cost more, fewer printers are sold.
+
+These elasticities come up often in investment analysis. Companies that sell necessities with inelastic demand (for example, household staples) see their revenue affected less by recessions; companies that sell luxuries with a high income elasticity see their revenue rise and fall strongly with the business cycle (<Ref lesson="2.8" />). A company that loses few customers after a price increase faces inelastic demand, which is one source of pricing power; <Ref lesson="1.6" /> discusses its relation to competitive advantage.
+
+<Check id="C4" />
+
+## Summary [#summary]
+
+- Demand and supply describe how the quantity demanded and the quantity supplied relate to the price. A change in price is a movement along a curve; a change in other conditions, such as income or input prices, shifts the whole curve.
+- Market equilibrium: the quantity demanded equals the quantity supplied. Above the equilibrium price there is a surplus; below it, a shortage.
+- Comparative statics: decide which curve shifts and in which direction, then find the new equilibrium.
+- The price elasticity of demand $\varepsilon = \frac{dQ}{dP} \cdot \frac{P}{Q}$ does not depend on units; $\lvert\varepsilon\rvert > 1$ is elastic and $\lvert\varepsilon\rvert < 1$ is inelastic.
+- The income elasticity separates normal goods from inferior goods; the cross-price elasticity separates substitutes from complements.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

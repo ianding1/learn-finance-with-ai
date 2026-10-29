@@ -1,0 +1,168 @@
+---
+title: 1.1 供给与需求
+description: 需求与供给、市场均衡、用比较静态分析条件变化的影响，以及价格弹性、收入弹性和交叉价格弹性。
+lesson: "1.1"
+---
+
+import Ref from '../../../components/Ref.astro';
+import Def from '../../../components/Def.astro';
+import Figure from '../../../components/Figure.astro';
+import Check from '../../../components/Check.astro';
+import Exercises from '../../../components/Exercises.astro';
+import CheckAll from '../../../components/CheckAll.astro';
+import SupplyDemand from '../../../components/widgets/SupplyDemand.astro';
+
+## 需求 [#demand]
+
+在某个价格下，买方愿意并且有能力购买的数量叫需求量（quantity demanded）。在其他条件不变时，价格与需求量之间的关系叫<Def id="demand">需求</Def>（demand）。
+
+例：某城市每周对咖啡豆的需求是
+
+$$
+Q_d = 100 - 2P
+$$
+
+其中 $P$ 是每袋的价格（美元），$Q_d$ 是需求量（千袋）。
+
+| 价格 $P$ | 需求量 $Q_d$ |
+| ---: | ---: |
+| 10 | 80 |
+| 20 | 60 |
+| 30 | 40 |
+| 40 | 20 |
+
+把这张表画成一条曲线就是需求曲线。经济学的习惯是把价格画在纵轴上、数量画在横轴上。需求曲线向下倾斜：其他条件不变时，价格越高，需求量越小。这叫需求定律（law of demand）。原因在 <Ref lesson="1.2" /> 中会详细分析：价格上升时，买方会转向其他商品，同样的收入也买得更少。
+
+“其他条件”包括买方的收入、相关商品（替代品或互补品）的价格、偏好、对未来价格的预期和买方的人数。要区分两种变化：
+
+- 价格变化引起的需求量变化，是沿着同一条需求曲线移动；
+- 其他条件变化引起的需求变化，是整条需求曲线移动。例如收入上升后，在每个价格下人们都想买更多咖啡豆，需求曲线向右移动。
+
+## 供给 [#supply]
+
+在某个价格下，卖方愿意并且有能力出售的数量叫供给量（quantity supplied）。在其他条件不变时，价格与供给量之间的关系叫<Def id="supply">供给</Def>（supply）。例：
+
+$$
+Q_s = -20 + 4P
+$$
+
+价格低于 5 美元时，没有卖方愿意出售，这个式子只在 $P \ge 5$ 时适用。供给曲线向上倾斜：价格越高，多生产一单位越有利可图。回忆 <Ref lesson="0.2" />，按市场价格出售的厂商会把产量定在价格等于边际成本（<Ref concept="marginal-cost" />）的地方；边际成本随产量上升，所以价格越高，厂商愿意生产得越多。<Ref lesson="1.5" /> 会从成本曲线推出供给曲线。
+
+影响供给的其他条件包括原材料和工资等投入的价格、技术、卖方的人数和对未来价格的预期。和需求一样，价格变化是沿着供给曲线移动，其他条件变化是整条供给曲线移动。
+
+## 市场均衡 [#equilibrium]
+
+需求量等于供给量时的价格和数量叫<Def id="market-equilibrium">市场均衡</Def>（market equilibrium）。在上面的例子中：
+
+$$
+100 - 2P = -20 + 4P \quad\Rightarrow\quad P^* = 20, \qquad Q^* = 100 - 2 \times 20 = 60
+$$
+
+均衡价格是每袋 20 美元，均衡数量是每周 6 万袋。
+
+为什么市场会停在这里？假设价格是 25 美元：需求量 50，供给量 80，卖方有 30 千袋卖不出去，这叫过剩（surplus）。卖方会降价，价格向 20 美元回落。假设价格是 15 美元：需求量 70，供给量 40，有 30 千袋的短缺（shortage），买方愿意出更高的价格，价格上升。只有在均衡价格下，没有人想改变价格。
+
+<Check id="C1" />
+
+## 比较静态 [#comparative-statics]
+
+外部条件改变时，均衡会怎样变化？比较条件改变前后的两个均衡，而不研究从一个均衡调整到另一个均衡的过程，这种方法叫<Def id="comparative-statics">比较静态</Def>（comparative statics）。
+
+例：这个城市的收入上升，在每个价格下需求量都增加 30 千袋，需求变为 $Q_d = 130 - 2P$。新的均衡：
+
+$$
+130 - 2P = -20 + 4P \quad\Rightarrow\quad P^* = 25, \qquad Q^* = 80
+$$
+
+价格上升 5 美元，数量增加 2 万袋。注意，供给曲线没有移动：供给量从 60 增加到 80，是沿着供给曲线移动，因为价格上升了。
+
+做比较静态分析分三步：
+
+1. 这个变化影响的是需求、供给，还是两者？
+2. 曲线向哪个方向移动？
+3. 新的均衡价格和数量各是多少，比原来高还是低？
+
+<Figure id="4-1" title="需求 $Q_d = 100 + \Delta D - 2P$ 与供给 $Q_s = -20 + \Delta S + 4P$。滑块把曲线水平移动，虚线是原来的曲线。" observe="分别移动需求曲线和供给曲线，比较均衡价格和数量的变化方向。">
+	<SupplyDemand />
+</Figure>
+
+<Check id="C2" />
+
+## 需求的价格弹性 [#price-elasticity]
+
+需求曲线的斜率告诉我们价格上升 1 美元时需求量减少多少，但斜率取决于单位：把价格从美元换成美分，斜率就变成原来的百分之一。为了比较不同商品对价格的反应，用百分比来衡量。价格变化 1% 时需求量变化的百分比，叫<Def id="price-elasticity">需求的价格弹性</Def>（price elasticity of demand）：
+
+$$
+\varepsilon = \frac{\%\Delta Q}{\%\Delta P} = \frac{dQ}{dP} \cdot \frac{P}{Q}
+$$
+
+需求曲线向下倾斜，所以 $\varepsilon$ 是负数。习惯上按绝对值分类：
+
+| 绝对值 | 名称 | 含义 |
+| --- | --- | --- |
+| $\lvert\varepsilon\rvert > 1$ | 富有弹性（elastic） | 需求量变化的百分比大于价格变化的百分比 |
+| $\lvert\varepsilon\rvert < 1$ | 缺乏弹性（inelastic） | 需求量变化的百分比小于价格变化的百分比 |
+| $\lvert\varepsilon\rvert = 1$ | 单位弹性（unit elastic） | 两者相等 |
+
+例：在均衡点 $P = 20$，$Q = 60$，需求曲线的斜率 $\frac{dQ}{dP} = -2$，
+
+$$
+\varepsilon = -2 \times \frac{20}{60} \approx -0.67
+$$
+
+价格上升 1%，需求量约减少 0.67%，在这一点需求缺乏弹性。沿着同一条直线需求曲线，弹性是否处处相同？请在 <Ref check="Q1" /> 中判断。
+
+只有两组价格和数量的观测时，可以用两点的平均值作为基数计算百分比，这叫中点法（arc elasticity）：
+
+$$
+\varepsilon \approx \frac{(Q_2 - Q_1) / \bar Q}{(P_2 - P_1) / \bar P}, \qquad \bar Q = \frac{Q_1 + Q_2}{2}, \quad \bar P = \frac{P_1 + P_2}{2}
+$$
+
+需求弹性的大小取决于：
+
+- 有没有相近的替代品：替代品越多，需求越富有弹性；
+- 这种商品占支出的比例：比例越大，买方对价格越敏感；
+- 是必需品还是可有可无：必需品的需求缺乏弹性；
+- 时间长短：时间越长，买方越有机会找到替代品或改变习惯，需求越富有弹性。
+
+企业提价时，收入 $R = P \times Q$ 是增加还是减少？这取决于弹性，具体关系请在 <Ref check="Q2" /> 中推导。
+
+<Check id="C3" />
+
+## 收入弹性与交叉价格弹性 [#other-elasticities]
+
+弹性的思路可以用在任何两个变量之间。收入变化 1% 时需求量变化的百分比，叫<Def id="income-elasticity">收入弹性</Def>（income elasticity）：
+
+$$
+\varepsilon_I = \frac{\%\Delta Q}{\%\Delta I}
+$$
+
+- $\varepsilon_I > 0$：正常品（normal good），收入越高买得越多。其中 $\varepsilon_I > 1$ 的叫奢侈品（luxury），$0 < \varepsilon_I < 1$ 的叫必需品（necessity）。
+- $\varepsilon_I < 0$：劣等品（inferior good），收入越高买得越少，例如收入上升后人们少乘长途大巴、多坐飞机。
+
+另一种商品 $y$ 的价格变化 1% 时，商品 $x$ 的需求量变化的百分比，叫<Def id="cross-price-elasticity">交叉价格弹性</Def>（cross-price elasticity）：
+
+$$
+\varepsilon_{xy} = \frac{\%\Delta Q_x}{\%\Delta P_y}
+$$
+
+- $\varepsilon_{xy} > 0$：替代品（substitutes），例如两家流媒体平台：一家涨价，另一家的用户增加。
+- $\varepsilon_{xy} < 0$：互补品（complements），例如打印机和墨盒：墨盒涨价，打印机卖得更少。
+
+这些弹性在投资分析中很常见。生产必需品、需求缺乏弹性的公司（例如日用消费品），收入受经济衰退的影响较小；生产奢侈品、收入弹性高的公司，收入随经济周期大起大落（<Ref lesson="2.8" />）。一家公司提价后客户流失得少，说明需求缺乏弹性，这是定价能力（pricing power）的来源之一，<Ref lesson="1.6" /> 会讨论它与竞争优势的关系。
+
+<Check id="C4" />
+
+## 小结 [#summary]
+
+- 需求和供给描述价格与需求量、供给量的关系。价格变化是沿着曲线移动；收入、投入价格等其他条件变化是整条曲线移动。
+- 市场均衡：需求量等于供给量。价格高于均衡时有过剩，低于均衡时有短缺。
+- 比较静态：判断哪条曲线移动、向哪个方向移动，再求新的均衡。
+- 需求的价格弹性 $\varepsilon = \frac{dQ}{dP} \cdot \frac{P}{Q}$，与单位无关；$\lvert\varepsilon\rvert > 1$ 富有弹性，$\lvert\varepsilon\rvert < 1$ 缺乏弹性。
+- 收入弹性区分正常品和劣等品；交叉价格弹性区分替代品和互补品。
+
+<CheckAll />
+
+## 练习题 [#exercises]
+
+<Exercises />
