@@ -27,14 +27,10 @@ def results():
     pv = 1000 * (1 - (1 + i) ** -12) / i
     assert pv > 11400  # paying cash is better
     r["Q5.pv"] = pv
-    lo, hi = 1e-9, 0.1  # implied monthly rate: PV of installments = 11,400
-    for _ in range(200):
-        m = (lo + hi) / 2
-        if 1000 * (1 - (1 + m) ** -12) / m > 11400:
-            lo = m
-        else:
-            hi = m
-    r["Q5.ear"] = 100 * ((1 + m) ** 12 - 1)
+    pv8 = 1000 * (1 - 1.008**-12) / 0.008  # the given monthly rate of 0.8%
+    assert abs(pv8 - 11400) < 2  # so 0.8% is (almost exactly) the implied monthly rate
+    r["Q5.pv8"] = pv8
+    r["Q5.ear"] = 100 * (1.008**12 - 1)
     r["Q5.naive"] = 100 * 600 / 11400
 
     # Q6: slope 1.2, sigma_x 5, sigma_y 7.5; hedge y - 1.2 x.

@@ -175,7 +175,7 @@ questions:
     part: problem
     points: 14
     concepts: [present-value, annuity, apr, ear]
-    expected: { pv: "11693.74", ear: "10.01", naive: "5.26" }
+    expected: { pv: "11693.74", pv8: "11398.61", ear: "10.03", naive: "5.26" }
     question:
       zh-cn: |-
         一家家具店的沙发标价 12,000 美元，有两种付款方式。一是今天付现金，打 95 折，付 11,400 美元。二是“零利率分期”：不打折，分 12 个月付清，每月末付 1,000 美元，第一笔在一个月后付。
@@ -184,7 +184,7 @@ questions:
 
         (a) 哪种方式对你更划算？说明为什么不能直接比较 11,400 美元和 12,000 美元。（5 分）
 
-        (b) 店员说：“分期的代价只是放弃了 600 美元的折扣，相当于借 11,400 美元、一年付 600 美元利息，年利率只有 $\frac{600}{11{,}400} \approx 5.26\%$。”求分期实际隐含的有效年利率，并说明店员的算法错在哪里。（9 分）
+        (b) 店员说：“分期的代价只是放弃了 600 美元的折扣，相当于借 11,400 美元、一年付 600 美元利息，年利率只有 $\frac{600}{11{,}400} \approx 5.26\%$。”按月利率 0.8% 把分期付款折现到今天，由结果估计分期实际隐含的有效年利率，并说明店员的算法错在哪里。（9 分）
       en: |-
         A furniture store sells a sofa at a list price of 12,000 dollars. There are two ways to pay. The first is to pay cash today with a 5% discount, that is, 11,400 dollars. The second is a "zero-interest installment plan": no discount, 12 monthly payments of 1,000 dollars at the end of each month, the first one month from now.
 
@@ -192,27 +192,27 @@ questions:
 
         (a) Which way of paying is better for you? Explain why you cannot compare 11,400 dollars with 12,000 dollars directly. (5 points)
 
-        (b) The salesperson says: "The only cost of the installment plan is the 600-dollar discount you give up. That is like borrowing 11,400 dollars and paying 600 dollars of interest in a year, a rate of only $\frac{600}{11{,}400} \approx 5.26\%$." Find the effective annual rate actually implied by the installment plan, and explain what is wrong with the salesperson's calculation. (9 points)
+        (b) The salesperson says: "The only cost of the installment plan is the 600-dollar discount you give up. That is like borrowing 11,400 dollars and paying 600 dollars of interest in a year, a rate of only $\frac{600}{11{,}400} \approx 5.26\%$." Discount the installments to today at a monthly rate of 0.8%, use the result to estimate the effective annual rate actually implied by the installment plan, and explain what is wrong with the salesperson's calculation. (9 points)
     answer:
       zh-cn: |-
         (a) 两种方式的付款时间不同，要折算到同一时点。“零利率”只是没有写明利息：分期放弃了折扣。对你来说，钱的机会成本是储蓄账户的月利率 $i = 4.8\% / 12 = 0.4\%$。分期付款今天的现值是
         $$1{,}000 \times \frac{1 - 1.004^{-12}}{0.004} \approx 11{,}693.74$$
         美元，高于现金价 11,400 美元，所以付现金更划算，按今天的价值约省 293.74 美元。换句话说，要支付分期，今天就要在账户里留出 11,693.74 美元。直接比较 11,400 和 12,000 忽略了分期的钱晚付、还能生息；只看“零利率”又忽略了放弃的折扣。
-        (b) 隐含的月利率 $i$ 使分期付款的现值等于现金价：$1{,}000 \times \frac{1 - (1+i)^{-12}}{i} = 11{,}400$。用计算器或代码求解，$i \approx 0.798\%$，有效年利率 $(1+i)^{12} - 1 \approx 10.01\%$，大约是店员说的 5.26% 的两倍。
+        (b) 按月利率 0.8% 折现：$1{,}000 \times \frac{1 - 1.008^{-12}}{0.008} \approx 11{,}398.61$ 美元，几乎正好等于现金价 11,400 美元。所以分期隐含的月利率约为 0.8%：接受分期，相当于用每月约 0.8% 的利率借了 11,400 美元。对应的有效年利率约为 $1.008^{12} - 1 \approx 10.03\%$，大约是店员说的 5.26% 的两倍。
         店员的算法假设你借了 11,400 美元整整一年、到年底一次还清。实际上从第一个月起每月还 1,000 美元，欠款逐月减少，平均只借了大约一半的钱一年。为同样的 600 美元利息，实际借的钱少一半，利率就大约翻倍。（另外 5.26% 也没有考虑按月复利。）
       en: |-
         (a) The two ways of paying have payments at different times, so they must be brought to the same point in time. "Zero interest" only means the interest is not stated: the installment plan gives up the discount. For you, the opportunity cost of money is the monthly rate of the savings account, $i = 4.8\% / 12 = 0.4\%$. The present value of the installments today is
         $$1{,}000 \times \frac{1 - 1.004^{-12}}{0.004} \approx 11{,}693.74$$
         dollars, more than the cash price of 11,400 dollars, so paying cash is better, by about 293.74 dollars in today's value. In other words, to pay the installments you would need to set aside 11,693.74 dollars in the account today. Comparing 11,400 with 12,000 directly ignores that the installment money is paid later and earns interest meanwhile; looking only at "zero interest" ignores the discount given up.
-        (b) The implied monthly rate $i$ makes the present value of the installments equal to the cash price: $1{,}000 \times \frac{1 - (1+i)^{-12}}{i} = 11{,}400$. Solving with a calculator or code gives $i \approx 0.798\%$ and an effective annual rate of $(1+i)^{12} - 1 \approx 10.01\%$, about twice the salesperson's 5.26%.
+        (b) Discounting at 0.8% a month: $1{,}000 \times \frac{1 - 1.008^{-12}}{0.008} \approx 11{,}398.61$ dollars, almost exactly the cash price of 11,400 dollars. So the monthly rate implied by the installment plan is about 0.8%: taking the plan is like borrowing 11,400 dollars at about 0.8% a month. The effective annual rate is about $1.008^{12} - 1 \approx 10.03\%$, about twice the salesperson's 5.26%.
         The salesperson's calculation assumes that you borrow 11,400 dollars for a whole year and repay it all at the end. In fact you repay 1,000 dollars every month from the first month, so the debt falls month by month, and on average you borrow only about half of the money for the year. The same 600 dollars of interest on half as much borrowed money is about twice the rate. (The 5.26% also ignores monthly compounding.)
     rubric:
       zh-cn:
         - "(a) 指出要按自己的机会成本（储蓄的月利率 0.4%）把分期付款折现到今天（2 分）；现值 11,693.74（1 分）；结论为付现金，并说明不能直接比较的原因（2 分）。只比较 11,400 与 12,000，或因“零利率”选分期：最多 1 分。"
-        - "(b) 列出使现值等于 11,400 的方程并求出月利率（3 分）；有效年利率 10.01%（2 分）；说明欠款逐月减少、平均只借了约一半的钱，所以 5.26% 低估了利率（4 分）。用年金公式反解时算术有误但方法对：只扣结果分。"
+        - "(b) 按 0.8% 折现得 11,398.61（3 分）；指出它约等于现金价，所以隐含月利率约 0.8%，有效年利率约 10.03%（2 分）；说明欠款逐月减少、平均只借了约一半的钱，所以 5.26% 低估了利率（4 分）。算出现值但没有和 11,400 比较、得不出隐含利率：最多 4 分。"
       en:
         - "(a) States that the installments must be discounted to today at one's own opportunity cost (the savings rate of 0.4% a month) (2 points); present value 11,693.74 (1 point); concludes that paying cash is better and explains why the direct comparison is wrong (2 points). Only comparing 11,400 with 12,000, or choosing installments because of \"zero interest\": at most 1 point."
-        - "(b) Sets up the equation that makes the present value equal to 11,400 and solves for the monthly rate (3 points); effective annual rate 10.01% (2 points); explains that the debt falls month by month and on average only about half of the money is borrowed, so 5.26% understates the rate (4 points). Correct method with an arithmetic error when solving: deduct only the result points."
+        - "(b) Discounting at 0.8% gives 11,398.61 (3 points); states that this is about the cash price, so the implied monthly rate is about 0.8% and the effective annual rate about 10.03% (2 points); explains that the debt falls month by month and on average only about half of the money is borrowed, so 5.26% understates the rate (4 points). Computing the present value without comparing it with 11,400 and so without an implied rate: at most 4 points."
 
   - id: Q6
     kind: quiz
