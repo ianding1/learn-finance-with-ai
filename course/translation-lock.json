@@ -39,6 +39,14 @@
   "en": "2cb9e830f4d9adde",
   "zh-cn": "aaafae6f32660910"
  },
+ "course/concepts.yaml#backward-induction": {
+  "en": "22fa2d25e64ae14c",
+  "zh-cn": "401c48c67b867ee8"
+ },
+ "course/concepts.yaml#backward-induction.short": {
+  "en": "871a39ac4f8b8f37",
+  "zh-cn": "2b0f694a13746bda"
+ },
  "course/concepts.yaml#barriers-to-entry": {
   "en": "dc4e02232bc12fae",
   "zh-cn": "81bd41532221f0d8"
@@ -215,6 +223,14 @@
   "en": "eb219ff654aaaf5c",
   "zh-cn": "c44098874de138a9"
  },
+ "course/concepts.yaml#dominant-strategy": {
+  "en": "498c9d5d73462cc6",
+  "zh-cn": "7c539f521e25240c"
+ },
+ "course/concepts.yaml#dominant-strategy.short": {
+  "en": "f93c49ab6180932d",
+  "zh-cn": "20bca17d052dd4ca"
+ },
  "course/concepts.yaml#ear": {
   "en": "897550ce81dea91e",
   "zh-cn": "d1f22353fc11835c"
@@ -306,6 +322,14 @@
  "course/concepts.yaml#future-value.short": {
   "en": "39da2622df97d5a5",
   "zh-cn": "df179770dd8f561d"
+ },
+ "course/concepts.yaml#game": {
+  "en": "12b5bbf2a2bfa6af",
+  "zh-cn": "b5a617a0eba0e293"
+ },
+ "course/concepts.yaml#game.short": {
+  "en": "77d6aa16a5e61f7b",
+  "zh-cn": "0d3654bb843f28e7"
  },
  "course/concepts.yaml#geometric-series": {
   "en": "5885edaf2b972595",
@@ -499,6 +523,14 @@
   "en": "f9fa1c61ea8e1d80",
   "zh-cn": "730093328fb3b8db"
  },
+ "course/concepts.yaml#nash-equilibrium": {
+  "en": "576e8cc683d4634a",
+  "zh-cn": "0215a710aa25e8da"
+ },
+ "course/concepts.yaml#nash-equilibrium.short": {
+  "en": "6575c4df635920a7",
+  "zh-cn": "4402d7d7a258d7dd"
+ },
  "course/concepts.yaml#natural-monopoly": {
   "en": "5412a9dbad661e63",
   "zh-cn": "e62c7f8c89624b7e"
@@ -627,6 +659,14 @@
   "en": "e2678c6624716d21",
   "zh-cn": "b2698f72755891b2"
  },
+ "course/concepts.yaml#prisoners-dilemma": {
+  "en": "6723f2b30418af80",
+  "zh-cn": "502d8ff2f44e848c"
+ },
+ "course/concepts.yaml#prisoners-dilemma.short": {
+  "en": "22435b27842e61d7",
+  "zh-cn": "cae3838950232abc"
+ },
  "course/concepts.yaml#probability-density": {
   "en": "f298f522bffc2f06",
   "zh-cn": "b3a8d7e013aafbda"
@@ -698,6 +738,14 @@
  "course/concepts.yaml#relative-risk-aversion.short": {
   "en": "46f19857f2fa799d",
   "zh-cn": "f660ae6294dcb64b"
+ },
+ "course/concepts.yaml#repeated-game": {
+  "en": "2a167076e67d8052",
+  "zh-cn": "59f62f793edbdbab"
+ },
+ "course/concepts.yaml#repeated-game.short": {
+  "en": "6630c8b9258afa4f",
+  "zh-cn": "ba1c3d0c529bf8f2"
  },
  "course/concepts.yaml#residual": {
   "en": "ef9670ac75858f70",
@@ -1026,6 +1074,10 @@
  "course/curriculum.yaml#stages[1].lessons[1.6].title": {
   "en": "e6a80170ef540b04",
   "zh-cn": "dc7d4f6c93e45a91"
+ },
+ "course/curriculum.yaml#stages[1].lessons[1.7].summary": {
+  "en": "f8a07e5275c86352",
+  "zh-cn": "0329365ac6ed7390"
  },
  "course/curriculum.yaml#stages[1].lessons[1.7].title": {
   "en": "ecd3158aee8df221",
@@ -3199,6 +3251,158 @@
   "en": "a7461cd42fea3a80",
   "zh-cn": "5c5c62e0f62bf9a0"
  },
+ "course/keys/1.7.yaml#common_errors[0]": {
+  "en": "fb07015154e77eb2",
+  "zh-cn": "cb7445a6a6399ec3"
+ },
+ "course/keys/1.7.yaml#common_errors[1]": {
+  "en": "fe806d55b86e4977",
+  "zh-cn": "cf4502fcef5f94fe"
+ },
+ "course/keys/1.7.yaml#common_errors[2]": {
+  "en": "f357c83e69a0c2b1",
+  "zh-cn": "53f8c5657a3d5638"
+ },
+ "course/keys/1.7.yaml#common_errors[3]": {
+  "en": "e101d3ead8b7b3b1",
+  "zh-cn": "dbc2b958629f5af3"
+ },
+ "course/keys/1.7.yaml#common_errors[4]": {
+  "en": "894ca4f9ee4e4c6a",
+  "zh-cn": "d7e4fb8214dfe2c6"
+ },
+ "course/keys/1.7.yaml#common_errors[5]": {
+  "en": "8e689184132394d9",
+  "zh-cn": "f3061573da2ed173"
+ },
+ "course/keys/1.7.yaml#context[0]": {
+  "en": "507a809e40de6686",
+  "zh-cn": "807d33807cf67279"
+ },
+ "course/keys/1.7.yaml#context[1]": {
+  "en": "faa516794eef9666",
+  "zh-cn": "d72eb2729a7eee4b"
+ },
+ "course/keys/1.7.yaml#context[2]": {
+  "en": "7cff94ead4d4c15e",
+  "zh-cn": "affea776bd1e02bb"
+ },
+ "course/keys/1.7.yaml#context[3]": {
+  "en": "51047f47f8584cf5",
+  "zh-cn": "8fb54c6f8dea88e9"
+ },
+ "course/keys/1.7.yaml#context[4]": {
+  "en": "24f2033639fa4962",
+  "zh-cn": "608a02d9f7c2898c"
+ },
+ "course/keys/1.7.yaml#questions[C1].answer": {
+  "en": "e1ffde88d0e583c9",
+  "zh-cn": "0db43a30212e04a3"
+ },
+ "course/keys/1.7.yaml#questions[C1].question": {
+  "en": "452d1146e20ad907",
+  "zh-cn": "76d646743c7437cb"
+ },
+ "course/keys/1.7.yaml#questions[C1].rubric": {
+  "en": "b5ecdead93965f4c",
+  "zh-cn": "b4130e070bc54a0d"
+ },
+ "course/keys/1.7.yaml#questions[C2].answer": {
+  "en": "b6e5e373b0a7cb0e",
+  "zh-cn": "938a012c557c5d82"
+ },
+ "course/keys/1.7.yaml#questions[C2].question": {
+  "en": "87057432e9563a61",
+  "zh-cn": "b88350de677b7658"
+ },
+ "course/keys/1.7.yaml#questions[C2].rubric": {
+  "en": "b4bae5b2d1bd8885",
+  "zh-cn": "4f2d7528069c689e"
+ },
+ "course/keys/1.7.yaml#questions[C3].answer": {
+  "en": "448bb26859bc13a3",
+  "zh-cn": "0319e4ecd714645b"
+ },
+ "course/keys/1.7.yaml#questions[C3].question": {
+  "en": "7c991da806d45b5d",
+  "zh-cn": "4af909eff66c227d"
+ },
+ "course/keys/1.7.yaml#questions[C3].rubric": {
+  "en": "8c9c26c73319e820",
+  "zh-cn": "4aa8116cfca9fc33"
+ },
+ "course/keys/1.7.yaml#questions[C4].answer": {
+  "en": "3adb775219d2712d",
+  "zh-cn": "d9509dccdeab60ed"
+ },
+ "course/keys/1.7.yaml#questions[C4].question": {
+  "en": "40c339c00d5c1e96",
+  "zh-cn": "083bccb13ce09867"
+ },
+ "course/keys/1.7.yaml#questions[C4].rubric": {
+  "en": "b98585d7fbfd5465",
+  "zh-cn": "1fe296696afe2be3"
+ },
+ "course/keys/1.7.yaml#questions[Q1].answer": {
+  "en": "b40380893fafeafc",
+  "zh-cn": "3a77fc6d6e738245"
+ },
+ "course/keys/1.7.yaml#questions[Q1].question": {
+  "en": "3d62889077c1bad9",
+  "zh-cn": "e3e025db9b03b3f0"
+ },
+ "course/keys/1.7.yaml#questions[Q1].rubric": {
+  "en": "2c7492c2b558e1c9",
+  "zh-cn": "e9765a73f3cf948b"
+ },
+ "course/keys/1.7.yaml#questions[Q2].answer": {
+  "en": "eb253f9d48b465f3",
+  "zh-cn": "3472f4befa357b8a"
+ },
+ "course/keys/1.7.yaml#questions[Q2].question": {
+  "en": "0f3caef91d2da7b6",
+  "zh-cn": "2897be50a8ff0a67"
+ },
+ "course/keys/1.7.yaml#questions[Q2].rubric": {
+  "en": "84867fd467c3bd71",
+  "zh-cn": "1835383106c827d6"
+ },
+ "course/keys/1.7.yaml#questions[Q3].answer": {
+  "en": "c15e40b0c1fe6f7b",
+  "zh-cn": "a8c5c9591da40c86"
+ },
+ "course/keys/1.7.yaml#questions[Q3].question": {
+  "en": "d3ffaa9c76287494",
+  "zh-cn": "de5ad583edd94065"
+ },
+ "course/keys/1.7.yaml#questions[Q3].rubric": {
+  "en": "5b44e6e28a2ad4ac",
+  "zh-cn": "d51639e26eb2f806"
+ },
+ "course/keys/1.7.yaml#questions[Q4].answer": {
+  "en": "dde307fdec84c9eb",
+  "zh-cn": "bcc11bbca2f292e9"
+ },
+ "course/keys/1.7.yaml#questions[Q4].question": {
+  "en": "309e970d74b725d3",
+  "zh-cn": "c286a5221a1922b1"
+ },
+ "course/keys/1.7.yaml#questions[Q4].rubric": {
+  "en": "254b25bccd35c9f2",
+  "zh-cn": "6d78a599d6a3db76"
+ },
+ "course/keys/1.7.yaml#questions[Q5].answer": {
+  "en": "e0a3c4184c9c7f66",
+  "zh-cn": "053d63caf64f2206"
+ },
+ "course/keys/1.7.yaml#questions[Q5].question": {
+  "en": "7a166895bfb77943",
+  "zh-cn": "067fffce9b146d92"
+ },
+ "course/keys/1.7.yaml#questions[Q5].rubric": {
+  "en": "dd8dce24f8855db5",
+  "zh-cn": "f50338ef2ba92f4a"
+ },
  "course/keys/E0.yaml#common_errors[0]": {
   "en": "5892871353963f3f",
   "zh-cn": "4d0b656928c8c79b"
@@ -3394,6 +3598,10 @@
  "src/content/docs/<lang>/lessons/1-6-market-structure.mdx": {
   "en": "7323aa2dcdc7d813",
   "zh-cn": "f0d24f288dc704c9"
+ },
+ "src/content/docs/<lang>/lessons/1-7-game-theory.mdx": {
+  "en": "d9b26510931ccde1",
+  "zh-cn": "64df5aeaae316148"
  },
  "src/content/docs/<lang>/lessons/e0-quiz.mdx": {
   "en": "0909e73cdcf97cfc",

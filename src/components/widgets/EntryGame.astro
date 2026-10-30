@@ -1,0 +1,82 @@
+---
+// Figure 4-1 of lesson 1.7: game tree of entry deterrence. The entrant chooses whether to enter; after
+// entry the incumbent chooses a price war or accommodation. Payoffs are (entrant, incumbent) in million
+// dollars. Static figure: a wide horizontal tree and a narrow vertical tree for phones.
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	'zh-cn': {
+		entrant: '进入者',
+		incumbent: '在位者',
+		stay: '不进入',
+		enter: '进入',
+		fight: '打价格战',
+		accommodate: '接纳',
+		note: '收益：（进入者，在位者），百万美元',
+	},
+	en: {
+		entrant: 'Entrant',
+		incumbent: 'Incumbent',
+		stay: 'Stay out',
+		enter: 'Enter',
+		fight: 'Price war',
+		accommodate: 'Accommodate',
+		note: 'Payoffs: (entrant, incumbent), million dollars',
+	},
+}[lang];
+
+type P = [number, number];
+interface Layout {
+	cls: string;
+	W: number;
+	H: number;
+	root: P;
+	inc: P;
+	stay: P;
+	fight: P;
+	acc: P;
+	note: P;
+}
+const layouts: Layout[] = [
+	{ cls: 'viz-wide', W: 640, H: 285, root: [90, 135], inc: [330, 190], stay: [330, 70], fight: [560, 135], acc: [560, 245], note: [20, 24] },
+	{ cls: 'viz-narrow', W: 360, H: 330, root: [180, 50], inc: [250, 160], stay: [80, 160], fight: [170, 270], acc: [310, 270], note: [12, 20] },
+];
+const mid = (a: P, b: P): P => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+const leaves = (l: Layout) => [
+	{ at: l.stay, pay: '(0, 100)' },
+	{ at: l.fight, pay: '(−10, 30)' },
+	{ at: l.acc, pay: '(20, 50)' },
+];
+const edges = (l: Layout) => [
+	{ a: l.root, b: l.stay, label: L.stay },
+	{ a: l.root, b: l.inc, label: L.enter },
+	{ a: l.inc, b: l.fight, label: L.fight },
+	{ a: l.inc, b: l.acc, label: L.accommodate },
+];
+---
+
+{layouts.map((l) => (
+	<svg class={`lfwai-viz ${l.cls}`} viewBox={`0 0 ${l.W} ${l.H}`} role="img" aria-label={`${L.entrant} / ${L.incumbent}`}>
+		<text class="viz-small" x={l.note[0]} y={l.note[1]}>{L.note}</text>
+		{edges(l).map((e) => {
+			const m = mid(e.a, e.b);
+			return (
+				<g>
+					<line class="viz-axis" x1={e.a[0]} y1={e.a[1]} x2={e.b[0]} y2={e.b[1]} />
+					<text class="viz-small viz-halo" x={m[0]} y={m[1] - 6} text-anchor="middle">{e.label}</text>
+				</g>
+			);
+		})}
+		<circle class="viz-min" cx={l.root[0]} cy={l.root[1]} r="7" />
+		<text class="viz-label viz-halo" x={l.root[0]} y={l.root[1] - 14} text-anchor="middle">{L.entrant}</text>
+		<circle class="viz-min" cx={l.inc[0]} cy={l.inc[1]} r="7" />
+		<text class="viz-label viz-halo" x={l.inc[0]} y={l.inc[1] - 14} text-anchor="middle">{L.incumbent}</text>
+		{leaves(l).map((f) => (
+			<g>
+				<circle class="viz-hollow" cx={f.at[0]} cy={f.at[1]} r="5" />
+				<text class="viz-value" x={f.at[0]} y={f.at[1] + 24} text-anchor="middle">{f.pay}</text>
+			</g>
+		))}
+	</svg>
+))}

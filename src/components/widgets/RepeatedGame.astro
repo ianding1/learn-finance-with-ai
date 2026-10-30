@@ -1,0 +1,80 @@
+---
+// Figure 5-1 of lesson 1.7: a repeated pricing game with a trigger strategy. Keeping the high price earns
+// 10 every period; cutting the price now earns 15 now and then 5 every period. The slider sets the discount
+// factor; the lines are the cumulative present values over 30 periods, and the readout gives the totals
+// over an infinite horizon. Parameters are registered in course/widgets.yaml (id: repeated-game).
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	'zh-cn': {
+		delta: '折现因子 δ',
+		x: '期数（今年为第 0 期）',
+		y: '累计现值（百万美元）',
+		keep: '一直保持高价',
+		cheat: '现在降价，以后对手一直低价',
+		readout: '无限期的总现值：一直保持高价 {keep}，现在降价 {cheat}。{verdict}',
+		keepBetter: '保持高价更好。',
+		cheatBetter: '现在降价更好。',
+		equal: '两者相等。',
+	},
+	en: {
+		delta: 'Discount factor δ',
+		x: 'Period (this year is period 0)',
+		y: 'Cumulative present value (million dollars)',
+		keep: 'Keep the high price',
+		cheat: 'Cut the price now; the rival prices low from then on',
+		readout: 'Total present value over an infinite horizon: keep the high price {keep}, cut the price now {cheat}. {verdict}',
+		keepBetter: 'Keeping the high price is better.',
+		cheatBetter: 'Cutting the price now is better.',
+		equal: 'The two are equal.',
+	},
+}[lang];
+
+const xr = [0, 30];
+const xticks = [0, 10, 20, 30];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 320, pad: { l: 56, r: 20, t: 14, b: 44 } },
+	{ cls: 'viz-narrow', W: 360, H: 300, pad: { l: 50, r: 12, t: 14, b: 44 } },
+].map((g) => ({
+	...g,
+	X: (v: number) => g.pad.l + ((v - xr[0]) / (xr[1] - xr[0])) * (g.W - g.pad.l - g.pad.r),
+}));
+---
+
+<div class="lfwai-widget" data-widget="repeated-game" data-readout={L.readout} data-keep-better={L.keepBetter} data-cheat-better={L.cheatBetter} data-equal={L.equal}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.delta} = <output data-out="delta">0.30</output></span>
+			<input type="range" min="0.05" max="0.95" step="0.05" value="0.3" data-param="delta" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad, X }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.y} data-geom={JSON.stringify({ W, H, pad, xr })}>
+			{[0, 1, 2, 3, 4].map((k) => (
+				<g>
+					<line class={k === 0 ? 'viz-axis' : 'viz-grid'} data-el={`yl${k}`} x1={pad.l} x2={W - pad.r} y1="0" y2="0" />
+					<text class="viz-tick" data-el={`yt${k}`} x={pad.l - 8} y="0" text-anchor="end"></text>
+				</g>
+			))}
+			{xticks.map((v) => (
+				<text class="viz-tick" x={X(v)} y={H - pad.b + 18} text-anchor="middle">{v}</text>
+			))}
+			<line class="viz-axis" x1={pad.l} x2={pad.l} y1={pad.t} y2={H - pad.b} />
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">{L.x}</text>
+			<text class="viz-tick" transform={`translate(12 ${(pad.t + H - pad.b) / 2}) rotate(-90)`} text-anchor="middle">{L.y}</text>
+			<polyline class="viz-curve" data-el="keep" points="" />
+			<polyline class="viz-curve-fat" data-el="cheat" points="" />
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-curve"></span>{L.keep}</li>
+		<li><span class="sw sw-fat"></span>{L.cheat}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initRepeatedGame } from '../../scripts/widgets/repeated-game';
+	initRepeatedGame();
+</script>

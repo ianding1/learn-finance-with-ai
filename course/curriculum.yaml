@@ -127,7 +127,15 @@ stages:
         published: true
         introduces: [monopoly, lerner-index, price-discrimination, oligopoly, cournot-model, bertrand-model, monopolistic-competition, barriers-to-entry, natural-monopoly, economic-moat]
         uses: [marginal-revenue, marginal-cost, profit-maximization, price-elasticity, demand, perfect-competition, economic-profit, long-run, returns-to-scale, average-cost, fixed-cost, first-order-condition]
-      - { id: "1.7", slug: "1-7-game-theory", title: { zh-cn: "博弈论基础", en: "Basic Game Theory" } }
+      - id: "1.7"
+        slug: "1-7-game-theory"
+        title: { zh-cn: "博弈论基础", en: "Basic Game Theory" }
+        summary:
+          zh-cn: "收益相互依赖时怎样分析决策：收益矩阵、占优策略与囚徒困境、纳什均衡、先后行动与倒推法，以及重复博弈中的合作。"
+          en: "How to analyze decisions when payoffs depend on each other: payoff matrices, dominant strategies and the prisoner's dilemma, Nash equilibrium, sequential moves and backward induction, and cooperation in repeated games."
+        published: true
+        introduces: [game, dominant-strategy, prisoners-dilemma, nash-equilibrium, backward-induction, repeated-game]
+        uses: [oligopoly, cournot-model, barriers-to-entry, discount-factor, perpetuity, perfect-competition]
       - { id: "1.8", slug: "1-8-welfare-market-failure", title: { zh-cn: "福利与市场失灵", en: "Welfare and Market Failure" } }
       - { id: "1.9", slug: "1-9-information-economics", title: { zh-cn: "信息经济学", en: "Information Economics" } }
       - { id: "E1", slug: "e1-quiz", exam: true, title: { zh-cn: "测验 E1：微观经济学", en: "Quiz E1: Microeconomics" } }

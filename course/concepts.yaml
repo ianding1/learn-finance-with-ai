@@ -942,6 +942,54 @@ economic-moat:
     zh-cn: "使企业的经济利润能长期保持为正的持久竞争优势。"
     en: "A durable competitive advantage that keeps a firm's economic profit positive for a long time."
 
+game:
+  defined_in: "1.7"
+  zh-cn: 博弈
+  en: game
+  short:
+    zh-cn: "几个决策者的收益相互依赖的情形，由参与者、策略和收益组成。"
+    en: "A situation in which the payoffs of several decision makers depend on each other's choices; it consists of players, strategies and payoffs."
+
+dominant-strategy:
+  defined_in: "1.7"
+  zh-cn: 占优策略
+  en: dominant strategy
+  short:
+    zh-cn: "无论对手选什么，都比自己的其他策略更好的策略。"
+    en: "A strategy that is better than the player's other strategies whatever the others choose."
+
+prisoners-dilemma:
+  defined_in: "1.7"
+  zh-cn: 囚徒困境
+  en: prisoner's dilemma
+  short:
+    zh-cn: "每个参与者都选自己的占优策略，结果却比另一种结果对所有人都差的博弈。"
+    en: "A game in which each player's dominant strategy leads to an outcome that is worse for everyone than another outcome."
+
+nash-equilibrium:
+  defined_in: "1.7"
+  zh-cn: 纳什均衡
+  en: Nash equilibrium
+  short:
+    zh-cn: "每个参与者的策略都是对其他人策略的最优反应、谁也不想单方面改变的策略组合。"
+    en: "A combination of strategies in which each player's strategy is a best response to the others', so no one wants to change alone."
+
+backward-induction:
+  defined_in: "1.7"
+  zh-cn: 倒推法
+  en: backward induction
+  short:
+    zh-cn: "求解先后行动的博弈：从最后一个决策开始找出最优选择，再依次往前推。"
+    en: "Solving a sequential game by finding the best choice at the last decision first and then working back step by step."
+
+repeated-game:
+  defined_in: "1.7"
+  zh-cn: 重复博弈
+  en: repeated game
+  short:
+    zh-cn: "同一个博弈一期又一期地重复进行；今天的选择会影响对手以后的选择，合作因此可能维持。"
+    en: "The same game played period after period; today's choice affects the other side's later choices, so cooperation may be sustained."
+
 risk-measures:
   defined_in: "4.1"
   zh-cn: 风险度量

@@ -1,0 +1,134 @@
+---
+title: 1.7 Basic Game Theory
+description: "How to analyze decisions when payoffs depend on each other: payoff matrices, dominant strategies and the prisoner's dilemma, Nash equilibrium, sequential moves and backward induction, and cooperation in repeated games."
+lesson: "1.7"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import EntryGame from '../../../../components/widgets/EntryGame.astro';
+import RepeatedGame from '../../../../components/widgets/RepeatedGame.astro';
+
+## What a game is [#games]
+
+The competitive firm of <Ref lesson="1.5" /> does not need to think about its rivals: it simply takes the market price. The oligopolists of <Ref lesson="1.6" /> are different: a firm's profit depends on how much its rivals produce and what prices they set, and the rivals' profits depend on it too. A situation in which the payoffs of several decision makers depend on each other's choices is called a <Def id="game">game</Def>.
+
+A game has three elements:
+
+- **Players**: the people or firms that make decisions.
+- **Strategies**: the choices each player can make.
+- **Payoffs**: what each player gets for every combination of choices.
+
+Start with players who decide at the same time without seeing each other's choices. Example: two airlines, A and B, compete on the same route, and each year each decides whether to set a high fare or a low fare. If both set high fares, each earns 10 million dollars, as with collusion in the <Ref concept="cournot-model" />; if one cuts its fare, it takes most of the passengers from the other; if both cut, each earns only 5 million dollars. A table of all the combinations is called a payoff matrix. In each cell, the first number is A's profit and the second is B's (million dollars per year):
+
+|  | B: high | B: low |
+| --- | ---: | ---: |
+| **A: high** | 10, 10 | 2, 15 |
+| **A: low** | 15, 2 | 5, 5 |
+
+What will the two airlines choose?
+
+## Dominant strategies and the prisoner's dilemma [#dominant-strategy]
+
+Put yourself in A's place and consider each of B's two choices:
+
+- If B sets a high fare: A gets 10 with a high fare and 15 with a low fare, so low is better.
+- If B sets a low fare: A gets 2 with a high fare and 5 with a low fare, so low is again better.
+
+Whatever B chooses, the low fare gives A a higher profit. A strategy that is better than the player's other strategies whatever the others choose is called a <Def id="dominant-strategy">dominant strategy</Def>. B's position is exactly symmetric, so the low fare is its dominant strategy as well. Both set low fares and earn 5 each.
+
+The strange part is that both would earn 10 with high fares, which is better for both. Each airline makes the choice that is best for itself, yet the result is worse for everyone than another outcome. Such a game is called a <Def id="prisoners-dilemma">prisoner's dilemma</Def>. The name comes from a story: two suspects are questioned separately, and each can confess or stay silent; whatever the partner does, confessing gives a lighter sentence, so both confess and get heavier sentences than if both had stayed silent.
+
+The root of the dilemma is that the outcome that is good for both requires each side to give up a choice that is better for itself, and there is no way to make sure the other side does the same. Cartel agreements are illegal in many countries and cannot be enforced in court, so the colluding firms of <Ref lesson="1.6" /> always have a reason to produce more in secret. Similar examples are advertising wars between rivals (both would be better off without advertising, but each wants to advertise a little more), and the speed race among high-frequency trading firms on exchanges (they all spend heavily to save a few microseconds, and their positions relative to each other do not change).
+
+<Check id="C1" />
+
+## Nash equilibrium [#nash-equilibrium]
+
+Many games have no dominant strategy: a player's best choice depends on what the others choose.
+
+Example: A and B each have 100 dollars deposited in a bank. The bank has lent the deposits to a long-term project. If both wait until the project matures before withdrawing, each gets 140 dollars. If someone withdraws early, the bank must sell assets at a low price: the person who withdraws early gets back 100 dollars and the one who waits has only 60 dollars left. If both withdraw early, the assets sell for only 160 dollars in total, 80 dollars each.
+
+|  | B: wait | B: withdraw early |
+| --- | ---: | ---: |
+| **A: wait** | 140, 140 | 60, 100 |
+| **A: withdraw early** | 100, 60 | 80, 80 |
+
+In A's place: if B waits, A is better off waiting too (140 > 100); if B withdraws early, A is better off withdrawing early too (80 > 60). The choice that is best for a player given the others' choices is called a best response. Here A's best response is "do what the other does", so A has no dominant strategy.
+
+A combination of strategies in which each player's strategy is a best response to the others', so that no one wants to change alone, is called a <Def id="nash-equilibrium">Nash equilibrium</Def>. In this example, "both wait" is a Nash equilibrium: if the other waits, switching to an early withdrawal gives only 100, less than 140. "Both withdraw early" is also a Nash equilibrium: if the other withdraws, switching to waiting leaves only 60, less than 80.
+
+Which of the two equilibria occurs depends on what each person expects the others to do. As long as depositors believe that others will withdraw, withdrawing is the rational choice even if the bank itself is sound, and everyone withdrawing then really does put the bank in trouble. This is a bank run: the expectation fulfills itself. In March 2023, depositors withdrew a large share of Silicon Valley Bank's deposits within a day or two, and regulators took the bank over immediately.
+
+The idea of Nash equilibrium applies to every game. The Cournot equilibrium of <Ref lesson="1.6" /> is a Nash equilibrium: each firm's output is a best response to its rival's output. If every player has a dominant strategy, how is the combination of dominant strategies related to Nash equilibrium? Prove it in <Ref check="Q1" />. Some games (for example, a penalty kick in which the kicker picks a side and the goalkeeper guesses a side) have no such equilibrium in pure strategies, and the players must choose at random; this course does not cover that case.
+
+<Check id="C2" />
+
+## Sequential moves and backward induction [#backward-induction]
+
+In some games the players move one after another, and later movers can see the earlier choices. Example: a market has a single incumbent firm, and a new firm is considering whether to enter. The incumbent announces: "If you come in, we will start a price war." Should the new firm believe it?
+
+A game with sequential moves can be drawn as a game tree: starting from the left, each node is a decision, each branch is a choice, and the ends show the payoffs of both sides.
+
+<Figure id="4-1" title="Entry game: the entrant first decides whether to enter; after entry, the incumbent decides between a price war and accommodation." observe="Start from the decision on the far right: if entry has already happened, how much does the incumbent get from a price war and from accommodating?">
+	<EntryGame />
+</Figure>
+
+The way to analyze it is to work back from the last step. Suppose the new firm has entered: the incumbent gets 30 from a price war and 50 from accommodating, so it accommodates. The new firm foresees this: entering gives 20 and staying out gives 0, so it enters. Starting from the last decision, finding the best choice at each step and then moving back is called <Def id="backward-induction">backward induction</Def>.
+
+The incumbent's threat is not credible: when the time comes, carrying it out would hurt the incumbent itself. The incumbent would prefer the new firm to stay out (it would get 100), but announcing a threat does not achieve that. To make the threat credible, the incumbent must change its own payoffs in advance so that a price war really would be better for it when the time comes, for example by building very large capacity ahead of time, so that expanding output after an entry costs little. Such a prior commitment is exactly one source of <Ref concept="barriers-to-entry" />.
+
+<Check id="C3" />
+
+## Repeated games [#repeated-game]
+
+Back to the airlines. If the two airlines competed only once, the prisoner's dilemma says that both would set low fares. But they compete on the same route every year. The same game played period after period is called a <Def id="repeated-game">repeated game</Def>.
+
+With repetition, today's choice affects the rival's choices tomorrow. Suppose both airlines use this strategy: start with a high fare; keep the high fare as long as the rival has always set a high fare; once the rival sets a low fare even once, set low fares forever. This is called a trigger strategy.
+
+Now A considers whether to cut its fare in secret this year. Compare two paths:
+
+- Keep the high fare: earn 10 every year.
+- Cut the fare this year: earn 15 this year, but B sets low fares forever from next year, so A earns only 5 every year after that.
+
+Future profits must be discounted. Let the yearly <Ref concept="discount-factor" /> be $\delta$ ($\delta = \frac{1}{1+r}$; if the game may end in any year, $\delta$ is also multiplied by the probability that it continues). The total present values today of the two paths are
+
+$$
+10 + 10\delta + 10\delta^2 + \cdots = \frac{10}{1-\delta}
+$$
+
+and
+
+$$
+15 + 5\delta + 5\delta^2 + \cdots = 15 + \frac{5\delta}{1-\delta}
+$$
+
+(This is the sum of a geometric series, derived in the same way as the <Ref concept="perpetuity" />, except that the first payment is today.) The gain from cutting the fare comes now and the cost comes later, so the conclusion depends on $\delta$, that is, on how much the airline values the future.
+
+<Figure id="5-1" title="A repeated pricing game with trigger strategies: cumulative present value of the two choices." observe="Start with a small $\delta$ and raise it step by step. Watch how the two lines move relative to each other, and in which period the line for cutting the fare now is caught up.">
+	<RepeatedGame />
+</Figure>
+
+How large must $\delta$ be for keeping the high fare to pay? Use the figure to answer <Ref check="C4" />; the general condition is derived in <Ref check="Q2" />. The comparison shows that cooperation is easier to sustain when the players value the future, the game is likely to continue, cheating is detected and punished quickly, and the gain from cheating once is small. What happens if everyone knows the game ends in a certain period? See <Ref check="Q4" />.
+
+Repeated games also explain why reputation has value. Banks, market makers and investment advisers deal with their clients again and again, and the short-term gain from cheating once is outweighed by the business lost later. Conversely, a counterparty in a one-time deal needs to be held in check by contracts, regulation or collateral.
+
+<Check id="C4" />
+
+## Summary [#summary]
+
+- A game consists of players, strategies and payoffs; a game with simultaneous moves is shown as a payoff matrix.
+- Dominant strategy: a strategy that is better whatever the rival chooses. Prisoner's dilemma: each side's dominant strategy leads to an outcome worse for everyone.
+- Nash equilibrium: each player's strategy is a best response to the others', so no one wants to change alone. A game can have several Nash equilibria; in a bank run, for example, which one occurs depends on expectations.
+- Games with sequential moves are solved by backward induction; a threat that would hurt the threatener when the time comes is not credible, and a prior commitment can make it credible.
+- In a repeated game, trigger strategies can sustain cooperation; whether cooperation pays depends on the discount factor $\delta$.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

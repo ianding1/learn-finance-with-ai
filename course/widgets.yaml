@@ -104,3 +104,13 @@ cournot:
   fixed:
     a: 100
     c: 20
+
+repeated-game:
+  component: src/components/widgets/RepeatedGame.astro
+  params:
+    delta: { min: 0.05, max: 0.95, step: 0.05, default: 0.3 }
+  fixed:
+    keep: 10
+    cheat: 15
+    punish: 5
+    periods: 30

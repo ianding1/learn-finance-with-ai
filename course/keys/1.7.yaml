@@ -1,0 +1,350 @@
+# Answer key for lesson 1.7. Shown to learners only inside generated grading prompts.
+# Text fields support: $inline math$, $$display math$$, **bold**, line breaks,
+# and references: [[0.1]] (lesson), [[1.7#nash-equilibrium]] (section), [[concept:game]], [[check:Q4]], [[fig:5-1]].
+# expected: values are recomputed by course/verify/1.7.py in CI and must appear verbatim in every answer text.
+#
+# context: lesson facts for the grader. A grading prompt includes an item when
+#   - the item has neither `concepts` nor `questions` (always included), or
+#   - one of its `concepts` is tested by a question being graded, or
+#   - one of its `questions` is being graded.
+# common_errors: each item lists the `questions` it is relevant to. Only those go into a prompt.
+
+lesson: "1.7"
+
+context:
+  - zh-cn: |-
+      学习者学过折现因子与永续年金（[[0.1]]）、利润最大化（[[0.2]]）、完全竞争（[[1.5]]），以及垄断、古诺模型和伯特兰模型、进入壁垒（[[1.6]]）。本课是简讲，只讲纯策略：没有讲混合策略，也没有讲子博弈完美均衡的正式定义。
+    en: |-
+      The learner has studied the discount factor and perpetuities ([[0.1]]), profit maximization ([[0.2]]), perfect competition ([[1.5]]), and monopoly, the Cournot and Bertrand models and barriers to entry ([[1.6]]). This is a short lesson that covers only pure strategies: it does not cover mixed strategies or the formal definition of subgame perfect equilibrium.
+  - concepts: [game, dominant-strategy, prisoners-dilemma]
+    zh-cn: |-
+      讲义的例子：两家航空公司同时选高价或低价，收益（甲，乙，百万美元 / 年）：都高价 (10, 10)；甲高乙低 (2, 15)；甲低乙高 (15, 2)；都低价 (5, 5)。低价是双方的占优策略，结果 (5, 5)，比 (10, 10) 对双方都差，这是囚徒困境。讲义还提到卡特尔不能靠法院执行、广告战和高频交易的速度竞赛。
+    en: |-
+      The lesson's example: two airlines choose a high or a low price at the same time, with payoffs (A, B, million dollars per year): both high (10, 10); A high, B low (2, 15); A low, B high (15, 2); both low (5, 5). The low price is a dominant strategy for both, so the outcome is (5, 5), worse for both than (10, 10): a prisoner's dilemma. The lesson also mentions that cartel agreements cannot be enforced in court, advertising wars, and the speed race among high-frequency traders.
+  - concepts: [nash-equilibrium]
+    zh-cn: |-
+      讲义的银行挤兑例子：两人各存 100 美元；都等待各得 140；一人提前取款时取款者得 100、等待者得 60；都提前取款各得 80。没有占优策略，有两个纳什均衡：都等待、都提前取款；出现哪一个取决于预期。讲义提到 2023 年 3 月硅谷银行的挤兑，并说明古诺均衡是纳什均衡。讲义没有说明占优策略组合与纳什均衡的关系（留给练习题）。
+    en: |-
+      The lesson's bank-run example: two people each deposit 100 dollars; if both wait, each gets 140; if one withdraws early, that person gets 100 and the one who waits gets 60; if both withdraw early, each gets 80. There is no dominant strategy, and there are two Nash equilibria: both wait, and both withdraw early; which one occurs depends on expectations. The lesson mentions the run on Silicon Valley Bank in March 2023 and notes that the Cournot equilibrium is a Nash equilibrium. The lesson does not state how dominant strategies relate to Nash equilibrium (left to an exercise).
+  - concepts: [backward-induction]
+    zh-cn: |-
+      [[fig:4-1]] 进入博弈（进入者，在位者，百万美元）：不进入 (0, 100)；进入后打价格战 (−10, 30)；进入后接纳 (20, 50)。倒推：在位者会接纳，进入者会进入；打价格战的威胁不可信。讲义说明事先的承诺（如提前建好大产能）可以使威胁可信，并把它与进入壁垒联系起来。
+    en: |-
+      [[fig:4-1]] entry game (entrant, incumbent, million dollars): stay out (0, 100); enter and price war (−10, 30); enter and accommodate (20, 50). Backward induction: the incumbent accommodates and the entrant enters; the threat of a price war is not credible. The lesson explains that a prior commitment (such as building large capacity in advance) can make the threat credible and links this to barriers to entry.
+  - concepts: [repeated-game]
+    zh-cn: |-
+      触发策略：开始定高价，对手一旦定低价就永远定低价。保持高价的现值 $\frac{10}{1-\delta}$，现在降价的现值 $15 + \frac{5\delta}{1-\delta}$；$\delta = \frac{1}{1+r}$，博弈可能结束时还要乘以继续的概率。[[fig:5-1]]：$\delta$ 滑块从 0.05 到 0.95，步长 0.05，默认 0.3；图中是 30 期的累计现值，读数给出无限期的总现值和哪一种更好。讲义没有给出 $\delta$ 的临界值（留给随堂题和练习题），也没有分析有限次重复（留给练习题）。讲义提到声誉的价值。
+    en: |-
+      Trigger strategy: start with the high price, and price low forever once the rival has priced low. Present value of keeping the high price $\frac{10}{1-\delta}$; of cutting the price now $15 + \frac{5\delta}{1-\delta}$; $\delta = \frac{1}{1+r}$, multiplied by the probability of continuing if the game may end. [[fig:5-1]]: a slider for $\delta$ from 0.05 to 0.95 in steps of 0.05 (default 0.3); the figure shows cumulative present values over 30 periods, and the readout gives the totals over an infinite horizon and which choice is better. The lesson does not give the critical value of $\delta$ (left to a check question and an exercise), nor does it analyze a finite number of repetitions (left to an exercise). The lesson mentions the value of reputation.
+
+common_errors:
+  - questions: [C1]
+    zh-cn: |-
+      认为只要有占优策略就是囚徒困境。囚徒困境还要求均衡结果比另一个结果对所有人都差。
+    en: |-
+      Thinking that any game with a dominant strategy is a prisoner's dilemma. A prisoner's dilemma also requires that the equilibrium outcome is worse for everyone than another outcome.
+  - questions: [C1, C2, Q3]
+    zh-cn: |-
+      比较收益时比较了错误的数：判断甲的最优反应要固定乙的选择、比较同一列中甲的两个收益，而不是比较甲和乙的收益，或者沿着一行比较。
+    en: |-
+      Comparing the wrong numbers: to find A's best response, fix B's choice and compare A's two payoffs in the same column, not A's payoff with B's, or along a row.
+  - questions: [C2, Q1]
+    zh-cn: |-
+      认为纳什均衡是使双方总收益最大的结果，或者认为一个博弈只有一个纳什均衡。纳什均衡只要求谁也不想单方面改变。
+    en: |-
+      Thinking that a Nash equilibrium is the outcome with the highest total payoff, or that a game has only one Nash equilibrium. A Nash equilibrium requires only that no one wants to change alone.
+  - questions: [C3]
+    zh-cn: |-
+      相信在位者事先宣布的威胁，而没有检查到时候执行威胁对它是否有利；或者忘记把建产能的成本算进比较。
+    en: |-
+      Believing the incumbent's announced threat without checking whether carrying it out would be in its interest at that point; or forgetting to include the cost of the capacity in the comparison.
+  - questions: [C4, Q2, Q5]
+    zh-cn: |-
+      只比较一期的收益（降价得 15 > 10，所以一定降价），忽略了以后各期的损失；或者把未来的收益直接相加而不折现。
+    en: |-
+      Comparing only one period (cutting the price gives 15 > 10, so always cut), ignoring the losses in later periods; or adding future payoffs without discounting them.
+  - questions: [Q4]
+    zh-cn: |-
+      认为有限次重复时，前面几期仍然可以靠“以后会被惩罚”维持合作。最后一期没有以后，倒推下去每一期都没有。
+    en: |-
+      Thinking that with a finite number of repetitions, cooperation in the early periods can still be held up by the threat of later punishment. The last period has no later periods, and working backward, neither does any period.
+
+questions:
+  # ---------- Check questions (随堂题) ----------
+  - id: C1
+    kind: check
+    section: dominant-strategy
+    concepts: [dominant-strategy, prisoners-dilemma]
+    question:
+      zh-cn: |-
+        大型连锁店 A 和小店 B 各自决定是否投放广告。收益（A，B）如下：两家都不投放 (50, 20)；A 不投放、B 投放 (40, 25)；A 投放、B 不投放 (55, 18)；两家都投放 (45, 15)。
+        (a) 谁有占优策略？是什么？
+        (b) 预测两家会怎样选择，并说明理由。
+        (c) 这个博弈是囚徒困境吗？
+      en: |-
+        A large chain A and a small shop B each decide whether to advertise. The payoffs (A, B) are: neither advertises (50, 20); A does not, B does (40, 25); A does, B does not (55, 18); both advertise (45, 15).
+        (a) Who has a dominant strategy, and what is it?
+        (b) Predict what the two firms will choose, and explain.
+        (c) Is this game a prisoner's dilemma?
+    answer:
+      zh-cn: |-
+        (a) A 有占优策略：投放。B 不投放时，A 投放得 55 > 50；B 投放时，A 投放得 45 > 40。B 没有占优策略：A 不投放时 B 投放更好（25 > 20），A 投放时 B 不投放更好（18 > 15）。
+        (b) A 一定投放。B 预见到这一点，选择对“A 投放”的最优反应：不投放。结果是 A 投放、B 不投放，收益 (55, 18)。
+        (c) 不是。没有另一个结果对两家都更好：(50, 20) 对 B 更好，但对 A 更差。只有一方有占优策略，也不满足“各自的占优策略导致对所有人都更差的结果”。
+      en: |-
+        (a) A has a dominant strategy: advertise. If B does not advertise, A gets 55 > 50 by advertising; if B advertises, A gets 45 > 40 by advertising. B has no dominant strategy: if A does not advertise, B is better off advertising (25 > 20); if A advertises, B is better off not advertising (18 > 15).
+        (b) A will certainly advertise. B foresees this and chooses its best response to "A advertises": not advertising. The outcome is A advertises and B does not, with payoffs (55, 18).
+        (c) No. No other outcome is better for both firms: (50, 20) is better for B but worse for A. Also, only one side has a dominant strategy, so it is not a case of "each side's dominant strategy leading to an outcome worse for everyone".
+    rubric:
+      zh-cn:
+        - "(a) A 的占优策略是投放，B 没有占优策略，比较正确。"
+        - "(b) A 投放、B 不投放，(55, 18)，并用 B 的最优反应说明。"
+        - "(c) 不是囚徒困境，没有对双方都更好的结果。"
+      en:
+        - "(a) A's dominant strategy is to advertise; B has none; correct comparisons."
+        - "(b) A advertises, B does not, (55, 18), explained with B's best response."
+        - "(c) Not a prisoner's dilemma: no outcome is better for both."
+
+  - id: C2
+    kind: check
+    section: nash-equilibrium
+    concepts: [nash-equilibrium, dominant-strategy]
+    question:
+      zh-cn: |-
+        两家公司各自为新产品选择技术标准 X 或 Y。选相同的标准时产品可以互相兼容：都选 X 时收益（甲，乙）为 (30, 20)，都选 Y 时为 (20, 30)；选不同的标准时各得 5。
+        (a) 有人有占优策略吗？
+        (b) 找出所有纳什均衡，并逐一说明为什么谁也不想单方面改变。
+        (c) 能预测会出现哪一个均衡吗？
+      en: |-
+        Two firms each choose technology standard X or Y for a new product. With the same standard their products are compatible: if both choose X the payoffs (A, B) are (30, 20), and if both choose Y they are (20, 30); with different standards each gets 5.
+        (a) Does anyone have a dominant strategy?
+        (b) Find all the Nash equilibria, and explain for each why no one wants to change alone.
+        (c) Can you predict which equilibrium will occur?
+    answer:
+      zh-cn: |-
+        (a) 没有。乙选 X 时甲选 X 更好（30 > 5），乙选 Y 时甲选 Y 更好（20 > 5）；乙也一样。
+        (b) 两个纳什均衡：(X, X) 和 (Y, Y)。在 (X, X)，甲改为 Y 从 30 降到 5，乙改为 Y 从 20 降到 5；在 (Y, Y)，甲改为 X 从 20 降到 5，乙改为 X 从 30 降到 5。(X, Y) 和 (Y, X) 都不是均衡：任何一方改成和对方相同的标准都能从 5 提高。
+        (c) 只靠这张表不能。甲更喜欢 X、乙更喜欢 Y，两个均衡都可能出现，要看谁先行动、谁先建立了用户基础、行业惯例或谈判等表外的因素。
+      en: |-
+        (a) No. If B chooses X, A is better off with X (30 > 5); if B chooses Y, A is better off with Y (20 > 5); the same holds for B.
+        (b) Two Nash equilibria: (X, X) and (Y, Y). At (X, X), A switching to Y drops from 30 to 5, and B switching to Y drops from 20 to 5; at (Y, Y), A switching to X drops from 20 to 5, and B switching to X drops from 30 to 5. (X, Y) and (Y, X) are not equilibria: either side gains by switching to the other's standard, from 5 upward.
+        (c) Not from the table alone. A prefers X and B prefers Y, and either equilibrium can occur; it depends on factors outside the table, such as who moves first, who already has users, industry custom or negotiation.
+    rubric:
+      zh-cn:
+        - "(a) 没有占优策略，理由正确。"
+        - "(b) 两个均衡 (X, X)、(Y, Y)，并逐一检查单方面改变；排除不同标准的组合。"
+        - "(c) 不能仅凭收益矩阵预测，说明取决于表外因素或预期。"
+      en:
+        - "(a) No dominant strategy, with correct reasons."
+        - "(b) Two equilibria (X, X) and (Y, Y), each checked for a one-sided change; the mixed-standard pairs are ruled out."
+        - "(c) Cannot be predicted from the payoff matrix alone; depends on factors outside it or on expectations."
+
+  - id: C3
+    kind: check
+    section: backward-induction
+    concepts: [backward-induction, barriers-to-entry]
+    expected: { with: "90", without: "50" }
+    question:
+      zh-cn: |-
+        在 [[fig:4-1]] 的进入博弈之前，在位者可以先建一座大工厂。建了之后（已扣除工厂的成本），收益（进入者，在位者）变为：不进入 (0, 90)；进入后打价格战 (−10, 40)；进入后接纳 (20, 35)。
+        (a) 建厂后，如果新企业进入，在位者会怎么做？新企业会进入吗？
+        (b) 在位者应该建厂吗？比较建厂与不建厂时它最终的收益。
+      en: |-
+        Before the entry game of [[fig:4-1]], the incumbent can first build a large plant. After building it (with the plant's cost already subtracted), the payoffs (entrant, incumbent) become: stay out (0, 90); enter and price war (−10, 40); enter and accommodate (20, 35).
+        (a) After building, if the new firm enters, what will the incumbent do? Will the new firm enter?
+        (b) Should the incumbent build the plant? Compare its final payoff with and without the plant.
+    answer:
+      zh-cn: |-
+        (a) 进入后，在位者打价格战得 40，接纳得 35，会打价格战：威胁现在可信。新企业预见到这一点，进入得 −10，不进入得 0，所以不进入。
+        (b) 建厂时结果是新企业不进入，在位者得 90。不建厂时（[[fig:4-1]]），新企业会进入、在位者接纳，在位者得 50。所以应该建厂：大工厂本身降低了在位者在没有竞争时的利润（100 降到 90），但它改变了在位者事后的选择，使威胁可信，从而阻止了进入。
+      en: |-
+        (a) After entry, the incumbent gets 40 from a price war and 35 from accommodating, so it fights: the threat is now credible. The new firm foresees this; entering gives −10 and staying out gives 0, so it stays out.
+        (b) With the plant, the new firm stays out and the incumbent gets 90. Without the plant ([[fig:4-1]]), the new firm enters and the incumbent accommodates, so the incumbent gets 50. So it should build: the large plant itself lowers the incumbent's profit when there is no competition (from 100 to 90), but it changes what the incumbent will do afterward, which makes the threat credible and keeps the entrant out.
+    rubric:
+      zh-cn:
+        - "(a) 在位者会打价格战（40 > 35），新企业不进入（0 > −10），按倒推的顺序说明。"
+        - "(b) 建厂得 90，不建厂得 50，应该建厂；说明建厂的作用是使威胁可信。"
+      en:
+        - "(a) The incumbent fights (40 > 35) and the new firm stays out (0 > −10), explained in backward order."
+        - "(b) 90 with the plant, 50 without, so build; explains that the plant makes the threat credible."
+
+  - id: C4
+    kind: check
+    section: repeated-game
+    concepts: [repeated-game, discount-factor]
+    widget: { id: repeated-game, set: { delta: 0.5 } }
+    expected: { delta: "0.5", rate: "100" }
+    question:
+      zh-cn: |-
+        在 [[fig:5-1]] 中逐渐调大 $\delta$，找出保持高价至少和现在降价一样好的最小 $\delta$，再用讲义中两个现值的表达式算出精确值。如果 $\delta$ 只反映利率（$\delta = \frac{1}{1+r}$），这相当于年利率最高是多少？
+      en: |-
+        In [[fig:5-1]], raise $\delta$ step by step and find the smallest $\delta$ at which keeping the high price is at least as good as cutting the price now. Then compute the exact value from the lesson's two present-value expressions. If $\delta$ reflects only the interest rate ($\delta = \frac{1}{1+r}$), what is the highest annual interest rate this allows?
+    answer:
+      zh-cn: |-
+        图中 $\delta = 0.5$ 时两者相等（都是 20），更大时保持高价更好。
+        精确值：$\frac{10}{1-\delta} \ge 15 + \frac{5\delta}{1-\delta}$，两边乘以 $1 - \delta$ 得 $10 \ge 15(1-\delta) + 5\delta = 15 - 10\delta$，即 $\delta \ge 0.5$。
+        $\frac{1}{1+r} \ge 0.5$ 即 $r \le 1$：年利率不超过 100% 时，合作都能维持。在这个例子里，只要两家公司相信博弈会继续下去，合作很容易维持；如果博弈每年有较大的概率结束，$\delta$ 会小得多。
+      en: |-
+        In the figure the two are equal at $\delta = 0.5$ (both 20), and above that keeping the high price is better.
+        Exact value: $\frac{10}{1-\delta} \ge 15 + \frac{5\delta}{1-\delta}$; multiplying both sides by $1 - \delta$ gives $10 \ge 15(1-\delta) + 5\delta = 15 - 10\delta$, that is, $\delta \ge 0.5$.
+        $\frac{1}{1+r} \ge 0.5$ means $r \le 1$: cooperation can be sustained at any annual interest rate up to 100%. In this example cooperation is easy to sustain as long as both firms believe the game will continue; if the game has a large chance of ending each year, $\delta$ is much smaller.
+    rubric:
+      zh-cn:
+        - "图中读出 0.5，并由不等式解出 $\\delta \\ge 0.5$。"
+        - "对应年利率最高 100%。"
+      en:
+        - "Reads 0.5 from the figure and solves the inequality for $\\delta \\ge 0.5$."
+        - "The corresponding highest annual rate is 100%."
+
+  # ---------- Exercises (reviewed by the AI, not scored) ----------
+  - id: Q1
+    kind: exercise
+    level: A
+    concepts: [dominant-strategy, nash-equilibrium]
+    question:
+      zh-cn: |-
+        判断真假并说明理由：如果每个参与者都有一个严格占优策略（无论别人选什么，都严格好于自己的其他策略），那么所有人都选占优策略的组合是纳什均衡，而且是唯一的纳什均衡。
+      en: |-
+        True or false? Explain. If every player has a strictly dominant strategy (strictly better than the player's other strategies whatever the others choose), then the profile in which everyone plays the dominant strategy is a Nash equilibrium, and it is the only Nash equilibrium.
+    answer:
+      zh-cn: |-
+        真。
+        是纳什均衡：占优策略对别人的任何选择都是最优反应，当然也是对别人的占优策略的最优反应，所以谁也不想单方面改变。
+        唯一：任取另一个策略组合，其中至少有一个参与者没有选他的占优策略。给定别人的选择，他改为占优策略会严格更好，所以这个组合不是纳什均衡。
+        囚徒困境就是一个例子：唯一的纳什均衡是双方都选占优策略，即使另一个结果对双方都更好。
+      en: |-
+        True.
+        It is a Nash equilibrium: a dominant strategy is a best response to anything the others choose, so in particular to their dominant strategies, and no one wants to change alone.
+        It is the only one: take any other profile; at least one player is not playing his dominant strategy. Given the others' choices, he would be strictly better off switching to it, so that profile is not a Nash equilibrium.
+        The prisoner's dilemma is an example: the only Nash equilibrium is that both play their dominant strategies, even though another outcome is better for both.
+    rubric:
+      zh-cn:
+        - "判断为真。"
+        - "说明占优策略组合中每个人都在做最优反应。"
+        - "用“至少一人没选占优策略、他改了会严格更好”证明唯一性。"
+      en:
+        - "States true."
+        - "Explains that in the dominant-strategy profile everyone is playing a best response."
+        - "Proves uniqueness: at least one player is not playing the dominant strategy and would be strictly better off switching."
+
+  - id: Q2
+    kind: exercise
+    level: B
+    star: true
+    concepts: [repeated-game, prisoners-dilemma, discount-factor]
+    expected: { d: "0.5" }
+    question:
+      zh-cn: |-
+        一般的囚徒困境：双方都合作时各得 $R$；自己背叛、对方合作时自己得 $T$；双方都背叛时各得 $P$；自己合作、对方背叛时自己得 $S$，且 $T > R > P > S$。博弈无限重复，双方采用触发策略，折现因子为 $\delta$。
+        (a) 证明：保持合作至少和现在背叛一样好，当且仅当 $\delta \ge \frac{T - R}{T - P}$。
+        (b) 用这个条件解释：背叛的诱惑（$T - R$）、惩罚的严厉程度（$R - P$）分别怎样影响合作能否维持？
+        (c) 代入讲义中航空公司的数字，与 [[check:C4]] 的结果核对。
+      en: |-
+        A general prisoner's dilemma: if both cooperate, each gets $R$; if you defect while the other cooperates, you get $T$; if both defect, each gets $P$; if you cooperate while the other defects, you get $S$, with $T > R > P > S$. The game is repeated forever, both use trigger strategies, and the discount factor is $\delta$.
+        (a) Show that continuing to cooperate is at least as good as defecting now if and only if $\delta \ge \frac{T - R}{T - P}$.
+        (b) Use this condition to explain how the temptation to defect ($T - R$) and the severity of the punishment ($R - P$) affect whether cooperation can be sustained.
+        (c) Substitute the airline numbers from the lesson and check against the result of [[check:C4]].
+    answer:
+      zh-cn: |-
+        (a) 合作的现值 $\frac{R}{1-\delta}$；现在背叛得 $T$，以后每期 $P$，现值 $T + \frac{\delta P}{1-\delta}$。$\frac{R}{1-\delta} \ge T + \frac{\delta P}{1-\delta}$ 两边乘以 $1 - \delta > 0$：$R \ge T(1-\delta) + \delta P$，即 $\delta(T - P) \ge T - R$，因为 $T > P$，得 $\delta \ge \frac{T - R}{T - P}$。
+        (b) 临界值 $\frac{T - R}{T - P} = \frac{T - R}{(T - R) + (R - P)}$。诱惑 $T - R$ 越大，临界值越高，合作越难维持；惩罚 $R - P$ 越大（背叛后的日子越差），临界值越低，合作越容易维持。$S$ 不出现在条件中，因为在触发策略下，没有人会在对方背叛后继续合作。
+        (c) $T = 15$，$R = 10$，$P = 5$：$\frac{15 - 10}{15 - 5} = 0.5$，与 [[check:C4]] 相同。
+      en: |-
+        (a) The present value of cooperating is $\frac{R}{1-\delta}$; defecting now gives $T$ and then $P$ each period, a present value of $T + \frac{\delta P}{1-\delta}$. Multiplying $\frac{R}{1-\delta} \ge T + \frac{\delta P}{1-\delta}$ by $1 - \delta > 0$ gives $R \ge T(1-\delta) + \delta P$, that is, $\delta(T - P) \ge T - R$, and since $T > P$, $\delta \ge \frac{T - R}{T - P}$.
+        (b) The critical value is $\frac{T - R}{T - P} = \frac{T - R}{(T - R) + (R - P)}$. The larger the temptation $T - R$, the higher the critical value and the harder cooperation is to sustain; the larger the punishment $R - P$ (the worse life is after defecting), the lower the critical value and the easier cooperation is to sustain. $S$ does not appear, because under trigger strategies no one keeps cooperating after the other defects.
+        (c) $T = 15$, $R = 10$, $P = 5$: $\frac{15 - 10}{15 - 5} = 0.5$, the same as in [[check:C4]].
+    rubric:
+      zh-cn:
+        - "(a) 两个现值写对，正确地乘以 $1 - \\delta$ 并利用 $T > P$ 解出条件。"
+        - "(b) 诱惑越大越难合作，惩罚越重越容易合作。"
+        - "(c) 得到 0.5。"
+      en:
+        - "(a) Both present values correct; multiplies by $1 - \\delta$ correctly and uses $T > P$ to solve."
+        - "(b) A larger temptation makes cooperation harder; a heavier punishment makes it easier."
+        - "(c) Gets 0.5."
+
+  - id: Q3
+    kind: exercise
+    level: B
+    concepts: [nash-equilibrium, dominant-strategy]
+    expected: { g: "80" }
+    question:
+      zh-cn: |-
+        在讲义的银行挤兑例子中，政府推出存款保险：等到期的储户如果拿到的少于 $g$ 美元，由保险机构补足到 $g$。
+        (a) $g$ 至少要多大，“两人都提前取款”才不再是纳什均衡？这时“等待”是不是占优策略？
+        (b) 在新的均衡中，保险机构需要赔付吗？这说明存款保险是怎样起作用的？
+      en: |-
+        In the lesson's bank-run example, the government introduces deposit insurance: if a depositor who waits until maturity gets less than $g$ dollars, the insurer tops it up to $g$.
+        (a) How large must $g$ be at least for "both withdraw early" to stop being a Nash equilibrium? Is "wait" then a dominant strategy?
+        (b) In the new equilibrium, does the insurer have to pay anything? What does this show about how deposit insurance works?
+    answer:
+      zh-cn: |-
+        (a) 保险只改变“自己等待、对方提前取款”时等待者的收益：从 60 变为 $\max(60, g)$。“都提前取款”不再是均衡，需要对方取款时自己改为等待更好：$g > 80$。（$g = 80$ 时两者相等，取款者没有严格的理由改变；所以 $g$ 要超过 80。）这时对方等待时等待更好（140 > 100），对方取款时等待也更好（$g > 80$），等待是占优策略，唯一的均衡是两人都等待。
+        (b) 不需要赔付：均衡中没有人提前取款，银行可以持有资产到期，每人得 140。存款保险的作用是消除“别人会先取”的担心，从而消除了坏的那个均衡；正因为人们相信保险，它在挤兑中反而很少需要动用。
+      en: |-
+        (a) The insurance changes only the payoff of the one who waits while the other withdraws early: from 60 to $\max(60, g)$. For "both withdraw early" to stop being an equilibrium, waiting must be better when the other withdraws: $g > 80$. (At $g = 80$ the two are equal and a withdrawer has no strict reason to switch, so $g$ must exceed 80.) Then waiting is better when the other waits (140 > 100) and also when the other withdraws ($g > 80$), so waiting is a dominant strategy and the only equilibrium is that both wait.
+        (b) No payment is needed: in equilibrium no one withdraws early, the bank holds its assets to maturity, and each gets 140. Deposit insurance works by removing the fear that others will withdraw first, which removes the bad equilibrium; because people trust it, it rarely needs to be used in a run.
+    rubric:
+      zh-cn:
+        - "(a) $g > 80$（只要求比较对方取款时等待与取款的收益）；等待成为占优策略。"
+        - "(b) 均衡中不需要赔付；说明保险通过改变预期消除了坏的均衡。"
+      en:
+        - "(a) $g > 80$ (comparing waiting and withdrawing when the other withdraws); waiting becomes a dominant strategy."
+        - "(b) No payment in equilibrium; explains that insurance removes the bad equilibrium by changing expectations."
+
+  - id: Q4
+    kind: exercise
+    level: B
+    concepts: [repeated-game, backward-induction, prisoners-dilemma]
+    question:
+      zh-cn: |-
+        讲义中的两家航空公司都知道，这条航线会在正好 10 年后关闭，之后两家不再有任何往来。
+        (a) 用倒推法说明：每一年两家都会定低价。
+        (b) 现实中很多行业也不会永远存在，但企业之间的默契常常能维持很久。用本课的概念给出一种解释。
+      en: |-
+        The two airlines in the lesson both know that the route will close in exactly 10 years, after which they will have no further dealings.
+        (a) Use backward induction to show that both price low in every year.
+        (b) In reality many industries do not last forever either, yet tacit cooperation between firms often lasts a long time. Give an explanation using the concepts of this lesson.
+    answer:
+      zh-cn: |-
+        (a) 第 10 年是最后一年，以后没有惩罚，这一年就是一次性的囚徒困境，两家都定低价。到第 9 年：不管今年怎么做，第 10 年都会是低价，所以今年保持高价换不来任何未来的好处，今年也是一次性的囚徒困境，都定低价。依次往前推，每一年都定低价。
+        (b) 关键是没有人知道博弈确切在哪一期结束。只要每年都有一定概率继续下去，就相当于一个无限重复的博弈，有效的折现因子是 $\delta = \frac{p}{1+r}$（$p$ 是继续的概率）；只要它高于临界值，触发策略就能维持合作。另外，企业之间往往在多个市场、多种产品上反复打交道，声誉也有价值。
+      en: |-
+        (a) Year 10 is the last year with no later punishment, so it is a one-shot prisoner's dilemma and both price low. In year 9, year 10 will be low whatever happens now, so keeping the high price this year earns no future benefit; this year is also a one-shot prisoner's dilemma and both price low. Working backward, both price low every year.
+        (b) The key is that no one knows exactly when the game ends. As long as the game continues each year with some probability, it is like an infinitely repeated game with an effective discount factor $\delta = \frac{p}{1+r}$ ($p$ is the probability of continuing); if this is above the critical value, trigger strategies can sustain cooperation. Firms also often deal with each other in several markets and products, and reputation has value.
+    rubric:
+      zh-cn:
+        - "(a) 从最后一年开始倒推，说明每一年都是一次性的囚徒困境。"
+        - "(b) 指出结束时间不确定时相当于无限重复（有效折现因子含继续的概率），或其他合理的解释（多市场接触、声誉）。"
+      en:
+        - "(a) Works backward from the last year, showing that every year is a one-shot prisoner's dilemma."
+        - "(b) Points out that an uncertain end works like infinite repetition (the effective discount factor includes the probability of continuing), or gives another sound explanation (contact in several markets, reputation)."
+
+  - id: Q5
+    kind: exercise
+    level: C
+    concepts: [repeated-game, cournot-model, discount-factor]
+    expected: { d: "0.529", p: "55.6" }
+    question:
+      zh-cn: |-
+        [[1.6]] 中的两个古诺厂商（需求 $P = 100 - Q$，边际成本都为 20）：合谋时各得 800；对方守约、自己偷偷多生产时得 900；古诺均衡时各得约 711.11。假设合谋每年重复，双方采用触发策略（一旦对方违约，以后永远回到古诺均衡）。
+        (a) 合谋能维持所需的最小折现因子是多少？
+        (b) 年利率为 5%，而每年都有一定概率因为反垄断调查或新企业进入而使合谋结束。合谋每年继续的概率至少要多大？
+      en: |-
+        The two Cournot firms of [[1.6]] (demand $P = 100 - Q$, marginal cost 20 for each): colluding, each earns 800; secretly producing more while the other keeps the agreement earns 900; in the Cournot equilibrium each earns about 711.11. Suppose the collusion repeats every year and both use trigger strategies (once the other cheats, return to the Cournot equilibrium forever).
+        (a) What is the smallest discount factor at which collusion can be sustained?
+        (b) The annual interest rate is 5%, and each year there is some chance that the collusion ends because of an antitrust investigation or a new entrant. At least how large must the probability that the collusion continues each year be?
+    answer:
+      zh-cn: |-
+        (a) $T = 900$，$R = 800$，$P = \frac{6400}{9} \approx 711.11$：$\delta \ge \frac{900 - 800}{900 - 711.11} = \frac{9}{17} \approx 0.529$。
+        (b) 有效折现因子 $\delta = \frac{p}{1.05} \ge 0.529$，得 $p \ge \frac{9}{17} \times 1.05 \approx 55.6\%$。即使每年有四成多的概率被打断，合谋仍可能维持；这也是反垄断机构重视厂商之间信息交流和价格透明度的原因：违约越容易被发现，合谋越容易维持。
+      en: |-
+        (a) $T = 900$, $R = 800$, $P = \frac{6400}{9} \approx 711.11$: $\delta \ge \frac{900 - 800}{900 - 711.11} = \frac{9}{17} \approx 0.529$.
+        (b) The effective discount factor is $\delta = \frac{p}{1.05} \ge 0.529$, so $p \ge \frac{9}{17} \times 1.05 \approx 55.6\%$. Even with a chance of more than 40% of being broken up each year, collusion may still be sustained; this is also why antitrust authorities pay attention to information exchange and price transparency among firms: the easier cheating is to detect, the easier collusion is to sustain.
+    rubric:
+      zh-cn:
+        - "(a) 用触发策略的条件（或直接比较现值）得到约 0.529。"
+        - "(b) $\\delta = \\frac{p}{1+r}$，得到约 55.6%。"
+      en:
+        - "(a) Uses the trigger-strategy condition (or compares present values directly) to get about 0.529."
+        - "(b) $\\delta = \\frac{p}{1+r}$, giving about 55.6%."
