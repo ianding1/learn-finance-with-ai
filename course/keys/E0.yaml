@@ -36,9 +36,9 @@ common_errors:
       Treating the market price as fixed ($MR = p$); or letting rent that has been paid and cannot be recovered affect the decision to produce: a sunk cost does not affect the decision, and producing should be compared with stopping.
   - questions: [Q7]
     zh-cn: |-
-      解出关于 $\rho$ 的二次方程后保留两个根：$\rho = 0.875$ 时最小方差组合要卖空 A，与题中“两个权重都为正”矛盾，应舍去。
+      解出关于 $\rho$ 的二次方程后保留两个根：$\rho = 0.875$ 时最小方差组合要卖空 A，不能卖空时最优是只持有 B（方差 256），应舍去。另一个常见错误是认为组合方差低于单只基金就说明负相关：$0 < \rho < \frac{\sigma_B}{\sigma_A}$ 时也能降低方差。
     en: |-
-      Keeping both roots of the quadratic in $\rho$: at $\rho = 0.875$ the minimum-variance portfolio sells A short, which contradicts "both weights positive", so that root is rejected.
+      Keeping both roots of the quadratic in $\rho$: at $\rho = 0.875$ the minimum-variance portfolio sells A short, and without short selling the optimum holds only B (variance 256), so that root is rejected. Another common error is thinking that a portfolio variance below that of a single fund shows negative correlation: for $0 < \rho < \frac{\sigma_B}{\sigma_A}$ the variance can also be lowered.
   - questions: [Q8]
     zh-cn: |-
       把多年对数收益率之和的标准差算成一年的 $n$ 倍（或由多年反推一年时除以 $n$）：各年独立时方差是 $n$ 倍，标准差只是 $\sqrt{n}$ 倍。
@@ -252,11 +252,11 @@ questions:
       zh-cn: |-
         两只基金 A、B 的标准差为 $\sigma_A$、$\sigma_B$，相关系数为 $\rho$，且 $\rho < 1$。组合中 A 的权重为 $w$，B 为 $1 - w$。
         (a) 用导数推导使组合方差最小的权重 $w^*$（用 $\sigma_A$、$\sigma_B$、$\rho$ 表示），并说明它确实是最小值。（7 分）
-        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$。两只基金都不能卖空（$0 \le w \le 1$），在这个限制下方差最小的组合，方差为 216（%²）。一位分析师由此算出：“两只基金高度相关，相关系数约为 0.875。”这个结论对吗？求两只基金的相关系数。（11 分）
+        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$。两只基金都不能卖空（$0 \le w \le 1$），在这个限制下方差最小的组合，方差为 216（%²）。一位分析师说：“组合的方差 216 比两只基金中较小的方差 $16^2 = 256$ 还低，说明两只基金负相关。”求两只基金的相关系数，并判断分析师的说法。（11 分）
       en: |-
         Two funds A and B have standard deviations $\sigma_A$ and $\sigma_B$ and correlation $\rho$, with $\rho < 1$. The portfolio holds A with weight $w$ and B with weight $1 - w$.
         (a) Use the derivative to derive the weight $w^*$ that minimizes the portfolio variance (in terms of $\sigma_A$, $\sigma_B$ and $\rho$), and show that it is a minimum. (7 points)
-        (b) Let $\sigma_A = 24\%$ and $\sigma_B = 16\%$. Neither fund can be sold short ($0 \le w \le 1$), and the portfolio with the lowest variance under this restriction has a variance of 216 (%²). From this an analyst concludes: "The two funds are highly correlated, with a correlation of about 0.875." Is this right? Find the correlation between the two funds. (11 points)
+        (b) Let $\sigma_A = 24\%$ and $\sigma_B = 16\%$. Neither fund can be sold short ($0 \le w \le 1$), and the portfolio with the lowest variance under this restriction has a variance of 216 (%²). An analyst says: "The portfolio variance of 216 is below the smaller of the two funds' variances, $16^2 = 256$, so the two funds must be negatively correlated." Find the correlation between the two funds, and judge the analyst's statement. (11 points)
     answer:
       zh-cn: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$。
@@ -264,21 +264,23 @@ questions:
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。
         二阶导数 $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$（因为 $\rho < 1$），是最小值。
         (b) 把 $w^*$ 代回方差，最小方差为 $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。令它等于 216：$\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$，即 $32\rho^2 - 36\rho + 7 = 0$，$\rho = 0.25$ 或 $\rho = 0.875$。
-        分析师的结论不对：$\rho = 0.875$ 只是不受限制时的最小方差为 216，这时 $w^* = \frac{256 - 336}{832 - 672} = -0.5$，要卖空 A，不允许。不能卖空时，方差是 $w$ 的开口向上的二次函数，$w^* < 0$ 意味着在 $[0, 1]$ 上方差随 $w$ 增加，最小值在 $w = 0$，即只持有 B，方差为 $16^2 = 256$，不是 216。所以 $\rho = 0.875$ 不符合题意。$\rho = 0.25$ 时 $w^* = \frac{256 - 96}{832 - 192} = 0.25$，即 A 占 25%，在 $[0, 1]$ 内，不受限制的最小值就是允许的组合，方差正好为 216。所以 $\rho = 0.25$。
+        先看 $\rho = 0.875$：它只是不受限制时的最小方差为 216，这时 $w^* = \frac{256 - 336}{832 - 672} = -0.5$，要卖空 A，不允许。不能卖空时，方差是 $w$ 的开口向上的二次函数，$w^* < 0$ 意味着在 $[0, 1]$ 上方差随 $w$ 增加，最小值在 $w = 0$，即只持有 B，方差为 $16^2 = 256$，不是 216。所以 $\rho = 0.875$ 不符合题意。$\rho = 0.25$ 时 $w^* = \frac{256 - 96}{832 - 192} = 0.25$，即 A 占 25%，在 $[0, 1]$ 内，不受限制的最小值就是允许的组合，方差正好为 216。所以 $\rho = 0.25$。
+        分析师的说法不对：相关系数是正的，组合的方差仍然低于 B 的方差。由 (a)，只要 $w^* > 0$，即 $\rho < \frac{\sigma_B}{\sigma_A} = \frac{2}{3}$，加入一点 A 就能降低方差，所以 $0 < \rho < \frac{2}{3}$ 时也有分散化的好处，不需要负相关。
       en: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$.
         $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$ gives
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$.
         The second derivative is $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$ (because $\rho < 1$), so it is a minimum.
         (b) Substituting $w^*$ back into the variance gives the minimum variance $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$. Setting it equal to 216: $\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$, that is, $32\rho^2 - 36\rho + 7 = 0$, so $\rho = 0.25$ or $\rho = 0.875$.
-        The analyst is wrong: at $\rho = 0.875$ the unrestricted minimum variance is 216, but then $w^* = \frac{256 - 336}{832 - 672} = -0.5$, a short position in A, which is not allowed. Without short selling, the variance is a quadratic in $w$ that opens upward, and $w^* < 0$ means the variance rises with $w$ on $[0, 1]$, so the minimum is at $w = 0$: holding only B, with variance $16^2 = 256$, not 216. So $\rho = 0.875$ does not fit. At $\rho = 0.25$, $w^* = \frac{256 - 96}{832 - 192} = 0.25$, that is, 25% in A, which lies in $[0, 1]$, so the unrestricted minimum is an allowed portfolio and its variance is exactly 216. So $\rho = 0.25$.
+        First consider $\rho = 0.875$: there the unrestricted minimum variance is 216, but then $w^* = \frac{256 - 336}{832 - 672} = -0.5$, a short position in A, which is not allowed. Without short selling, the variance is a quadratic in $w$ that opens upward, and $w^* < 0$ means the variance rises with $w$ on $[0, 1]$, so the minimum is at $w = 0$: holding only B, with variance $16^2 = 256$, not 216. So $\rho = 0.875$ does not fit. At $\rho = 0.25$, $w^* = \frac{256 - 96}{832 - 192} = 0.25$, that is, 25% in A, which lies in $[0, 1]$, so the unrestricted minimum is an allowed portfolio and its variance is exactly 216. So $\rho = 0.25$.
+        The analyst is wrong: the correlation is positive, yet the portfolio variance is still below B's variance. From (a), as long as $w^* > 0$, that is, $\rho < \frac{\sigma_B}{\sigma_A} = \frac{2}{3}$, adding some A lowers the variance, so diversification helps for $0 < \rho < \frac{2}{3}$ as well; negative correlation is not needed.
     rubric:
       zh-cn:
         - "(a) 方差表达式与求导 3 分，$w^*$ 公式 2 分，二阶条件 2 分。"
-        - "(b) 由最小方差列出关于 $\\rho$ 的方程并解出两个根 6 分；指出 $\\rho = 0.875$ 时要卖空 A，不能卖空时最小方差组合是只持有 B、方差 256，因此舍去 0.875、得 $\\rho = 0.25$ 5 分。保留两个根、没有取舍：最多 6 分。"
+        - "(b) 由最小方差列出关于 $\\rho$ 的方程并解出两个根 4 分；指出 $\\rho = 0.875$ 时要卖空 A，不能卖空时最小方差组合是只持有 B、方差 256，因此舍去 0.875、得 $\\rho = 0.25$ 4 分；判断分析师的说法不对，说明 $\\rho < \\frac{2}{3}$ 时正相关也能降低方差 3 分。保留两个根、没有取舍：$\\rho$ 部分最多 4 分。"
       en:
         - "(a) Variance expression and derivative 3 points; formula for $w^*$ 2 points; second-order condition 2 points."
-        - "(b) Sets up the equation in $\\rho$ from the minimum variance and finds both roots 6 points; shows that $\\rho = 0.875$ needs a short position in A, so without short selling the minimum-variance portfolio holds only B with variance 256, rejects 0.875 and gives $\\rho = 0.25$, 5 points. Keeping both roots without choosing: at most 6 points."
+        - "(b) Sets up the equation in $\\rho$ from the minimum variance and finds both roots 4 points; shows that $\\rho = 0.875$ needs a short position in A, so without short selling the minimum-variance portfolio holds only B with variance 256, rejects 0.875 and gives $\\rho = 0.25$, 4 points; judges the analyst wrong and explains that a positive correlation below $\\frac{2}{3}$ also lowers the variance 3 points. Keeping both roots without choosing: at most 4 points for the correlation."
 
   - id: Q8
     kind: quiz
