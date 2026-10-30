@@ -154,7 +154,16 @@ stages:
         published: true
         introduces: [asymmetric-information, adverse-selection, signaling, screening, moral-hazard, principal-agent-problem]
         uses: [expected-value, consumer-surplus, externality, risk-aversion, future-value, first-order-condition]
-      - { id: "E1", slug: "e1-quiz", exam: true, title: { zh-cn: "测验 E1：微观经济学", en: "Quiz E1: Microeconomics" } }
+      - id: "E1"
+        slug: "e1-quiz"
+        exam: true
+        title: { zh-cn: "测验 E1：微观经济学", en: "Quiz E1: Microeconomics" }
+        summary:
+          zh-cn: "第 1 阶段（1.1–1.9）的测验：供求与弹性、消费者与跨期选择、不确定性下的选择、厂商与市场结构、博弈论、福利与信息经济学。总分 100 分，建议用时 120 分钟。"
+          en: "The quiz for Stage 1 (1.1–1.9): supply, demand and elasticity, consumer and intertemporal choice, choice under uncertainty, firms and market structure, game theory, welfare and information economics. 100 points, about 120 minutes."
+        published: true
+        introduces: []
+        uses: [nominal-interest-rate, real-interest-rate, fisher-equation, inflation, marginal-rate-of-substitution, budget-constraint, preferences, demand, supply, comparative-statics, deadweight-loss, tax-incidence, price-elasticity, adverse-selection, asymmetric-information, present-value, economic-profit, perfect-competition, barriers-to-entry, economic-moat, growing-perpetuity, principal-agent-problem, risk-premium, crra-utility, certainty-equivalent, repeated-game, bertrand-model, prisoners-dilemma, oligopoly, short-run, long-run]
 
   - id: "2"
     title: { zh-cn: "第 2 阶段：宏观经济学", en: "Stage 2: Macroeconomics" }
