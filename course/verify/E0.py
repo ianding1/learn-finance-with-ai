@@ -74,6 +74,7 @@ def results():
     r["Q9.cut"] = cut
     r["Q9.z"] = z
     r["Q9.prob"] = 100 * norm_sf(z)
+    r["Q9.years"] = (1.96 * 8 / 2) ** 2  # critical value equals the true mean: 50% chance
     return r
 
 
