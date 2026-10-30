@@ -246,17 +246,17 @@ questions:
     easy_points: 0
     hard_points: 0
     points: 18
-    concepts: [portfolio-variance, first-order-condition, second-order-condition, correlation]
+    concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, correlation]
     expected: { rho: "0.25", w: "25" }
     question:
       zh-cn: |-
         两只基金 A、B 的标准差为 $\sigma_A$、$\sigma_B$，相关系数为 $\rho$，且 $\rho < 1$。组合中 A 的权重为 $w$，B 为 $1 - w$。
         (a) 用导数推导使组合方差最小的权重 $w^*$（用 $\sigma_A$、$\sigma_B$、$\rho$ 表示），并说明它确实是最小值。（7 分）
-        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$。已知这两只基金的最小方差组合同时持有两只基金（两个权重都为正），组合的方差为 216（%²）。一位分析师由此算出：“两只基金高度相关，相关系数约为 0.875。”这个结论对吗？求两只基金的相关系数。（11 分）
+        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$。两只基金都不能卖空（$0 \le w \le 1$），在这个限制下方差最小的组合，方差为 216（%²）。一位分析师由此算出：“两只基金高度相关，相关系数约为 0.875。”这个结论对吗？求两只基金的相关系数。（11 分）
       en: |-
         Two funds A and B have standard deviations $\sigma_A$ and $\sigma_B$ and correlation $\rho$, with $\rho < 1$. The portfolio holds A with weight $w$ and B with weight $1 - w$.
         (a) Use the derivative to derive the weight $w^*$ that minimizes the portfolio variance (in terms of $\sigma_A$, $\sigma_B$ and $\rho$), and show that it is a minimum. (7 points)
-        (b) Let $\sigma_A = 24\%$ and $\sigma_B = 16\%$. The minimum-variance portfolio of these two funds is known to hold both funds (both weights positive) and to have a variance of 216 (%²). From this an analyst concludes: "The two funds are highly correlated, with a correlation of about 0.875." Is this right? Find the correlation between the two funds. (11 points)
+        (b) Let $\sigma_A = 24\%$ and $\sigma_B = 16\%$. Neither fund can be sold short ($0 \le w \le 1$), and the portfolio with the lowest variance under this restriction has a variance of 216 (%²). From this an analyst concludes: "The two funds are highly correlated, with a correlation of about 0.875." Is this right? Find the correlation between the two funds. (11 points)
     answer:
       zh-cn: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$。
@@ -264,21 +264,21 @@ questions:
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。
         二阶导数 $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$（因为 $\rho < 1$），是最小值。
         (b) 把 $w^*$ 代回方差，最小方差为 $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。令它等于 216：$\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$，即 $32\rho^2 - 36\rho + 7 = 0$，$\rho = 0.25$ 或 $\rho = 0.875$。
-        分析师的结论不对：$\rho = 0.875$ 也满足方差等于 216，但这时 $w^* = \frac{256 - 336}{832 - 672} = -0.5$，要卖空 A，与“两个权重都为正”矛盾，应舍去。所以 $\rho = 0.25$（这时 A 的权重 $w^* = \frac{256 - 96}{832 - 192} = 0.25$，即 25%，两个权重都为正）。
+        分析师的结论不对：$\rho = 0.875$ 只是不受限制时的最小方差为 216，这时 $w^* = \frac{256 - 336}{832 - 672} = -0.5$，要卖空 A，不允许。不能卖空时，方差是 $w$ 的开口向上的二次函数，$w^* < 0$ 意味着在 $[0, 1]$ 上方差随 $w$ 增加，最小值在 $w = 0$，即只持有 B，方差为 $16^2 = 256$，不是 216。所以 $\rho = 0.875$ 不符合题意。$\rho = 0.25$ 时 $w^* = \frac{256 - 96}{832 - 192} = 0.25$，即 A 占 25%，在 $[0, 1]$ 内，不受限制的最小值就是允许的组合，方差正好为 216。所以 $\rho = 0.25$。
       en: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$.
         $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$ gives
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$.
         The second derivative is $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$ (because $\rho < 1$), so it is a minimum.
         (b) Substituting $w^*$ back into the variance gives the minimum variance $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$. Setting it equal to 216: $\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$, that is, $32\rho^2 - 36\rho + 7 = 0$, so $\rho = 0.25$ or $\rho = 0.875$.
-        The analyst is wrong: $\rho = 0.875$ also gives a variance of 216, but then $w^* = \frac{256 - 336}{832 - 672} = -0.5$, a short position in A, which contradicts "both weights positive", so it must be rejected. So $\rho = 0.25$ (A's weight is then $w^* = \frac{256 - 96}{832 - 192} = 0.25$, that is, 25%, and both weights are positive).
+        The analyst is wrong: at $\rho = 0.875$ the unrestricted minimum variance is 216, but then $w^* = \frac{256 - 336}{832 - 672} = -0.5$, a short position in A, which is not allowed. Without short selling, the variance is a quadratic in $w$ that opens upward, and $w^* < 0$ means the variance rises with $w$ on $[0, 1]$, so the minimum is at $w = 0$: holding only B, with variance $16^2 = 256$, not 216. So $\rho = 0.875$ does not fit. At $\rho = 0.25$, $w^* = \frac{256 - 96}{832 - 192} = 0.25$, that is, 25% in A, which lies in $[0, 1]$, so the unrestricted minimum is an allowed portfolio and its variance is exactly 216. So $\rho = 0.25$.
     rubric:
       zh-cn:
         - "(a) 方差表达式与求导 3 分，$w^*$ 公式 2 分，二阶条件 2 分。"
-        - "(b) 由最小方差列出关于 $\\rho$ 的方程并解出两个根 6 分；用“两个权重都为正”舍去 0.875，得 $\\rho = 0.25$ 5 分。保留两个根、没有取舍：最多 6 分。"
+        - "(b) 由最小方差列出关于 $\\rho$ 的方程并解出两个根 6 分；指出 $\\rho = 0.875$ 时要卖空 A，不能卖空时最小方差组合是只持有 B、方差 256，因此舍去 0.875、得 $\\rho = 0.25$ 5 分。保留两个根、没有取舍：最多 6 分。"
       en:
         - "(a) Variance expression and derivative 3 points; formula for $w^*$ 2 points; second-order condition 2 points."
-        - "(b) Sets up the equation in $\\rho$ from the minimum variance and finds both roots 6 points; rejects 0.875 because both weights must be positive, giving $\\rho = 0.25$, 5 points. Keeping both roots without choosing: at most 6 points."
+        - "(b) Sets up the equation in $\\rho$ from the minimum variance and finds both roots 6 points; shows that $\\rho = 0.875$ needs a short position in A, so without short selling the minimum-variance portfolio holds only B with variance 256, rejects 0.875 and gives $\\rho = 0.25$, 5 points. Keeping both roots without choosing: at most 6 points."
 
   - id: Q8
     kind: quiz
@@ -287,22 +287,28 @@ questions:
     hard_points: 0
     points: 17
     concepts: [log-return, lognormal-distribution, normal-distribution, z-score, variance]
-    expected: { s: "0.90", mu: "7", sigma: "18" }
+    expected: { mu: "7", sigma: "18" }
     question:
       zh-cn: |-
-        某股票指数每年的对数收益率服从同一个正态分布，各年相互独立，期望和标准差未知。一份报告说：今天投入 100 美元，25 年后财富的均值约为 862.8 美元；25 年后财富低于 100 美元（亏本）的概率约为 2.6%。已知标准正态分布的累积分布函数 $\Phi(1.94) = 0.974$。由报告的数字求每年对数收益率的期望和标准差（以百分比表示，取整数）。
+        某股票指数每年的对数收益率服从同一个正态分布，各年相互独立，期望和标准差未知。一份报告说：今天投入 100 美元，10 年后财富的均值约为 236.8 美元；25 年后财富低于 100 美元（亏本）的概率约为 2.6%。已知标准正态分布的累积分布函数 $\Phi(1.94) = 0.974$。由报告的数字求每年对数收益率的期望和标准差（以百分比表示，取整数）。
       en: |-
-        The yearly log return of a stock index follows the same normal distribution every year, independent across years, with unknown mean and standard deviation. A report says: if you invest 100 dollars today, the mean of your wealth after 25 years is about 862.8 dollars, and the probability that your wealth after 25 years is below 100 dollars (a loss) is about 2.6%. The standard normal cumulative distribution function has $\Phi(1.94) = 0.974$. From the report's numbers, find the mean and standard deviation of the yearly log return (in percent, rounded to whole numbers).
+        The yearly log return of a stock index follows the same normal distribution every year, independent across years, with unknown mean and standard deviation. A report says: if you invest 100 dollars today, the mean of your wealth after 10 years is about 236.8 dollars, and the probability that your wealth after 25 years is below 100 dollars (a loss) is about 2.6%. The standard normal cumulative distribution function has $\Phi(1.94) = 0.974$. From the report's numbers, find the mean and standard deviation of the yearly log return (in percent, rounded to whole numbers).
     answer:
       zh-cn: |-
-        对数收益率可以相加，25 年的总对数收益率 $S$ 服从正态分布，设期望为 $m$、标准差为 $s$，则 $\ln W = \ln 100 + S$。亏本即 $S < 0$：$P(S < 0) = \Phi\!\left(-\frac{m}{s}\right) = 0.026 = 1 - 0.974$，所以 $\frac{m}{s} = 1.94$。财富的均值 $100\,e^{m + s^2/2} = 862.8$，所以 $m + \frac{s^2}{2} = \ln 8.628 \approx 2.155$。代入 $m = 1.94s$：$s^2 + 3.88s - 4.31 = 0$，取正根 $s \approx 0.90$，$m \approx 1.75$。各年独立同分布：期望是每年的 25 倍；方差是 25 倍，所以标准差是 $\sqrt{25} = 5$ 倍。每年的期望约 $\frac{1.75}{25} = 7$%，标准差约 $\frac{0.90}{5} = 18$%。（把标准差也除以 25 会得到 3.6%，这是错的。）
+        对数收益率可以相加。设每年对数收益率的期望为 $\mu$、标准差为 $\sigma$。各年独立，$n$ 年的总对数收益率服从正态分布，期望 $n\mu$，方差 $n\sigma^2$（标准差 $\sqrt{n}\,\sigma$）；$n$ 年后财富的对数为 $\ln 100$ 加上这个和，财富服从对数正态分布。两个数字的期限不同，要分别用 $n = 25$ 和 $n = 10$。
+        亏本（25 年）：$P = \Phi\!\left(-\frac{25\mu}{5\sigma}\right) = 0.026 = 1 - 0.974$，所以 $\frac{5\mu}{\sigma} = 1.94$，$\mu = 0.388\sigma$。
+        均值（10 年）：$100\,e^{10\mu + 10\sigma^2/2} = 236.8$，所以 $10\mu + 5\sigma^2 = \ln 2.368 \approx 0.862$。
+        代入：$5\sigma^2 + 3.88\sigma - 0.862 = 0$，取正根 $\sigma \approx 0.180$，$\mu \approx 0.070$。每年的期望约 7%，标准差约 18%。（把 25 年的标准差写成 $25\sigma$，或把两个数字当作同一个期限，都会得到错误的结果。）
       en: |-
-        Log returns add up, so the total log return $S$ over 25 years is normally distributed; let its mean be $m$ and its standard deviation $s$. Then $\ln W = \ln 100 + S$. A loss means $S < 0$: $P(S < 0) = \Phi\!\left(-\frac{m}{s}\right) = 0.026 = 1 - 0.974$, so $\frac{m}{s} = 1.94$. The mean of wealth is $100\,e^{m + s^2/2} = 862.8$, so $m + \frac{s^2}{2} = \ln 8.628 \approx 2.155$. Substituting $m = 1.94s$: $s^2 + 3.88s - 4.31 = 0$, whose positive root is $s \approx 0.90$, so $m \approx 1.75$. With independent, identically distributed years, the mean is 25 times the yearly mean; the variance is 25 times as large, so the standard deviation is $\sqrt{25} = 5$ times as large. The yearly mean is about $\frac{1.75}{25} = 7$% and the standard deviation about $\frac{0.90}{5} = 18$%. (Dividing the standard deviation by 25 as well gives 3.6%, which is wrong.)
+        Log returns add up. Let the yearly log return have mean $\mu$ and standard deviation $\sigma$. With independent years, the total log return over $n$ years is normal with mean $n\mu$ and variance $n\sigma^2$ (standard deviation $\sqrt{n}\,\sigma$); the log of wealth after $n$ years is $\ln 100$ plus this sum, so wealth is lognormal. The two numbers refer to different horizons, so $n = 25$ and $n = 10$ must be used separately.
+        Loss (25 years): $P = \Phi\!\left(-\frac{25\mu}{5\sigma}\right) = 0.026 = 1 - 0.974$, so $\frac{5\mu}{\sigma} = 1.94$ and $\mu = 0.388\sigma$.
+        Mean (10 years): $100\,e^{10\mu + 10\sigma^2/2} = 236.8$, so $10\mu + 5\sigma^2 = \ln 2.368 \approx 0.862$.
+        Substituting: $5\sigma^2 + 3.88\sigma - 0.862 = 0$, whose positive root is $\sigma \approx 0.180$, so $\mu \approx 0.070$. The yearly mean is about 7% and the standard deviation about 18%. (Writing the 25-year standard deviation as $25\sigma$, or treating the two numbers as if they had the same horizon, gives wrong results.)
     rubric:
       zh-cn:
-        - "由亏本概率得 $\\frac{m}{s} = 1.94$ 4 分；由均值得 $m + \\frac{s^2}{2} = \\ln 8.628$ 4 分；解出 $s \\approx 0.90$、$m \\approx 1.75$ 4 分；换算成每年：期望约 7% 2 分，标准差按 $\\sqrt{25}$ 换算约 18% 3 分。标准差除以 25：最后 3 分不给。"
+        - "写出 $n$ 年对数收益率之和的期望 $n\\mu$ 和标准差 $\\sqrt{n}\\,\\sigma$ 4 分；由 25 年亏本概率得 $\\frac{5\\mu}{\\sigma} = 1.94$ 4 分；由 10 年均值得 $10\\mu + 5\\sigma^2 = \\ln 2.368$ 4 分；解出 $\\mu \\approx 7\\%$、$\\sigma \\approx 18\\%$ 5 分。两个数字用同一个期限：最多 8 分。"
       en:
-        - "$\\frac{m}{s} = 1.94$ from the probability of a loss 4 points; $m + \\frac{s^2}{2} = \\ln 8.628$ from the mean 4 points; solving for $s \\approx 0.90$ and $m \\approx 1.75$ 4 points; conversion to one year: mean about 7% 2 points, standard deviation scaled by $\\sqrt{25}$ to about 18% 3 points. Standard deviation divided by 25: no points for the last 3."
+        - "Mean $n\\mu$ and standard deviation $\\sqrt{n}\\,\\sigma$ of the sum of $n$ yearly log returns 4 points; $\\frac{5\\mu}{\\sigma} = 1.94$ from the 25-year probability of a loss 4 points; $10\\mu + 5\\sigma^2 = \\ln 2.368$ from the 10-year mean 4 points; solving for $\\mu \\approx 7\\%$ and $\\sigma \\approx 18\\%$ 5 points. Using the same horizon for both numbers: at most 8 points."
 
   - id: Q9
     kind: quiz

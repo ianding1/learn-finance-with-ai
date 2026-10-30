@@ -63,18 +63,18 @@ def results():
     disc = sqrt(B * B - 4 * A * C)
     roots = [(-B + disc) / (2 * A), (-B - disc) / (2 * A)]
     rho = next(x for x in roots if 0 < wstar(x) < 1)
-    assert abs(minvar(rho) - 216) < 1e-9 and sum(0 < wstar(x) < 1 for x in roots) == 1
+    # Without short selling, a root with w* outside [0, 1] gives a corner (holding only B, variance 256).
+    assert abs(minvar(rho) - 216) < 1e-9 and sum(0 <= wstar(x) <= 1 for x in roots) == 1
     r["Q7.rho"] = rho
     r["Q7.w"] = 100 * wstar(rho)
 
-    # Q8: mean of 25-year wealth 862.8 for 100 invested; P(loss) = 2.6%, so m / s = 1.94.
-    n = 25
-    L = log(8.628)  # m + s^2/2
-    s = (-3.88 + sqrt(3.88**2 + 8 * L)) / 2  # s^2 + 3.88 s - 2L = 0
-    m = 1.94 * s
-    r["Q8.s"] = s
-    r["Q8.mu"] = 100 * m / n
-    r["Q8.sigma"] = 100 * s / sqrt(n)
+    # Q8: mean of 10-year wealth 236.8 for 100 invested; P(loss after 25 years) = 2.6%.
+    # Loss: Phi(-25 mu / (5 sigma)) = 0.026, so mu = 0.388 sigma.
+    # Mean: 10 mu + 5 sigma^2 = ln 2.368  ->  5 sigma^2 + 3.88 sigma - ln 2.368 = 0.
+    L = log(2.368)
+    sigma = (-3.88 + sqrt(3.88**2 + 20 * L)) / 10
+    r["Q8.mu"] = 100 * 0.388 * sigma
+    r["Q8.sigma"] = 100 * sigma
 
     # Q9: a = 0.4, b = 1.3, residual sd 5.75; market mean 1%.
     sd_e = 5.75
