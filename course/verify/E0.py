@@ -48,6 +48,8 @@ def results():
     fv = 50_000 * (1 + i) ** 360 + 400 * ((1 + i) ** 360 - 1) / i
     r["Q6.fv"] = fv
     r["Q6.n"] = -log(1 - fv * R / (60_000 * (1 + R))) / log(1 + R)
+    fv0 = 50_000 * (1 + i) ** 360
+    r["Q6.c"] = (pv - fv0) * i / ((1 + i) ** 360 - 1)  # deposit needed for all 25 withdrawals
     # (c) growing perpetuity with the first payment today.
     r["Q6.w"] = pv * (R - 0.02) / (1 + R)
     r["Q6.w3"] = pv * (R - 0.03) / (1 + R)
