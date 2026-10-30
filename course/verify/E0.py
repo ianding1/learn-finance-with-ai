@@ -48,11 +48,12 @@ def results():
     r["Q6.p"] = p(20)
     r["Q6.profit"] = operating(20) - 200
     r["Q6.rise"] = p(28) - p(20)
-    # (c) the rent of 200 is sunk; c = 70.
+    # (c) the rent of 200 is sunk; c = 70; stopping lets the company sublet for 120.
     r["Q6.q70"] = q(70)
     r["Q6.op"] = operating(70)
     r["Q6.total"] = operating(70) - 200
-    assert operating(70) - 200 > -200  # producing beats stopping
+    r["Q6.stop"] = 120 - 200  # stop and sublet the equipment for 120
+    assert r["Q6.stop"] > r["Q6.total"]  # stopping beats producing
 
     # Q7: sigma_A 24, sigma_B 16; the minimum variance is 216 with both weights positive.
     sa, sb = 24, 16
@@ -74,8 +75,6 @@ def results():
     r["Q8.s"] = s
     r["Q8.mu"] = 100 * m / n
     r["Q8.sigma"] = 100 * s / sqrt(n)
-    # (b) mean / median = exp(n sigma^2 / 2) > 2 with sigma = 18%.
-    r["Q8.n"] = 2 * log(2) / 0.18**2
 
     # Q9: a = 0.4, b = 1.3, residual sd 5.75; market mean 1%.
     sd_e = 5.75

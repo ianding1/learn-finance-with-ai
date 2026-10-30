@@ -209,36 +209,36 @@ questions:
     hard_points: 0
     points: 16
     concepts: [profit-maximization, marginal-revenue, marginal-cost, first-order-condition, fixed-cost, sunk-cost]
-    expected: { q: "20", p: "60", profit: "600", rise: "4", q70: "7.5", op: "112.5", total: "-87.5" }
+    expected: { q: "20", p: "60", profit: "600", rise: "4", q70: "7.5", op: "112.5", total: "-87.5", stop: "-80" }
     question:
       zh-cn: |-
         一家公司是某种产品唯一的卖家。卖出 $q$ 件时，市场价格为 $p(q) = 100 - 2q$（美元）。每件的成本为 $c$（$c < 100$），每年另有设备租金 $F$，即 $C(q) = cq + F$。
         (a) 求利润最高的产量 $q^*$ 和价格 $p^*$（用 $c$ 表示），以及 $c = 20$、$F = 200$ 时的最大利润。（3 分）
         (b) 原料涨价，$c$ 从 20 变为 28。一位同事说：“每件成本涨了 8 美元，就应该把价格提高 8 美元，把成本完全转嫁给顾客。”这个说法对吗？用边际收入和边际成本说明。（5 分）
-        (c) 设 $F = 200$。年初公司签了一年的租约，并已一次付清全年租金，不能退款。在决定今年的产量之前，原料大涨，$c$ 变为 70。另一位同事说：“按最优产量生产，今年的利润也是负的，所以今年应该停产。”这个说法对吗？公司今年应该怎么做？（8 分）
+        (c) 设 $F = 200$。年初公司签了一年的设备租约，并已一次付清全年租金，不能退款。在决定今年的产量之前，原料大涨，$c$ 变为 70。如果今年停产，公司可以把设备转租给另一家公司，对方付 120 美元。另一位同事说：“租金已经付了，是沉没成本，不影响决策；只要按最优产量生产时收入超过原料成本，就应该生产。”这个说法对吗？公司今年应该生产还是停产？（8 分）
       en: |-
         A company is the only seller of a product. When it sells $q$ units, the market price is $p(q) = 100 - 2q$ (dollars). Each unit costs $c$ ($c < 100$), and there is also a yearly equipment rent $F$, so $C(q) = cq + F$.
         (a) Find the profit-maximizing output $q^*$ and price $p^*$ (in terms of $c$), and the maximum profit when $c = 20$ and $F = 200$. (3 points)
         (b) Material prices rise and $c$ goes from 20 to 28. A colleague says: "Each unit costs 8 dollars more, so we should raise the price by 8 dollars and pass the whole cost on to customers." Is this right? Explain with marginal revenue and marginal cost. (5 points)
-        (c) Let $F = 200$. At the start of the year the company signed a one-year lease and has already paid the whole year's rent, which cannot be refunded. Before this year's output is decided, material prices jump and $c$ becomes 70. Another colleague says: "Even at the best output, this year's profit is negative, so we should stop producing this year." Is this right? What should the company do this year? (8 points)
+        (c) Let $F = 200$. At the start of the year the company signed a one-year equipment lease and has already paid the whole year's rent, which cannot be refunded. Before this year's output is decided, material prices jump and $c$ becomes 70. If the company stops producing this year, it can sublet the equipment to another company, which would pay 120 dollars. Another colleague says: "The rent has already been paid; it is a sunk cost and does not affect the decision. As long as revenue at the best output exceeds the material cost, we should produce." Is this right? Should the company produce or stop this year? (8 points)
     answer:
       zh-cn: |-
         (a) $\pi = (100 - 2q)q - cq - F$。$\pi' = 100 - c - 4q = 0$，$q^* = \frac{100 - c}{4}$；$\pi'' = -4 < 0$，是最大值。$p^* = 100 - 2q^* = \frac{100 + c}{2}$，$\pi^* = \frac{(100 - c)^2}{8} - F$。$c = 20$、$F = 200$ 时 $q^* = 20$，$p^* = 60$，最大利润 $800 - 200 = 600$。
         (b) 不对。$p^* = \frac{100 + c}{2}$，成本每涨 1 美元价格只涨 0.5 美元：$c = 28$ 时 $p^* = 64$，只上涨 4 美元。原因：最优点满足 $MR = MC$。边际收入 $100 - 4q$ 随产量下降的速度是价格 $100 - 2q$ 的两倍；边际成本上升 8 时，产量只需减少 2 件就能让边际收入上升 8，而减少 2 件只让价格上升 4。如果把价格提高 8（产量减到 16），$MR = 36 > MC = 28$，多卖一件还能增加利润。
-        (c) 不对，应该继续生产。200 美元已经付出、收不回，无论生产与否都要承担，是沉没成本，不影响今年的决策。要比较的是生产与停产的差别：按最优产量 $q^* = \frac{100 - 70}{4} = 7.5$、价格 $p^* = 85$ 生产，收入减去原料成本为 $\frac{(100 - 70)^2}{8} = 112.5$；停产时这部分为 0。所以生产时今年的总利润为 $112.5 - 200 = -87.5$，停产时为 $-200$，生产少亏 112.5 美元。只要 $q = 0$ 处的边际收入 100 大于 $c$，生产就比停产好。（如果租金还没付、可以不租，结论才会不同：这时 $c > 60$ 就应停产。）
+        (c) 不对，应该停产并转租。同事前半句对：200 美元已经付出、收不回，无论生产与否都要承担，不影响决策。但他漏掉了生产的机会成本：生产就不能转租，要放弃 120 美元。按最优产量 $q^* = \frac{100 - 70}{4} = 7.5$、价格 $p^* = 85$ 生产，收入减去原料成本为 $\frac{(100 - 70)^2}{8} = 112.5$，低于转租的 120。比较两种选择今年的总利润：生产 $112.5 - 200 = -87.5$，停产并转租 $120 - 200 = -80$。停产少亏 7.5 美元。
       en: |-
         (a) $\pi = (100 - 2q)q - cq - F$. $\pi' = 100 - c - 4q = 0$ gives $q^* = \frac{100 - c}{4}$; $\pi'' = -4 < 0$, so it is a maximum. $p^* = 100 - 2q^* = \frac{100 + c}{2}$ and $\pi^* = \frac{(100 - c)^2}{8} - F$. With $c = 20$ and $F = 200$: $q^* = 20$, $p^* = 60$, and the maximum profit is $800 - 200 = 600$.
         (b) No. $p^* = \frac{100 + c}{2}$, so each dollar of cost raises the price by only 0.5 dollars: at $c = 28$, $p^* = 64$, a rise of only 4 dollars. Reason: the optimum satisfies $MR = MC$. Marginal revenue $100 - 4q$ falls with output twice as fast as the price $100 - 2q$; when marginal cost rises by 8, output needs to fall by only 2 units to raise marginal revenue by 8, and 2 fewer units raise the price by only 4. If the price were raised by 8 (output 16), $MR = 36 > MC = 28$, so selling one more unit would still add profit.
-        (c) No; it should keep producing. The 200 dollars has been paid and cannot be recovered; the company bears it whether or not it produces, so it is a sunk cost and does not affect this year's decision. What matters is the difference between producing and stopping: at the best output $q^* = \frac{100 - 70}{4} = 7.5$ and price $p^* = 85$, revenue minus material cost is $\frac{(100 - 70)^2}{8} = 112.5$; when stopping it is 0. So this year's total profit is $112.5 - 200 = -87.5$ when producing and $-200$ when stopping: producing loses 112.5 dollars less. Producing beats stopping as long as the marginal revenue at $q = 0$, 100, is above $c$. (Only if the rent were not yet paid and could be avoided would the conclusion change: then the company should stop for $c > 60$.)
+        (c) No; the company should stop and sublet. The first half of the statement is right: the 200 dollars has been paid and cannot be recovered, so it is borne either way and does not affect the decision. But the statement misses the opportunity cost of producing: producing means giving up the 120 dollars from subletting. At the best output $q^* = \frac{100 - 70}{4} = 7.5$ and price $p^* = 85$, revenue minus material cost is $\frac{(100 - 70)^2}{8} = 112.5$, less than the 120 from subletting. Comparing this year's total profit: producing gives $112.5 - 200 = -87.5$; stopping and subletting gives $120 - 200 = -80$. Stopping loses 7.5 dollars less.
     rubric:
       zh-cn:
         - "(a) $q^*$、$p^*$ 的表达式 2 分；最大利润 600 1 分。"
         - "(b) 判断不对，指出价格只涨 4 美元 2 分；用 $MR$ 比价格下降得快说明原因 3 分。"
-        - "(c) 指出租金是沉没成本、不影响决策 3 分；比较生产（−87.5）与停产（−200），或说明经营利润 112.5 为正 3 分；结论为继续生产，产量 7.5 2 分。"
+        - "(c) 指出已付租金是沉没成本、但转租收入 120 是生产的机会成本 3 分；算出最优产量下收入减原料成本 112.5 2 分；比较生产（−87.5）与停产转租（−80），结论为停产 3 分。只说沉没成本不影响决策、结论为生产：最多 2 分。"
       en:
         - "(a) Expressions for $q^*$ and $p^*$ 2 points; maximum profit 600 1 point."
         - "(b) Judges the statement wrong and finds that the price rises by only 4 dollars 2 points; explains with $MR$ falling faster than the price 3 points."
-        - "(c) Recognizes that the rent is sunk and does not affect the decision 3 points; compares producing (−87.5) with stopping (−200), or shows that the operating profit of 112.5 is positive 3 points; concludes that the company keeps producing, with output 7.5, 2 points."
+        - "(c) Recognizes that the paid rent is sunk but that the 120 from subletting is an opportunity cost of producing 3 points; revenue minus material cost of 112.5 at the best output 2 points; compares producing (−87.5) with stopping and subletting (−80) and concludes that the company stops 3 points. Only stating that the sunk cost does not matter and concluding to produce: at most 2 points."
 
   - id: Q7
     kind: quiz
@@ -252,11 +252,11 @@ questions:
       zh-cn: |-
         两只基金 A、B 的标准差为 $\sigma_A$、$\sigma_B$，相关系数为 $\rho$，且 $\rho < 1$。组合中 A 的权重为 $w$，B 为 $1 - w$。
         (a) 用导数推导使组合方差最小的权重 $w^*$（用 $\sigma_A$、$\sigma_B$、$\rho$ 表示），并说明它确实是最小值。（7 分）
-        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$。一位分析师说，这两只基金的最小方差组合同时持有两只基金（两个权重都为正），组合的方差为 216（%²）。求两只基金的相关系数。（11 分）
+        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$。已知这两只基金的最小方差组合同时持有两只基金（两个权重都为正），组合的方差为 216（%²）。一位分析师由此算出：“两只基金高度相关，相关系数约为 0.875。”这个结论对吗？求两只基金的相关系数。（11 分）
       en: |-
         Two funds A and B have standard deviations $\sigma_A$ and $\sigma_B$ and correlation $\rho$, with $\rho < 1$. The portfolio holds A with weight $w$ and B with weight $1 - w$.
         (a) Use the derivative to derive the weight $w^*$ that minimizes the portfolio variance (in terms of $\sigma_A$, $\sigma_B$ and $\rho$), and show that it is a minimum. (7 points)
-        (b) Let $\sigma_A = 24\%$ and $\sigma_B = 16\%$. An analyst says that the minimum-variance portfolio of these two funds holds both funds (both weights positive) and has a variance of 216 (%²). Find the correlation between the two funds. (11 points)
+        (b) Let $\sigma_A = 24\%$ and $\sigma_B = 16\%$. The minimum-variance portfolio of these two funds is known to hold both funds (both weights positive) and to have a variance of 216 (%²). From this an analyst concludes: "The two funds are highly correlated, with a correlation of about 0.875." Is this right? Find the correlation between the two funds. (11 points)
     answer:
       zh-cn: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$。
@@ -264,14 +264,14 @@ questions:
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。
         二阶导数 $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$（因为 $\rho < 1$），是最小值。
         (b) 把 $w^*$ 代回方差，最小方差为 $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。令它等于 216：$\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$，即 $32\rho^2 - 36\rho + 7 = 0$，$\rho = 0.25$ 或 $\rho = 0.875$。
-        $\rho = 0.875$ 时 $w^* = \frac{256 - 336}{832 - 672} = -0.5$，要卖空 A，与“两个权重都为正”矛盾，舍去。所以 $\rho = 0.25$（这时 A 的权重 $w^* = \frac{256 - 96}{832 - 192} = 0.25$，即 25%，两个权重都为正）。
+        分析师的结论不对：$\rho = 0.875$ 也满足方差等于 216，但这时 $w^* = \frac{256 - 336}{832 - 672} = -0.5$，要卖空 A，与“两个权重都为正”矛盾，应舍去。所以 $\rho = 0.25$（这时 A 的权重 $w^* = \frac{256 - 96}{832 - 192} = 0.25$，即 25%，两个权重都为正）。
       en: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$.
         $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$ gives
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$.
         The second derivative is $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$ (because $\rho < 1$), so it is a minimum.
         (b) Substituting $w^*$ back into the variance gives the minimum variance $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$. Setting it equal to 216: $\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$, that is, $32\rho^2 - 36\rho + 7 = 0$, so $\rho = 0.25$ or $\rho = 0.875$.
-        At $\rho = 0.875$, $w^* = \frac{256 - 336}{832 - 672} = -0.5$, a short position in A, which contradicts "both weights positive", so it is rejected. So $\rho = 0.25$ (A's weight is then $w^* = \frac{256 - 96}{832 - 192} = 0.25$, that is, 25%, and both weights are positive).
+        The analyst is wrong: $\rho = 0.875$ also gives a variance of 216, but then $w^* = \frac{256 - 336}{832 - 672} = -0.5$, a short position in A, which contradicts "both weights positive", so it must be rejected. So $\rho = 0.25$ (A's weight is then $w^* = \frac{256 - 96}{832 - 192} = 0.25$, that is, 25%, and both weights are positive).
     rubric:
       zh-cn:
         - "(a) 方差表达式与求导 3 分，$w^*$ 公式 2 分，二阶条件 2 分。"
@@ -286,31 +286,23 @@ questions:
     easy_points: 0
     hard_points: 0
     points: 17
-    concepts: [log-return, lognormal-distribution, normal-distribution, z-score, median, right-skew, variance]
-    expected: { s: "0.90", mu: "7", sigma: "18", n: "43" }
+    concepts: [log-return, lognormal-distribution, normal-distribution, z-score, variance]
+    expected: { s: "0.90", mu: "7", sigma: "18" }
     question:
       zh-cn: |-
-        某股票指数每年的对数收益率服从同一个正态分布，各年相互独立，期望和标准差未知。一份报告说：今天投入 100 美元，25 年后财富的均值约为 862.8 美元；25 年后财富低于 100 美元（亏本）的概率约为 2.6%。已知标准正态分布的累积分布函数 $\Phi(1.94) = 0.974$。
-        (a) 由报告的数字求每年对数收益率的期望和标准差（以百分比表示，取整数）。（9 分）
-        (b) 报告用均值说明“你大约会有多少钱”。持有多少年后，财富的均值会超过中位数的 2 倍？（8 分）
+        某股票指数每年的对数收益率服从同一个正态分布，各年相互独立，期望和标准差未知。一份报告说：今天投入 100 美元，25 年后财富的均值约为 862.8 美元；25 年后财富低于 100 美元（亏本）的概率约为 2.6%。已知标准正态分布的累积分布函数 $\Phi(1.94) = 0.974$。由报告的数字求每年对数收益率的期望和标准差（以百分比表示，取整数）。
       en: |-
-        The yearly log return of a stock index follows the same normal distribution every year, independent across years, with unknown mean and standard deviation. A report says: if you invest 100 dollars today, the mean of your wealth after 25 years is about 862.8 dollars, and the probability that your wealth after 25 years is below 100 dollars (a loss) is about 2.6%. The standard normal cumulative distribution function has $\Phi(1.94) = 0.974$.
-        (a) From the report's numbers, find the mean and standard deviation of the yearly log return (in percent, rounded to whole numbers). (9 points)
-        (b) The report uses the mean to describe "about how much you will have". After how many years of holding is the mean of wealth more than twice the median? (8 points)
+        The yearly log return of a stock index follows the same normal distribution every year, independent across years, with unknown mean and standard deviation. A report says: if you invest 100 dollars today, the mean of your wealth after 25 years is about 862.8 dollars, and the probability that your wealth after 25 years is below 100 dollars (a loss) is about 2.6%. The standard normal cumulative distribution function has $\Phi(1.94) = 0.974$. From the report's numbers, find the mean and standard deviation of the yearly log return (in percent, rounded to whole numbers).
     answer:
       zh-cn: |-
-        (a) 对数收益率可以相加，25 年的总对数收益率 $S$ 服从正态分布，设期望为 $m$、标准差为 $s$，则 $\ln W = \ln 100 + S$。亏本即 $S < 0$：$P(S < 0) = \Phi\!\left(-\frac{m}{s}\right) = 0.026 = 1 - 0.974$，所以 $\frac{m}{s} = 1.94$。财富的均值 $100\,e^{m + s^2/2} = 862.8$，所以 $m + \frac{s^2}{2} = \ln 8.628 \approx 2.155$。代入 $m = 1.94s$：$s^2 + 3.88s - 4.31 = 0$，取正根 $s \approx 0.90$，$m \approx 1.75$。各年独立同分布：期望是每年的 25 倍；方差是 25 倍，所以标准差是 $\sqrt{25} = 5$ 倍。每年的期望约 $\frac{1.75}{25} = 7$%，标准差约 $\frac{0.90}{5} = 18$%。（把标准差也除以 25 会得到 3.6%，这是错的。）
-        (b) $n$ 年后 $\ln W$ 的方差为 $n\sigma^2$，均值与中位数之比为 $e^{n\sigma^2/2}$。令 $e^{n \times 0.0324 / 2} > 2$：$n > \frac{2\ln 2}{0.0324} \approx 42.8$，即持有约 43 年后，均值超过中位数的 2 倍。均值与中位数的差距随持有期增长，持有越久，用均值描述典型投资者的结果越误导。
+        对数收益率可以相加，25 年的总对数收益率 $S$ 服从正态分布，设期望为 $m$、标准差为 $s$，则 $\ln W = \ln 100 + S$。亏本即 $S < 0$：$P(S < 0) = \Phi\!\left(-\frac{m}{s}\right) = 0.026 = 1 - 0.974$，所以 $\frac{m}{s} = 1.94$。财富的均值 $100\,e^{m + s^2/2} = 862.8$，所以 $m + \frac{s^2}{2} = \ln 8.628 \approx 2.155$。代入 $m = 1.94s$：$s^2 + 3.88s - 4.31 = 0$，取正根 $s \approx 0.90$，$m \approx 1.75$。各年独立同分布：期望是每年的 25 倍；方差是 25 倍，所以标准差是 $\sqrt{25} = 5$ 倍。每年的期望约 $\frac{1.75}{25} = 7$%，标准差约 $\frac{0.90}{5} = 18$%。（把标准差也除以 25 会得到 3.6%，这是错的。）
       en: |-
-        (a) Log returns add up, so the total log return $S$ over 25 years is normally distributed; let its mean be $m$ and its standard deviation $s$. Then $\ln W = \ln 100 + S$. A loss means $S < 0$: $P(S < 0) = \Phi\!\left(-\frac{m}{s}\right) = 0.026 = 1 - 0.974$, so $\frac{m}{s} = 1.94$. The mean of wealth is $100\,e^{m + s^2/2} = 862.8$, so $m + \frac{s^2}{2} = \ln 8.628 \approx 2.155$. Substituting $m = 1.94s$: $s^2 + 3.88s - 4.31 = 0$, whose positive root is $s \approx 0.90$, so $m \approx 1.75$. With independent, identically distributed years, the mean is 25 times the yearly mean; the variance is 25 times as large, so the standard deviation is $\sqrt{25} = 5$ times as large. The yearly mean is about $\frac{1.75}{25} = 7$% and the standard deviation about $\frac{0.90}{5} = 18$%. (Dividing the standard deviation by 25 as well gives 3.6%, which is wrong.)
-        (b) After $n$ years the variance of $\ln W$ is $n\sigma^2$, and the ratio of mean to median is $e^{n\sigma^2/2}$. Setting $e^{n \times 0.0324 / 2} > 2$: $n > \frac{2\ln 2}{0.0324} \approx 42.8$, so after about 43 years the mean is more than twice the median. The gap between mean and median grows with the holding period: the longer the holding, the more misleading the mean is as a description of a typical investor's result.
+        Log returns add up, so the total log return $S$ over 25 years is normally distributed; let its mean be $m$ and its standard deviation $s$. Then $\ln W = \ln 100 + S$. A loss means $S < 0$: $P(S < 0) = \Phi\!\left(-\frac{m}{s}\right) = 0.026 = 1 - 0.974$, so $\frac{m}{s} = 1.94$. The mean of wealth is $100\,e^{m + s^2/2} = 862.8$, so $m + \frac{s^2}{2} = \ln 8.628 \approx 2.155$. Substituting $m = 1.94s$: $s^2 + 3.88s - 4.31 = 0$, whose positive root is $s \approx 0.90$, so $m \approx 1.75$. With independent, identically distributed years, the mean is 25 times the yearly mean; the variance is 25 times as large, so the standard deviation is $\sqrt{25} = 5$ times as large. The yearly mean is about $\frac{1.75}{25} = 7$% and the standard deviation about $\frac{0.90}{5} = 18$%. (Dividing the standard deviation by 25 as well gives 3.6%, which is wrong.)
     rubric:
       zh-cn:
-        - "(a) 由亏本概率得 $\\frac{m}{s} = 1.94$ 2 分；由均值得 $m + \\frac{s^2}{2} = \\ln 8.628$ 2 分；解出 $s \\approx 0.90$、$m \\approx 1.75$ 2 分；换算成每年：期望约 7% 1 分，标准差按 $\\sqrt{25}$ 换算约 18% 2 分。标准差除以 25：最后 2 分不给。"
-        - "(b) 写出均值与中位数之比 $e^{n\\sigma^2/2}$（方差与年数成正比）4 分；解出约 43 年 4 分。用 (a) 的错误结果但方法正确：不扣分。"
+        - "由亏本概率得 $\\frac{m}{s} = 1.94$ 4 分；由均值得 $m + \\frac{s^2}{2} = \\ln 8.628$ 4 分；解出 $s \\approx 0.90$、$m \\approx 1.75$ 4 分；换算成每年：期望约 7% 2 分，标准差按 $\\sqrt{25}$ 换算约 18% 3 分。标准差除以 25：最后 3 分不给。"
       en:
-        - "(a) $\\frac{m}{s} = 1.94$ from the probability of a loss 2 points; $m + \\frac{s^2}{2} = \\ln 8.628$ from the mean 2 points; solving for $s \\approx 0.90$ and $m \\approx 1.75$ 2 points; conversion to one year: mean about 7% 1 point, standard deviation scaled by $\\sqrt{25}$ to about 18% 2 points. Standard deviation divided by 25: no points for the last 2."
-        - "(b) The ratio of mean to median is $e^{n\\sigma^2/2}$ (variance proportional to the number of years) 4 points; about 43 years 4 points. Correct method with a wrong result carried over from (a): no deduction."
+        - "$\\frac{m}{s} = 1.94$ from the probability of a loss 4 points; $m + \\frac{s^2}{2} = \\ln 8.628$ from the mean 4 points; solving for $s \\approx 0.90$ and $m \\approx 1.75$ 4 points; conversion to one year: mean about 7% 2 points, standard deviation scaled by $\\sqrt{25}$ to about 18% 3 points. Standard deviation divided by 25: no points for the last 3."
 
   - id: Q9
     kind: quiz
