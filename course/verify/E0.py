@@ -3,7 +3,7 @@
 results() returns {"<question id>.<name>": value}. CI compares each value with the
 `expected` string in the key file, rounded to the number of decimals written there.
 """
-from math import exp, sqrt
+from math import log, sqrt
 from statistics import NormalDist, mean
 
 Phi = NormalDist().cdf
@@ -17,12 +17,12 @@ def results():
     r["Q1.a10"] = 200 / 1.1**10
     r["Q1.b10"] = 140 / 1.1**3
 
-    # Q2: U = xy, p_x = 2, p_y = 4: x = M/4, y = M/8, so U*(M) = M^2 / 32 and lambda = M / 16.
-    u = lambda m: m**2 / 32
-    r["Q2.u100"] = u(100)
-    r["Q2.u200"] = u(200)
-    r["Q2.approx"] = (100 / 16) * 100
-    r["Q2.actual"] = u(200) - u(100)
+    # Q2: U = x y^2, p_x = 1, p_y = 3: x = M/3, y = 2M/9, U*(M) = 4M^3/243, lambda = 4M^2/81.
+    u = lambda m: (m / 3) * (2 * m / 9) ** 2
+    r["Q2.lam"] = 4 * 90**2 / 81
+    r["Q2.u90"] = u(90)
+    r["Q2.u180"] = u(180)
+    r["Q2.gain"] = u(180) - u(90)
 
     # Q3: A in {-10, 0, 10} equally likely, B = 0.1 A^2.
     A = [-10, 0, 10]
@@ -44,10 +44,13 @@ def results():
     pv = 60_000 * (1 - (1 + R) ** -25) / R * (1 + R)
     r["Q6.ear"] = 100 * R
     r["Q6.pv"] = pv
-    fv0 = 50_000 * (1 + i) ** 360  # the balance already in the account
-    r["Q6.fv0"] = fv0
-    r["Q6.c"] = (pv - fv0) * i / ((1 + i) ** 360 - 1)
-    r["Q6.w"] = pv * (R - 0.02) / (1 + R)  # growing perpetuity, first payment today
+    # (b) 50,000 today plus 400 at the end of each month; years of 60,000 at the start of each year.
+    fv = 50_000 * (1 + i) ** 360 + 400 * ((1 + i) ** 360 - 1) / i
+    r["Q6.fv"] = fv
+    r["Q6.n"] = -log(1 - fv * R / (60_000 * (1 + R))) / log(1 + R)
+    # (c) growing perpetuity with the first payment today.
+    r["Q6.w"] = pv * (R - 0.02) / (1 + R)
+    r["Q6.w3"] = pv * (R - 0.03) / (1 + R)
 
     # Q7: p = 100 - 2q, C = cq + F.
     q = lambda c: (100 - c) / 4
@@ -61,27 +64,34 @@ def results():
     r["Q7.c_shut"] = 100 - sqrt(8 * 200)  # profit(c, 200) = 0
     r["Q7.c_sunk"] = 100  # marginal revenue at q = 0
 
-    # Q8: sigma_A 24, sigma_B 16, w* = 0.25 -> back out rho.
-    sa, sb, w = 24, 16, 0.25
-    rho = (sb**2 - w * (sa**2 + sb**2)) / (sa * sb * (1 - 2 * w))
+    # Q8: sigma_A 24, sigma_B 16; the minimum variance is 216 with both weights positive.
+    sa, sb = 24, 16
+    wstar = lambda rho: (sb**2 - rho * sa * sb) / (sa**2 + sb**2 - 2 * rho * sa * sb)
+    minvar = lambda rho: sa**2 * sb**2 * (1 - rho**2) / (sa**2 + sb**2 - 2 * rho * sa * sb)
+    # 216 (832 - 768 rho) = 147456 (1 - rho^2)  ->  quadratic in rho
+    A, B, C = sa**2 * sb**2, -216 * 2 * sa * sb, 216 * (sa**2 + sb**2) - sa**2 * sb**2
+    disc = sqrt(B * B - 4 * A * C)
+    roots = [(-B + disc) / (2 * A), (-B - disc) / (2 * A)]
+    rho = next(x for x in roots if 0 < wstar(x) < 1)
+    assert abs(minvar(rho) - 216) < 1e-9
     r["Q8.rho"] = rho
-    r["Q8.sd"] = sqrt(w**2 * sa**2 + (1 - w) ** 2 * sb**2 + 2 * w * (1 - w) * rho * sa * sb)
+    r["Q8.w"] = 100 * wstar(rho)
+    r["Q8.w0"] = 100 * wstar(0)
     r["Q8.threshold"] = sb / sa
 
-    # Q9: yearly log return N(7%, 18%^2), independent; 25 years.
-    mu, sd, n = 0.07, 0.18, 25
-    m, s = n * mu, sd * sqrt(n)
+    # Q9: a report gives median 575.5 and mean 862.8 after 25 years for 100 invested.
+    n = 25
+    m = log(575.5 / 100)
+    s = sqrt(2 * log(862.8 / 575.5))
+    r["Q9.mu"] = 100 * m / n
+    r["Q9.sigma"] = 100 * s / sqrt(n)
+    m, s = 1.75, 0.9  # the rounded values used in the answer
     r["Q9.p25"] = 100 * Phi(-m / s)
-    r["Q9.median"] = 100 * exp(m)
-    r["Q9.mean"] = 100 * exp(m + s**2 / 2)
     r["Q9.below"] = 100 * Phi((s**2 / 2) / s)
 
-    # Q10: a = 0.4, b = 1.3, R^2 = 0.45; market mean 1%, sd 4%.
-    var_f = 1.3**2 * 4**2 / 0.45
-    sd_e = sqrt((1 - 0.45) * var_f)
+    # Q10: a = 0.4, b = 1.3, residual sd 5.75; market mean 1%.
+    sd_e = 5.75
     pred = 0.4 + 1.3 * 4
-    r["Q10.sd_f"] = sqrt(var_f)
-    r["Q10.sd_e"] = sd_e
     r["Q10.gap"] = 0.4 + (1.3 - 1) * 1  # fund minus market at the average market return
     r["Q10.gap_down"] = 0.4 + (1.3 - 1) * -4
     r["Q10.pred"] = pred
