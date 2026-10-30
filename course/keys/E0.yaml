@@ -369,7 +369,7 @@ questions:
     rubric:
       zh-cn:
         - "(a) 标准误 2.53，并把“t 值大于 1.96”转换为样本均值大于 4.96（3 分）；在真实期望为 2 下标准化，$z \\approx 1.17$，概率约 12.1%（4 分）；评价：说法不对，不显著不等于没有能力，并用信号与噪声或数据太少说明（4 分）。按原假设得 5%，或因期望的 t 值小于 1.96 就说不可能显著：最多 3 分。只凭“不显著不等于没有能力”评价、没有计算：最多 3 分。"
-        - "(b) 说明显著概率为 50% 时临界值等于真实期望 2（4 分）；解出 $n \\approx 61.5$，至少 62 年（3 分）。"
+        - "(b) 说明显著概率为 50% 时临界值等于真实期望 2（4 分）；解出 $n \\approx 61.5$，至少 62 年（3 分）。条件写对但答 61 年：扣 1 分。"
       en:
         - "(a) Standard error 2.53, and turns \"t-statistic above 1.96\" into a sample mean above 4.96 (3 points); standardizes with a true expected value of 2, $z \\approx 1.17$, probability about 12.1% (4 points); evaluation: the statement is wrong, not significant does not mean no skill, explained with signal and noise or too little data (4 points). Getting 5% under the null hypothesis, or saying significance is impossible because the expected t-statistic is below 1.96: at most 3 points. Evaluating only with \"not significant does not mean no skill\" and no calculation: at most 3 points."
-        - "(b) Explains that the probability is 50% when the critical value equals the true expected value of 2 (4 points); solves $n \\approx 61.5$, at least 62 years (3 points)."
+        - "(b) Explains that the probability is 50% when the critical value equals the true expected value of 2 (4 points); solves $n \\approx 61.5$, at least 62 years (3 points). Correct condition but an answer of 61 years: deduct 1 point."
