@@ -1,0 +1,115 @@
+---
+title: 1.9 Information Economics
+description: "What happens when one side knows more than the other: adverse selection and the market for lemons, signaling and screening, moral hazard, and the principal-agent problem in corporate governance and asset management."
+lesson: "1.9"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import LemonsMarket from '../../../../components/widgets/LemonsMarket.astro';
+
+## Asymmetric information [#asymmetric-information]
+
+So far we have assumed that buyers and sellers both know the quality of what is traded. In reality one side often knows more: the owner of a used car knows what has gone wrong with it, a person buying insurance knows their own health, and a company's manager knows whether they have worked hard. When one side of a transaction knows something the other side does not, there is <Def id="asymmetric-information">asymmetric information</Def>.
+
+Asymmetric information comes in two kinds:
+
+- **Hidden information**: before the transaction, one side does not know the other side's type, for example whether a car is good or bad, or whether a policyholder is high or low risk. It leads to adverse selection.
+- **Hidden action**: after the transaction, one side cannot see what the other side does, for example whether a policyholder is careful or whether a manager works hard. It leads to moral hazard.
+
+## Adverse selection [#adverse-selection]
+
+A used-car market has two kinds of car: good cars and bad cars (in American slang, "lemons"). Buyers cannot tell which kind a car is; owners can.
+
+| Kind of car | Value to buyers (dollars) | Owner's lowest price (dollars) |
+| --- | ---: | ---: |
+| Good car | 10,000 | 8,000 |
+| Lemon | 4,000 | 3,000 |
+
+For each kind of car, buyers value it more than its owner does, so if quality were public, every car should be sold: that makes total surplus as large as possible (<Ref concept="consumer-surplus" />).
+
+Now suppose half of the cars for sale are good. Buyers are risk neutral and pay at most the average value (<Ref concept="expected-value" />):
+
+$$
+0.5 \times 10{,}000 + 0.5 \times 4{,}000 = 7{,}000
+$$
+
+This price is below the 8,000 that owners of good cars require, so they do not sell. Buyers can work this out too: only owners of lemons are willing to sell at 7,000, so buyers will pay only 4,000. In the end only lemons are traded; good cars, although they are worth more to buyers, do not sell at all.
+
+When the less-informed side ends up facing exactly the counterparties that are worst for it, this is called <Def id="adverse-selection">adverse selection</Def>. This model is called the market for lemons, proposed by George Akerlof in 1970. How high must the share of good cars be for their owners to stay in the market? Use the figure below to find out.
+
+<Figure id="2-1" title="The market for lemons: the most buyers will pay as the share of good cars changes." observe="Move the share of good cars and see when the solid line falls below the dashed line, and what happens to the market then.">
+	<LemonsMarket />
+</Figure>
+
+<Check id="C1" />
+
+Insurance markets also have adverse selection. An insurer that cannot tell high risks from low risks can only set the premium by the average risk; for low-risk people this premium is too high, so they do not buy, the remaining buyers are riskier on average, the premium must rise again, and things can keep getting worse. The same happens in financial markets:
+
+- **Issuing new shares**: managers know better than investors what the company is worth. Issuing new shares pays best when the share price is above what the managers think it is worth, so investors read a share issue as a sign that the price is too high, and share prices often fall when companies announce an issue.
+- **Lending**: when a bank raises its interest rate, the borrowers willing to accept the higher rate tend to be riskier. So banks often limit the amount they lend and require collateral instead of simply raising the rate.
+
+<Check id="C2" />
+
+## Signaling and screening [#signaling-screening]
+
+Can the owner of a good car prove that the car is good? Just saying "my car is good" does not help, because owners of lemons say the same. What is needed is an action that is cheap for owners of good cars and expensive for owners of lemons, such as a one-year warranty: a good car seldom needs repairs, so the warranty costs almost nothing; a lemon often breaks down, so the warranty is very costly. When the better-informed side reveals its type through such a costly action, this is called <Def id="signaling">signaling</Def>. What conditions does a signal need in order to work? Derive them in <Ref check="Q3" />.
+
+Other examples:
+
+- Education: even if a degree did not make people more productive, able people find it easier to complete one, so a degree can signal ability to employers (Michael Spence).
+- Paying steady dividends for many years: a company with unsteady cash flow would find it hard to keep this up.
+- Company founders and managers buying a large amount of their own company's shares with their own money.
+
+Conversely, the less-informed side can design a set of choices so that the other side reveals its type by what it chooses. This is called <Def id="screening">screening</Def>. An insurer offers two policies at the same time: a low premium with a high deductible, or a high premium with full coverage. Low-risk people seldom make claims and prefer the high deductible; high-risk people choose full coverage. A bank that requires collateral or a down payment is also screening: only borrowers confident in their own projects are willing to put their own assets at stake.
+
+<Check id="C3" />
+
+## Moral hazard [#moral-hazard]
+
+After a contract is signed, one side may take actions the other side cannot see, and these actions affect the other side's losses. Someone with full car insurance may drive less carefully than before, because the insurer bears the loss. When a contract relieves one side of the full consequences of its actions and thereby changes those actions, this is called <Def id="moral-hazard">moral hazard</Def>.
+
+The remedy is to make the acting side bear part of the consequences: deductibles, sharing a proportion of each loss (coinsurance), premium discounts for safe driving, or closer monitoring.
+
+Moral hazard is common in finance:
+
+- If large banks expect the government to rescue them when they get into trouble ("too big to fail"), the gains from taking risk are theirs while part of the losses fall on taxpayers, so they take more risk. This adds to the problem of <Ref concept="externality" />.
+- Deposit insurance prevents runs, but it also means depositors no longer care whether their bank is sound, so banks face less discipline. That is why places with deposit insurance usually also regulate bank capital.
+
+<Check id="C4" />
+
+## The principal-agent problem [#principal-agent]
+
+Many economic relationships involve one party asking another to act on its behalf: shareholders hire managers to run the company, investors hire fund managers to manage their money, and clients hire advisers for advice. The party who hires is called the principal, and the party who acts is called the agent. When the agent's interests are not fully aligned with the principal's and the principal cannot fully observe what the agent does or how well, this is called the <Def id="principal-agent-problem">principal-agent problem</Def>. It is a form of moral hazard and is especially important in investing:
+
+- **Shareholders and managers**: managers may pursue the size of the company rather than its profit (a larger company brings more status and higher pay), enjoy too many perks, or sacrifice long-term value for short-term results.
+- **Investors and fund managers**: if a fund charges fees based on the assets it manages, the manager's income depends mainly on size rather than performance. The manager then has a reason to focus on attracting money, or to hold almost the same positions as the index (so as not to fall behind it and lose money) while charging fees for active management. If the manager shares the gains but not the losses, the manager has a reason to take too much risk (see <Ref check="Q2" />).
+- **Clients and advisers**: if an adviser's income comes from sales commissions on products, the adviser has a reason to recommend high-commission products, which often also have high fees.
+
+There are three kinds of remedy for the principal-agent problem:
+
+- **Incentives**: tie the agent's pay to the principal's interests, for example by having managers own the company's shares or paying bonuses based on long-term results. But tying pay to results also passes the risk of the results to the agent; agents are usually risk averse (<Ref concept="risk-aversion" />) and demand higher pay in return. So pay usually does not depend entirely on results. How the agent's share affects the agent's effort and the principal's payoff is examined in <Ref check="Q4" />.
+- **Monitoring**: boards of directors, audits, disclosure.
+- **Legal duties**: in the United States, registered investment advisers owe their clients a fiduciary duty under the Investment Advisers Act of 1940 and must put the clients' interests first; since 2020, broker-dealers must follow the Securities and Exchange Commission's (SEC) Regulation Best Interest.
+
+For an investor, the most practical step is to ask: where does the income of the person managing your money or advising you come from? Stage 6 uses this question again and again when choosing funds and advisers.
+
+<Check id="C5" />
+
+## Summary [#summary]
+
+- Asymmetric information: one side of a transaction knows more. Hidden information before the transaction leads to adverse selection; hidden action after it leads to moral hazard.
+- Adverse selection: pricing by average quality drives the good types out of the market, and at worst only the worst type remains (the market for lemons). Insurance, share issues and lending all show adverse selection.
+- Signaling: the better-informed side reveals its type through a costly action. Screening: the less-informed side designs choices that make the other side reveal its type.
+- Moral hazard: a contract relieves one side of the full consequences of its actions. Deductibles, shared losses and monitoring reduce it.
+- The principal-agent problem: the agent's interests differ from the principal's, and the agent's actions are hard to observe. The remedies are incentives, monitoring and legal duties; the stronger the incentive, the more risk the agent bears.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

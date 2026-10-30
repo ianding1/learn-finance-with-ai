@@ -1,0 +1,385 @@
+# Answer key for lesson 1.9. Shown to learners only inside generated grading prompts.
+# Text fields support: $inline math$, $$display math$$, **bold**, line breaks,
+# and references: [[1.4]] (lesson), [[1.9#moral-hazard]] (section), [[concept:adverse-selection]], [[check:Q2]], [[fig:2-1]].
+# expected: values are recomputed by course/verify/1.9.py in CI and must appear verbatim in every answer text.
+#
+# context: lesson facts for the grader. A grading prompt includes an item when
+#   - the item has neither `concepts` nor `questions` (always included), or
+#   - one of its `concepts` is tested by a question being graded, or
+#   - one of its `questions` is being graded.
+# common_errors: each item lists the `questions` it is relevant to. Only those go into a prompt.
+
+lesson: "1.9"
+
+context:
+  - zh-cn: |-
+      学习者学过期望（[[0.3]]）、年金与复利（[[0.1]]）、风险厌恶（[[1.4]]）、博弈论（[[1.7]]）以及剩余、外部性（[[1.8]]）。本课不使用正式的契约理论模型；信号传递和筛选只讲直观的条件。
+    en: |-
+      The learner has studied expected value ([[0.3]]), annuities and compounding ([[0.1]]), risk aversion ([[1.4]]), game theory ([[1.7]]), and surplus and externalities ([[1.8]]). This lesson does not use formal contract-theory models; signaling and screening are covered only through intuitive conditions.
+  - concepts: [asymmetric-information, adverse-selection]
+    zh-cn: |-
+      讲义的柠檬市场：好车对买方价值 10,000、车主最低要价 8,000；柠檬对买方 4,000、车主 3,000；买方风险中性，最多付平均价值。一半好车时买方最多付 7,000，好车退出，只剩柠檬、价格 4,000。[[fig:2-1]]：好车比例滑块从 0 到 1，步长 0.05，默认 0.5；读数给出买方最多愿意付的价格和好车车主是否留下。讲义没有给出好车留下所需的比例（留给随堂题）。讲义还讲了保险中的逆向选择、增发股票时股价下跌、银行限制贷款数量而不是单纯提高利率。
+    en: |-
+      The lesson's lemons market: a good car is worth 10,000 to buyers and its owner's lowest price is 8,000; a lemon is worth 4,000 to buyers and 3,000 to its owner; buyers are risk neutral and pay at most the average value. With half good cars, buyers pay at most 7,000, good cars leave, and only lemons remain at 4,000. [[fig:2-1]]: a slider for the share of good cars from 0 to 1 in steps of 0.05 (default 0.5); the readout gives the most buyers will pay and whether owners of good cars stay. The lesson does not give the share needed for good cars to stay (left to a check question). It also covers adverse selection in insurance, the fall in share prices when firms issue new shares, and banks limiting loan amounts rather than only raising interest rates.
+  - concepts: [signaling, screening]
+    zh-cn: |-
+      讲义：信号要对好的类型便宜、对差的类型昂贵（例如保修）；条件的推导留给练习题。例子：学历（斯彭斯）、稳定的股息、经理买入本公司股票。筛选：保险公司同时提供高免赔额低保费和全额赔付高保费的保单；银行要求抵押或首付。
+    en: |-
+      The lesson: a signal must be cheap for the good type and expensive for the bad type (for example a warranty); deriving the condition is left to an exercise. Examples: education (Spence), steady dividends, managers buying their own company's shares. Screening: an insurer offers both a low-premium policy with a high deductible and a high-premium policy with full coverage; banks require collateral or a down payment.
+  - concepts: [moral-hazard, principal-agent-problem]
+    zh-cn: |-
+      讲义：道德风险的对策是免赔额、共担损失、保费折扣和监督；金融中的例子是“大而不能倒”和存款保险。委托–代理问题的例子：股东与经理、投资者与基金经理（按规模收费、收益共享而不承担损失）、客户与拿佣金的顾问。对策：激励（但会把风险转给风险厌恶的代理人）、监督、法律责任（美国注册投资顾问按 1940 年《投资顾问法》负有受托责任；经纪商自 2020 年起须遵守 SEC 的 Regulation Best Interest）。
+    en: |-
+      The lesson: remedies for moral hazard are deductibles, shared losses, premium discounts and monitoring; financial examples are "too big to fail" and deposit insurance. Examples of the principal-agent problem: shareholders and managers, investors and fund managers (fees based on assets, sharing gains without bearing losses), clients and commission-paid advisers. Remedies: incentives (which shift risk onto a risk-averse agent), monitoring, legal duties (in the US, registered investment advisers have a fiduciary duty under the Investment Advisers Act of 1940; broker-dealers must follow the SEC's Regulation Best Interest since 2020).
+
+common_errors:
+  - questions: [C1, C2, Q1]
+    zh-cn: |-
+      用所有类型的平均值定价后就停下，没有检查在这个价格下谁会留在市场里；留下的类型变了，平均值也要重新计算。
+    en: |-
+      Stopping after pricing at the average over all types, without checking who stays in the market at that price; when the types that stay change, the average must be recomputed.
+  - questions: [C3, Q3]
+    zh-cn: |-
+      只检查好的类型是否愿意发出信号，没有检查差的类型会不会模仿。信号要起作用，差的类型模仿必须不划算。
+    en: |-
+      Checking only whether the good type is willing to send the signal, not whether the bad type would copy it. For a signal to work, copying must not pay for the bad type.
+  - questions: [C4]
+    zh-cn: |-
+      认为全额保险时投保人仍会因为损失的可能而小心。全额保险时损失由保险公司承担，小心对投保人自己没有好处。
+    en: |-
+      Thinking that a fully insured person still takes care because of the chance of a loss. With full insurance the insurer bears the loss, so taking care brings the insured person no benefit.
+  - questions: [Q2]
+    zh-cn: |-
+      只比较两种策略的期望收益（都是 5%），没有注意到业绩报酬只分享收益、不承担损失，使经理偏好波动大的策略。
+    en: |-
+      Comparing only the expected returns of the two strategies (both 5%), without noticing that a performance fee shares gains but not losses, which makes the manager prefer the volatile strategy.
+  - questions: [Q4]
+    zh-cn: |-
+      认为委托人应该把全部利润都给代理人（努力最高），或者一点都不给。委托人关心的是自己的那一份，要在努力和分成之间权衡。
+    en: |-
+      Thinking that the principal should give the agent all the profit (maximum effort) or none of it. The principal cares about its own share and must trade effort off against the split.
+
+questions:
+  # ---------- Check questions (随堂题) ----------
+  - id: C1
+    kind: check
+    section: adverse-selection
+    concepts: [adverse-selection, expected-value]
+    widget: { id: lemons, set: { q: 0.7 } }
+    expected: { q: "0.67", wtp: "8200" }
+    question:
+      zh-cn: |-
+        在 [[fig:2-1]] 中逐渐提高好车的比例，找出好车车主开始愿意留在市场里的大致比例，再精确计算。如果待售车中 70% 是好车，买方最多愿意付多少？哪些车会成交？
+      en: |-
+        In [[fig:2-1]], raise the share of good cars step by step and find roughly the share at which owners of good cars start to be willing to stay in the market; then compute it exactly. If 70% of the cars for sale are good, what is the most buyers will pay, and which cars are traded?
+    answer:
+      zh-cn: |-
+        需要 $10{,}000\,q + 4{,}000\,(1 - q) \ge 8{,}000$，即 $6{,}000\,q \ge 4{,}000$，$q \ge \frac23 \approx 0.67$。图中 0.65 时低于 8,000，0.70 时高于 8,000。
+        70% 是好车时，买方最多付 $0.7 \times 10{,}000 + 0.3 \times 4{,}000 = 8{,}200$，高于 8,000，好车车主愿意卖，好车和柠檬都按同一个价格成交。
+      en: |-
+        We need $10{,}000\,q + 4{,}000\,(1 - q) \ge 8{,}000$, that is, $6{,}000\,q \ge 4{,}000$ and $q \ge \frac23 \approx 0.67$. In the figure, 0.65 is below 8,000 and 0.70 is above.
+        With 70% good cars, buyers pay at most $0.7 \times 10{,}000 + 0.3 \times 4{,}000 = 8{,}200$, above 8,000, so owners of good cars are willing to sell, and both good cars and lemons trade at the same price.
+    rubric:
+      zh-cn:
+        - "列出不等式，得到 $q \\ge \\frac23$（约 0.67）。"
+        - "70% 时买方最多付 8,200，好车和柠檬都成交。"
+      en:
+        - "Sets up the inequality and gets $q \\ge \\frac23$ (about 0.67)."
+        - "At 70%, buyers pay at most 8,200, and both good cars and lemons trade."
+
+  - id: C2
+    kind: check
+    section: adverse-selection
+    concepts: [adverse-selection, risk-aversion]
+    expected: { p1: "500", p2: "800" }
+    question:
+      zh-cn: |-
+        一种健康保险的潜在投保人中，一半是低风险的人，每年的预期理赔 200 美元；一半是高风险的人，预期理赔 800 美元。因为风险厌恶，低风险的人最多愿意付 300 美元的保费，高风险的人最多愿意付 1,000 美元。保险公司分不清两类人，只能对所有投保人收同一个保费，并按投保人的平均预期理赔定价（不赚不赔）。
+        (a) 如果两类人都投保，保费是多少？低风险的人会买吗？
+        (b) 最后谁会投保？保费是多少？这个结果为什么没有效率？
+      en: |-
+        Half of the potential buyers of a health insurance policy are low-risk people with expected claims of 200 dollars a year; half are high-risk people with expected claims of 800 dollars. Because they are risk averse, low-risk people would pay a premium of at most 300 dollars, and high-risk people at most 1,000 dollars. The insurer cannot tell the two groups apart, must charge all buyers the same premium, and sets it equal to the average expected claim of the buyers (breaking even).
+        (a) If both groups buy, what is the premium? Will low-risk people buy?
+        (b) In the end, who buys insurance, and at what premium? Why is this outcome inefficient?
+    answer:
+      zh-cn: |-
+        (a) 平均预期理赔 $0.5 \times 200 + 0.5 \times 800 = 500$，保费 500。低风险的人最多付 300，不买。
+        (b) 只剩高风险的人，保费要涨到 800；他们最多愿意付 1,000，所以会买。结果只有高风险的人投保，保费 800。
+        没有效率：低风险的人愿意付 300，而为他们提供保险的预期成本只有 200，这笔交易本来对双方都有好处，却因为保险公司分不清风险高低而没有发生。
+      en: |-
+        (a) The average expected claim is $0.5 \times 200 + 0.5 \times 800 = 500$, so the premium is 500. Low-risk people would pay at most 300, so they do not buy.
+        (b) Only high-risk people remain, so the premium must rise to 800; they would pay up to 1,000, so they buy. In the end only high-risk people are insured, at a premium of 800.
+        It is inefficient: low-risk people would pay 300, while the expected cost of insuring them is only 200; this trade would benefit both sides, but it does not happen because the insurer cannot tell the risks apart.
+    rubric:
+      zh-cn:
+        - "(a) 保费 500，低风险的人不买。"
+        - "(b) 只有高风险的人投保，保费 800。"
+        - "指出低风险的人愿意付的高于为他们提供保险的成本，交易没有发生，所以没有效率。"
+      en:
+        - "(a) Premium 500; low-risk people do not buy."
+        - "(b) Only high-risk people buy, at 800."
+        - "Points out that low-risk people would pay more than the cost of insuring them, so a beneficial trade is lost."
+
+  - id: C3
+    kind: check
+    section: signaling-screening
+    concepts: [signaling, adverse-selection]
+    expected: { good: "9800", lemon: "3000", lemon2: "5000" }
+    question:
+      zh-cn: |-
+        沿用讲义的二手车市场（好车对买方 10,000、车主最低要价 8,000；柠檬对买方 4,000）。卖方可以为车提供一年保修。一年内的预期修理费：好车 200 美元，柠檬 7,000 美元。如果买方相信提供保修的都是好车，就愿意为有保修的车付 10,000；没有保修的车被当作柠檬，只值 4,000。
+        (a) 好车车主会提供保修吗？柠檬车主会模仿吗？保修能区分两种车吗？
+        (b) 如果柠檬一年的预期修理费只有 5,000 美元，结果会怎样？
+      en: |-
+        Use the lesson's used-car market (a good car is worth 10,000 to buyers and its owner's lowest price is 8,000; a lemon is worth 4,000 to buyers). Sellers can offer a one-year warranty. Expected repair costs within a year: 200 dollars for a good car and 7,000 dollars for a lemon. If buyers believe that only good cars come with a warranty, they will pay 10,000 for a car with a warranty; a car without one is treated as a lemon and is worth only 4,000.
+        (a) Will owners of good cars offer the warranty? Will owners of lemons copy them? Does the warranty separate the two kinds of car?
+        (b) What happens if a lemon's expected repair cost for a year is only 5,000 dollars?
+    answer:
+      zh-cn: |-
+        (a) 好车车主提供保修，得到 $10{,}000 - 200 = 9{,}800$，高于自己的最低要价 8,000，会提供。柠檬车主如果模仿，得到 $10{,}000 - 7{,}000 = 3{,}000$，低于不提供保修时的 4,000，不会模仿。保修能区分两种车：有保修的是好车，按 10,000 成交；没有保修的是柠檬，按 4,000 成交。
+        (b) 柠檬车主模仿得到 $10{,}000 - 5{,}000 = 5{,}000$，高于 4,000，会模仿。于是有保修的车里也有柠檬，买方不会再为有保修的车付 10,000，保修不再能区分两种车。信号要起作用，对差的类型必须足够昂贵。
+      en: |-
+        (a) An owner of a good car who offers the warranty gets $10{,}000 - 200 = 9{,}800$, above the owner's lowest price of 8,000, so the owner offers it. An owner of a lemon who copies gets $10{,}000 - 7{,}000 = 3{,}000$, less than the 4,000 without a warranty, so the owner does not copy. The warranty separates the two kinds of car: cars with a warranty are good and sell for 10,000; cars without one are lemons and sell for 4,000.
+        (b) An owner of a lemon who copies now gets $10{,}000 - 5{,}000 = 5{,}000$, more than 4,000, so the owner copies. Then some cars with a warranty are lemons, buyers will no longer pay 10,000 for them, and the warranty no longer separates the two kinds. For a signal to work, it must be expensive enough for the bad type.
+    rubric:
+      zh-cn:
+        - "(a) 好车 9,800 > 8,000 会提供；柠檬 3,000 < 4,000 不模仿；能区分。"
+        - "(b) 柠檬 5,000 > 4,000 会模仿，信号失效；说明信号对差的类型必须足够昂贵。"
+      en:
+        - "(a) Good car: 9,800 > 8,000, so it offers the warranty; lemon: 3,000 < 4,000, so it does not copy; the cars are separated."
+        - "(b) Lemon: 5,000 > 4,000, so it copies and the signal fails; explains that the signal must be expensive enough for the bad type."
+
+  - id: C4
+    kind: check
+    section: moral-hazard
+    concepts: [moral-hazard]
+    expected: { gain: "100", d: "500" }
+    question:
+      zh-cn: |-
+        一位租客可以花 50 美元买防火用品并更加小心。这样做时，一年内发生 1,000 美元损失的概率是 10%；不这样做时是 20%。
+        (a) 没有保险时，租客会小心吗？
+        (b) 有全额保险时呢？
+        (c) 保险公司设置免赔额 $D$（每次损失中前 $D$ 美元由租客自己承担）。$D$ 至少要多大，租客才会小心？（不考虑风险厌恶。）
+      en: |-
+        A renter can spend 50 dollars on fire-safety equipment and be more careful. If the renter does, the probability of a 1,000-dollar loss within a year is 10%; if not, it is 20%.
+        (a) Without insurance, will the renter take care?
+        (b) What about with full insurance?
+        (c) The insurer sets a deductible $D$ (the renter bears the first $D$ dollars of each loss). How large must $D$ be at least for the renter to take care? (Ignore risk aversion.)
+    answer:
+      zh-cn: |-
+        (a) 小心使预期损失减少 $(0.2 - 0.1) \times 1{,}000 = 100$，大于成本 50，会小心。
+        (b) 全额保险时损失由保险公司承担，小心对租客没有好处，只有 50 的成本，所以不会小心。这就是道德风险。
+        (c) 租客自己承担的预期损失减少 $(0.2 - 0.1) \times D = 0.1D$，需要 $0.1D \ge 50$，即 $D \ge 500$。
+      en: |-
+        (a) Taking care lowers the expected loss by $(0.2 - 0.1) \times 1{,}000 = 100$, more than the cost of 50, so the renter takes care.
+        (b) With full insurance the insurer bears the loss, so taking care brings the renter no benefit and costs 50; the renter does not take care. This is moral hazard.
+        (c) The renter's own expected loss falls by $(0.2 - 0.1) \times D = 0.1D$, so we need $0.1D \ge 50$, that is, $D \ge 500$.
+    rubric:
+      zh-cn:
+        - "(a) 预期损失减少 100 > 50，会小心。"
+        - "(b) 全额保险时不会小心。"
+        - "(c) $D \\ge 500$。"
+      en:
+        - "(a) Expected loss falls by 100 > 50, so the renter takes care."
+        - "(b) With full insurance, no care."
+        - "(c) $D \\ge 500$."
+
+  - id: C5
+    kind: check
+    section: principal-agent
+    concepts: [principal-agent-problem, moral-hazard]
+    question:
+      zh-cn: |-
+        一位理财顾问不向客户收费，收入全部来自他推荐的基金支付的销售佣金。
+        (a) 谁是委托人，谁是代理人？两者的利益在哪里不一致？
+        (b) 委托人为什么很难发现问题？
+        (c) 给出两种可以减轻这个问题的办法。
+      en: |-
+        A financial adviser charges clients nothing; all of the adviser's income comes from sales commissions paid by the funds the adviser recommends.
+        (a) Who is the principal and who is the agent? Where do their interests differ?
+        (b) Why is it hard for the principal to detect the problem?
+        (c) Give two ways to reduce the problem.
+    answer:
+      zh-cn: |-
+        (a) 客户是委托人，顾问是代理人。客户要的是适合自己、费用低的投资；顾问的收入取决于佣金，有动机推荐佣金高的基金，而佣金高的基金往往费用也高。
+        (b) 客户通常不了解各种基金的费用和佣金，也很难判断别的选择会不会更好；业绩差可以归咎于市场，客户分不清是运气还是建议不好。
+        (c) 例如：改为客户直接付费（按固定费用或按资产的一定比例收费）、不收产品佣金；选择对客户负有受托责任的顾问；要求顾问书面披露所有佣金和利益冲突；客户自己比较产品费用。
+      en: |-
+        (a) The client is the principal and the adviser is the agent. The client wants suitable, low-cost investments; the adviser's income depends on commissions, so the adviser has a reason to recommend funds with high commissions, and such funds often also have high fees.
+        (b) Clients usually do not know the fees and commissions of the various funds and find it hard to judge whether other choices would have been better; poor results can be blamed on the market, and clients cannot tell bad luck from bad advice.
+        (c) For example: have the client pay the adviser directly (a fixed fee or a percentage of assets) instead of product commissions; choose an adviser with a fiduciary duty to clients; require the adviser to disclose all commissions and conflicts of interest in writing; have the client compare product fees.
+    rubric:
+      zh-cn:
+        - "(a) 客户是委托人、顾问是代理人；指出佣金使顾问偏好高佣金产品。"
+        - "(b) 指出客户难以观察和判断（信息不对称、运气与能力难分）。"
+        - "(c) 两种合理的办法（改变收费方式、受托责任、披露、监督等）。"
+      en:
+        - "(a) Client is the principal and adviser the agent; points out that commissions make the adviser favor high-commission products."
+        - "(b) Points out that the client can hardly observe or judge (asymmetric information, luck hard to tell from skill)."
+        - "(c) Two sound remedies (change how the adviser is paid, fiduciary duty, disclosure, monitoring and so on)."
+
+  # ---------- Exercises (reviewed by the AI, not scored) ----------
+  - id: Q1
+    kind: exercise
+    level: B
+    concepts: [adverse-selection, expected-value]
+    question:
+      zh-cn: |-
+        一个二手车市场中，车的质量 $v$ 均匀分布在 0 到 10,000 美元之间（$v$ 是车主对这辆车的估价），买方对质量为 $v$ 的车估价 $1.5v$。只有车主知道 $v$；买方风险中性，只知道待售车的平均质量。
+        (a) 如果市场价格是 $p$，哪些车主愿意卖？待售车的平均质量是多少？买方愿意付多少？
+        (b) 证明除了 $p = 0$，没有价格能使买方愿意付的等于 $p$。这说明了什么？
+      en: |-
+        In a used-car market, car quality $v$ is uniformly distributed between 0 and 10,000 dollars ($v$ is the owner's value of the car), and buyers value a car of quality $v$ at $1.5v$. Only owners know $v$; buyers are risk neutral and know only the average quality of the cars for sale.
+        (a) If the market price is $p$, which owners are willing to sell? What is the average quality of the cars for sale? How much are buyers willing to pay?
+        (b) Show that no price except $p = 0$ makes what buyers are willing to pay equal to $p$. What does this show?
+    answer:
+      zh-cn: |-
+        (a) 车主估价 $v \le p$ 时愿意卖，待售车的质量均匀分布在 0 到 $p$ 之间，平均质量 $\frac{p}{2}$。买方愿意付 $1.5 \times \frac{p}{2} = 0.75p$。
+        (b) 买方愿意付的 $0.75p$ 总是低于 $p$（$p > 0$ 时）。按 $p$ 卖不出去；降价后最好的那些车又退出，平均质量继续下降。只有 $p = 0$ 时两者相等，市场完全瓦解，虽然每一辆车对买方的价值都是车主的 1.5 倍，却没有一辆成交。逆向选择可以使整个市场消失，而不只是让好车退出。
+      en: |-
+        (a) Owners with $v \le p$ are willing to sell, so the quality of the cars for sale is uniform between 0 and $p$, with average $\frac{p}{2}$. Buyers are willing to pay $1.5 \times \frac{p}{2} = 0.75p$.
+        (b) What buyers will pay, $0.75p$, is always below $p$ (for $p > 0$). At $p$ the cars do not sell; at a lower price the best remaining cars leave and the average quality falls again. Only at $p = 0$ are the two equal, and the market collapses completely: although every car is worth 1.5 times as much to buyers as to its owner, none is traded. Adverse selection can make a whole market disappear, not only drive out the good cars.
+    rubric:
+      zh-cn:
+        - "(a) $v \\le p$ 的车主卖，平均质量 $\\frac{p}{2}$，买方愿意付 $0.75p$。"
+        - "(b) $0.75p < p$，只有 $p = 0$；指出市场完全瓦解，尽管每笔交易都有好处。"
+      en:
+        - "(a) Owners with $v \\le p$ sell; average quality $\\frac{p}{2}$; buyers pay $0.75p$."
+        - "(b) $0.75p < p$, so only $p = 0$; points out that the market collapses even though every trade would be beneficial."
+
+  - id: Q2
+    kind: exercise
+    level: B
+    concepts: [principal-agent-problem, risk-aversion, expected-value]
+    expected: { safe: "1", risky: "4" }
+    question:
+      zh-cn: |-
+        一位基金经理的报酬是基金当年收益的 20%，但收益为负时报酬为 0（不承担损失）。他可以选择两种策略：稳健策略每年收益确定为 5%；激进策略每年等概率收益 +40% 或 −30%。
+        (a) 两种策略的期望收益各是多少？投资者如果是风险厌恶的，更喜欢哪一种？
+        (b) 两种策略下经理的期望报酬各是多少（占基金资产的百分比）？经理会选哪一种？
+        (c) 这个报酬结构的问题在哪里？提出一种改进的办法。
+      en: |-
+        A fund manager is paid 20% of the fund's return for the year, but nothing if the return is negative (the manager bears no losses). There are two strategies: a safe one with a certain return of 5% a year, and an aggressive one with a return of +40% or −30% each year with equal probability.
+        (a) What is the expected return of each strategy? If investors are risk averse, which do they prefer?
+        (b) What is the manager's expected pay under each strategy (as a percentage of fund assets)? Which strategy will the manager choose?
+        (c) What is the problem with this pay structure? Suggest one improvement.
+    answer:
+      zh-cn: |-
+        (a) 稳健 5%；激进 $0.5 \times 40\% + 0.5 \times (-30\%) = 5\%$。期望收益相同，激进策略风险大得多，风险厌恶的投资者更喜欢稳健策略。
+        (b) 稳健：$20\% \times 5\% = 1\%$。激进：$0.5 \times 20\% \times 40\% + 0.5 \times 0 = 4\%$。经理会选激进策略。
+        (c) 经理分享收益却不承担损失，他的报酬像一份看涨期权：波动越大，期望报酬越高。投资者承担全部下跌风险，经理却有动机加大风险。改进：要求经理用自己的钱投资于基金（共担损失）；设置历史最高净值线（high-water mark），亏损补回之前不收业绩报酬；用多年业绩计算报酬；或者只收固定的管理费。
+      en: |-
+        (a) Safe: 5%; aggressive: $0.5 \times 40\% + 0.5 \times (-30\%) = 5\%$. The expected returns are the same, but the aggressive strategy is much riskier, so risk-averse investors prefer the safe one.
+        (b) Safe: $20\% \times 5\% = 1\%$. Aggressive: $0.5 \times 20\% \times 40\% + 0.5 \times 0 = 4\%$. The manager chooses the aggressive strategy.
+        (c) The manager shares the gains but not the losses, so the pay works like a call option: the more volatile the result, the higher the expected pay. Investors bear all of the downside, yet the manager has a reason to take more risk. Improvements: require the manager to invest personal money in the fund (sharing losses); use a high-water mark, with no performance fee until losses are made up; base pay on several years of results; or charge only a fixed management fee.
+    rubric:
+      zh-cn:
+        - "(a) 期望都是 5%，风险厌恶的投资者偏好稳健策略。"
+        - "(b) 1% 与 4%，经理选激进策略。"
+        - "(c) 指出报酬只分享收益、不承担损失，鼓励冒险；给出合理的改进办法。"
+      en:
+        - "(a) Both have an expected return of 5%; risk-averse investors prefer the safe strategy."
+        - "(b) 1% and 4%; the manager chooses the aggressive strategy."
+        - "(c) Points out that pay shares gains without losses and encourages risk taking; gives a sound improvement."
+
+  - id: Q3
+    kind: exercise
+    level: B
+    star: true
+    concepts: [signaling, adverse-selection]
+    question:
+      zh-cn: |-
+        有两种类型的卖方：好的和差的。被买方认作好类型时，卖方多得到 $\Delta > 0$。发出一个信号的成本：好类型为 $c_H$，差类型为 $c_L$。
+        (a) 证明：存在“好类型发信号、差类型不发”的结果，当且仅当 $c_H \le \Delta \le c_L$。（不考虑相等时的取舍。）
+        (b) 由此说明：为什么信号对差类型的成本必须高于对好类型的成本？如果信号对两类人的成本一样，会怎样？
+        (c) 公司宣布提高股息常常被看作好消息。用这个条件解释：为什么股息可以是信号？什么样的公司难以模仿？
+      en: |-
+        There are two types of seller: good and bad. Being taken for the good type earns a seller an extra $\Delta > 0$. Sending a signal costs $c_H$ for the good type and $c_L$ for the bad type.
+        (a) Show that an outcome in which the good type signals and the bad type does not exists if and only if $c_H \le \Delta \le c_L$. (Ignore how ties are broken.)
+        (b) Use this to explain why the signal must cost the bad type more than the good type. What happens if the signal costs both types the same?
+        (c) An announced increase in dividends is often taken as good news. Use this condition to explain why a dividend can be a signal. What kind of company finds it hard to copy?
+    answer:
+      zh-cn: |-
+        (a) 好类型愿意发信号：发信号多得 $\Delta$、付出 $c_H$，需要 $\Delta \ge c_H$。差类型不模仿：模仿会多得 $\Delta$、付出 $c_L$，需要 $\Delta \le c_L$。两者同时成立，即 $c_H \le \Delta \le c_L$；反过来，只要有一个不成立，就会有一类人改变做法。
+        (b) 条件要求 $c_H \le c_L$，并且 $\Delta$ 落在两者之间。如果成本相同（$c_H = c_L = c$），只有 $\Delta = c$ 这一个巧合的值能成立；一般情况下要么两类人都发信号，要么都不发，买方从信号中得不到信息。
+        (c) 提高股息就是承诺以后每年都要付出更多现金。现金流稳定、前景好的公司做得到，成本低；现金流不稳定或前景差的公司以后可能不得不削减股息，而削减股息会被市场严厉惩罚，或者要靠借钱来维持股息，成本高，所以难以模仿。
+      en: |-
+        (a) The good type is willing to signal: signaling earns $\Delta$ more and costs $c_H$, so we need $\Delta \ge c_H$. The bad type does not copy: copying would earn $\Delta$ more and cost $c_L$, so we need $\Delta \le c_L$. Both together give $c_H \le \Delta \le c_L$; conversely, if either fails, one type changes what it does.
+        (b) The condition requires $c_H \le c_L$, with $\Delta$ between the two. If the costs are equal ($c_H = c_L = c$), only the coincidental value $\Delta = c$ works; in general either both types signal or neither does, and buyers learn nothing from the signal.
+        (c) Raising the dividend is a commitment to pay out more cash every year from now on. A company with steady cash flow and good prospects can do this cheaply; a company with unsteady cash flow or poor prospects may later have to cut the dividend, which the market punishes severely, or borrow to keep paying it, so the cost is high and copying is hard.
+    rubric:
+      zh-cn:
+        - "(a) 分别写出好类型愿意发、差类型不模仿的条件，合起来得到 $c_H \\le \\Delta \\le c_L$。"
+        - "(b) 说明需要 $c_H < c_L$；成本相同时信号不能区分类型。"
+        - "(c) 股息是对未来现金的承诺，对现金流差的公司成本高。"
+      en:
+        - "(a) Writes the good type's condition to signal and the bad type's condition not to copy, and combines them into $c_H \\le \\Delta \\le c_L$."
+        - "(b) Explains that $c_H < c_L$ is needed; with equal costs the signal cannot separate the types."
+        - "(c) A dividend is a commitment of future cash, costly for firms with weak cash flow."
+
+  - id: Q4
+    kind: exercise
+    level: C
+    star: true
+    concepts: [principal-agent-problem, first-order-condition]
+    expected: { e: "5", owner: "25", agency: "12.5" }
+    question:
+      zh-cn: |-
+        公司所有者（委托人）请一位经理（代理人）经营公司。经理的努力 $e$ 使利润为 $10e$，努力给经理带来的成本为 $\frac{e^2}{2}$（以美元计）。所有者看不到努力，只能看到利润，于是把利润的比例 $s$（$0 \le s \le 1$）付给经理。经理是风险中性的，没有其他收入来源。
+        (a) 给定 $s$，经理选择多大的努力？
+        (b) 所有者选择多大的 $s$？这时经理的努力和所有者的收益各是多少？
+        (c) 如果所有者能直接看到并规定努力，使总剩余（利润减去努力成本）最大的努力是多少？与 (b) 相比，总剩余少了多少？这部分损失来自哪里？
+      en: |-
+        A company owner (the principal) hires a manager (the agent). The manager's effort $e$ produces a profit of $10e$, and effort costs the manager $\frac{e^2}{2}$ (in dollars). The owner cannot see effort, only profit, so the owner pays the manager a share $s$ of profit ($0 \le s \le 1$). The manager is risk neutral and has no other income.
+        (a) Given $s$, how much effort does the manager choose?
+        (b) What $s$ does the owner choose? What are the manager's effort and the owner's payoff then?
+        (c) If the owner could see and dictate effort directly, what effort would maximize total surplus (profit minus the cost of effort)? Compared with (b), how much total surplus is lost? Where does the loss come from?
+    answer:
+      zh-cn: |-
+        (a) 经理最大化 $s \cdot 10e - \frac{e^2}{2}$，一阶条件 $10s - e = 0$，$e = 10s$。
+        (b) 所有者得到 $(1 - s) \cdot 10e = (1 - s) \cdot 100s$，对 $s$ 求导：$100 - 200s = 0$，$s = 0.5$。经理努力 $e = 5$，利润 50，所有者得 25，经理得 $25 - 12.5 = 12.5$。
+        (c) 总剩余 $10e - \frac{e^2}{2}$ 在 $e = 10$ 时最大，为 50。(b) 中总剩余 $50 - 12.5 = 37.5$，少了 12.5。损失来自所有者看不到努力：经理只得到边际利润的一半，所以只做到一半的努力；所有者如果给经理更大的比例，努力会增加，但自己的那一份会减少。这 12.5 就是代理成本（agency cost）。
+        （如果经理是风险厌恶的而利润有随机性，提高 $s$ 还会让经理承担更多风险，所有者会选择更小的 $s$。）
+      en: |-
+        (a) The manager maximizes $s \cdot 10e - \frac{e^2}{2}$; the first-order condition $10s - e = 0$ gives $e = 10s$.
+        (b) The owner gets $(1 - s) \cdot 10e = (1 - s) \cdot 100s$; setting the derivative with respect to $s$ to zero, $100 - 200s = 0$, gives $s = 0.5$. The manager's effort is $e = 5$, profit is 50, the owner gets 25, and the manager gets $25 - 12.5 = 12.5$.
+        (c) Total surplus $10e - \frac{e^2}{2}$ is largest at $e = 10$, where it is 50. In (b) total surplus is $50 - 12.5 = 37.5$, so 12.5 is lost. The loss comes from the owner's inability to see effort: the manager receives only half of the marginal profit and so puts in only half the effort; giving the manager a larger share would raise effort but reduce the owner's own part. This 12.5 is the agency cost.
+        (If the manager were risk averse and profit were random, a higher $s$ would also load more risk onto the manager, and the owner would choose a smaller $s$.)
+    rubric:
+      zh-cn:
+        - "(a) $e = 10s$。"
+        - "(b) $s = 0.5$，努力 5，所有者得 25。"
+        - "(c) 最优努力 10，总剩余 50；(b) 中 37.5，代理成本 12.5；解释来自努力不可观察。"
+      en:
+        - "(a) $e = 10s$."
+        - "(b) $s = 0.5$, effort 5, owner gets 25."
+        - "(c) Best effort 10 with total surplus 50; 37.5 in (b), an agency cost of 12.5; explains that it comes from effort being unobservable."
+
+  - id: Q5
+    kind: exercise
+    level: B
+    concepts: [principal-agent-problem, future-value]
+    expected: { x: "304678", y: "383368", gap: "78690" }
+    question:
+      zh-cn: |-
+        一位拿佣金的顾问建议客户把 100,000 美元投入基金 X：买入时收取 5% 的销售佣金（付给顾问），之后每年费用率 1.0%。另一个选择是指数基金 Y：没有销售佣金，每年费用率 0.05%。两只基金扣费前的年收益都是 7%，费用直接从年收益中扣除。持有 20 年。
+        (a) 20 年后两种选择的终值各是多少？相差多少？
+        (b) 顾问从这笔建议中得到多少？用委托–代理的概念说明，为什么这种安排会让客户付出代价。
+      en: |-
+        A commission-paid adviser recommends that a client put 100,000 dollars into fund X, which charges a 5% sales commission on purchase (paid to the adviser) and then an expense ratio of 1.0% a year. The alternative is index fund Y, with no sales commission and an expense ratio of 0.05% a year. Both funds earn 7% a year before fees, and fees are taken directly out of the yearly return. The money is held for 20 years.
+        (a) What is the value of each choice after 20 years? How large is the difference?
+        (b) How much does the adviser get from this recommendation? Use the principal-agent idea to explain why this arrangement costs the client.
+    answer:
+      zh-cn: |-
+        (a) X：实际投入 95,000，年收益 6%：$95{,}000 \times 1.06^{20} \approx 304{,}678$。Y：$100{,}000 \times 1.0695^{20} \approx 383{,}368$。相差约 78,690 美元，约为 Y 终值的 20%。
+        (b) 顾问得到 5,000 美元佣金（基金每年的费用中可能还有给销售渠道的部分）。客户（委托人）请顾问（代理人）替自己选择，但顾问的收入来自产品佣金，与客户的利益不一致；客户又很难看出另一种选择会好多少。5,000 美元的佣金和每年多出的费用，20 年后使客户少了近 8 万美元。
+      en: |-
+        (a) X: 95,000 is actually invested, growing at 6% a year: $95{,}000 \times 1.06^{20} \approx 304{,}678$. Y: $100{,}000 \times 1.0695^{20} \approx 383{,}368$. The difference is about 78,690 dollars, about 20% of Y's final value.
+        (b) The adviser gets a commission of 5,000 dollars (the fund's yearly fees may also include a part for the sales channel). The client (the principal) asks the adviser (the agent) to choose on the client's behalf, but the adviser's income comes from product commissions and is not aligned with the client's interest; and the client finds it hard to see how much better the other choice would be. The 5,000-dollar commission and the higher yearly fees leave the client almost 80,000 dollars poorer after 20 years.
+    rubric:
+      zh-cn:
+        - "(a) 约 304,678 和 383,368，相差约 78,690。"
+        - "(b) 佣金 5,000；用利益不一致和信息不对称说明。"
+      en:
+        - "(a) About 304,678 and 383,368, a difference of about 78,690."
+        - "(b) Commission of 5,000; explained with misaligned interests and asymmetric information."

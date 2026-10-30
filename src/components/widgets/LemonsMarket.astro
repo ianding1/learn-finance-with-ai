@@ -1,0 +1,86 @@
+---
+// Figure 2-1 of lesson 1.9: the lemons market. Buyers value a good car at 10,000 and a lemon at 4,000;
+// sellers value them at 8,000 and 3,000. Buyers cannot tell them apart and pay at most the average value.
+// The slider sets the share of good cars among those offered; the line is what buyers will pay, the
+// dashed line is the lowest price at which owners of good cars sell.
+// Parameters are registered in course/widgets.yaml (id: lemons).
+import { toLang } from '../../i18n/ui';
+
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	'zh-cn': {
+		q: '待售车中好车的比例 q',
+		x: '好车的比例 q',
+		y: '美元',
+		wtp: '买方最多愿意付的价格（平均价值）',
+		reserve: '好车车主的最低要价 8,000',
+		now: '当前',
+		readout: '买方最多愿意付 {wtp} 美元。{verdict}',
+		stay: '高于 8,000：好车车主愿意卖，好车和柠檬都能成交。',
+		leave: '低于 8,000：好车车主不愿意卖，退出市场；只剩柠檬，价格降到 4,000。',
+	},
+	en: {
+		q: 'Share of good cars among those for sale q',
+		x: 'Share of good cars q',
+		y: 'Dollars',
+		wtp: 'Most buyers will pay (average value)',
+		reserve: 'Lowest price owners of good cars accept, 8,000',
+		now: 'Current',
+		readout: 'Buyers will pay at most {wtp} dollars. {verdict}',
+		stay: 'Above 8,000: owners of good cars are willing to sell, and both good cars and lemons are traded.',
+		leave: 'Below 8,000: owners of good cars will not sell and leave the market; only lemons remain, and the price falls to 4,000.',
+	},
+}[lang];
+
+const xr = [0, 1];
+const yr = [0, 12000];
+const xticks = [0, 0.2, 0.4, 0.6, 0.8, 1];
+const yticks = [0, 2000, 4000, 6000, 8000, 10000, 12000];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 320, pad: { l: 64, r: 20, t: 14, b: 44 } },
+	{ cls: 'viz-narrow', W: 360, H: 290, pad: { l: 58, r: 12, t: 14, b: 44 } },
+].map((g) => ({
+	...g,
+	X: (v: number) => g.pad.l + ((v - xr[0]) / (xr[1] - xr[0])) * (g.W - g.pad.l - g.pad.r),
+	Y: (v: number) => g.pad.t + ((yr[1] - v) / (yr[1] - yr[0])) * (g.H - g.pad.t - g.pad.b),
+}));
+const fmt = (v: number) => v.toLocaleString('en-US');
+---
+
+<div class="lfwai-widget" data-widget="lemons" data-readout={L.readout} data-stay={L.stay} data-leave={L.leave}>
+	<div class="lfwai-sliders">
+		<label>
+			<span>{L.q} = <output data-out="q">0.50</output></span>
+			<input type="range" min="0" max="1" step="0.05" value="0.5" data-param="q" />
+		</label>
+	</div>
+	{layouts.map(({ cls, W, H, pad, X, Y }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={L.wtp} data-geom={JSON.stringify({ W, H, pad, xr, yr })}>
+			{yticks.map((v) => (
+				<g>
+					<line class={v === 0 ? 'viz-axis' : 'viz-grid'} x1={pad.l} x2={W - pad.r} y1={Y(v)} y2={Y(v)} />
+					<text class="viz-tick" x={pad.l - 8} y={Y(v) + 4} text-anchor="end">{fmt(v)}</text>
+				</g>
+			))}
+			{xticks.map((v) => (
+				<text class="viz-tick" x={X(v)} y={H - pad.b + 18} text-anchor="middle">{v}</text>
+			))}
+			<line class="viz-axis" x1={pad.l} x2={pad.l} y1={pad.t} y2={H - pad.b} />
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">{L.x}</text>
+			<line class="viz-curve-fat viz-dashed" x1={X(0)} y1={Y(8000)} x2={X(1)} y2={Y(8000)} />
+			<line class="viz-curve" x1={X(0)} y1={Y(4000)} x2={X(1)} y2={Y(10000)} />
+			<line class="viz-mean" data-el="vq" x1="0" y1="0" x2="0" y2="0" />
+			<circle class="viz-min" data-el="pt" r="6" cx="0" cy="0" />
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-curve"></span>{L.wtp}</li>
+		<li><span class="sw sw-fat sw-dashed"></span>{L.reserve}</li>
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initLemons } from '../../scripts/widgets/lemons';
+	initLemons();
+</script>

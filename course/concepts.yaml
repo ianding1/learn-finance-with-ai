@@ -1046,6 +1046,54 @@ public-good:
     zh-cn: "既没有竞争性、也没有排他性的物品；有搭便车问题，市场提供得太少。"
     en: "A good that is neither rival nor excludable; it has a free-rider problem, and markets provide too little of it."
 
+asymmetric-information:
+  defined_in: "1.9"
+  zh-cn: 信息不对称
+  en: asymmetric information
+  short:
+    zh-cn: "交易的一方掌握另一方不知道的信息。"
+    en: "One side of a transaction knows something the other side does not."
+
+adverse-selection:
+  defined_in: "1.9"
+  zh-cn: 逆向选择
+  en: adverse selection
+  short:
+    zh-cn: "交易前的信息不对称使知道得少的一方面对最不利的交易对象，好的类型退出市场。"
+    en: "Hidden information before a transaction leaves the less-informed side facing the worst counterparties, as the good types leave the market."
+
+signaling:
+  defined_in: "1.9"
+  zh-cn: 信号传递
+  en: signaling
+  short:
+    zh-cn: "知道得多的一方用对好类型便宜、对差类型昂贵的行动表明自己的类型。"
+    en: "The better-informed side reveals its type through an action that is cheap for good types and expensive for bad types."
+
+screening:
+  defined_in: "1.9"
+  zh-cn: 筛选
+  en: screening
+  short:
+    zh-cn: "知道得少的一方设计几种选择，让对方通过自己的选择暴露类型。"
+    en: "The less-informed side designs a set of choices so that the other side reveals its type by what it chooses."
+
+moral-hazard:
+  defined_in: "1.9"
+  zh-cn: 道德风险
+  en: moral hazard
+  short:
+    zh-cn: "合同使一方不再承担自己行为的全部后果，从而改变了他看不见的行为。"
+    en: "A contract that relieves one side of the full consequences of its actions changes those actions, which the other side cannot see."
+
+principal-agent-problem:
+  defined_in: "1.9"
+  zh-cn: 委托–代理问题
+  en: principal-agent problem
+  short:
+    zh-cn: "代理人替委托人做事，但两者利益不一致，委托人又不能完全观察代理人的行动。"
+    en: "An agent acts for a principal, but their interests differ and the principal cannot fully observe the agent's actions."
+
 risk-measures:
   defined_in: "4.1"
   zh-cn: 风险度量

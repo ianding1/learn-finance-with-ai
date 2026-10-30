@@ -145,7 +145,15 @@ stages:
         published: true
         introduces: [consumer-surplus, producer-surplus, deadweight-loss, tax-incidence, externality, pigouvian-tax, public-good]
         uses: [demand, supply, market-equilibrium, marginal-cost, perfect-competition, monopoly, price-elasticity, nash-equilibrium, prisoners-dilemma, dominant-strategy]
-      - { id: "1.9", slug: "1-9-information-economics", title: { zh-cn: "信息经济学", en: "Information Economics" } }
+      - id: "1.9"
+        slug: "1-9-information-economics"
+        title: { zh-cn: "信息经济学", en: "Information Economics" }
+        summary:
+          zh-cn: "一方知道得比另一方多时，市场会怎样：逆向选择与柠檬市场、信号传递与筛选、道德风险，以及公司治理和资产管理中的委托–代理问题。"
+          en: "What happens when one side knows more than the other: adverse selection and the market for lemons, signaling and screening, moral hazard, and the principal-agent problem in corporate governance and asset management."
+        published: true
+        introduces: [asymmetric-information, adverse-selection, signaling, screening, moral-hazard, principal-agent-problem]
+        uses: [expected-value, consumer-surplus, externality, risk-aversion, future-value, first-order-condition]
       - { id: "E1", slug: "e1-quiz", exam: true, title: { zh-cn: "测验 E1：微观经济学", en: "Quiz E1: Microeconomics" } }
 
   - id: "2"

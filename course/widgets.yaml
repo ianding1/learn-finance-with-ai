@@ -122,3 +122,13 @@ surplus-tax:
   fixed:
     demand: "Qd = 100 - 2P"
     supply: "Qs = -20 + 4P"
+
+lemons:
+  component: src/components/widgets/LemonsMarket.astro
+  params:
+    q: { min: 0, max: 1, step: 0.05, default: 0.5 }
+  fixed:
+    good_buyer: 10000
+    good_seller: 8000
+    lemon_buyer: 4000
+    lemon_seller: 3000
