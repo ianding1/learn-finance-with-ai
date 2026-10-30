@@ -33,6 +33,8 @@ def results():
     from math import sqrt
     r["Q5.kup"] = 100 * (sqrt(1.2) - 1)
     r["Q5.ldown"] = 100 * (1 - 1 / sqrt(1.2))
+    r["Q5.cost"] = 100 * (sqrt(1.2) - 1)  # both cost terms scale by sqrt(1.2)
+    assert r["Q5.cost"] < 100 * (1.2 * 0.5 + 0.5 - 1)  # below the 10% rise without substitution
 
     # Q8: expected 7% minus 1% fee, sd 15%, gamma 3; certain alternative 4%.
     premium = 0.5 * 3 * 0.15**2

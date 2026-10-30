@@ -35,9 +35,9 @@ common_errors:
       Thinking that every tax causes a deadweight loss, or that whoever pays a tax bears it. The deadweight loss comes from the fall in the quantity traded; the split of the burden depends on how each side responds to the price and changes over time.
   - questions: [Q5]
     zh-cn: |-
-      认为产量不变时投入组合也不变，或者认为工资上涨只会减少工人而不影响机器。成本最低的投入组合取决于投入的相对价格：$\frac{MP_L}{w} = \frac{MP_K}{r}$。
+      认为产量不变时投入组合也不变，所以成本按原来的比例上涨（10%）。成本最低的投入组合取决于投入的相对价格 $\frac{MP_L}{w} = \frac{MP_K}{r}$；可以用机器替代工人时，成本上升得更少。
     en: |-
-      Thinking that the mix of inputs stays the same when output does, or that a higher wage only reduces workers without affecting machines. The cost-minimizing mix depends on relative input prices: $\frac{MP_L}{w} = \frac{MP_K}{r}$.
+      Thinking that the mix of inputs stays the same when output does, so cost rises in the old proportions (10%). The cost-minimizing mix depends on relative input prices, $\frac{MP_L}{w} = \frac{MP_K}{r}$; when machines can replace workers, cost rises by less.
   - questions: [Q6]
     zh-cn: |-
       认为净现值为正的项目一定会被投资；或者没有注意到，新股按平均价值定价时，好公司的老股东要把一部分价值让给新股东。
@@ -111,10 +111,10 @@ questions:
         So market prices make the rate at which each person is willing to trade $y$ for $x$ the same, and the gains from exchange are used up: differences in preferences and incomes show up only in the quantities bought.
     rubric:
       zh-cn:
-        - "判断为真，并用两人的边际替代率都等于共同的价格比说明交换比例对至少一方不利，或用“更好的组合原来买不起”的论证；两种论证都可以得满分（7 分）。"
+        - "判断为真，并用两人的边际替代率都等于共同的价格比说明交换比例对至少一方不利，并说明这对任意大小的交换都成立（用“更好的组合原来买不起”的论证，或用相切和无差异曲线凸向原点说明两人的“都更好”的区域不相交）（7 分）。只用 MRS 相等说明小的交换不能使双方都变好：5 分。"
         - "判断为真但只说出 $MRS = \\frac{p_x}{p_y}$，没有联系到交换为什么不能使双方都更好：3 分。只写判断：0 分。"
       en:
-        - "States true and explains, using the fact that both MRS equal the common price ratio, that any exchange ratio hurts at least one side, or uses the argument that better bundles were unaffordable; either argument earns full marks (7 points)."
+        - "States true and explains, using the fact that both MRS equal the common price ratio, that any exchange ratio hurts at least one side, and explains why this holds for exchanges of any size (by the argument that better bundles were unaffordable, or by tangency and indifference curves convex to the origin, so that the regions where each is better off do not overlap) (7 points). Using equal MRS only to show that small exchanges cannot make both better off: 5 points."
         - "True but only stating $MRS = \\frac{p_x}{p_y}$ without linking it to why an exchange cannot make both better off: 3 points. Only the verdict: 0 points."
 
   - id: Q3
@@ -168,26 +168,26 @@ questions:
     part: judge
     points: 6
     concepts: [production-function, marginal-product, long-run]
-    expected: { kup: "9.54", ldown: "8.71" }
+    expected: { kup: "9.54", ldown: "8.71", cost: "9.54" }
     question:
       zh-cn: |-
-        一家工厂的生产函数为 $Q = K^{0.5}L^{0.5}$（$K$ 是机器，$L$ 是工人），长期中两种投入都可以调整。工资上涨 20%，机器的租金不变。为了以最低的成本生产和原来同样多的产量，工厂会用更多的机器、更少的工人。
+        一家工厂的生产函数为 $Q = K^{0.5}L^{0.5}$（$K$ 是机器，$L$ 是工人），长期中两种投入都可以调整，原来按成本最低的组合生产。工资上涨 20%，机器的租金不变。原来工资支出正好占总成本的一半，所以生产和原来同样多的产量，最低总成本会上升 10%。
       en: |-
-        A factory has the production function $Q = K^{0.5}L^{0.5}$ ($K$ is machines, $L$ is workers), and in the long run both inputs can be adjusted. Wages rise by 20% while the rental price of machines stays the same. To produce the same output as before at the lowest cost, the factory will use more machines and fewer workers.
+        A factory has the production function $Q = K^{0.5}L^{0.5}$ ($K$ is machines, $L$ is workers); in the long run both inputs can be adjusted, and the factory has been producing with the cost-minimizing mix. Wages rise by 20% while the rental price of machines stays the same. Wages used to be exactly half of total cost, so the lowest total cost of producing the same output as before rises by 10%.
     answer:
       zh-cn: |-
-        真。成本最低时，最后 1 美元花在哪种投入上增加的产量都一样：$\frac{MP_L}{w} = \frac{MP_K}{r}$。这里 $MP_L = 0.5\sqrt{K/L}$，$MP_K = 0.5\sqrt{L/K}$，条件化为 $\frac{K}{L} = \frac{w}{r}$。工资上涨 20%，成本最低的 $\frac{K}{L}$ 也要提高 20%：工人相对变贵了，用机器替代一部分工人更便宜。
-        产量不变时 $KL = Q^2$ 不变，所以 $K$ 增加到原来的 $\sqrt{1.2} \approx 1.0954$ 倍（多约 9.54%），$L$ 减少到原来的 $\frac{1}{\sqrt{1.2}}$ 倍（少约 8.71%）。如果不调整投入组合，成本会因工资上涨而增加更多；调整投入组合使成本只上升约 9.54%。
+        假。10% 是不调整投入组合时的成本上升：工资那一半涨 20%，总成本涨 10%。但工厂会重新选择成本最低的组合。成本最低时 $\frac{MP_L}{w} = \frac{MP_K}{r}$；这里 $MP_L = 0.5\sqrt{K/L}$，$MP_K = 0.5\sqrt{L/K}$，条件化为 $\frac{K}{L} = \frac{w}{r}$。工资上涨 20%，$\frac{K}{L}$ 也提高 20%：用机器替代一部分工人。
+        产量不变时 $KL = Q^2$ 不变，所以 $K$ 增加到原来的 $\sqrt{1.2}$ 倍（多约 9.54%），$L$ 减少到原来的 $\frac{1}{\sqrt{1.2}}$ 倍（少约 8.71%）。新的成本 $wL + rK$ 中，两项相等，各为原来那一项的 $\sqrt{1.2}$ 倍，所以最低总成本上升约 9.54%，少于 10%。原来的组合在新价格下仍然可行，所以最低成本最多上升 10%；能用机器替代工人，成本就上升得更少。
       en: |-
-        True. At the lowest cost, the last dollar spent on either input adds the same output: $\frac{MP_L}{w} = \frac{MP_K}{r}$. Here $MP_L = 0.5\sqrt{K/L}$ and $MP_K = 0.5\sqrt{L/K}$, so the condition becomes $\frac{K}{L} = \frac{w}{r}$. With wages 20% higher, the cost-minimizing $\frac{K}{L}$ must also rise by 20%: workers have become relatively more expensive, so replacing some workers with machines is cheaper.
-        With output unchanged, $KL = Q^2$ stays the same, so $K$ rises to $\sqrt{1.2} \approx 1.0954$ times its old level (about 9.54% more), and $L$ falls to $\frac{1}{\sqrt{1.2}}$ times its old level (about 8.71% less). Without changing the mix of inputs, the cost would rise more because of the higher wage; changing the mix limits the rise in cost to about 9.54%.
+        False. 10% is the rise in cost if the mix of inputs is not changed: the wage half of cost rises 20%, so total cost rises 10%. But the factory will choose the cost-minimizing mix again. At the lowest cost, $\frac{MP_L}{w} = \frac{MP_K}{r}$; here $MP_L = 0.5\sqrt{K/L}$ and $MP_K = 0.5\sqrt{L/K}$, so the condition becomes $\frac{K}{L} = \frac{w}{r}$. With wages 20% higher, $\frac{K}{L}$ also rises by 20%: machines replace some workers.
+        With output unchanged, $KL = Q^2$ stays the same, so $K$ rises to $\sqrt{1.2}$ times its old level (about 9.54% more) and $L$ falls to $\frac{1}{\sqrt{1.2}}$ times its old level (about 8.71% less). In the new cost $wL + rK$ the two terms are equal, each $\sqrt{1.2}$ times its old value, so the lowest total cost rises by about 9.54%, less than 10%. The old mix is still possible at the new prices, so the lowest cost rises by at most 10%; because machines can replace workers, it rises by less.
     rubric:
       zh-cn:
-        - "判断为真，并用成本最低的条件 $\\frac{MP_L}{w} = \\frac{MP_K}{r}$（或等价的 $\\frac{K}{L} = \\frac{w}{r}$）说明 $\\frac{K}{L}$ 随工资上升；最好算出产量不变时 $K$ 与 $L$ 的变化（6 分）。"
-        - "判断为真但只说“工人变贵了”，没有用成本最低的条件：3 分。只写判断：0 分。"
+        - "判断为假，用成本最低的条件得出投入组合改变（$\\frac{K}{L}$ 提高 20%），并算出最低成本约上升 9.54%，或论证它一定低于 10%（6 分）。"
+        - "判断为假但只说“会用机器替代工人”，没有说明为什么成本因此低于 10%：3 分。只写判断：0 分。"
       en:
-        - "States true and uses the cost-minimizing condition $\\frac{MP_L}{w} = \\frac{MP_K}{r}$ (or the equivalent $\\frac{K}{L} = \\frac{w}{r}$) to show that $\\frac{K}{L}$ rises with the wage; ideally computes how $K$ and $L$ change with output unchanged (6 points)."
-        - "True but only saying \"workers have become more expensive\" without using the cost-minimizing condition: 3 points. Only the verdict: 0 points."
+        - "States false, uses the cost-minimizing condition to show that the input mix changes ($\\frac{K}{L}$ rises 20%), and computes a rise in the lowest cost of about 9.54%, or argues that it must be below 10% (6 points)."
+        - "False but only saying \"machines replace workers\" without explaining why this makes the rise less than 10%: 3 points. Only the verdict: 0 points."
 
   - id: Q6
     kind: quiz
@@ -237,13 +237,13 @@ questions:
 
         (a) 一位分析师预计 A 的经济利润从明年的 10 开始，每年比上一年减少 30%（后年 7，……）。按他的预计，A 和 B 的溢价各应是多少？（5 分）
 
-        (b) 市场目前给 A 的溢价是 50。按 8% 折现，市场的价格隐含 A 的经济利润每年减少百分之几？分析师（每年减少 30%）和市场的预期，都与“A 的行业可以自由进入”一致吗？仅凭自由进入能不能判断哪一个更接近现实？如果不能，还需要知道什么？（8 分）
+        (b) 市场目前给 A 的溢价是 50。按 8% 折现，市场的价格隐含 A 的经济利润每年减少百分之几？分析师（每年减少 30%）和市场的预期，都与“A 的行业可以自由进入”一致吗？仅凭自由进入能否判断哪一个更接近现实？说明理由。（8 分）
       en: |-
         A company's value can be seen as the capital invested plus the present value of its future economic profit; the part above the capital invested is called the premium. Companies A and B are each expected to earn an economic profit (profit after all costs, including the opportunity cost of capital) of 10 (million dollars) at the end of next year. A's industry has free entry; B has strong barriers to entry, and its economic profit is expected to stay at 10 every year forever. The discount rate is 8%.
 
         (a) An analyst expects A's economic profit to start at 10 next year and then fall by 30% each year from the previous year (7 the year after, and so on). On his forecast, what should the premiums of A and B be? (5 points)
 
-        (b) The market currently gives A a premium of 50. At an 8% discount rate, how fast does the market price imply that A's economic profit falls each year? Are the analyst's expectation (a 30% fall each year) and the market's both consistent with "A's industry has free entry"? Can free entry alone tell which is closer to reality? If not, what else would you need to know? (8 points)
+        (b) The market currently gives A a premium of 50. At an 8% discount rate, how fast does the market price imply that A's economic profit falls each year? Are the analyst's expectation (a 30% fall each year) and the market's both consistent with "A's industry has free entry"? Can free entry alone tell which is closer to reality? Explain. (8 points)
     answer:
       zh-cn: |-
         (a) A 是增长率为 −30% 的增长永续年金：$\frac{10}{0.08 - (-0.30)} = \frac{10}{0.38} \approx 26.32$。B 是永续年金：$\frac{10}{0.08} = 125$。明年的利润一样，溢价却差了很多：溢价取决于经济利润能持续多久。
@@ -267,39 +267,45 @@ questions:
     kind: quiz
     part: problem
     points: 15
-    concepts: [principal-agent-problem, risk-premium, crra-utility, certainty-equivalent]
+    concepts: [principal-agent-problem, moral-hazard, risk-premium, crra-utility, certainty-equivalent]
     expected: { premium: "3.375", ce: "2.625", fee: "2000" }
     question:
       zh-cn: |-
         一位客户有 200,000 美元现金，这是她全部的金融资产；她还有一笔固定利率 4% 的房贷，余额也是 200,000 美元。她的理财顾问每年按他管理的资产收取 1% 的费用。顾问建议她不要提前还房贷，而是把 200,000 美元交给他投资一个股票组合：“这个组合的期望年收益是 7%，比房贷利率 4% 高，所以投资更划算。”组合年收益的标准差为 15%。客户的效用是 CRRA，相对风险厌恶系数 $\gamma = 3$；计算风险溢价时，把这 200,000 美元当作她的财富。费用在年末从收益中扣除。提前还清房贷相当于得到确定的 4% 的年收益。只比较一年，不考虑税。
 
-        评价顾问的建议：对这位客户，哪种选择更好？顾问为什么会给出这样的建议？（15 分）
+        (a) 评价顾问的建议：对这位客户，哪种选择更好？（11 分）
+
+        (b) 如果顾问改为每年收取固定费用 2,000 美元，不论客户怎样选择，他的建议还会偏向让客户投资吗？这种收费方式会带来什么新的问题？（4 分）
       en: |-
         A client has 200,000 dollars in cash, which is all of her financial assets; she also has a fixed-rate mortgage at 4% with a balance of 200,000 dollars. Her financial adviser charges 1% a year of the assets he manages. He advises her not to pay off the mortgage but to let him invest the 200,000 dollars in a stock portfolio: "This portfolio has an expected return of 7% a year, higher than the 4% mortgage rate, so investing pays more." The standard deviation of the portfolio's yearly return is 15%. The client has CRRA utility with a coefficient of relative risk aversion $\gamma = 3$; when computing the risk premium, treat the 200,000 dollars as her wealth. The fee is deducted from the return at the end of the year. Paying off the mortgage is equivalent to a certain return of 4% a year. Compare one year only and ignore taxes.
 
-        Evaluate the adviser's advice: which choice is better for this client? Why would the adviser give this advice? (15 points)
+        (a) Evaluate the adviser's advice: which choice is better for this client? (11 points)
+
+        (b) If the adviser instead charged a fixed fee of 2,000 dollars a year, whatever the client chooses, would his advice still lean toward investing? What new problem could this way of charging create? (4 points)
     answer:
       zh-cn: |-
         比较要在同样的基础上进行。顾问的比较有两个问题：
         第一，费用：扣除 1% 的费用后，期望收益只有 6%。
         第二，风险：还房贷得到的 4% 是确定的，投资的收益有风险。用 CRRA 的近似公式，按比例计算的风险溢价约为 $\frac12\gamma\sigma^2 = \frac12 \times 3 \times 0.15^2 = 3.375\%$，所以投资的确定性等价收益约为 $6\% - 3.375\% = 2.625\%$，低于确定的 4%。（$\frac12\gamma\sigma^2$ 是小风险时的近似值，不是精确的确定性等价；但差距足够大，用精确的期望效用计算，结论相同。）
         对这位客户，提前还房贷更好。（即使不扣费用，$7\% - 3.375\% = 3.625\%$ 也低于 4%。）
-        顾问的建议反映了委托–代理问题：他的收入取决于管理的资产，客户投资时他每年得到约 2,000 美元，客户还房贷时他什么也得不到。客户（委托人）很难判断建议是否真的为自己着想（信息不对称）。办法包括：按固定费用付费、选择负有受托责任的顾问、要求顾问说明收费方式和利益冲突、自己按风险调整后比较。
+        这个建议也反映了委托–代理问题：顾问按管理的资产收费，客户投资时他每年得到约 2,000 美元，还房贷时什么也得不到，所以他的比较只看对投资有利的数字。
+        (b) 固定费用与客户怎样选择无关，顾问不再因为客户投资而多得钱，偏向投资的动机消失了。但新的问题是：他的收入也不再取决于客户的结果或他自己付出的努力，可能不再认真研究客户的情况（道德风险），客户需要通过服务质量、监督或续约来约束他。也可以说：固定费用较高时，没有资产的客户可能根本请不起顾问。任何收费方式都有代价，关键是知道顾问的收入从哪里来、会使他偏向什么。
       en: |-
         The comparison must be made on the same basis. The adviser's comparison has two problems.
         First, fees: after the 1% fee, the expected return is only 6%.
         Second, risk: the 4% from paying off the mortgage is certain, while the investment return is risky. By the CRRA approximation, the proportional risk premium is about $\frac12\gamma\sigma^2 = \frac12 \times 3 \times 0.15^2 = 3.375\%$, so the certainty-equivalent return of investing is about $6\% - 3.375\% = 2.625\%$, below the certain 4%. ($\frac12\gamma\sigma^2$ is an approximation for small risks, not the exact certainty equivalent; but the gap is large enough that an exact expected-utility calculation gives the same conclusion.)
         For this client, paying off the mortgage is better. (Even without the fee, $7\% - 3.375\% = 3.625\%$ is below 4%.)
-        The advice reflects the principal-agent problem: the adviser's income depends on the assets he manages, so he earns about 2,000 dollars a year if she invests and nothing if she pays off the mortgage. The client (the principal) finds it hard to judge whether the advice really serves her (asymmetric information). Remedies include paying a fixed fee, choosing an adviser with a fiduciary duty, asking the adviser to explain how he is paid and his conflicts of interest, and making her own risk-adjusted comparison.
+        The advice also reflects the principal-agent problem: the adviser charges a fee on the assets he manages, so he earns about 2,000 dollars a year if she invests and nothing if she pays off the mortgage, and his comparison shows only the numbers that favor investing.
+        (b) A fixed fee does not depend on what the client chooses, so the adviser no longer earns more when she invests, and the tilt toward investing disappears. The new problem is that his income also no longer depends on the client's results or on his own effort, so he may not study her situation carefully (moral hazard); the client has to hold him to account through the quality of service, monitoring or renewing the contract. One can also note that with a high fixed fee, clients with few assets may not be able to afford an adviser at all. Every way of charging has a cost; the key is to know where the adviser's income comes from and what it makes him favor.
     rubric:
       zh-cn:
-        - "扣除费用得约 6%（按年初或年末资产计算费用都可以，2 分）。"
+        - "(a) 扣除费用得约 6%（按年初或年末资产计算费用都可以，2 分）。"
         - "用 $\\frac12\\gamma\\sigma^2$ 算出风险溢价约 3.375%，确定性等价约 2.625%，与确定的 4% 比较，结论为还房贷更好（9 分）。只比较 7% 与 4% 或 6% 与 4%：这部分最多 2 分。"
-        - "指出顾问按资产收费带来的利益冲突（约 2,000 美元 / 年）及信息不对称，并给出一种对策（4 分）。"
+        - "(b) 固定费用消除了偏向投资的动机（2 分）；指出新的问题，例如收入与结果和努力无关带来的道德风险（2 分）。"
       en:
-        - "Subtracts the fee to get about 6% (computing the fee on assets at the start or the end of the year are both fine; 2 points)."
+        - "(a) Subtracts the fee to get about 6% (computing the fee on assets at the start or the end of the year are both fine; 2 points)."
         - "Uses $\\frac12\\gamma\\sigma^2$ to get a risk premium of about 3.375% and a certainty-equivalent return of about 2.625%, compares it with the certain 4%, and concludes that paying off the mortgage is better (9 points). Only comparing 7% or 6% with 4%: at most 2 points for this part."
-        - "Points out the conflict of interest from fees based on assets (about 2,000 dollars a year) and the asymmetric information, and gives one remedy (4 points)."
+        - "(b) A fixed fee removes the tilt toward investing (2 points); points out a new problem, such as the moral hazard from income no longer depending on results or effort (2 points)."
 
   - id: Q9
     kind: quiz

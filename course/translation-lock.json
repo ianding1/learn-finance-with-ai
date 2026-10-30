@@ -4004,8 +4004,8 @@
   "zh-cn": "d403a1d33f5e57d3"
  },
  "course/keys/E1.yaml#common_errors[4]": {
-  "en": "bf7d16e6d686c1bd",
-  "zh-cn": "fa7667f754c62d67"
+  "en": "82f70f950dfe1d7c",
+  "zh-cn": "e16659983643802d"
  },
  "course/keys/E1.yaml#common_errors[5]": {
   "en": "a674f052396c04ff",
@@ -4060,8 +4060,8 @@
   "zh-cn": "db437a1a0f0bcba5"
  },
  "course/keys/E1.yaml#questions[Q2].rubric": {
-  "en": "b5973e47ed633ffb",
-  "zh-cn": "d2a3285eefe78b0f"
+  "en": "9144fd38258ab627",
+  "zh-cn": "2c1b123b7f1ef8e6"
  },
  "course/keys/E1.yaml#questions[Q3].answer": {
   "en": "f7ff77559b87a77c",
@@ -4088,16 +4088,16 @@
   "zh-cn": "483db63fc74f402d"
  },
  "course/keys/E1.yaml#questions[Q5].answer": {
-  "en": "ca0e467a5d26a03e",
-  "zh-cn": "ea8a723c5723b4b3"
+  "en": "c19af02b4a58a46d",
+  "zh-cn": "aeec936733c8bb84"
  },
  "course/keys/E1.yaml#questions[Q5].question": {
-  "en": "0e846157d05ab097",
-  "zh-cn": "755c95f372452e16"
+  "en": "111e9f2147050e18",
+  "zh-cn": "d47faa0b6d7fdfdd"
  },
  "course/keys/E1.yaml#questions[Q5].rubric": {
-  "en": "0c11f715537e2b1b",
-  "zh-cn": "bacd53063b16340e"
+  "en": "ee1574c2b0fb1a65",
+  "zh-cn": "c838b2e5fb42e6b8"
  },
  "course/keys/E1.yaml#questions[Q6].answer": {
   "en": "5273e6e2c12f1365",
@@ -4116,24 +4116,24 @@
   "zh-cn": "cf033a418cd5b8f9"
  },
  "course/keys/E1.yaml#questions[Q7].question": {
-  "en": "d9480519ba57b0d8",
-  "zh-cn": "1c5ec21eac8e9de1"
+  "en": "b3b8259e7b39461b",
+  "zh-cn": "1809f933de5bbf60"
  },
  "course/keys/E1.yaml#questions[Q7].rubric": {
   "en": "d68b74cb5ec91c70",
   "zh-cn": "9f545d8a46910079"
  },
  "course/keys/E1.yaml#questions[Q8].answer": {
-  "en": "506613334dd09507",
-  "zh-cn": "2b02643ade7f9970"
+  "en": "748fd1c6f57c45bd",
+  "zh-cn": "10986601f859de8c"
  },
  "course/keys/E1.yaml#questions[Q8].question": {
-  "en": "8b6477b32ef943bf",
-  "zh-cn": "71410b007bd35909"
+  "en": "f71a0892efeaa2fb",
+  "zh-cn": "6afc775b9aefdf75"
  },
  "course/keys/E1.yaml#questions[Q8].rubric": {
-  "en": "0a3c9ac5fa054264",
-  "zh-cn": "f097ebdf5cd55fec"
+  "en": "5a5b6b9e75b16dee",
+  "zh-cn": "af31b30eb75be5fd"
  },
  "course/keys/E1.yaml#questions[Q9].answer": {
   "en": "0cbe3c5fe4b5528a",
