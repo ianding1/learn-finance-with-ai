@@ -4,7 +4,6 @@ results() returns {"<question id>.<name>": value}. CI compares each value with t
 `expected` string in the key file, rounded to the number of decimals written there.
 """
 from math import exp, log, sqrt
-from statistics import mean
 
 
 def results():
@@ -22,74 +21,69 @@ def results():
     r["Q2.u180"] = u(180)
     r["Q2.gain"] = u(180) - u(90)
 
-    # Q3: A in {-10, 0, 10} equally likely, B = 0.1 A^2.
-    A = [-10, 0, 10]
-    B = [0.1 * a * a for a in A]
-    ma, mb = mean(A), mean(B)
-    r["Q3.cov"] = sum((a - ma) * (b - mb) for a, b in zip(A, B)) / 3
-
-    # Q4: estimates 10% and 4%, both SE 2, independent: test the difference.
+    # Q3: estimates 10% and 4%, both SE 2, independent: test the difference.
     se_d = sqrt(2**2 + 2**2)
-    r["Q4.se_d"] = se_d
-    r["Q4.t"] = (10 - 4) / se_d
+    r["Q3.se_d"] = se_d
+    r["Q3.t"] = (10 - 4) / se_d
 
-    # Q5: slope of y on x is 2 and R^2 = 0.5; the product of the two slopes is r^2 = R^2.
-    r["Q5.d"] = 0.5 / 2
+    # Q4: slope of y on x is 2 and R^2 = 0.5; the product of the two slopes is r^2 = R^2.
+    r["Q4.d"] = 0.5 / 2
 
-    # Q6: withdrawals of 60,000 at the start of each year for 25 years; 6% nominal, monthly.
+    # Q5: withdrawals at the start of each year for 25 years; 6% nominal, monthly.
     i = 0.005
     R = (1 + i) ** 12 - 1
     pv = 60_000 * (1 - (1 + R) ** -25) / R * (1 + R)
-    r["Q6.ear"] = 100 * R
-    r["Q6.pv"] = pv
-    # (b) 50,000 today plus 400 at the end of each month; years of 60,000 at the start of each year.
-    fv = 50_000 * (1 + i) ** 360 + 400 * ((1 + i) ** 360 - 1) / i
-    r["Q6.fv"] = fv
-    r["Q6.n"] = -log(1 - fv * R / (60_000 * (1 + R))) / log(1 + R)
-    # (c) growing perpetuity with the first payment (40,000) today: highest growth rate.
-    r["Q6.g"] = 100 * (R - 40_000 * (1 + R) / pv)
+    r["Q5.ear"] = 100 * R
+    r["Q5.pv"] = pv
+    # (b) 25 payments growing 2% a year, the first today: growing annuity due.
+    g = 0.02
+    factor = (1 + R) / (R - g) * (1 - ((1 + g) / (1 + R)) ** 25)
+    r["Q5.w"] = pv / factor
 
-    # Q7: p = 100 - 2q, C = cq + F.
+    # Q6: p = 100 - 2q, C = cq + F.
     q = lambda c: (100 - c) / 4
     p = lambda c: (100 + c) / 2
-    profit = lambda c, F: (100 - c) ** 2 / 8 - F
-    r["Q7.q"] = q(20)
-    r["Q7.p"] = p(20)
-    r["Q7.profit"] = profit(20, 200)
-    r["Q7.p_new"] = p(28)
-    r["Q7.rise"] = p(28) - p(20)
-    r["Q7.c_shut"] = 100 - sqrt(8 * 200)  # profit(c, 200) = 0
+    operating = lambda c: (100 - c) ** 2 / 8  # revenue minus material cost at the optimum
+    r["Q6.q"] = q(20)
+    r["Q6.p"] = p(20)
+    r["Q6.profit"] = operating(20) - 200
+    r["Q6.rise"] = p(28) - p(20)
+    # (c) the rent of 200 is sunk; c = 70.
+    r["Q6.q70"] = q(70)
+    r["Q6.op"] = operating(70)
+    r["Q6.total"] = operating(70) - 200
+    assert operating(70) - 200 > -200  # producing beats stopping
 
-    # Q8: sigma_A 24, sigma_B 16; the minimum variance is 216 with both weights positive.
+    # Q7: sigma_A 24, sigma_B 16; the minimum variance is 216 with both weights positive.
     sa, sb = 24, 16
     wstar = lambda rho: (sb**2 - rho * sa * sb) / (sa**2 + sb**2 - 2 * rho * sa * sb)
     minvar = lambda rho: sa**2 * sb**2 * (1 - rho**2) / (sa**2 + sb**2 - 2 * rho * sa * sb)
-    # 216 (832 - 768 rho) = 147456 (1 - rho^2)  ->  quadratic in rho
     A, B, C = sa**2 * sb**2, -216 * 2 * sa * sb, 216 * (sa**2 + sb**2) - sa**2 * sb**2
     disc = sqrt(B * B - 4 * A * C)
     roots = [(-B + disc) / (2 * A), (-B - disc) / (2 * A)]
     rho = next(x for x in roots if 0 < wstar(x) < 1)
-    assert abs(minvar(rho) - 216) < 1e-9
-    r["Q8.rho"] = rho
-    r["Q8.w"] = 100 * wstar(rho)
-    r["Q8.threshold"] = sb / sa
+    assert abs(minvar(rho) - 216) < 1e-9 and sum(0 < wstar(x) < 1 for x in roots) == 1
+    r["Q7.rho"] = rho
+    r["Q7.w"] = 100 * wstar(rho)
 
-    # Q9: a report gives median 575.5 and mean 862.8 after 25 years for 100 invested.
+    # Q8: mean of 25-year wealth 862.8 for 100 invested; P(loss) = 2.6%, so m / s = 1.94.
     n = 25
-    m = log(575.5 / 100)
-    s = sqrt(2 * log(862.8 / 575.5))
-    r["Q9.mu"] = 100 * m / n
-    r["Q9.sigma"] = 100 * s / sqrt(n)
-    r["Q9.ratio25"] = 862.8 / 575.5
-    r["Q9.ratio40"] = exp(40 * 0.18**2 / 2)  # e^{s^2/2} with s^2 = n sigma^2
+    L = log(8.628)  # m + s^2/2
+    s = (-3.88 + sqrt(3.88**2 + 8 * L)) / 2  # s^2 + 3.88 s - 2L = 0
+    m = 1.94 * s
+    r["Q8.s"] = s
+    r["Q8.mu"] = 100 * m / n
+    r["Q8.sigma"] = 100 * s / sqrt(n)
+    # (b) mean / median = exp(n sigma^2 / 2) > 2 with sigma = 18%.
+    r["Q8.n"] = 2 * log(2) / 0.18**2
 
-    # Q10: a = 0.4, b = 1.3, residual sd 5.75; market mean 1%.
+    # Q9: a = 0.4, b = 1.3, residual sd 5.75; market mean 1%.
     sd_e = 5.75
     pred = 0.4 + 1.3 * 4
-    r["Q10.gap"] = 0.4 + (1.3 - 1) * 1  # fund minus market at the average market return
-    r["Q10.pred"] = pred
-    r["Q10.lo"] = pred - 1.96 * sd_e
-    r["Q10.hi"] = pred + 1.96 * sd_e
+    r["Q9.gap"] = 0.4 + (1.3 - 1) * 1
+    r["Q9.pred"] = pred
+    r["Q9.lo"] = pred - 1.96 * sd_e
+    r["Q9.hi"] = pred + 1.96 * sd_e
     return r
 
 
