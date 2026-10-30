@@ -303,23 +303,23 @@
 	fill: var(--viz-neg);
 	fill-opacity: 0.45;
 }
-.lfwai-legend .sw-cs,
-.lfwai-legend .sw-ps,
-.lfwai-legend .sw-rev,
-.lfwai-legend .sw-dwl {
+.lfwai-legend .sw.sw-cs,
+.lfwai-legend .sw.sw-ps,
+.lfwai-legend .sw.sw-rev,
+.lfwai-legend .sw.sw-dwl {
 	height: 0.75rem;
 	border: none;
 }
-.lfwai-legend .sw-cs {
+.lfwai-legend .sw.sw-cs {
 	background: color-mix(in srgb, var(--viz-a) 25%, transparent);
 }
-.lfwai-legend .sw-ps {
+.lfwai-legend .sw.sw-ps {
 	background: color-mix(in srgb, var(--viz-b) 25%, transparent);
 }
-.lfwai-legend .sw-rev {
+.lfwai-legend .sw.sw-rev {
 	background: color-mix(in srgb, var(--viz-violet) 30%, transparent);
 }
-.lfwai-legend .sw-dwl {
+.lfwai-legend .sw.sw-dwl {
 	background: color-mix(in srgb, var(--viz-neg) 45%, transparent);
 }
 /* Lesson 1.5 figure */
