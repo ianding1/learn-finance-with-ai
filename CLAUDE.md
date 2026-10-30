@@ -151,6 +151,9 @@ Quizzes follow the exam rules in the author's curriculum ("阶段考试"):
   points, hard parts (score 6 or more) at least 10 (`easy_points` and `hard_points` per question in
   the key; never shown on the page).
 - Each question has its own core point; basic concepts used along the way may repeat.
+- Each part asks one core question. It may ask to compute and then explain when the explanation
+  follows from that computation, but it never combines unrelated computations or several separate
+  questions. Difficulty comes from the depth of that one question, not from the number of questions.
 - Only lessons of the block and earlier; the questions carry no lesson or difficulty labels and no
   hints. The page starts with instructions and a formula sheet.
 - Part 1 is true / false with reasons (both verdicts occur; no "uncertain") (`part: judge`); a verdict without a reason gets
