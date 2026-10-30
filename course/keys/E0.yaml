@@ -55,9 +55,9 @@ common_errors:
       Thinking that the longer the payments last, the more sensitive the value is to interest rates, so a perpetuity must fall more than a single payment in 30 years. The sensitivity depends on how far in the future most of the value lies: most of a perpetuity's value comes from nearer payments, and the lower the rate, the larger the share of distant payments.
   - questions: [Q9]
     zh-cn: |-
-      认为真有能力的经理在 10 年的数据中一定显著，或者认为不显著就说明没有能力。另一个常见错误是按原假设（$\mu = 0$）算出显著的概率是 5%，或者看到期望的 t 值 0.79 小于 1.96 就说不可能显著；应在 $\mu = 2$ 下求样本均值超过临界值的概率。
+      认为真有能力的经理在 10 年的数据中一定显著，或者认为不显著就说明没有能力。另一个常见错误是按原假设（$\mu = 0$）算出显著的概率是 5%，或者看到期望的 t 值 0.79 小于 1.96 就说不可能显著；应在 $\mu = 2$ 下求样本均值落在临界值以外的概率。
     en: |-
-      Thinking that a manager with real skill must be significant in 10 years of data, or that a result that is not significant shows there is no skill. Other common errors are computing the probability of significance under the null hypothesis ($\mu = 0$) as 5%, or saying it cannot be significant because the expected t-statistic of 0.79 is below 1.96; the right step is the probability, with $\mu = 2$, that the sample mean exceeds the critical value.
+      Thinking that a manager with real skill must be significant in 10 years of data, or that a result that is not significant shows there is no skill. Other common errors are computing the probability of significance under the null hypothesis ($\mu = 0$) as 5%, or saying it cannot be significant because the expected t-statistic of 0.79 is below 1.96; the right step is the probability, with $\mu = 2$, that the sample mean falls beyond the critical values.
 
 questions:
   - id: Q1
@@ -130,11 +130,11 @@ questions:
       zh-cn: |-
         假。财富按比例增减，要看对数收益率之和 $\ln W_n - \ln W_0 = \sum_t \ln(1 + R_t)$。
         例：每年等概率 +20% 或 −20%，期望简单收益率为 0。但一涨一跌的净效果是 $1.2 \times 0.8 = 0.96 < 1$；一般地 $(1+x)(1-x) = 1 - x^2 < 1$。每年对数收益率的期望为 $\frac{\ln 1.2 + \ln 0.8}{2} \approx -0.0204$，是负的，标准差约 0.2027。$n$ 年的对数收益率之和的期望是 $-0.0204\,n$，标准差只按 $\sqrt{n}$ 增长，所以和小于 0 的概率随 $n$ 增大趋于 1：$n = 100$ 时约为 $P(Z < 1.01) \approx 84\%$。
-        只要收益有波动，对数收益率的期望就小于 0（与期望简单收益率为 0 相比，下跌的影响更大），财富的中位数越来越低，长期下来亏损的概率趋于 1，而不是 50%。期望财富仍是初始投资，因为少数幸运的结果非常大。
+        一般地（每年收益高于 −100%，各年独立同分布，对数收益率的期望有限），只要收益有波动，由于对数函数是凹的，对数收益率的期望就小于 $\ln(1 + 0) = 0$（与期望简单收益率为 0 相比，下跌的影响更大），财富的中位数越来越低，长期下来亏损的概率趋于 1，而不是 50%。期望财富仍是初始投资，因为少数幸运的结果非常大。
       en: |-
         False. Wealth changes in proportion, so what matters is the sum of log returns $\ln W_n - \ln W_0 = \sum_t \ln(1 + R_t)$.
         Example: each year +20% or −20% with equal probability, so the expected simple return is 0. But one rise and one fall give $1.2 \times 0.8 = 0.96 < 1$; in general $(1+x)(1-x) = 1 - x^2 < 1$. The expected log return per year is $\frac{\ln 1.2 + \ln 0.8}{2} \approx -0.0204$, which is negative, with a standard deviation of about 0.2027. The sum of $n$ yearly log returns has expected value $-0.0204\,n$, while its standard deviation grows only with $\sqrt{n}$, so the probability that the sum is below 0 tends to 1 as $n$ grows: for $n = 100$ it is about $P(Z < 1.01) \approx 84\%$.
-        Whenever returns vary, the expected log return is below 0 (compared with an expected simple return of 0, falls weigh more), the median of wealth keeps falling, and in the long run the probability of a loss tends to 1, not 50%. Expected wealth is still the initial investment, because a few lucky outcomes are very large.
+        In general (each year's return above −100%, years independent with the same distribution, a finite expected log return), whenever returns vary, the expected log return is below $\ln(1 + 0) = 0$ because the logarithm is concave (compared with an expected simple return of 0, falls weigh more), the median of wealth keeps falling, and in the long run the probability of a loss tends to 1, not 50%. Expected wealth is still the initial investment, because a few lucky outcomes are very large.
     rubric:
       zh-cn:
         - "判断为假；用例子或一般论证说明一涨一跌后财富减少、对数收益率的期望为负（4 分）；说明对数收益率之和的期望按 $n$ 下降、标准差只按 $\\sqrt{n}$ 增长，因此长期亏损的概率趋于 1（4 分）。"
@@ -241,7 +241,7 @@ questions:
         (b) $\text{Cov}(x, y) = b\,\sigma_x^2 = 1.2 \times 25 = 30$（%²）。
         $$\text{Var}(y - 1.2x) = 56.25 - 2 \times 1.2 \times 30 + 1.44 \times 25 = 20.25,$$
         标准差 4.5%，比基金本身的 7.5% 低，但远不是 0。
-        经理说对了一半：$\text{Cov}(y - bx, x) = \text{Cov}(x, y) - b\,\sigma_x^2 = 0$，对冲后的组合确实与市场不相关。但 $y - bx$ 就是截距加残差，对冲只去掉了市场能解释的那部分方差。$R^2 = \frac{\text{Cov}(x, y)^2}{\sigma_x^2\sigma_y^2} = \frac{900}{25 \times 56.25} = 0.64$，也可以写成 $1 - \frac{20.25}{56.25}$：市场解释了基金方差的 64%，剩下的 $(1 - R^2)\sigma_y^2 = 0.36 \times 56.25 = 20.25$ 是基金自身的风险（残差），和市场无关，用市场也就对冲不掉。用 $\sigma_y - b\,\sigma_x = 1.5\%$ 计算是错的：那只在 $R^2 = 1$（完全相关）时成立。
+        经理说对了一半：$\text{Cov}(y - bx, x) = \text{Cov}(x, y) - b\,\sigma_x^2 = 0$，对冲后的组合确实与市场不相关（不相关只是协方差为 0，不一定独立）。但 $y - bx$ 就是截距加残差，对冲只去掉了市场能解释的那部分方差。$R^2 = \frac{\text{Cov}(x, y)^2}{\sigma_x^2\sigma_y^2} = \frac{900}{25 \times 56.25} = 0.64$，也可以写成 $1 - \frac{20.25}{56.25}$：市场解释了基金方差的 64%，剩下的 $(1 - R^2)\sigma_y^2 = 0.36 \times 56.25 = 20.25$ 是基金自身的风险（残差），和市场无关，用市场也就对冲不掉。用 $\sigma_y - b\,\sigma_x = 1.5\%$ 计算是错的：那只在 $R^2 = 1$（完全相关）时成立。
       en: |-
         (a) By the variance of a linear combination,
         $$\text{Var}(y - hx) = \sigma_y^2 - 2h\,\text{Cov}(x, y) + h^2\sigma_x^2.$$
@@ -249,7 +249,7 @@ questions:
         (b) $\text{Cov}(x, y) = b\,\sigma_x^2 = 1.2 \times 25 = 30$ (%²).
         $$\text{Var}(y - 1.2x) = 56.25 - 2 \times 1.2 \times 30 + 1.44 \times 25 = 20.25,$$
         a standard deviation of 4.5%, lower than the fund's own 7.5% but far from 0.
-        The manager is half right: $\text{Cov}(y - bx, x) = \text{Cov}(x, y) - b\,\sigma_x^2 = 0$, so the hedged portfolio is indeed uncorrelated with the market. But $y - bx$ is the intercept plus the residual, and the hedge removes only the part of the variance the market explains. $R^2 = \frac{\text{Cov}(x, y)^2}{\sigma_x^2\sigma_y^2} = \frac{900}{25 \times 56.25} = 0.64$, which can also be written $1 - \frac{20.25}{56.25}$: the market explains 64% of the fund's variance, and the remaining $(1 - R^2)\sigma_y^2 = 0.36 \times 56.25 = 20.25$ is the fund's own risk (the residual), unrelated to the market, so the market cannot hedge it. Computing $\sigma_y - b\,\sigma_x = 1.5\%$ is wrong: that holds only when $R^2 = 1$ (perfect correlation).
+        The manager is half right: $\text{Cov}(y - bx, x) = \text{Cov}(x, y) - b\,\sigma_x^2 = 0$, so the hedged portfolio is indeed uncorrelated with the market (uncorrelated means only that the covariance is 0, not necessarily independent). But $y - bx$ is the intercept plus the residual, and the hedge removes only the part of the variance the market explains. $R^2 = \frac{\text{Cov}(x, y)^2}{\sigma_x^2\sigma_y^2} = \frac{900}{25 \times 56.25} = 0.64$, which can also be written $1 - \frac{20.25}{56.25}$: the market explains 64% of the fund's variance, and the remaining $(1 - R^2)\sigma_y^2 = 0.36 \times 56.25 = 20.25$ is the fund's own risk (the residual), unrelated to the market, so the market cannot hedge it. Computing $\sigma_y - b\,\sigma_x = 1.5\%$ is wrong: that holds only when $R^2 = 1$ (perfect correlation).
     rubric:
       zh-cn:
         - "(a) 写出 $\\text{Var}(y - hx)$ 的展开式（1 分）；由一阶条件得 $h^* = \\frac{\\text{Cov}}{\\sigma_x^2}$ 并检查二阶条件（2 分）；指出这就是 OLS 斜率（1 分）。"
@@ -337,39 +337,41 @@ questions:
     part: problem
     points: 18
     concepts: [standard-error, hypothesis-test, t-statistic, statistical-significance, normal-distribution, z-score]
-    expected: { se: "2.53", cut: "4.96", z: "1.17", prob: "12.1", years: "61.5" }
+    expected: { se: "2.53", cut: "4.96", z: "1.17", z2: "2.75", prob: "12.4", years: "61.5" }
     question:
       zh-cn: |-
-        一位基金经理每年相对指数的超额收益服从正态分布，各年独立，标准差为 8 个百分点。假设他真有能力：超额收益的真实期望是每年 2 个百分点。投资者用他的记录检验原假设“真实期望为 0”，t 值大于 1.96 时才认为他有能力。为了简单，计算标准误时用真实的标准差 8 个百分点。可以用代码计算正态分布的概率，也可以用：$P(Z > 0.79) \approx 0.215$，$P(Z > 1.17) \approx 0.121$，$P(Z > 1.65) \approx 0.049$，$P(Z > 1.96) \approx 0.025$，$P(Z > 2.75) \approx 0.003$。
+        一位基金经理每年相对指数的超额收益服从正态分布，各年独立，标准差为 8 个百分点。假设他真有能力：超额收益的真实期望是每年 2 个百分点。投资者用他的记录在 5% 水平上做双侧检验，原假设是“真实期望为 0”：$|t| > 1.96$ 时结果显著。为了简单，计算标准误时用真实的标准差 8 个百分点。可以用代码计算正态分布的概率，也可以用：$P(Z > 0.79) \approx 0.215$，$P(Z > 1.17) \approx 0.121$，$P(Z > 1.65) \approx 0.049$，$P(Z > 1.96) \approx 0.025$，$P(Z > 2.75) \approx 0.003$。
 
-        (a) 一位投资者说：“如果他真有能力，10 年的数据足以检验出来；如果 10 年后结果不显著，就说明他没有能力。”求他 10 年的记录显著（t 值大于 1.96）的概率，并评价这个说法。（11 分）
+        (a) 一位投资者说：“如果他真有能力，10 年的数据足以检验出来；如果 10 年后结果不显著，就说明他没有能力。”求他 10 年的记录显著的概率，并评价这个说法。（11 分）
 
         (b) 至少要有多少年的记录，他的结果显著的概率才能达到 50%？（7 分）
       en: |-
-        A fund manager's excess return over an index is normally distributed, independent from year to year, with a standard deviation of 8 percentage points. Suppose he really has skill: the true expected excess return is 2 percentage points a year. Investors test the null hypothesis "the true expected value is 0" on his record and consider him skilled only if the t-statistic is above 1.96. For simplicity, use the true standard deviation of 8 percentage points to compute the standard error. You may compute normal probabilities with code or use: $P(Z > 0.79) \approx 0.215$, $P(Z > 1.17) \approx 0.121$, $P(Z > 1.65) \approx 0.049$, $P(Z > 1.96) \approx 0.025$, $P(Z > 2.75) \approx 0.003$.
+        A fund manager's excess return over an index is normally distributed, independent from year to year, with a standard deviation of 8 percentage points. Suppose he really has skill: the true expected excess return is 2 percentage points a year. Investors use his record for a two-sided test at the 5% level of the null hypothesis "the true expected value is 0": the result is significant when $|t| > 1.96$. For simplicity, use the true standard deviation of 8 percentage points to compute the standard error. You may compute normal probabilities with code or use: $P(Z > 0.79) \approx 0.215$, $P(Z > 1.17) \approx 0.121$, $P(Z > 1.65) \approx 0.049$, $P(Z > 1.96) \approx 0.025$, $P(Z > 2.75) \approx 0.003$.
 
-        (a) An investor says: "If he really has skill, 10 years of data are enough to detect it; if the result is not significant after 10 years, that shows he has no skill." Find the probability that his 10-year record is significant (t-statistic above 1.96), and evaluate the statement. (11 points)
+        (a) An investor says: "If he really has skill, 10 years of data are enough to detect it; if the result is not significant after 10 years, that shows he has no skill." Find the probability that his 10-year record is significant, and evaluate the statement. (11 points)
 
         (b) At least how many years of record are needed for the probability that his result is significant to reach 50%? (7 points)
     answer:
       zh-cn: |-
-        (a) 10 年平均超额收益的标准误是 $\frac{8}{\sqrt{10}} \approx 2.53$ 个百分点。t 值大于 1.96，等价于样本均值大于 $1.96 \times 2.53 \approx 4.96$ 个百分点。
+        (a) 10 年平均超额收益的标准误是 $\frac{8}{\sqrt{10}} \approx 2.53$ 个百分点。$|t| > 1.96$，等价于样本均值大于 $1.96 \times 2.53 \approx 4.96$ 个百分点，或小于 −4.96 个百分点。
         在“真实期望为 2”的假设下，样本均值服从均值 2、标准差 2.53 的正态分布，所以
-        $$P(\bar R > 4.96) = P\left(Z > \frac{4.96 - 2}{2.53}\right) = P(Z > 1.17) \approx 12.1\%.$$
-        即使他真有这样的能力，10 年的记录也只有约 12.1% 的概率显著，约 88% 的情况下不显著。所以投资者的说法不对：10 年不显著并不说明他没有能力，只说明这么短的数据分辨不出每年 2 个百分点的能力和运气，因为一年的噪声（8 个百分点）远大于要检测的信号。
+        $$P(\bar R > 4.96) = P\left(Z > \frac{4.96 - 2}{2.53}\right) = P(Z > 1.17) \approx 0.121,$$
+        $$P(\bar R < -4.96) = P\left(Z < \frac{-4.96 - 2}{2.53}\right) = P(Z < -2.75) \approx 0.003.$$
+        合计约 12.4%，其中约 0.3% 是显著为负（看起来比指数差），真正显示他有能力的只有约 12.1%。即使他真有这样的能力，10 年的记录也只有约 12.4% 的概率显著，近 88% 的情况下不显著。所以投资者的说法不对：10 年不显著并不说明他没有能力，只说明这么短的数据分辨不出每年 2 个百分点的能力和运气，因为一年的噪声（8 个百分点）远大于要检测的信号。
         （按原假设算出的 5% 是没有能力的经理碰巧显著的概率，不是这里要求的概率；期望的 t 值 $\frac{2}{2.53} \approx 0.79$ 小于 1.96，也不说明不可能显著。）
-        (b) 样本均值以真实期望 2 为中心对称分布，所以当临界值正好等于 2 时，显著的概率是 50%：$1.96 \times \frac{8}{\sqrt{n}} = 2$，$\sqrt{n} = 7.84$，$n \approx 61.5$，即至少要 62 年。一个人的整个职业生涯都不够让一个每年真正多赚 2 个百分点的经理有一半的机会被检验出来。
+        (b) 样本均值以真实期望 2 为中心对称分布，所以当上方的临界值正好等于 2 时，显著为正的概率是 50%；这时下方的临界值离 2 超过 7 个标准误，显著为负的概率可以忽略：$1.96 \times \frac{8}{\sqrt{n}} = 2$，$\sqrt{n} = 7.84$，$n \approx 61.5$，即至少要 62 年。一个人的整个职业生涯都不够让一个每年真正多赚 2 个百分点的经理有一半的机会被检验出来。
       en: |-
-        (a) The standard error of the 10-year mean excess return is $\frac{8}{\sqrt{10}} \approx 2.53$ percentage points. A t-statistic above 1.96 is the same as a sample mean above $1.96 \times 2.53 \approx 4.96$ percentage points.
+        (a) The standard error of the 10-year mean excess return is $\frac{8}{\sqrt{10}} \approx 2.53$ percentage points. $|t| > 1.96$ is the same as a sample mean above $1.96 \times 2.53 \approx 4.96$ percentage points or below −4.96 percentage points.
         If the true expected value is 2, the sample mean is normal with mean 2 and standard deviation 2.53, so
-        $$P(\bar R > 4.96) = P\left(Z > \frac{4.96 - 2}{2.53}\right) = P(Z > 1.17) \approx 12.1\%.$$
-        Even if he really has this skill, his 10-year record is significant with a probability of only about 12.1%, and in about 88% of cases it is not significant. So the investor is wrong: a result that is not significant after 10 years does not show that he has no skill. It only shows that so little data cannot tell a skill of 2 percentage points a year apart from luck, because the noise in one year (8 percentage points) is much larger than the signal to be detected.
+        $$P(\bar R > 4.96) = P\left(Z > \frac{4.96 - 2}{2.53}\right) = P(Z > 1.17) \approx 0.121,$$
+        $$P(\bar R < -4.96) = P\left(Z < \frac{-4.96 - 2}{2.53}\right) = P(Z < -2.75) \approx 0.003.$$
+        Together about 12.4%, of which about 0.3% is significantly negative (he looks worse than the index); only about 12.1% shows him to be skilled. Even if he really has this skill, his 10-year record is significant with a probability of only about 12.4%, and in nearly 88% of cases it is not significant. So the investor is wrong: a result that is not significant after 10 years does not show that he has no skill. It only shows that so little data cannot tell a skill of 2 percentage points a year apart from luck, because the noise in one year (8 percentage points) is much larger than the signal to be detected.
         (The 5% computed under the null hypothesis is the probability that a manager without skill is significant by chance, not the probability asked for here; an expected t-statistic of $\frac{2}{2.53} \approx 0.79$ below 1.96 does not mean significance is impossible either.)
-        (b) The sample mean is distributed symmetrically around the true expected value of 2, so the probability of significance is 50% when the critical value equals 2 exactly: $1.96 \times \frac{8}{\sqrt{n}} = 2$, $\sqrt{n} = 7.84$, $n \approx 61.5$, that is, at least 62 years. A whole working life is not enough to give a manager who truly earns 2 percentage points a year more a 50% chance of being detected.
+        (b) The sample mean is distributed symmetrically around the true expected value of 2, so the probability of a significantly positive result is 50% when the upper critical value equals 2 exactly; the lower critical value is then more than 7 standard errors below 2, so a significantly negative result has negligible probability: $1.96 \times \frac{8}{\sqrt{n}} = 2$, $\sqrt{n} = 7.84$, $n \approx 61.5$, that is, at least 62 years. A whole working life is not enough to give a manager who truly earns 2 percentage points a year more a 50% chance of being detected.
     rubric:
       zh-cn:
-        - "(a) 标准误 2.53，并把“t 值大于 1.96”转换为样本均值大于 4.96（3 分）；在真实期望为 2 下标准化，$z \\approx 1.17$，概率约 12.1%（4 分）；评价：说法不对，不显著不等于没有能力，并用信号与噪声或数据太少说明（4 分）。按原假设得 5%，或因期望的 t 值小于 1.96 就说不可能显著：最多 3 分。只凭“不显著不等于没有能力”评价、没有计算：最多 3 分。"
+        - "(a) 标准误 2.53，并把 $|t| > 1.96$ 转换为样本均值大于 4.96 或小于 −4.96（3 分）；在真实期望为 2 下标准化，$z \\approx 1.17$，概率合计约 12.4%（4 分；只算正向一侧得 12.1%：扣 1 分）；评价：说法不对，不显著不等于没有能力，并用信号与噪声或数据太少说明（4 分）。按原假设得 5%，或因期望的 t 值小于 1.96 就说不可能显著：最多 3 分。只凭“不显著不等于没有能力”评价、没有计算：最多 3 分。"
         - "(b) 说明显著概率为 50% 时临界值等于真实期望 2（4 分）；解出 $n \\approx 61.5$，至少 62 年（3 分）。条件写对但答 61 年：扣 1 分。"
       en:
-        - "(a) Standard error 2.53, and turns \"t-statistic above 1.96\" into a sample mean above 4.96 (3 points); standardizes with a true expected value of 2, $z \\approx 1.17$, probability about 12.1% (4 points); evaluation: the statement is wrong, not significant does not mean no skill, explained with signal and noise or too little data (4 points). Getting 5% under the null hypothesis, or saying significance is impossible because the expected t-statistic is below 1.96: at most 3 points. Evaluating only with \"not significant does not mean no skill\" and no calculation: at most 3 points."
+        - "(a) Standard error 2.53, and turns $|t| > 1.96$ into a sample mean above 4.96 or below −4.96 (3 points); standardizes with a true expected value of 2, $z \\approx 1.17$, total probability about 12.4% (4 points; only the positive side, giving 12.1%: deduct 1 point); evaluation: the statement is wrong, not significant does not mean no skill, explained with signal and noise or too little data (4 points). Getting 5% under the null hypothesis, or saying significance is impossible because the expected t-statistic is below 1.96: at most 3 points. Evaluating only with \"not significant does not mean no skill\" and no calculation: at most 3 points."
         - "(b) Explains that the probability is 50% when the critical value equals the true expected value of 2 (4 points); solves $n \\approx 61.5$, at least 62 years (3 points). Correct condition but an answer of 61 years: deduct 1 point."

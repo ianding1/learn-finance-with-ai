@@ -66,14 +66,16 @@ def results():
     r["Q8.far2"] = 100 * 1.02**-30
     assert r["Q8.a4"] < r["Q8.b4"] and r["Q8.b2"] < r["Q8.a2"]  # the conclusion flips
 
-    # Q9: excess return sd 8, true mean 2, 10 years; P(t > 1.96).
+    # Q9: excess return sd 8, true mean 2, 10 years; two-sided test, P(|t| > 1.96).
     se = 8 / sqrt(10)
     cut = 1.96 * se
     z = (cut - 2) / se
     r["Q9.se"] = se
     r["Q9.cut"] = cut
     r["Q9.z"] = z
-    r["Q9.prob"] = 100 * norm_sf(z)
+    z2 = (cut + 2) / se  # lower tail: sample mean below -cut
+    r["Q9.z2"] = z2
+    r["Q9.prob"] = 100 * (norm_sf(z) + norm_sf(z2))  # two-sided test
     r["Q9.years"] = (1.96 * 8 / 2) ** 2  # critical value equals the true mean: 50% chance
     return r
 
