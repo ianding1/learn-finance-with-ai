@@ -195,13 +195,13 @@ questions:
     question:
       zh-cn: |-
         一个家庭计划 30 年后退休。退休后每年年初从账户取 60,000 美元，共取 25 年，第一笔在退休当天取出。账户的名义年利率始终为 6%，按月复利。
-        (a) 退休当天账户里至少要有多少钱？（6 分）
-        (b) 这个家庭现在账户里有 50,000 美元，从下个月起每月月末只能存 400 美元，共存 360 次，最后一次在退休当天。退休当天账户里会有多少钱？退休后余额继续按同样的利率计息，这笔钱够取多少次完整的 60,000 美元？要取满 25 次，每月至少要存多少？（5 分）
+        (a) 退休当天账户里至少要有多少钱？（5 分）
+        (b) 这个家庭现在账户里有 50,000 美元，从下个月起每月月末只能存 400 美元，共存 360 次，最后一次在退休当天。退休当天账户里会有多少钱？退休后余额继续按同样的利率计息，这笔钱够取多少次完整的 60,000 美元？其他条件不变，要取满 25 次，每月至少要存多少？（6 分）
         (c) 家庭改变计划：退休时账户里有 (a) 的金额，领取永远持续下去（留给子女），仍是每年年初领取、第一笔在退休当天，以后每年比上一年多 2%。第一年能领多少？如果改为每年多 3%，第一年能领多少？说明增长率对第一年领取额的影响，以及增长率为什么不能任意提高。（5 分）
       en: |-
         A household plans to retire in 30 years. After retirement it will withdraw 60,000 dollars at the start of each year for 25 years, with the first withdrawal on the day of retirement. The account always pays a nominal annual rate of 6%, compounded monthly.
-        (a) How much must the account hold on the day of retirement? (6 points)
-        (b) The household has 50,000 dollars in the account today and can deposit only 400 dollars at the end of each month from next month on, 360 deposits in all, the last on the day of retirement. How much will the account hold on the day of retirement? After retirement the balance keeps earning the same rate. How many full withdrawals of 60,000 dollars will that pay for? To make all 25 withdrawals, how much must the household deposit each month at least? (5 points)
+        (a) How much must the account hold on the day of retirement? (5 points)
+        (b) The household has 50,000 dollars in the account today and can deposit only 400 dollars at the end of each month from next month on, 360 deposits in all, the last on the day of retirement. How much will the account hold on the day of retirement? After retirement the balance keeps earning the same rate. How many full withdrawals of 60,000 dollars will that pay for? With everything else unchanged, how much must the household deposit each month at least to make all 25 withdrawals? (6 points)
         (c) The household changes its plan: it retires with the amount from (a), and the withdrawals continue forever (for its children), still at the start of each year with the first on the day of retirement, each year 2% more than the year before. How much can it withdraw in the first year? How much if the withdrawals instead grow 3% a year? Explain how the growth rate affects the first withdrawal, and why the growth rate cannot be raised without limit. (5 points)
     answer:
       zh-cn: |-
@@ -224,12 +224,12 @@ questions:
         $g = 2\%$: $W \approx 31{,}464$ dollars; $g = 3\%$: $W \approx 23{,}914$ dollars. The higher the growth rate, the less can be withdrawn in the first year from the same amount, because later withdrawals are larger. $W$ is proportional to $R - g$, so as $g$ approaches $R$ the first withdrawal goes to 0; for $g \ge R$ the present value of the growing perpetuity is infinite and no finite amount can support it, so the growth rate must stay below the effective annual rate.
     rubric:
       zh-cn:
-        - "(a) 换算有效年利率 2 分；按期初年金求现值，约 801,486 美元 4 分。直接用 6% 或按期末年金计算、其余正确：最多 3 分。"
-        - "(b) 退休时约 702,935 美元（现有存款和每月存款的终值都计入）1 分；用期初年金反解年数，约 19.07 年、19 次完整取款 2 分；每月至少约 498.11 美元 2 分。忽略现有存款或按期末年金反解、其余正确：扣 1 分。"
+        - "(a) 换算有效年利率 2 分；按期初年金求现值，约 801,486 美元 3 分。直接用 6% 或按期末年金计算、其余正确：最多 2 分。"
+        - "(b) 退休时约 702,935 美元（现有存款和每月存款的终值都计入）1 分；用期初年金反解年数，约 19.07 年、19 次完整取款 2 分；每月至少约 498.11 美元 3 分。忽略现有存款或按期末年金反解、其余正确：扣 1 分。"
         - "(c) 正确处理第一笔在退休当天（$W = PV \\times \\frac{R - g}{1 + R}$ 或等价形式）并算出约 31,464 美元 2 分；3% 时约 23,914 美元 1 分；说明增长率越高第一年越少、$g$ 必须低于 $R$ 2 分。用 (a) 的错误结果但方法正确：不扣分。"
       en:
-        - "(a) Conversion to the effective annual rate 2 points; present value as an annuity due, about 801,486 dollars, 4 points. Using 6% directly or an end-of-year annuity with the rest correct: at most 3 points."
-        - "(b) About 702,935 dollars at retirement (including the future values of both the existing balance and the monthly deposits) 1 point; solving the annuity due for the number of years, about 19.07 years and 19 full withdrawals, 2 points; a monthly deposit of at least about 498.11 dollars 2 points. Ignoring the existing balance or solving with an end-of-year annuity, with the rest correct: minus 1 point."
+        - "(a) Conversion to the effective annual rate 2 points; present value as an annuity due, about 801,486 dollars, 3 points. Using 6% directly or an end-of-year annuity with the rest correct: at most 2 points."
+        - "(b) About 702,935 dollars at retirement (including the future values of both the existing balance and the monthly deposits) 1 point; solving the annuity due for the number of years, about 19.07 years and 19 full withdrawals, 2 points; a monthly deposit of at least about 498.11 dollars 3 points. Ignoring the existing balance or solving with an end-of-year annuity, with the rest correct: minus 1 point."
         - "(c) Correct treatment of the first withdrawal on the day of retirement ($W = PV \\times \\frac{R - g}{1 + R}$ or an equivalent form), about 31,464 dollars, 2 points; about 23,914 dollars at 3%, 1 point; explains that a higher growth rate means a smaller first withdrawal and that $g$ must stay below $R$, 2 points. Correct method with a wrong result carried over from (a): no deduction."
 
   - id: Q7
