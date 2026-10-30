@@ -163,7 +163,7 @@ stages:
           en: "The quiz for Stage 1 (1.1–1.9): supply, demand and elasticity, consumer and intertemporal choice, choice under uncertainty, firms and market structure, game theory, welfare and information economics. 100 points, about 120 minutes."
         published: true
         introduces: []
-        uses: [nominal-interest-rate, real-interest-rate, fisher-equation, inflation, marginal-rate-of-substitution, budget-constraint, preferences, demand, supply, comparative-statics, deadweight-loss, tax-incidence, price-elasticity, adverse-selection, asymmetric-information, present-value, economic-profit, perfect-competition, barriers-to-entry, economic-moat, growing-perpetuity, principal-agent-problem, risk-premium, crra-utility, certainty-equivalent, repeated-game, bertrand-model, prisoners-dilemma, oligopoly, short-run, long-run]
+        uses: [nominal-interest-rate, real-interest-rate, fisher-equation, inflation, marginal-rate-of-substitution, budget-constraint, preferences, demand, supply, comparative-statics, deadweight-loss, tax-incidence, price-elasticity, production-function, marginal-product, long-run, adverse-selection, asymmetric-information, present-value, economic-profit, perfect-competition, barriers-to-entry, economic-moat, growing-perpetuity, principal-agent-problem, risk-premium, crra-utility, certainty-equivalent, repeated-game, bertrand-model, prisoners-dilemma, oligopoly, short-run]
 
   - id: "2"
     title: { zh-cn: "第 2 阶段：宏观经济学", en: "Stage 2: Macroeconomics" }
