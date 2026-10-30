@@ -90,9 +90,9 @@ questions:
     concepts: [marginal-rate-of-substitution, budget-constraint, preferences]
     question:
       zh-cn: |-
-        两个消费者的偏好和收入都不同，但面对相同的两种商品价格，各自花完收入，都处于内部最优（两种商品都买，无差异曲线光滑）。那么他们买好之后，无论按什么比例互相交换手中的商品，都不可能使两人都变得更好。
+        两个消费者的偏好和收入都不同，但面对相同的两种商品价格，各自花完收入，都处于内部最优（两种商品都买，无差异曲线光滑）。那么他们买好之后，无论怎样互相交换手中的商品（交换多少、按什么比例），都不可能使两人都变得更好。
       en: |-
-        Two consumers have different preferences and different incomes, but they face the same prices for two goods, each spends all of their income, and both are at an interior optimum (they buy both goods, and their indifference curves are smooth). Then after they have bought, no exchange of goods between them, at any ratio, can make both of them better off.
+        Two consumers have different preferences and different incomes, but they face the same prices for two goods, each spends all of their income, and both are at an interior optimum (they buy both goods, and their indifference curves are smooth). Then after they have bought, no exchange of goods between them (in any amounts, at any ratio) can make both of them better off.
     answer:
       zh-cn: |-
         真。
@@ -106,10 +106,10 @@ questions:
         So market prices make the rate at which each person is willing to trade $y$ for $x$ the same, and the gains from exchange are used up: differences in preferences and incomes show up only in the quantities bought.
     rubric:
       zh-cn:
-        - "判断为真，并用两人的边际替代率都等于共同的价格比说明交换比例对至少一方不利，或用“更好的组合原来买不起”的论证（7 分）。"
+        - "判断为真，并用两人的边际替代率都等于共同的价格比说明交换比例对至少一方不利，或用“更好的组合原来买不起”的论证；两种论证都可以得满分（7 分）。"
         - "判断为真但只说出 $MRS = \\frac{p_x}{p_y}$，没有联系到交换为什么不能使双方都更好：3 分。只写判断：0 分。"
       en:
-        - "States true and explains, using the fact that both MRS equal the common price ratio, that any exchange ratio hurts at least one side, or uses the argument that better bundles were unaffordable (7 points)."
+        - "States true and explains, using the fact that both MRS equal the common price ratio, that any exchange ratio hurts at least one side, or uses the argument that better bundles were unaffordable; either argument earns full marks (7 points)."
         - "True but only stating $MRS = \\frac{p_x}{p_y}$ without linking it to why an exchange cannot make both better off: 3 points. Only the verdict: 0 points."
 
   - id: Q3
@@ -206,31 +206,31 @@ questions:
 
         (a) 一位分析师预计 A 的经济利润从明年的 10 开始，每年比上一年减少 30%（后年 7，……）。按他的预计，A 和 B 的溢价各应是多少？（6 分）
 
-        (b) 市场目前给 A 的溢价是 50。按 8% 折现，市场的价格隐含 A 的经济利润每年减少百分之几？结合 A 所在行业的特点，你认为是市场的预期还是分析师的预期更可能接近现实？如果分析师是对的，现在买入 A 的投资者多付了多少？（8 分）
+        (b) 市场目前给 A 的溢价是 50。按 8% 折现，市场的价格隐含 A 的经济利润每年减少百分之几？结合 A 所在行业的特点，你认为是市场的预期还是分析师的预期更可能接近现实？为什么？（8 分）
       en: |-
         A company's value can be seen as the capital invested plus the present value of its future economic profit; the part above the capital invested is called the premium. Companies A and B are each expected to earn an economic profit (profit after all costs, including the opportunity cost of capital) of 10 (million dollars) at the end of next year. A's industry has free entry; B has strong barriers to entry, and its economic profit is expected to stay at 10 every year forever. The discount rate is 8%.
 
         (a) An analyst expects A's economic profit to start at 10 next year and then fall by 30% each year from the previous year (7 the year after, and so on). On his forecast, what should the premiums of A and B be? (6 points)
 
-        (b) The market currently gives A a premium of 50. At an 8% discount rate, how fast does the market price imply that A's economic profit falls each year? Given the nature of A's industry, which expectation do you think is more likely to be close to reality, the market's or the analyst's? If the analyst is right, how much too much does an investor who buys A now pay? (8 points)
+        (b) The market currently gives A a premium of 50. At an 8% discount rate, how fast does the market price imply that A's economic profit falls each year? Given the nature of A's industry, which expectation do you think is more likely to be close to reality, the market's or the analyst's? Why? (8 points)
     answer:
       zh-cn: |-
         (a) A 是增长率为 −30% 的增长永续年金：$\frac{10}{0.08 - (-0.30)} = \frac{10}{0.38} \approx 26.32$。B 是永续年金：$\frac{10}{0.08} = 125$。今年的利润一样，溢价却差了很多：溢价取决于经济利润能持续多久。
         (b) 设市场隐含每年减少 $d$：$\frac{10}{0.08 + d} = 50$，$0.08 + d = 0.2$，$d = 12\%$。
         A 的行业可以自由进入，正的经济利润会吸引新企业进入或模仿，直到经济利润为 0；没有进入壁垒时，利润通常消失得较快。所以分析师的预计（每年减少 30%）更可能接近现实，市场把 A 的利润看得太持久，好像 A 有一部分护城河。（如果能找到 A 有进入壁垒的证据，例如多年来资本回报率持续高于资本成本，市场的预期才有道理。）
-        如果分析师是对的，A 的溢价应为 26.32，投资者多付了约 $50 - 26.32 = 23.68$。
+        如果分析师是对的，A 的溢价应为 26.32，市场的价格高出约 $50 - 26.32 = 23.68$。
       en: |-
         (a) A is a growing perpetuity with growth rate −30%: $\frac{10}{0.08 - (-0.30)} = \frac{10}{0.38} \approx 26.32$. B is a perpetuity: $\frac{10}{0.08} = 125$. The profits are the same next year, but the premiums differ greatly: the premium depends on how long the economic profit lasts.
         (b) Let the implied yearly decline be $d$: $\frac{10}{0.08 + d} = 50$, so $0.08 + d = 0.2$ and $d = 12\%$.
         A's industry has free entry, so positive economic profit attracts new firms that enter or copy until economic profit is 0; without barriers to entry, profit usually disappears fairly quickly. So the analyst's forecast (a 30% decline a year) is more likely to be close to reality; the market treats A's profit as too durable, as if A had part of a moat. (Only evidence that A has barriers to entry, for example a return on capital that has stayed above the cost of capital for many years, would support the market's expectation.)
-        If the analyst is right, A's premium should be 26.32, and an investor overpays by about $50 - 26.32 = 23.68$.
+        If the analyst is right, A's premium should be 26.32, and the market price is too high by about $50 - 26.32 = 23.68$.
     rubric:
       zh-cn:
         - "(a) 认出 A 是增长率为负的增长永续年金，约 26.32（4 分）；B 为 125（2 分）。把 A 当作永续年金（125）：最多 2 分。"
-        - "(b) 由 $\\frac{10}{0.08 + d} = 50$ 解出 $d = 12\\%$（3 分）；用自由进入说明利润会较快消失，判断分析师的预期更合理，或说明只有在有进入壁垒的证据时市场才合理（3 分）；多付约 23.68（2 分）。"
+        - "(b) 由 $\\frac{10}{0.08 + d} = 50$ 解出 $d = 12\\%$（3 分）；用自由进入说明利润会较快消失，判断分析师的预期更合理，或说明只有在有进入壁垒的证据时市场才合理；按理由给分，只写结论不得分（5 分）。"
       en:
         - "(a) Recognizes A as a growing perpetuity with a negative growth rate, about 26.32 (4 points); B is 125 (2 points). Treating A as a plain perpetuity (125): at most 2 points."
-        - "(b) Solves $\\frac{10}{0.08 + d} = 50$ for $d = 12\\%$ (3 points); uses free entry to explain that the profit tends to disappear fairly quickly and judges the analyst's expectation more plausible, or explains that the market is right only with evidence of barriers to entry (3 points); overpayment about 23.68 (2 points)."
+        - "(b) Solves $\\frac{10}{0.08 + d} = 50$ for $d = 12\\%$ (3 points); uses free entry to explain that the profit tends to disappear fairly quickly and judges the analyst's expectation more plausible, or explains that the market is right only with evidence of barriers to entry; points go to the reasons, and a verdict alone earns nothing (5 points)."
 
   - id: Q7
     kind: quiz
@@ -262,13 +262,13 @@ questions:
         The advice reflects the principal-agent problem: the adviser's income depends on the assets he manages, so he earns about 2,000 dollars a year if she invests and nothing if she pays off the mortgage. The client (the principal) finds it hard to judge whether the advice really serves her (asymmetric information). Remedies include paying a fixed fee, choosing an adviser with a fiduciary duty, asking the adviser to explain how he is paid and his conflicts of interest, and making her own risk-adjusted comparison.
     rubric:
       zh-cn:
-        - "扣除费用得 6%（2 分）。"
-        - "用 $\\frac12\\gamma\\sigma^2$ 算出风险溢价约 3.375%，确定性等价约 2.625%，与确定的 4% 比较，结论为还房贷更好（7 分）。只比较 7% 与 4% 或 6% 与 4%：这部分最多 2 分。"
-        - "指出顾问按资产收费带来的利益冲突（约 2,000 美元 / 年）及信息不对称，并给出一种对策（6 分）。"
+        - "扣除费用得约 6%（按年初或年末资产计算费用都可以，2 分）。"
+        - "用 $\\frac12\\gamma\\sigma^2$ 算出风险溢价约 3.375%，确定性等价约 2.625%，与确定的 4% 比较，结论为还房贷更好（9 分）。只比较 7% 与 4% 或 6% 与 4%：这部分最多 2 分。"
+        - "指出顾问按资产收费带来的利益冲突（约 2,000 美元 / 年）及信息不对称，并给出一种对策（4 分）。"
       en:
-        - "Subtracts the fee to get 6% (2 points)."
-        - "Uses $\\frac12\\gamma\\sigma^2$ to get a risk premium of about 3.375% and a certainty-equivalent return of about 2.625%, compares it with the certain 4%, and concludes that paying off the mortgage is better (7 points). Only comparing 7% or 6% with 4%: at most 2 points for this part."
-        - "Points out the conflict of interest from fees based on assets (about 2,000 dollars a year) and the asymmetric information, and gives one remedy (6 points)."
+        - "Subtracts the fee to get about 6% (computing the fee on assets at the start or the end of the year are both fine; 2 points)."
+        - "Uses $\\frac12\\gamma\\sigma^2$ to get a risk premium of about 3.375% and a certainty-equivalent return of about 2.625%, compares it with the certain 4%, and concludes that paying off the mortgage is better (9 points). Only comparing 7% or 6% with 4%: at most 2 points for this part."
+        - "Points out the conflict of interest from fees based on assets (about 2,000 dollars a year) and the asymmetric information, and gives one remedy (4 points)."
 
   - id: Q8
     kind: quiz
