@@ -323,9 +323,15 @@ def check_keys():
                     err(where, "quiz questions need positive 'points'")
                 if q.get("part") not in ("judge", "problem"):
                     err(where, "quiz questions need part: judge or problem")
-                hp = q.get("hard_points")
-                if not isinstance(hp, (int, float)) or hp < 0 or hp > (q.get("points") or 0):
-                    err(where, "quiz questions need hard_points between 0 and their points")
+                # Difficulty is judged per part: easy_points / hard_points are the points of the parts
+                # with a difficulty score of at most 2 / at least 6.
+                pts = q.get("points") or 0
+                ep, hp = q.get("easy_points"), q.get("hard_points")
+                for name, v in (("easy_points", ep), ("hard_points", hp)):
+                    if not isinstance(v, (int, float)) or v < 0 or v > pts:
+                        err(where, f"quiz questions need {name} between 0 and their points")
+                if isinstance(ep, (int, float)) and isinstance(hp, (int, float)) and ep + hp > pts:
+                    err(where, "easy_points + hard_points exceed the question's points")
             # Lesson questions (check questions and exercises) are reviewed without scores; only the
             # quizzes after a group of lessons are scored, and they are not in lesson key files.
             if kind in ("check", "exercise"):
@@ -352,9 +358,12 @@ def check_keys():
             total = sum(q.get("points") or 0 for q in key.get("questions", []))
             if total != 100:
                 err(file, f"quiz points add up to {total}, not 100")
+            easy = sum(q.get("easy_points") or 0 for q in key.get("questions", []))
             hard = sum(q.get("hard_points") or 0 for q in key.get("questions", []))
-            if not 20 <= hard <= 30:
-                err(file, f"hard parts of the quiz add up to {hard} points, not 20-30")
+            if easy > 20:
+                err(file, f"easy parts (difficulty score 2 or less) add up to {easy} points; at most 20 are allowed")
+            if hard < 10:
+                err(file, f"hard parts (difficulty score 6 or more) add up to {hard} points; at least 10 are needed")
         if not l.get("published"):
             continue
         for lang in LANGS:

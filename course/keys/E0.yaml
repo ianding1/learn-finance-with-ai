@@ -1,6 +1,7 @@
 # Answer key for quiz E0 (math and statistics tools, lessons 0.1–0.5). Shown to learners only inside the
 # generated scoring prompt. The quiz page shows only the questions and their points.
-# hard_points: points of the hard parts of a question (difficulty is judged per part); the quiz has 20–30 in total. Not shown on the page.
+# easy_points / hard_points: points of the parts of a question with difficulty score 2 or less / 6 or more
+# (scored per part). The quiz has at most 20 easy points and at least 10 hard points. Not shown on the page.
 # expected: values are recomputed by course/verify/E0.py in CI and must appear verbatim in every answer text.
 # Each question tests a different idea; the parts of a problem build on each other.
 
@@ -15,9 +16,14 @@ context:
 common_errors:
   - questions: [Q4]
     zh-cn: |-
-      认为检验 20 个无效策略时“出现显著结果的概率是 5%”：5% 是每一次检验的误报概率，至少一次误报的概率要按 $1 - 0.95^{20}$ 计算。
+      用两个置信区间是否重叠来判断差异是否显著：应检验两者之差，独立时差的标准误是 $\sqrt{\text{SE}_A^2 + \text{SE}_B^2}$，小于两个标准误之和。
     en: |-
-      Thinking that when 20 useless strategies are tested, "the probability of a significant result is 5%": 5% is the false-positive probability of each test, and the probability of at least one false positive is $1 - 0.95^{20}$.
+      Judging whether a difference is significant by whether the two confidence intervals overlap: the difference itself must be tested, and with independent estimates its standard error is $\sqrt{\text{SE}_A^2 + \text{SE}_B^2}$, smaller than the sum of the two standard errors.
+  - questions: [Q5]
+    zh-cn: |-
+      认为 $x$ 对 $y$ 回归的斜率是 $y$ 对 $x$ 回归斜率的倒数：只有 $R^2 = 1$ 时才成立，一般两个斜率的乘积等于 $R^2$。
+    en: |-
+      Thinking that the slope of $x$ on $y$ is the reciprocal of the slope of $y$ on $x$: this holds only when $R^2 = 1$; in general the product of the two slopes is $R^2$.
   - questions: [Q6]
     zh-cn: |-
       每年取款、按月复利时直接用名义年利率 6% 作为年折现率：应先换算成有效年利率。另一个常见错误是忽略第一笔在退休当天取出（期初年金、期初开始的增长永续年金）。
@@ -40,9 +46,9 @@ common_errors:
       Taking the standard deviation of the sum of several years of log returns as $n$ times that of one year: with independent years the variance is $n$ times as large, so the standard deviation is only $\sqrt{n}$ times as large.
   - questions: [Q10]
     zh-cn: |-
-      把 $R^2$ 理解为“平均收益中有多少来自市场”：$R^2$ 说的是波动（方差）中有多少能由市场解释。
+      把截距理解为“基金比市场多赚的部分”：基金与市场之差是 $a + (b - 1)x$，斜率不等于 1 时取决于市场收益。另一个常见错误是把 $R^2$ 理解为“平均收益中有多少来自市场”，$R^2$ 说的是波动（方差）中有多少能由市场解释。
     en: |-
-      Reading $R^2$ as "the share of the average return that comes from the market": $R^2$ is the share of the variation (variance) that the market explains.
+      Reading the intercept as "how much the fund beats the market": the difference between fund and market is $a + (b - 1)x$, which depends on the market return when the slope is not 1. Another common error is reading $R^2$ as "the share of the average return that comes from the market": $R^2$ is the share of the variation (variance) that the market explains.
 
 questions:
   # ---------- Part 1: true or false (4 points each) ----------
@@ -127,24 +133,24 @@ questions:
     part: judge
     hard_points: 0
     points: 4
-    concepts: [multiple-testing, hypothesis-test]
-    expected: { p: "64" }
+    concepts: [confidence-interval, hypothesis-test, standard-error, variance]
+    expected: { se_d: "2.83", t: "2.12" }
     question:
       zh-cn: |-
-        一位研究者检验了 20 个互不相关的选股策略，假设它们其实都没有效果。每个策略都在 5% 的水平上检验，那么至少有一个策略显示为“显著有效”的概率约为 5%。
+        基金 A 和基金 B 的平均年收益估计值分别为 10% 和 4%，标准误都是 2 个百分点，两个估计相互独立。A 的 95% 置信区间约为 [6.08%, 13.92%]，B 的约为 [0.08%, 7.92%]，两个区间有重叠，所以在 5% 水平上不能认为两只基金的真实平均收益有差别。
       en: |-
-        A researcher tests 20 unrelated stock-picking strategies, and suppose that none of them actually works. Each strategy is tested at the 5% level. Then the probability that at least one strategy shows up as "significantly effective" is about 5%.
+        The estimated average yearly returns of fund A and fund B are 10% and 4%, both with a standard error of 2 percentage points, and the two estimates are independent. A's 95% confidence interval is about [6.08%, 13.92%] and B's is about [0.08%, 7.92%]. The intervals overlap, so at the 5% level we cannot conclude that the two funds have different true average returns.
     answer:
       zh-cn: |-
-        假。5% 是每一次检验在策略无效时误报的概率。20 次检验相互独立时，全部不误报的概率是 $0.95^{20}$，至少一次误报的概率是 $1 - 0.95^{20} \approx 64$%。平均来说会有 $20 \times 0.05 = 1$ 个策略看起来显著。所以从很多次检验中挑出一个显著的结果，并不能说明它有效。
+        假。要检验的是两者之差。差的估计值为 $10 - 4 = 6$ 个百分点；两个估计独立，差的方差是两个方差之和，标准误为 $\sqrt{2^2 + 2^2} \approx 2.83$。$t = \frac{6}{2.83} \approx 2.12 > 1.96$，在 5% 水平上显著。两个区间重叠并不说明差异不显著：差的标准误只是各自标准误的 $\sqrt{2}$ 倍，而不是两倍。
       en: |-
-        False. 5% is the probability that one test gives a false positive when the strategy does not work. With 20 independent tests, the probability of no false positive is $0.95^{20}$, so the probability of at least one is $1 - 0.95^{20} \approx 64$%. On average $20 \times 0.05 = 1$ strategy looks significant. So picking one significant result out of many tests does not show that it works.
+        False. What must be tested is the difference. The estimated difference is $10 - 4 = 6$ percentage points; the estimates are independent, so the variance of the difference is the sum of the two variances and its standard error is $\sqrt{2^2 + 2^2} \approx 2.83$. $t = \frac{6}{2.83} \approx 2.12 > 1.96$, significant at the 5% level. Overlapping intervals do not show that the difference is not significant: the standard error of the difference is only $\sqrt{2}$ times each standard error, not twice.
     rubric:
       zh-cn:
-        - "判断为假，并算出约 64%（或说明至少一次误报的概率远大于 5%）（4 分）。"
+        - "判断为假，并对两者之差做检验（标准误约 2.83，$t \\approx 2.12$），或说明差的标准误是 $\\sqrt{2}$ 倍而不是两倍（4 分）。"
         - "判断为假但理由不完整：2 分。只写判断：0 分。"
       en:
-        - "States false and computes about 64% (or explains that the probability of at least one false positive is far above 5%) (4 points)."
+        - "States false and tests the difference (standard error about 2.83, $t \\approx 2.12$), or explains that the standard error of the difference is $\\sqrt{2}$ times, not twice, each standard error (4 points)."
         - "False with an incomplete reason: 2 points. Only the verdict: 0 points."
 
   - id: Q5
@@ -152,24 +158,25 @@ questions:
     part: judge
     hard_points: 0
     points: 4
-    concepts: [omitted-variable-bias, regression-coefficient]
+    concepts: [regression-coefficient, r-squared, correlation]
+    expected: { d: "0.25" }
     question:
       zh-cn: |-
-        在 $y$ 对 $x$ 的回归中，加入一个对 $y$ 有很大影响、但与 $x$ 不相关的新变量 $z$。数据很多时，$x$ 的系数基本不变。
+        用同一组数据做 $y$ 对 $x$ 的回归，斜率为 2，$R^2 = 0.5$。那么用这组数据做 $x$ 对 $y$ 的回归，斜率是 0.25。
       en: |-
-        A new variable $z$ that has a large effect on $y$ but is uncorrelated with $x$ is added to a regression of $y$ on $x$. With a lot of data, the coefficient on $x$ stays about the same.
+        A regression of $y$ on $x$ with a set of data has slope 2 and $R^2 = 0.5$. Then a regression of $x$ on $y$ with the same data has slope 0.25.
     answer:
       zh-cn: |-
-        真。只用 $x$ 回归时，数据很多时斜率接近 $\beta_x + \beta_z \cdot \frac{\text{Cov}(x, z)}{\text{Var}(x)}$。遗漏 $z$ 造成的偏差需要两个条件：$z$ 影响 $y$（$\beta_z \ne 0$），而且 $z$ 与 $x$ 相关。这里 $\text{Cov}(x, z) = 0$，无论 $\beta_z$ 多大，遗漏 $z$ 都不造成偏差，加入 $z$ 后 $x$ 的系数基本不变。例如真实关系为 $y = 1 + 2x + 3z + \varepsilon$，$x$ 与 $z$ 不相关，加入 $z$ 前后 $x$ 的系数都接近 2。加入 $z$ 会提高 $R^2$、减小残差，但不改变 $x$ 的系数。
+        真。记 $S_{xy} = \sum (x_i - \bar x)(y_i - \bar y)$，$S_{xx}$、$S_{yy}$ 同理。$y$ 对 $x$ 的斜率 $b = \frac{S_{xy}}{S_{xx}}$，$x$ 对 $y$ 的斜率 $d = \frac{S_{xy}}{S_{yy}}$，所以 $bd = \frac{S_{xy}^2}{S_{xx}S_{yy}} = r^2$。一个自变量的回归中 $R^2 = r^2$，所以 $d = \frac{R^2}{b} = \frac{0.5}{2} = 0.25$，而不是 $\frac{1}{2}$。只有所有点都在一条直线上（$R^2 = 1$）时，两个斜率才互为倒数。
       en: |-
-        True. When only $x$ is in the regression, with a lot of data the slope is close to $\beta_x + \beta_z \cdot \frac{\text{Cov}(x, z)}{\text{Var}(x)}$. A bias from leaving out $z$ needs two conditions: $z$ affects $y$ ($\beta_z \ne 0$), and $z$ is correlated with $x$. Here $\text{Cov}(x, z) = 0$, so however large $\beta_z$ is, leaving out $z$ causes no bias, and the coefficient on $x$ stays about the same when $z$ is added. For example, if the true relation is $y = 1 + 2x + 3z + \varepsilon$ and $x$ is uncorrelated with $z$, the coefficient on $x$ is close to 2 both before and after $z$ is added. Adding $z$ raises $R^2$ and makes the residuals smaller, but does not change the coefficient on $x$.
+        True. Write $S_{xy} = \sum (x_i - \bar x)(y_i - \bar y)$, and $S_{xx}$ and $S_{yy}$ in the same way. The slope of $y$ on $x$ is $b = \frac{S_{xy}}{S_{xx}}$ and the slope of $x$ on $y$ is $d = \frac{S_{xy}}{S_{yy}}$, so $bd = \frac{S_{xy}^2}{S_{xx}S_{yy}} = r^2$. With one explanatory variable $R^2 = r^2$, so $d = \frac{R^2}{b} = \frac{0.5}{2} = 0.25$, not $\frac{1}{2}$. The two slopes are reciprocals only when all points lie on one line ($R^2 = 1$).
     rubric:
       zh-cn:
-        - "判断为真，并用遗漏变量公式说明偏差需要 $z$ 与 $x$ 相关（4 分）。"
-        - "判断为真但理由不完整：2 分。只写判断：0 分。"
+        - "判断为真，并由两个斜率的公式得出 $bd = r^2 = R^2$，算出 0.25（4 分）。"
+        - "判断为真但理由不完整：2 分。只写判断，或判断为假（认为斜率是 0.5）：0 分。"
       en:
-        - "States true and uses the omitted variable formula to show that a bias needs $z$ to be correlated with $x$ (4 points)."
-        - "True with an incomplete reason: 2 points. Only the verdict: 0 points."
+        - "States true and uses the two slope formulas to show $bd = r^2 = R^2$, giving 0.25 (4 points)."
+        - "True with an incomplete reason: 2 points. Only the verdict, or false (taking the slope as 0.5): 0 points."
 
   # ---------- Part 2: problems ----------
   - id: Q6
@@ -178,24 +185,24 @@ questions:
     hard_points: 0
     points: 16
     concepts: [ear, annuity, annuity-due, future-value, growing-perpetuity]
-    expected: { ear: "6.17", pv: "801486", c: "797.88", w: "31464" }
+    expected: { ear: "6.17", pv: "801486", fv0: "301129", c: "498.11", w: "31464" }
     question:
       zh-cn: |-
         一个家庭计划 30 年后退休。退休后每年年初从账户取 60,000 美元，共取 25 年，第一笔在退休当天取出。账户的名义年利率始终为 6%，按月复利。
         (a) 退休当天账户里至少要有多少钱？（6 分）
-        (b) 从现在起每月月末存入相同的金额，30 年后正好达到 (a) 的金额。每月要存多少？（4 分）
+        (b) 账户里现在已有 50,000 美元。从现在起每月月末再存入相同的金额，30 年后正好达到 (a) 的金额。每月要存多少？（4 分）
         (c) 这个家庭改变了计划：退休后的领取永远持续下去（留给子女），仍是每年年初领取一次、第一笔在退休当天，但以后每年比上一年多 2%。退休时的金额仍是 (a) 的结果，第一年能领多少？（6 分）
       en: |-
         A household plans to retire in 30 years. After retirement it will withdraw 60,000 dollars at the start of each year for 25 years, with the first withdrawal on the day of retirement. The account always pays a nominal annual rate of 6%, compounded monthly.
         (a) How much must the account hold on the day of retirement? (6 points)
-        (b) Starting now, the household deposits the same amount at the end of each month and reaches exactly the amount in (a) after 30 years. How much must it deposit each month? (4 points)
+        (b) The account already holds 50,000 dollars today. Starting now, the household also deposits the same amount at the end of each month and reaches exactly the amount in (a) after 30 years. How much must it deposit each month? (4 points)
         (c) The household changes its plan: after retirement the withdrawals continue forever (for its children), still once at the start of each year with the first on the day of retirement, but each year 2% more than the year before. With the amount from (a) at retirement, how much can it withdraw in the first year? (6 points)
     answer:
       zh-cn: |-
         (a) 取款每年一次，而利息按月复利，所以要用有效年利率：$R = 1.005^{12} - 1 \approx 6.17$%。取款在每年年初，是期初年金：
         $PV = 60{,}000 \times \frac{1 - (1+R)^{-25}}{R} \times (1+R) \approx 801{,}486$ 美元。
         （直接用 6% 作为年利率会得到约 813,021 美元；按期末年金计算则会少算一期利息。）
-        (b) 月利率 $i = 0.005$，$n = 360$。由年金终值公式，$C = \frac{801{,}486 \times 0.005}{1.005^{360} - 1} \approx 797.88$ 美元。
+        (b) 月利率 $i = 0.005$，$n = 360$。现有的 50,000 美元 30 年后变为 $50{,}000 \times 1.005^{360} \approx 301{,}129$ 美元，每月存款只需补足其余的 $801{,}486 - 301{,}129 = 500{,}357$ 美元。由年金终值公式，$C = \frac{500{,}357 \times 0.005}{1.005^{360} - 1} \approx 498.11$ 美元。
         (c) 设第一年领取 $W$。第一笔在退休当天，之后从第 1 年末起是首笔为 $W(1+g)$ 的增长永续年金，所以
         $PV = W + \frac{W(1+g)}{R - g} = W \cdot \frac{1+R}{R-g}$。
         $W = 801{,}486 \times \frac{R - 0.02}{1 + R} \approx 31{,}464$ 美元。
@@ -203,18 +210,18 @@ questions:
         (a) Withdrawals are yearly while interest is compounded monthly, so the effective annual rate is needed: $R = 1.005^{12} - 1 \approx 6.17$%. The withdrawals are at the start of each year, an annuity due:
         $PV = 60{,}000 \times \frac{1 - (1+R)^{-25}}{R} \times (1+R) \approx 801{,}486$ dollars.
         (Using 6% directly as the annual rate gives about 813,021 dollars; treating the withdrawals as end-of-year leaves out one period of interest.)
-        (b) The monthly rate is $i = 0.005$ and $n = 360$. From the future value of an annuity, $C = \frac{801{,}486 \times 0.005}{1.005^{360} - 1} \approx 797.88$ dollars.
+        (b) The monthly rate is $i = 0.005$ and $n = 360$. The 50,000 dollars already in the account grows to $50{,}000 \times 1.005^{360} \approx 301{,}129$ dollars in 30 years, so the deposits need to supply only the remaining $801{,}486 - 301{,}129 = 500{,}357$ dollars. From the future value of an annuity, $C = \frac{500{,}357 \times 0.005}{1.005^{360} - 1} \approx 498.11$ dollars.
         (c) Let the first withdrawal be $W$. It is on the day of retirement; from the end of year 1 there is a growing perpetuity whose first payment is $W(1+g)$, so
         $PV = W + \frac{W(1+g)}{R - g} = W \cdot \frac{1+R}{R-g}$.
         $W = 801{,}486 \times \frac{R - 0.02}{1 + R} \approx 31{,}464$ dollars.
     rubric:
       zh-cn:
         - "(a) 换算有效年利率 2 分；按期初年金求现值，约 801,486 美元 4 分。直接用 6% 或按期末年金计算、其余正确：最多 3 分。"
-        - "(b) 列出年金终值方程 2 分，约 797.88 美元 2 分。用 (a) 的错误结果但方法正确：给满分。"
+        - "(b) 计入现有存款的终值并列出年金终值方程 2 分，约 498.11 美元 2 分。忽略现有存款：最多 1 分。用 (a) 的错误结果但方法正确：给满分。"
         - "(c) 正确处理第一笔在退休当天（$W \\cdot \\frac{1+R}{R-g}$ 或等价形式）4 分，约 31,464 美元 2 分。"
       en:
         - "(a) Conversion to the effective annual rate 2 points; present value as an annuity due, about 801,486 dollars, 4 points. Using 6% directly or an end-of-year annuity with the rest correct: at most 3 points."
-        - "(b) Future value equation 2 points; about 797.88 dollars 2 points. Correct method with a wrong result carried over from (a): full points."
+        - "(b) Future value of the existing 50,000 dollars and the annuity future value equation 2 points; about 498.11 dollars 2 points. Ignoring the existing balance: at most 1 point. Correct method with a wrong result carried over from (a): full points."
         - "(c) Correct treatment of the first withdrawal on the day of retirement ($W \\cdot \\frac{1+R}{R-g}$ or an equivalent form) 4 points; about 31,464 dollars 2 points."
 
   - id: Q7
@@ -259,120 +266,118 @@ questions:
   - id: Q8
     kind: quiz
     part: problem
-    hard_points: 12
+    hard_points: 0
     points: 18
     concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, correlation]
-    expected: { rho: "-0.25", sd: "7.91", threshold: "0.5" }
+    expected: { rho: "0.25", sd: "14.70", threshold: "0.67" }
     question:
       zh-cn: |-
-        两只基金 A、B 的标准差为 $\sigma_A$、$\sigma_B$，相关系数为 $\rho$。组合中 A 的权重为 $w$，B 为 $1 - w$。
+        两只基金 A、B 的标准差为 $\sigma_A$、$\sigma_B$，相关系数为 $\rho$，且 $\rho < 1$。组合中 A 的权重为 $w$，B 为 $1 - w$。
         (a) 用导数推导使组合方差最小的权重 $w^*$（用 $\sigma_A$、$\sigma_B$、$\rho$ 表示），并说明它确实是最小值。（6 分）
-        (b) 已知 $\sigma_A = 20\%$，$\sigma_B = 10\%$，某位分析师算出的最小方差组合中 A 的权重是 25%。由此反推两只基金的相关系数，并求这个组合的标准差。（6 分）
-        (c) 仍取 $\sigma_A = 20\%$、$\sigma_B = 10\%$，不允许卖空（$0 \le w \le 1$）。相关系数在什么范围内时，最小方差组合完全不持有 A？说明理由。（6 分）
+        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$，某位分析师算出的最小方差组合中 A 的权重是 25%。由此反推两只基金的相关系数，并求这个组合的标准差。（6 分）
+        (c) 仍取 $\sigma_A = 24\%$、$\sigma_B = 16\%$，不允许卖空（$0 \le w \le 1$）。相关系数在什么范围内时，最小方差组合完全不持有 A？说明理由。（6 分）
       en: |-
-        Two funds A and B have standard deviations $\sigma_A$ and $\sigma_B$ and correlation $\rho$. The portfolio holds A with weight $w$ and B with weight $1 - w$.
+        Two funds A and B have standard deviations $\sigma_A$ and $\sigma_B$ and correlation $\rho$, with $\rho < 1$. The portfolio holds A with weight $w$ and B with weight $1 - w$.
         (a) Use the derivative to derive the weight $w^*$ that minimizes the portfolio variance (in terms of $\sigma_A$, $\sigma_B$ and $\rho$), and show that it is a minimum. (6 points)
-        (b) With $\sigma_A = 20\%$ and $\sigma_B = 10\%$, an analyst finds that the minimum-variance portfolio holds 25% in A. Work back to the correlation between the two funds, and find the standard deviation of this portfolio. (6 points)
-        (c) Still with $\sigma_A = 20\%$ and $\sigma_B = 10\%$, short selling is not allowed ($0 \le w \le 1$). For what range of the correlation does the minimum-variance portfolio hold no A at all? Explain. (6 points)
+        (b) With $\sigma_A = 24\%$ and $\sigma_B = 16\%$, an analyst finds that the minimum-variance portfolio holds 25% in A. Work back to the correlation between the two funds, and find the standard deviation of this portfolio. (6 points)
+        (c) Still with $\sigma_A = 24\%$ and $\sigma_B = 16\%$, short selling is not allowed ($0 \le w \le 1$). For what range of the correlation does the minimum-variance portfolio hold no A at all? Explain. (6 points)
     answer:
       zh-cn: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$。
         $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$，解得
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。
-        二阶导数 $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\,\text{Var}(R_A - R_B) \ge 0$，$\rho < 1$ 或 $\sigma_A \ne \sigma_B$ 时为正，是最小值。
-        (b) $\frac{100 - 200\rho}{500 - 400\rho} = 0.25$，$100 - 200\rho = 125 - 100\rho$，$\rho = -0.25$。
-        $\sigma_P^2 = 0.0625 \times 400 + 0.5625 \times 100 + 2 \times 0.25 \times 0.75 \times (-0.25) \times 200 = 25 + 56.25 - 18.75 = 62.5$，$\sigma_P \approx 7.91\%$。
-        (c) 方差是 $w$ 的开口向上的二次函数。最小值点 $w^* \le 0$ 时，在 $[0, 1]$ 上方差随 $w$ 增加，最优是角点 $w = 0$。$w^* \le 0$ 即 $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$，$\rho \ge \frac{\sigma_B}{\sigma_A} = 0.5$。所以 $\rho \ge 0.5$ 时完全不持有 A（$\rho = 0.5$ 时 $w^*$ 恰好为 0）。
+        二阶导数 $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$（因为 $\rho < 1$），是最小值。
+        (b) $\frac{256 - 384\rho}{832 - 768\rho} = 0.25$，$256 - 384\rho = 208 - 192\rho$，$\rho = 0.25$。
+        $\sigma_P^2 = 0.0625 \times 576 + 0.5625 \times 256 + 2 \times 0.25 \times 0.75 \times 0.25 \times 384 = 36 + 144 + 36 = 216$，$\sigma_P \approx 14.70\%$。
+        (c) 方差是 $w$ 的开口向上的二次函数。最小值点 $w^* \le 0$ 时，在 $[0, 1]$ 上方差随 $w$ 增加，最优是角点 $w = 0$。$w^* \le 0$ 即 $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$，$\rho \ge \frac{\sigma_B}{\sigma_A} = \frac{2}{3} \approx 0.67$。所以 $\frac{2}{3} \le \rho < 1$ 时完全不持有 A（$\rho = \frac{2}{3}$ 时 $w^*$ 恰好为 0）。
       en: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$.
         $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$ gives
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$.
-        The second derivative is $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\,\text{Var}(R_A - R_B) \ge 0$, positive when $\rho < 1$ or $\sigma_A \ne \sigma_B$, so it is a minimum.
-        (b) $\frac{100 - 200\rho}{500 - 400\rho} = 0.25$, so $100 - 200\rho = 125 - 100\rho$ and $\rho = -0.25$.
-        $\sigma_P^2 = 0.0625 \times 400 + 0.5625 \times 100 + 2 \times 0.25 \times 0.75 \times (-0.25) \times 200 = 25 + 56.25 - 18.75 = 62.5$, so $\sigma_P \approx 7.91\%$.
-        (c) The variance is a quadratic in $w$ that opens upward. When its minimum point $w^* \le 0$, the variance rises with $w$ on $[0, 1]$, and the optimum is the corner $w = 0$. $w^* \le 0$ means $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$, that is, $\rho \ge \frac{\sigma_B}{\sigma_A} = 0.5$. So for $\rho \ge 0.5$ the portfolio holds no A ($w^*$ is exactly 0 at $\rho = 0.5$).
+        The second derivative is $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$ (because $\rho < 1$), so it is a minimum.
+        (b) $\frac{256 - 384\rho}{832 - 768\rho} = 0.25$, so $256 - 384\rho = 208 - 192\rho$ and $\rho = 0.25$.
+        $\sigma_P^2 = 0.0625 \times 576 + 0.5625 \times 256 + 2 \times 0.25 \times 0.75 \times 0.25 \times 384 = 36 + 144 + 36 = 216$, so $\sigma_P \approx 14.70\%$.
+        (c) The variance is a quadratic in $w$ that opens upward. When its minimum point $w^* \le 0$, the variance rises with $w$ on $[0, 1]$, and the optimum is the corner $w = 0$. $w^* \le 0$ means $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$, that is, $\rho \ge \frac{\sigma_B}{\sigma_A} = \frac{2}{3} \approx 0.67$. So for $\frac{2}{3} \le \rho < 1$ the portfolio holds no A ($w^*$ is exactly 0 at $\rho = \frac{2}{3}$).
     rubric:
       zh-cn:
         - "(a) 方差表达式与求导 3 分，$w^*$ 公式 2 分，二阶条件 1 分。"
-        - "(b) 解出 $\\rho = -0.25$ 4 分，标准差约 7.91% 2 分。"
-        - "(c) 指出最优为角点、需要 $w^* \\le 0$ 3 分；得出 $\\rho \\ge 0.5$ 3 分。"
+        - "(b) 解出 $\\rho = 0.25$ 4 分，标准差约 14.70% 2 分。"
+        - "(c) 指出最优为角点、需要 $w^* \\le 0$ 3 分；得出 $\\rho \\ge \\frac{2}{3}$ 3 分。"
       en:
         - "(a) Variance expression and derivative 3 points; formula for $w^*$ 2 points; second-order condition 1 point."
-        - "(b) $\\rho = -0.25$: 4 points; standard deviation about 7.91%: 2 points."
-        - "(c) The optimum is a corner when $w^* \\le 0$: 3 points; $\\rho \\ge 0.5$: 3 points."
+        - "(b) $\\rho = 0.25$: 4 points; standard deviation about 14.70%: 2 points."
+        - "(c) The optimum is a corner when $w^* \\le 0$: 3 points; $\\rho \\ge \\frac{2}{3}$: 3 points."
 
   - id: Q9
     kind: quiz
     part: problem
-    hard_points: 11
+    hard_points: 0
     points: 15
     concepts: [normal-distribution, z-score, log-return, lognormal-distribution, median, right-skew]
-    expected: { p1: "35", p25: "2.6", median: "575.5", mean: "862.8", below: "67" }
+    expected: { p25: "2.6", median: "575.5", mean: "862.8", below: "67" }
     question:
       zh-cn: |-
         某股票指数每年的对数收益率服从正态分布，期望 7%，标准差 18%，各年相互独立。需要时可用标准正态分布的累积分布函数 $\Phi$ 的这些值：$\Phi(0.39) = 0.652$，$\Phi(0.45) = 0.674$，$\Phi(0.78) = 0.782$，$\Phi(1.17) = 0.879$，$\Phi(1.94) = 0.974$。
-        (a) 某一年指数下跌（对数收益率小于 0）的概率约为多少？（4 分）
-        (b) 持有 25 年，25 年后指数低于今天的概率约为多少？（5 分）
-        (c) 今天投入 100 美元，25 年后财富的中位数和均值各是多少？一份退休规划报告用这个均值来说明“你 25 年后大约会有多少钱”。最后财富低于这个数的投资者约占多大比例？（6 分）
+        (a) 持有 25 年，25 年后指数低于今天的概率约为多少？（5 分）
+        (b) 今天投入 100 美元，25 年后财富的中位数和均值各是多少？（5 分）
+        (c) 一份退休规划报告用 (b) 的均值来说明“你 25 年后大约会有多少钱”。最后财富低于这个数的投资者约占多大比例？评价这份报告的说法。（5 分）
       en: |-
         The yearly log return of a stock index is normally distributed with mean 7% and standard deviation 18%, independent across years. Where needed, use these values of the standard normal cumulative distribution function $\Phi$: $\Phi(0.39) = 0.652$, $\Phi(0.45) = 0.674$, $\Phi(0.78) = 0.782$, $\Phi(1.17) = 0.879$, $\Phi(1.94) = 0.974$.
-        (a) What is the probability that the index falls in a given year (a log return below 0)? (4 points)
-        (b) Holding for 25 years, what is the probability that after 25 years the index is below its level today? (5 points)
-        (c) You invest 100 dollars today. What are the median and the mean of your wealth after 25 years? A retirement planning report uses this mean to describe "about how much you will have in 25 years". About what share of investors end with less than this amount? (6 points)
+        (a) Holding for 25 years, what is the probability that after 25 years the index is below its level today? (5 points)
+        (b) You invest 100 dollars today. What are the median and the mean of your wealth after 25 years? (5 points)
+        (c) A retirement planning report uses the mean from (b) to describe "about how much you will have in 25 years". About what share of investors end with less than this amount? Evaluate the report's statement. (5 points)
     answer:
       zh-cn: |-
-        (a) $z = \frac{0 - 7}{18} \approx -0.39$，$P = 1 - \Phi(0.39) \approx 0.348$，约 35%。
-        (b) 对数收益率可以相加，25 年的总对数收益率服从正态分布：期望 $25 \times 7\% = 175\%$；各年独立，方差是 25 倍，标准差为 $18\% \times \sqrt{25} = 90\%$。$z = \frac{0 - 175}{90} \approx -1.94$，$P \approx 1 - 0.974 = 2.6$%。（把标准差算成 $25 \times 18\% = 450\%$ 会得到 $z \approx -0.39$，与一年的结果相同，这是错的。）
-        (c) $\ln W = \ln 100 + S$，其中 $S$ 的期望 $m = 1.75$、标准差 $s = 0.9$。中位数 $100\,e^{1.75} \approx 575.5$ 美元，均值 $100\,e^{1.75 + 0.81/2} = 100\,e^{2.155} \approx 862.8$ 美元。
-        财富低于均值即 $S < 2.155$，$z = \frac{2.155 - 1.75}{0.9} = 0.45$，概率 $\Phi(0.45) \approx 0.674$，约 67% 的投资者达不到这个数。财富分布右偏，均值被少数结果很好的路径拉高，用均值描述“大约会有多少钱”过于乐观。
+        (a) 对数收益率可以相加，25 年的总对数收益率服从正态分布：期望 $25 \times 7\% = 175\%$；各年独立，方差是 25 倍，标准差为 $18\% \times \sqrt{25} = 90\%$。$z = \frac{0 - 175}{90} \approx -1.94$，$P \approx 1 - 0.974 = 2.6$%。（把标准差算成 $25 \times 18\% = 450\%$ 会得到 $z \approx -0.39$，与一年的结果相同，这是错的。）
+        (b) $\ln W = \ln 100 + S$，其中 $S$ 的期望 $m = 1.75$、标准差 $s = 0.9$。中位数 $100\,e^{1.75} \approx 575.5$ 美元，均值 $100\,e^{1.75 + 0.81/2} = 100\,e^{2.155} \approx 862.8$ 美元。
+        (c) 财富低于均值即 $S < 2.155$，$z = \frac{2.155 - 1.75}{0.9} = 0.45$，概率 $\Phi(0.45) \approx 0.674$，约 67% 的投资者达不到这个数。财富分布右偏，均值被少数结果很好的路径拉高，用均值描述“大约会有多少钱”过于乐观；中位数（575.5 美元）更能代表典型的结果。
       en: |-
-        (a) $z = \frac{0 - 7}{18} \approx -0.39$, so $P = 1 - \Phi(0.39) \approx 0.348$, about 35%.
-        (b) Log returns add up, so the total log return over 25 years is normally distributed with mean $25 \times 7\% = 175\%$; with independent years the variance is 25 times as large, so the standard deviation is $18\% \times \sqrt{25} = 90\%$. $z = \frac{0 - 175}{90} \approx -1.94$, so $P \approx 1 - 0.974 = 2.6$%. (Taking the standard deviation as $25 \times 18\% = 450\%$ gives $z \approx -0.39$, the same as for one year, which is wrong.)
-        (c) $\ln W = \ln 100 + S$, where $S$ has mean $m = 1.75$ and standard deviation $s = 0.9$. The median is $100\,e^{1.75} \approx 575.5$ dollars and the mean is $100\,e^{1.75 + 0.81/2} = 100\,e^{2.155} \approx 862.8$ dollars.
-        Wealth below the mean means $S < 2.155$, $z = \frac{2.155 - 1.75}{0.9} = 0.45$, with probability $\Phi(0.45) \approx 0.674$: about 67% of investors do not reach this amount. The distribution of wealth is right-skewed and the mean is pulled up by a few very good paths, so using the mean for "about how much you will have" is too optimistic.
+        (a) Log returns add up, so the total log return over 25 years is normally distributed with mean $25 \times 7\% = 175\%$; with independent years the variance is 25 times as large, so the standard deviation is $18\% \times \sqrt{25} = 90\%$. $z = \frac{0 - 175}{90} \approx -1.94$, so $P \approx 1 - 0.974 = 2.6$%. (Taking the standard deviation as $25 \times 18\% = 450\%$ gives $z \approx -0.39$, the same as for one year, which is wrong.)
+        (b) $\ln W = \ln 100 + S$, where $S$ has mean $m = 1.75$ and standard deviation $s = 0.9$. The median is $100\,e^{1.75} \approx 575.5$ dollars and the mean is $100\,e^{1.75 + 0.81/2} = 100\,e^{2.155} \approx 862.8$ dollars.
+        (c) Wealth below the mean means $S < 2.155$, $z = \frac{2.155 - 1.75}{0.9} = 0.45$, with probability $\Phi(0.45) \approx 0.674$: about 67% of investors do not reach this amount. The distribution of wealth is right-skewed and the mean is pulled up by a few very good paths, so using the mean for "about how much you will have" is too optimistic; the median (575.5 dollars) better represents a typical outcome.
     rubric:
       zh-cn:
-        - "(a) $z$ 值 2 分，约 35% 2 分。"
-        - "(b) 期望 175% 1 分；标准差按 $\\sqrt{25}$ 放大得 90% 2 分；约 2.6% 2 分。标准差按 25 倍放大：最多 1 分。"
-        - "(c) 中位数 2 分，均值 2 分；约 67% 并说明均值被右偏拉高 2 分。"
+        - "(a) 期望 175% 1 分；标准差按 $\\sqrt{25}$ 放大得 90% 2 分；约 2.6% 2 分。标准差按 25 倍放大：最多 1 分。"
+        - "(b) 中位数 2 分，均值 3 分。"
+        - "(c) 约 67% 3 分；说明均值被右偏拉高、典型结果应看中位数 2 分。"
       en:
-        - "(a) $z$ value 2 points; about 35% 2 points."
-        - "(b) Mean of 175% 1 point; standard deviation scaled by $\\sqrt{25}$ to 90% 2 points; about 2.6% 2 points. Standard deviation scaled by 25: at most 1 point."
-        - "(c) Median 2 points, mean 2 points; about 67% with the explanation that the mean is pulled up by the right skew 2 points."
+        - "(a) Mean of 175% 1 point; standard deviation scaled by $\\sqrt{25}$ to 90% 2 points; about 2.6% 2 points. Standard deviation scaled by 25: at most 1 point."
+        - "(b) Median 2 points, mean 3 points."
+        - "(c) About 67%: 3 points; explains that the mean is pulled up by the right skew and that the median represents a typical outcome 2 points."
 
   - id: Q10
     kind: quiz
     part: problem
     hard_points: 0
     points: 15
-    concepts: [r-squared, residual, regression-coefficient, t-statistic, confidence-interval, statistical-significance]
-    expected: { sd_f: "7.75", sd_e: "5.75", t_a: "1.6", ilo: "-0.09", ihi: "0.89", pred: "5.6", lo: "-5.7", hi: "16.9" }
+    concepts: [r-squared, residual, regression-coefficient, normal-distribution]
+    expected: { sd_f: "7.75", sd_e: "5.75", gap: "0.7", gap_down: "-0.8", pred: "5.6", lo: "-5.7", hi: "16.9" }
     question:
       zh-cn: |-
-        用一只基金过去 60 个月的月收益对市场月收益（%）做回归，结果为：截距 $a = 0.4$（标准误 0.25），斜率 $b = 1.3$（标准误 0.2），$R^2 = 0.45$。同期市场月收益的标准差为 4%。
-        (a) 求基金月收益的标准差，以及残差的标准差。（5 分）
-        (b) 一位分析师说：“截距是每月 0.4%，一年约 4.8%，说明基金经理每年能比市场多赚将近 5 个百分点。”评价这个说法。（4 分）
+        用一只基金过去 60 个月的月收益对市场月收益（%）做回归，结果为：截距 $a = 0.4$，斜率 $b = 1.3$，$R^2 = 0.45$。同期市场月收益的平均值为 1%，标准差为 4%。
+        (a) 求基金月收益的标准差，以及残差的标准差（各保留两位小数）。（5 分）
+        (b) 一位分析师说：“截距是 0.4，说明这只基金平均每月比市场多赚 0.4 个百分点。”评价这个说法：这段时期基金平均每月比市场多赚多少？市场下跌 4% 的月份呢？多赚的部分主要来自哪里？（4 分）
         (c) 某个月市场涨了 4%。忽略系数的估计误差，并假设残差近似服从正态分布，预测这个月基金的收益，并给出大约 95% 的这类月份会落在其中的范围。有人说：“这个月市场涨了 4%，这只基金这个月不可能亏钱。”这个说法对吗？（6 分）
       en: |-
-        A fund's monthly returns over the past 60 months are regressed on the market's monthly returns (%). The result: intercept $a = 0.4$ (standard error 0.25), slope $b = 1.3$ (standard error 0.2), $R^2 = 0.45$. Over the same period the standard deviation of the market's monthly return was 4%.
-        (a) Find the standard deviation of the fund's monthly return and the standard deviation of the residuals. (5 points)
-        (b) An analyst says: "The intercept is 0.4% a month, about 4.8% a year, so the fund manager can earn almost 5 percentage points a year more than the market." Evaluate this statement. (4 points)
+        A fund's monthly returns over the past 60 months are regressed on the market's monthly returns (%). The result: intercept $a = 0.4$, slope $b = 1.3$, $R^2 = 0.45$. Over the same period the market's monthly return had an average of 1% and a standard deviation of 4%.
+        (a) Find the standard deviation of the fund's monthly return and the standard deviation of the residuals (to two decimal places each). (5 points)
+        (b) An analyst says: "The intercept is 0.4, so on average the fund earns 0.4 percentage points a month more than the market." Evaluate this statement: over this period, how much more than the market did the fund earn on average per month? What about in a month when the market falls 4%? Where does the extra return mainly come from? (4 points)
         (c) In one month the market rises 4%. Ignoring the estimation error of the coefficients and assuming that the residuals are approximately normal, predict the fund's return for this month, and give the range in which about 95% of such months fall. Someone says: "The market rose 4% this month, so this fund cannot lose money this month." Is this right? (6 points)
     answer:
       zh-cn: |-
         (a) 拟合值 $a + bx$ 的方差为 $b^2\sigma_m^2 = 1.69 \times 16 = 27.04$。$R^2$ 是拟合值的方差占基金收益方差的比例，所以 $\sigma_f^2 = \frac{27.04}{0.45} \approx 60.09$，$\sigma_f \approx 7.75$%。残差的方差是剩下的部分：$(1 - R^2)\sigma_f^2 \approx 33.05$，残差标准差约 5.75%。
-        (b) 截距的 t 值 $\frac{0.4}{0.25} = 1.6 < 1.96$，在 5% 水平上不显著；95% 置信区间 $0.4 \pm 1.96 \times 0.25$，约 $[-0.09, 0.89]$，包含 0。4.8% 只是点估计，数据不能区分能力和运气，不能据此说经理能稳定地多赚。
+        (b) 说法不对。截距是市场收益为 0 时基金的平均收益，不是基金比市场多赚的部分。基金减市场的平均差为 $a + (b - 1)x$：这段时期市场平均 1%，基金平均 $0.4 + 1.3 \times 1 = 1.7$%，每月平均多赚 0.7 个百分点；市场下跌 4% 的月份，基金平均 $0.4 - 5.2 = -4.8$%，比市场少 0.8 个百分点（即 −0.8）。多赚的部分有一大块来自 $b = 1.3 > 1$：基金承担了比市场更大的市场风险，市场上涨时跟着多涨，下跌时也多跌。这不说明经理有选股能力。
         (c) 预测 $0.4 + 1.3 \times 4 = 5.6$%。范围约 $5.6 \pm 1.96 \times 5.75$，即 $[-5.7, 16.9]$（%）。说法不对：范围的下限是负数。残差的标准差和预测值差不多大，即使市场涨了 4%，基金在相当一部分这样的月份里仍会亏钱。回归给出的是平均关系，不是每个月都成立。
       en: |-
         (a) The fitted values $a + bx$ have variance $b^2\sigma_m^2 = 1.69 \times 16 = 27.04$. $R^2$ is the share of the variance of the fund's return that the fitted values account for, so $\sigma_f^2 = \frac{27.04}{0.45} \approx 60.09$ and $\sigma_f \approx 7.75$%. The residual variance is the rest: $(1 - R^2)\sigma_f^2 \approx 33.05$, so the residual standard deviation is about 5.75%.
-        (b) The t-statistic of the intercept is $\frac{0.4}{0.25} = 1.6 < 1.96$, not significant at the 5% level; the 95% confidence interval $0.4 \pm 1.96 \times 0.25$ is about $[-0.09, 0.89]$ and contains 0. 4.8% is only a point estimate; the data cannot separate skill from luck, so they do not show that the manager can reliably earn more.
+        (b) The statement is wrong. The intercept is the fund's average return when the market return is 0, not the amount by which the fund beats the market. The average difference between fund and market is $a + (b - 1)x$: over this period the market averaged 1% and the fund $0.4 + 1.3 \times 1 = 1.7$%, so it earned 0.7 percentage points a month more on average; in a month when the market falls 4%, the fund averages $0.4 - 5.2 = -4.8$%, 0.8 percentage points less than the market (that is, −0.8). Much of the extra return comes from $b = 1.3 > 1$: the fund takes more market risk than the market itself, so it rises more when the market rises and falls more when it falls. This does not show that the manager has stock-picking skill.
         (c) The prediction is $0.4 + 1.3 \times 4 = 5.6$%. The range is about $5.6 \pm 1.96 \times 5.75$, that is, $[-5.7, 16.9]$ (%). The statement is wrong: the lower end of the range is negative. The residual standard deviation is about as large as the prediction, so even when the market rises 4%, the fund still loses money in a fair share of such months. The regression gives an average relation, not one that holds every month.
     rubric:
       zh-cn:
         - "(a) 用 $R^2$ 与方差的关系求出基金标准差约 7.75% 3 分；残差标准差约 5.75% 2 分。"
-        - "(b) 计算截距的 t 值或置信区间并得出不显著 3 分；说明点估计不能证明能力 1 分。"
+        - "(b) 指出截距不是比市场多赚的部分，算出平均多赚 0.7 和下跌月份少 0.8 3 分；指出来自 $b > 1$ 的市场风险 1 分。只从截距是否显著的角度评价：最多 2 分。"
         - "(c) 预测 5.6% 2 分；用残差标准差给出范围约 −5.7% 到 16.9% 2 分；指出可能亏钱、回归只是平均关系 2 分。用 (a) 的错误结果但方法正确：不扣分。"
       en:
         - "(a) Uses the relation between $R^2$ and variances to find the fund's standard deviation of about 7.75%: 3 points; residual standard deviation of about 5.75%: 2 points."
-        - "(b) Computes the t-statistic or the confidence interval of the intercept and finds it not significant 3 points; explains that a point estimate does not prove skill 1 point."
+        - "(b) Explains that the intercept is not the amount by which the fund beats the market, and finds 0.7 more on average and 0.8 less in a falling month: 3 points; attributes this to market risk from $b > 1$: 1 point. Evaluating only whether the intercept is significant: at most 2 points."
         - "(c) Prediction of 5.6% 2 points; range of about −5.7% to 16.9% from the residual standard deviation 2 points; points out that a loss is possible because the regression is only an average relation 2 points. Correct method with a wrong result carried over from (a): no deduction."

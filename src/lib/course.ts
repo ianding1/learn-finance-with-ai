@@ -38,7 +38,9 @@ export interface Question {
 	section?: string;
 	/** quiz questions only: 'judge' (true / false with reasons) or 'problem' */
 	part?: 'judge' | 'problem';
-	/** quiz questions only: points of the parts judged hard (not shown on the page) */
+	/** quiz questions only: points of the parts with difficulty score 2 or less (not shown on the page) */
+	easy_points?: number;
+	/** quiz questions only: points of the parts with difficulty score 6 or more (not shown on the page) */
 	hard_points?: number;
 	star?: boolean;
 	/** quiz questions only; check questions and exercises are not scored */

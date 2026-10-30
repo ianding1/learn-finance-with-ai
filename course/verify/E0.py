@@ -30,8 +30,13 @@ def results():
     ma, mb = mean(A), mean(B)
     r["Q3.cov"] = sum((a - ma) * (b - mb) for a, b in zip(A, B)) / 3
 
-    # Q4: at least one false positive among 20 independent tests at 5%.
-    r["Q4.p"] = 100 * (1 - 0.95**20)
+    # Q4: estimates 10% and 4%, both SE 2, independent: test the difference.
+    se_d = sqrt(2**2 + 2**2)
+    r["Q4.se_d"] = se_d
+    r["Q4.t"] = (10 - 4) / se_d
+
+    # Q5: slope of y on x is 2 and R^2 = 0.5; the product of the two slopes is r^2 = R^2.
+    r["Q5.d"] = 0.5 / 2
 
     # Q6: withdrawals of 60,000 at the start of each year for 25 years; 6% nominal, monthly.
     i = 0.005
@@ -39,7 +44,9 @@ def results():
     pv = 60_000 * (1 - (1 + R) ** -25) / R * (1 + R)
     r["Q6.ear"] = 100 * R
     r["Q6.pv"] = pv
-    r["Q6.c"] = pv * i / ((1 + i) ** 360 - 1)
+    fv0 = 50_000 * (1 + i) ** 360  # the balance already in the account
+    r["Q6.fv0"] = fv0
+    r["Q6.c"] = (pv - fv0) * i / ((1 + i) ** 360 - 1)
     r["Q6.w"] = pv * (R - 0.02) / (1 + R)  # growing perpetuity, first payment today
 
     # Q7: p = 100 - 2q, C = cq + F.
@@ -54,8 +61,8 @@ def results():
     r["Q7.c_shut"] = 100 - sqrt(8 * 200)  # profit(c, 200) = 0
     r["Q7.c_sunk"] = 100  # marginal revenue at q = 0
 
-    # Q8: sigma_A 20, sigma_B 10, w* = 0.25 -> back out rho.
-    sa, sb, w = 20, 10, 0.25
+    # Q8: sigma_A 24, sigma_B 16, w* = 0.25 -> back out rho.
+    sa, sb, w = 24, 16, 0.25
     rho = (sb**2 - w * (sa**2 + sb**2)) / (sa * sb * (1 - 2 * w))
     r["Q8.rho"] = rho
     r["Q8.sd"] = sqrt(w**2 * sa**2 + (1 - w) ** 2 * sb**2 + 2 * w * (1 - w) * rho * sa * sb)
@@ -64,21 +71,19 @@ def results():
     # Q9: yearly log return N(7%, 18%^2), independent; 25 years.
     mu, sd, n = 0.07, 0.18, 25
     m, s = n * mu, sd * sqrt(n)
-    r["Q9.p1"] = 100 * Phi(-mu / sd)
     r["Q9.p25"] = 100 * Phi(-m / s)
     r["Q9.median"] = 100 * exp(m)
     r["Q9.mean"] = 100 * exp(m + s**2 / 2)
     r["Q9.below"] = 100 * Phi((s**2 / 2) / s)
 
-    # Q10: a = 0.4 (SE 0.25), b = 1.3 (SE 0.2), R^2 = 0.45, sd of market 4%.
+    # Q10: a = 0.4, b = 1.3, R^2 = 0.45; market mean 1%, sd 4%.
     var_f = 1.3**2 * 4**2 / 0.45
     sd_e = sqrt((1 - 0.45) * var_f)
     pred = 0.4 + 1.3 * 4
     r["Q10.sd_f"] = sqrt(var_f)
     r["Q10.sd_e"] = sd_e
-    r["Q10.t_a"] = 0.4 / 0.25
-    r["Q10.ilo"] = 0.4 - 1.96 * 0.25
-    r["Q10.ihi"] = 0.4 + 1.96 * 0.25
+    r["Q10.gap"] = 0.4 + (1.3 - 1) * 1  # fund minus market at the average market return
+    r["Q10.gap_down"] = 0.4 + (1.3 - 1) * -4
     r["Q10.pred"] = pred
     r["Q10.lo"] = pred - 1.96 * sd_e
     r["Q10.hi"] = pred + 1.96 * sd_e

@@ -100,7 +100,8 @@ one learner, revision history and answers inline. To publish a finished lesson:
   `<CheckAll />` exactly once, and a lesson with
   exercises contains `<Exercises />` exactly once.
 - Check questions and exercises have no `points`, and their rubrics do not mention points.
-- Quiz questions have `points` (total 100) and `hard_points` (0 to `points`); the hard parts total 20–30.
+- Quiz questions have `points` (total 100), `easy_points` and `hard_points`; easy parts (difficulty
+  score 2 or less) total at most 20 points, and hard parts (score 6 or more) at least 10.
 - Chinese text (every `zh-*` language) uses Chinese quotation marks and the word 提示词 (提示詞 in
   Traditional Chinese), has no space after full-width
   punctuation, and never ends a bold run with full-width punctuation directly before a character
@@ -145,8 +146,10 @@ one learner, revision history and answers inline. To publish a finished lesson:
 
 Quizzes follow the exam rules in the author's curriculum ("阶段考试"):
 
-- Test understanding and use, not definitions or direct use of a formula. Difficulty is judged per
-  part: the hard parts total 20–30 points (`hard_points` per question in the key; never shown on the page).
+- Test understanding and use, not definitions or direct use of a formula. Difficulty is scored per
+  part with the rubric of the stage-quiz-writing skill: easy parts (score 2 or less) total at most 20
+  points, hard parts (score 6 or more) at least 10 (`easy_points` and `hard_points` per question in
+  the key; never shown on the page).
 - Each question has its own core point; basic concepts used along the way may repeat.
 - Only lessons of the block and earlier; the questions carry no lesson or difficulty labels and no
   hints. The page starts with instructions and a formula sheet.
