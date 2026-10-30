@@ -82,7 +82,7 @@ questions:
   - id: Q2
     kind: quiz
     part: judge
-    easy_points: 0
+    easy_points: 4
     hard_points: 0
     points: 4
     concepts: [shadow-price, lagrange-multiplier]
@@ -108,7 +108,7 @@ questions:
   - id: Q3
     kind: quiz
     part: judge
-    easy_points: 0
+    easy_points: 4
     hard_points: 0
     points: 4
     concepts: [covariance, correlation, random-variable]
@@ -160,7 +160,7 @@ questions:
   - id: Q5
     kind: quiz
     part: judge
-    easy_points: 0
+    easy_points: 4
     hard_points: 0
     points: 4
     concepts: [regression-coefficient, r-squared, correlation]
@@ -196,12 +196,12 @@ questions:
       zh-cn: |-
         一个家庭计划 30 年后退休。退休后每年年初从账户取 60,000 美元，共取 25 年，第一笔在退休当天取出。账户的名义年利率始终为 6%，按月复利。
         (a) 退休当天账户里至少要有多少钱？（6 分）
-        (b) 这个家庭现在账户里有 50,000 美元，以后每月月末只能存 400 美元。退休当天账户里会有多少钱？这笔钱够取多少次完整的 60,000 美元？（5 分）
+        (b) 这个家庭现在账户里有 50,000 美元，从下个月起每月月末只能存 400 美元，共存 360 次，最后一次在退休当天。退休当天账户里会有多少钱？退休后余额继续按同样的利率计息，这笔钱够取多少次完整的 60,000 美元？（5 分）
         (c) 家庭改变计划：退休时账户里有 (a) 的金额，领取永远持续下去（留给子女），仍是每年年初领取、第一笔在退休当天，以后每年比上一年多 2%。第一年能领多少？如果改为每年多 3%，第一年能领多少？说明增长率对第一年领取额的影响，以及增长率为什么不能任意提高。（5 分）
       en: |-
         A household plans to retire in 30 years. After retirement it will withdraw 60,000 dollars at the start of each year for 25 years, with the first withdrawal on the day of retirement. The account always pays a nominal annual rate of 6%, compounded monthly.
         (a) How much must the account hold on the day of retirement? (6 points)
-        (b) The household has 50,000 dollars in the account today and can deposit only 400 dollars at the end of each month from now on. How much will the account hold on the day of retirement? How many full withdrawals of 60,000 dollars will that pay for? (5 points)
+        (b) The household has 50,000 dollars in the account today and can deposit only 400 dollars at the end of each month from next month on, 360 deposits in all, the last on the day of retirement. How much will the account hold on the day of retirement? After retirement the balance keeps earning the same rate. How many full withdrawals of 60,000 dollars will that pay for? (5 points)
         (c) The household changes its plan: it retires with the amount from (a), and the withdrawals continue forever (for its children), still at the start of each year with the first on the day of retirement, each year 2% more than the year before. How much can it withdraw in the first year? How much if the withdrawals instead grow 3% a year? Explain how the growth rate affects the first withdrawal, and why the growth rate cannot be raised without limit. (5 points)
     answer:
       zh-cn: |-
@@ -233,7 +233,7 @@ questions:
   - id: Q7
     kind: quiz
     part: problem
-    easy_points: 0
+    easy_points: 5
     hard_points: 6
     points: 16
     concepts: [profit-maximization, marginal-revenue, marginal-cost, first-order-condition, second-order-condition, fixed-cost, sunk-cost]
@@ -274,7 +274,7 @@ questions:
     kind: quiz
     part: problem
     easy_points: 0
-    hard_points: 0
+    hard_points: 6
     points: 18
     concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, correlation]
     expected: { rho: "0.25", w: "25", w0: "30.77", threshold: "0.67" }
@@ -328,48 +328,44 @@ questions:
       zh-cn: |-
         某股票指数每年的对数收益率服从同一个正态分布，各年相互独立，期望和标准差未知。一份报告说：今天投入 100 美元，25 年后财富的中位数约为 575.5 美元，均值约为 862.8 美元。需要时可用标准正态分布的累积分布函数 $\Phi$ 的这些值：$\Phi(0.39) = 0.652$，$\Phi(0.45) = 0.674$，$\Phi(0.78) = 0.782$，$\Phi(1.17) = 0.879$，$\Phi(1.94) = 0.974$。
         (a) 由报告的数字求每年对数收益率的期望和标准差（以百分比表示，取整数）。（5 分）
-        (b) 持有 25 年，25 年后指数低于今天的概率约为多少？（5 分）
-        (c) 报告用均值 862.8 美元说明“你 25 年后大约会有多少钱”。最后财富低于这个数的投资者约占多大比例？评价这份报告的说法。（5 分）
+        (b) 持有 25 年，25 年后指数低于今天的概率约为多少？报告用均值 862.8 美元说明“你 25 年后大约会有多少钱”，最后财富低于这个数的投资者约占多大比例？评价这份报告的说法。（10 分）
       en: |-
         The yearly log return of a stock index follows the same normal distribution every year, independent across years, with unknown mean and standard deviation. A report says: if you invest 100 dollars today, the median of your wealth after 25 years is about 575.5 dollars and the mean is about 862.8 dollars. Where needed, use these values of the standard normal cumulative distribution function $\Phi$: $\Phi(0.39) = 0.652$, $\Phi(0.45) = 0.674$, $\Phi(0.78) = 0.782$, $\Phi(1.17) = 0.879$, $\Phi(1.94) = 0.974$.
         (a) From the report's numbers, find the mean and standard deviation of the yearly log return (in percent, rounded to whole numbers). (5 points)
-        (b) Holding for 25 years, what is the probability that after 25 years the index is below its level today? (5 points)
-        (c) The report uses the mean of 862.8 dollars to describe "about how much you will have in 25 years". About what share of investors end with less than this amount? Evaluate the report's statement. (5 points)
+        (b) Holding for 25 years, what is the probability that after 25 years the index is below its level today? The report uses the mean of 862.8 dollars to describe "about how much you will have in 25 years": about what share of investors end with less than this amount? Evaluate the report's statement. (10 points)
     answer:
       zh-cn: |-
         (a) 对数收益率可以相加，25 年的总对数收益率 $S$ 服从正态分布，设期望为 $m$、标准差为 $s$，则 $\ln W = \ln 100 + S$，财富服从对数正态分布。中位数 $100\,e^{m} = 575.5$，得 $m = \ln 5.755 \approx 1.75$；均值与中位数之比 $e^{s^2/2} = \frac{862.8}{575.5} \approx 1.499$，得 $s^2 \approx 0.81$，$s \approx 0.9$。各年独立同分布：期望是每年的 25 倍，方差是 25 倍、标准差是 $\sqrt{25} = 5$ 倍。所以每年的期望约 $\frac{1.75}{25} = 7$%，标准差约 $\frac{0.9}{5} = 18$%。（把标准差也除以 25 会得到 3.6%，这是错的。）
         (b) $S \sim N(1.75, 0.9^2)$，指数低于今天即 $S < 0$。$z = \frac{0 - 1.75}{0.9} \approx -1.94$，$P \approx 1 - 0.974 = 2.6$%。
-        (c) 财富低于均值即 $S < m + \frac{s^2}{2} = 2.155$，$z = \frac{2.155 - 1.75}{0.9} = 0.45$，概率 $\Phi(0.45) \approx 0.674$，约 67% 的投资者达不到这个数。财富分布右偏，均值被少数结果很好的路径拉高，用均值描述“大约会有多少钱”过于乐观；中位数（575.5 美元）更能代表典型的结果。
+        财富低于均值即 $S < m + \frac{s^2}{2} = 2.155$，$z = \frac{2.155 - 1.75}{0.9} = 0.45$，概率 $\Phi(0.45) \approx 0.674$，约 67% 的投资者达不到这个数。财富分布右偏，均值被少数结果很好的路径拉高，用均值描述“大约会有多少钱”过于乐观；中位数（575.5 美元）更能代表典型的结果。
       en: |-
         (a) Log returns add up, so the total log return $S$ over 25 years is normally distributed; let its mean be $m$ and its standard deviation $s$. Then $\ln W = \ln 100 + S$ and wealth is lognormal. The median $100\,e^{m} = 575.5$ gives $m = \ln 5.755 \approx 1.75$; the ratio of mean to median $e^{s^2/2} = \frac{862.8}{575.5} \approx 1.499$ gives $s^2 \approx 0.81$ and $s \approx 0.9$. With independent, identically distributed years, the mean is 25 times the yearly mean, and the variance is 25 times as large, so the standard deviation is $\sqrt{25} = 5$ times as large. So the yearly mean is about $\frac{1.75}{25} = 7$% and the standard deviation about $\frac{0.9}{5} = 18$%. (Dividing the standard deviation by 25 as well gives 3.6%, which is wrong.)
         (b) $S \sim N(1.75, 0.9^2)$, and the index is below today's level when $S < 0$. $z = \frac{0 - 1.75}{0.9} \approx -1.94$, so $P \approx 1 - 0.974 = 2.6$%.
-        (c) Wealth below the mean means $S < m + \frac{s^2}{2} = 2.155$, $z = \frac{2.155 - 1.75}{0.9} = 0.45$, with probability $\Phi(0.45) \approx 0.674$: about 67% of investors do not reach this amount. The distribution of wealth is right-skewed and the mean is pulled up by a few very good paths, so using the mean for "about how much you will have" is too optimistic; the median (575.5 dollars) better represents a typical outcome.
+        Wealth below the mean means $S < m + \frac{s^2}{2} = 2.155$, $z = \frac{2.155 - 1.75}{0.9} = 0.45$, with probability $\Phi(0.45) \approx 0.674$: about 67% of investors do not reach this amount. The distribution of wealth is right-skewed and the mean is pulled up by a few very good paths, so using the mean for "about how much you will have" is too optimistic; the median (575.5 dollars) better represents a typical outcome.
     rubric:
       zh-cn:
         - "(a) 由中位数求 $m$、由均值与中位数之比求 $s$ 3 分；换算成每年：期望约 7% 1 分，标准差按 $\\sqrt{25}$ 换算约 18% 1 分。标准差除以 25：这 1 分不给。"
-        - "(b) 设定 $S < 0$ 并标准化 3 分；约 2.6% 2 分。用 (a) 的错误结果但方法正确：不扣分。"
-        - "(c) 约 67% 3 分；说明均值被右偏拉高、典型结果应看中位数 2 分。"
+        - "(b) 设定 $S < 0$ 并标准化 3 分，约 2.6% 2 分；约 67% 3 分；说明均值被右偏拉高、典型结果应看中位数 2 分。用 (a) 的错误结果但方法正确：不扣分。"
       en:
         - "(a) $m$ from the median and $s$ from the ratio of mean to median 3 points; conversion to one year: mean about 7% 1 point, standard deviation scaled by $\\sqrt{25}$ to about 18% 1 point. Standard deviation divided by 25: no point for that part."
-        - "(b) Sets up $S < 0$ and standardizes 3 points; about 2.6% 2 points. Correct method with a wrong result carried over from (a): no deduction."
-        - "(c) About 67%: 3 points; explains that the mean is pulled up by the right skew and that the median represents a typical outcome 2 points."
+        - "(b) Sets up $S < 0$ and standardizes 3 points, about 2.6% 2 points; about 67% 3 points; explains that the mean is pulled up by the right skew and that the median represents a typical outcome 2 points. Correct method with a wrong result carried over from (a): no deduction."
 
   - id: Q10
     kind: quiz
     part: problem
     easy_points: 0
-    hard_points: 0
+    hard_points: 7
     points: 15
     concepts: [residual, regression-coefficient, normal-distribution]
     expected: { gap: "0.7", gap_down: "-0.8", pred: "5.6", lo: "-5.7", hi: "16.9" }
     question:
       zh-cn: |-
         用一只基金过去 60 个月的月收益对市场月收益（%）做回归，结果为：截距 $a = 0.4$，斜率 $b = 1.3$，残差的标准差为 5.75%。同期市场月收益的平均值为 1%。
-        (a) 一位分析师说：“截距是 0.4，说明这只基金平均每月比市场多赚 0.4 个百分点。”评价这个说法：这段时期基金平均每月比市场多赚多少？市场下跌 4% 的月份呢？多赚的部分可以分成哪两部分，各是多少？哪一部分在市场下跌时会变成负的？（7 分）
+        (a) 一位分析师说：“截距是 0.4，说明这只基金平均每月比市场多赚 0.4 个百分点。”评价这个说法：这段时期基金平均每月比市场多赚多少？按回归直线，市场下跌 4% 的月份，基金平均比市场多赚多少？多赚的部分可以分成哪两部分，各是多少？哪一部分在市场下跌时会变成负的？（7 分）
         (b) 某个月市场涨了 4%。忽略系数的估计误差，并假设残差近似服从正态分布，预测这个月基金的收益，并给出大约 95% 的这类月份会落在其中的范围。有人说：“这个月市场涨了 4%，这只基金这个月不可能亏钱。”这个说法对吗？（8 分）
       en: |-
         A fund's monthly returns over the past 60 months are regressed on the market's monthly returns (%). The result: intercept $a = 0.4$, slope $b = 1.3$, and a residual standard deviation of 5.75%. Over the same period the market's average monthly return was 1%.
-        (a) An analyst says: "The intercept is 0.4, so on average the fund earns 0.4 percentage points a month more than the market." Evaluate this statement: over this period, how much more than the market did the fund earn on average per month? What about in a month when the market falls 4%? Into which two parts can the extra return be split, and how large is each? Which part turns negative when the market falls? (7 points)
+        (a) An analyst says: "The intercept is 0.4, so on average the fund earns 0.4 percentage points a month more than the market." Evaluate this statement: over this period, how much more than the market did the fund earn on average per month? By the regression line, how much more than the market does the fund earn on average in a month when the market falls 4%? Into which two parts can the extra return be split, and how large is each? Which part turns negative when the market falls? (7 points)
         (b) In one month the market rises 4%. Ignoring the estimation error of the coefficients and assuming that the residuals are approximately normal, predict the fund's return for this month, and give the range in which about 95% of such months fall. Someone says: "The market rose 4% this month, so this fund cannot lose money this month." Is this right? (8 points)
     answer:
       zh-cn: |-

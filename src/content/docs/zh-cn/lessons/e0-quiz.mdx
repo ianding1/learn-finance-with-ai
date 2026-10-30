@@ -9,7 +9,7 @@ import Quiz from '../../../../components/Quiz.astro';
 
 ## 说明 [#instructions]
 
-- 本测验考 <Ref lesson="0.1" /> 到 <Ref lesson="0.5" /> 的内容。总分 100 分，建议用时 120 分钟，各题注明了分值。
+- 本测验考 <Ref lesson="0.1" /> 到 <Ref lesson="0.5" /> 的内容（包括标为“选读”的部分）。总分 100 分，建议用时 120 分钟，各题注明了分值。
 - 可以使用计算器或代码，不要查看讲义。需要的公式见下面的公式表。
 - 计算题要写出过程。按过程给分，只有答案、没有过程的部分不得分。
 - 把答案写在纸上（或打字）。做完后点击页面底部的“复制评分提示词”，连同答案一起发给你的 AI 助手；也可以分几次提交。
@@ -31,6 +31,7 @@ import Quiz from '../../../../components/Quiz.astro';
 **概率与组合**
 
 - $E[R] = \sum_i p_i R_i$，$\text{Var}(R) = \sum_i p_i (R_i - E[R])^2$，$\rho = \frac{\text{Cov}(R_A, R_B)}{\sigma_A \sigma_B}$
+- 线性组合的方差：$\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\,\text{Cov}(X, Y)$
 - 两资产组合：$\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\,\sigma_A\sigma_B$
 
 **统计推断**
