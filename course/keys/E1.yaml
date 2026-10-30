@@ -58,7 +58,7 @@ questions:
   - id: Q1
     kind: quiz
     part: judge
-    points: 6
+    points: 5
     concepts: [nominal-interest-rate, real-interest-rate, fisher-equation, inflation]
     expected: { real: "90705", loss: "9.3" }
     question:
@@ -77,41 +77,45 @@ questions:
         dollars, a loss of about 9.3% of purchasing power. "Principal protected" guarantees only that the nominal amount does not fall, not purchasing power.
     rubric:
       zh-cn:
-        - "判断为假，并用实际收益率为负或计算出购买力约减少 9.3% 说明（6 分）。"
-        - "判断为假但只说“通胀会侵蚀收益”而没有说明实际收益率为负或计算：3 分。只写判断：0 分。"
+        - "判断为假，并用实际收益率为负或计算出购买力约减少 9.3% 说明（5 分）。"
+        - "判断为假但只说“通胀会侵蚀收益”而没有说明实际收益率为负或计算：2 分。只写判断：0 分。"
       en:
-        - "States false and explains with the negative real return or by computing the loss of about 9.3% of purchasing power (6 points)."
-        - "False but only saying \"inflation eats into the return\" without showing that the real return is negative or computing it: 3 points. Only the verdict: 0 points."
+        - "States false and explains with the negative real return or by computing the loss of about 9.3% of purchasing power (5 points)."
+        - "False but only saying \"inflation eats into the return\" without showing that the real return is negative or computing it: 2 points. Only the verdict: 0 points."
 
   - id: Q2
     kind: quiz
     part: judge
-    points: 6
+    points: 7
     concepts: [marginal-rate-of-substitution, budget-constraint, preferences]
     question:
       zh-cn: |-
-        两个消费者的偏好和收入都不同，但面对相同的两种商品价格，而且都处于内部最优（两种商品都买，无差异曲线光滑）。那么在各自的最优点，两人的边际替代率一定相等。
+        两个消费者的偏好和收入都不同，但面对相同的两种商品价格，各自花完收入，都处于内部最优（两种商品都买，无差异曲线光滑）。那么他们买好之后，无论按什么比例互相交换手中的商品，都不可能使两人都变得更好。
       en: |-
-        Two consumers have different preferences and different incomes, but they face the same prices for two goods, and both are at an interior optimum (they buy both goods, and their indifference curves are smooth). Then at their respective optima, the two consumers' marginal rates of substitution must be equal.
+        Two consumers have different preferences and different incomes, but they face the same prices for two goods, each spends all of their income, and both are at an interior optimum (they buy both goods, and their indifference curves are smooth). Then after they have bought, no exchange of goods between them, at any ratio, can make both of them better off.
     answer:
       zh-cn: |-
-        真。内部最优点满足 $MRS = \frac{p_x}{p_y}$：如果某人的 MRS 大于价格比，他对 $x$ 的评价高于它在市场上的代价，多买 $x$ 能提高效用，所以那一点不是最优。两人面对同样的价格比，所以最优点的 MRS 都等于同一个数。偏好和收入不同，只使两人买的数量不同。
-        这也说明市场价格的作用：最后一单位 $x$ 换 $y$ 的比率对每个人都一样，没有两个人还能通过互相交换都变得更好。
+        真。
+        直观的理由：内部最优满足 $MRS = \frac{p_x}{p_y}$，两人面对相同的价格比，所以最优点的边际替代率相等。如果两人的 MRS 不同，按介于两者之间的比例交换一点就能使两人都更好；MRS 相等时，任何交换比例都会让至少一方吃亏：比例高于 MRS 时卖 $x$ 的一方有利、买 $x$ 的一方吃亏，反之亦然。
+        更完整的论证：假设某个交换使两人都更好，交换后的组合分别为 A′ 和 B′。每个人都是在预算内选了最好的组合，所以比原来更好的组合一定是原来买不起的：按市场价格，A′ 的价值大于甲的收入，B′ 的价值大于乙的收入。但交换只是在两人之间转移商品，A′ 和 B′ 的总价值等于两人原来组合的总价值，也就是两人收入之和。矛盾。
+        所以市场价格使每个人愿意用 $y$ 换 $x$ 的比率都相同，交换的好处已经用尽：偏好和收入的不同只体现在买的数量上。
       en: |-
-        True. An interior optimum satisfies $MRS = \frac{p_x}{p_y}$: if someone's MRS were above the price ratio, they would value $x$ more than its cost in the market, and buying more $x$ would raise utility, so that point would not be optimal. Both face the same price ratio, so at their optima both MRS equal the same number. Different preferences and incomes only make them buy different quantities.
-        This also shows what market prices do: the rate at which the last unit of $x$ trades for $y$ is the same for everyone, so no two people could both gain by trading with each other.
+        True.
+        The intuition: an interior optimum satisfies $MRS = \frac{p_x}{p_y}$, and both face the same price ratio, so their marginal rates of substitution are equal at the optima. If their MRS differed, exchanging a little at a ratio between the two would make both better off; with equal MRS, every exchange ratio makes at least one side worse off: a ratio above the MRS favors the side selling $x$ and hurts the side buying it, and the reverse.
+        A fuller argument: suppose some exchange made both better off, giving bundles A′ and B′. Each person chose the best bundle within their budget, so any bundle better than the original must have been unaffordable: at market prices, A′ is worth more than A's income and B′ more than B's income. But exchange only moves goods between the two, so A′ and B′ together are worth the same as the two original bundles, that is, the sum of the two incomes. Contradiction.
+        So market prices make the rate at which each person is willing to trade $y$ for $x$ the same, and the gains from exchange are used up: differences in preferences and incomes show up only in the quantities bought.
     rubric:
       zh-cn:
-        - "判断为真，并用相切条件 $MRS = \\frac{p_x}{p_y}$ 说明价格比对两人相同（6 分）。"
-        - "判断为真但没有说明为什么最优点要满足这个条件，或只说“效用最大”：3 分。只写判断：0 分。"
+        - "判断为真，并用两人的边际替代率都等于共同的价格比说明交换比例对至少一方不利，或用“更好的组合原来买不起”的论证（7 分）。"
+        - "判断为真但只说出 $MRS = \\frac{p_x}{p_y}$，没有联系到交换为什么不能使双方都更好：3 分。只写判断：0 分。"
       en:
-        - "States true and explains with the tangency condition $MRS = \\frac{p_x}{p_y}$ that the price ratio is the same for both (6 points)."
-        - "True but without explaining why the optimum must satisfy this condition, or only saying \"utility is maximized\": 3 points. Only the verdict: 0 points."
+        - "States true and explains, using the fact that both MRS equal the common price ratio, that any exchange ratio hurts at least one side, or uses the argument that better bundles were unaffordable (7 points)."
+        - "True but only stating $MRS = \\frac{p_x}{p_y}$ without linking it to why an exchange cannot make both better off: 3 points. Only the verdict: 0 points."
 
   - id: Q3
     kind: quiz
     part: judge
-    points: 6
+    points: 7
     concepts: [demand, supply, comparative-statics]
     question:
       zh-cn: |-
@@ -125,16 +129,16 @@ questions:
         False. Each year's observed price and quantity are the intersection of that year's demand and supply curves, and the intersections in different years do not lie on one demand curve. The natural explanation for price and quantity rising together is that the demand curve shifted right (for example, people moving in, higher incomes, lower interest rates), so the new equilibrium moved along the upward-sloping supply curve. In each year the demand curve itself can still slope downward. To estimate the demand curve, one needs changes that shift supply without shifting demand.
     rubric:
       zh-cn:
-        - "判断为假，指出这是需求曲线移动、沿供给曲线移动的结果，观测点不在同一条需求曲线上（6 分）。"
+        - "判断为假，指出这是需求曲线移动、沿供给曲线移动的结果，观测点不在同一条需求曲线上（7 分）。"
         - "判断为假但只说“还有其他因素”而没有说明需求移动与供给曲线的关系：3 分。只写判断：0 分。"
       en:
-        - "States false and explains that demand shifted and the equilibrium moved along the supply curve, so the observations are not on one demand curve (6 points)."
+        - "States false and explains that demand shifted and the equilibrium moved along the supply curve, so the observations are not on one demand curve (7 points)."
         - "False but only saying \"other factors matter\" without relating the demand shift to the supply curve: 3 points. Only the verdict: 0 points."
 
   - id: Q4
     kind: quiz
     part: judge
-    points: 6
+    points: 7
     concepts: [deadweight-loss, tax-incidence, price-elasticity]
     question:
       zh-cn: |-
@@ -148,10 +152,10 @@ questions:
         True. Deadweight loss comes from trades that no longer happen because of the tax. With perfectly inelastic demand, the price buyers pay rises by the whole tax, the quantity demanded does not change, the price sellers receive does not change, and neither does the quantity traded: every trade in which the willingness to pay exceeded the cost still happens. The tax is only a transfer from buyers to the government, and total surplus does not fall. (Buyers bear the whole tax in this case.) In general, the less sensitive buyers and sellers are to the price, the smaller the deadweight loss from a given tax.
     rubric:
       zh-cn:
-        - "判断为真，并说明成交量不变、没有交易因税而消失，税收只是转移（6 分）。"
+        - "判断为真，并说明成交量不变、没有交易因税而消失，税收只是转移（7 分）。"
         - "判断为真但只说“需求不变”而没有联系到无谓损失的来源：3 分。只写判断：0 分。"
       en:
-        - "States true and explains that the quantity traded does not change, no trades are lost, and the tax is only a transfer (6 points)."
+        - "States true and explains that the quantity traded does not change, no trades are lost, and the tax is only a transfer (7 points)."
         - "True but only saying \"demand does not change\" without linking it to the source of deadweight loss: 3 points. Only the verdict: 0 points."
 
   - id: Q5
@@ -164,69 +168,69 @@ questions:
       zh-cn: |-
         有两类公司，各占一半。“好公司”现有资产值 200（百万美元），“差公司”现有资产值 40。两类公司都有一个新项目：投资 20，投资后使公司价值增加 25（净现值为 +5）。经理知道自己公司属于哪一类，并为现有股东的利益做决定；外部投资者分不清，只知道各占一半，并按他们的判断公平地为新股定价。公司没有现金，要投资就必须先融资 20。
 
-        (a) 如果两类公司都发行新股融资，投资者会按什么价值为发行新股的公司定价？新股东要得到公司的多大比例？好公司的老股东最后拥有的价值是多少？好公司会发行新股去投资吗？（8 分）
+        (a) 假设投资者认为两类公司都会发行新股，并据此定价。投资者会按什么价值为发行新股的公司定价（用投资后的价值）？新股东要得到公司的多大比例？好公司的老股东最后拥有的价值是多少？好公司会发行新股去投资吗？（8 分）
 
-        (b) 如果好公司可以改为借入 20 的无风险债务（到期偿还 20），它会投资吗？为什么债务能避免 (a) 中的问题？（7 分）
+        (b) 如果好公司可以改为借入 20 的无风险债务（只看一期，不考虑利息，期末偿还 20），它会投资吗？为什么债务能避免 (a) 中的问题？（7 分）
       en: |-
         There are two kinds of company, half of each. A "good company" has existing assets worth 200 (million dollars), and a "bad company" has existing assets worth 40. Both kinds have a new project: investing 20 raises the company's value by 25 (a net present value of +5). Managers know which kind their company is and decide in the interest of the existing shareholders; outside investors cannot tell, know only that half are of each kind, and price new shares fairly given what they believe. The companies have no cash, so to invest they must first raise 20.
 
-        (a) If both kinds raise the money by issuing new shares, at what value will investors price a company that issues new shares? What share of the company must the new shareholders receive? What is the value finally owned by the old shareholders of a good company? Will a good company issue new shares to invest? (8 points)
+        (a) Suppose investors believe that both kinds will issue new shares and price them accordingly. At what value will investors price a company that issues new shares (using its value after the investment)? What share of the company must the new shareholders receive? What is the value finally owned by the old shareholders of a good company? Will a good company issue new shares to invest? (8 points)
 
-        (b) If a good company can instead borrow 20 of risk-free debt (repaying 20 at maturity), will it invest? Why does debt avoid the problem in (a)? (7 points)
+        (b) If a good company can instead borrow 20 of risk-free debt (one period, ignoring interest, repaying 20 at the end), will it invest? Why does debt avoid the problem in (a)? (7 points)
     answer:
       zh-cn: |-
         (a) 两类都发行时，投资后好公司值 225，差公司值 65，投资者按平均值 $\frac{225 + 65}{2} = 145$ 定价。融资 20 需要让新股东得到 $\frac{20}{145} \approx 13.79\%$。好公司的老股东最后拥有 $225 \times (1 - 13.79\%) \approx 193.97$，少于不投资时的 200。所以好公司不会发行新股：它的股票被按平均值低估，新股东拿走的价值（约 31）超过了项目的净现值 5。
-        结果只有差公司发行新股（对差公司的老股东，按平均价值发行是占便宜）。投资者也会想到这一点，把发行新股看作“我是差公司”的信号；这正是公司宣布增发时股价往往下跌的原因。好公司放弃了一个净现值为正的项目，这是逆向选择造成的效率损失。
+        结果只有差公司发行新股（对差公司的老股东，按平均价值发行是占便宜），所以“两类都发行”的预期不会成立。投资者也会想到这一点，把发行新股看作“我是差公司”的信号；这正是公司宣布增发时股价往往下跌的原因。好公司放弃了一个净现值为正的项目，这是逆向选择造成的效率损失。
         (b) 会。借 20、投资后公司值 225，偿还 20 后老股东得到 205，多于不投资时的 200。无风险债务到期只需偿还 20，它的价值不取决于公司属于哪一类，所以投资者不需要判断公司的类型，好公司也不必把被低估的股份让给新股东。融资工具的价值对公司的内部信息越不敏感，逆向选择的问题越小；这是公司通常先用内部资金和债务、最后才发行新股的原因之一。
       en: |-
         (a) If both kinds issue, after investing a good company is worth 225 and a bad one 65, so investors price an issuer at the average $\frac{225 + 65}{2} = 145$. Raising 20 requires giving new shareholders $\frac{20}{145} \approx 13.79\%$. The old shareholders of a good company end up with $225 \times (1 - 13.79\%) \approx 193.97$, less than the 200 they have without investing. So a good company will not issue new shares: its shares are undervalued at the average, and the value taken by the new shareholders (about 31) exceeds the project's net present value of 5.
-        In the end only bad companies issue new shares (for their old shareholders, issuing at the average value is a bargain). Investors can work this out too and read a share issue as a sign of "I am a bad company"; this is exactly why share prices often fall when companies announce an issue. The good company gives up a project with a positive net present value, an efficiency loss caused by adverse selection.
+        In the end only bad companies issue new shares (for their old shareholders, issuing at the average value is a bargain), so the belief that both kinds issue cannot hold. Investors can work this out too and read a share issue as a sign of "I am a bad company"; this is exactly why share prices often fall when companies announce an issue. The good company gives up a project with a positive net present value, an efficiency loss caused by adverse selection.
         (b) Yes. Borrowing 20 and investing makes the company worth 225, and after repaying 20 the old shareholders get 205, more than the 200 without investing. Risk-free debt requires repaying only 20, so its value does not depend on which kind the company is; investors do not need to judge the company's type, and the good company does not have to hand undervalued shares to new shareholders. The less the value of a financing instrument depends on the company's inside information, the smaller the adverse-selection problem; this is one reason companies usually use internal funds and debt first and issue new shares last.
     rubric:
       zh-cn:
-        - "(a) 按平均值 145 定价（2 分）；新股东比例约 13.79%（2 分）；好公司老股东约 193.97 < 200，不发行（2 分）；说明股票被低估、让出的价值超过净现值 5，好公司放弃正净现值项目（2 分）。只说“净现值为正所以投资”：最多 2 分。"
+        - "(a) 按平均值 145 定价（用投资前的平均价值 120 加上新资金 20 计算同样可以，2 分）；新股东比例约 13.79%（2 分）；好公司老股东约 193.97 < 200，不发行（2 分）；说明股票被低估、让出的价值超过净现值 5，好公司放弃正净现值项目（2 分）。只说“净现值为正所以投资”：最多 2 分。"
         - "(b) 老股东得到 205 > 200，会投资（3 分）；说明无风险债务的价值与公司类型无关，不需要按平均值定价（4 分）。"
       en:
-        - "(a) Priced at the average of 145 (2 points); new shareholders' share about 13.79% (2 points); old shareholders of a good company about 193.97 < 200, so it does not issue (2 points); explains that the shares are undervalued and the value given away exceeds the net present value of 5, so a positive-NPV project is lost (2 points). Only \"the NPV is positive, so it invests\": at most 2 points."
+        - "(a) Priced at the average of 145 (computing it as the average value before investment, 120, plus the new money of 20 is also fine; 2 points); new shareholders' share about 13.79% (2 points); old shareholders of a good company about 193.97 < 200, so it does not issue (2 points); explains that the shares are undervalued and the value given away exceeds the net present value of 5, so a positive-NPV project is lost (2 points). Only \"the NPV is positive, so it invests\": at most 2 points."
         - "(b) Old shareholders get 205 > 200, so it invests (3 points); explains that the value of risk-free debt does not depend on the company's type, so no pricing at the average is needed (4 points)."
 
   - id: Q6
     kind: quiz
     part: problem
-    points: 15
+    points: 14
     concepts: [economic-profit, perfect-competition, barriers-to-entry, economic-moat, growing-perpetuity]
-    expected: { a: "26.32", b: "125", gap: "98.68" }
+    expected: { a: "26.32", b: "125", d: "12", over: "23.68" }
     question:
       zh-cn: |-
-        公司 A 和公司 B 今年都赚得 10（百万美元）的经济利润，即扣除包括资本的机会成本在内的全部成本之后还剩 10。A 所在的行业可以自由进入，新的竞争者会不断进入，A 每年的经济利润比上一年减少 30%（明年年末 10，后年年末 7，……）。B 有很强的进入壁垒，经济利润会永远保持每年 10（每年年末）。折现率为 8%。
+        一家公司的价值可以看作投入的资本加上未来经济利润的现值；超出投入资本的部分叫溢价。公司 A 和公司 B 明年年末的经济利润（扣除包括资本的机会成本在内的全部成本之后的利润）预计都是 10（百万美元）。A 所在的行业可以自由进入；B 有很强的进入壁垒，经济利润预计永远保持每年 10。折现率为 8%。
 
-        (a) 两家公司未来经济利润的现值各是多少？（7 分）
+        (a) 一位分析师预计 A 的经济利润从明年的 10 开始，每年比上一年减少 30%（后年 7，……）。按他的预计，A 和 B 的溢价各应是多少？（6 分）
 
-        (b) 一位分析师说：“两家公司今年的经济利润一样，市场为它们支付的溢价也应该一样。”评价这个说法，并说明：为什么 A 的经济利润会消失？要判断 B 的利润真的能持续，需要看什么？（8 分）
+        (b) 市场目前给 A 的溢价是 50。按 8% 折现，市场的价格隐含 A 的经济利润每年减少百分之几？结合 A 所在行业的特点，你认为是市场的预期还是分析师的预期更可能接近现实？如果分析师是对的，现在买入 A 的投资者多付了多少？（8 分）
       en: |-
-        Companies A and B both earn an economic profit of 10 (million dollars) this year, that is, 10 is left after all costs including the opportunity cost of capital. A's industry has free entry, new competitors keep coming in, and A's economic profit falls by 30% each year (10 at the end of next year, 7 at the end of the year after, and so on). B has strong barriers to entry, and its economic profit stays at 10 every year forever (at each year's end). The discount rate is 8%.
+        A company's value can be seen as the capital invested plus the present value of its future economic profit; the part above the capital invested is called the premium. Companies A and B are each expected to earn an economic profit (profit after all costs, including the opportunity cost of capital) of 10 (million dollars) at the end of next year. A's industry has free entry; B has strong barriers to entry, and its economic profit is expected to stay at 10 every year forever. The discount rate is 8%.
 
-        (a) What is the present value of each company's future economic profit? (7 points)
+        (a) An analyst expects A's economic profit to start at 10 next year and then fall by 30% each year from the previous year (7 the year after, and so on). On his forecast, what should the premiums of A and B be? (6 points)
 
-        (b) An analyst says: "The two companies earn the same economic profit this year, so the market should pay the same premium for both." Evaluate this statement, and explain: why does A's economic profit disappear? What would you need to see to judge that B's profit really will last? (8 points)
+        (b) The market currently gives A a premium of 50. At an 8% discount rate, how fast does the market price imply that A's economic profit falls each year? Given the nature of A's industry, which expectation do you think is more likely to be close to reality, the market's or the analyst's? If the analyst is right, how much too much does an investor who buys A now pay? (8 points)
     answer:
       zh-cn: |-
-        (a) A 是增长率为 −30% 的增长永续年金：$\frac{10}{0.08 - (-0.30)} = \frac{10}{0.38} \approx 26.32$。B 是永续年金：$\frac{10}{0.08} = 125$。相差约 98.68。
-        (b) 说法不对：价值取决于经济利润能持续多久，而不只是今年有多少。按今年的利润给两家同样的溢价，会大大高估 A。
-        A 的利润消失，是因为在可以自由进入的行业，正的经济利润会吸引新厂商进入或模仿，供给增加、价格下降，直到经济利润为 0（[[1.5]]、[[1.6]] 的长期均衡与垄断竞争）。
-        要判断 B 的利润能否持续，要看它是否真有阻止竞争者以相近成本进入或模仿的壁垒：规模经济、网络效应、转换成本、专利或牌照等无形资产、成本优势；并检验这些壁垒会不会因为技术变化或专利到期而变窄。证据可以是：资本回报率多年持续高于资本成本，竞争者进入后市场份额和价格仍然稳定。
+        (a) A 是增长率为 −30% 的增长永续年金：$\frac{10}{0.08 - (-0.30)} = \frac{10}{0.38} \approx 26.32$。B 是永续年金：$\frac{10}{0.08} = 125$。今年的利润一样，溢价却差了很多：溢价取决于经济利润能持续多久。
+        (b) 设市场隐含每年减少 $d$：$\frac{10}{0.08 + d} = 50$，$0.08 + d = 0.2$，$d = 12\%$。
+        A 的行业可以自由进入，正的经济利润会吸引新企业进入或模仿，直到经济利润为 0；没有进入壁垒时，利润通常消失得较快。所以分析师的预计（每年减少 30%）更可能接近现实，市场把 A 的利润看得太持久，好像 A 有一部分护城河。（如果能找到 A 有进入壁垒的证据，例如多年来资本回报率持续高于资本成本，市场的预期才有道理。）
+        如果分析师是对的，A 的溢价应为 26.32，投资者多付了约 $50 - 26.32 = 23.68$。
       en: |-
-        (a) A is a growing perpetuity with growth rate −30%: $\frac{10}{0.08 - (-0.30)} = \frac{10}{0.38} \approx 26.32$. B is a perpetuity: $\frac{10}{0.08} = 125$. The difference is about 98.68.
-        (b) The statement is wrong: value depends on how long the economic profit lasts, not only on how large it is this year. Paying the same premium for both based on this year's profit would greatly overvalue A.
-        A's profit disappears because in an industry with free entry, positive economic profit attracts new firms that enter or copy, supply rises and prices fall until economic profit is 0 (the long-run equilibrium and monopolistic competition of [[1.5]] and [[1.6]]).
-        To judge whether B's profit can last, check whether it really has barriers that keep competitors from entering or copying at similar cost: economies of scale, network effects, switching costs, intangible assets such as patents or licenses, cost advantages; and check whether these barriers may narrow because of technological change or expiring patents. Evidence could be a return on capital that has stayed above the cost of capital for many years, and market share and prices that stayed stable after competitors entered.
+        (a) A is a growing perpetuity with growth rate −30%: $\frac{10}{0.08 - (-0.30)} = \frac{10}{0.38} \approx 26.32$. B is a perpetuity: $\frac{10}{0.08} = 125$. The profits are the same next year, but the premiums differ greatly: the premium depends on how long the economic profit lasts.
+        (b) Let the implied yearly decline be $d$: $\frac{10}{0.08 + d} = 50$, so $0.08 + d = 0.2$ and $d = 12\%$.
+        A's industry has free entry, so positive economic profit attracts new firms that enter or copy until economic profit is 0; without barriers to entry, profit usually disappears fairly quickly. So the analyst's forecast (a 30% decline a year) is more likely to be close to reality; the market treats A's profit as too durable, as if A had part of a moat. (Only evidence that A has barriers to entry, for example a return on capital that has stayed above the cost of capital for many years, would support the market's expectation.)
+        If the analyst is right, A's premium should be 26.32, and an investor overpays by about $50 - 26.32 = 23.68$.
     rubric:
       zh-cn:
-        - "(a) 认出 A 是增长率为负的增长永续年金，约 26.32（4 分）；B 为 125（3 分）。把 A 当作永续年金（125）：最多 3 分。"
-        - "(b) 指出价值取决于利润的持续时间（2 分）；用自由进入解释 A 的利润消失（3 分）；说明需要检验进入壁垒及其持久性，给出至少一种可观察的证据（3 分）。"
+        - "(a) 认出 A 是增长率为负的增长永续年金，约 26.32（4 分）；B 为 125（2 分）。把 A 当作永续年金（125）：最多 2 分。"
+        - "(b) 由 $\\frac{10}{0.08 + d} = 50$ 解出 $d = 12\\%$（3 分）；用自由进入说明利润会较快消失，判断分析师的预期更合理，或说明只有在有进入壁垒的证据时市场才合理（3 分）；多付约 23.68（2 分）。"
       en:
-        - "(a) Recognizes A as a growing perpetuity with a negative growth rate, about 26.32 (4 points); B is 125 (3 points). Treating A as a plain perpetuity (125): at most 3 points."
-        - "(b) Points out that value depends on how long the profit lasts (2 points); explains A's disappearing profit with free entry (3 points); explains that the barriers to entry and their durability must be checked, with at least one observable piece of evidence (3 points)."
+        - "(a) Recognizes A as a growing perpetuity with a negative growth rate, about 26.32 (4 points); B is 125 (2 points). Treating A as a plain perpetuity (125): at most 2 points."
+        - "(b) Solves $\\frac{10}{0.08 + d} = 50$ for $d = 12\\%$ (3 points); uses free entry to explain that the profit tends to disappear fairly quickly and judges the analyst's expectation more plausible, or explains that the market is right only with evidence of barriers to entry (3 points); overpayment about 23.68 (2 points)."
 
   - id: Q7
     kind: quiz
@@ -236,11 +240,11 @@ questions:
     expected: { premium: "3.375", ce: "2.625", fee: "2000" }
     question:
       zh-cn: |-
-        一位客户有 200,000 美元现金，这是她全部的金融资产；她还有一笔固定利率 4% 的房贷，余额也是 200,000 美元。她的理财顾问每年按他管理的资产收取 1% 的费用。顾问建议她不要提前还房贷，而是把 200,000 美元交给他投资一个股票组合：“这个组合的期望年收益是 7%，比房贷利率 4% 高，所以投资更划算。”组合年收益的标准差为 15%。客户的效用是 CRRA，相对风险厌恶系数 $\gamma = 3$。提前还清房贷相当于得到确定的 4% 的年收益。只比较一年，不考虑税。
+        一位客户有 200,000 美元现金，这是她全部的金融资产；她还有一笔固定利率 4% 的房贷，余额也是 200,000 美元。她的理财顾问每年按他管理的资产收取 1% 的费用。顾问建议她不要提前还房贷，而是把 200,000 美元交给他投资一个股票组合：“这个组合的期望年收益是 7%，比房贷利率 4% 高，所以投资更划算。”组合年收益的标准差为 15%。客户的效用是 CRRA，相对风险厌恶系数 $\gamma = 3$；计算风险溢价时，把这 200,000 美元当作她的财富。费用在年末从收益中扣除。提前还清房贷相当于得到确定的 4% 的年收益。只比较一年，不考虑税。
 
         评价顾问的建议：对这位客户，哪种选择更好？顾问为什么会给出这样的建议？（15 分）
       en: |-
-        A client has 200,000 dollars in cash, which is all of her financial assets; she also has a fixed-rate mortgage at 4% with a balance of 200,000 dollars. Her financial adviser charges 1% a year of the assets he manages. He advises her not to pay off the mortgage but to let him invest the 200,000 dollars in a stock portfolio: "This portfolio has an expected return of 7% a year, higher than the 4% mortgage rate, so investing pays more." The standard deviation of the portfolio's yearly return is 15%. The client has CRRA utility with a coefficient of relative risk aversion $\gamma = 3$. Paying off the mortgage is equivalent to a certain return of 4% a year. Compare one year only and ignore taxes.
+        A client has 200,000 dollars in cash, which is all of her financial assets; she also has a fixed-rate mortgage at 4% with a balance of 200,000 dollars. Her financial adviser charges 1% a year of the assets he manages. He advises her not to pay off the mortgage but to let him invest the 200,000 dollars in a stock portfolio: "This portfolio has an expected return of 7% a year, higher than the 4% mortgage rate, so investing pays more." The standard deviation of the portfolio's yearly return is 15%. The client has CRRA utility with a coefficient of relative risk aversion $\gamma = 3$; when computing the risk premium, treat the 200,000 dollars as her wealth. The fee is deducted from the return at the end of the year. Paying off the mortgage is equivalent to a certain return of 4% a year. Compare one year only and ignore taxes.
 
         Evaluate the adviser's advice: which choice is better for this client? Why would the adviser give this advice? (15 points)
     answer:
@@ -269,69 +273,69 @@ questions:
   - id: Q8
     kind: quiz
     part: problem
-    points: 15
+    points: 14
     concepts: [repeated-game, bertrand-model, prisoners-dilemma, oligopoly]
-    expected: { d2: "0.5", n: "10" }
+    expected: { d2: "0.5", n: "12" }
     question:
       zh-cn: |-
         一个行业有 $n$ 家相同的公司，产品完全相同，按伯特兰模型竞争价格，边际成本相同。如果所有公司都定垄断价格，行业每年的总利润是 $\pi$，平分给 $n$ 家。任何一家公司只要把价格定得略低于其他公司，当年就能得到几乎整个行业的利润 $\pi$。各公司采用触发策略：只要有人降过价，以后所有公司永远按边际成本定价。每年的折现因子为 $\delta$。
 
-        (a) 求维持合谋所需的最小 $\delta$（用 $n$ 表示）。$n = 2$ 时是多少？（8 分）
+        (a) 求维持合谋所需的最小 $\delta$（用 $n$ 表示）。$n = 2$ 时是多少？（7 分）
 
-        (b) 设 $\delta = 0.9$。最多有几家公司时合谋还能维持？用这个结果解释：为什么反垄断机构对公司很少的行业更警惕？（7 分）
+        (b) 设 $\delta = 0.92$。最多有几家公司时合谋还能维持？用这个结果解释：为什么反垄断机构对公司很少的行业更警惕？（7 分）
       en: |-
         An industry has $n$ identical firms with identical products, competing on price as in the Bertrand model, with the same marginal cost. If all firms set the monopoly price, the industry's total yearly profit is $\pi$, split equally among the $n$ firms. Any firm that sets its price slightly below the others' captures almost the whole industry profit $\pi$ for that year. The firms use trigger strategies: once anyone has cut the price, all firms price at marginal cost forever. The yearly discount factor is $\delta$.
 
-        (a) Find the smallest $\delta$ that sustains collusion (in terms of $n$). What is it for $n = 2$? (8 points)
+        (a) Find the smallest $\delta$ that sustains collusion (in terms of $n$). What is it for $n = 2$? (7 points)
 
-        (b) Let $\delta = 0.9$. At most how many firms can there be for collusion to be sustained? Use this result to explain why antitrust authorities are more watchful of industries with few firms. (7 points)
+        (b) Let $\delta = 0.92$. At most how many firms can there be for collusion to be sustained? Use this result to explain why antitrust authorities are more watchful of industries with few firms. (7 points)
     answer:
       zh-cn: |-
         (a) 守约每年得 $\frac{\pi}{n}$，现值 $\frac{\pi/n}{1 - \delta}$。今年降价得 $\pi$，以后价格等于边际成本，利润为 0，现值 $\pi$。守约至少一样好：$\frac{\pi/n}{1 - \delta} \ge \pi$，即 $1 - \delta \le \frac1n$，$\delta \ge 1 - \frac1n$。$n = 2$ 时 $\delta \ge 0.5$。
-        (b) $1 - \frac1n \le 0.9$，$n \le 10$：最多 10 家。公司越多，每家从合谋中分到的利润 $\frac{\pi}{n}$ 越少，而降价一次仍能拿到整个市场，背叛的诱惑相对越大，合谋越难维持。公司很少时，即使没有明确的协议，靠重复博弈中的默契也可能维持高价，所以反垄断机构更关注集中度高的行业（以及让违约更容易被发现的信息交换）。
+        (b) $1 - \frac1n \le 0.92$，$n \le 12.5$：最多 12 家（12 家时临界值约 0.917，13 家时约 0.923）。公司越多，每家从合谋中分到的利润 $\frac{\pi}{n}$ 越少，而降价一次仍能拿到整个市场，背叛的诱惑相对越大，合谋越难维持。公司很少时，即使没有明确的协议，靠重复博弈中的默契也可能维持高价，所以反垄断机构更关注集中度高的行业（以及让违约更容易被发现的信息交换）。
       en: |-
         (a) Keeping the agreement earns $\frac{\pi}{n}$ each year, with present value $\frac{\pi/n}{1 - \delta}$. Cutting the price this year earns $\pi$, after which the price equals marginal cost and profit is 0, so the present value is $\pi$. Keeping the agreement is at least as good when $\frac{\pi/n}{1 - \delta} \ge \pi$, that is, $1 - \delta \le \frac1n$, or $\delta \ge 1 - \frac1n$. For $n = 2$, $\delta \ge 0.5$.
-        (b) $1 - \frac1n \le 0.9$ gives $n \le 10$: at most 10 firms. The more firms, the smaller each one's share of the collusive profit $\frac{\pi}{n}$, while cutting the price once still captures the whole market, so the temptation to cheat is relatively larger and collusion harder to sustain. With very few firms, high prices can be kept up by a tacit understanding in the repeated game even without an explicit agreement, which is why antitrust authorities pay more attention to concentrated industries (and to information exchange that makes cheating easier to detect).
+        (b) $1 - \frac1n \le 0.92$ gives $n \le 12.5$: at most 12 firms (the critical value is about 0.917 with 12 firms and about 0.923 with 13). The more firms, the smaller each one's share of the collusive profit $\frac{\pi}{n}$, while cutting the price once still captures the whole market, so the temptation to cheat is relatively larger and collusion harder to sustain. With very few firms, high prices can be kept up by a tacit understanding in the repeated game even without an explicit agreement, which is why antitrust authorities pay more attention to concentrated industries (and to information exchange that makes cheating easier to detect).
     rubric:
       zh-cn:
-        - "(a) 两个现值写对（4 分）；解出 $\\delta \\ge 1 - \\frac1n$（3 分）；$n = 2$ 时 0.5（1 分）。只比较一年的利润：最多 2 分。"
-        - "(b) $n \\le 10$（3 分）；用分到的利润减少而背叛收益不变解释，并联系到集中度（4 分）。"
+        - "(a) 两个现值写对（3 分）；解出 $\\delta \\ge 1 - \\frac1n$（3 分）；$n = 2$ 时 0.5（1 分）。只比较一年的利润：最多 2 分。"
+        - "(b) 最多 12 家（3 分）；用分到的利润减少而背叛收益不变解释，并联系到集中度（4 分）。"
       en:
-        - "(a) Both present values correct (4 points); solves $\\delta \\ge 1 - \\frac1n$ (3 points); 0.5 for $n = 2$ (1 point). Comparing only one year's profit: at most 2 points."
-        - "(b) $n \\le 10$ (3 points); explains with the smaller share of collusive profit against an unchanged gain from cheating, and links this to concentration (4 points)."
+        - "(a) Both present values correct (3 points); solves $\\delta \\ge 1 - \\frac1n$ (3 points); 0.5 for $n = 2$ (1 point). Comparing only one year's profit: at most 2 points."
+        - "(b) At most 12 firms (3 points); explains with the smaller share of collusive profit against an unchanged gain from cheating, and links this to concentration (4 points)."
 
   - id: Q9
     kind: quiz
     part: problem
     points: 16
     concepts: [tax-incidence, perfect-competition, short-run, long-run, economic-profit]
-    expected: { pb: "44", ps: "38", q: "560", pl: "46", ql: "540" }
+    expected: { pb: "44.8", ps: "38.8", q: "552", pl: "46", ql: "540" }
     question:
       zh-cn: |-
-        一个完全竞争行业的市场需求为 $Q_d = 1000 - 10P$。短期内厂商数目不变，市场供给为 $Q_s = 20P - 200$。长期中厂商可以自由进入和退出，每家厂商的成本都相同，长期平均成本的最低值是 40，所以长期供给在价格 40 处是一条水平线。目前行业处于长期均衡。政府对每单位产品征收 6 美元的税，由厂商缴纳。
+        一个完全竞争行业的市场需求为 $Q_d = 1000 - 10P$。短期内厂商数目不变，市场供给为 $Q_s = 40P - 1000$。长期中厂商可以自由进入和退出，每家厂商的成本都相同，长期平均成本的最低值是 40，所以长期供给在价格 40 处是一条水平线。目前行业处于长期均衡。政府对每单位产品征收 6 美元的税，由厂商缴纳。
 
-        (a) 短期内，买方付的价格、厂商得到的价格和成交量各是多少？税负怎样分配？（7 分）
+        (a) 短期内，买方付的价格、厂商得到的价格和成交量各是多少？税负怎样分配？（5 分）
 
-        (b) 长期中会发生什么？求长期的买方价格和成交量。有人说：“这个税是向公司征的，最终由公司的股东承担。”评价这个说法。（9 分）
+        (b) 长期中会发生什么？求长期的买方价格和成交量。有人说：“这个税是向公司征的，最终由公司的股东承担。”评价这个说法。（11 分）
       en: |-
-        A perfectly competitive industry has market demand $Q_d = 1000 - 10P$. In the short run the number of firms is fixed and market supply is $Q_s = 20P - 200$. In the long run firms can enter and exit freely, all firms have the same costs, and the minimum of long-run average cost is 40, so long-run supply is a horizontal line at a price of 40. The industry is currently in long-run equilibrium. The government imposes a tax of 6 dollars per unit, paid by the firms.
+        A perfectly competitive industry has market demand $Q_d = 1000 - 10P$. In the short run the number of firms is fixed and market supply is $Q_s = 40P - 1000$. In the long run firms can enter and exit freely, all firms have the same costs, and the minimum of long-run average cost is 40, so long-run supply is a horizontal line at a price of 40. The industry is currently in long-run equilibrium. The government imposes a tax of 6 dollars per unit, paid by the firms.
 
-        (a) In the short run, what are the price buyers pay, the price firms receive and the quantity traded? How is the burden of the tax split? (7 points)
+        (a) In the short run, what are the price buyers pay, the price firms receive and the quantity traded? How is the burden of the tax split? (5 points)
 
-        (b) What happens in the long run? Find the long-run price buyers pay and the quantity traded. Someone says: "This tax is levied on companies, so in the end it is borne by their shareholders." Evaluate this statement. (9 points)
+        (b) What happens in the long run? Find the long-run price buyers pay and the quantity traded. Someone says: "This tax is levied on companies, so in the end it is borne by their shareholders." Evaluate this statement. (11 points)
     answer:
       zh-cn: |-
-        (a) 税前：$1000 - 10P = 20P - 200$，$P = 40$，$Q = 600$，与长期均衡一致。征税后 $1000 - 10P_b = 20(P_b - 6) - 200$，$P_b = 44$，$P_s = 38$，$Q = 560$。买方每单位多付 4，厂商少得 2：短期内买方承担三分之二，厂商承担三分之一（短期供给对价格的反应比需求更强）。
-        (b) 短期内厂商得到的 38 低于长期平均成本的最低值 40，经济利润为负，一部分厂商会退出。退出使供给减少，直到厂商得到的价格回到 40、经济利润回到 0。长期中 $P_s = 40$，$P_b = 46$，$Q = 1000 - 460 = 540$。
+        (a) 税前：$1000 - 10P = 40P - 1000$，$P = 40$，$Q = 600$，与长期均衡一致。征税后 $1000 - 10P_b = 40(P_b - 6) - 1000$，$P_b = 44.8$，$P_s = 38.8$，$Q = 552$。买方每单位多付 4.8，厂商少得 1.2：短期内买方承担 80%，厂商承担 20%（短期供给对价格的反应比需求更强）。
+        (b) 短期内厂商得到的 38.8 低于长期平均成本的最低值 40，经济利润为负，一部分厂商会退出。退出使供给减少，直到厂商得到的价格回到 40、经济利润回到 0。长期中 $P_s = 40$，$P_b = 46$，$Q = 1000 - 460 = 540$。
         这个说法只在短期部分成立：调整期间，现有厂商的股东承担了亏损（厂商得到的价格低于平均成本）。但长期中，可以自由进入和退出、成本不变的行业，供给完全有弹性，厂商得到的价格回到 40，税负全部由买方承担。税由谁缴纳不决定谁承担；随着时间延长，供给越来越有弹性，税负越来越多地转给买方。
       en: |-
-        (a) Before the tax: $1000 - 10P = 20P - 200$ gives $P = 40$ and $Q = 600$, consistent with the long-run equilibrium. With the tax, $1000 - 10P_b = 20(P_b - 6) - 200$ gives $P_b = 44$, $P_s = 38$ and $Q = 560$. Buyers pay 4 more per unit and firms receive 2 less: in the short run buyers bear two thirds and firms one third (short-run supply responds to the price more than demand does).
-        (b) In the short run, the 38 firms receive is below the minimum long-run average cost of 40, so economic profit is negative and some firms exit. Exit reduces supply until the price firms receive returns to 40 and economic profit returns to 0. In the long run $P_s = 40$, $P_b = 46$ and $Q = 1000 - 460 = 540$.
+        (a) Before the tax: $1000 - 10P = 40P - 1000$ gives $P = 40$ and $Q = 600$, consistent with the long-run equilibrium. With the tax, $1000 - 10P_b = 40(P_b - 6) - 1000$ gives $P_b = 44.8$, $P_s = 38.8$ and $Q = 552$. Buyers pay 4.8 more per unit and firms receive 1.2 less: in the short run buyers bear 80% and firms 20% (short-run supply responds to the price more than demand does).
+        (b) In the short run, the 38.8 firms receive is below the minimum long-run average cost of 40, so economic profit is negative and some firms exit. Exit reduces supply until the price firms receive returns to 40 and economic profit returns to 0. In the long run $P_s = 40$, $P_b = 46$ and $Q = 1000 - 460 = 540$.
         The statement holds only for the short run: during the adjustment, the shareholders of existing firms bear losses (the price they receive is below average cost). But in the long run, in an industry with free entry and exit and constant costs, supply is perfectly elastic, the price firms receive returns to 40, and buyers bear the whole tax. Who pays a tax does not decide who bears it; as time passes and supply becomes more elastic, more of the tax is passed on to buyers.
     rubric:
       zh-cn:
-        - "(a) $P_b = 44$，$P_s = 38$，$Q = 560$（4 分）；买方承担 4、厂商承担 2，并联系到双方对价格的反应（3 分）。"
-        - "(b) 说明厂商亏损、退出，直到 $P_s$ 回到 40（3 分）；$P_b = 46$，$Q = 540$（2 分）；评价：短期股东承担一部分，长期税负全部转给买方，税负取决于弹性而不是由谁缴税（4 分）。同意“由股东承担”而没有区分短期和长期：这部分最多 1 分。"
+        - "(a) $P_b = 44.8$，$P_s = 38.8$，$Q = 552$（3 分）；买方承担 4.8、厂商承担 1.2，并联系到双方对价格的反应（2 分）。"
+        - "(b) 说明厂商亏损、退出，直到 $P_s$ 回到 40（4 分）；$P_b = 46$，$Q = 540$（2 分）；评价：短期股东承担一部分，长期税负全部转给买方，税负取决于弹性而不是由谁缴税（5 分）。同意“由股东承担”而没有区分短期和长期：这部分最多 1 分。"
       en:
-        - "(a) $P_b = 44$, $P_s = 38$, $Q = 560$ (4 points); buyers bear 4 and firms 2, linked to how each side responds to the price (3 points)."
-        - "(b) Explains that firms make losses and exit until $P_s$ returns to 40 (3 points); $P_b = 46$, $Q = 540$ (2 points); evaluation: shareholders bear part in the short run, buyers bear the whole tax in the long run, and the split depends on elasticity, not on who pays (4 points). Agreeing that shareholders bear it without distinguishing the short and long run: at most 1 point for this part."
+        - "(a) $P_b = 44.8$, $P_s = 38.8$, $Q = 552$ (3 points); buyers bear 4.8 and firms 1.2, linked to how each side responds to the price (2 points)."
+        - "(b) Explains that firms make losses and exit until $P_s$ returns to 40 (4 points); $P_b = 46$, $Q = 540$ (2 points); evaluation: shareholders bear part in the short run, buyers bear the whole tax in the long run, and the split depends on elasticity, not on who pays (5 points). Agreeing that shareholders bear it without distinguishing the short and long run: at most 1 point for this part."

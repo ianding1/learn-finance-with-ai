@@ -4032,20 +4032,20 @@
   "zh-cn": "8d2baa8ff7a716b2"
  },
  "course/keys/E1.yaml#questions[Q1].rubric": {
-  "en": "1da40c428a522534",
-  "zh-cn": "27b4c68f31afa586"
+  "en": "81caa269263e4c4b",
+  "zh-cn": "5c8a4b9bf5af6ca1"
  },
  "course/keys/E1.yaml#questions[Q2].answer": {
-  "en": "dbf65e7f2661c94e",
-  "zh-cn": "81118e48b0a8cdc2"
+  "en": "68eb7f178431cd30",
+  "zh-cn": "be9ac319cba5217f"
  },
  "course/keys/E1.yaml#questions[Q2].question": {
-  "en": "83ef58ac196b19ea",
-  "zh-cn": "d5e447d0a4274399"
+  "en": "c61dd3669b1b79c7",
+  "zh-cn": "61fd4be8fe1840b3"
  },
  "course/keys/E1.yaml#questions[Q2].rubric": {
-  "en": "28528c088875fb15",
-  "zh-cn": "6b81273bcb988223"
+  "en": "3fff1c6eab7a557a",
+  "zh-cn": "59a42515685fff17"
  },
  "course/keys/E1.yaml#questions[Q3].answer": {
   "en": "f7ff77559b87a77c",
@@ -4056,8 +4056,8 @@
   "zh-cn": "a153fb12c83d2cb9"
  },
  "course/keys/E1.yaml#questions[Q3].rubric": {
-  "en": "b148fe9e78d3a8cb",
-  "zh-cn": "0f8637c2e974e4bb"
+  "en": "b2aa130f9848fed3",
+  "zh-cn": "a5a4705884028ca1"
  },
  "course/keys/E1.yaml#questions[Q4].answer": {
   "en": "c6f9a94638695b2b",
@@ -4068,68 +4068,68 @@
   "zh-cn": "915f2520d90592b4"
  },
  "course/keys/E1.yaml#questions[Q4].rubric": {
-  "en": "57adb1522070c2a5",
-  "zh-cn": "0500aeb43ea337b2"
+  "en": "a51b947877bbc764",
+  "zh-cn": "f0bc07072c679c32"
  },
  "course/keys/E1.yaml#questions[Q5].answer": {
-  "en": "3d863335e246190c",
-  "zh-cn": "d9f390599f6b423e"
+  "en": "971ba495492a20d2",
+  "zh-cn": "31750f22038d85af"
  },
  "course/keys/E1.yaml#questions[Q5].question": {
-  "en": "c81bff0c373270ab",
-  "zh-cn": "71bfc70b44b218f0"
+  "en": "83cd0a15769bd615",
+  "zh-cn": "0baa0d2d45931635"
  },
  "course/keys/E1.yaml#questions[Q5].rubric": {
-  "en": "f88c4659c53e2116",
-  "zh-cn": "6247cfa3aa80e325"
+  "en": "f8d9faec11653cae",
+  "zh-cn": "96f4a3becac01954"
  },
  "course/keys/E1.yaml#questions[Q6].answer": {
-  "en": "87485678edb18419",
-  "zh-cn": "b9c6fe19f8f5156a"
+  "en": "9352ced84e7a69e1",
+  "zh-cn": "29785b439bf22206"
  },
  "course/keys/E1.yaml#questions[Q6].question": {
-  "en": "ac940ff03f5a0ad2",
-  "zh-cn": "d6b948c834dff565"
+  "en": "13c06f8a65385771",
+  "zh-cn": "54b88cc0a1f92852"
  },
  "course/keys/E1.yaml#questions[Q6].rubric": {
-  "en": "bbc0e3a6908b0349",
-  "zh-cn": "ac075f568a52be50"
+  "en": "f55211620d608a43",
+  "zh-cn": "6b17f63bdc6fcdb1"
  },
  "course/keys/E1.yaml#questions[Q7].answer": {
   "en": "b809eae521581359",
   "zh-cn": "6afe5006cdfa369a"
  },
  "course/keys/E1.yaml#questions[Q7].question": {
-  "en": "d1b4f9a4de7b0fa5",
-  "zh-cn": "e9d6fc7526900043"
+  "en": "8b6477b32ef943bf",
+  "zh-cn": "71410b007bd35909"
  },
  "course/keys/E1.yaml#questions[Q7].rubric": {
   "en": "fcea67cd68bb7100",
   "zh-cn": "f7b9aa788a76a913"
  },
  "course/keys/E1.yaml#questions[Q8].answer": {
-  "en": "c5d2ac9c5b883f15",
-  "zh-cn": "fd0fed85c31a25de"
+  "en": "0cbe3c5fe4b5528a",
+  "zh-cn": "a264234a2986511c"
  },
  "course/keys/E1.yaml#questions[Q8].question": {
-  "en": "15a7e5e5bb4b16e6",
-  "zh-cn": "1237467ee40fb07b"
+  "en": "e8fa9091e528eb46",
+  "zh-cn": "74ecb5e52771d079"
  },
  "course/keys/E1.yaml#questions[Q8].rubric": {
-  "en": "8d5c2b3ef06921dd",
-  "zh-cn": "baf16fae12439eb4"
+  "en": "a1f0baa605045aa1",
+  "zh-cn": "8b9862da45b999f5"
  },
  "course/keys/E1.yaml#questions[Q9].answer": {
-  "en": "bfec3620973d4135",
-  "zh-cn": "d9079e4efc50e7f5"
+  "en": "af77dedcbe248f07",
+  "zh-cn": "c528c49a792ab2de"
  },
  "course/keys/E1.yaml#questions[Q9].question": {
-  "en": "841a2d3b45f67cac",
-  "zh-cn": "03d94294d5a65355"
+  "en": "b379df1f85fcc7ae",
+  "zh-cn": "8b554a7e2d14cea9"
  },
  "course/keys/E1.yaml#questions[Q9].rubric": {
-  "en": "df9831242c9251ee",
-  "zh-cn": "c78952e2b40dc95b"
+  "en": "0ece4e29bd5e8662",
+  "zh-cn": "8ec8a42741ab5740"
  },
  "src/content/docs/<lang>/index.mdx": {
   "en": "f5b13f8274af2469",
@@ -4196,7 +4196,7 @@
   "zh-cn": "4e5b585a17f06a05"
  },
  "src/content/docs/<lang>/lessons/e1-quiz.mdx": {
-  "en": "33f553073926ebe6",
-  "zh-cn": "0f4b246249823906"
+  "en": "be2da18ddaf87c91",
+  "zh-cn": "1bf75c5b70e8b821"
  }
 }

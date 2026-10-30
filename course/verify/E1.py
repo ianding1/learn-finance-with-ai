@@ -23,10 +23,12 @@ def results():
     r["Q5.debt"] = good - 20
     assert r["Q5.debt"] > 200
 
-    # Q6: economic profit 10 a year; A shrinks 30% a year, B stays; discount rate 8%.
+    # Q6: economic profit 10 next year; A shrinks 30% a year, B stays; discount rate 8%.
     a = 10 / (0.08 + 0.30)
     b = 10 / 0.08
-    r["Q6.a"], r["Q6.b"], r["Q6.gap"] = a, b, b - a
+    r["Q6.a"], r["Q6.b"] = a, b
+    r["Q6.d"] = 100 * (10 / 50 - 0.08)  # decline implied by a premium of 50
+    r["Q6.over"] = 50 - a
 
     # Q7: expected 7% minus 1% fee, sd 15%, gamma 3; certain alternative 4%.
     premium = 0.5 * 3 * 0.15**2
@@ -37,12 +39,12 @@ def results():
 
     # Q8: collusion needs delta >= 1 - 1/n.
     r["Q8.d2"] = 1 - 1 / 2
-    r["Q8.n"] = max(n for n in range(1, 100) if 1 - 1 / n <= 0.9 + 1e-12)
+    r["Q8.n"] = max(n for n in range(1, 100) if 1 - 1 / n <= 0.92)
 
-    # Q9: Qd = 1000 - 10P, short-run Qs = 20P - 200, long-run supply flat at 40, tax 6.
-    pb = (1000 + 200 + 20 * 6) / 30
+    # Q9: Qd = 1000 - 10P, short-run Qs = 40P - 1000, long-run supply flat at 40, tax 6.
+    pb = (1000 + 1000 + 40 * 6) / 50
     r["Q9.pb"], r["Q9.ps"], r["Q9.q"] = pb, pb - 6, 1000 - 10 * pb
-    assert 1000 - 10 * 40 == 20 * 40 - 200  # the starting point is the long-run equilibrium
+    assert 1000 - 10 * 40 == 40 * 40 - 1000  # the starting point is the long-run equilibrium
     r["Q9.pl"] = 40 + 6
     r["Q9.ql"] = 1000 - 10 * r["Q9.pl"]
     return r
