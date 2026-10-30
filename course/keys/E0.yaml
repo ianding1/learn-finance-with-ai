@@ -191,132 +191,128 @@ questions:
     hard_points: 0
     points: 16
     concepts: [ear, annuity, annuity-due, future-value, growing-perpetuity]
-    expected: { ear: "6.17", pv: "801486", fv: "702935", n: "19.07", c: "498.11", w: "31464", w3: "23914" }
+    expected: { ear: "6.17", pv: "801486", fv: "702935", n: "19.07", g: "0.87" }
     question:
       zh-cn: |-
         一个家庭计划 30 年后退休。退休后每年年初从账户取 60,000 美元，共取 25 年，第一笔在退休当天取出。账户的名义年利率始终为 6%，按月复利。
         (a) 退休当天账户里至少要有多少钱？（5 分）
-        (b) 这个家庭现在账户里有 50,000 美元，从下个月起每月月末只能存 400 美元，共存 360 次，最后一次在退休当天。退休当天账户里会有多少钱？退休后余额继续按同样的利率计息，这笔钱够取多少次完整的 60,000 美元？其他条件不变，要取满 25 次，每月至少要存多少？（6 分）
-        (c) 家庭改变计划：退休时账户里有 (a) 的金额，领取永远持续下去（留给子女），仍是每年年初领取、第一笔在退休当天，以后每年比上一年多 2%。第一年能领多少？如果改为每年多 3%，第一年能领多少？说明增长率对第一年领取额的影响，以及增长率为什么不能任意提高。（5 分）
+        (b) 这个家庭现在账户里有 50,000 美元，从下个月起每月月末只能存 400 美元，共存 360 次，最后一次在退休当天。退休后余额继续按同样的利率计息。这笔钱够取多少次完整的 60,000 美元？（5 分）
+        (c) 家庭改变计划：退休时账户里有 (a) 的金额，领取永远持续下去（留给子女），每年年初领取一次、第一笔在退休当天，以后每年按固定的比例增长。如果第一年要领 40,000 美元，每年的增长率最高是多少？（6 分）
       en: |-
         A household plans to retire in 30 years. After retirement it will withdraw 60,000 dollars at the start of each year for 25 years, with the first withdrawal on the day of retirement. The account always pays a nominal annual rate of 6%, compounded monthly.
         (a) How much must the account hold on the day of retirement? (5 points)
-        (b) The household has 50,000 dollars in the account today and can deposit only 400 dollars at the end of each month from next month on, 360 deposits in all, the last on the day of retirement. How much will the account hold on the day of retirement? After retirement the balance keeps earning the same rate. How many full withdrawals of 60,000 dollars will that pay for? With everything else unchanged, how much must the household deposit each month at least to make all 25 withdrawals? (6 points)
-        (c) The household changes its plan: it retires with the amount from (a), and the withdrawals continue forever (for its children), still at the start of each year with the first on the day of retirement, each year 2% more than the year before. How much can it withdraw in the first year? How much if the withdrawals instead grow 3% a year? Explain how the growth rate affects the first withdrawal, and why the growth rate cannot be raised without limit. (5 points)
+        (b) The household has 50,000 dollars in the account today and can deposit only 400 dollars at the end of each month from next month on, 360 deposits in all, the last on the day of retirement. After retirement the balance keeps earning the same rate. How many full withdrawals of 60,000 dollars will this money pay for? (5 points)
+        (c) The household changes its plan: it retires with the amount from (a), and the withdrawals continue forever (for its children), once at the start of each year with the first on the day of retirement, growing by a fixed rate each year. If the first withdrawal is to be 40,000 dollars, what is the highest possible yearly growth rate? (6 points)
     answer:
       zh-cn: |-
         (a) 取款每年一次，而利息按月复利，所以要用有效年利率：$R = 1.005^{12} - 1 \approx 6.17$%。取款在每年年初，是期初年金：
         $PV = 60{,}000 \times \frac{1 - (1+R)^{-25}}{R} \times (1+R) \approx 801{,}486$ 美元。
         （直接用 6% 作为年利率会得到约 813,021 美元；按期末年金计算则会少算一期利息。）
-        (b) 月利率 $i = 0.005$，$n = 360$。$FV = 50{,}000 \times 1.005^{360} + 400 \times \frac{1.005^{360} - 1}{0.005} \approx 301{,}129 + 401{,}806 \approx 702{,}935$ 美元。
+        (b) 月利率 $i = 0.005$，$n = 360$。退休时 $FV = 50{,}000 \times 1.005^{360} + 400 \times \frac{1.005^{360} - 1}{0.005} \approx 301{,}129 + 401{,}806 \approx 702{,}935$ 美元。
         设能取 $n$ 年：$60{,}000 \times \frac{1 - (1+R)^{-n}}{R} \times (1+R) = 702{,}935$，得 $(1+R)^{-n} = 1 - \frac{702{,}935 \times R}{60{,}000 \times (1+R)} \approx 0.3194$，$n = \frac{-\ln 0.3194}{\ln(1+R)} \approx 19.07$。够取 19 次完整的 60,000 美元，第 20 年只剩一小部分。
-        要取满 25 次，退休时需要 (a) 的 801,486 美元。现有存款的终值 301,129 美元不变，每月存款要补足 $801{,}486 - 301{,}129 = 500{,}357$ 美元：$C = \frac{500{,}357 \times 0.005}{1.005^{360} - 1} \approx 498.11$ 美元。
-        (c) 设第一年领取 $W$。第一笔在退休当天，之后从第 1 年末起是首笔为 $W(1+g)$ 的增长永续年金，所以 $PV = W + \frac{W(1+g)}{R - g} = W \cdot \frac{1+R}{R-g}$，$W = PV \times \frac{R - g}{1 + R}$。
-        $g = 2\%$：$W \approx 31{,}464$ 美元；$g = 3\%$：$W \approx 23{,}914$ 美元。增长率越高，同样的本金下第一年能领的越少，因为以后的领取额更大。$W$ 与 $R - g$ 成正比，$g$ 接近 $R$ 时第一年能领的趋近 0；$g \ge R$ 时增长永续年金的现值无穷大，任何有限的本金都无法支持，所以增长率必须低于有效年利率。
+        (c) 设增长率为 $g$、第一年领取 $W$。第一笔在退休当天，之后从第 1 年末起是首笔为 $W(1+g)$ 的增长永续年金（公式表中的 $C$ 是第 1 期期末的付款，不能直接用 $W$ 代入），所以 $PV = W + \frac{W(1+g)}{R - g} = W \cdot \frac{1+R}{R-g}$。
+        由 $801{,}486 = 40{,}000 \times \frac{1+R}{R-g}$ 得 $g = R - \frac{40{,}000 \times (1+R)}{801{,}486} \approx 6.168\% - 5.299\% \approx 0.87$%。增长率高于这个值时，同样的本金付不起第一年 40,000 美元。（把 40,000 美元当作第 1 年末的付款，会得到 $g = R - \frac{40{,}000}{801{,}486} \approx 1.18\%$，偏高。）
       en: |-
         (a) Withdrawals are yearly while interest is compounded monthly, so the effective annual rate is needed: $R = 1.005^{12} - 1 \approx 6.17$%. The withdrawals are at the start of each year, an annuity due:
         $PV = 60{,}000 \times \frac{1 - (1+R)^{-25}}{R} \times (1+R) \approx 801{,}486$ dollars.
         (Using 6% directly as the annual rate gives about 813,021 dollars; treating the withdrawals as end-of-year leaves out one period of interest.)
-        (b) The monthly rate is $i = 0.005$ and $n = 360$. $FV = 50{,}000 \times 1.005^{360} + 400 \times \frac{1.005^{360} - 1}{0.005} \approx 301{,}129 + 401{,}806 \approx 702{,}935$ dollars.
+        (b) The monthly rate is $i = 0.005$ and $n = 360$. At retirement $FV = 50{,}000 \times 1.005^{360} + 400 \times \frac{1.005^{360} - 1}{0.005} \approx 301{,}129 + 401{,}806 \approx 702{,}935$ dollars.
         Let the money last $n$ years: $60{,}000 \times \frac{1 - (1+R)^{-n}}{R} \times (1+R) = 702{,}935$ gives $(1+R)^{-n} = 1 - \frac{702{,}935 \times R}{60{,}000 \times (1+R)} \approx 0.3194$, so $n = \frac{-\ln 0.3194}{\ln(1+R)} \approx 19.07$. It pays for 19 full withdrawals of 60,000 dollars, with only a small amount left for year 20.
-        To make all 25 withdrawals the household needs the 801,486 dollars from (a) at retirement. The existing balance still grows to 301,129 dollars, so the deposits must supply $801{,}486 - 301{,}129 = 500{,}357$ dollars: $C = \frac{500{,}357 \times 0.005}{1.005^{360} - 1} \approx 498.11$ dollars.
-        (c) Let the first withdrawal be $W$. It is on the day of retirement; from the end of year 1 there is a growing perpetuity whose first payment is $W(1+g)$, so $PV = W + \frac{W(1+g)}{R - g} = W \cdot \frac{1+R}{R-g}$ and $W = PV \times \frac{R - g}{1 + R}$.
-        $g = 2\%$: $W \approx 31{,}464$ dollars; $g = 3\%$: $W \approx 23{,}914$ dollars. The higher the growth rate, the less can be withdrawn in the first year from the same amount, because later withdrawals are larger. $W$ is proportional to $R - g$, so as $g$ approaches $R$ the first withdrawal goes to 0; for $g \ge R$ the present value of the growing perpetuity is infinite and no finite amount can support it, so the growth rate must stay below the effective annual rate.
+        (c) Let the growth rate be $g$ and the first withdrawal $W$. The first withdrawal is on the day of retirement; from the end of year 1 there is a growing perpetuity whose first payment is $W(1+g)$ (the $C$ on the formula sheet is the payment at the end of the first period, so $W$ cannot be put in directly), so $PV = W + \frac{W(1+g)}{R - g} = W \cdot \frac{1+R}{R-g}$.
+        From $801{,}486 = 40{,}000 \times \frac{1+R}{R-g}$, $g = R - \frac{40{,}000 \times (1+R)}{801{,}486} \approx 6.168\% - 5.299\% \approx 0.87$%. With a higher growth rate the same amount cannot pay 40,000 dollars in the first year. (Treating the 40,000 dollars as a payment at the end of year 1 gives $g = R - \frac{40{,}000}{801{,}486} \approx 1.18\%$, which is too high.)
     rubric:
       zh-cn:
         - "(a) 换算有效年利率 2 分；按期初年金求现值，约 801,486 美元 3 分。直接用 6% 或按期末年金计算、其余正确：最多 2 分。"
-        - "(b) 退休时约 702,935 美元（现有存款和每月存款的终值都计入）1 分；用期初年金反解年数，约 19.07 年、19 次完整取款 2 分；每月至少约 498.11 美元 3 分。忽略现有存款或按期末年金反解、其余正确：扣 1 分。"
-        - "(c) 正确处理第一笔在退休当天（$W = PV \\times \\frac{R - g}{1 + R}$ 或等价形式）并算出约 31,464 美元 2 分；3% 时约 23,914 美元 1 分；说明增长率越高第一年越少、$g$ 必须低于 $R$ 2 分。用 (a) 的错误结果但方法正确：不扣分。"
+        - "(b) 退休时的金额（现有存款和每月存款的终值都计入）2 分；用期初年金反解年数，约 19.07 年、19 次完整取款 3 分。忽略现有存款或按期末年金反解、其余正确：扣 1 分。"
+        - "(c) 正确处理第一笔在退休当天（$PV = W \\cdot \\frac{1+R}{R-g}$ 或等价形式）3 分；解出约 0.87% 3 分。把 40,000 美元当作期末付款（约 1.18%）：最多 2 分。用 (a) 的错误结果但方法正确：不扣分。"
       en:
         - "(a) Conversion to the effective annual rate 2 points; present value as an annuity due, about 801,486 dollars, 3 points. Using 6% directly or an end-of-year annuity with the rest correct: at most 2 points."
-        - "(b) About 702,935 dollars at retirement (including the future values of both the existing balance and the monthly deposits) 1 point; solving the annuity due for the number of years, about 19.07 years and 19 full withdrawals, 2 points; a monthly deposit of at least about 498.11 dollars 3 points. Ignoring the existing balance or solving with an end-of-year annuity, with the rest correct: minus 1 point."
-        - "(c) Correct treatment of the first withdrawal on the day of retirement ($W = PV \\times \\frac{R - g}{1 + R}$ or an equivalent form), about 31,464 dollars, 2 points; about 23,914 dollars at 3%, 1 point; explains that a higher growth rate means a smaller first withdrawal and that $g$ must stay below $R$, 2 points. Correct method with a wrong result carried over from (a): no deduction."
+        - "(b) The amount at retirement (including the future values of both the existing balance and the monthly deposits) 2 points; solving the annuity due for the number of years, about 19.07 years and 19 full withdrawals, 3 points. Ignoring the existing balance or solving with an end-of-year annuity, with the rest correct: minus 1 point."
+        - "(c) Correct treatment of the first withdrawal on the day of retirement ($PV = W \\cdot \\frac{1+R}{R-g}$ or an equivalent form) 3 points; solving for about 0.87% 3 points. Treating the 40,000 dollars as an end-of-year payment (about 1.18%): at most 2 points. Correct method with a wrong result carried over from (a): no deduction."
 
   - id: Q7
     kind: quiz
     part: problem
-    easy_points: 5
-    hard_points: 6
+    easy_points: 0
+    hard_points: 0
     points: 16
     concepts: [profit-maximization, marginal-revenue, marginal-cost, first-order-condition, second-order-condition, fixed-cost, sunk-cost]
-    expected: { q: "20", p: "60", profit: "600", p_new: "64", rise: "4", c_shut: "60", c_sunk: "100" }
+    expected: { q: "20", p: "60", profit: "600", p_new: "64", rise: "4", c_shut: "60" }
     question:
       zh-cn: |-
-        一家公司是某种产品唯一的卖家。卖出 $q$ 件时，市场价格为 $p(q) = 100 - 2q$（美元）。每件的成本为 $c$，每年另有固定成本 $F$，即 $C(q) = cq + F$。
-        (a) 求利润最高的产量 $q^*$ 和价格 $p^*$（用 $c$ 表示），并检查是最大值。$c = 20$、$F = 200$ 时，$q^*$、$p^*$ 和最大利润各是多少？（5 分）
-        (b) 原料涨价，$c$ 从 20 变为 28。一位同事说：“每件成本涨了 8 美元，就应该把价格提高 8 美元，把成本完全转嫁给顾客。”用 (a) 的结果判断这个说法，并用边际收入和边际成本说明原因。（5 分）
-        (c) 设 $F = 200$，是每年的设备租金；公司停产时可以退租，不必支付。一位同事说：“只要一阶条件给出的产量是正数，就应该生产。”$c$ 超过多少时公司应该停产（$c$ 恰好等于这个值时两种选择一样好）？判断同事的说法。如果这 200 美元是已经付出、收不回的沉没成本，答案会怎样变？（6 分）
+        一家公司是某种产品唯一的卖家。卖出 $q$ 件时，市场价格为 $p(q) = 100 - 2q$（美元）。每件的成本为 $c$，每年另有设备租金 $F$，即 $C(q) = cq + F$。
+        (a) 求利润最高的产量 $q^*$ 和价格 $p^*$（用 $c$ 表示），以及 $c = 20$、$F = 200$ 时的最大利润。（4 分）
+        (b) 原料涨价，$c$ 从 20 变为 28。一位同事说：“每件成本涨了 8 美元，就应该把价格提高 8 美元，把成本完全转嫁给顾客。”这个说法对吗？用边际收入和边际成本说明。（5 分）
+        (c) 设 $F = 200$。设备租金按月支付，公司停产后可以立即退租，不再支付。另一位同事说：“只要一阶条件给出的产量是正数，生产就比停产好。”这个说法对吗？$c$ 在什么范围内时公司应该停产？（7 分）
       en: |-
-        A company is the only seller of a product. When it sells $q$ units, the market price is $p(q) = 100 - 2q$ (dollars). Each unit costs $c$, and there is also a fixed cost $F$ per year, so $C(q) = cq + F$.
-        (a) Find the profit-maximizing output $q^*$ and price $p^*$ (in terms of $c$), and check that it is a maximum. With $c = 20$ and $F = 200$, what are $q^*$, $p^*$ and the maximum profit? (5 points)
-        (b) Material prices rise and $c$ goes from 20 to 28. A colleague says: "Each unit costs 8 dollars more, so we should raise the price by 8 dollars and pass the whole cost on to customers." Use the result of (a) to judge this statement, and explain with marginal revenue and marginal cost. (5 points)
-        (c) Let $F = 200$ be a yearly equipment rent; if the company stops producing, it can end the lease and does not pay it. A colleague says: "As long as the first-order condition gives a positive output, we should produce." Above what value of $c$ should the company stop producing (at exactly that value both choices are equally good)? Judge the colleague's statement. How does the answer change if the 200 dollars is a sunk cost that has already been paid and cannot be recovered? (6 points)
+        A company is the only seller of a product. When it sells $q$ units, the market price is $p(q) = 100 - 2q$ (dollars). Each unit costs $c$, and there is also a yearly equipment rent $F$, so $C(q) = cq + F$.
+        (a) Find the profit-maximizing output $q^*$ and price $p^*$ (in terms of $c$), and the maximum profit when $c = 20$ and $F = 200$. (4 points)
+        (b) Material prices rise and $c$ goes from 20 to 28. A colleague says: "Each unit costs 8 dollars more, so we should raise the price by 8 dollars and pass the whole cost on to customers." Is this right? Explain with marginal revenue and marginal cost. (5 points)
+        (c) Let $F = 200$. The rent is paid monthly, and if the company stops producing it can end the lease at once and pay no more. Another colleague says: "As long as the first-order condition gives a positive output, producing is better than stopping." Is this right? For what range of $c$ should the company stop producing? (7 points)
     answer:
       zh-cn: |-
-        (a) $\pi = (100 - 2q)q - cq - F$。$\pi' = 100 - c - 4q = 0$，$q^* = \frac{100 - c}{4}$；$\pi'' = -4 < 0$，是最大值。$p^* = 100 - 2q^* = \frac{100 + c}{2}$，$\pi^* = \frac{(100 - c)^2}{8} - F$。$c = 20$、$F = 200$ 时 $q^* = 20$，$p^* = 60$，$\pi^* = 800 - 200 = 600$。
+        (a) $\pi = (100 - 2q)q - cq - F$。$\pi' = 100 - c - 4q = 0$，$q^* = \frac{100 - c}{4}$；$\pi'' = -4 < 0$，是最大值。$p^* = 100 - 2q^* = \frac{100 + c}{2}$，$\pi^* = \frac{(100 - c)^2}{8} - F$。$c = 20$、$F = 200$ 时 $q^* = 20$，$p^* = 60$，最大利润 $800 - 200 = 600$。
         (b) 不对。$p^* = \frac{100 + c}{2}$，成本每涨 1 美元价格只涨 0.5 美元：$c = 28$ 时 $p^* = 64$，只上涨 4 美元。原因：最优点满足 $MR = MC$。边际收入 $100 - 4q$ 随产量下降的速度是价格 $100 - 2q$ 的两倍；边际成本上升 8 时，产量只需减少 2 件就能让边际收入上升 8，而减少 2 件只让价格上升 4。如果把价格提高 8（产量减到 16），$MR = 36 > MC = 28$，多卖一件还能增加利润。
-        (c) 固定成本可以避免时，要比较最优产量的利润和不生产（$q = 0$，利润 0）。生产要求 $\frac{(100 - c)^2}{8} \ge 200$，即 $100 - c \ge 40$，$c \le 60$。所以 $c > 60$ 时应停产。同事的说法不对：$60 < c < 100$ 时一阶条件仍给出正的产量（例如 $c = 64$ 时 $q^* = 9$），但这时最好的利润也是负的，不如退租停产。
-        如果 200 美元是沉没成本，生产与否都要承担，它不影响决策：只要多卖一件能赚钱就生产，即 $q = 0$ 处的边际收入 100 大于 $c$。所以只有 $c \ge 100$ 时才停产。
+        (c) 不对。租金停产后就不用付，是可以避免的成本，所以要比较最优产量的利润和不生产（$q = 0$，利润 0）。生产要求 $\frac{(100 - c)^2}{8} \ge 200$，即 $100 - c \ge 40$，$c \le 60$。所以 $c > 60$ 时应停产（$c = 60$ 时两者一样好）。$60 < c < 100$ 时一阶条件仍给出正的产量（例如 $c = 64$ 时 $q^* = 9$），但这时最好的利润也是负的（$\frac{36^2}{8} - 200 = -38$），不如退租停产。一阶条件只说明在生产的前提下哪个产量最好，不说明生产是否比停产好。
       en: |-
-        (a) $\pi = (100 - 2q)q - cq - F$. $\pi' = 100 - c - 4q = 0$ gives $q^* = \frac{100 - c}{4}$; $\pi'' = -4 < 0$, so it is a maximum. $p^* = 100 - 2q^* = \frac{100 + c}{2}$ and $\pi^* = \frac{(100 - c)^2}{8} - F$. With $c = 20$ and $F = 200$: $q^* = 20$, $p^* = 60$, $\pi^* = 800 - 200 = 600$.
+        (a) $\pi = (100 - 2q)q - cq - F$. $\pi' = 100 - c - 4q = 0$ gives $q^* = \frac{100 - c}{4}$; $\pi'' = -4 < 0$, so it is a maximum. $p^* = 100 - 2q^* = \frac{100 + c}{2}$ and $\pi^* = \frac{(100 - c)^2}{8} - F$. With $c = 20$ and $F = 200$: $q^* = 20$, $p^* = 60$, and the maximum profit is $800 - 200 = 600$.
         (b) No. $p^* = \frac{100 + c}{2}$, so each dollar of cost raises the price by only 0.5 dollars: at $c = 28$, $p^* = 64$, a rise of only 4 dollars. Reason: the optimum satisfies $MR = MC$. Marginal revenue $100 - 4q$ falls with output twice as fast as the price $100 - 2q$; when marginal cost rises by 8, output needs to fall by only 2 units to raise marginal revenue by 8, and 2 fewer units raise the price by only 4. If the price were raised by 8 (output 16), $MR = 36 > MC = 28$, so selling one more unit would still add profit.
-        (c) When the fixed cost can be avoided, the profit at the optimal output must be compared with not producing ($q = 0$, profit 0). Producing requires $\frac{(100 - c)^2}{8} \ge 200$, that is, $100 - c \ge 40$ and $c \le 60$. So for $c > 60$ the company should stop. The colleague is wrong: for $60 < c < 100$ the first-order condition still gives a positive output (for example, $c = 64$ gives $q^* = 9$), but even the best profit is then negative, so ending the lease and stopping is better.
-        If the 200 dollars is a sunk cost, it is paid whether or not the company produces, so it does not affect the decision: the company produces as long as selling one more unit makes money, that is, as long as the marginal revenue of 100 at $q = 0$ is above $c$. So it stops only when $c \ge 100$.
+        (c) No. The rent is not paid after stopping, so it is an avoidable cost, and the profit at the optimal output must be compared with not producing ($q = 0$, profit 0). Producing requires $\frac{(100 - c)^2}{8} \ge 200$, that is, $100 - c \ge 40$ and $c \le 60$. So the company should stop for $c > 60$ (at $c = 60$ both are equally good). For $60 < c < 100$ the first-order condition still gives a positive output (for example, $c = 64$ gives $q^* = 9$), but even the best profit is then negative ($\frac{36^2}{8} - 200 = -38$), so ending the lease and stopping is better. The first-order condition only tells which output is best if the company produces, not whether producing beats stopping.
     rubric:
       zh-cn:
-        - "(a) $q^*$、$p^*$ 的表达式和二阶条件 3 分；数值 20、60、600 2 分。"
+        - "(a) $q^*$、$p^*$ 的表达式 2 分；最大利润 600 2 分。"
         - "(b) 判断不对，指出价格只涨 4 美元 2 分；用 $MR$ 比价格下降得快说明原因 3 分。"
-        - "(c) 比较最优利润与不生产的利润，得出 $c > 60$ 时停产 3 分；用 $60 < c < 100$ 的情形说明同事的说法不对 1 分；沉没成本不影响决策、$c \\ge 100$ 才停产 2 分。"
+        - "(c) 指出租金可以避免、要与 $q = 0$ 比较 3 分；得出 $c > 60$ 时停产 2 分；用 $60 < c < 100$ 的情形说明同事的说法不对 2 分。"
       en:
-        - "(a) Expressions for $q^*$ and $p^*$ and the second-order condition 3 points; the values 20, 60 and 600 2 points."
+        - "(a) Expressions for $q^*$ and $p^*$ 2 points; maximum profit 600 2 points."
         - "(b) Judges the statement wrong and finds that the price rises by only 4 dollars 2 points; explains with $MR$ falling faster than the price 3 points."
-        - "(c) Compares the optimal profit with the profit of not producing and finds that the company stops for $c > 60$: 3 points; uses the case $60 < c < 100$ to show that the colleague is wrong: 1 point; the sunk cost does not affect the decision, so it stops only for $c \\ge 100$: 2 points."
+        - "(c) Recognizes that the rent is avoidable and compares with $q = 0$ 3 points; finds that the company stops for $c > 60$ 2 points; uses the case $60 < c < 100$ to show that the colleague is wrong 2 points."
 
   - id: Q8
     kind: quiz
     part: problem
     easy_points: 0
-    hard_points: 6
+    hard_points: 0
     points: 18
     concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, correlation]
-    expected: { rho: "0.25", w: "25", w0: "30.77", threshold: "0.67" }
+    expected: { rho: "0.25", w: "25", threshold: "0.67" }
     question:
       zh-cn: |-
         两只基金 A、B 的标准差为 $\sigma_A$、$\sigma_B$，相关系数为 $\rho$，且 $\rho < 1$。组合中 A 的权重为 $w$，B 为 $1 - w$。
-        (a) 用导数推导使组合方差最小的权重 $w^*$（用 $\sigma_A$、$\sigma_B$、$\rho$ 表示），并说明它确实是最小值。（6 分）
-        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$。一位分析师说，这两只基金的最小方差组合同时持有两只基金（两个权重都为正），组合的方差为 216（%²）。由此求两只基金的相关系数和这个组合中 A 的权重。（6 分）
-        (c) 仍取 $\sigma_A = 24\%$、$\sigma_B = 16\%$，不允许卖空（$0 \le w \le 1$）。相关系数从 0 逐渐增大到接近 1 时，最小方差组合中 A 的权重怎样变化？相关系数在什么范围内时，最小方差组合完全不持有 A？说明理由。（6 分）
+        (a) 用导数推导使组合方差最小的权重 $w^*$（用 $\sigma_A$、$\sigma_B$、$\rho$ 表示），并说明它确实是最小值。（5 分）
+        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$。一位分析师说，这两只基金的最小方差组合同时持有两只基金（两个权重都为正），组合的方差为 216（%²）。求两只基金的相关系数。（7 分）
+        (c) 仍取 $\sigma_A = 24\%$、$\sigma_B = 16\%$，不允许卖空（$0 \le w \le 1$）。相关系数在什么范围内时，最小方差组合完全不持有 A？（6 分）
       en: |-
         Two funds A and B have standard deviations $\sigma_A$ and $\sigma_B$ and correlation $\rho$, with $\rho < 1$. The portfolio holds A with weight $w$ and B with weight $1 - w$.
-        (a) Use the derivative to derive the weight $w^*$ that minimizes the portfolio variance (in terms of $\sigma_A$, $\sigma_B$ and $\rho$), and show that it is a minimum. (6 points)
-        (b) Let $\sigma_A = 24\%$ and $\sigma_B = 16\%$. An analyst says that the minimum-variance portfolio of these two funds holds both funds (both weights positive) and has a variance of 216 (%²). From this, find the correlation between the two funds and the weight of A in this portfolio. (6 points)
-        (c) Still with $\sigma_A = 24\%$ and $\sigma_B = 16\%$, short selling is not allowed ($0 \le w \le 1$). As the correlation rises from 0 toward 1, how does the weight of A in the minimum-variance portfolio change? For what range of the correlation does the minimum-variance portfolio hold no A at all? Explain. (6 points)
+        (a) Use the derivative to derive the weight $w^*$ that minimizes the portfolio variance (in terms of $\sigma_A$, $\sigma_B$ and $\rho$), and show that it is a minimum. (5 points)
+        (b) Let $\sigma_A = 24\%$ and $\sigma_B = 16\%$. An analyst says that the minimum-variance portfolio of these two funds holds both funds (both weights positive) and has a variance of 216 (%²). Find the correlation between the two funds. (7 points)
+        (c) Still with $\sigma_A = 24\%$ and $\sigma_B = 16\%$, short selling is not allowed ($0 \le w \le 1$). For what range of the correlation does the minimum-variance portfolio hold no A at all? (6 points)
     answer:
       zh-cn: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$。
         $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$，解得
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。
         二阶导数 $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$（因为 $\rho < 1$），是最小值。
-        (b) 把 $w^*$ 代回方差，最小方差为 $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$（也可以把 $w^*$ 代入后直接化简）。令它等于 216：$\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$，即 $32\rho^2 - 36\rho + 7 = 0$，$\rho = 0.25$ 或 $\rho = 0.875$。
-        $\rho = 0.875$ 时 $w^* = \frac{256 - 336}{832 - 672} = -0.5$，要卖空 A，与“两个权重都为正”矛盾，舍去。所以 $\rho = 0.25$，$w^* = \frac{256 - 96}{832 - 192} = 0.25$，即 A 的权重为 25%。
-        (c) $w^*(\rho) = \frac{256 - 384\rho}{832 - 768\rho}$。$\rho = 0$ 时约 30.77%；对 $\rho$ 求导，分子为 $-384(832 - 768\rho) + 768(256 - 384\rho) = -122{,}880 < 0$，所以 $\rho$ 越大，$w^*$ 越小：相关性越高，分散化的好处越小，最小方差组合越倾向于只持有风险较低的 B。方差是 $w$ 的开口向上的二次函数，$w^* \le 0$ 时在 $[0, 1]$ 上方差随 $w$ 增加，不允许卖空时最优是角点 $w = 0$。$w^* \le 0$ 即 $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$，$\rho \ge \frac{\sigma_B}{\sigma_A} = \frac{2}{3} \approx 0.67$。所以 $\frac{2}{3} \le \rho < 1$ 时完全不持有 A。
+        (b) 把 $w^*$ 代回方差，最小方差为 $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。令它等于 216：$\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$，即 $32\rho^2 - 36\rho + 7 = 0$，$\rho = 0.25$ 或 $\rho = 0.875$。
+        $\rho = 0.875$ 时 $w^* = \frac{256 - 336}{832 - 672} = -0.5$，要卖空 A，与“两个权重都为正”矛盾，舍去。所以 $\rho = 0.25$（这时 A 的权重 $w^* = \frac{256 - 96}{832 - 192} = 0.25$，即 25%，两个权重都为正）。
+        (c) 方差是 $w$ 的开口向上的二次函数。$w^* \le 0$ 时，在 $[0, 1]$ 上方差随 $w$ 增加，不允许卖空时最优是角点 $w = 0$。$w^* \le 0$ 即 $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$，$\rho \ge \frac{\sigma_B}{\sigma_A} = \frac{2}{3} \approx 0.67$。所以 $\frac{2}{3} \le \rho < 1$ 时完全不持有 A。
       en: |-
         (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$.
         $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$ gives
         $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$.
         The second derivative is $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$ (because $\rho < 1$), so it is a minimum.
-        (b) Substituting $w^*$ back into the variance gives the minimum variance $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$ (one can also substitute $w^*$ and simplify directly). Setting it equal to 216: $\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$, that is, $32\rho^2 - 36\rho + 7 = 0$, so $\rho = 0.25$ or $\rho = 0.875$.
-        At $\rho = 0.875$, $w^* = \frac{256 - 336}{832 - 672} = -0.5$, a short position in A, which contradicts "both weights positive", so it is rejected. So $\rho = 0.25$ and $w^* = \frac{256 - 96}{832 - 192} = 0.25$: A has a weight of 25%.
-        (c) $w^*(\rho) = \frac{256 - 384\rho}{832 - 768\rho}$. At $\rho = 0$ it is about 30.77%; differentiating with respect to $\rho$, the numerator is $-384(832 - 768\rho) + 768(256 - 384\rho) = -122{,}880 < 0$, so $w^*$ falls as $\rho$ rises: with higher correlation, diversification helps less and the minimum-variance portfolio leans toward holding only the less risky B. The variance is a quadratic in $w$ that opens upward; when $w^* \le 0$ the variance rises with $w$ on $[0, 1]$, so without short selling the optimum is the corner $w = 0$. $w^* \le 0$ means $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$, that is, $\rho \ge \frac{\sigma_B}{\sigma_A} = \frac{2}{3} \approx 0.67$. So for $\frac{2}{3} \le \rho < 1$ the portfolio holds no A.
+        (b) Substituting $w^*$ back into the variance gives the minimum variance $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$. Setting it equal to 216: $\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$, that is, $32\rho^2 - 36\rho + 7 = 0$, so $\rho = 0.25$ or $\rho = 0.875$.
+        At $\rho = 0.875$, $w^* = \frac{256 - 336}{832 - 672} = -0.5$, a short position in A, which contradicts "both weights positive", so it is rejected. So $\rho = 0.25$ (A's weight is then $w^* = \frac{256 - 96}{832 - 192} = 0.25$, that is, 25%, and both weights are positive).
+        (c) The variance is a quadratic in $w$ that opens upward. When $w^* \le 0$, the variance rises with $w$ on $[0, 1]$, so without short selling the optimum is the corner $w = 0$. $w^* \le 0$ means $\sigma_B^2 - \rho\sigma_A\sigma_B \le 0$, that is, $\rho \ge \frac{\sigma_B}{\sigma_A} = \frac{2}{3} \approx 0.67$. So for $\frac{2}{3} \le \rho < 1$ the portfolio holds no A.
     rubric:
       zh-cn:
-        - "(a) 方差表达式与求导 3 分，$w^*$ 公式 2 分，二阶条件 1 分。"
-        - "(b) 由最小方差列出关于 $\\rho$ 的方程并解出两个根 3 分；用“两个权重都为正”舍去 0.875，得 $\\rho = 0.25$、A 的权重 25% 3 分。保留两个根、没有取舍：最多 4 分。"
-        - "(c) 说明 $w^*$ 随 $\\rho$ 增大而减小（$\\rho = 0$ 时约 30.77%）2 分；指出不允许卖空时最优为角点、需要 $w^* \\le 0$ 2 分；得出 $\\rho \\ge \\frac{2}{3}$ 2 分。"
+        - "(a) 方差表达式与求导 2 分，$w^*$ 公式 2 分，二阶条件 1 分。"
+        - "(b) 由最小方差列出关于 $\\rho$ 的方程并解出两个根 4 分；用“两个权重都为正”舍去 0.875，得 $\\rho = 0.25$ 3 分。保留两个根、没有取舍：最多 4 分。"
+        - "(c) 指出不允许卖空时最优为角点、需要 $w^* \\le 0$ 3 分；得出 $\\rho \\ge \\frac{2}{3}$ 3 分。"
       en:
-        - "(a) Variance expression and derivative 3 points; formula for $w^*$ 2 points; second-order condition 1 point."
-        - "(b) Sets up the equation in $\\rho$ from the minimum variance and finds both roots 3 points; rejects 0.875 because both weights must be positive, giving $\\rho = 0.25$ and a weight of 25% for A, 3 points. Keeping both roots without choosing: at most 4 points."
-        - "(c) Shows that $w^*$ falls as $\\rho$ rises (about 30.77% at $\\rho = 0$) 2 points; the optimum without short selling is a corner when $w^* \\le 0$ 2 points; $\\rho \\ge \\frac{2}{3}$ 2 points."
+        - "(a) Variance expression and derivative 2 points; formula for $w^*$ 2 points; second-order condition 1 point."
+        - "(b) Sets up the equation in $\\rho$ from the minimum variance and finds both roots 4 points; rejects 0.875 because both weights must be positive, giving $\\rho = 0.25$, 3 points. Keeping both roots without choosing: at most 4 points."
+        - "(c) The optimum without short selling is a corner when $w^* \\le 0$: 3 points; $\\rho \\ge \\frac{2}{3}$: 3 points."
 
   - id: Q9
     kind: quiz
@@ -324,62 +320,60 @@ questions:
     easy_points: 0
     hard_points: 0
     points: 15
-    concepts: [normal-distribution, z-score, log-return, lognormal-distribution, median, right-skew]
-    expected: { mu: "7", sigma: "18", p25: "2.6", below: "67" }
+    concepts: [log-return, lognormal-distribution, median, right-skew, variance]
+    expected: { mu: "7", sigma: "18", ratio25: "1.50", ratio40: "1.91" }
     question:
       zh-cn: |-
-        某股票指数每年的对数收益率服从同一个正态分布，各年相互独立，期望和标准差未知。一份报告说：今天投入 100 美元，25 年后财富的中位数约为 575.5 美元，均值约为 862.8 美元。需要时可用标准正态分布的累积分布函数 $\Phi$ 的这些值：$\Phi(0.39) = 0.652$，$\Phi(0.45) = 0.674$，$\Phi(0.78) = 0.782$，$\Phi(1.17) = 0.879$，$\Phi(1.94) = 0.974$。
-        (a) 由报告的数字求每年对数收益率的期望和标准差（以百分比表示，取整数）。（5 分）
-        (b) 持有 25 年，25 年后指数低于今天的概率约为多少？报告用均值 862.8 美元说明“你 25 年后大约会有多少钱”，最后财富低于这个数的投资者约占多大比例？评价这份报告的说法。（10 分）
+        某股票指数每年的对数收益率服从同一个正态分布，各年相互独立，期望和标准差未知。一份报告说：今天投入 100 美元，25 年后财富的中位数约为 575.5 美元，均值约为 862.8 美元。报告用均值说明“你 25 年后大约会有多少钱”。
+        (a) 由报告的数字求每年对数收益率的期望和标准差（以百分比表示，取整数）。（8 分）
+        (b) 如果持有期从 25 年延长到 40 年，财富的均值是中位数的多少倍？由此说明：持有期越长，用均值描述典型投资者的结果，偏差是变大还是变小。（7 分）
       en: |-
-        The yearly log return of a stock index follows the same normal distribution every year, independent across years, with unknown mean and standard deviation. A report says: if you invest 100 dollars today, the median of your wealth after 25 years is about 575.5 dollars and the mean is about 862.8 dollars. Where needed, use these values of the standard normal cumulative distribution function $\Phi$: $\Phi(0.39) = 0.652$, $\Phi(0.45) = 0.674$, $\Phi(0.78) = 0.782$, $\Phi(1.17) = 0.879$, $\Phi(1.94) = 0.974$.
-        (a) From the report's numbers, find the mean and standard deviation of the yearly log return (in percent, rounded to whole numbers). (5 points)
-        (b) Holding for 25 years, what is the probability that after 25 years the index is below its level today? The report uses the mean of 862.8 dollars to describe "about how much you will have in 25 years": about what share of investors end with less than this amount? Evaluate the report's statement. (10 points)
+        The yearly log return of a stock index follows the same normal distribution every year, independent across years, with unknown mean and standard deviation. A report says: if you invest 100 dollars today, the median of your wealth after 25 years is about 575.5 dollars and the mean is about 862.8 dollars. The report uses the mean to describe "about how much you will have in 25 years".
+        (a) From the report's numbers, find the mean and standard deviation of the yearly log return (in percent, rounded to whole numbers). (8 points)
+        (b) If the holding period is extended from 25 to 40 years, how many times the median is the mean of wealth? Use this to explain whether, as the holding period gets longer, using the mean to describe a typical investor's result becomes more or less misleading. (7 points)
     answer:
       zh-cn: |-
-        (a) 对数收益率可以相加，25 年的总对数收益率 $S$ 服从正态分布，设期望为 $m$、标准差为 $s$，则 $\ln W = \ln 100 + S$，财富服从对数正态分布。中位数 $100\,e^{m} = 575.5$，得 $m = \ln 5.755 \approx 1.75$；均值与中位数之比 $e^{s^2/2} = \frac{862.8}{575.5} \approx 1.499$，得 $s^2 \approx 0.81$，$s \approx 0.9$。各年独立同分布：期望是每年的 25 倍，方差是 25 倍、标准差是 $\sqrt{25} = 5$ 倍。所以每年的期望约 $\frac{1.75}{25} = 7$%，标准差约 $\frac{0.9}{5} = 18$%。（把标准差也除以 25 会得到 3.6%，这是错的。）
-        (b) $S \sim N(1.75, 0.9^2)$，指数低于今天即 $S < 0$。$z = \frac{0 - 1.75}{0.9} \approx -1.94$，$P \approx 1 - 0.974 = 2.6$%。
-        财富低于均值即 $S < m + \frac{s^2}{2} = 2.155$，$z = \frac{2.155 - 1.75}{0.9} = 0.45$，概率 $\Phi(0.45) \approx 0.674$，约 67% 的投资者达不到这个数。财富分布右偏，均值被少数结果很好的路径拉高，用均值描述“大约会有多少钱”过于乐观；中位数（575.5 美元）更能代表典型的结果。
+        (a) 对数收益率可以相加，25 年的总对数收益率 $S$ 服从正态分布，设期望为 $m$、标准差为 $s$，则 $\ln W = \ln 100 + S$，财富服从对数正态分布。中位数 $100\,e^{m} = 575.5$，得 $m = \ln 5.755 \approx 1.75$；均值与中位数之比 $e^{s^2/2} = \frac{862.8}{575.5} \approx 1.50$，得 $s^2 \approx 0.81$，$s \approx 0.9$。各年独立同分布：期望是每年的 25 倍；方差是 25 倍，所以标准差是 $\sqrt{25} = 5$ 倍。每年的期望约 $\frac{1.75}{25} = 7$%，标准差约 $\frac{0.9}{5} = 18$%。（把标准差也除以 25 会得到 3.6%，这是错的。）
+        (b) 均值与中位数之比为 $e^{s^2/2}$，而 $s^2 = n\sigma^2$ 随年数成正比增加。40 年时 $s^2 = 40 \times 0.18^2 = 1.296$，比值 $e^{0.648} \approx 1.91$，高于 25 年时的 1.50。持有期越长，财富分布越右偏，均值被少数结果很好的路径拉得离中位数越远，大多数投资者达不到均值，用均值描述典型结果的偏差越大；应该看中位数或分位数。
       en: |-
-        (a) Log returns add up, so the total log return $S$ over 25 years is normally distributed; let its mean be $m$ and its standard deviation $s$. Then $\ln W = \ln 100 + S$ and wealth is lognormal. The median $100\,e^{m} = 575.5$ gives $m = \ln 5.755 \approx 1.75$; the ratio of mean to median $e^{s^2/2} = \frac{862.8}{575.5} \approx 1.499$ gives $s^2 \approx 0.81$ and $s \approx 0.9$. With independent, identically distributed years, the mean is 25 times the yearly mean, and the variance is 25 times as large, so the standard deviation is $\sqrt{25} = 5$ times as large. So the yearly mean is about $\frac{1.75}{25} = 7$% and the standard deviation about $\frac{0.9}{5} = 18$%. (Dividing the standard deviation by 25 as well gives 3.6%, which is wrong.)
-        (b) $S \sim N(1.75, 0.9^2)$, and the index is below today's level when $S < 0$. $z = \frac{0 - 1.75}{0.9} \approx -1.94$, so $P \approx 1 - 0.974 = 2.6$%.
-        Wealth below the mean means $S < m + \frac{s^2}{2} = 2.155$, $z = \frac{2.155 - 1.75}{0.9} = 0.45$, with probability $\Phi(0.45) \approx 0.674$: about 67% of investors do not reach this amount. The distribution of wealth is right-skewed and the mean is pulled up by a few very good paths, so using the mean for "about how much you will have" is too optimistic; the median (575.5 dollars) better represents a typical outcome.
+        (a) Log returns add up, so the total log return $S$ over 25 years is normally distributed; let its mean be $m$ and its standard deviation $s$. Then $\ln W = \ln 100 + S$ and wealth is lognormal. The median $100\,e^{m} = 575.5$ gives $m = \ln 5.755 \approx 1.75$; the ratio of mean to median $e^{s^2/2} = \frac{862.8}{575.5} \approx 1.50$ gives $s^2 \approx 0.81$ and $s \approx 0.9$. With independent, identically distributed years, the mean is 25 times the yearly mean; the variance is 25 times as large, so the standard deviation is $\sqrt{25} = 5$ times as large. The yearly mean is about $\frac{1.75}{25} = 7$% and the standard deviation about $\frac{0.9}{5} = 18$%. (Dividing the standard deviation by 25 as well gives 3.6%, which is wrong.)
+        (b) The ratio of mean to median is $e^{s^2/2}$, and $s^2 = n\sigma^2$ grows in proportion to the number of years. For 40 years $s^2 = 40 \times 0.18^2 = 1.296$ and the ratio is $e^{0.648} \approx 1.91$, above the 1.50 for 25 years. The longer the holding period, the more right-skewed the distribution of wealth, and the further a few very good paths pull the mean above the median; most investors do not reach the mean, so using the mean for a typical result becomes more misleading. The median or percentiles should be used instead.
     rubric:
       zh-cn:
-        - "(a) 由中位数求 $m$、由均值与中位数之比求 $s$ 3 分；换算成每年：期望约 7% 1 分，标准差按 $\\sqrt{25}$ 换算约 18% 1 分。标准差除以 25：这 1 分不给。"
-        - "(b) 设定 $S < 0$ 并标准化 3 分，约 2.6% 2 分；约 67% 3 分；说明均值被右偏拉高、典型结果应看中位数 2 分。用 (a) 的错误结果但方法正确：不扣分。"
+        - "(a) 由中位数求 $m$ 2 分；由均值与中位数之比求 $s$ 3 分；换算成每年：期望约 7% 1 分，标准差按 $\\sqrt{25}$ 换算约 18% 2 分。标准差除以 25：后 2 分不给。"
+        - "(b) 指出比值为 $e^{s^2/2}$、$s^2$ 与年数成正比 3 分；40 年时约 1.91 2 分；说明偏差变大、应看中位数 2 分。用 (a) 的错误结果但方法正确：不扣分。"
       en:
-        - "(a) $m$ from the median and $s$ from the ratio of mean to median 3 points; conversion to one year: mean about 7% 1 point, standard deviation scaled by $\\sqrt{25}$ to about 18% 1 point. Standard deviation divided by 25: no point for that part."
-        - "(b) Sets up $S < 0$ and standardizes 3 points, about 2.6% 2 points; about 67% 3 points; explains that the mean is pulled up by the right skew and that the median represents a typical outcome 2 points. Correct method with a wrong result carried over from (a): no deduction."
+        - "(a) $m$ from the median 2 points; $s$ from the ratio of mean to median 3 points; conversion to one year: mean about 7% 1 point, standard deviation scaled by $\\sqrt{25}$ to about 18% 2 points. Standard deviation divided by 25: no points for the last 2."
+        - "(b) The ratio is $e^{s^2/2}$ with $s^2$ proportional to the number of years 3 points; about 1.91 for 40 years 2 points; explains that the mean becomes more misleading and that the median should be used 2 points. Correct method with a wrong result carried over from (a): no deduction."
 
   - id: Q10
     kind: quiz
     part: problem
     easy_points: 0
-    hard_points: 7
+    hard_points: 0
     points: 15
     concepts: [residual, regression-coefficient, normal-distribution]
-    expected: { gap: "0.7", gap_down: "-0.8", pred: "5.6", lo: "-5.7", hi: "16.9" }
+    expected: { gap: "0.7", pred: "5.6", lo: "-5.7", hi: "16.9" }
     question:
       zh-cn: |-
         用一只基金过去 60 个月的月收益对市场月收益（%）做回归，结果为：截距 $a = 0.4$，斜率 $b = 1.3$，残差的标准差为 5.75%。同期市场月收益的平均值为 1%。
-        (a) 一位分析师说：“截距是 0.4，说明这只基金平均每月比市场多赚 0.4 个百分点。”评价这个说法：这段时期基金平均每月比市场多赚多少？按回归直线，市场下跌 4% 的月份，基金平均比市场多赚多少？多赚的部分可以分成哪两部分，各是多少？哪一部分在市场下跌时会变成负的？（7 分）
-        (b) 某个月市场涨了 4%。忽略系数的估计误差，并假设残差近似服从正态分布，预测这个月基金的收益，并给出大约 95% 的这类月份会落在其中的范围。有人说：“这个月市场涨了 4%，这只基金这个月不可能亏钱。”这个说法对吗？（8 分）
+        (a) 一位分析师说：“截距是 0.4，说明这只基金平均每月比市场多赚 0.4 个百分点。”这段时期基金平均每月实际比市场多赚多少？分析师的说法错在哪里？（7 分）
+        (b) 某个月市场涨了 4%。有人说：“这个月市场涨了 4%，这只基金这个月不可能亏钱。”忽略系数的估计误差，并假设残差近似服从正态分布，用大约 95% 的这类月份所在的范围判断这个说法。（8 分）
       en: |-
         A fund's monthly returns over the past 60 months are regressed on the market's monthly returns (%). The result: intercept $a = 0.4$, slope $b = 1.3$, and a residual standard deviation of 5.75%. Over the same period the market's average monthly return was 1%.
-        (a) An analyst says: "The intercept is 0.4, so on average the fund earns 0.4 percentage points a month more than the market." Evaluate this statement: over this period, how much more than the market did the fund earn on average per month? By the regression line, how much more than the market does the fund earn on average in a month when the market falls 4%? Into which two parts can the extra return be split, and how large is each? Which part turns negative when the market falls? (7 points)
-        (b) In one month the market rises 4%. Ignoring the estimation error of the coefficients and assuming that the residuals are approximately normal, predict the fund's return for this month, and give the range in which about 95% of such months fall. Someone says: "The market rose 4% this month, so this fund cannot lose money this month." Is this right? (8 points)
+        (a) An analyst says: "The intercept is 0.4, so on average the fund earns 0.4 percentage points a month more than the market." Over this period, how much more than the market did the fund actually earn on average per month? What is wrong with the analyst's statement? (7 points)
+        (b) In one month the market rises 4%. Someone says: "The market rose 4% this month, so this fund cannot lose money this month." Ignoring the estimation error of the coefficients and assuming that the residuals are approximately normal, judge this statement using the range in which about 95% of such months fall. (8 points)
     answer:
       zh-cn: |-
-        (a) 说法不对。截距是市场收益为 0 时基金的平均收益，不是基金比市场多赚的部分。基金减市场的平均差为 $a + (b - 1)x$。这段时期市场平均 1%，基金平均 $0.4 + 1.3 \times 1 = 1.7$%，每月平均多赚 0.7 个百分点；市场下跌 4% 的月份，基金平均 $0.4 - 5.2 = -4.8$%，比市场少 0.8 个百分点（即 −0.8）。多赚的 0.7 个百分点分成两部分：截距 0.4，与市场涨跌无关；$(b - 1)x = 0.3 \times 1 = 0.3$，来自 $b = 1.3 > 1$，即基金承担了比市场更大的市场风险。后一部分在市场下跌时变成负的（市场跌 4% 时为 $0.3 \times (-4) = -1.2$），这时基金反而跑输市场。
+        (a) 回归直线经过平均点，基金平均收益为 $0.4 + 1.3 \times 1 = 1.7$%，每月平均比市场多赚 $1.7 - 1 = 0.7$ 个百分点，不是 0.4。错在：截距是市场收益为 0 时基金的平均收益，不是基金比市场多赚的部分。基金减市场的平均差为 $a + (b - 1)x$：其中 0.4 与市场涨跌无关；另外 $(b - 1)x = 0.3 \times 1 = 0.3$ 来自 $b = 1.3 > 1$，即基金承担了比市场更大的市场风险，市场下跌时这一部分是负的（例如市场跌 4% 时为 −1.2），基金反而跑输市场。
         (b) 预测 $0.4 + 1.3 \times 4 = 5.6$%。范围约 $5.6 \pm 1.96 \times 5.75$，即 $[-5.7, 16.9]$（%）。说法不对：范围的下限是负数。残差的标准差和预测值差不多大，即使市场涨了 4%，基金在相当一部分这样的月份里仍会亏钱。回归给出的是平均关系，不是每个月都成立。
       en: |-
-        (a) The statement is wrong. The intercept is the fund's average return when the market return is 0, not the amount by which the fund beats the market. The average difference between fund and market is $a + (b - 1)x$. Over this period the market averaged 1% and the fund $0.4 + 1.3 \times 1 = 1.7$%, so it earned 0.7 percentage points a month more on average; in a month when the market falls 4%, the fund averages $0.4 - 5.2 = -4.8$%, 0.8 percentage points less than the market (that is, −0.8). The extra 0.7 percentage points split into two parts: the intercept, 0.4, which does not depend on the market; and $(b - 1)x = 0.3 \times 1 = 0.3$, which comes from $b = 1.3 > 1$, that is, from the fund taking more market risk than the market. The second part turns negative when the market falls ($0.3 \times (-4) = -1.2$ when the market falls 4%), and the fund then trails the market.
+        (a) The regression line passes through the point of averages, so the fund's average return is $0.4 + 1.3 \times 1 = 1.7$%, and it earned $1.7 - 1 = 0.7$ percentage points a month more than the market on average, not 0.4. What is wrong: the intercept is the fund's average return when the market return is 0, not the amount by which the fund beats the market. The average difference between fund and market is $a + (b - 1)x$: the 0.4 does not depend on the market; the other $(b - 1)x = 0.3 \times 1 = 0.3$ comes from $b = 1.3 > 1$, that is, from the fund taking more market risk than the market, and this part is negative when the market falls (for example −1.2 when the market falls 4%), so the fund then trails the market.
         (b) The prediction is $0.4 + 1.3 \times 4 = 5.6$%. The range is about $5.6 \pm 1.96 \times 5.75$, that is, $[-5.7, 16.9]$ (%). The statement is wrong: the lower end of the range is negative. The residual standard deviation is about as large as the prediction, so even when the market rises 4%, the fund still loses money in a fair share of such months. The regression gives an average relation, not one that holds every month.
     rubric:
       zh-cn:
-        - "(a) 指出截距不是比市场多赚的部分、写出 $a + (b - 1)x$ 2 分；平均多赚 0.7 与下跌月份少 0.8 2 分；分成截距 0.4 与 $(b - 1)x = 0.3$ 两部分 2 分；指出后一部分在市场下跌时为负 1 分。"
-        - "(b) 预测 5.6% 2 分；用残差标准差给出范围约 −5.7% 到 16.9% 3 分；指出可能亏钱、回归只是平均关系 3 分。"
+        - "(a) 算出平均多赚约 0.7 个百分点 3 分；指出截距是市场收益为 0 时的值，差额为 $a + (b - 1)x$，其中一部分来自 $b > 1$ 的市场风险 4 分。"
+        - "(b) 预测 5.6% 2 分；用残差标准差给出范围约 −5.7% 到 16.9% 3 分；判断说法不对，并说明回归只是平均关系 3 分。"
       en:
-        - "(a) Explains that the intercept is not the amount by which the fund beats the market and writes $a + (b - 1)x$ 2 points; 0.7 more on average and 0.8 less in a falling month 2 points; split into the intercept, 0.4, and $(b - 1)x = 0.3$ 2 points; the second part is negative when the market falls 1 point."
-        - "(b) Prediction of 5.6% 2 points; range of about −5.7% to 16.9% from the residual standard deviation 3 points; points out that a loss is possible because the regression is only an average relation 3 points."
+        - "(a) Finds that the fund earned about 0.7 percentage points more on average 3 points; explains that the intercept is the value when the market return is 0, that the difference is $a + (b - 1)x$, and that part of it comes from market risk with $b > 1$ 4 points."
+        - "(b) Prediction of 5.6% 2 points; range of about −5.7% to 16.9% from the residual standard deviation 3 points; judges the statement wrong and explains that the regression is only an average relation 3 points."

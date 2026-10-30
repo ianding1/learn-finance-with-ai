@@ -3,10 +3,8 @@
 results() returns {"<question id>.<name>": value}. CI compares each value with the
 `expected` string in the key file, rounded to the number of decimals written there.
 """
-from math import log, sqrt
-from statistics import NormalDist, mean
-
-Phi = NormalDist().cdf
+from math import exp, log, sqrt
+from statistics import mean
 
 
 def results():
@@ -48,11 +46,8 @@ def results():
     fv = 50_000 * (1 + i) ** 360 + 400 * ((1 + i) ** 360 - 1) / i
     r["Q6.fv"] = fv
     r["Q6.n"] = -log(1 - fv * R / (60_000 * (1 + R))) / log(1 + R)
-    fv0 = 50_000 * (1 + i) ** 360
-    r["Q6.c"] = (pv - fv0) * i / ((1 + i) ** 360 - 1)  # deposit needed for all 25 withdrawals
-    # (c) growing perpetuity with the first payment today.
-    r["Q6.w"] = pv * (R - 0.02) / (1 + R)
-    r["Q6.w3"] = pv * (R - 0.03) / (1 + R)
+    # (c) growing perpetuity with the first payment (40,000) today: highest growth rate.
+    r["Q6.g"] = 100 * (R - 40_000 * (1 + R) / pv)
 
     # Q7: p = 100 - 2q, C = cq + F.
     q = lambda c: (100 - c) / 4
@@ -64,7 +59,6 @@ def results():
     r["Q7.p_new"] = p(28)
     r["Q7.rise"] = p(28) - p(20)
     r["Q7.c_shut"] = 100 - sqrt(8 * 200)  # profit(c, 200) = 0
-    r["Q7.c_sunk"] = 100  # marginal revenue at q = 0
 
     # Q8: sigma_A 24, sigma_B 16; the minimum variance is 216 with both weights positive.
     sa, sb = 24, 16
@@ -78,7 +72,6 @@ def results():
     assert abs(minvar(rho) - 216) < 1e-9
     r["Q8.rho"] = rho
     r["Q8.w"] = 100 * wstar(rho)
-    r["Q8.w0"] = 100 * wstar(0)
     r["Q8.threshold"] = sb / sa
 
     # Q9: a report gives median 575.5 and mean 862.8 after 25 years for 100 invested.
@@ -87,15 +80,13 @@ def results():
     s = sqrt(2 * log(862.8 / 575.5))
     r["Q9.mu"] = 100 * m / n
     r["Q9.sigma"] = 100 * s / sqrt(n)
-    m, s = 1.75, 0.9  # the rounded values used in the answer
-    r["Q9.p25"] = 100 * Phi(-m / s)
-    r["Q9.below"] = 100 * Phi((s**2 / 2) / s)
+    r["Q9.ratio25"] = 862.8 / 575.5
+    r["Q9.ratio40"] = exp(40 * 0.18**2 / 2)  # e^{s^2/2} with s^2 = n sigma^2
 
     # Q10: a = 0.4, b = 1.3, residual sd 5.75; market mean 1%.
     sd_e = 5.75
     pred = 0.4 + 1.3 * 4
     r["Q10.gap"] = 0.4 + (1.3 - 1) * 1  # fund minus market at the average market return
-    r["Q10.gap_down"] = 0.4 + (1.3 - 1) * -4
     r["Q10.pred"] = pred
     r["Q10.lo"] = pred - 1.96 * sd_e
     r["Q10.hi"] = pred + 1.96 * sd_e
