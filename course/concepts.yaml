@@ -990,6 +990,62 @@ repeated-game:
     zh-cn: "同一个博弈一期又一期地重复进行；今天的选择会影响对手以后的选择，合作因此可能维持。"
     en: "The same game played period after period; today's choice affects the other side's later choices, so cooperation may be sustained."
 
+consumer-surplus:
+  defined_in: "1.8"
+  zh-cn: 消费者剩余
+  en: consumer surplus
+  short:
+    zh-cn: "买者的支付意愿减去实际支付的价格的总和，即需求曲线以下、价格以上的面积。"
+    en: "The sum of buyers' willingness to pay minus the price they actually pay: the area below the demand curve and above the price."
+
+producer-surplus:
+  defined_in: "1.8"
+  zh-cn: 生产者剩余
+  en: producer surplus
+  short:
+    zh-cn: "卖方得到的价格减去边际成本的总和，即价格以下、供给曲线以上的面积，等于收入减去可变成本。"
+    en: "The sum of the price sellers receive minus marginal cost: the area below the price and above the supply curve, equal to revenue minus variable cost."
+
+deadweight-loss:
+  defined_in: "1.8"
+  zh-cn: 无谓损失
+  en: deadweight loss
+  short:
+    zh-cn: "成交量偏离有效率的数量时，总剩余中没有被任何人得到的部分。"
+    en: "The part of total surplus that no one gets when the quantity traded differs from the efficient quantity."
+
+tax-incidence:
+  defined_in: "1.8"
+  zh-cn: 税收归宿
+  en: tax incidence
+  short:
+    zh-cn: "税的负担实际由买方和卖方各承担多少。"
+    en: "How the burden of a tax is actually split between buyers and sellers."
+
+externality:
+  defined_in: "1.8"
+  zh-cn: 外部性
+  en: externality
+  short:
+    zh-cn: "一方的决策影响了别人，而这种影响没有反映在价格中。"
+    en: "An effect of one party's decision on others that is not reflected in prices."
+
+pigouvian-tax:
+  defined_in: "1.8"
+  zh-cn: 庇古税
+  en: Pigouvian tax
+  short:
+    zh-cn: "对每单位产量征收、等于其外部成本的税，使决策者面对全部社会成本。"
+    en: "A tax per unit equal to its external cost, which makes the decision maker face the full social cost."
+
+public-good:
+  defined_in: "1.8"
+  zh-cn: 公共品
+  en: public good
+  short:
+    zh-cn: "既没有竞争性、也没有排他性的物品；有搭便车问题，市场提供得太少。"
+    en: "A good that is neither rival nor excludable; it has a free-rider problem, and markets provide too little of it."
+
 risk-measures:
   defined_in: "4.1"
   zh-cn: 风险度量

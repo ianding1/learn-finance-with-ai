@@ -136,7 +136,15 @@ stages:
         published: true
         introduces: [game, dominant-strategy, prisoners-dilemma, nash-equilibrium, backward-induction, repeated-game]
         uses: [oligopoly, cournot-model, barriers-to-entry, discount-factor, perpetuity, perfect-competition]
-      - { id: "1.8", slug: "1-8-welfare-market-failure", title: { zh-cn: "福利与市场失灵", en: "Welfare and Market Failure" } }
+      - id: "1.8"
+        slug: "1-8-welfare-market-failure"
+        title: { zh-cn: "福利与市场失灵", en: "Welfare and Market Failure" }
+        summary:
+          zh-cn: "用消费者剩余和生产者剩余度量市场带来的好处；无谓损失、税收归宿，以及外部性和公共品为什么会使市场的结果偏离最优。"
+          en: "Measuring the gains from a market with consumer and producer surplus; deadweight loss, tax incidence, and why externalities and public goods make market outcomes fall short of the best."
+        published: true
+        introduces: [consumer-surplus, producer-surplus, deadweight-loss, tax-incidence, externality, pigouvian-tax, public-good]
+        uses: [demand, supply, market-equilibrium, marginal-cost, perfect-competition, monopoly, price-elasticity, nash-equilibrium, prisoners-dilemma, dominant-strategy]
       - { id: "1.9", slug: "1-9-information-economics", title: { zh-cn: "信息经济学", en: "Information Economics" } }
       - { id: "E1", slug: "e1-quiz", exam: true, title: { zh-cn: "测验 E1：微观经济学", en: "Quiz E1: Microeconomics" } }
 

@@ -1,0 +1,101 @@
+---
+// Figures 1-1 and 3-1 of lesson 1.8: the coffee-bean market of lesson 1.1 (Qd = 100 − 2P, Qs = −20 + 4P)
+// with consumer surplus, producer surplus, tax revenue and deadweight loss. With `tax`, a slider sets a
+// per-unit tax t paid by sellers; without it, the figure shows the market without a tax.
+// Parameters are registered in course/widgets.yaml (id: surplus-tax).
+import { toLang } from '../../i18n/ui';
+
+interface Props {
+	tax?: boolean;
+}
+const { tax = false } = Astro.props;
+const lang = toLang(Astro.locals.starlightRoute.lang);
+const L = {
+	'zh-cn': {
+		t: '每袋税额 t（美元）',
+		x: '数量 Q（千袋 / 周）',
+		y: '价格（美元 / 袋）',
+		demand: '需求',
+		supply: '供给',
+		cs: '消费者剩余',
+		ps: '生产者剩余',
+		rev: '税收',
+		dwl: '无谓损失',
+		readout: '买方付 {pb}，卖方得 {ps}，数量 {q}。消费者剩余 {cs}，生产者剩余 {psur}，税收 {rev}，无谓损失 {dwl}（千美元 / 周）。',
+		readoutNoTax: '价格 {pb}，数量 {q}。消费者剩余 {cs}，生产者剩余 {psur}，总剩余 {total}（千美元 / 周）。',
+	},
+	en: {
+		t: 'Tax per bag t (dollars)',
+		x: 'Quantity Q (thousand bags per week)',
+		y: 'Price (dollars per bag)',
+		demand: 'Demand',
+		supply: 'Supply',
+		cs: 'Consumer surplus',
+		ps: 'Producer surplus',
+		rev: 'Tax revenue',
+		dwl: 'Deadweight loss',
+		readout: 'Buyers pay {pb}, sellers receive {ps}, quantity {q}. Consumer surplus {cs}, producer surplus {psur}, tax revenue {rev}, deadweight loss {dwl} (thousand dollars per week).',
+		readoutNoTax: 'Price {pb}, quantity {q}. Consumer surplus {cs}, producer surplus {psur}, total surplus {total} (thousand dollars per week).',
+	},
+}[lang];
+
+const xr = [0, 100];
+const yr = [0, 50];
+const xticks = [0, 20, 40, 60, 80, 100];
+const yticks = [0, 10, 20, 30, 40, 50];
+const layouts = [
+	{ cls: 'viz-wide', W: 640, H: 340, pad: { l: 50, r: 20, t: 14, b: 44 } },
+	{ cls: 'viz-narrow', W: 360, H: 300, pad: { l: 50, r: 12, t: 14, b: 44 } },
+].map((g) => ({
+	...g,
+	X: (v: number) => g.pad.l + ((v - xr[0]) / (xr[1] - xr[0])) * (g.W - g.pad.l - g.pad.r),
+	Y: (v: number) => g.pad.t + ((yr[1] - v) / (yr[1] - yr[0])) * (g.H - g.pad.t - g.pad.b),
+}));
+---
+
+<div class="lfwai-widget" data-widget="surplus-tax" data-readout={tax ? L.readout : L.readoutNoTax}>
+	{tax && (
+		<div class="lfwai-sliders">
+			<label>
+				<span>{L.t} = <output data-out="t">0</output></span>
+				<input type="range" min="0" max="30" step="1" value="0" data-param="t" />
+			</label>
+		</div>
+	)}
+	{layouts.map(({ cls, W, H, pad, X, Y }) => (
+		<svg class={`lfwai-viz ${cls}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${L.cs} / ${L.ps}`} data-geom={JSON.stringify({ W, H, pad, xr, yr })}>
+			{yticks.map((v) => (
+				<g>
+					<line class={v === 0 ? 'viz-axis' : 'viz-grid'} x1={pad.l} x2={W - pad.r} y1={Y(v)} y2={Y(v)} />
+					<text class="viz-tick" x={pad.l - 8} y={Y(v) + 4} text-anchor="end">{v}</text>
+				</g>
+			))}
+			{xticks.map((v) => (
+				<text class="viz-tick" x={X(v)} y={H - pad.b + 18} text-anchor="middle">{v}</text>
+			))}
+			<line class="viz-axis" x1={pad.l} x2={pad.l} y1={pad.t} y2={H - pad.b} />
+			<text class="viz-tick" x={(pad.l + W - pad.r) / 2} y={H - 8} text-anchor="middle">{L.x}</text>
+			<text class="viz-tick" transform={`translate(12 ${(pad.t + H - pad.b) / 2}) rotate(-90)`} text-anchor="middle">{L.y}</text>
+			<polygon class="viz-cs" data-el="cs" points="" />
+			<polygon class="viz-ps" data-el="ps" points="" />
+			<polygon class="viz-rev" data-el="rev" points="" />
+			<polygon class="viz-dwl" data-el="dwl" points="" />
+			<line class="viz-curve" x1={X(0)} y1={Y(50)} x2={X(100)} y2={Y(0)} />
+			<line class="viz-curve-fat" x1={X(0)} y1={Y(5)} x2={X(100)} y2={Y(30)} />
+		</svg>
+	))}
+	<ul class="lfwai-legend">
+		<li><span class="sw sw-curve"></span>{L.demand}</li>
+		<li><span class="sw sw-fat"></span>{L.supply}</li>
+		<li><span class="sw sw-cs"></span>{L.cs}</li>
+		<li><span class="sw sw-ps"></span>{L.ps}</li>
+		{tax && <li><span class="sw sw-rev"></span>{L.rev}</li>}
+		{tax && <li><span class="sw sw-dwl"></span>{L.dwl}</li>}
+	</ul>
+	<p class="lfwai-readout" data-el="readout" aria-live="polite"></p>
+</div>
+
+<script>
+	import { initSurplusTax } from '../../scripts/widgets/surplus-tax';
+	initSurplusTax();
+</script>

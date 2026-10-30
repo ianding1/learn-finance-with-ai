@@ -1,0 +1,122 @@
+---
+title: 1.8 Welfare and Market Failure
+description: "Measuring the gains from a market with consumer and producer surplus; deadweight loss, tax incidence, and why externalities and public goods make market outcomes fall short of the best."
+lesson: "1.8"
+---
+
+import Ref from '../../../../components/Ref.astro';
+import Def from '../../../../components/Def.astro';
+import Figure from '../../../../components/Figure.astro';
+import Check from '../../../../components/Check.astro';
+import Exercises from '../../../../components/Exercises.astro';
+import CheckAll from '../../../../components/CheckAll.astro';
+import SurplusTax from '../../../../components/widgets/SurplusTax.astro';
+
+## Consumer surplus and producer surplus [#surplus]
+
+The most a buyer would pay for a bag of coffee beans is called the buyer's willingness to pay. If the buyer would pay 30 dollars and actually pays 20 dollars, the purchase gives the buyer a gain of 10 dollars.
+
+The demand curve can be read vertically: at quantity $Q$, the height of the curve is the willingness to pay of the buyer of "bag number $Q$". Each buyer's willingness to pay minus the price, added up over all the buyers who buy, is the area below the demand curve and above the price. It is called <Def id="consumer-surplus">consumer surplus</Def>.
+
+The same holds for sellers. <Ref lesson="1.5" /> showed that a competitive firm's supply curve is its marginal cost curve: at quantity $Q$, the height of the supply curve is the marginal cost of producing "bag number $Q$". The price of each bag minus its marginal cost, added up, is the area below the price and above the supply curve. It is called <Def id="producer-surplus">producer surplus</Def>, and it equals revenue minus variable cost.
+
+Take the coffee-bean market of <Ref lesson="1.1" />: demand $Q_d = 100 - 2P$, supply $Q_s = -20 + 4P$, an equilibrium price of 20 dollars and a quantity of 60 thousand bags. Written in terms of the price, demand is $P = 50 - \frac{Q}{2}$ and supply is $P = 5 + \frac{Q}{4}$. Both areas are triangles, written CS and PS:
+
+$$
+\text{CS} = \tfrac12 \times 60 \times (50 - 20) = 900, \qquad \text{PS} = \tfrac12 \times 60 \times (20 - 5) = 450
+$$
+
+The unit is thousand dollars per week. Their sum is called total surplus: the gain this market brings to buyers and sellers each week, 1,350 thousand dollars in total.
+
+<Figure id="1-1" title="Consumer surplus and producer surplus in the coffee-bean market." observe="The two areas meet at the equilibrium price. Think about how total surplus would change if fewer than 60 or more than 60 were traded.">
+	<SurplusTax />
+</Figure>
+
+The equilibrium quantity of a competitive market makes total surplus as large as possible. If fewer than 60 are traded, some bags still have a willingness to pay above their marginal cost, and selling them would raise total surplus; if more than 60 are traded, the extra bags have a marginal cost above the willingness to pay, and selling them lowers total surplus. The equilibrium quantity carries out exactly all the trades in which the willingness to pay exceeds the cost. This is what economists mean when they say a competitive market is efficient.
+
+Note that total surplus counts only the total size of the gains, not who receives them. Efficient does not mean fair.
+
+<Check id="C1" />
+
+## Deadweight loss [#deadweight-loss]
+
+When the quantity traded differs from the efficient quantity, total surplus falls. The part that is lost goes to no one and is called <Def id="deadweight-loss">deadweight loss</Def>.
+
+Example: the monopolist of <Ref lesson="1.6" /> faces demand $P = 100 - Q$ with marginal cost 20. Under monopoly, output is 40 and the price is 60; under perfect competition, output is 80 and the price is 20. For units 40 to 80, buyers would pay more than the marginal cost of 20, but these units are not produced. The lost total surplus (written DWL) is the triangle between the demand curve and marginal cost from output 40 to 80:
+
+$$
+\text{DWL} = \tfrac12 \times (80 - 40) \times (60 - 20) = 800
+$$
+
+The monopolist's profit $(60 - 20) \times 40 = 1600$ used to be part of consumer surplus and has now moved to the monopolist. This is a transfer, not a loss: only the triangle actually disappears from total surplus.
+
+Price controls, taxes and the externalities discussed below also cause deadweight loss.
+
+<Check id="C2" />
+
+## Tax incidence [#tax-incidence]
+
+The government levies a tax of $t$ dollars per bag of coffee beans, paid by sellers. Now the price buyers pay, $P_b$, and the price sellers receive, $P_s$, differ by $t$: $P_s = P_b - t$. Sellers decide how much to supply based on the price they receive, so the new equilibrium satisfies
+
+$$
+100 - 2P_b = -20 + 4(P_b - t)
+$$
+
+With $t = 6$, $P_b = 24$, $P_s = 18$ and the quantity is 52. The price before the tax was 20: buyers pay 4 dollars more and sellers receive 2 dollars less. Although sellers hand the tax to the government, two thirds of the burden falls on buyers. Who actually bears the burden of a tax is called <Def id="tax-incidence">tax incidence</Def>.
+
+In this example, which side's quantity is more sensitive to the price? Which side bears more? Derive the general relation between the two in <Ref check="Q2" />. Would the result differ if buyers paid the tax instead? Compute it in <Ref check="Q1" />.
+
+The government collects $6 \times 52 = 312$ thousand dollars. The revenue itself is a transfer from buyers and sellers to the government, not a loss; but the quantity falls from 60 to 52, and these 8 thousand bags, whose willingness to pay was above their cost, are no longer traded. The deadweight loss is $\tfrac12 \times 6 \times 8 = 24$ thousand dollars.
+
+<Figure id="3-1" title="A tax of $t$ dollars per bag on sellers: the price buyers pay and the price sellers receive differ by $t$." observe="Starting from $t = 0$, raise the tax step by step and compare how tax revenue and the deadweight loss grow.">
+	<SurplusTax tax />
+</Figure>
+
+The same issue comes up in investing. For example, if securities trading is taxed and trading volume is very sensitive to trading costs, the tax cuts volume sharply: the government collects less than an estimate based on the old volume would suggest, while the deadweight loss is not small.
+
+<Check id="C3" />
+
+## Externalities [#externalities]
+
+When a decision by a person or a firm affects others and the effect is not reflected in prices, it is called an <Def id="externality">externality</Def>. Pollution from a factory harms nearby residents: a negative externality. A vaccination also lowers the risk that others are infected: a positive externality.
+
+With a negative externality, the social marginal cost of a unit equals the marginal cost the firm bears plus the cost it imposes on others. The firm decides its output based only on its own cost, so the market produces more than the socially optimal quantity: the last units bring buyers less benefit than their social cost, which causes a deadweight loss. A positive externality works the other way: the market produces too little.
+
+One remedy is a tax per unit of output equal to the external cost, so that the firm itself faces the full social cost. Such a tax is called a <Def id="pigouvian-tax">Pigouvian tax</Def>. Unlike the tax in the previous section, a Pigouvian tax removes trades that should not happen in the first place, so it reduces deadweight loss rather than causing it. Another approach is to define property rights clearly and let the affected parties bargain (the Coase theorem), but this is hard when many people are affected and bargaining is costly.
+
+The most important externality in finance is systemic risk. The failure of a large bank harms the banks and firms that deal with it and can even set off runs (<Ref concept="nash-equilibrium" />). When a bank decides how much risk to take, it does not count all these losses, so it takes too much risk. Regulators require systemically important banks to hold more capital, which works much like a Pigouvian tax.
+
+<Check id="C4" />
+
+## Public goods [#public-goods]
+
+Goods can be classified by two properties:
+
+- **Rivalry**: whether one person's use reduces the amount others can use.
+- **Excludability**: whether people who do not pay can be kept from using it.
+
+|  | Excludable | Not excludable |
+| --- | --- | --- |
+| **Rival** | Private goods (lunch, cars) | Common resources (fish in the open ocean, crowded roads) |
+| **Not rival** | Club goods (paid video, paid software) | Public goods (national defense, basic research, weather forecasts broadcast free) |
+
+A good that is neither rival nor excludable is called a <Def id="public-good">public good</Def>. Because people who do not pay cannot be kept from using it, everyone hopes that others will pay and they can use it for free; this is called free riding. As in the <Ref concept="prisoners-dilemma" />, each side's best choice leads to too little of the public good. This is why public goods are usually provided by the government and paid for with taxes. Common resources have the opposite problem: each user takes a little more, and the resource is overused, as in overfishing.
+
+Financial markets have a public good too: the prices themselves. Active investors spend money researching companies, and their trades make prices reflect this information; passive investors do no research and can still buy at those prices. If everyone only free-rode, no one would do the research, and prices would no longer reflect information. <Ref lesson="4.7" /> discusses what this means for market efficiency.
+
+<Check id="C5" />
+
+## Summary [#summary]
+
+- Consumer surplus: the area below the demand curve and above the price. Producer surplus: the area below the price and above the supply curve. Their sum is total surplus.
+- The equilibrium quantity of a competitive market makes total surplus as large as possible; efficient does not mean fair.
+- Deadweight loss: the total surplus that no one gets when the quantity traded differs from the efficient quantity. Monopoly, taxes and externalities all cause deadweight loss; profit from pricing above cost is a transfer, not a loss.
+- Tax incidence: who actually bears the burden of a tax. A tax opens a gap between the price buyers pay and the price sellers receive, reduces the quantity traded and causes a deadweight loss.
+- Externalities make markets produce too much (negative) or too little (positive); a Pigouvian tax makes the decision maker face the full social cost.
+- Public goods are neither rival nor excludable, have a free-rider problem, and markets provide too little of them.
+
+<CheckAll />
+
+## Exercises [#exercises]
+
+<Exercises />

@@ -1,0 +1,396 @@
+# Answer key for lesson 1.8. Shown to learners only inside generated grading prompts.
+# Text fields support: $inline math$, $$display math$$, **bold**, line breaks,
+# and references: [[1.1]] (lesson), [[1.8#tax-incidence]] (section), [[concept:externality]], [[check:Q2]], [[fig:3-1]].
+# expected: values are recomputed by course/verify/1.8.py in CI and must appear verbatim in every answer text.
+#
+# context: lesson facts for the grader. A grading prompt includes an item when
+#   - the item has neither `concepts` nor `questions` (always included), or
+#   - one of its `concepts` is tested by a question being graded, or
+#   - one of its `questions` is being graded.
+# common_errors: each item lists the `questions` it is relevant to. Only those go into a prompt.
+
+lesson: "1.8"
+
+context:
+  - zh-cn: |-
+      学习者学过供给、需求与均衡（[[1.1]]）、竞争厂商的供给曲线就是边际成本曲线（[[1.5]]）、垄断（[[1.6]]），以及囚徒困境与纳什均衡（[[1.7]]）。本课是简讲：只用线性的需求和供给，没有讲一般均衡和福利定理的正式表述。
+    en: |-
+      The learner has studied supply, demand and equilibrium ([[1.1]]), that a competitive firm's supply curve is its marginal cost curve ([[1.5]]), monopoly ([[1.6]]), and the prisoner's dilemma and Nash equilibrium ([[1.7]]). This is a short lesson: it uses only linear demand and supply and does not cover general equilibrium or a formal statement of the welfare theorems.
+  - concepts: [consumer-surplus, producer-surplus, deadweight-loss]
+    zh-cn: |-
+      讲义的例子：[[1.1]] 的咖啡豆市场 $Q_d = 100 - 2P$、$Q_s = -20 + 4P$，即 $P = 50 - \frac{Q}{2}$、$P = 5 + \frac{Q}{4}$，均衡价格 20、数量 60（千袋 / 周）；消费者剩余 900、生产者剩余 450、总剩余 1,350（千美元 / 周）。讲义说明竞争均衡使总剩余最大，有效率不等于公平。无谓损失的例子：[[1.6]] 的垄断（$P = 100 - Q$，边际成本 20），无谓损失 800，垄断利润 1600 是转移。
+    en: |-
+      The lesson's example: the coffee-bean market of [[1.1]], $Q_d = 100 - 2P$ and $Q_s = -20 + 4P$, that is, $P = 50 - \frac{Q}{2}$ and $P = 5 + \frac{Q}{4}$, with equilibrium price 20 and quantity 60 (thousand bags per week); consumer surplus 900, producer surplus 450, total surplus 1,350 (thousand dollars per week). The lesson explains that the competitive equilibrium maximizes total surplus and that efficient does not mean fair. Deadweight-loss example: the monopoly of [[1.6]] ($P = 100 - Q$, marginal cost 20), with deadweight loss 800; the monopoly profit of 1600 is a transfer.
+  - concepts: [tax-incidence]
+    zh-cn: |-
+      讲义对卖方征收每袋 $t$ 美元的税：$100 - 2P_b = -20 + 4(P_b - t)$。$t = 6$ 时买方付 24、卖方得 18、数量 52，买方承担三分之二；税收 312，无谓损失 24。[[fig:3-1]]：税额滑块从 0 到 30，步长 1，默认 0；读数显示买方付的价格、卖方得到的价格、数量、消费者剩余、生产者剩余、税收和无谓损失。讲义没有给出税负分配与弹性的一般关系（留给练习题），也没有计算向买方征税的情形（留给练习题）。讲义提到对证券交易征税时交易量可能大幅减少。
+    en: |-
+      The lesson taxes sellers $t$ dollars per bag: $100 - 2P_b = -20 + 4(P_b - t)$. At $t = 6$ buyers pay 24, sellers receive 18, the quantity is 52, and buyers bear two thirds; tax revenue is 312 and the deadweight loss is 24. [[fig:3-1]]: a tax slider from 0 to 30 in steps of 1 (default 0); the readout shows the price buyers pay, the price sellers receive, the quantity, consumer surplus, producer surplus, tax revenue and deadweight loss. The lesson does not give the general relation between the split of the tax and elasticities (left to an exercise), nor does it compute the case of a tax on buyers (left to an exercise). The lesson mentions that a tax on securities trading may reduce trading volume sharply.
+  - concepts: [externality, pigouvian-tax]
+    zh-cn: |-
+      讲义：负外部性时社会边际成本 = 企业的边际成本 + 外部成本，市场生产太多；正外部性时生产太少。庇古税等于每单位的外部成本，减少无谓损失。提到科斯定理（谈判成本高时难以做到）和金融业的系统性风险（系统重要性银行多持有资本，作用类似庇古税）。
+    en: |-
+      The lesson: with a negative externality, social marginal cost = the firm's marginal cost + the external cost, and the market produces too much; with a positive externality it produces too little. A Pigouvian tax equals the external cost per unit and reduces the deadweight loss. The lesson mentions the Coase theorem (hard to apply when bargaining is costly) and systemic risk in finance (systemically important banks must hold more capital, which works like a Pigouvian tax).
+  - concepts: [public-good]
+    zh-cn: |-
+      讲义按竞争性和排他性分为私人物品、俱乐部物品、公共资源和公共品；公共品有搭便车问题，与囚徒困境类似，通常由政府提供；公共资源被过度使用。讲义提到价格信息是金融市场中的公共品，被动投资者搭主动投资者的便车。
+    en: |-
+      The lesson classifies goods by rivalry and excludability into private goods, club goods, common resources and public goods; public goods have a free-rider problem, similar to the prisoner's dilemma, and are usually provided by the government; common resources are overused. The lesson mentions that price information is a public good in financial markets, with passive investors free-riding on active investors.
+
+common_errors:
+  - questions: [C1, C2, C4]
+    zh-cn: |-
+      计算剩余时用错了三角形的高或底：消费者剩余的高是需求曲线截距减去价格，生产者剩余的高是价格减去供给曲线截距；需求写成 $Q = \ldots$ 时要先改写成价格的形式。
+    en: |-
+      Using the wrong height or base for the surplus triangles: the height of consumer surplus is the demand intercept minus the price, and the height of producer surplus is the price minus the supply intercept; demand written as $Q = \ldots$ must first be rewritten in terms of the price.
+  - questions: [C2]
+    zh-cn: |-
+      把垄断利润当作无谓损失。利润是从消费者转到垄断者的，总剩余中消失的只有三角形。
+    en: |-
+      Counting the monopoly profit as deadweight loss. The profit is transferred from consumers to the monopolist; only the triangle disappears from total surplus.
+  - questions: [C3, Q1, Q2]
+    zh-cn: |-
+      认为由谁把税交给政府，谁就承担税负；或者认为价格会上涨整个税额。
+    en: |-
+      Thinking that whoever hands the tax to the government bears it, or that the price rises by the full amount of the tax.
+  - questions: [C3, Q3]
+    zh-cn: |-
+      把税收当作无谓损失。税收是转移；无谓损失只来自没有发生的交易。
+    en: |-
+      Counting tax revenue as deadweight loss. The revenue is a transfer; the deadweight loss comes only from trades that no longer happen.
+  - questions: [C4, Q5]
+    zh-cn: |-
+      用社会边际成本求市场的实际产量，或者用企业的边际成本求社会最优产量，把两者弄反。
+    en: |-
+      Using social marginal cost to find the market's actual output, or the firm's own marginal cost to find the social optimum, mixing the two up.
+  - questions: [C5]
+    zh-cn: |-
+      把“免费”当作公共品的标准，或者把公共资源（有竞争性）当作公共品。
+    en: |-
+      Treating "free of charge" as the test for a public good, or treating a common resource (which is rival) as a public good.
+
+questions:
+  # ---------- Check questions (随堂题) ----------
+  - id: C1
+    kind: check
+    section: surplus
+    concepts: [consumer-surplus, producer-surplus]
+    expected: { q: "32", p: "28", cs: "512", ps: "256" }
+    question:
+      zh-cn: |-
+        某市场的需求为 $P = 60 - Q$，供给为 $P = 12 + \frac{Q}{2}$。求均衡价格和数量、消费者剩余和生产者剩余。
+      en: |-
+        A market has demand $P = 60 - Q$ and supply $P = 12 + \frac{Q}{2}$. Find the equilibrium price and quantity, consumer surplus and producer surplus.
+    answer:
+      zh-cn: |-
+        $60 - Q = 12 + \frac{Q}{2}$，$Q = 32$，$P = 28$。消费者剩余 $\tfrac12 \times 32 \times (60 - 28) = 512$，生产者剩余 $\tfrac12 \times 32 \times (28 - 12) = 256$。
+      en: |-
+        $60 - Q = 12 + \frac{Q}{2}$ gives $Q = 32$ and $P = 28$. Consumer surplus is $\tfrac12 \times 32 \times (60 - 28) = 512$, and producer surplus is $\tfrac12 \times 32 \times (28 - 12) = 256$.
+    rubric:
+      zh-cn:
+        - "均衡 $Q = 32$，$P = 28$。"
+        - "消费者剩余 512，生产者剩余 256。"
+      en:
+        - "Equilibrium $Q = 32$, $P = 28$."
+        - "Consumer surplus 512, producer surplus 256."
+
+  - id: C2
+    kind: check
+    section: deadweight-loss
+    concepts: [deadweight-loss, consumer-surplus, monopoly]
+    expected: { dwl: "400", profit: "800", cs: "400", csc: "1600" }
+    question:
+      zh-cn: |-
+        沿用 [[1.6]] 随堂题中的垄断者：需求 $P = 120 - 2Q$，边际成本恒为 40，没有固定成本。
+        (a) 如果这个市场是完全竞争的，消费者剩余是多少？
+        (b) 垄断时，消费者剩余、垄断利润和无谓损失各是多少？
+        (c) 完全竞争时的消费者剩余在垄断下分别去了哪里？
+      en: |-
+        Use the monopolist from the [[1.6]] check question: demand $P = 120 - 2Q$, a constant marginal cost of 40 and no fixed cost.
+        (a) If this market were perfectly competitive, what would consumer surplus be?
+        (b) Under monopoly, what are consumer surplus, the monopoly profit and the deadweight loss?
+        (c) Where does the consumer surplus of perfect competition go under monopoly?
+    answer:
+      zh-cn: |-
+        (a) 完全竞争时 $P = 40$，$Q = 40$，消费者剩余 $\tfrac12 \times 40 \times (120 - 40) = 1600$。
+        (b) 垄断时 $Q = 20$，$P = 80$。消费者剩余 $\tfrac12 \times 20 \times (120 - 80) = 400$，利润 $(80 - 40) \times 20 = 800$，无谓损失 $\tfrac12 \times (40 - 20) \times (80 - 40) = 400$。
+        (c) 1600 分成三部分：400 仍然是消费者剩余，800 转给了垄断者（利润），400 是无谓损失，谁也没有得到。
+      en: |-
+        (a) Under perfect competition $P = 40$ and $Q = 40$, so consumer surplus is $\tfrac12 \times 40 \times (120 - 40) = 1600$.
+        (b) Under monopoly $Q = 20$ and $P = 80$. Consumer surplus is $\tfrac12 \times 20 \times (120 - 80) = 400$, profit is $(80 - 40) \times 20 = 800$, and the deadweight loss is $\tfrac12 \times (40 - 20) \times (80 - 40) = 400$.
+        (c) The 1600 splits into three parts: 400 is still consumer surplus, 800 goes to the monopolist (profit), and 400 is deadweight loss that no one gets.
+    rubric:
+      zh-cn:
+        - "(a) 1600。"
+        - "(b) 消费者剩余 400，利润 800，无谓损失 400。"
+        - "(c) 400 + 800 + 400 = 1600，区分转移和损失。"
+      en:
+        - "(a) 1600."
+        - "(b) Consumer surplus 400, profit 800, deadweight loss 400."
+        - "(c) 400 + 800 + 400 = 1600, distinguishing transfer from loss."
+
+  - id: C3
+    kind: check
+    section: tax-incidence
+    concepts: [tax-incidence, deadweight-loss]
+    widget: { id: surplus-tax, set: { t: 12 } }
+    expected: { pb: "28", ps: "16", q: "44", rev: "528", dwl: "96" }
+    question:
+      zh-cn: |-
+        在 [[fig:3-1]] 中把税额调到 12 美元。买方付多少、卖方得多少、成交多少？税收和无谓损失各是多少？买方和卖方各承担了每袋多少税？在这个市场中，价格每变化 1 美元，需求量和供给量各变化多少？由此猜测：哪一方承担得多与什么有关？
+      en: |-
+        In [[fig:3-1]], set the tax to 12 dollars. How much do buyers pay, how much do sellers receive, and how much is traded? What are the tax revenue and the deadweight loss? How much of the tax per bag do buyers and sellers each bear? In this market, by how much do the quantity demanded and the quantity supplied each change when the price changes by 1 dollar? From this, guess what determines which side bears more.
+    answer:
+      zh-cn: |-
+        买方付 28，卖方得 16，数量 44（比税前的 60 少 16，即从 52 再少 8）。税收 $12 \times 44 = 528$，无谓损失 $\tfrac12 \times 12 \times 16 = 96$。买方每袋多付 8，卖方每袋少得 4，买方承担三分之二。
+        价格变化 1 美元时，需求量变化 2 千袋，供给量变化 4 千袋：卖方对价格更敏感。猜测：对价格越不敏感的一方，越难通过改变数量躲开税，承担得越多。
+      en: |-
+        Buyers pay 28, sellers receive 16, and the quantity is 44 (16 less than the 60 before the tax, that is, 8 less than the 52 at a tax of 6). Tax revenue is $12 \times 44 = 528$, and the deadweight loss is $\tfrac12 \times 12 \times 16 = 96$. Buyers pay 8 more per bag and sellers receive 4 less, so buyers bear two thirds.
+        When the price changes by 1 dollar, the quantity demanded changes by 2 thousand bags and the quantity supplied by 4 thousand bags: sellers are more sensitive to the price. Guess: the side that is less sensitive to the price finds it harder to avoid the tax by changing its quantity, and bears more.
+    rubric:
+      zh-cn:
+        - "28、16、44，税收 528，无谓损失 96。"
+        - "买方承担 8、卖方承担 4。"
+        - "指出卖方对价格更敏感，猜测对价格不敏感的一方承担更多。"
+      en:
+        - "28, 16, 44, tax revenue 528, deadweight loss 96."
+        - "Buyers bear 8 and sellers 4."
+        - "Points out that sellers are more sensitive to the price and guesses that the less sensitive side bears more."
+
+  - id: C4
+    kind: check
+    section: externalities
+    concepts: [externality, pigouvian-tax, deadweight-loss]
+    expected: { q: "40", qs: "35", tax: "10", dwl: "25" }
+    question:
+      zh-cn: |-
+        一种化工产品的需求为 $P = 100 - Q$，企业的边际成本为 $MC = 20 + Q$（竞争市场的供给曲线）。每生产一单位，污染给附近居民造成 10 美元的损失。
+        (a) 市场的均衡数量和价格是多少？
+        (b) 社会最优的数量是多少？
+        (c) 无谓损失是多少？多大的庇古税能使市场达到社会最优？
+      en: |-
+        Demand for a chemical product is $P = 100 - Q$, and firms' marginal cost is $MC = 20 + Q$ (the supply curve of a competitive market). Each unit produced causes 10 dollars of pollution damage to nearby residents.
+        (a) What are the market equilibrium quantity and price?
+        (b) What is the socially optimal quantity?
+        (c) What is the deadweight loss? What Pigouvian tax brings the market to the social optimum?
+    answer:
+      zh-cn: |-
+        (a) $100 - Q = 20 + Q$，$Q = 40$，$P = 60$。
+        (b) 社会边际成本 $30 + Q$：$100 - Q = 30 + Q$，$Q = 35$（价格 65）。
+        (c) 第 35 到第 40 单位的社会成本高于支付意愿；无谓损失是两条边际成本线之间、需求以上的三角形：$\tfrac12 \times 10 \times (40 - 35) = 25$。每单位 10 美元的庇古税使企业面对的边际成本变为 $30 + Q$，市场产量变为 35。
+      en: |-
+        (a) $100 - Q = 20 + Q$ gives $Q = 40$ and $P = 60$.
+        (b) Social marginal cost is $30 + Q$: $100 - Q = 30 + Q$ gives $Q = 35$ (price 65).
+        (c) For units 35 to 40 the social cost exceeds the willingness to pay; the deadweight loss is the triangle between the two marginal cost lines above demand: $\tfrac12 \times 10 \times (40 - 35) = 25$. A Pigouvian tax of 10 dollars per unit makes the marginal cost firms face $30 + Q$, and market output becomes 35.
+    rubric:
+      zh-cn:
+        - "(a) 40、60。"
+        - "(b) 35。"
+        - "(c) 无谓损失 25，庇古税每单位 10。"
+      en:
+        - "(a) 40, 60."
+        - "(b) 35."
+        - "(c) Deadweight loss 25; Pigouvian tax 10 per unit."
+
+  - id: C5
+    kind: check
+    section: public-goods
+    concepts: [public-good]
+    question:
+      zh-cn: |-
+        判断下面每一种属于私人物品、俱乐部物品、公共资源还是公共品，并说明理由。如果完全交给市场，哪一种最可能提供得太少？
+        (a) 免费播出的天气预报
+        (b) 一家视频网站的会员
+        (c) 公海里的鱼
+        (d) 一份外卖午餐
+      en: |-
+        Classify each of the following as a private good, a club good, a common resource or a public good, and explain. If left entirely to the market, which one is most likely to be provided too little?
+        (a) A weather forecast broadcast free of charge
+        (b) A membership of a video-streaming site
+        (c) Fish in the open ocean
+        (d) A takeout lunch
+    answer:
+      zh-cn: |-
+        (a) 公共品：一个人收听不减少别人可以收听的，也无法阻止不付钱的人收听。
+        (b) 俱乐部物品：一个人观看基本不影响别人，但不付费就不能看。
+        (c) 公共资源：一个人捕走的鱼别人就捕不到（有竞争性），但很难阻止别人捕鱼。
+        (d) 私人物品：有竞争性，也有排他性。
+        最可能提供得太少的是 (a)：没有人能向搭便车的人收费，私人提供者收不回成本。（(c) 的问题相反，是被过度使用。）
+      en: |-
+        (a) Public good: one person listening does not reduce what others can hear, and those who do not pay cannot be kept from listening.
+        (b) Club good: one person watching hardly affects others, but non-payers cannot watch.
+        (c) Common resource: fish caught by one person cannot be caught by others (rival), but it is hard to keep others from fishing.
+        (d) Private good: rival and excludable.
+        The one most likely to be provided too little is (a): no one can charge the free riders, so a private provider cannot recover the cost. ((c) has the opposite problem: it is overused.)
+    rubric:
+      zh-cn:
+        - "四种分类正确，用竞争性和排他性说明理由。"
+        - "(a) 最可能提供不足，用搭便车解释；指出 (c) 是过度使用。"
+      en:
+        - "All four classifications correct, explained with rivalry and excludability."
+        - "(a) is most likely underprovided, explained by free riding; notes that (c) is overused."
+
+  # ---------- Exercises (reviewed by the AI, not scored) ----------
+  - id: Q1
+    kind: exercise
+    level: A
+    concepts: [tax-incidence]
+    expected: { pb: "24", ps: "18", q: "52" }
+    question:
+      zh-cn: |-
+        在讲义的咖啡豆市场中，改为向买方征收每袋 6 美元的税：买方每买一袋，除了付给卖方的价格 $P_s$，还要另交 6 美元给政府。求买方付的总价、卖方得到的价格和成交量，并与讲义中向卖方征税的结果比较。这说明了什么？
+      en: |-
+        In the lesson's coffee-bean market, tax buyers 6 dollars per bag instead: for each bag, a buyer pays the seller the price $P_s$ and also pays 6 dollars to the government. Find the total price buyers pay, the price sellers receive and the quantity traded, and compare with the lesson's result for a tax on sellers. What does this show?
+    answer:
+      zh-cn: |-
+        买方按总价 $P_s + 6$ 决定需求量：$100 - 2(P_s + 6) = -20 + 4P_s$，$88 - 2P_s = -20 + 4P_s$，$P_s = 18$。买方付的总价 24，数量 52。
+        与向卖方征税完全相同：买方付 24、卖方得 18、数量 52。税负怎样分配只取决于需求和供给，与法律规定由谁缴税无关；法律只决定谁把钱交给政府。
+      en: |-
+        Buyers decide how much to buy based on the total price $P_s + 6$: $100 - 2(P_s + 6) = -20 + 4P_s$, so $88 - 2P_s = -20 + 4P_s$ and $P_s = 18$. Buyers pay 24 in total, and the quantity is 52.
+        This is exactly the same as with a tax on sellers: buyers pay 24, sellers receive 18, and the quantity is 52. How the burden is split depends only on demand and supply, not on who the law says must pay; the law only decides who hands the money to the government.
+    rubric:
+      zh-cn:
+        - "正确列出方程，得到买方付 24、卖方得 18、数量 52。"
+        - "指出结果与向卖方征税相同，税负分配与由谁缴税无关。"
+      en:
+        - "Sets up the equation correctly: buyers pay 24, sellers receive 18, quantity 52."
+        - "Points out that the result is the same as taxing sellers, so the split does not depend on who pays."
+
+  - id: Q2
+    kind: exercise
+    level: B
+    star: true
+    concepts: [tax-incidence, deadweight-loss, price-elasticity]
+    question:
+      zh-cn: |-
+        一般的线性市场：需求 $Q_d = a - bP$，供给 $Q_s = c + dP$（$b, d > 0$）。对每单位征税 $t$。
+        (a) 求买方付的价格和卖方得到的价格各变化多少。
+        (b) 把结果写成税前均衡点的弹性形式：买方承担的比例等于 $\frac{e_s}{e_s + |e_d|}$，其中 $e_s$ 是供给的价格弹性，$|e_d|$ 是需求价格弹性的绝对值。用一句话解释。
+        (c) 证明无谓损失 $= \frac{bd}{2(b + d)}\,t^2$，并用讲义中 $t = 6$ 的结果核对。
+      en: |-
+        A general linear market: demand $Q_d = a - bP$ and supply $Q_s = c + dP$ ($b, d > 0$). A tax of $t$ per unit is imposed.
+        (a) Find how much the price buyers pay and the price sellers receive each change.
+        (b) Write the result in terms of elasticities at the equilibrium before the tax: the share borne by buyers is $\frac{e_s}{e_s + |e_d|}$, where $e_s$ is the price elasticity of supply and $|e_d|$ is the absolute value of the price elasticity of demand. Explain in one sentence.
+        (c) Show that the deadweight loss is $\frac{bd}{2(b + d)}\,t^2$, and check it against the lesson's result for $t = 6$.
+    answer:
+      zh-cn: |-
+        (a) $a - bP_b = c + d(P_b - t)$，$P_b = \frac{a - c + dt}{b + d}$。税前 $P^* = \frac{a - c}{b + d}$，所以买方的价格上升 $\frac{d}{b + d}\,t$，卖方得到的价格 $P_b - t$ 下降 $\frac{b}{b + d}\,t$。
+        (b) 在税前均衡点，$|e_d| = b\frac{P^*}{Q^*}$，$e_s = d\frac{P^*}{Q^*}$，所以 $\frac{d}{b + d} = \frac{e_s}{e_s + |e_d|}$。供给越有弹性（卖方越容易转向别的用途），需求越缺乏弹性（买方越难不买），买方承担得越多：对价格越不敏感的一方承担得越多。
+        (c) 成交量减少 $\Delta Q = b \cdot \frac{d}{b + d}\,t = \frac{bd}{b + d}\,t$。无谓损失是高为 $t$、底为 $\Delta Q$ 的三角形：$\tfrac12 \cdot t \cdot \frac{bd}{b + d}\,t = \frac{bd}{2(b + d)}\,t^2$。讲义中 $b = 2$、$d = 4$：$\frac{8}{12} \times 36 = 24$，相符。无谓损失与 $t^2$ 成正比：税额加倍，无谓损失变为 4 倍。
+      en: |-
+        (a) $a - bP_b = c + d(P_b - t)$ gives $P_b = \frac{a - c + dt}{b + d}$. Before the tax $P^* = \frac{a - c}{b + d}$, so the buyers' price rises by $\frac{d}{b + d}\,t$, and the sellers' price $P_b - t$ falls by $\frac{b}{b + d}\,t$.
+        (b) At the equilibrium before the tax, $|e_d| = b\frac{P^*}{Q^*}$ and $e_s = d\frac{P^*}{Q^*}$, so $\frac{d}{b + d} = \frac{e_s}{e_s + |e_d|}$. The more elastic supply is (the easier it is for sellers to turn to other uses) and the less elastic demand is (the harder it is for buyers to stop buying), the more buyers bear: the side that is less sensitive to the price bears more.
+        (c) The quantity falls by $\Delta Q = b \cdot \frac{d}{b + d}\,t = \frac{bd}{b + d}\,t$. The deadweight loss is a triangle with height $t$ and base $\Delta Q$: $\tfrac12 \cdot t \cdot \frac{bd}{b + d}\,t = \frac{bd}{2(b + d)}\,t^2$. In the lesson $b = 2$ and $d = 4$: $\frac{8}{12} \times 36 = 24$, which matches. The deadweight loss is proportional to $t^2$: doubling the tax makes it four times as large.
+    rubric:
+      zh-cn:
+        - "(a) 买方价格上升 $\\frac{d}{b + d}t$，卖方价格下降 $\\frac{b}{b + d}t$。"
+        - "(b) 由弹性的定义化为 $\\frac{e_s}{e_s + |e_d|}$，并说明对价格越不敏感的一方承担越多。"
+        - "(c) 推出公式并用 24 核对；最好指出与 $t^2$ 成正比。"
+      en:
+        - "(a) Buyers' price rises by $\\frac{d}{b + d}t$; sellers' price falls by $\\frac{b}{b + d}t$."
+        - "(b) Uses the definition of elasticity to get $\\frac{e_s}{e_s + |e_d|}$ and explains that the less price-sensitive side bears more."
+        - "(c) Derives the formula and checks it with 24; ideally notes that it is proportional to $t^2$."
+
+  - id: Q3
+    kind: exercise
+    level: B
+    concepts: [tax-incidence, deadweight-loss]
+    expected: { tmax: "22.5", rmax: "675", dwl: "337.5" }
+    question:
+      zh-cn: |-
+        在讲义的咖啡豆市场中，政府想从这个市场得到尽可能多的税收。
+        (a) 把税收写成每袋税额 $t$ 的函数，求使税收最大的 $t$ 和最大税收。
+        (b) 这时的无谓损失是多少？
+        (c) 税额超过这个水平后，继续提高税额会怎样？结合 [[fig:3-1]] 说明。
+      en: |-
+        In the lesson's coffee-bean market, the government wants to raise as much tax revenue as possible from this market.
+        (a) Write tax revenue as a function of the tax per bag $t$, and find the $t$ that maximizes revenue and the maximum revenue.
+        (b) What is the deadweight loss at that point?
+        (c) What happens if the tax is raised beyond this level? Explain with [[fig:3-1]].
+    answer:
+      zh-cn: |-
+        (a) 成交量 $Q = 60 - \frac{4t}{3}$，税收 $R(t) = t\left(60 - \frac{4t}{3}\right)$。$R'(t) = 60 - \frac{8t}{3} = 0$，$t = 22.5$，$R = 22.5 \times 30 = 675$。
+        (b) 无谓损失 $\tfrac12 \times 22.5 \times (60 - 30) = 337.5$，正好是税收的一半。
+        (c) 再提高税额，成交量下降得更快，税收反而减少，无谓损失却继续增加。在图中把 $t$ 从 22 调到 30：税收从约 675 降到 600，无谓损失从约 323 增加到 600。
+      en: |-
+        (a) The quantity is $Q = 60 - \frac{4t}{3}$, and revenue is $R(t) = t\left(60 - \frac{4t}{3}\right)$. $R'(t) = 60 - \frac{8t}{3} = 0$ gives $t = 22.5$ and $R = 22.5 \times 30 = 675$.
+        (b) The deadweight loss is $\tfrac12 \times 22.5 \times (60 - 30) = 337.5$, exactly half of the revenue.
+        (c) Raising the tax further makes the quantity fall faster, so revenue actually falls while the deadweight loss keeps rising. In the figure, moving $t$ from 22 to 30: revenue falls from about 675 to 600, and the deadweight loss rises from about 323 to 600.
+    rubric:
+      zh-cn:
+        - "(a) $R(t)$ 正确，$t = 22.5$，最大税收 675。"
+        - "(b) 无谓损失 337.5。"
+        - "(c) 指出税收下降而无谓损失继续增加。"
+      en:
+        - "(a) Correct $R(t)$, $t = 22.5$, maximum revenue 675."
+        - "(b) Deadweight loss 337.5."
+        - "(c) Points out that revenue falls while the deadweight loss keeps rising."
+
+  - id: Q4
+    kind: exercise
+    level: B
+    concepts: [public-good, prisoners-dilemma, dominant-strategy]
+    question:
+      zh-cn: |-
+        两户邻居考虑在两家之间装一盏路灯，成本 120 美元，每户从路灯得到的好处值 80 美元。如果两户都愿意出钱，各出 60；如果只有一户出钱，它出全部 120；如果都不出，就不装。
+        (a) 写出收益矩阵（收益 = 好处 − 出的钱），找出每户的占优策略和结果。
+        (b) 从总剩余看，应该装路灯吗？
+        (c) 这和 [[1.7]] 的哪个博弈相同？给出一种解决办法。
+      en: |-
+        Two neighbors are considering a street light between their houses. It costs 120 dollars, and each household values the light at 80 dollars. If both are willing to pay, each pays 60; if only one pays, it pays all 120; if neither pays, the light is not installed.
+        (a) Write the payoff matrix (payoff = benefit − amount paid), and find each household's dominant strategy and the outcome.
+        (b) Judged by total surplus, should the light be installed?
+        (c) Which game from [[1.7]] is this? Give one way to solve the problem.
+    answer:
+      zh-cn: |-
+        (a) 都出钱：(20, 20)；甲出、乙不出：(−40, 80)；甲不出、乙出：(80, −40)；都不出：(0, 0)。对方出钱时，自己不出得 80 > 20；对方不出时，自己不出得 0 > −40。不出钱是占优策略，结果是不装路灯，各得 0。
+        (b) 应该：总好处 160 大于成本 120，装上后总剩余增加 40。
+        (c) 囚徒困境：各自的占优策略（搭便车）导致对双方都更差的结果。解决办法：由社区或政府向两户各收 60 美元的费用（强制分摊），或者两户签订有约束力的协议。
+      en: |-
+        (a) Both pay: (20, 20); A pays and B does not: (−40, 80); A does not and B pays: (80, −40); neither pays: (0, 0). If the other pays, not paying gives 80 > 20; if the other does not pay, not paying gives 0 > −40. Not paying is a dominant strategy, so the light is not installed and each gets 0.
+        (b) Yes: the total benefit of 160 exceeds the cost of 120, so installing it raises total surplus by 40.
+        (c) A prisoner's dilemma: each side's dominant strategy (free riding) leads to an outcome worse for both. A solution: the community or the government charges each household 60 dollars (a compulsory split), or the two households sign a binding agreement.
+    rubric:
+      zh-cn:
+        - "(a) 矩阵正确；不出钱是占优策略，不装路灯。"
+        - "(b) 应该装，总剩余增加 40。"
+        - "(c) 囚徒困境（搭便车）；给出强制分摊或有约束力的协议等办法。"
+      en:
+        - "(a) Correct matrix; not paying is dominant; no light."
+        - "(b) It should be installed; total surplus rises by 40."
+        - "(c) Prisoner's dilemma (free riding); gives a solution such as a compulsory split or a binding agreement."
+
+  - id: Q5
+    kind: exercise
+    level: C
+    concepts: [externality, pigouvian-tax, deadweight-loss]
+    expected: { lp: "10", ls: "8", tax: "4", dwl: "4" }
+    question:
+      zh-cn: |-
+        一家大银行选择高风险贷款的规模 $L$（十亿美元）。这些贷款给银行带来的预期利润为 $20L - L^2$（百万美元）。由于这家银行一旦出问题会牵连其他银行，每十亿美元的高风险贷款还给其他金融机构和纳税人带来 4 百万美元的预期损失，银行自己不承担。
+        (a) 银行自己选择的 $L$ 是多少？社会最优的 $L$ 是多少？
+        (b) 银行自己的选择造成的无谓损失是多少？
+        (c) 监管机构对每十亿美元的高风险贷款收多少费用（或要求多少额外资本、使成本相当），能使银行选择社会最优的 $L$？为什么说这类监管的作用类似于庇古税？
+      en: |-
+        A large bank chooses the size $L$ of its high-risk lending (billion dollars). This lending gives the bank an expected profit of $20L - L^2$ (million dollars). Because trouble at this bank would spread to other banks, each billion dollars of high-risk lending also causes an expected loss of 4 million dollars to other financial institutions and taxpayers, which the bank does not bear.
+        (a) What $L$ does the bank choose on its own? What is the socially optimal $L$?
+        (b) What is the deadweight loss of the bank's own choice?
+        (c) What charge per billion dollars of high-risk lending (or extra capital requirement with the same cost) would make the bank choose the socially optimal $L$? Why is such regulation said to work like a Pigouvian tax?
+    answer:
+      zh-cn: |-
+        (a) 银行：$20 - 2L = 0$，$L = 10$。社会：$20 - 2L - 4 = 0$，$L = 8$。
+        (b) 从 8 到 10 的每一单位，社会边际好处 $20 - 2L - 4$ 为负，损失是三角形 $\tfrac12 \times (10 - 8) \times 4 = 4$ 百万美元。（也可以直接算：社会净收益 $20L - L^2 - 4L$ 在 $L = 8$ 时为 64，在 $L = 10$ 时为 60，相差 4。）
+        (c) 每十亿美元收 4 百万美元：银行的边际条件变为 $20 - 2L - 4 = 0$，选择 $L = 8$。这类费用或额外资本要求让银行自己面对它给别人造成的预期损失，正是庇古税的作用：把外部成本变成决策者自己的成本。
+      en: |-
+        (a) The bank: $20 - 2L = 0$ gives $L = 10$. Society: $20 - 2L - 4 = 0$ gives $L = 8$.
+        (b) For each unit from 8 to 10, the social marginal benefit $20 - 2L - 4$ is negative, and the loss is the triangle $\tfrac12 \times (10 - 8) \times 4 = 4$ million dollars. (Directly: the social net benefit $20L - L^2 - 4L$ is 64 at $L = 8$ and 60 at $L = 10$, a difference of 4.)
+        (c) A charge of 4 million dollars per billion: the bank's marginal condition becomes $20 - 2L - 4 = 0$, so it chooses $L = 8$. Such a charge or extra capital requirement makes the bank face the expected losses it imposes on others, which is exactly what a Pigouvian tax does: it turns an external cost into the decision maker's own cost.
+    rubric:
+      zh-cn:
+        - "(a) 银行 10，社会 8。"
+        - "(b) 无谓损失 4。"
+        - "(c) 每单位 4；说明它把外部成本变成银行自己的成本。"
+      en:
+        - "(a) Bank 10, society 8."
+        - "(b) Deadweight loss 4."
+        - "(c) 4 per unit; explains that it turns the external cost into the bank's own cost."

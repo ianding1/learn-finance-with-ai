@@ -286,6 +286,42 @@
 	stroke-width: 1.5;
 	stroke-dasharray: 6 4;
 }
+/* Lesson 1.8 figure: surplus areas */
+.viz-cs {
+	fill: var(--viz-a);
+	fill-opacity: 0.25;
+}
+.viz-ps {
+	fill: var(--viz-b);
+	fill-opacity: 0.25;
+}
+.viz-rev {
+	fill: var(--viz-violet);
+	fill-opacity: 0.3;
+}
+.viz-dwl {
+	fill: var(--viz-neg);
+	fill-opacity: 0.45;
+}
+.lfwai-legend .sw-cs,
+.lfwai-legend .sw-ps,
+.lfwai-legend .sw-rev,
+.lfwai-legend .sw-dwl {
+	height: 0.75rem;
+	border: none;
+}
+.lfwai-legend .sw-cs {
+	background: color-mix(in srgb, var(--viz-a) 25%, transparent);
+}
+.lfwai-legend .sw-ps {
+	background: color-mix(in srgb, var(--viz-b) 25%, transparent);
+}
+.lfwai-legend .sw-rev {
+	background: color-mix(in srgb, var(--viz-violet) 30%, transparent);
+}
+.lfwai-legend .sw-dwl {
+	background: color-mix(in srgb, var(--viz-neg) 45%, transparent);
+}
 /* Lesson 1.5 figure */
 .viz-profit {
 	fill: var(--viz-pos);
