@@ -1,345 +1,375 @@
 # Answer key for quiz E0 (math and statistics tools, lessons 0.1–0.5). Shown to learners only inside the
 # generated scoring prompt. The quiz page shows only the questions and their points.
-# easy_points / hard_points: points of the parts of a question with difficulty score 2 or less / 6 or more
-# (scored per part). The quiz has at most 20 easy points and at least 10 hard points. Not shown on the page.
 # expected: values are recomputed by course/verify/E0.py in CI and must appear verbatim in every answer text.
-# Each question tests a different idea; the parts of a problem build on each other.
+# Each question tests a different idea and names the misconception it can reveal (common_errors);
+# the parts of a problem build on each other.
 
 lesson: "E0"
 
 context:
   - zh-cn: |-
-      测验 E0 考 [[0.1]] 到 [[0.5]]：货币时间价值、优化、概率与组合方差、分布与统计推断、回归。学习者可以用计算器或代码，卷首有公式表（年金、永续年金、EAR、一阶条件、组合方差、标准误、对数正态分布的中位数和均值、OLS、遗漏变量等）。计算用 1.96 作为 95% 的临界值，除非题目另有说明。
+      测验 E0 考 [[0.1]] 到 [[0.5]]：货币时间价值、优化、概率与组合方差、分布与统计推断、回归。学习者可以用计算器或代码，卷首有公式表（现值与终值、EAR、年金、永续年金、对数收益率、一阶与二阶条件、拉格朗日函数、期望与方差、线性组合的方差、两资产组合的方差、标准误、置信区间、t 值、标准化、OLS 斜率与截距、$R^2$）。计算用 1.96 作为 95% 的临界值，除非题目另有说明。题目考的是理解：评分时，推理和理由比算术更重要。
     en: |-
-      Quiz E0 covers [[0.1]] to [[0.5]]: time value of money, optimization, probability and portfolio variance, distributions and inference, and regression. The learner may use a calculator or code, and the quiz starts with a formula sheet (annuities, perpetuities, EAR, first-order conditions, portfolio variance, standard error, the median and mean of a lognormal distribution, OLS, omitted variables and so on). Calculations use 1.96 as the 95% critical value unless a question says otherwise.
+      Quiz E0 covers [[0.1]] to [[0.5]]: time value of money, optimization, probability and portfolio variance, distributions and inference, and regression. The learner may use a calculator or code, and the quiz starts with a formula sheet (present and future value, EAR, annuities, perpetuities, log returns, first- and second-order conditions, the Lagrangian, expected value and variance, the variance of a linear combination, two-asset portfolio variance, standard error, confidence interval, t-statistic, standardization, the OLS slope and intercept, $R^2$). Calculations use 1.96 as the 95% critical value unless a question says otherwise. The questions test understanding: when scoring, reasoning and reasons count more than arithmetic.
 
 common_errors:
+  - questions: [Q1]
+    zh-cn: |-
+      认为相关系数为正就没有分散化的好处，加入波动更大的资产一定提高风险。只要 $\rho < \frac{\sigma_B}{\sigma_A}$，少量加入 A 仍能降低组合的标准差。
+    en: |-
+      Thinking that a positive correlation means no benefit from diversification, so adding a more volatile asset must raise risk. As long as $\rho < \frac{\sigma_B}{\sigma_A}$, adding a small amount of A still lowers the portfolio standard deviation.
+  - questions: [Q2]
+    zh-cn: |-
+      认为价格和预算同比例变化时什么都没变，所以 $\lambda$ 也不变。$\lambda$ 是每多 1 美元预算带来的效用，有单位；1 美元能买的东西减半，它也减半。
+    en: |-
+      Thinking that nothing changes when prices and the budget change in the same proportion, so $\lambda$ stays the same. $\lambda$ is the utility from one more dollar of budget and has units; when a dollar buys half as much, it halves too.
   - questions: [Q3]
     zh-cn: |-
-      用两个置信区间是否重叠来判断差异是否显著：应检验两者之差，独立时差的标准误是 $\sqrt{\text{SE}_A^2 + \text{SE}_B^2}$，小于两个标准误之和。
+      认为期望收益为 0 时财富的分布是对称的，长期下来涨跌各半。按比例增减时，一涨一跌的净效果是 $(1+x)(1-x) = 1 - x^2 < 1$，对数收益率的期望为负，典型的结果是财富越来越少。
     en: |-
-      Judging whether a difference is significant by whether the two confidence intervals overlap: the difference itself must be tested, and with independent estimates its standard error is $\sqrt{\text{SE}_A^2 + \text{SE}_B^2}$, smaller than the sum of the two standard errors.
+      Thinking that with an expected return of 0 the distribution of wealth is symmetric, so in the long run gains and losses are equally likely. With proportional changes, one rise and one fall give $(1+x)(1-x) = 1 - x^2 < 1$, the expected log return is negative, and the typical outcome is less and less wealth.
   - questions: [Q4]
     zh-cn: |-
-      认为 $x$ 对 $y$ 回归的斜率是 $y$ 对 $x$ 回归斜率的倒数：只有 $R^2 = 1$ 时才成立，一般两个斜率的乘积等于 $R^2$。
+      认为观测数越多估计越准，所以 240 个月度数据的标准误约为 20 个年度数据的 $\frac{1}{\sqrt{12}}$。估计平均收益的精度取决于数据覆盖的时间长度，而不是观测的频率。
     en: |-
-      Thinking that the slope of $x$ on $y$ is the reciprocal of the slope of $y$ on $x$: this holds only when $R^2 = 1$; in general the product of the two slopes is $R^2$.
+      Thinking that more observations always give a more precise estimate, so 240 monthly observations give about $\frac{1}{\sqrt{12}}$ of the standard error of 20 yearly ones. The precision of an estimated mean return depends on the length of time the data cover, not on how often it is observed.
   - questions: [Q5]
     zh-cn: |-
-      每年取款、按月复利时直接用名义年利率 6% 作为年折现率：应先换算成有效年利率。另一个常见错误是忽略第一笔在退休当天取出（期初付款），或把增长永续年金的公式直接用于有限的 25 期。
+      因为分期是“零利率”、钱还能在账户里生息，就认为分期更划算；或者直接比较 11,400 美元和 12,000 美元。应把分期的各笔付款按自己的机会成本折现，再与现金价格比较。另一个常见错误是把 600 美元除以 11,400 美元当作分期的年利率：借款是逐月还清的，平均只借了大约一半的钱一年。
     en: |-
-      Using the nominal rate of 6% as the annual discount rate for yearly withdrawals with monthly compounding: it must first be converted to the effective annual rate. Other common errors are ignoring that the first withdrawal is on the day of retirement (payments at the start of each year), and using the growing perpetuity formula directly for a finite 25 payments.
+      Thinking that installments are better because they are "zero interest" and the money keeps earning interest in the account; or comparing 11,400 dollars with 12,000 dollars directly. The installments should be discounted at one's own opportunity cost and then compared with the cash price. Another common error is taking 600 dollars divided by 11,400 dollars as the yearly rate of the installment plan: the loan is repaid month by month, so on average only about half of it is borrowed for the year.
   - questions: [Q6]
     zh-cn: |-
-      把市场价格当作不变（$MR = p$）；或者让已经付出、收不回的租金影响是否生产的决定：沉没成本不影响决策，应比较生产与停产的差别。
+      认为按回归斜率对冲后风险会接近 0，或者把对冲后的标准差算成 $\sigma_y - b\,\sigma_x = 1.5\%$（相当于假设完全正相关）。对冲只去掉了市场能解释的那部分方差，剩下 $(1 - R^2)\sigma_y^2$，也就是残差的方差。
     en: |-
-      Treating the market price as fixed ($MR = p$); or letting rent that has been paid and cannot be recovered affect the decision to produce: a sunk cost does not affect the decision, and producing should be compared with stopping.
+      Thinking that hedging with the regression slope brings the risk close to 0, or computing the hedged standard deviation as $\sigma_y - b\,\sigma_x = 1.5\%$ (as if the correlation were perfect). The hedge removes only the part of the variance the market explains; $(1 - R^2)\sigma_y^2$, the variance of the residual, remains.
   - questions: [Q7]
     zh-cn: |-
-      解出关于 $\rho$ 的二次方程后保留两个根：$\rho = 0.875$ 时最小方差组合要卖空 A，不能卖空时最优是只持有 B（方差 256），应舍去。另一个常见错误是认为组合方差低于单只基金就说明负相关：$0 < \rho < \frac{\sigma_B}{\sigma_A}$ 时也能降低方差。
+      把所有与产量无关的成本都当作不影响任何决策，于是认为只要价格为正就该出摊；或者把已经付清的许可费按天分摊（每天 20 美元）算进出摊的决策，得到最低价格约 3.74 美元。固定成本不影响 $p = MC$ 给出的产量，但可以避免的固定成本（摊位费）决定是否出摊，沉没成本（许可费）什么都不影响。
     en: |-
-      Keeping both roots of the quadratic in $\rho$: at $\rho = 0.875$ the minimum-variance portfolio sells A short, and without short selling the optimum holds only B (variance 256), so that root is rejected. Another common error is thinking that a portfolio variance below that of a single fund shows negative correlation: for $0 < \rho < \frac{\sigma_B}{\sigma_A}$ the variance can also be lowered.
+      Treating every cost that does not depend on output as irrelevant to every decision, and so concluding that the truck should open at any positive price; or spreading the permit that has already been paid over the days (20 dollars a day) and including it in the decision to open, which gives a lowest price of about 3.74 dollars. Fixed costs do not affect the output from $p = MC$, but a fixed cost that can be avoided (the stall fee) decides whether to open, and a sunk cost (the permit) affects nothing.
   - questions: [Q8]
     zh-cn: |-
-      把多年对数收益率之和的标准差算成一年的 $n$ 倍（或由多年反推一年时除以 $n$）：各年独立时方差是 $n$ 倍，标准差只是 $\sqrt{n}$ 倍。
+      认为付款持续得越久，价值对利率越敏感，所以永续年金一定比 30 年的一次性付款跌得多。敏感度取决于价值主要来自多远的未来：永续年金的大部分价值来自较近的付款；利率越低，远期付款占的比重越大。
     en: |-
-      Taking the standard deviation of the sum of several years of log returns as $n$ times that of one year (or dividing by $n$ when working back to one year): with independent years the variance is $n$ times as large, so the standard deviation is only $\sqrt{n}$ times as large.
+      Thinking that the longer the payments last, the more sensitive the value is to interest rates, so a perpetuity must fall more than a single payment in 30 years. The sensitivity depends on how far in the future most of the value lies: most of a perpetuity's value comes from nearer payments, and the lower the rate, the larger the share of distant payments.
   - questions: [Q9]
     zh-cn: |-
-      把截距理解为“基金比市场多赚的部分”：基金与市场之差是 $a + (b - 1)x$，斜率不等于 1 时取决于市场收益。另一个常见错误是把回归直线当作每个月都成立，忽略残差。
+      认为真有能力的经理在 10 年的数据中一定显著，或者认为不显著就说明没有能力。另一个常见错误是按原假设（$\mu = 0$）算出显著的概率是 5%，或者看到期望的 t 值 0.79 小于 1.96 就说不可能显著；应在 $\mu = 2$ 下求样本均值超过临界值的概率。
     en: |-
-      Reading the intercept as "how much the fund beats the market": the difference between fund and market is $a + (b - 1)x$, which depends on the market return when the slope is not 1. Another common error is treating the regression line as holding every month and ignoring the residuals.
+      Thinking that a manager with real skill must be significant in 10 years of data, or that a result that is not significant shows there is no skill. Other common errors are computing the probability of significance under the null hypothesis ($\mu = 0$) as 5%, or saying it cannot be significant because the expected t-statistic of 0.79 is below 1.96; the right step is the probability, with $\mu = 2$, that the sample mean exceeds the critical value.
 
 questions:
-  # ---------- Part 1: true or false (4 points each) ----------
   - id: Q1
     kind: quiz
     part: judge
-    easy_points: 4
-    hard_points: 0
-    points: 4
-    concepts: [present-value, discount-factor]
-    expected: { a5: "122.78", b5: "120.94", a10: "77.11", b10: "105.18" }
+    points: 6
+    concepts: [portfolio-variance, correlation, diversification]
+    expected: { var: "96.25", sd: "9.81" }
     question:
       zh-cn: |-
-        在 5% 的折现率下，项目 A 的现值高于项目 B。两个项目都只有未来的正现金流。那么在 10% 的折现率下，A 的现值也一定高于 B。
+        基金 A 的年收益标准差为 25%，基金 B 为 10%，两者的相关系数为正（小于 1）。一位只持有 B 的投资者如果拿出一部分资金换成波动更大的 A，组合的标准差一定会高于 10%。
       en: |-
-        At a discount rate of 5%, project A has a higher present value than project B. Both projects have only positive future cash flows. Then at a discount rate of 10%, A must also have a higher present value than B.
+        The yearly return of fund A has a standard deviation of 25%, and that of fund B 10%. The correlation between them is positive (less than 1). If an investor who holds only B moves part of the money into the more volatile A, the standard deviation of the portfolio must be higher than 10%.
     answer:
       zh-cn: |-
-        假。折现率上升时，越晚到的现金流现值下降得越多（折现因子 $(1+r)^{-t}$ 对 $r$ 的敏感度随 $t$ 增大）。所以现金流较晚的项目在高折现率下可能被反超。
-        反例：A 在第 10 年末付 200 美元，B 在第 3 年末付 140 美元。5% 时 A 的现值 $\frac{200}{1.05^{10}} \approx 122.78$，B 的现值 $\frac{140}{1.05^{3}} \approx 120.94$，A 更高；10% 时 A 的现值 $\frac{200}{1.1^{10}} \approx 77.11$，B 的现值 $\frac{140}{1.1^{3}} \approx 105.18$，B 更高。
+        假。组合的方差还取决于协方差项。把 A 的权重记为 $w$，在 $w = 0$ 处
+        $$\frac{d\sigma_P^2}{dw} = 2\sigma_B(\rho\,\sigma_A - \sigma_B),$$
+        当 $\rho < \frac{\sigma_B}{\sigma_A} = 0.4$ 时为负：少量加入 A，组合的方差下降。A 和 B 只是弱相关时，A 的一部分波动和 B 的波动方向相反，互相抵消，这比 A 自身较大的波动更重要。
+        反例：$\rho = 0.2$，$w = 10\%$：$\sigma_P^2 = 0.01 \times 625 + 0.81 \times 100 + 2 \times 0.1 \times 0.9 \times 0.2 \times 25 \times 10 = 96.25$，$\sigma_P \approx 9.81\%$，低于 10%。只有 $\rho \ge 0.4$ 时，加入 A 才一定提高风险。
       en: |-
-        False. When the discount rate rises, later cash flows lose more present value (the sensitivity of the discount factor $(1+r)^{-t}$ to $r$ grows with $t$). So a project with later cash flows can fall behind at a higher discount rate.
-        Counterexample: A pays 200 dollars at the end of year 10, and B pays 140 dollars at the end of year 3. At 5%, A is worth $\frac{200}{1.05^{10}} \approx 122.78$ and B is worth $\frac{140}{1.05^{3}} \approx 120.94$, so A is higher; at 10%, A is worth $\frac{200}{1.1^{10}} \approx 77.11$ and B is worth $\frac{140}{1.1^{3}} \approx 105.18$, so B is higher.
+        False. The portfolio variance also depends on the covariance term. With weight $w$ in A, at $w = 0$
+        $$\frac{d\sigma_P^2}{dw} = 2\sigma_B(\rho\,\sigma_A - \sigma_B),$$
+        which is negative when $\rho < \frac{\sigma_B}{\sigma_A} = 0.4$: adding a little A lowers the portfolio variance. When A and B are only weakly correlated, part of A's movements go against B's and offset them, and this matters more than A's larger volatility.
+        Counterexample: $\rho = 0.2$, $w = 10\%$: $\sigma_P^2 = 0.01 \times 625 + 0.81 \times 100 + 2 \times 0.1 \times 0.9 \times 0.2 \times 25 \times 10 = 96.25$, $\sigma_P \approx 9.81\%$, below 10%. Only when $\rho \ge 0.4$ does adding A always raise the risk.
     rubric:
       zh-cn:
-        - "判断为假，并给出数值反例，或说明较晚的现金流对折现率更敏感（4 分）。"
-        - "判断为假但理由不完整：2 分。只写判断：0 分。"
+        - "判断为假，并给出数值反例，或推出条件 $\\rho < \\frac{\\sigma_B}{\\sigma_A}$ 并说明协方差项的作用（6 分）。"
+        - "判断为假但理由不完整（例如只说“分散化总能降低风险”，没有计算或条件）：3 分。只写判断：0 分。"
       en:
-        - "States false and gives a numerical counterexample, or explains that later cash flows are more sensitive to the discount rate (4 points)."
-        - "False with an incomplete reason: 2 points. Only the verdict: 0 points."
+        - "States false and gives a numerical counterexample, or derives the condition $\\rho < \\frac{\\sigma_B}{\\sigma_A}$ and explains the role of the covariance term (6 points)."
+        - "False with an incomplete reason (for example only \"diversification always lowers risk\", with no calculation or condition): 3 points. Only the verdict: 0 points."
+
   - id: Q2
     kind: quiz
     part: judge
-    easy_points: 4
-    hard_points: 0
-    points: 4
-    concepts: [shadow-price, lagrange-multiplier]
-    expected: { lam: "400", u90: "12000", u180: "96000", gain: "84000" }
+    points: 6
+    concepts: [lagrange-multiplier, shadow-price, budget-constraint]
     question:
       zh-cn: |-
-        消费者的效用 $U = xy^2$，$p_x = 1$，$p_y = 3$，预算 $M = 90$ 美元。预算增加到 180 美元时，最大效用的增加量超过 $\lambda \times 90$ 的两倍，其中 $\lambda$ 是预算为 90 美元时的拉格朗日乘数。
+        消费者在价格 $p_x$、$p_y$ 和预算 $M$ 下选择两种商品，偏好越多越好，最优点是内部解（两种都买），拉格朗日乘数为 $\lambda$。如果两种商品的价格和预算都翻倍，最优的 $x^*$、$y^*$ 不变，但 $\lambda$ 变为原来的一半。
       en: |-
-        A consumer has utility $U = xy^2$ with $p_x = 1$, $p_y = 3$ and a budget of $M = 90$ dollars. If the budget rises to 180 dollars, the maximum utility rises by more than twice $\lambda \times 90$, where $\lambda$ is the Lagrange multiplier at a budget of 90 dollars.
+        A consumer chooses two goods at prices $p_x$, $p_y$ with budget $M$. More is better, the optimum is interior (the consumer buys both), and the Lagrange multiplier is $\lambda$. If both prices and the budget double, the optimal $x^*$, $y^*$ do not change, but $\lambda$ becomes half as large.
     answer:
       zh-cn: |-
-        真。一阶条件 $y^2 = \lambda$，$2xy = 3\lambda$，得 $y = \frac{2x}{3}$，代入预算 $x + 3y = M$ 得 $x = \frac{M}{3}$，$y = \frac{2M}{9}$，$U^*(M) = \frac{M}{3}\left(\frac{2M}{9}\right)^2 = \frac{4M^3}{243}$，$\lambda = \frac{dU^*}{dM} = \frac{4M^2}{81}$。$M = 90$ 时 $\lambda = 400$，$\lambda \times 90 = 36{,}000$，两倍为 72,000。实际 $U^*(90) = 12{,}000$，$U^*(180) = 96{,}000$，增加 84,000，超过 72,000。$\lambda$ 只是预算小幅变化时的变化率；这里 $\lambda$ 随 $M^2$ 增大，预算变化很大时 $\lambda \times \Delta M$ 会严重低估效用的增加。
+        真。新的预算线 $2p_x x + 2p_y y = 2M$ 与原来的 $p_x x + p_y y = M$ 是同一条线，可以买的组合完全一样，所以最优点不变，边际效用 $MU_x$、$MU_y$ 也不变。最优点满足 $\frac{MU_x}{p_x} = \lambda$；价格翻倍后 $\lambda' = \frac{MU_x}{2p_x} = \frac{\lambda}{2}$。
+        含义：$\lambda$ 是预算多 1 美元时最大效用的增加量，单位是“效用 / 美元”。价格翻倍后，1 美元只能买原来一半的东西，多 1 美元带来的效用也只有一半。消费者的实际选择没有变，但衡量预算的单位变了。
       en: |-
-        True. The first-order conditions $y^2 = \lambda$ and $2xy = 3\lambda$ give $y = \frac{2x}{3}$; with the budget $x + 3y = M$, $x = \frac{M}{3}$ and $y = \frac{2M}{9}$, so $U^*(M) = \frac{M}{3}\left(\frac{2M}{9}\right)^2 = \frac{4M^3}{243}$ and $\lambda = \frac{dU^*}{dM} = \frac{4M^2}{81}$. At $M = 90$, $\lambda = 400$, $\lambda \times 90 = 36{,}000$, and twice that is 72,000. In fact $U^*(90) = 12{,}000$ and $U^*(180) = 96{,}000$, an increase of 84,000, more than 72,000. $\lambda$ is only the rate of change for a small change in the budget; here $\lambda$ grows with $M^2$, so for a large change $\lambda \times \Delta M$ badly understates the gain in utility.
+        True. The new budget line $2p_x x + 2p_y y = 2M$ is the same line as $p_x x + p_y y = M$: exactly the same bundles are affordable, so the optimum does not change, and neither do the marginal utilities $MU_x$, $MU_y$. The optimum satisfies $\frac{MU_x}{p_x} = \lambda$; with doubled prices $\lambda' = \frac{MU_x}{2p_x} = \frac{\lambda}{2}$.
+        Meaning: $\lambda$ is the increase in maximum utility from one more dollar of budget, in units of "utility per dollar". With doubled prices a dollar buys only half as much, so one more dollar adds only half as much utility. The consumer's real choice is the same, but the unit in which the budget is measured has changed.
     rubric:
       zh-cn:
-        - "判断为真，求出 $\\lambda = 400$ 与实际增加 84,000（或说明 $U^*$ 是 $M$ 的三次函数、$\\lambda$ 随 $M$ 增大），并与 72,000 比较（4 分）。"
-        - "判断为真但理由不完整：2 分。只写判断：0 分。"
+        - "判断为真；说明预算集不变所以最优点不变（2 分）；由 $\\frac{MU_x}{p_x} = \\lambda$ 或影子价格的含义说明 $\\lambda$ 减半（4 分）。"
+        - "判断为真但只说明了最优点不变，或只写 $\\lambda$ 减半而没有理由：3 分。只写判断：0 分。"
       en:
-        - "States true, finds $\\lambda = 400$ and the actual increase of 84,000 (or explains that $U^*$ is cubic in $M$ and $\\lambda$ grows with $M$), and compares with 72,000 (4 points)."
-        - "True with an incomplete reason: 2 points. Only the verdict: 0 points."
+        - "States true; explains that the budget set is unchanged, so the optimum is unchanged (2 points); explains with $\\frac{MU_x}{p_x} = \\lambda$ or the meaning of the shadow price why $\\lambda$ halves (4 points)."
+        - "True but only explains that the optimum is unchanged, or only states that $\\lambda$ halves without a reason: 3 points. Only the verdict: 0 points."
 
   - id: Q3
     kind: quiz
     part: judge
-    easy_points: 0
-    hard_points: 0
-    points: 4
-    concepts: [confidence-interval, hypothesis-test, standard-error, variance]
-    expected: { se_d: "2.83", t: "2.12" }
+    points: 7
+    concepts: [simple-return, log-return, expected-value, median, normal-distribution]
+    expected: { mlog: "-0.0204" }
     question:
       zh-cn: |-
-        基金 A 和基金 B 的平均年收益估计值分别为 10% 和 4%，标准误都是 2 个百分点，两个估计相互独立。A 的 95% 置信区间约为 [6.08%, 13.92%]，B 的约为 [0.08%, 7.92%]，两个区间有重叠，所以在 5% 水平上不能认为两只基金的真实平均收益有差别。
+        某资产每年的简单收益率期望为 0，各年独立且分布相同，但每年的收益有波动。长期持有时，财富低于初始投资的概率接近 50%。
       en: |-
-        The estimated average yearly returns of fund A and fund B are 10% and 4%, both with a standard error of 2 percentage points, and the two estimates are independent. A's 95% confidence interval is about [6.08%, 13.92%] and B's is about [0.08%, 7.92%]. The intervals overlap, so at the 5% level we cannot conclude that the two funds have different true average returns.
+        The expected simple return of an asset is 0 each year. Years are independent with the same distribution, and the return varies from year to year. If the asset is held for a long time, the probability that wealth ends below the initial investment is close to 50%.
     answer:
       zh-cn: |-
-        假。要检验的是两者之差。差的估计值为 $10 - 4 = 6$ 个百分点；两个估计独立，差的方差是两个方差之和，标准误为 $\sqrt{2^2 + 2^2} \approx 2.83$。$t = \frac{6}{2.83} \approx 2.12 > 1.96$，在 5% 水平上显著。两个区间重叠并不说明差异不显著：差的标准误只是各自标准误的 $\sqrt{2}$ 倍，而不是两倍。
+        假。财富按比例增减，要看对数收益率之和 $\ln W_n - \ln W_0 = \sum_t \ln(1 + R_t)$。
+        例：每年等概率 +20% 或 −20%，期望简单收益率为 0。但一涨一跌的净效果是 $1.2 \times 0.8 = 0.96 < 1$；一般地 $(1+x)(1-x) = 1 - x^2 < 1$。每年对数收益率的期望为 $\frac{\ln 1.2 + \ln 0.8}{2} \approx -0.0204$，是负的，标准差约 0.2027。$n$ 年的对数收益率之和的期望是 $-0.0204\,n$，标准差只按 $\sqrt{n}$ 增长，所以和小于 0 的概率随 $n$ 增大趋于 1：$n = 100$ 时约为 $P(Z < 1.01) \approx 84\%$。
+        只要收益有波动，对数收益率的期望就小于 0（与期望简单收益率为 0 相比，下跌的影响更大），财富的中位数越来越低，长期下来亏损的概率趋于 1，而不是 50%。期望财富仍是初始投资，因为少数幸运的结果非常大。
       en: |-
-        False. What must be tested is the difference. The estimated difference is $10 - 4 = 6$ percentage points; the estimates are independent, so the variance of the difference is the sum of the two variances and its standard error is $\sqrt{2^2 + 2^2} \approx 2.83$. $t = \frac{6}{2.83} \approx 2.12 > 1.96$, significant at the 5% level. Overlapping intervals do not show that the difference is not significant: the standard error of the difference is only $\sqrt{2}$ times each standard error, not twice.
+        False. Wealth changes in proportion, so what matters is the sum of log returns $\ln W_n - \ln W_0 = \sum_t \ln(1 + R_t)$.
+        Example: each year +20% or −20% with equal probability, so the expected simple return is 0. But one rise and one fall give $1.2 \times 0.8 = 0.96 < 1$; in general $(1+x)(1-x) = 1 - x^2 < 1$. The expected log return per year is $\frac{\ln 1.2 + \ln 0.8}{2} \approx -0.0204$, which is negative, with a standard deviation of about 0.2027. The sum of $n$ yearly log returns has expected value $-0.0204\,n$, while its standard deviation grows only with $\sqrt{n}$, so the probability that the sum is below 0 tends to 1 as $n$ grows: for $n = 100$ it is about $P(Z < 1.01) \approx 84\%$.
+        Whenever returns vary, the expected log return is below 0 (compared with an expected simple return of 0, falls weigh more), the median of wealth keeps falling, and in the long run the probability of a loss tends to 1, not 50%. Expected wealth is still the initial investment, because a few lucky outcomes are very large.
     rubric:
       zh-cn:
-        - "判断为假，并对两者之差做检验（标准误约 2.83，$t \\approx 2.12$），或说明差的标准误是 $\\sqrt{2}$ 倍而不是两倍（4 分）。"
-        - "判断为假但理由不完整：2 分。只写判断：0 分。"
+        - "判断为假；用例子或一般论证说明一涨一跌后财富减少、对数收益率的期望为负（4 分）；说明因此长期亏损的概率趋于 1（或中位数持续下降）（3 分）。"
+        - "判断为假但只说明了其中一点：3–4 分。只写判断，或理由是“分布不是正态的”而没有说明方向：0–1 分。"
       en:
-        - "States false and tests the difference (standard error about 2.83, $t \\approx 2.12$), or explains that the standard error of the difference is $\\sqrt{2}$ times, not twice, each standard error (4 points)."
-        - "False with an incomplete reason: 2 points. Only the verdict: 0 points."
+        - "States false; shows with an example or a general argument that one rise and one fall reduce wealth and the expected log return is negative (4 points); explains that therefore the probability of a loss tends to 1 in the long run (or the median keeps falling) (3 points)."
+        - "False but explains only one of the two points: 3–4 points. Only the verdict, or a reason such as \"the distribution is not normal\" without the direction: 0–1 points."
 
   - id: Q4
     kind: quiz
     part: judge
-    easy_points: 4
-    hard_points: 0
-    points: 4
-    concepts: [regression-coefficient, r-squared, correlation]
-    expected: { d: "0.25" }
+    points: 6
+    concepts: [log-return, sample-mean, standard-error, variance]
     question:
       zh-cn: |-
-        用同一组数据做 $y$ 对 $x$ 的回归，斜率为 2，$R^2 = 0.5$。那么用这组数据做 $x$ 对 $y$ 的回归，斜率是 0.25。
+        某指数过去 20 年的月对数收益率各月独立且分布相同。用这 240 个月度收益估计年平均对数收益率，标准误与只用 20 个年度对数收益率估计时相同：观测数是 12 倍，估计并没有更准。
       en: |-
-        A regression of $y$ on $x$ with a set of data has slope 2 and $R^2 = 0.5$. Then a regression of $x$ on $y$ with the same data has slope 0.25.
+        The monthly log returns of an index over the past 20 years are independent with the same distribution. Estimating the mean yearly log return from these 240 monthly returns gives the same standard error as estimating it from the 20 yearly log returns: there are 12 times as many observations, but the estimate is no more precise.
     answer:
       zh-cn: |-
-        真。记 $S_{xy} = \sum (x_i - \bar x)(y_i - \bar y)$，$S_{xx}$、$S_{yy}$ 同理。$y$ 对 $x$ 的斜率 $b = \frac{S_{xy}}{S_{xx}}$，$x$ 对 $y$ 的斜率 $d = \frac{S_{xy}}{S_{yy}}$，所以 $bd = \frac{S_{xy}^2}{S_{xx}S_{yy}} = r^2$。一个自变量的回归中 $R^2 = r^2$，所以 $d = \frac{R^2}{b} = \frac{0.5}{2} = 0.25$，而不是 $\frac{1}{2}$。只有所有点都在一条直线上（$R^2 = 1$）时，两个斜率才互为倒数。
+        真。每年的对数收益率是这一年 12 个月的对数收益率之和。用月度数据估计年平均收益率，是把月平均乘以 12：$12 \times \frac{1}{240}\sum_{\text{月}} \ell = \frac{1}{20}\sum_{\text{月}} \ell$，这正好等于 20 个年度对数收益率的平均值，是同一个数。
+        也可以算标准误：设年对数收益率的标准差为 $\sigma$，各月独立时月度的方差是 $\frac{\sigma^2}{12}$。月平均的标准误是 $\frac{\sigma/\sqrt{12}}{\sqrt{240}}$，乘以 12 得 $\frac{12\,\sigma}{\sqrt{12}\sqrt{240}} = \frac{\sigma}{\sqrt{20}}$，与年度数据相同。
+        估计平均收益的精度取决于数据覆盖了多少年，而不是多久观测一次：把一年切成 12 段，每段的波动也小了，信息并没有增加。
       en: |-
-        True. Write $S_{xy} = \sum (x_i - \bar x)(y_i - \bar y)$, and $S_{xx}$ and $S_{yy}$ in the same way. The slope of $y$ on $x$ is $b = \frac{S_{xy}}{S_{xx}}$ and the slope of $x$ on $y$ is $d = \frac{S_{xy}}{S_{yy}}$, so $bd = \frac{S_{xy}^2}{S_{xx}S_{yy}} = r^2$. With one explanatory variable $R^2 = r^2$, so $d = \frac{R^2}{b} = \frac{0.5}{2} = 0.25$, not $\frac{1}{2}$. The two slopes are reciprocals only when all points lie on one line ($R^2 = 1$).
+        True. Each year's log return is the sum of the log returns of its 12 months. Estimating the mean yearly return from monthly data means multiplying the monthly mean by 12: $12 \times \frac{1}{240}\sum_{\text{months}} \ell = \frac{1}{20}\sum_{\text{months}} \ell$, which is exactly the mean of the 20 yearly log returns, the same number.
+        The standard error gives the same result: let the standard deviation of the yearly log return be $\sigma$; with independent months, the monthly variance is $\frac{\sigma^2}{12}$. The standard error of the monthly mean is $\frac{\sigma/\sqrt{12}}{\sqrt{240}}$, and 12 times this is $\frac{12\,\sigma}{\sqrt{12}\sqrt{240}} = \frac{\sigma}{\sqrt{20}}$, the same as with yearly data.
+        The precision of an estimated mean return depends on how many years the data cover, not on how often it is observed: cutting a year into 12 parts also makes each part less volatile, and no information is added.
     rubric:
       zh-cn:
-        - "判断为真，并由两个斜率的公式得出 $bd = r^2 = R^2$，算出 0.25（4 分）。"
-        - "判断为真但理由不完整：2 分。只写判断，或判断为假（认为斜率是 0.5）：0 分。"
+        - "判断为真，并说明两种估计是同一个数，或算出两者的标准误都是 $\\frac{\\sigma}{\\sqrt{20}}$（6 分）。"
+        - "判断为真但没有考虑月度方差是年度的 $\\frac{1}{12}$，或只说“时间长度才重要”而没有论证：3 分。只写判断：0 分。"
       en:
-        - "States true and uses the two slope formulas to show $bd = r^2 = R^2$, giving 0.25 (4 points)."
-        - "True with an incomplete reason: 2 points. Only the verdict, or false (taking the slope as 0.5): 0 points."
+        - "States true and shows that the two estimates are the same number, or computes that both standard errors are $\\frac{\\sigma}{\\sqrt{20}}$ (6 points)."
+        - "True but without using that the monthly variance is $\\frac{1}{12}$ of the yearly one, or only saying \"the length of time is what matters\" without an argument: 3 points. Only the verdict: 0 points."
 
-  # ---------- Part 2: problems ----------
   - id: Q5
     kind: quiz
     part: problem
-    easy_points: 0
-    hard_points: 0
     points: 16
-    concepts: [ear, annuity, annuity-due, growing-perpetuity]
-    expected: { ear: "6.17", pv: "801486", w: "49740" }
+    concepts: [present-value, annuity, apr, ear]
+    expected: { pv: "11693.74", ear: "10.01", naive: "5.26" }
     question:
       zh-cn: |-
-        一个家庭计划 30 年后退休。退休后每年年初从账户取 60,000 美元，共取 25 年，第一笔在退休当天取出。账户的名义年利率始终为 6%，按月复利。
-        (a) 退休当天账户里至少要有多少钱？（7 分）
-        (b) 退休时账户里正好有 (a) 的金额。家庭改变计划：仍是每年年初领取、第一笔在退休当天、共领 25 次，但为了抵消通胀，每年的领取额比上一年多 2%。第一年能领多少？（9 分）
+        一家家具店的沙发标价 12,000 美元，有两种付款方式：
+
+        - 今天付现金，打 95 折，付 11,400 美元；
+        - “零利率分期”：不打折，分 12 个月付清，每月末付 1,000 美元，第一笔在一个月后付。
+
+        你已经有足够的钱，存在名义年利率 4.8%、按月复利的储蓄账户里。选分期的话，还没付的钱可以留在账户里继续生息。
+
+        (a) 哪种方式对你更划算？说明为什么不能直接比较 11,400 美元和 12,000 美元。（7 分）
+
+        (b) 店员说：“分期的代价只是放弃了 600 美元的折扣，相当于借 11,400 美元、一年付 600 美元利息，年利率只有 $\frac{600}{11{,}400} \approx 5.26\%$。”求分期实际隐含的有效年利率，并说明店员的算法错在哪里。（9 分）
       en: |-
-        A household plans to retire in 30 years. After retirement it will withdraw 60,000 dollars at the start of each year for 25 years, with the first withdrawal on the day of retirement. The account always pays a nominal annual rate of 6%, compounded monthly.
-        (a) How much must the account hold on the day of retirement? (7 points)
-        (b) At retirement the account holds exactly the amount from (a). The household changes its plan: still a withdrawal at the start of each year, the first on the day of retirement, 25 withdrawals in all, but to offset inflation each withdrawal is 2% larger than the one before. How much can it withdraw in the first year? (9 points)
+        A furniture store sells a sofa at a list price of 12,000 dollars. There are two ways to pay:
+
+        - pay cash today with a 5% discount, that is, 11,400 dollars;
+        - a "zero-interest installment plan": no discount, 12 monthly payments of 1,000 dollars at the end of each month, the first one month from now.
+
+        You already have enough money in a savings account with a nominal annual rate of 4.8%, compounded monthly. With the installment plan, the money not yet paid stays in the account and keeps earning interest.
+
+        (a) Which way of paying is better for you? Explain why you cannot compare 11,400 dollars with 12,000 dollars directly. (7 points)
+
+        (b) The salesperson says: "The only cost of the installment plan is the 600-dollar discount you give up. That is like borrowing 11,400 dollars and paying 600 dollars of interest in a year, a rate of only $\frac{600}{11{,}400} \approx 5.26\%$." Find the effective annual rate actually implied by the installment plan, and explain what is wrong with the salesperson's calculation. (9 points)
     answer:
       zh-cn: |-
-        (a) 取款每年一次，而利息按月复利，所以要用有效年利率：$R = 1.005^{12} - 1 \approx 6.17$%。取款在每年年初，是期初年金：
-        $PV = 60{,}000 \times \frac{1 - (1+R)^{-25}}{R} \times (1+R) \approx 801{,}486$ 美元。
-        （直接用 6% 作为年利率会得到约 813,021 美元；按期末年金计算则会少算一期利息。）
-        (b) 公式表只有增长永续年金。先看期末付款：首笔 $C$、增长率 $g$、共 25 期的增长年金，等于从第 1 期起的增长永续年金，减去从第 26 期起的增长永续年金（它在第 25 年末的价值是 $\frac{C(1+g)^{25}}{R - g}$，再折现 25 年）：
-        $PV_{\text{期末}} = \frac{C}{R - g}\left[1 - \left(\frac{1+g}{1+R}\right)^{25}\right]$。
-        这里第一笔在退休当天，每笔都早一年，现值再乘以 $(1+R)$：
-        $801{,}486 = W \cdot \frac{1+R}{R - g}\left[1 - \left(\frac{1.02}{1+R}\right)^{25}\right] \approx 16.11\,W$，所以 $W \approx 49{,}740$ 美元。
-        第一年比固定领取的 60,000 美元少约 17%，换来以后每年增加 2%。
+        (a) 两种方式的付款时间不同，要折算到同一时点。“零利率”只是没有写明利息：分期放弃了折扣。对你来说，钱的机会成本是储蓄账户的月利率 $i = 4.8\% / 12 = 0.4\%$。分期付款今天的现值是
+        $$1{,}000 \times \frac{1 - 1.004^{-12}}{0.004} \approx 11{,}693.74$$
+        美元，高于现金价 11,400 美元，所以付现金更划算，按今天的价值约省 293.74 美元。换句话说，要支付分期，今天就要在账户里留出 11,693.74 美元。直接比较 11,400 和 12,000 忽略了分期的钱晚付、还能生息；只看“零利率”又忽略了放弃的折扣。
+        (b) 隐含的月利率 $i$ 使分期付款的现值等于现金价：$1{,}000 \times \frac{1 - (1+i)^{-12}}{i} = 11{,}400$。用计算器或代码求解，$i \approx 0.798\%$，有效年利率 $(1+i)^{12} - 1 \approx 10.01\%$，大约是店员说的 5.26% 的两倍。
+        店员的算法假设你借了 11,400 美元整整一年、到年底一次还清。实际上从第一个月起每月还 1,000 美元，欠款逐月减少，平均只借了大约一半的钱一年。为同样的 600 美元利息，实际借的钱少一半，利率就大约翻倍。（另外 5.26% 也没有考虑按月复利。）
       en: |-
-        (a) Withdrawals are yearly while interest is compounded monthly, so the effective annual rate is needed: $R = 1.005^{12} - 1 \approx 6.17$%. The withdrawals are at the start of each year, an annuity due:
-        $PV = 60{,}000 \times \frac{1 - (1+R)^{-25}}{R} \times (1+R) \approx 801{,}486$ dollars.
-        (Using 6% directly as the annual rate gives about 813,021 dollars; treating the withdrawals as end-of-year leaves out one period of interest.)
-        (b) The formula sheet has only the growing perpetuity. First take end-of-year payments: a growing annuity with first payment $C$, growth $g$ and 25 payments equals a growing perpetuity starting in year 1 minus a growing perpetuity starting in year 26 (worth $\frac{C(1+g)^{25}}{R - g}$ at the end of year 25, then discounted 25 years):
-        $PV_{\text{end}} = \frac{C}{R - g}\left[1 - \left(\frac{1+g}{1+R}\right)^{25}\right]$.
-        Here the first payment is on the day of retirement, so every payment is one year earlier and the present value is multiplied by $(1+R)$:
-        $801{,}486 = W \cdot \frac{1+R}{R - g}\left[1 - \left(\frac{1.02}{1+R}\right)^{25}\right] \approx 16.11\,W$, so $W \approx 49{,}740$ dollars.
-        The first withdrawal is about 17% less than the fixed 60,000 dollars, in exchange for a 2% increase every year after.
+        (a) The two ways of paying have payments at different times, so they must be brought to the same point in time. "Zero interest" only means the interest is not stated: the installment plan gives up the discount. For you, the opportunity cost of money is the monthly rate of the savings account, $i = 4.8\% / 12 = 0.4\%$. The present value of the installments today is
+        $$1{,}000 \times \frac{1 - 1.004^{-12}}{0.004} \approx 11{,}693.74$$
+        dollars, more than the cash price of 11,400 dollars, so paying cash is better, by about 293.74 dollars in today's value. In other words, to pay the installments you would need to set aside 11,693.74 dollars in the account today. Comparing 11,400 with 12,000 directly ignores that the installment money is paid later and earns interest meanwhile; looking only at "zero interest" ignores the discount given up.
+        (b) The implied monthly rate $i$ makes the present value of the installments equal to the cash price: $1{,}000 \times \frac{1 - (1+i)^{-12}}{i} = 11{,}400$. Solving with a calculator or code gives $i \approx 0.798\%$ and an effective annual rate of $(1+i)^{12} - 1 \approx 10.01\%$, about twice the salesperson's 5.26%.
+        The salesperson's calculation assumes that you borrow 11,400 dollars for a whole year and repay it all at the end. In fact you repay 1,000 dollars every month from the first month, so the debt falls month by month, and on average you borrow only about half of the money for the year. The same 600 dollars of interest on half as much borrowed money is about twice the rate. (The 5.26% also ignores monthly compounding.)
     rubric:
       zh-cn:
-        - "(a) 换算有效年利率 3 分；按期初年金求现值，约 801,486 美元 4 分。直接用 6% 或按期末年金计算、其余正确：最多 3 分。"
-        - "(b) 用两个增长永续年金之差（或等比数列求和）得到 25 期增长年金的现值 4 分；按第一笔在退休当天乘以 $(1+R)$ 2 分；约 49,740 美元 3 分。按期末付款计算、其余正确：最多 6 分。用 (a) 的错误结果但方法正确：不扣分。"
+        - "(a) 指出要按自己的机会成本（储蓄的月利率 0.4%）把分期付款折现到今天（3 分）；现值 11,693.74（2 分）；结论为付现金，并说明不能直接比较的原因（2 分）。只比较 11,400 与 12,000，或因“零利率”选分期：最多 1 分。"
+        - "(b) 列出使现值等于 11,400 的方程并求出月利率（3 分）；有效年利率 10.01%（2 分）；说明欠款逐月减少、平均只借了约一半的钱，所以 5.26% 低估了利率（4 分）。用年金公式反解时算术有误但方法对：只扣结果分。"
       en:
-        - "(a) Conversion to the effective annual rate 3 points; present value as an annuity due, about 801,486 dollars, 4 points. Using 6% directly or an end-of-year annuity with the rest correct: at most 3 points."
-        - "(b) Present value of the 25-year growing annuity as the difference of two growing perpetuities (or as a geometric sum) 4 points; multiplying by $(1+R)$ because the first payment is on the day of retirement 2 points; about 49,740 dollars 3 points. End-of-year payments with the rest correct: at most 6 points. Correct method with a wrong result carried over from (a): no deduction."
+        - "(a) States that the installments must be discounted to today at one's own opportunity cost (the savings rate of 0.4% a month) (3 points); present value 11,693.74 (2 points); concludes that paying cash is better and explains why the direct comparison is wrong (2 points). Only comparing 11,400 with 12,000, or choosing installments because of \"zero interest\": at most 1 point."
+        - "(b) Sets up the equation that makes the present value equal to 11,400 and solves for the monthly rate (3 points); effective annual rate 10.01% (2 points); explains that the debt falls month by month and on average only about half of the money is borrowed, so 5.26% understates the rate (4 points). Correct method with an arithmetic error when solving: deduct only the result points."
 
   - id: Q6
     kind: quiz
     part: problem
-    easy_points: 3
-    hard_points: 8
-    points: 16
-    concepts: [profit-maximization, marginal-revenue, marginal-cost, first-order-condition, fixed-cost, sunk-cost]
-    expected: { q: "20", p: "60", profit: "600", rise: "4", q70: "7.5", op: "112.5", total: "-87.5", stop: "-80" }
+    points: 18
+    concepts: [regression-coefficient, r-squared, residual, portfolio-variance, first-order-condition]
+    expected: { cov: "30", sd: "4.5", r2: "0.64", naive: "1.5" }
     question:
       zh-cn: |-
-        一家公司是某种产品唯一的卖家。卖出 $q$ 件时，市场价格为 $p(q) = 100 - 2q$（美元）。每件的成本为 $c$（$c < 100$），每年另有设备租金 $F$，即 $C(q) = cq + F$。
-        (a) 求利润最高的产量 $q^*$ 和价格 $p^*$（用 $c$ 表示），以及 $c = 20$、$F = 200$ 时的最大利润。（3 分）
-        (b) 原料涨价，$c$ 从 20 变为 28。一位同事说：“每件成本涨了 8 美元，就应该把价格提高 8 美元，把成本完全转嫁给顾客。”这个说法对吗？用边际收入和边际成本说明。（5 分）
-        (c) 设 $F = 200$。年初公司签了一年的设备租约，并已一次付清全年租金，不能退款。在决定今年的产量之前，原料大涨，$c$ 变为 70。如果今年停产，公司可以把设备转租给另一家公司，对方付 120 美元。另一位同事说：“租金已经付了，是沉没成本，不影响决策；只要按最优产量生产时收入超过原料成本，就应该生产。”这个说法对吗？公司今年应该生产还是停产？（8 分）
+        某基金的月收益 $y$ 对市场的月收益 $x$ 做回归，斜率 $b = 1.2$。市场月收益的标准差为 5%，基金为 7.5%。数据很多，估计误差可以忽略。基金经理打算持有基金的同时卖空市场指数：每 1 美元基金卖空 $h$ 美元的指数，组合的月收益为 $y - hx$（忽略交易成本和借券费用）。
+
+        (a) 证明：使组合方差最小的 $h$ 等于回归斜率 $b$。（8 分）
+
+        (b) 经理按 $h = 1.2$ 对冲后说：“组合已经和市场无关，风险几乎为 0。”求对冲后组合月收益的标准差，并用 $R^2$ 说明为什么风险没有降到 0。（10 分）
       en: |-
-        A company is the only seller of a product. When it sells $q$ units, the market price is $p(q) = 100 - 2q$ (dollars). Each unit costs $c$ ($c < 100$), and there is also a yearly equipment rent $F$, so $C(q) = cq + F$.
-        (a) Find the profit-maximizing output $q^*$ and price $p^*$ (in terms of $c$), and the maximum profit when $c = 20$ and $F = 200$. (3 points)
-        (b) Material prices rise and $c$ goes from 20 to 28. A colleague says: "Each unit costs 8 dollars more, so we should raise the price by 8 dollars and pass the whole cost on to customers." Is this right? Explain with marginal revenue and marginal cost. (5 points)
-        (c) Let $F = 200$. At the start of the year the company signed a one-year equipment lease and has already paid the whole year's rent, which cannot be refunded. Before this year's output is decided, material prices jump and $c$ becomes 70. If the company stops producing this year, it can sublet the equipment to another company, which would pay 120 dollars. Another colleague says: "The rent has already been paid; it is a sunk cost and does not affect the decision. As long as revenue at the best output exceeds the material cost, we should produce." Is this right? Should the company produce or stop this year? (8 points)
+        The monthly return $y$ of a fund is regressed on the monthly market return $x$, with slope $b = 1.2$. The standard deviation of the monthly market return is 5%, and that of the fund 7.5%. There is a lot of data, so estimation error can be ignored. The fund manager plans to hold the fund and sell the market index short: for each dollar in the fund, sell $h$ dollars of the index short, so the portfolio's monthly return is $y - hx$ (ignore trading costs and borrowing fees).
+
+        (a) Show that the $h$ that minimizes the portfolio variance equals the regression slope $b$. (8 points)
+
+        (b) After hedging with $h = 1.2$, the manager says: "The portfolio no longer depends on the market, so its risk is almost 0." Find the standard deviation of the hedged portfolio's monthly return, and use $R^2$ to explain why the risk is not 0. (10 points)
     answer:
       zh-cn: |-
-        (a) $\pi = (100 - 2q)q - cq - F$。$\pi' = 100 - c - 4q = 0$，$q^* = \frac{100 - c}{4}$；$\pi'' = -4 < 0$，是最大值。$p^* = 100 - 2q^* = \frac{100 + c}{2}$，$\pi^* = \frac{(100 - c)^2}{8} - F$。$c = 20$、$F = 200$ 时 $q^* = 20$，$p^* = 60$，最大利润 $800 - 200 = 600$。
-        (b) 不对。$p^* = \frac{100 + c}{2}$，成本每涨 1 美元价格只涨 0.5 美元：$c = 28$ 时 $p^* = 64$，只上涨 4 美元。原因：最优点满足 $MR = MC$。边际收入 $100 - 4q$ 随产量下降的速度是价格 $100 - 2q$ 的两倍；边际成本上升 8 时，产量只需减少 2 件就能让边际收入上升 8，而减少 2 件只让价格上升 4。如果把价格提高 8（产量减到 16），$MR = 36 > MC = 28$，多卖一件还能增加利润。
-        (c) 不对，应该停产并转租。同事前半句对：200 美元已经付出、收不回，无论生产与否都要承担，不影响决策。但他漏掉了生产的机会成本：生产就不能转租，要放弃 120 美元。按最优产量 $q^* = \frac{100 - 70}{4} = 7.5$、价格 $p^* = 85$ 生产，收入减去原料成本为 $\frac{(100 - 70)^2}{8} = 112.5$，低于转租的 120。比较两种选择今年的总利润：生产 $112.5 - 200 = -87.5$，停产并转租 $120 - 200 = -80$。停产少亏 7.5 美元。
+        (a) 由线性组合的方差，
+        $$\text{Var}(y - hx) = \sigma_y^2 - 2h\,\text{Cov}(x, y) + h^2\sigma_x^2.$$
+        对 $h$ 求导并令其为 0：$-2\,\text{Cov}(x, y) + 2h\,\sigma_x^2 = 0$，得 $h^* = \frac{\text{Cov}(x, y)}{\sigma_x^2}$；二阶导数 $2\sigma_x^2 > 0$，是最小值。OLS 斜率 $b = \frac{\sum (x_i - \bar x)(y_i - \bar y)}{\sum (x_i - \bar x)^2}$ 就是样本协方差除以样本方差，所以 $h^* = b$。
+        (b) $\text{Cov}(x, y) = b\,\sigma_x^2 = 1.2 \times 25 = 30$（%²）。
+        $$\text{Var}(y - 1.2x) = 56.25 - 2 \times 1.2 \times 30 + 1.44 \times 25 = 20.25,$$
+        标准差 4.5%，比基金本身的 7.5% 低，但远不是 0。
+        经理说对了一半：$\text{Cov}(y - bx, x) = \text{Cov}(x, y) - b\,\sigma_x^2 = 0$，对冲后的组合确实与市场不相关。但 $y - bx$ 就是截距加残差，对冲只去掉了市场能解释的那部分方差。$R^2 = \frac{\text{Cov}(x, y)^2}{\sigma_x^2\sigma_y^2} = \frac{900}{25 \times 56.25} = 0.64$，也可以写成 $1 - \frac{20.25}{56.25}$：市场解释了基金方差的 64%，剩下的 $(1 - R^2)\sigma_y^2 = 0.36 \times 56.25 = 20.25$ 是基金自身的风险（残差），和市场无关，用市场也就对冲不掉。用 $\sigma_y - b\,\sigma_x = 1.5\%$ 计算是错的：那只在 $R^2 = 1$（完全相关）时成立。
       en: |-
-        (a) $\pi = (100 - 2q)q - cq - F$. $\pi' = 100 - c - 4q = 0$ gives $q^* = \frac{100 - c}{4}$; $\pi'' = -4 < 0$, so it is a maximum. $p^* = 100 - 2q^* = \frac{100 + c}{2}$ and $\pi^* = \frac{(100 - c)^2}{8} - F$. With $c = 20$ and $F = 200$: $q^* = 20$, $p^* = 60$, and the maximum profit is $800 - 200 = 600$.
-        (b) No. $p^* = \frac{100 + c}{2}$, so each dollar of cost raises the price by only 0.5 dollars: at $c = 28$, $p^* = 64$, a rise of only 4 dollars. Reason: the optimum satisfies $MR = MC$. Marginal revenue $100 - 4q$ falls with output twice as fast as the price $100 - 2q$; when marginal cost rises by 8, output needs to fall by only 2 units to raise marginal revenue by 8, and 2 fewer units raise the price by only 4. If the price were raised by 8 (output 16), $MR = 36 > MC = 28$, so selling one more unit would still add profit.
-        (c) No; the company should stop and sublet. The first half of the statement is right: the 200 dollars has been paid and cannot be recovered, so it is borne either way and does not affect the decision. But the statement misses the opportunity cost of producing: producing means giving up the 120 dollars from subletting. At the best output $q^* = \frac{100 - 70}{4} = 7.5$ and price $p^* = 85$, revenue minus material cost is $\frac{(100 - 70)^2}{8} = 112.5$, less than the 120 from subletting. Comparing this year's total profit: producing gives $112.5 - 200 = -87.5$; stopping and subletting gives $120 - 200 = -80$. Stopping loses 7.5 dollars less.
+        (a) By the variance of a linear combination,
+        $$\text{Var}(y - hx) = \sigma_y^2 - 2h\,\text{Cov}(x, y) + h^2\sigma_x^2.$$
+        Setting the derivative with respect to $h$ to 0: $-2\,\text{Cov}(x, y) + 2h\,\sigma_x^2 = 0$, so $h^* = \frac{\text{Cov}(x, y)}{\sigma_x^2}$; the second derivative $2\sigma_x^2 > 0$, so it is a minimum. The OLS slope $b = \frac{\sum (x_i - \bar x)(y_i - \bar y)}{\sum (x_i - \bar x)^2}$ is the sample covariance divided by the sample variance, so $h^* = b$.
+        (b) $\text{Cov}(x, y) = b\,\sigma_x^2 = 1.2 \times 25 = 30$ (%²).
+        $$\text{Var}(y - 1.2x) = 56.25 - 2 \times 1.2 \times 30 + 1.44 \times 25 = 20.25,$$
+        a standard deviation of 4.5%, lower than the fund's own 7.5% but far from 0.
+        The manager is half right: $\text{Cov}(y - bx, x) = \text{Cov}(x, y) - b\,\sigma_x^2 = 0$, so the hedged portfolio is indeed uncorrelated with the market. But $y - bx$ is the intercept plus the residual, and the hedge removes only the part of the variance the market explains. $R^2 = \frac{\text{Cov}(x, y)^2}{\sigma_x^2\sigma_y^2} = \frac{900}{25 \times 56.25} = 0.64$, which can also be written $1 - \frac{20.25}{56.25}$: the market explains 64% of the fund's variance, and the remaining $(1 - R^2)\sigma_y^2 = 0.36 \times 56.25 = 20.25$ is the fund's own risk (the residual), unrelated to the market, so the market cannot hedge it. Computing $\sigma_y - b\,\sigma_x = 1.5\%$ is wrong: that holds only when $R^2 = 1$ (perfect correlation).
     rubric:
       zh-cn:
-        - "(a) $q^*$、$p^*$ 的表达式 2 分；最大利润 600 1 分。"
-        - "(b) 判断不对，指出价格只涨 4 美元 2 分；用 $MR$ 比价格下降得快说明原因 3 分。"
-        - "(c) 指出已付租金是沉没成本、但转租收入 120 是生产的机会成本 3 分；算出最优产量下收入减原料成本 112.5 2 分；比较生产（−87.5）与停产转租（−80），结论为停产 3 分。只说沉没成本不影响决策、结论为生产：最多 2 分。"
+        - "(a) 写出 $\\text{Var}(y - hx)$ 的展开式（3 分）；由一阶条件得 $h^* = \\frac{\\text{Cov}}{\\sigma_x^2}$ 并检查二阶条件（3 分）；指出这就是 OLS 斜率（2 分）。"
+        - "(b) 由斜率得到协方差 30（2 分）；对冲后标准差 4.5%（3 分）；用 $R^2 = 0.64$ 说明对冲只去掉市场解释的 64% 的方差，剩下的是与市场无关的残差（5 分）。答 $\\sigma_y - b\\sigma_x = 1.5\\%$ 或认为风险接近 0：最多 2 分。前面的协方差算错、后面方法对：不重复扣分。"
       en:
-        - "(a) Expressions for $q^*$ and $p^*$ 2 points; maximum profit 600 1 point."
-        - "(b) Judges the statement wrong and finds that the price rises by only 4 dollars 2 points; explains with $MR$ falling faster than the price 3 points."
-        - "(c) Recognizes that the paid rent is sunk but that the 120 from subletting is an opportunity cost of producing 3 points; revenue minus material cost of 112.5 at the best output 2 points; compares producing (−87.5) with stopping and subletting (−80) and concludes that the company stops 3 points. Only stating that the sunk cost does not matter and concluding to produce: at most 2 points."
+        - "(a) Writes out $\\text{Var}(y - hx)$ (3 points); obtains $h^* = \\frac{\\text{Cov}}{\\sigma_x^2}$ from the first-order condition and checks the second-order condition (3 points); states that this is the OLS slope (2 points)."
+        - "(b) Obtains the covariance of 30 from the slope (2 points); hedged standard deviation 4.5% (3 points); uses $R^2 = 0.64$ to explain that the hedge removes only the 64% of the variance the market explains, and what remains is the residual, unrelated to the market (5 points). Answering $\\sigma_y - b\\sigma_x = 1.5\\%$, or that the risk is close to 0: at most 2 points. A wrong covariance earlier with a correct method later: do not deduct twice."
 
   - id: Q7
     kind: quiz
     part: problem
-    easy_points: 0
-    hard_points: 11
-    points: 18
-    concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, correlation]
-    expected: { rho: "0.25", w: "25" }
+    points: 13
+    concepts: [profit-maximization, marginal-cost, fixed-cost, variable-cost, sunk-cost]
+    expected: { p: "3.16", q: "31.6", wrong: "3.74" }
     question:
       zh-cn: |-
-        两只基金 A、B 的标准差为 $\sigma_A$、$\sigma_B$，相关系数为 $\rho$，且 $\rho < 1$。组合中 A 的权重为 $w$，B 为 $1 - w$。
-        (a) 用导数推导使组合方差最小的权重 $w^*$（用 $\sigma_A$、$\sigma_B$、$\rho$ 表示），并说明它确实是最小值。（7 分）
-        (b) 已知 $\sigma_A = 24\%$，$\sigma_B = 16\%$。两只基金都不能卖空（$0 \le w \le 1$），在这个限制下方差最小的组合，方差为 216（%²）。一位分析师说：“组合的方差 216 比两只基金中较小的方差 $16^2 = 256$ 还低，说明两只基金负相关。”求两只基金的相关系数，并判断分析师的说法。（11 分）
+        一辆餐车在竞争激烈的集市上卖饭，每份的价格 $p$ 由市场决定，不受餐车卖多少的影响。每天卖 $q$ 份时，食材和小时工的成本为 $\frac{q^2}{20}$ 美元。餐车每月初付 600 美元的停车许可费，已经付清，不能退。每天出摊还要交 50 美元的摊位费，不出摊就不用交。
+
+        一位朋友说：“许可费和摊位费都是固定成本，不影响产量。所以只要价格高于 0 就该出摊，按 $p = MC$ 决定卖多少。”这个说法对吗？求餐车愿意出摊的最低价格，以及在这个价格下每天卖多少份。（13 分）
       en: |-
-        Two funds A and B have standard deviations $\sigma_A$ and $\sigma_B$ and correlation $\rho$, with $\rho < 1$. The portfolio holds A with weight $w$ and B with weight $1 - w$.
-        (a) Use the derivative to derive the weight $w^*$ that minimizes the portfolio variance (in terms of $\sigma_A$, $\sigma_B$ and $\rho$), and show that it is a minimum. (7 points)
-        (b) Let $\sigma_A = 24\%$ and $\sigma_B = 16\%$. Neither fund can be sold short ($0 \le w \le 1$), and the portfolio with the lowest variance under this restriction has a variance of 216 (%²). An analyst says: "The portfolio variance of 216 is below the smaller of the two funds' variances, $16^2 = 256$, so the two funds must be negatively correlated." Find the correlation between the two funds, and judge the analyst's statement. (11 points)
+        A food truck sells meals at a busy market. The price per meal $p$ is set by the market and does not depend on how much the truck sells. Selling $q$ meals a day costs $\frac{q^2}{20}$ dollars for ingredients and hourly staff. At the start of each month the truck pays a parking permit of 600 dollars, which has been paid and cannot be refunded. On each day it opens, it also pays a stall fee of 50 dollars; on days it does not open, it pays nothing.
+
+        A friend says: "The permit and the stall fee are both fixed costs and do not affect output. So the truck should open whenever the price is above 0 and choose how much to sell by $p = MC$." Is this right? Find the lowest price at which the truck is willing to open, and how many meals a day it sells at that price. (13 points)
     answer:
       zh-cn: |-
-        (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$。
-        $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$，解得
-        $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。
-        二阶导数 $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$（因为 $\rho < 1$），是最小值。
-        (b) 把 $w^*$ 代回方差，最小方差为 $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$。令它等于 216：$\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$，即 $32\rho^2 - 36\rho + 7 = 0$，$\rho = 0.25$ 或 $\rho = 0.875$。
-        先看 $\rho = 0.875$：它只是不受限制时的最小方差为 216，这时 $w^* = \frac{256 - 336}{832 - 672} = -0.5$，要卖空 A，不允许。不能卖空时，方差是 $w$ 的开口向上的二次函数，$w^* < 0$ 意味着在 $[0, 1]$ 上方差随 $w$ 增加，最小值在 $w = 0$，即只持有 B，方差为 $16^2 = 256$，不是 216。所以 $\rho = 0.875$ 不符合题意。$\rho = 0.25$ 时 $w^* = \frac{256 - 96}{832 - 192} = 0.25$，即 A 占 25%，在 $[0, 1]$ 内，不受限制的最小值就是允许的组合，方差正好为 216。所以 $\rho = 0.25$。
-        分析师的说法不对：相关系数是正的，组合的方差仍然低于 B 的方差。由 (a)，只要 $w^* > 0$，即 $\rho < \frac{\sigma_B}{\sigma_A} = \frac{2}{3}$，加入一点 A 就能降低方差，所以 $0 < \rho < \frac{2}{3}$ 时也有分散化的好处，不需要负相关。
+        朋友说对了一半。产量：边际成本 $MC = \frac{q}{10}$，由 $p = MC$ 得 $q^* = 10p$（二阶导数 $-\frac{1}{10} < 0$）。两项费用都与 $q$ 无关，确实不影响出摊时卖多少。
+        但“是否出摊”是另一个决策，要比较出摊与不出摊的差别。许可费已经付清，出不出摊都一样，是沉没成本，不影响这个决策。摊位费只在出摊时付，是出摊才发生的成本，必须算进去。按最优产量出摊时，收入减去食材和人工成本为
+        $$p \cdot 10p - \frac{(10p)^2}{20} = 5p^2.$$
+        出摊的条件是 $5p^2 \ge 50$，即 $p \ge \sqrt{10} \approx 3.16$ 美元，这时每天卖 $10\sqrt{10} \approx 31.6$ 份。价格低于约 3.16 美元时，卖饭赚的不够付摊位费，不出摊更好。
+        所以：固定成本不影响产量，但可以避免的固定成本（摊位费）决定是否出摊；沉没成本（许可费）两者都不影响。把许可费按天分摊（每天 20 美元）算进去，会得到 $5p^2 \ge 70$、$p \ge 3.74$，这是错的。
       en: |-
-        (a) $\sigma_P^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2w(1-w)\rho\sigma_A\sigma_B$.
-        $\frac{d\sigma_P^2}{dw} = 2w\sigma_A^2 - 2(1-w)\sigma_B^2 + 2(1 - 2w)\rho\sigma_A\sigma_B = 0$ gives
-        $w^* = \frac{\sigma_B^2 - \rho\sigma_A\sigma_B}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$.
-        The second derivative is $2(\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B) = 2\big[(\sigma_A - \sigma_B)^2 + 2(1 - \rho)\sigma_A\sigma_B\big] > 0$ (because $\rho < 1$), so it is a minimum.
-        (b) Substituting $w^*$ back into the variance gives the minimum variance $\frac{\sigma_A^2\sigma_B^2(1 - \rho^2)}{\sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B}$. Setting it equal to 216: $\frac{147{,}456\,(1 - \rho^2)}{832 - 768\rho} = 216$, that is, $32\rho^2 - 36\rho + 7 = 0$, so $\rho = 0.25$ or $\rho = 0.875$.
-        First consider $\rho = 0.875$: there the unrestricted minimum variance is 216, but then $w^* = \frac{256 - 336}{832 - 672} = -0.5$, a short position in A, which is not allowed. Without short selling, the variance is a quadratic in $w$ that opens upward, and $w^* < 0$ means the variance rises with $w$ on $[0, 1]$, so the minimum is at $w = 0$: holding only B, with variance $16^2 = 256$, not 216. So $\rho = 0.875$ does not fit. At $\rho = 0.25$, $w^* = \frac{256 - 96}{832 - 192} = 0.25$, that is, 25% in A, which lies in $[0, 1]$, so the unrestricted minimum is an allowed portfolio and its variance is exactly 216. So $\rho = 0.25$.
-        The analyst is wrong: the correlation is positive, yet the portfolio variance is still below B's variance. From (a), as long as $w^* > 0$, that is, $\rho < \frac{\sigma_B}{\sigma_A} = \frac{2}{3}$, adding some A lowers the variance, so diversification helps for $0 < \rho < \frac{2}{3}$ as well; negative correlation is not needed.
+        The friend is half right. Output: marginal cost is $MC = \frac{q}{10}$, and $p = MC$ gives $q^* = 10p$ (the second derivative is $-\frac{1}{10} < 0$). Neither fee depends on $q$, so indeed they do not affect how much the truck sells once it opens.
+        But whether to open is a different decision, and it compares opening with not opening. The permit has been paid and is the same either way: it is a sunk cost and does not affect this decision. The stall fee is paid only on days the truck opens, so it is a cost of opening and must be counted. Opening at the best output, revenue minus the cost of ingredients and staff is
+        $$p \cdot 10p - \frac{(10p)^2}{20} = 5p^2.$$
+        The truck opens if $5p^2 \ge 50$, that is, $p \ge \sqrt{10} \approx 3.16$ dollars, and then it sells $10\sqrt{10} \approx 31.6$ meals a day. Below about 3.16 dollars, selling meals does not earn enough to pay the stall fee, and not opening is better.
+        So: fixed costs do not affect output, but a fixed cost that can be avoided (the stall fee) decides whether to open; a sunk cost (the permit) affects neither. Spreading the permit over the days (20 dollars a day) and including it gives $5p^2 \ge 70$, $p \ge 3.74$, which is wrong.
     rubric:
       zh-cn:
-        - "(a) 方差表达式与求导 3 分，$w^*$ 公式 2 分，二阶条件 2 分。"
-        - "(b) 由最小方差列出关于 $\\rho$ 的方程并解出两个根 4 分；指出 $\\rho = 0.875$ 时要卖空 A，不能卖空时最小方差组合是只持有 B、方差 256，因此舍去 0.875、得 $\\rho = 0.25$ 4 分；判断分析师的说法不对，说明 $\\rho < \\frac{2}{3}$ 时正相关也能降低方差 3 分。保留两个根、没有取舍：$\\rho$ 部分最多 4 分。"
+        - "由 $p = MC$ 得 $q^* = 10p$（2 分）；区分摊位费（出摊才付，影响是否出摊）与许可费（沉没成本，不影响）（4 分）；列出 $5p^2 \\ge 50$，得最低价格 3.16、产量 31.6（4 分）；评价朋友的说法：产量部分对，“价格为正就出摊”错（3 分）。"
+        - "同意朋友、认为价格为正就出摊：最多 3 分。把许可费分摊进出摊的决策（得 3.74）：最多 8 分。"
       en:
-        - "(a) Variance expression and derivative 3 points; formula for $w^*$ 2 points; second-order condition 2 points."
-        - "(b) Sets up the equation in $\\rho$ from the minimum variance and finds both roots 4 points; shows that $\\rho = 0.875$ needs a short position in A, so without short selling the minimum-variance portfolio holds only B with variance 256, rejects 0.875 and gives $\\rho = 0.25$, 4 points; judges the analyst wrong and explains that a positive correlation below $\\frac{2}{3}$ also lowers the variance 3 points. Keeping both roots without choosing: at most 4 points for the correlation."
+        - "Obtains $q^* = 10p$ from $p = MC$ (2 points); distinguishes the stall fee (paid only when opening, affects whether to open) from the permit (sunk, affects nothing) (4 points); sets up $5p^2 \\ge 50$ and finds the lowest price 3.16 and output 31.6 (4 points); evaluates the friend's statement: right about output, wrong about \"open at any positive price\" (3 points)."
+        - "Agrees with the friend that the truck opens at any positive price: at most 3 points. Includes the permit, spread over the days, in the decision to open (giving 3.74): at most 8 points."
 
   - id: Q8
     kind: quiz
     part: problem
-    easy_points: 0
-    hard_points: 0
-    points: 17
-    concepts: [log-return, lognormal-distribution, normal-distribution, z-score, variance]
-    expected: { mu: "7", sigma: "18" }
+    points: 14
+    concepts: [present-value, perpetuity, discount-factor]
+    expected: { a4: "-24.96", b4: "-20", near4: "69.17", a2: "-25.37", b2: "-33.33", far4: "30.83", far2: "55.21" }
     question:
       zh-cn: |-
-        某股票指数每年的对数收益率服从同一个正态分布，各年相互独立，期望和标准差未知。一份报告说：今天投入 100 美元，10 年后财富的均值约为 236.8 美元；25 年后财富低于 100 美元（亏本）的概率约为 2.6%。已知标准正态分布的累积分布函数 $\Phi(1.94) = 0.974$。由报告的数字求每年对数收益率的期望和标准差（以百分比表示，取整数）。
+        资产 A 在 30 年后一次性支付 1,000,000 美元，中间没有付款。资产 B 从明年起每年末支付 40,000 美元，永远持续。
+
+        (a) 一位同事说：“B 的付款永远持续，比 A 的 30 年长得多，所以利率上升时 B 的价值跌得比 A 多。”设折现率从 4% 升到 5%，计算两者价值下降的百分比，判断这个说法，并解释原因。（8 分）
+
+        (b) 如果折现率是从 2% 升到 3%，结论会变吗？解释为什么。（6 分）
       en: |-
-        The yearly log return of a stock index follows the same normal distribution every year, independent across years, with unknown mean and standard deviation. A report says: if you invest 100 dollars today, the mean of your wealth after 10 years is about 236.8 dollars, and the probability that your wealth after 25 years is below 100 dollars (a loss) is about 2.6%. The standard normal cumulative distribution function has $\Phi(1.94) = 0.974$. From the report's numbers, find the mean and standard deviation of the yearly log return (in percent, rounded to whole numbers).
+        Asset A pays 1,000,000 dollars once, in 30 years, with no payments before. Asset B pays 40,000 dollars at the end of every year, starting next year, forever.
+
+        (a) A colleague says: "B's payments last forever, much longer than A's 30 years, so when interest rates rise, B loses more value than A." Let the discount rate rise from 4% to 5%. Compute the percentage fall in the value of each asset, judge the statement, and explain why. (8 points)
+
+        (b) If the discount rate rises from 2% to 3% instead, does the conclusion change? Explain why. (6 points)
     answer:
       zh-cn: |-
-        对数收益率可以相加。设每年对数收益率的期望为 $\mu$、标准差为 $\sigma$。各年独立，$n$ 年的总对数收益率服从正态分布，期望 $n\mu$，方差 $n\sigma^2$（标准差 $\sqrt{n}\,\sigma$）；$n$ 年后财富的对数为 $\ln 100$ 加上这个和，财富服从对数正态分布。两个数字的期限不同，要分别用 $n = 25$ 和 $n = 10$。
-        亏本（25 年）：$P = \Phi\!\left(-\frac{25\mu}{5\sigma}\right) = 0.026 = 1 - 0.974$，所以 $\frac{5\mu}{\sigma} = 1.94$，$\mu = 0.388\sigma$。
-        均值（10 年）：$100\,e^{10\mu + 10\sigma^2/2} = 236.8$，所以 $10\mu + 5\sigma^2 = \ln 2.368 \approx 0.862$。
-        代入：$5\sigma^2 + 3.88\sigma - 0.862 = 0$，取正根 $\sigma \approx 0.180$，$\mu \approx 0.070$。每年的期望约 7%，标准差约 18%。（把 25 年的标准差写成 $25\sigma$，或把两个数字当作同一个期限，都会得到错误的结果。）
+        (a) A：$\frac{1{,}000{,}000}{1.04^{30}} \approx 308{,}319$ 美元，升到 5% 后乘以 $\left(\frac{1.04}{1.05}\right)^{30} \approx 0.750$，变化约 −24.96%。B：$\frac{40{,}000}{0.04} = 1{,}000{,}000$ 美元变为 $\frac{40{,}000}{0.05} = 800{,}000$ 美元，变化 −20%。A 跌得更多，同事的说法不对。
+        原因：利率变化对一笔付款的影响随它离现在的时间增大（折现因子 $(1+r)^{-t}$ 中 $t$ 越大越敏感）。敏感度取决于价值主要来自多远的未来，而不是付款持续多久。A 的全部价值都在第 30 年；B 虽然永远付款，但 4% 时前 30 年的付款占它价值的 $1 - 1.04^{-30} \approx 69.17\%$，这些较近的付款受利率影响小。
+        (b) 会变。A：$\left(\frac{1.02}{1.03}\right)^{30} - 1 \approx -25.37\%$。B：$\frac{40{,}000}{0.03} \div \frac{40{,}000}{0.02} - 1 = \frac{2}{3} - 1 \approx -33.33\%$。现在 B 跌得更多。
+        B 在第 30 年以后的付款，折现后占它价值的比例是 $(1+r)^{-30}$：4% 时是 30.83%，2% 时是 55.21%。利率越低，远期付款被折现得越少，在价值中的比重越大，永续年金的价值就更多地来自远期，对利率也就更敏感。所以哪一个更敏感不取决于付款持续多久，而取决于价值主要分布在哪些时点，而这又取决于利率水平。
       en: |-
-        Log returns add up. Let the yearly log return have mean $\mu$ and standard deviation $\sigma$. With independent years, the total log return over $n$ years is normal with mean $n\mu$ and variance $n\sigma^2$ (standard deviation $\sqrt{n}\,\sigma$); the log of wealth after $n$ years is $\ln 100$ plus this sum, so wealth is lognormal. The two numbers refer to different horizons, so $n = 25$ and $n = 10$ must be used separately.
-        Loss (25 years): $P = \Phi\!\left(-\frac{25\mu}{5\sigma}\right) = 0.026 = 1 - 0.974$, so $\frac{5\mu}{\sigma} = 1.94$ and $\mu = 0.388\sigma$.
-        Mean (10 years): $100\,e^{10\mu + 10\sigma^2/2} = 236.8$, so $10\mu + 5\sigma^2 = \ln 2.368 \approx 0.862$.
-        Substituting: $5\sigma^2 + 3.88\sigma - 0.862 = 0$, whose positive root is $\sigma \approx 0.180$, so $\mu \approx 0.070$. The yearly mean is about 7% and the standard deviation about 18%. (Writing the 25-year standard deviation as $25\sigma$, or treating the two numbers as if they had the same horizon, gives wrong results.)
+        (a) A: $\frac{1{,}000{,}000}{1.04^{30}} \approx 308{,}319$ dollars; at 5% it is multiplied by $\left(\frac{1.04}{1.05}\right)^{30} \approx 0.750$, a change of about −24.96%. B: $\frac{40{,}000}{0.04} = 1{,}000{,}000$ dollars becomes $\frac{40{,}000}{0.05} = 800{,}000$ dollars, a change of −20%. A falls more, so the colleague is wrong.
+        Reason: the effect of a rate change on a payment grows with how far in the future the payment is (the discount factor $(1+r)^{-t}$ is more sensitive for larger $t$). The sensitivity depends on how far in the future most of the value lies, not on how long the payments last. All of A's value is in year 30; B pays forever, but at 4% the payments of the first 30 years make up $1 - 1.04^{-30} \approx 69.17\%$ of its value, and these nearer payments are less affected by the rate.
+        (b) Yes. A: $\left(\frac{1.02}{1.03}\right)^{30} - 1 \approx -25.37\%$. B: $\frac{40{,}000}{0.03} \div \frac{40{,}000}{0.02} - 1 = \frac{2}{3} - 1 \approx -33.33\%$. Now B falls more.
+        The share of B's value that comes from payments after year 30 is $(1+r)^{-30}$: 30.83% at 4% and 55.21% at 2%. The lower the rate, the less distant payments are discounted and the larger their share of the value, so more of the perpetuity's value comes from the distant future and it becomes more sensitive to the rate. So which asset is more sensitive does not depend on how long the payments last but on when most of the value is received, and that depends on the level of the rate.
     rubric:
       zh-cn:
-        - "写出 $n$ 年对数收益率之和的期望 $n\\mu$ 和标准差 $\\sqrt{n}\\,\\sigma$ 4 分；由 25 年亏本概率得 $\\frac{5\\mu}{\\sigma} = 1.94$ 4 分；由 10 年均值得 $10\\mu + 5\\sigma^2 = \\ln 2.368$ 4 分；解出 $\\mu \\approx 7\\%$、$\\sigma \\approx 18\\%$ 5 分。两个数字用同一个期限：最多 8 分。"
+        - "(a) 两个变化百分比 −24.96%、−20%（3 分）；判断说法不对，并用“价值主要来自多远的未来”或前 30 年付款占 B 价值的比例说明原因（5 分）。算对但解释为“A 的期限更长”之类、没有说明价值分布：最多 5 分。"
+        - "(b) 两个变化百分比 −25.37%、−33.33%，结论改变（2 分）；说明利率越低远期付款在 B 的价值中比重越大（4 分）。"
       en:
-        - "Mean $n\\mu$ and standard deviation $\\sqrt{n}\\,\\sigma$ of the sum of $n$ yearly log returns 4 points; $\\frac{5\\mu}{\\sigma} = 1.94$ from the 25-year probability of a loss 4 points; $10\\mu + 5\\sigma^2 = \\ln 2.368$ from the 10-year mean 4 points; solving for $\\mu \\approx 7\\%$ and $\\sigma \\approx 18\\%$ 5 points. Using the same horizon for both numbers: at most 8 points."
+        - "(a) The two percentage changes −24.96% and −20% (3 points); judges the statement wrong and explains with \"how far in the future most of the value lies\" or the share of B's value from the first 30 years (5 points). Correct numbers but an explanation such as \"A has a longer maturity\" that does not discuss where the value lies: at most 5 points."
+        - "(b) The two percentage changes −25.37% and −33.33%, and the conclusion changes (2 points); explains that the lower the rate, the larger the share of distant payments in B's value (4 points)."
 
   - id: Q9
     kind: quiz
     part: problem
-    easy_points: 4
-    hard_points: 0
-    points: 17
-    concepts: [residual, regression-coefficient, normal-distribution]
-    expected: { gap: "0.7", pred: "5.6", lo: "-5.7", hi: "16.9" }
+    points: 14
+    concepts: [standard-error, hypothesis-test, t-statistic, statistical-significance, normal-distribution, z-score]
+    expected: { se: "2.53", cut: "4.96", z: "1.17", prob: "12.1" }
     question:
       zh-cn: |-
-        用一只基金过去 60 个月的月收益对市场月收益（%）做回归，结果为：截距 $a = 0.4$，斜率 $b = 1.3$，残差的标准差为 5.75%。同期市场月收益的平均值为 1%。
-        (a) 一位分析师说：“截距是 0.4，说明这只基金平均每月比市场多赚 0.4 个百分点。”这段时期基金平均每月实际比市场多赚多少？分析师的说法错在哪里？（4 分）
-        (b) 某个月市场涨了 4%。有人说：“这个月市场涨了 4%，这只基金这个月不可能亏钱。”忽略系数的估计误差，并假设残差近似服从正态分布，用大约 95% 的这类月份所在的范围判断这个说法。（13 分）
+        一位基金经理每年相对指数的超额收益各年独立，标准差为 8 个百分点。假设他真有能力：超额收益的真实期望是每年 2 个百分点。投资者用他 10 年的记录检验原假设“真实期望为 0”，t 值大于 1.96 时才认为他有能力。为了简单，计算标准误时用真实的标准差 8 个百分点。
+
+        一位投资者说：“如果他真有能力，10 年的数据足以检验出来；如果 10 年后结果不显著，就说明他没有能力。”在上面的假设下，求他 10 年的记录显著（t 值大于 1.96）的概率，并评价这个说法。已知标准正态分布 $P(Z > 1.17) \approx 0.121$。（14 分）
       en: |-
-        A fund's monthly returns over the past 60 months are regressed on the market's monthly returns (%). The result: intercept $a = 0.4$, slope $b = 1.3$, and a residual standard deviation of 5.75%. Over the same period the market's average monthly return was 1%.
-        (a) An analyst says: "The intercept is 0.4, so on average the fund earns 0.4 percentage points a month more than the market." Over this period, how much more than the market did the fund actually earn on average per month? What is wrong with the analyst's statement? (4 points)
-        (b) In one month the market rises 4%. Someone says: "The market rose 4% this month, so this fund cannot lose money this month." Ignoring the estimation error of the coefficients and assuming that the residuals are approximately normal, judge this statement using the range in which about 95% of such months fall. (13 points)
+        A fund manager's excess return over an index is independent from year to year, with a standard deviation of 8 percentage points. Suppose he really has skill: the true expected excess return is 2 percentage points a year. Investors test the null hypothesis "the true expected value is 0" on his 10-year record and consider him skilled only if the t-statistic is above 1.96. For simplicity, use the true standard deviation of 8 percentage points to compute the standard error.
+
+        An investor says: "If he really has skill, 10 years of data are enough to detect it; if the result is not significant after 10 years, that shows he has no skill." Under the assumptions above, find the probability that his 10-year record is significant (t-statistic above 1.96), and evaluate the statement. For the standard normal distribution, $P(Z > 1.17) \approx 0.121$. (14 points)
     answer:
       zh-cn: |-
-        (a) 回归直线经过平均点，基金平均收益为 $0.4 + 1.3 \times 1 = 1.7$%，每月平均比市场多赚 $1.7 - 1 = 0.7$ 个百分点，不是 0.4。错在：截距是市场收益为 0 时基金的平均收益，不是基金比市场多赚的部分。基金减市场的平均差为 $a + (b - 1)x$：其中 0.4 与市场涨跌无关；另外 $(b - 1)x = 0.3 \times 1 = 0.3$ 来自 $b = 1.3 > 1$，即基金承担了比市场更大的市场风险，市场下跌时这一部分是负的（例如市场跌 4% 时为 −1.2），基金反而跑输市场。
-        (b) 预测 $0.4 + 1.3 \times 4 = 5.6$%。范围约 $5.6 \pm 1.96 \times 5.75$，即 $[-5.7, 16.9]$（%）。说法不对：范围的下限是负数。残差的标准差和预测值差不多大，即使市场涨了 4%，基金在相当一部分这样的月份里仍会亏钱。回归给出的是平均关系，不是每个月都成立。
+        10 年平均超额收益的标准误是 $\frac{8}{\sqrt{10}} \approx 2.53$ 个百分点。t 值大于 1.96，等价于样本均值大于 $1.96 \times 2.53 \approx 4.96$ 个百分点。
+        在“真实期望为 2”的假设下，样本均值近似服从均值 2、标准差 2.53 的正态分布，所以
+        $$P(\bar R > 4.96) = P\left(Z > \frac{4.96 - 2}{2.53}\right) \approx P(Z > 1.17) \approx 12.1\%.$$
+        即使他真有这样的能力，10 年的记录也只有约 12.1% 的概率显著，约 88% 的情况下不显著。所以投资者的说法不对：10 年不显著并不说明他没有能力，只说明这么短的数据分辨不出每年 2 个百分点的能力和运气，因为一年的噪声（8 个百分点）远大于要检测的信号。不显著不等于真实值为 0。
+        （按原假设算出的 5% 是没有能力的经理碰巧显著的概率，不是这里要求的概率；期望的 t 值 $\frac{2}{2.53} \approx 0.79$ 小于 1.96，也不说明不可能显著。）
       en: |-
-        (a) The regression line passes through the point of averages, so the fund's average return is $0.4 + 1.3 \times 1 = 1.7$%, and it earned $1.7 - 1 = 0.7$ percentage points a month more than the market on average, not 0.4. What is wrong: the intercept is the fund's average return when the market return is 0, not the amount by which the fund beats the market. The average difference between fund and market is $a + (b - 1)x$: the 0.4 does not depend on the market; the other $(b - 1)x = 0.3 \times 1 = 0.3$ comes from $b = 1.3 > 1$, that is, from the fund taking more market risk than the market, and this part is negative when the market falls (for example −1.2 when the market falls 4%), so the fund then trails the market.
-        (b) The prediction is $0.4 + 1.3 \times 4 = 5.6$%. The range is about $5.6 \pm 1.96 \times 5.75$, that is, $[-5.7, 16.9]$ (%). The statement is wrong: the lower end of the range is negative. The residual standard deviation is about as large as the prediction, so even when the market rises 4%, the fund still loses money in a fair share of such months. The regression gives an average relation, not one that holds every month.
+        The standard error of the 10-year mean excess return is $\frac{8}{\sqrt{10}} \approx 2.53$ percentage points. A t-statistic above 1.96 is the same as a sample mean above $1.96 \times 2.53 \approx 4.96$ percentage points.
+        If the true expected value is 2, the sample mean is approximately normal with mean 2 and standard deviation 2.53, so
+        $$P(\bar R > 4.96) = P\left(Z > \frac{4.96 - 2}{2.53}\right) \approx P(Z > 1.17) \approx 12.1\%.$$
+        Even if he really has this skill, his 10-year record is significant with a probability of only about 12.1%, and in about 88% of cases it is not significant. So the investor is wrong: a result that is not significant after 10 years does not show that he has no skill. It only shows that so little data cannot tell a skill of 2 percentage points a year apart from luck, because the noise in one year (8 percentage points) is much larger than the signal to be detected. Not significant does not mean the true value is 0.
+        (The 5% computed under the null hypothesis is the probability that a manager without skill is significant by chance, not the probability asked for here; an expected t-statistic of $\frac{2}{2.53} \approx 0.79$ below 1.96 does not mean significance is impossible either.)
     rubric:
       zh-cn:
-        - "(a) 算出平均多赚约 0.7 个百分点 2 分；指出截距是市场收益为 0 时的值，差额为 $a + (b - 1)x$，其中一部分来自 $b > 1$ 的市场风险 2 分。"
-        - "(b) 预测 5.6% 3 分；用残差标准差给出范围约 −5.7% 到 16.9% 5 分；判断说法不对，并说明回归只是平均关系 5 分。"
+        - "标准误 2.53，并把“t 值大于 1.96”转换为样本均值大于 4.96（4 分）；在真实期望为 2 下标准化，$z \\approx 1.17$（3 分）；概率约 12.1%（2 分）；评价：说法不对，不显著不等于没有能力，并用信号与噪声或数据太少说明（5 分）。"
+        - "按原假设算出 5%，或因期望的 t 值小于 1.96 就说不可能显著：最多 5 分。只凭“不显著不等于没有能力”评价、没有计算：最多 4 分。"
       en:
-        - "(a) Finds that the fund earned about 0.7 percentage points more on average 2 points; explains that the intercept is the value when the market return is 0, that the difference is $a + (b - 1)x$, and that part of it comes from market risk with $b > 1$ 2 points."
-        - "(b) Prediction of 5.6% 3 points; range of about −5.7% to 16.9% from the residual standard deviation 5 points; judges the statement wrong and explains that the regression is only an average relation 5 points."
+        - "Standard error 2.53, and turns \"t-statistic above 1.96\" into a sample mean above 4.96 (4 points); standardizes with a true expected value of 2, $z \\approx 1.17$ (3 points); probability about 12.1% (2 points); evaluation: the statement is wrong, not significant does not mean no skill, explained with signal and noise or too little data (5 points)."
+        - "Computing 5% under the null hypothesis, or saying significance is impossible because the expected t-statistic is below 1.96: at most 5 points. Evaluating only with \"not significant does not mean no skill\" and no calculation: at most 4 points."

@@ -3,86 +3,77 @@
 results() returns {"<question id>.<name>": value}. CI compares each value with the
 `expected` string in the key file, rounded to the number of decimals written there.
 """
-from math import exp, log, sqrt
+from math import erfc, log, sqrt
+
+
+def norm_sf(z):
+    return 0.5 * erfc(z / sqrt(2))
 
 
 def results():
     r = {}
-    # Q1: A pays 200 at the end of year 10, B pays 140 at the end of year 3.
-    r["Q1.a5"] = 200 / 1.05**10
-    r["Q1.b5"] = 140 / 1.05**3
-    r["Q1.a10"] = 200 / 1.1**10
-    r["Q1.b10"] = 140 / 1.1**3
+    # Q1: sigma_A 25, sigma_B 10; counterexample rho = 0.2 with 10% in A.
+    sa, sb, rho, w = 25, 10, 0.2, 0.1
+    var = w**2 * sa**2 + (1 - w) ** 2 * sb**2 + 2 * w * (1 - w) * rho * sa * sb
+    assert rho < sb / sa and sqrt(var) < sb
+    r["Q1.var"] = var
+    r["Q1.sd"] = sqrt(var)
 
-    # Q2: U = x y^2, p_x = 1, p_y = 3: x = M/3, y = 2M/9, U*(M) = 4M^3/243, lambda = 4M^2/81.
-    u = lambda m: (m / 3) * (2 * m / 9) ** 2
-    r["Q2.lam"] = 4 * 90**2 / 81
-    r["Q2.u90"] = u(90)
-    r["Q2.u180"] = u(180)
-    r["Q2.gain"] = u(180) - u(90)
+    # Q3: +20% or -20% with equal probability: expected simple return 0, expected log return < 0.
+    r["Q3.mlog"] = (log(1.2) + log(0.8)) / 2
 
-    # Q3: estimates 10% and 4%, both SE 2, independent: test the difference.
-    se_d = sqrt(2**2 + 2**2)
-    r["Q3.se_d"] = se_d
-    r["Q3.t"] = (10 - 4) / se_d
-
-    # Q4: slope of y on x is 2 and R^2 = 0.5; the product of the two slopes is r^2 = R^2.
-    r["Q4.d"] = 0.5 / 2
-
-    # Q5: withdrawals at the start of each year for 25 years; 6% nominal, monthly.
-    i = 0.005
-    R = (1 + i) ** 12 - 1
-    pv = 60_000 * (1 - (1 + R) ** -25) / R * (1 + R)
-    r["Q5.ear"] = 100 * R
+    # Q5: 12 payments of 1,000 at the end of each month vs 11,400 cash; savings at 4.8% APR monthly.
+    i = 0.048 / 12
+    pv = 1000 * (1 - (1 + i) ** -12) / i
+    assert pv > 11400  # paying cash is better
     r["Q5.pv"] = pv
-    # (b) 25 payments growing 2% a year, the first today: growing annuity due.
-    g = 0.02
-    factor = (1 + R) / (R - g) * (1 - ((1 + g) / (1 + R)) ** 25)
-    r["Q5.w"] = pv / factor
+    lo, hi = 1e-9, 0.1  # implied monthly rate: PV of installments = 11,400
+    for _ in range(200):
+        m = (lo + hi) / 2
+        if 1000 * (1 - (1 + m) ** -12) / m > 11400:
+            lo = m
+        else:
+            hi = m
+    r["Q5.ear"] = 100 * ((1 + m) ** 12 - 1)
+    r["Q5.naive"] = 100 * 600 / 11400
 
-    # Q6: p = 100 - 2q, C = cq + F.
-    q = lambda c: (100 - c) / 4
-    p = lambda c: (100 + c) / 2
-    operating = lambda c: (100 - c) ** 2 / 8  # revenue minus material cost at the optimum
-    r["Q6.q"] = q(20)
-    r["Q6.p"] = p(20)
-    r["Q6.profit"] = operating(20) - 200
-    r["Q6.rise"] = p(28) - p(20)
-    # (c) the rent of 200 is sunk; c = 70; stopping lets the company sublet for 120.
-    r["Q6.q70"] = q(70)
-    r["Q6.op"] = operating(70)
-    r["Q6.total"] = operating(70) - 200
-    r["Q6.stop"] = 120 - 200  # stop and sublet the equipment for 120
-    assert r["Q6.stop"] > r["Q6.total"]  # stopping beats producing
+    # Q6: slope 1.2, sigma_x 5, sigma_y 7.5; hedge y - 1.2 x.
+    b, sx, sy = 1.2, 5, 7.5
+    cov = b * sx**2
+    hedged = sy**2 - 2 * b * cov + b**2 * sx**2
+    r2 = cov**2 / (sx**2 * sy**2)
+    assert abs(hedged - (1 - r2) * sy**2) < 1e-9
+    r["Q6.cov"] = cov
+    r["Q6.sd"] = sqrt(hedged)
+    r["Q6.r2"] = r2
+    r["Q6.naive"] = sy - b * sx
 
-    # Q7: sigma_A 24, sigma_B 16; the minimum variance is 216 with both weights positive.
-    sa, sb = 24, 16
-    wstar = lambda rho: (sb**2 - rho * sa * sb) / (sa**2 + sb**2 - 2 * rho * sa * sb)
-    minvar = lambda rho: sa**2 * sb**2 * (1 - rho**2) / (sa**2 + sb**2 - 2 * rho * sa * sb)
-    A, B, C = sa**2 * sb**2, -216 * 2 * sa * sb, 216 * (sa**2 + sb**2) - sa**2 * sb**2
-    disc = sqrt(B * B - 4 * A * C)
-    roots = [(-B + disc) / (2 * A), (-B - disc) / (2 * A)]
-    rho = next(x for x in roots if 0 < wstar(x) < 1)
-    # Without short selling, a root with w* outside [0, 1] gives a corner (holding only B, variance 256).
-    assert abs(minvar(rho) - 216) < 1e-9 and sum(0 <= wstar(x) <= 1 for x in roots) == 1
-    r["Q7.rho"] = rho
-    r["Q7.w"] = 100 * wstar(rho)
+    # Q7: p = MC = q / 10 gives q = 10 p; surplus 5 p^2 must cover the stall fee of 50.
+    p = sqrt(50 / 5)
+    r["Q7.p"] = p
+    r["Q7.q"] = 10 * p
+    r["Q7.wrong"] = sqrt((50 + 600 / 30) / 5)  # permit spread over 30 days (wrong)
 
-    # Q8: mean of 10-year wealth 236.8 for 100 invested; P(loss after 25 years) = 2.6%.
-    # Loss: Phi(-25 mu / (5 sigma)) = 0.026, so mu = 0.388 sigma.
-    # Mean: 10 mu + 5 sigma^2 = ln 2.368  ->  5 sigma^2 + 3.88 sigma - ln 2.368 = 0.
-    L = log(2.368)
-    sigma = (-3.88 + sqrt(3.88**2 + 20 * L)) / 10
-    r["Q8.mu"] = 100 * 0.388 * sigma
-    r["Q8.sigma"] = 100 * sigma
+    # Q8: A pays 1,000,000 in 30 years; B is a perpetuity of 40,000.
+    zero = lambda rate: 1e6 / (1 + rate) ** 30
+    perp = lambda rate: 40000 / rate
+    r["Q8.a4"] = 100 * (zero(0.05) / zero(0.04) - 1)
+    r["Q8.b4"] = 100 * (perp(0.05) / perp(0.04) - 1)
+    r["Q8.near4"] = 100 * (1 - 1.04**-30)
+    r["Q8.far4"] = 100 * 1.04**-30
+    r["Q8.a2"] = 100 * (zero(0.03) / zero(0.02) - 1)
+    r["Q8.b2"] = 100 * (perp(0.03) / perp(0.02) - 1)
+    r["Q8.far2"] = 100 * 1.02**-30
+    assert r["Q8.a4"] < r["Q8.b4"] and r["Q8.b2"] < r["Q8.a2"]  # the conclusion flips
 
-    # Q9: a = 0.4, b = 1.3, residual sd 5.75; market mean 1%.
-    sd_e = 5.75
-    pred = 0.4 + 1.3 * 4
-    r["Q9.gap"] = 0.4 + (1.3 - 1) * 1
-    r["Q9.pred"] = pred
-    r["Q9.lo"] = pred - 1.96 * sd_e
-    r["Q9.hi"] = pred + 1.96 * sd_e
+    # Q9: excess return sd 8, true mean 2, 10 years; P(t > 1.96).
+    se = 8 / sqrt(10)
+    cut = 1.96 * se
+    z = (cut - 2) / se
+    r["Q9.se"] = se
+    r["Q9.cut"] = cut
+    r["Q9.z"] = z
+    r["Q9.prob"] = 100 * norm_sf(z)
     return r
 
 

@@ -100,8 +100,7 @@ one learner, revision history and answers inline. To publish a finished lesson:
   `<CheckAll />` exactly once, and a lesson with
   exercises contains `<Exercises />` exactly once.
 - Check questions and exercises have no `points`, and their rubrics do not mention points.
-- Quiz questions have `points` (total 100), `easy_points` and `hard_points`; easy parts (difficulty
-  score 2 or less) total at most 20 points, and hard parts (score 6 or more) at least 10.
+- Quiz questions have `points`, and the points of a quiz total 100.
 - Chinese text (every `zh-*` language) uses Chinese quotation marks and the word 提示词 (提示詞 in
   Traditional Chinese), has no space after full-width
   punctuation, and never ends a bold run with full-width punctuation directly before a character
@@ -146,10 +145,13 @@ one learner, revision history and answers inline. To publish a finished lesson:
 
 Quizzes follow the exam rules in the author's curriculum ("阶段考试"):
 
-- Test understanding and use, not definitions or direct use of a formula. Difficulty is scored per
-  part with the rubric of the stage-quiz-writing skill: easy parts (score 2 or less) total at most 20
-  points, hard parts (score 6 or more) at least 10 (`easy_points` and `hard_points` per question in
-  the key; never shown on the page).
+- A question shows whether the learner understands the financial concept, not whether they can run a
+  familiar procedure: its meaning, the conditions under which a result holds, the mechanism behind it,
+  its use in an unfamiliar but relevant situation, and whether a result makes sense. Difficulty comes
+  from the depth of understanding needed, not from extra calculations, several tasks or artificially
+  complicated conditions. Each question names the misconception it can reveal (in `common_errors`);
+  a learner who only applies the steps does not get full marks. Routine calculation totals at most
+  about 15 points.
 - Each question has its own core point; basic concepts used along the way may repeat.
 - Each part asks one core question. It may ask to compute and then explain when the explanation
   follows from that computation, but it never combines unrelated computations or several separate
@@ -157,11 +159,11 @@ Quizzes follow the exam rules in the author's curriculum ("阶段考试"):
 - Only lessons of the block and earlier; the questions carry no lesson or difficulty labels and no
   hints. The page starts with instructions and a formula sheet.
 - Part 1 is true / false with reasons (both verdicts occur; no "uncertain") (`part: judge`); a verdict without a reason gets
-  no points. Part 2 holds problems (`part: problem`), mostly chains of calculations at stage 0–3.
+  no points. Part 2 holds problems (`part: problem`).
 - Calculation questions require working; rubrics give partial credit and state the points per part.
 - For each question, ask "can it be answered by recalling an example from a lesson?" and rework it
-  if so: reverse the calculation, change one assumption, find the error in an analysis, construct a
-  counterexample, or estimate an order of magnitude. Adapting an exercise with a new extension is fine.
+  if so, for example by changing the situation, the known facts or the goal of the decision. Adapting
+  an exercise with a new extension is fine.
 - Every numeric answer is in `expected` and recomputed in `course/verify/E<n>.py`.
 - The site's quizzes are for every learner; do not target one learner's weak points.
 

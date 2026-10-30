@@ -9,9 +9,9 @@ import Quiz from '../../../../components/Quiz.astro';
 
 ## 说明 [#instructions]
 
-- 本测验考 <Ref lesson="0.1" /> 到 <Ref lesson="0.5" /> 的内容（包括标为“选读”的部分）。总分 100 分，建议用时 120 分钟，各题注明了分值。
+- 本测验考 <Ref lesson="0.1" /> 到 <Ref lesson="0.5" /> 的内容。总分 100 分，建议用时 120 分钟，各题注明了分值。
 - 可以使用计算器或代码，不要查看讲义。需要的公式见下面的公式表。
-- 计算题要写出过程。按过程给分，只有答案、没有过程的部分不得分。
+- 计算题要写出过程。按过程和理由给分，只有答案、没有过程的部分不得分。判断题只写“真”或“假”、没有理由不得分。
 - 把答案写在纸上（或打字）。做完后点击页面底部的“复制评分提示词”，连同答案一起发给你的 AI 助手；也可以分几次提交。
 
 ## 公式表 [#formulas]
@@ -20,7 +20,7 @@ import Quiz from '../../../../components/Quiz.astro';
 
 - 终值与现值：$FV = PV(1+r)^n$，$PV = \frac{FV}{(1+r)^n}$；有效年利率：$\text{EAR} = \left(1 + \frac{r}{m}\right)^m - 1$
 - 年金（期末付款）：$PV = \frac{C}{r}\left[1 - (1+r)^{-n}\right]$，$FV = C\,\frac{(1+r)^n - 1}{r}$
-- 永续年金：$PV = \frac{C}{r}$；增长永续年金：$PV = \frac{C}{r - g}$（$C$ 为第 1 期期末的付款）
+- 永续年金（期末付款）：$PV = \frac{C}{r}$
 - 对数收益率：$r = \ln(1 + R)$
 
 **优化**
@@ -36,9 +36,9 @@ import Quiz from '../../../../components/Quiz.astro';
 
 **统计推断**
 
-- 样本标准差：$s = \sqrt{\frac{1}{n-1}\sum_t (R_t - \bar R)^2}$；标准误：$\text{SE}(\bar R) = \frac{s}{\sqrt{n}}$
+- 标准误：$\text{SE}(\bar R) = \frac{s}{\sqrt{n}}$
 - 95% 置信区间：$\bar R \pm 1.96\,\text{SE}$；$t = \frac{\bar R}{\text{SE}}$
-- 标准化：$z = \frac{x - \mu}{\sigma}$；若 $\ln W$ 服从 $N(m, s^2)$，则 $W$ 的中位数为 $e^m$，均值为 $e^{m + s^2/2}$
+- 标准化：$z = \frac{x - \mu}{\sigma}$
 
 **回归**
 

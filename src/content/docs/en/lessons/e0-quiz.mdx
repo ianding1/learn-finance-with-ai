@@ -9,9 +9,9 @@ import Quiz from '../../../../components/Quiz.astro';
 
 ## Instructions [#instructions]
 
-- This quiz covers <Ref lesson="0.1" /> to <Ref lesson="0.5" />, including the parts marked "Optional". It is worth 100 points and should take about 120 minutes; each question shows its points.
+- This quiz covers <Ref lesson="0.1" /> to <Ref lesson="0.5" />. It is worth 100 points and should take about 120 minutes; each question shows its points.
 - You may use a calculator or code, but do not look at the lessons. The formulas you need are in the formula sheet below.
-- Show your working in calculation questions. Points are given for the working; parts with only an answer and no working get no points.
+- Show your working in calculation questions. Points are given for the working and the reasons; parts with only an answer and no working get no points. A true / false answer without a reason gets no points.
 - Write your answers on paper (or type them). When you are done, click "Copy scoring prompt" at the bottom of the page and send it with your answers to your AI assistant. You can also submit in several parts.
 
 ## Formula sheet [#formulas]
@@ -20,7 +20,7 @@ import Quiz from '../../../../components/Quiz.astro';
 
 - Future and present value: $FV = PV(1+r)^n$, $PV = \frac{FV}{(1+r)^n}$; effective annual rate: $\text{EAR} = \left(1 + \frac{r}{m}\right)^m - 1$
 - Annuity (payments at the end of each period): $PV = \frac{C}{r}\left[1 - (1+r)^{-n}\right]$, $FV = C\,\frac{(1+r)^n - 1}{r}$
-- Perpetuity: $PV = \frac{C}{r}$; growing perpetuity: $PV = \frac{C}{r - g}$ ($C$ is the payment at the end of the first period)
+- Perpetuity (payments at the end of each period): $PV = \frac{C}{r}$
 - Log return: $r = \ln(1 + R)$
 
 **Optimization**
@@ -36,9 +36,9 @@ import Quiz from '../../../../components/Quiz.astro';
 
 **Statistical inference**
 
-- Sample standard deviation: $s = \sqrt{\frac{1}{n-1}\sum_t (R_t - \bar R)^2}$; standard error: $\text{SE}(\bar R) = \frac{s}{\sqrt{n}}$
+- Standard error: $\text{SE}(\bar R) = \frac{s}{\sqrt{n}}$
 - 95% confidence interval: $\bar R \pm 1.96\,\text{SE}$; $t = \frac{\bar R}{\text{SE}}$
-- Standardizing: $z = \frac{x - \mu}{\sigma}$; if $\ln W$ follows $N(m, s^2)$, the median of $W$ is $e^m$ and its mean is $e^{m + s^2/2}$
+- Standardizing: $z = \frac{x - \mu}{\sigma}$
 
 **Regression**
 
