@@ -55,7 +55,7 @@ questions:
   - id: Q1
     kind: quiz
     part: judge
-    easy_points: 0
+    easy_points: 4
     hard_points: 0
     points: 4
     concepts: [present-value, discount-factor]
@@ -205,8 +205,8 @@ questions:
   - id: Q6
     kind: quiz
     part: problem
-    easy_points: 0
-    hard_points: 0
+    easy_points: 3
+    hard_points: 8
     points: 16
     concepts: [profit-maximization, marginal-revenue, marginal-cost, first-order-condition, fixed-cost, sunk-cost]
     expected: { q: "20", p: "60", profit: "600", rise: "4", q70: "7.5", op: "112.5", total: "-87.5", stop: "-80" }
@@ -244,7 +244,7 @@ questions:
     kind: quiz
     part: problem
     easy_points: 0
-    hard_points: 0
+    hard_points: 11
     points: 18
     concepts: [portfolio-variance, first-order-condition, second-order-condition, corner-solution, correlation]
     expected: { rho: "0.25", w: "25" }
@@ -315,7 +315,7 @@ questions:
   - id: Q9
     kind: quiz
     part: problem
-    easy_points: 0
+    easy_points: 4
     hard_points: 0
     points: 17
     concepts: [residual, regression-coefficient, normal-distribution]
